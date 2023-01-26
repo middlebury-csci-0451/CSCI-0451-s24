@@ -1,0 +1,17 @@
+---
+listing: 
+  contents: assignments
+  template: assignments.ejs
+#   type: table
+#   sort: best-by
+#   fields: [title, type, best-by,]
+#   sort-ui: false
+#   filter-ui: false
+#   field-display-names: 
+#     title: "Title"
+#     type: "Type"
+#     best-by: "Best-By Date"
+toc: false
+title: Index of Assignments
+---
+               

@@ -1,0 +1,50 @@
+/*-- scss:defaults --*/
+// Base document colors
+// $body-bg: #181818;
+// $body-color: white;
+
+$base-color: #003F84; 
+$link-color: $base-color; 
+$link-hover-color: #62a8e5;
+$pale-grey: rgba(243, 242, 238, 1);
+$sidebar-bg: $pale-grey;
+$navbar-bg: $pale-grey;
+$input-bg: #ffffff;
+$dark-text: #51514f;
+
+
+$font-size-root: 1.05em;
+$font-size-sidebar-link: 1.2*$font-size-root;
+
+$font-size-sidebar-header: $font-size-sidebar-link;
+
+// Code blocks
+$code-block-bg-alpha: -.8;     
+
+
+
+
+
+.sidebar-item-text {
+    font-size: $font-size-sidebar-link;
+}
+
+.sidebar-title.mb-0.py-0 a {
+    font-size: $font-size-sidebar-header;
+}
+
+div.sidebar-item-container .active{
+    font-weight: bold;
+}
+
+.quarto-sidebar-header p {
+    padding-bottom: 0em;
+    margin-bottom: 0em;
+  }
+
+.display-name { 
+    color: $dark-text;
+}
+
+
+$link-underline-color: #dee2e6;

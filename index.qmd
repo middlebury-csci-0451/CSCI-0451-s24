@@ -1,0 +1,12 @@
+---
+toc: true
+numbered: false
+title: Welcome! 
+---
+
+<!-- ## Welcome! {.unnumbered .unlisted} -->
+
+CSCI 0451, "Machine Learning," is an introductory course in computer science at Middlebury College. It is one of several ways in which you might begin a computer science major at Midd. It's also a great way for you to develop your computational skills to support other majors. 
+
+The primary aim of CSCI 0145 is to help you build strong foundations in computational thinking and programming skills. We will cover a fair amount of the Python programming language. That said, our primary focus will be on reasoning, program design, and implementation principles rather than the details of Python programming. 
+

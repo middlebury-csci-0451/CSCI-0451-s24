@@ -1,0 +1,22 @@
+[
+  {
+    "listing": "/assignments.html",
+    "items": [
+      "/assignments/blog-post-penguins.html",
+      "/assignments/blog-post-medical-bias.html",
+      "/assignments/blog-post-compas.html",
+      "/assignments/blog-post-data-science.html",
+      "/assignments/blog-post-optimization.html"
+    ]
+  },
+  {
+    "listing": "/schedule.html",
+    "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/2023-01-01-test.html"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - "lecture-scripts/*"
+    - "assignments"
+
+website:
+  body-footer: |
+    <br> <br> <span style="color:grey;">&#169; Phil Chodrow, 2023</span>
+  sidebar:
+    collapse-level: 1	
+    style: "docked"
+    title: "<b>Machine Learning</b><br>CSCI 0451"
+    contents:
+      - syllabus.qmd 
+      - collaboration.qmd
+      - schedule.qmd
+      - assignments.qmd
+  favicon: assets/img/icons/favicon.png
+
+format:
+  html:
+    theme: [cosmo, custom.scss]
+    css: styles.css
+    toc: true
+    number-depth: 0
+    reference-location: margin
+    callout-icon: false;

@@ -1,0 +1,30 @@
+# Some Teaching Philosophies
+
+## Learning Computing
+
+[![Calligraphy with the sentence "I am here for you" surrounded by a circle."](https://images.squarespace-cdn.com/content/v1/563ce107e4b088e6d742e65d/1584467902419-9WTUGOMH8YJGGEP4ORHQ/image-asset.jpeg) Calligraphy by Thich Nhat Hanh.]{.aside}
+
+Learning computing for the first time can be a challenging experience. In a nutshell, my teaching philosophy is: 
+
+
+1. Your flourishing as an entire human person is more important than any grades. 
+2. It is my job to help you learn and grow, as a scientist, scholar, and public citizen. 
+3. You can count on me to interact with you in a way that furthers your learning and growth. 
+4. In particular, you can count on me to care about you as a person and ensure that you can get help when you need it. 
+
+
+## Grading
+
+Many of my courses involve three different kinds of graded components: 
+
+- **Learning behavior incentives** include things like participation and the reading quizzes. Their purpose is to promote behavior that supports the learning of you and your peers. 
+- **Formative assessments** include things like labs and homework. Their primary purpose is to give you regular practice that will help you meet the course learning objectives. They also give you an opportunity to get *feedback* on your strengths and opportunities for improvement 
+- **Summative assessments** include things like a midterm and final exam. Their primary purpose is to give an overall measurement of your cumulative learning throughout the course. 
+
+You might look at these three different purposes and say: 
+
+> "Hey Phil, isn't it weird to combine points from three totally different purposes into a single grade?" 
+
+If you did, I would say: yes, it is! More generally, **grading is broken**. This is especially true of summative assessments. Instructors struggle to design assessments that equitably measure meaningful competency, and the results are rarely predictive of future success. [Professor Amy J. Ko at the University of Washington has a [reflection](https://medium.com/bits-and-behavior/grading-is-ineffective-harmful-and-unjust-lets-stop-doing-it-52d2ef8ffc47) on the deep flaws of grading, which you might wish to read.]{.aside}
+
+I don't think that the grading systems for any of my courses are totally perfect. My promise to you is that I will be as transparent as I can about how I assess you, where you can improve, and how you can achieve your goals in the course. 

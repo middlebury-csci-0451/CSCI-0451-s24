@@ -1,0 +1,515 @@
+- date: 2022-09-12
+  day: 1
+  header: | 
+    Welcome to CSCI 0145!
+  summary: |
+    We discuss the structure of the class and briefly introduce computational thinking. 
+  objectives: 
+    - Computational Thinking
+  reading:
+    - <a href="syllabus.qmd">Course syllabus</a>
+    - <a href="collaboration.qmd">Collaboration and academic honesty</a>
+    - <a href="tools.qmd">Course resources</a>
+    - <a href="help.qmd">Asking for help</a>
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/algorithms_bugs.html">Algorithms and bugs</a>
+  module: Introduction
+  publish: true
+- date: 2022-09-14
+  day: 2
+  header: | 
+    Expressions and Variables
+  summary: |
+    We discuss <i>expressions</i> -- the simplest recipes for computations -- and <i>variables</i>, which allow us to store the results of computations for later use. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading:
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/expressions.html">Expressions</a>
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/variables.html">Variables</a>
+  module: Introduction
+  assigned: 
+  publish: true
+- date: 2022-09-15
+  header: | 
+    Guided Discovery: Introduction to Strings
+  summary: |
+    We learn some ways to manipulate text, save the results, and show them to the user. We'll come back to advanced text manipulation much later in the course. 
+  activity: 
+    - <a href="assignments/guided-discovery/strings/gd-strings.py">GD1</a>
+  module: Introduction
+  objectives: 
+    - Python Programming
+    - Applications
+  assigned: 
+  publish: true
+- date: 2022-09-16
+  header: | 
+    Functions
+  summary: |
+        Functions are reusable computational recipes. We discuss the basic ingredients of a function and work through some simple examples. 
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/functions.html"> Functions</a> (1-3)
+  optional: 
+    - <a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf"> ThinkPython</a> 3.1-3.7 
+  module: Fundamentals of Procedural Programming
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  publish: true
+- date: 2022-09-19
+  header: | 
+    More on Functions
+  summary: |
+    We discuss some important considerations for writing functions and using functions that other people have written. Our main topics are <i>variable scope</i>, <i>documentation</i>, and <i>modules</i>. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/functions.html"> Functions</a> (4-5)
+  optional: 
+    - <a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf"> ThinkPython</a> 3.8-3.14 
+  module: Fundamentals of Procedural Programming
+  publish: true
+  assigned: 
+    - <a href="assignments/HW/HW1/HW1.py">HW1</a>
+- date: 2022-09-21
+  header: | 
+    Control Flow
+  summary: |
+    We discuss how to make decisions when executing a program. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/conditionals.html">Conditionals</a>
+    - <a href="assets/pdf/PairProgramming.pdf">How Pair Programming Really Works</a> by Stuart Wray
+  optional: 
+    - <a href="https://runestone.academy/ns/books/published/thinkcspy/Selection/toctree.html#selection"> Think Like a Computer Scientist, Chapter 7 </a> 
+  module: Fundamentals of Procedural Programming
+  publish: true
+- date: 2022-09-22
+  header: | 
+    Guided Discovery: Practice With Functions and Control Flow
+  summary: |
+    We practice writing functions that make simple decisions in response to user input. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+    - Social Responsibility
+  activity: 
+    - <a href="https://replit.com/team/csci-0145/Guided-Discovery-2-Functions-and-Control-Flow">GD2</a>
+  module: Fundamentals of Procedural Programming
+  publish: true
+- date: 2022-09-23
+  header: | 
+    Lab: Developers as Decision-Makers
+  summary: |
+    We use our skills with gathering user input, writing functions, and making simple decisions that prioritize some users over others. We also practice the human-centered design process. 
+  objectives: 
+    - Python Programming
+    - Design and Collaboration
+    - Social Responsibility
+  activity:
+    - <a href="labs/decision-making/">Lab 1</a>
+  module: Fundamentals of Procedural Programming
+  publish: true
+  assigned: 
+    - Lab 1
+- date: 2022-09-26
+  header: |
+    Recursion
+  summary: |
+    We study recursion, a powerful tool for writing simple solutions to complex problems by breaking them down into smaller problems. 
+  objectives: 
+    - Computational Thinking
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/recursion.html">Recursion</a>
+  optional: 
+    - <a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf"> ThinkPython</a> 5.8-5.14 
+  module: Recursion
+  publish: true
+  assigned: 
+    - HW2
+  due: 
+    - HW1
+- date: 2022-09-28
+  header: |
+    Recursion and Recursive Graphics
+  summary: |
+    We continue our study of recursion while creating simple recursive graphics. 
+  objectives: 
+    - Computational Thinking
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/turtle.html">Turtle Graphics</a>
+  module: Recursion
+  publish: true
+  due: 
+    - Lab 1
+- date: 2022-09-29
+  header: |
+    Guided Discovery: Recursion and Performance
+  summary: |
+    We learn some ways to measure and analyze the performance of functions, and use these techniques to study the performance implications of recursive techniques. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  activity: 
+    - <a href="assignments/guided-discovery/recursion-performance">GD3</a>
+  module: Recursion
+  publish: true
+- date: 2022-09-30
+  header: |
+    Lab: Fractal Graphics with Recursion
+  summary: |
+    We practice writing functions to produce recursive graphics with the turtle module. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  activity: 
+    - <a href="labs/recursion-turtle/">Lab 2</a>
+  assigned: 
+    - Lab 2
+  module: Recursion
+  publish: true
+- date: 2022-10-03
+  header: |
+    Iteration
+  summary: |
+    We introduce definite and indefinite iteration as a method for performing repeated tasks. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/iteration.html">Iteration</a>
+    - <i><a href="https://runestone.academy/ns/books/published/thinkcspy/index.html#">Think Like a Computer Scientist</a> 8.1-8.9, 9.10-9.14</i>
+    - <i><a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf">Think Python</a> Chapter 7</i>
+    - <i><a href="https://runestone.academy/ns/books/published//fopp/Iteration/toctree.html">Foundations of Python Programming</a> 7.1-7.4, 14</i>
+  assigned: 
+    - HW3
+  due: 
+    - HW2
+  module: Iteration and Data Structures
+  publish: true
+- date: 2022-10-05
+  header: |
+    Lists
+  summary: |
+    We introduce lists, data structures that can hold ordered sequences of arbitrary objects. We also begin to discuss some of the synergies between lists and iteration. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/lists.html">Lists</a>
+    - <i><a href="https://runestone.academy/ns/books/published/thinkcspy/Lists/toctree.html">Think Like a Computer Scientist</a> 10.1-14</i>
+    - <i><a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf">Think Python</a> Chapter 10</i>
+    - <i><a href="https://runestone.academy/ns/books/published//fopp/Sequences/toctree.html">Foundations of Python Programming</a> 6</i>
+  due: 
+    - Lab 2
+  module: Iteration and Data Structures
+  publish: true
+- date: 2022-10-06
+  header: |
+    Lab: Iteration and Lists
+  summary: |
+    We write functions that check the validity of International Standard Book Numbers (ISBNs). Along the way, we practice writing functions, iteration, and map-filter-reduce operations.  
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+    - Applications
+  activity: 
+    - <a href="labs/map-filter-reduce/">Lab 3</a>
+  assigned: 
+    - Lab 3
+  module: Iteration and Data Structures
+  publish: true
+- date: 2022-10-07
+  header: |
+    Guided Discovery: Iteration and Lists
+  summary: |
+    We work on several common patterns for manipulating lists using iteration. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  activity: 
+    - <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/assignments/HW/HW4/HW4.py">HW4</a>, Problem 1
+  publish: true
+- date: 2022-10-10
+  header: |
+    List Operations: Map, Filter, and Reduce
+  summary: |
+    We discuss the map-filter-reduce paradigm for operating on lists of data, and work several examples. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/lists.html">Lists</a>, Section 2
+    - <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/lecture-scripts/iteration-patterns.py">Lecture script</a> 
+  assigned: 
+    - <a href="https://raw.githubusercontent.com/PhilChodrow/CSCI-0145/main/assignments/HW/HW4/HW4.py">HW4</a>
+  publish: true
+- date: 2022-10-12
+  header: |
+    More Data Structures: Dictionaries and Tuples
+  summary: |
+    We discuss two other useful data structures, with a special emphasis on the role of dictionaries in representing relationships between pieces of data. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/data_structures_and_references.html">Data Structures</a>
+    - <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/lecture-scripts/data-structures.py">Lecture script</a> 
+  Due: 
+    - Lab 3
+  publish: true
+- date: 2022-10-13
+  header: |
+    Lab: Developers as Future-Makers
+  summary: |
+    We write functions that filter applicants to an opportunity according to a set of numerical criteria, and reflect on the ethical challenges associated with such filters. Along the way, we practice iteration and working with lists. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+    - Social Responsibility
+  activity: 
+    - <a href="labs/future-makers/">Lab 4</a>
+  assigned: 
+    - Lab 4
+  module: Iteration and Data Structures
+  publish: true
+- date: 2022-10-14
+  header: |
+    No Class! 
+  summary: |
+    Midterm Recess
+  publish: true
+- date: 2022-10-17
+  header: |
+    Review: Recursion
+  summary: |
+    We work together on several problems to reinforce core concepts and techniques for recursive problem-solving. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/recursion.html">Recursion</a>
+    - <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/lecture-scripts/recursion-review.py">Lecture Script</a>
+  due: 
+    - HW4
+  module: Recursion
+  publish: true
+- date: 2022-10-19
+  header: |
+    Representing Data: Integers
+  summary: |
+    We begin a discussion of why computers represent data in binary, and how to convert between binary and decimal representations of integers. 
+  objectives: 
+    - Computational Thinking
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/representing_data.html">Representing Data</a>
+    - <a href="https://docs.google.com/presentation/d/1oz58DPWj-NSQRxrz0r4F5-gE2NwPAaudpOnuwclcmms/edit?usp=sharing">Lecture Slides</a>
+  due: 
+    - Lab 4
+  module: Data Representation
+  publish: true
+- date: 2022-10-24
+  header: |
+    Representing Data: Floating Point Numbers
+  summary: |
+    We continue our discussion of data representation. We highlight some of the challenges for computers in representing floating point numbers. 
+  objectives: 
+    - Computational Thinking
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/representing_data.html">Representing Data</a>
+    - <a href="https://docs.google.com/presentation/d/1oz58DPWj-NSQRxrz0r4F5-gE2NwPAaudpOnuwclcmms/edit?usp=sharing">Lecture Slides</a>
+  assigned: 
+    - HW5
+  module: |
+    Data Representation
+  publish: true
+- date: 2022-10-26
+  header: |
+    Representing Data: and Images
+  summary: |
+    We discuss representations of digital images as arrays of pixels. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+    - Applications
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/representing_data.html">Representing Data</a>
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/image_processing.html">Image Processing</a>
+    - <a href="https://docs.google.com/presentation/d/1oz58DPWj-NSQRxrz0r4F5-gE2NwPAaudpOnuwclcmms/edit?usp=sharing">Lecture Slides</a>
+  assigned: 
+    - HW5
+  module: |
+    Application: Image Processing
+  publish: true
+- date: 2022-10-27
+  header: |
+    Lab: Image Manipulation
+  summary: |
+    We write functions that allow us to manipulate digital images. We implement brightening, contrast-heightening, reflection, and several other transformations. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+    - Applications
+  activity: 
+    - <a href="labs/images/">Lab 5</a>
+  assigned: 
+    - Lab 5
+  module: |
+    Application: Image Processing
+  publish: true
+- date: 2022-10-31
+  header: |
+    Introducing Object-Oriented Programming
+  summary: |
+    We begin a discussion of object-oriented programming, the standard approach in Python for writing complex programs by combining data (attributes) and behavior (methods). 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/object_oriented_programming.html">Object-Oriented Programming</a>
+    - <a href="https://docs.google.com/presentation/d/1enzYDGoOycH_Ih-uL8WIaNlKMnasozw7DUPxQXd3b8Y/edit?usp=sharing">Lecture Slides</a>
+  assigned: 
+    - HW5
+  module: |
+    Object-Oriented Programming
+  publish: true
+- date: 2022-11-02
+  header: |
+    More Object-Oriented Programming
+  summary: |
+    We continue using object-oriented programming to implement complex program behavior. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/object_oriented_programming.html">Object-Oriented Programming</a>
+    - <a href="https://docs.google.com/presentation/d/1enzYDGoOycH_Ih-uL8WIaNlKMnasozw7DUPxQXd3b8Y/edit?usp=sharing">Lecture Slides</a>
+  module: |
+    Object-Oriented Programming
+  publish: true
+- date: 2022-11-03
+  header: |
+    Lab: Object-Oriented Programming
+  summary: |
+    We use object-oriented programming to create a set of interacting classes that model a computer science course. 
+  objectives: 
+    - Computational Thinking
+    - Python Programming
+  activity: 
+    - <a href="labs/introducing-oop/">Lab 6</a>
+  assigned: 
+    - Lab 6
+  module: |
+    Object-Oriented Programming
+  publish: true
+- date: 2022-11-07
+  header: |
+    Unit Testing
+  summary: |
+    We introduce unit testing, an automated framework for checking correct functionality of small pieces ("units") of code. 
+  objectives: 
+    - Python Programming
+    - Applications
+  reading: 
+    - <a href="https://towardsdatascience.com/how-to-easily-and-confidently-implement-unit-tests-in-python-cad48d91ab74">Blog Post on Medium</a>
+  assigned: 
+    - HW6
+  module: |
+    Unit Testing
+  publish: true
+- date: 2022-11-09
+  header: |
+    More Unit Testing
+  summary: |
+    We continue with an extended example of unit-testing. 
+  objectives: 
+    - Python Programming
+    - Applications
+  reading: 
+    - <a href="https://towardsdatascience.com/how-to-easily-and-confidently-implement-unit-tests-in-python-cad48d91ab74">Blog Post on Medium</a>
+  module: |
+    Unit Testing
+  publish: true
+- date: 2022-11-10
+  header: |
+    Lab: Developers as Prioritizers
+  summary: |
+    We develop our skills using object-oriented interfaces while reflecting on some of the difficult choices posed by automated vehicles and rescue services. 
+  objectives: 
+    - Social Responsibility
+    - Applications
+  activity: 
+    - <a href="labs/prioritizers/">Lab 7</a>
+  assigned: 
+    - Lab 7
+  module: |
+    Object-Oriented Programming
+  publish: true
+- date: 2022-11-14
+  header: |
+    String Methods
+  summary: |
+    We survey several important string methods and use them for basic text analysis tasks. 
+  objectives: 
+    - Python Programming
+    - Applications
+  reading: 
+    - <a href="https://www.digitalocean.com/community/tutorials/python-string-functions">String methods reference</a>
+    - <a href="http://cissandbox.bentley.edu/sandbox/wp-content/uploads/2022-02-10-Documentation-on-f-strings-Updated.pdf">A Guide to Formatting with f-strings in Python </a>
+  assigned: 
+    - HW7
+  module: |
+    Text Analysis
+  publish: true
+- date: 2022-11-16
+  header: |
+    Case Study: Lines in Plays
+  summary: |
+    We use string methods in combination with our iteration and data structure skills to count the number of lines spoken by each character in Shakespeare's <i>Hamlet</i>. 
+  objectives: 
+    - Python Programming
+    - Applications
+  reading: 
+    - <a href="https://www.digitalocean.com/community/tutorials/python-string-functions">String methods reference</a>
+    - <a href="http://cissandbox.bentley.edu/sandbox/wp-content/uploads/2022-02-10-Documentation-on-f-strings-Updated.pdf">A Guide to Formatting with f-strings in Python </a>
+  module: |
+    Text Analysis
+  publish: true
+- date: 2022-11-17
+  header: |
+    Lab: The Hedonometer
+  summary: |
+    We implement sentiment analysis in the style of <a href="https://hedonometer.org/timeseries/en_all/">The Hedonometer</a> at the University of Vermont, and use it to analyze the emotional arc of several famous speeches. 
+  objectives: 
+    - Social Responsibility
+    - Applications
+  activity: 
+    - <a href="labs/hedonometer/">Lab 8</a>
+  assigned: 
+    - Lab 8
+  module: |
+    Text Analysis
+  publish: true
+- date: 2022-11-21
+  header: |
+    Thanksgiving Break! 
+  summary: |
+    No class this week, enjoy the holiday! 
+  publish: true
+- date: 2022-11-28
+  header: |
+    Introducing Analysis of Algorithms
+  summary: |
+    We begin the study of analyzing the worst-case runtime of algorithms using big-O analysis. 
+  objectives: 
+    - Analysis
+    - Computational Thinking
+  reading: 
+    - <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/complexity.html">Computational Complexity</a>
+    - <a href="https://greenteapress.com/thinkpython2/html/thinkpython2022.html">ThinkPython2e, Appendix B</a>
+  module: |
+    Analysis
+  publish: true
