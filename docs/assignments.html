@@ -59,7 +59,7 @@ ul.task-list{list-style: none;}
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-blog-posts .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -72,7 +72,35 @@ ul.task-list{list-style: none;}
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-blog-posts'] = new List('listing-blog-posts', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-process .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-date','listing-author','listing-type','listing-path','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-objectives',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      
+      searchColumns: ["listing-title","listing-date","listing-author","listing-type","listing-path","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-objectives"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-process'] = new List('listing-process', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -140,6 +168,21 @@ ul.task-list{list-style: none;}
   <a href="./assignments.html" class="sidebar-item-text sidebar-link active">Index of Assignments</a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Lecture Notes</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecture-notes/intro-classification.html" class="sidebar-item-text sidebar-link">Introduction to Classification and Auditing</a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -164,36 +207,79 @@ ul.task-list{list-style: none;}
 
 </header>
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-custom" id="listing-listing">
+<section id="process" class="level1">
+<h1>Process</h1>
+<div id="listing-process" class="quarto-listing quarto-listing-container-custom">
 
 <table style="display: block; max-width: 800px;">
         <tbody><tr>
-            <td style="min-width:100px;max-width:200px;">
-                <b>
-                    Blog Post
-                </b> 
-            </td>
-            <td style="min-width:400px">
-                <a href="./assignments/blog-post-data-science.html">
-                    Elementary Data Science in Python
-                </a>
-            </td>
-            <td style="text-align: right; max-width: 150;min-width: 150px;">
-            Best By: &nbsp; 
-            </td>
-            <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                Feb 7, 2023
+            <td class="smaller syllabus-item-objective" colspan="3">
             </td>
         </tr>
+            <tr>
+                <td style="min-width:100px;max-width:200px;">
+                    <b>
+                        Reflection
+                    </b> 
+                </td>
+                <td style="min-width:400px">
+                    <a href="./assignments/process/goal-setting.html">
+                        Reflective Goal-Setting
+                    </a>
+                </td>
+                <td style="text-align: right; max-width: 150;min-width: 150px;">
+                Best By: &nbsp; 
+                </td>
+                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                    Feb 14, 2023
+                </td>
+            </tr>
+            <tr>
+                <td class="smaller" colspan="4">
+                    We plan our goals for learning, engagement, and achievement over the course of the semester.
+                </td>
+            </tr>
         <tr>
-            <td class="smaller" colspan="4">
-                In this blog post, you'll practice the Quarto technical publishing workflow. You'll also demonstrate the usage of packages like <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code> to create informative data analyses and visualizations.
+            <td class="smaller syllabus-item-objective" colspan="3">
+                    <b>Learning Objectives: </b>
+                    <!-- <b>Learning Objectives</b><br> -->
+                        Reflection
             </td>
         </tr>
+</tbody></table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="blog-posts" class="level1">
+<h1>Blog Posts</h1>
+<div id="listing-blog-posts" class="quarto-listing quarto-listing-container-custom">
+
+<table style="display: block; max-width: 800px;">
+            <tbody><tr>
+                <td style="min-width:100px;max-width:200px;">
+                    <b>
+                        Blog Post
+                    </b> 
+                </td>
+                <td style="min-width:400px">
+                    <a href="./assignments/blog-posts/blog-post-data-science.html">
+                        Elementary Data Science in Python
+                    </a>
+                </td>
+                <td style="text-align: right; max-width: 150;min-width: 150px;">
+                Best By: &nbsp; 
+                </td>
+                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                    Feb 7, 2023
+                </td>
+            </tr>
+            <tr>
+                <td class="smaller" colspan="4">
+                    In this blog post, you'll practice the Quarto technical publishing workflow. You'll also demonstrate the usage of packages like <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code> to create informative data analyses and visualizations.
+                </td>
+            </tr>
         <tr>
             <td class="smaller syllabus-item-objective" colspan="3">
                     <b>Learning Objectives: </b>
@@ -203,29 +289,29 @@ ul.task-list{list-style: none;}
                         Navigation
             </td>
         </tr>
-        <tr>
-            <td style="min-width:100px;max-width:200px;">
-                <b>
-                    Blog Post
-                </b> 
-            </td>
-            <td style="min-width:400px">
-                <a href="./assignments/blog-post-compas.html">
-                    Classification Rates in a Recidivism Prediction Algorithm
-                </a>
-            </td>
-            <td style="text-align: right; max-width: 150;min-width: 150px;">
-            Best By: &nbsp; 
-            </td>
-            <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                Feb 14, 2023
-            </td>
-        </tr>
-        <tr>
-            <td class="smaller" colspan="4">
-                In this blog post, you'll study (mis)classification rates from a famous algorithm used to predict whether people sentenced to jail due to criminal convictions were likely to be arrested again after release.
-            </td>
-        </tr>
+            <tr>
+                <td style="min-width:100px;max-width:200px;">
+                    <b>
+                        Blog Post
+                    </b> 
+                </td>
+                <td style="min-width:400px">
+                    <a href="./assignments/blog-posts/blog-post-compas.html">
+                        Classification Rates in a Recidivism Prediction Algorithm
+                    </a>
+                </td>
+                <td style="text-align: right; max-width: 150;min-width: 150px;">
+                Best By: &nbsp; 
+                </td>
+                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                    Feb 14, 2023
+                </td>
+            </tr>
+            <tr>
+                <td class="smaller" colspan="4">
+                    In this blog post, you'll study (mis)classification rates from a famous algorithm used to predict whether people sentenced to jail due to criminal convictions were likely to be arrested again after release.
+                </td>
+            </tr>
         <tr>
             <td class="smaller syllabus-item-objective" colspan="3">
                     <b>Learning Objectives: </b>
@@ -235,29 +321,29 @@ ul.task-list{list-style: none;}
                         Navigation
             </td>
         </tr>
-        <tr>
-            <td style="min-width:100px;max-width:200px;">
-                <b>
-                    Blog Post
-                </b> 
-            </td>
-            <td style="min-width:400px">
-                <a href="./assignments/blog-post-optimization.html">
-                    Optimization for Logistic Regression
-                </a>
-            </td>
-            <td style="text-align: right; max-width: 150;min-width: 150px;">
-            Best By: &nbsp; 
-            </td>
-            <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                Feb 21, 2023
-            </td>
-        </tr>
-        <tr>
-            <td class="smaller" colspan="4">
-                In this blog post, you'll implement several <i>first-order methods</i>: optimization algorithms based on the gradients of functions. You'll implement simple gradient descent, a momentum method, and stochastic gradient descent, comparing their performance for training logistic regression.
-            </td>
-        </tr>
+            <tr>
+                <td style="min-width:100px;max-width:200px;">
+                    <b>
+                        Blog Post
+                    </b> 
+                </td>
+                <td style="min-width:400px">
+                    <a href="./assignments/blog-posts/blog-post-optimization.html">
+                        Optimization for Logistic Regression
+                    </a>
+                </td>
+                <td style="text-align: right; max-width: 150;min-width: 150px;">
+                Best By: &nbsp; 
+                </td>
+                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                    Feb 21, 2023
+                </td>
+            </tr>
+            <tr>
+                <td class="smaller" colspan="4">
+                    In this blog post, you'll implement several <i>first-order methods</i>: optimization algorithms based on the gradients of functions. You'll implement simple gradient descent, a momentum method, and stochastic gradient descent, comparing their performance for training logistic regression.
+                </td>
+            </tr>
         <tr>
             <td class="smaller syllabus-item-objective" colspan="3">
                     <b>Learning Objectives: </b>
@@ -269,29 +355,29 @@ ul.task-list{list-style: none;}
                         Experimentation
             </td>
         </tr>
-        <tr>
-            <td style="min-width:100px;max-width:200px;">
-                <b>
-                    Blog Post
-                </b> 
-            </td>
-            <td style="min-width:400px">
-                <a href="./assignments/blog-post-penguins.html">
-                    Application Project: Classifying Palmer Penguins
-                </a>
-            </td>
-            <td style="text-align: right; max-width: 150;min-width: 150px;">
-            Best By: &nbsp; 
-            </td>
-            <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                Feb 28, 2023
-            </td>
-        </tr>
-        <tr>
-            <td class="smaller" colspan="4">
-                In this blog post, you'll work through a complete example of the standard machine learning workflow, including: data splitting, model and feature selection, cross validation, etc. Your primary goal is to determine the smallest number of measurements necessary to confidently determine the species of a penguin.
-            </td>
-        </tr>
+            <tr>
+                <td style="min-width:100px;max-width:200px;">
+                    <b>
+                        Blog Post
+                    </b> 
+                </td>
+                <td style="min-width:400px">
+                    <a href="./assignments/blog-posts/blog-post-penguins.html">
+                        Application Project: Classifying Palmer Penguins
+                    </a>
+                </td>
+                <td style="text-align: right; max-width: 150;min-width: 150px;">
+                Best By: &nbsp; 
+                </td>
+                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                    Feb 28, 2023
+                </td>
+            </tr>
+            <tr>
+                <td class="smaller" colspan="4">
+                    In this blog post, you'll work through a complete example of the standard machine learning workflow, including: data splitting, model and feature selection, cross validation, etc. Your primary goal is to determine the smallest number of measurements necessary to confidently determine the species of a penguin.
+                </td>
+            </tr>
         <tr>
             <td class="smaller syllabus-item-objective" colspan="3">
                     <b>Learning Objectives: </b>
@@ -301,29 +387,29 @@ ul.task-list{list-style: none;}
                         Navigation
             </td>
         </tr>
-        <tr>
-            <td style="min-width:100px;max-width:200px;">
-                <b>
-                    Blog Post
-                </b> 
-            </td>
-            <td style="min-width:400px">
-                <a href="./assignments/blog-post-medical-bias.html">
-                    Bias in a Medical Recommender System
-                </a>
-            </td>
-            <td style="text-align: right; max-width: 150;min-width: 150px;">
-            Best By: &nbsp; 
-            </td>
-            <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                Mar 6, 2023
-            </td>
-        </tr>
-        <tr>
-            <td class="smaller" colspan="4">
-                In this blog post, you'll reproduce some of the findings of a famous study that found racial bias in a deployed, large-scale medical recommender system.
-            </td>
-        </tr>
+            <tr>
+                <td style="min-width:100px;max-width:200px;">
+                    <b>
+                        Blog Post
+                    </b> 
+                </td>
+                <td style="min-width:400px">
+                    <a href="./assignments/blog-posts/blog-post-medical-bias.html">
+                        Bias in a Medical Recommender System
+                    </a>
+                </td>
+                <td style="text-align: right; max-width: 150;min-width: 150px;">
+                Best By: &nbsp; 
+                </td>
+                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                    Mar 6, 2023
+                </td>
+            </tr>
+            <tr>
+                <td class="smaller" colspan="4">
+                    In this blog post, you'll reproduce some of the findings of a famous study that found racial bias in a deployed, large-scale medical recommender system.
+                </td>
+            </tr>
         <tr>
             <td class="smaller syllabus-item-objective" colspan="3">
                     <b>Learning Objectives: </b>
@@ -337,7 +423,13 @@ ul.task-list{list-style: none;}
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div><p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+</div>
+
+
+
+</section>
+
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

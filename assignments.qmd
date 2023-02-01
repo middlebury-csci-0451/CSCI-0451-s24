@@ -1,7 +1,4 @@
 ---
-listing: 
-  contents: assignments
-  template: assignments.ejs
 #   type: table
 #   sort: best-by
 #   fields: [title, type, best-by,]
@@ -13,5 +10,26 @@ listing:
 #     best-by: "Best-By Date"
 toc: false
 title: Index of Assignments
+listing:
+  - id: blog-posts
+    contents: assignments/blog-posts
+    sort-ui: false
+    filter-ui: false
+    template: assignments.ejs
+  - id: process
+    contents: assignments/process
+    sort-ui: false
+    filter-ui: false
+    template: assignments.ejs
 ---
                
+
+# Process
+
+::: {#process}
+:::
+
+# Blog Posts   
+
+:::{#blog-posts}
+:::

@@ -179,7 +179,7 @@ I'd prefer to just not give you grades at all. But, Middlebury says I have to, a
 
 ## Assignments
 
-There are four kinds of assignments in this course, plus a mysterious "Other" category. 
+There are three kinds of assessed assignments in this course, plus a mysterious "Other" category. 
 
 <table>
     <tr>
@@ -188,14 +188,6 @@ There are four kinds of assignments in this course, plus a mysterious "Other" ca
         </td>
         <td class="syllabus-description-table-entry">
             Blog posts are the primary way in which you will demonstrate your understanding of course content. Blog posts usually involve: written explanation of some relevant theory; implementation one or more algorithms according to written specifications; performing experiments to test the performance of the implementations; and communicating findings in a professional way. Some blog posts will be more like short essays than problem sets or programming assignments. Your blog posts will be hosted on your own public website (which you will create). This website will serve as your **portfolio** for the course.  
-        </td>
-    </tr>
-    <tr>
-        <td class="syllabus-description-table-header">
-            <b>Theory Exercises</b>
-        </td>
-        <td class="syllabus-description-table-entry">
-            These are mathematical exercises that build your understanding of how and why our algorithms work. We won't do too many theory problems, although most blog posts will require you to do a bit of theoretical writing. 
         </td>
     </tr>
     <tr>
@@ -252,9 +244,6 @@ I am likely to consider your time in my course to be highly successful if you do
 - You complete almost all assignments with a high degree of quality, including revising in response to my feedback. 
 - You spend on average **10 productive hours** of work time on this course outside of class.
 - You complete many assignments that I give you, and also propose and complete alternative work that demonstrates your learning and achievement. 
-
-
-
 
 # Course Policies 
 

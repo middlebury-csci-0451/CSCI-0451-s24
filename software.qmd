@@ -58,6 +58,7 @@ Install the following packages:
 - `matplotlib`
 - `pandas`
 - `scikit-learn`
+- `seaborn`
 
 I may ask you to install additional packages later on, or you may find it useful to install packages yourself in order to deal with problems or projects. You'll follow this same process to install them to the `ml-0451` environment. 
 
