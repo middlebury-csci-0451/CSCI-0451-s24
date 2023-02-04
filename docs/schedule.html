@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Course Schedule</title>
+<title>Schedule</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,7 +25,7 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assets/img/icons/favicon.png" rel="icon" type="image/png">
+<link href="./assets/icons/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -66,10 +66,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-date','listing-day','listing-header','listing-summary','listing-objectives','listing-reading','listing-module','listing-publish','listing-assigned','listing-activity','listing-optional','listing-due','listing-Due',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
-      page: 25,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-date","listing-day","listing-header","listing-summary","listing-objectives","listing-reading","listing-module","listing-publish","listing-assigned","listing-activity","listing-optional","listing-due","listing-Due"],
+      valueNames: ['listing-date','listing-header','listing-summary','listing-objectives','listing-reading','listing-notes','listing-module','listing-publish','listing-warmup','listing-assignments','listing-optional',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
+      
+      searchColumns: ["listing-date","listing-header","listing-summary","listing-objectives","listing-reading","listing-notes","listing-module","listing-publish","listing-warmup","listing-assignments","listing-optional"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -98,7 +97,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Course Schedule</h1>
+      <h1 class="quarto-secondary-nav-title">Schedule</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -128,12 +127,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./collaboration.html" class="sidebar-item-text sidebar-link">Collaboration And Academic Honesty</a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link active">Course Schedule</a>
+  <a href="./schedule.html" class="sidebar-item-text sidebar-link active">Schedule</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -151,7 +145,7 @@ ul.task-list{list-style: none;}
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Course Schedule</h1>
+<h1 class="title d-none d-lg-block">Schedule</h1>
 </div>
 
 
@@ -165,7 +159,12 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>Readings in <em>italic</em> are optional recommendations for further background on the material.</p>
+<ul>
+<li>Readings in normal font should be completed and annotated ahead of lecture.</li>
+<li><em>Readings in italic provide optional additional depth on the material.</em><br>
+</li>
+<li><strong>Assignments</strong> are listed on the day when I suggest you begin working on them.</li>
+</ul>
 
 
 
@@ -178,119 +177,79 @@ ul.task-list{list-style: none;}
             <td rowspan="2" class="syllabus-date-pane">
                     <span class="syllabus-day-of-week">M</span>
                     <br>
-                    <span class="syllabus-date">Sep. 12</span></td> 
-            <td colspan="2"> Welcome to CSCI 0145!
+                    <span class="syllabus-date">Feb. 13</span></td> 
+            <td colspan="2"> Welcome!
  </td>  
         </tr>
         <tr>
             <td colspan="4" class="smaller"> 
-                We discuss the structure of the class and briefly introduce computational thinking. 
+                We discuss how the course works and begin our discussion of classification and auditing. 
             </td>
         </tr>
         <tr>
             <td></td>
             <td class="smaller syllabus-item-objective">
                     <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
+                            Getting Oriented <br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
-                            <a href="./syllabus.html">Course syllabus</a> <br> 
-                            <a href="./collaboration.html">Collaboration and academic honesty</a> <br> 
-                            <a href="tools.qmd">Course resources</a> <br> 
-                            <a href="help.qmd">Asking for help</a> <br> 
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/algorithms_bugs.html">Algorithms and bugs</a> <br> 
+                           <a href="./syllabus.html">Course syllabus</a><br> 
+                           <a href="./collaboration.html">Collaboration</a><br> 
+                           <a href="https://via.hypothes.is/https://www.jessestommel.com/why-i-dont-grade/">Why I Don't Grade</a> by Jesse Stommel<br> 
+                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch01.pdf">Daumé 1.1-1.5</a><br> 
+            </td>
+            <td class="smaller syllabus-item-readings">
+                    <b>Notes</b><br>
+                            <a href="./slides/welcome.html">Welcome slides</a>
+ <br> 
+                            <a href="./lecture-notes/intro-classification.html">Lecture notes</a>
+ <br> 
             </td>
             <td class="smaller syllabus-item-assignment">
+                    <b>Warmup</b><br>
+                    <a href="./software.html">Set up your software</a>.
             </td>
             <td class="smaller syllabus-item-assignment">
+                    <b>Assignments</b><br>
+                    No really, <br><a href="./software.html">set up your software</a>.
             </td>
         </tr>
         <tr>
             <td rowspan="2" class="syllabus-date-pane">
                     <span class="syllabus-day-of-week">W</span>
                     <br>
-                    <span class="syllabus-date">Sep. 14</span></td> 
-            <td colspan="2"> Expressions and Variables
+                    <span class="syllabus-date">Feb. 15</span></td> 
+            <td colspan="2"> More On Classification and Auditing
  </td>  
         </tr>
         <tr>
             <td colspan="4" class="smaller"> 
-                We discuss <i>expressions</i> -- the simplest recipes for computations -- and <i>variables</i>, which allow us to store the results of computations for later use. 
+                We continue our discussion of classification and introduce algorithmic bias. 
             </td>
         </tr>
         <tr>
             <td></td>
             <td class="smaller syllabus-item-objective">
                     <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
+                            Social Responsibility <br> 
+                            Navigation <br> 
+                            Experimentation <br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/expressions.html">Expressions</a> <br> 
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/variables.html">Variables</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Sep. 15</span></td> 
-            <td colspan="2"> Guided Discovery: Introduction to Strings
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We learn some ways to manipulate text, save the results, and show them to the user. We'll come back to advanced text manipulation much later in the course. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Python Programming <br> 
-                            Applications <br> 
+                           <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> from <i>ProPublica</i><br> 
+                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#3.-Data-Manipulation-with-Pandas">Data Manipulation with Pandas</a> from <i>The Python Data Science Handbook</i> by Jake van der Plaas<br> 
+                           Example 2.3.1 from <a href="https://github.com/probml/pml-book/releases/latest/download/book1.pdf">Murphy</a><br> 
             </td>
             <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="assignments/guided-discovery/strings/gd-strings.py">GD1</a> <br> 
+                    <b>Notes</b><br>
+                            <a href="./lecture-notes/intro-classification.html">Lecture notes</a>
+ <br> 
             </td>
             <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">F</span>
-                    <br>
-                    <span class="syllabus-date">Sep. 16</span></td> 
-            <td colspan="2"> Functions
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                Functions are reusable computational recipes. We discuss the basic ingredients of a function and work through some simple examples. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/functions.html"> Functions</a> (1-3) <br> 
-                            <span class="supporting-reading"><a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf"> ThinkPython</a> 3.1-3.7</span> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
+                    <b>Warmup</b><br>
+                    <a href="./warmup-exercises.html#classification-rates"> Classification rates </a>
             </td>
             <td class="smaller syllabus-item-assignment">
             </td>
@@ -302,125 +261,77 @@ ul.task-list{list-style: none;}
             <td rowspan="2" class="syllabus-date-pane">
                     <span class="syllabus-day-of-week">M</span>
                     <br>
-                    <span class="syllabus-date">Sep. 19</span></td> 
-            <td colspan="2"> More on Functions
+                    <span class="syllabus-date">Feb. 20</span></td> 
+            <td colspan="2"> Classification: The Perceptron
  </td>  
         </tr>
         <tr>
             <td colspan="4" class="smaller"> 
-                We discuss some important considerations for writing functions and using functions that other people have written. Our main topics are <i>variable scope</i>, <i>documentation</i>, and <i>modules</i>. 
+                We study the perceptron algorithm, a historical method that serves as the foundation for many modern classifiers. 
             </td>
         </tr>
         <tr>
             <td></td>
             <td class="smaller syllabus-item-objective">
                     <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
+                            Theory <br> 
+                            Implementation <br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/functions.html"> Functions</a> (4-5) <br> 
-                            <span class="supporting-reading"><a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf"> ThinkPython</a> 3.8-3.14</span> <br> 
+                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch04.pdf">Daumé 4.1-4.5, 4.7</a><br> 
+                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#2.-Introduction-to-NumPy">Introduction to Numpy</a> from <i>The Python Data Science Handbook</i> by Jake van der Plaas<br> 
+                           <a href="https://nbviewer.org/github/PhilChodrow/PIC16B/blob/master/lectures/math/linear-algebra-I.ipynb">Linear algebra with Numpy</a><br> 
+                           <i><a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht</a>, p. 37-41</i><br> 
+            </td>
+            <td class="smaller syllabus-item-readings">
+                    <b>Notes</b><br>
+                            TBD <br> 
             </td>
             <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        <a href="assignments/HW/HW1/HW1.py">HW1</a> <br>
+                    <b>Warmup</b><br>
+                    <a href="./warmup-exercises.html#perceptron"> Perceptron </a>
             </td>
             <td class="smaller syllabus-item-assignment">
+                    <b>Assignments</b><br>
+                    <a href="./assignments/blog-posts/blog-post-perceptron.html">Blog post: perceptron</a>
             </td>
         </tr>
         <tr>
             <td rowspan="2" class="syllabus-date-pane">
                     <span class="syllabus-day-of-week">W</span>
                     <br>
-                    <span class="syllabus-date">Sep. 21</span></td> 
-            <td colspan="2"> Control Flow
+                    <span class="syllabus-date">Feb. 22</span></td> 
+            <td colspan="2"> Models, Loss Functions, and Algorithms
  </td>  
         </tr>
         <tr>
             <td colspan="4" class="smaller"> 
-                We discuss how to make decisions when executing a program. 
+                We generalize our study of the perceptron to a broader framework for supervised machine learning called <i>empirical risk minimization</i>. Within this framework, we begin to study logistic regression and the primal support vector machine for binary classification.
             </td>
         </tr>
         <tr>
             <td></td>
             <td class="smaller syllabus-item-objective">
                     <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
+                            Theory <br> 
+                            Implementation <br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/conditionals.html">Conditionals</a> <br> 
-                            <a href="assets/pdf/PairProgramming.pdf">How Pair Programming Really Works</a> by Stuart Wray <br> 
-                            <span class="supporting-reading"><a href="https://runestone.academy/ns/books/published/thinkcspy/Selection/toctree.html#selection"> Think Like a Computer Scientist, Chapter 7 </a></span> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Sep. 22</span></td> 
-            <td colspan="2"> Guided Discovery: Practice With Functions and Control Flow
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We practice writing functions that make simple decisions in response to user input. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-                            Social Responsibility <br> 
+                           TBD<br> 
             </td>
             <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="https://replit.com/team/csci-0145/Guided-Discovery-2-Functions-and-Control-Flow">GD2</a> <br> 
+                    <b>Notes</b><br>
+                            TBD <br> 
             </td>
             <td class="smaller syllabus-item-assignment">
+                    <b>Warmup</b><br>
+                    TBD
             </td>
             <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">F</span>
-                    <br>
-                    <span class="syllabus-date">Sep. 23</span></td> 
-            <td colspan="2"> Lab: Developers as Decision-Makers
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We use our skills with gathering user input, writing functions, and making simple decisions that prioritize some users over others. We also practice the human-centered design process. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Python Programming <br> 
-                            Design and Collaboration <br> 
-                            Social Responsibility <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/decision-making/">Lab 1</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 1 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
+                    <b>Assignments</b><br>
+                    <a href="./assignments/process/goal-setting.html">Reflective goal-setting</a>
             </td>
         </tr>
             </tbody></table>
@@ -430,899 +341,43 @@ ul.task-list{list-style: none;}
             <td rowspan="2" class="syllabus-date-pane">
                     <span class="syllabus-day-of-week">M</span>
                     <br>
-                    <span class="syllabus-date">Sep. 26</span></td> 
-            <td colspan="2"> Recursion
+                    <span class="syllabus-date">Feb. 27</span></td> 
+            <td colspan="2"> Optimization
  </td>  
         </tr>
         <tr>
             <td colspan="4" class="smaller"> 
-                We study recursion, a powerful tool for writing simple solutions to complex problems by breaking them down into smaller problems. 
+                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for the primal support vector machine. 
             </td>
         </tr>
         <tr>
             <td></td>
             <td class="smaller syllabus-item-objective">
                     <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
+                            Theory <br> 
+                            Implementation <br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/recursion.html">Recursion</a> <br> 
-                            <span class="supporting-reading"><a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf"> ThinkPython</a> 5.8-5.14</span> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        HW2 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Due</b><br>
-                            HW1 <br>
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Sep. 28</span></td> 
-            <td colspan="2"> Recursion and Recursive Graphics
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We continue our study of recursion while creating simple recursive graphics. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
+                           TBD<br> 
             </td>
             <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/turtle.html">Turtle Graphics</a> <br> 
+                    <b>Notes</b><br>
+                            TBD <br> 
             </td>
             <td class="smaller syllabus-item-assignment">
+                    <b>Warmup</b><br>
+                    TBD
             </td>
             <td class="smaller syllabus-item-assignment">
-                    <b>Due</b><br>
-                            Lab 1 <br>
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Sep. 29</span></td> 
-            <td colspan="2"> Guided Discovery: Recursion and Performance
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We learn some ways to measure and analyze the performance of functions, and use these techniques to study the performance implications of recursive techniques. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="assignments/guided-discovery/recursion-performance">GD3</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">F</span>
-                    <br>
-                    <span class="syllabus-date">Sep. 30</span></td> 
-            <td colspan="2"> Lab: Fractal Graphics with Recursion
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We practice writing functions to produce recursive graphics with the turtle module. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/recursion-turtle/">Lab 2</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 2 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 4 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 03</span></td> 
-            <td colspan="2"> Iteration
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We introduce definite and indefinite iteration as a method for performing repeated tasks. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/iteration.html">Iteration</a> <br> 
-                            <i><a href="https://runestone.academy/ns/books/published/thinkcspy/index.html#">Think Like a Computer Scientist</a> 8.1-8.9, 9.10-9.14</i> <br> 
-                            <i><a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf">Think Python</a> Chapter 7</i> <br> 
-                            <i><a href="https://runestone.academy/ns/books/published//fopp/Iteration/toctree.html">Foundations of Python Programming</a> 7.1-7.4, 14</i> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        HW3 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Due</b><br>
-                            HW2 <br>
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 05</span></td> 
-            <td colspan="2"> Lists
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We introduce lists, data structures that can hold ordered sequences of arbitrary objects. We also begin to discuss some of the synergies between lists and iteration. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/lists.html">Lists</a> <br> 
-                            <i><a href="https://runestone.academy/ns/books/published/thinkcspy/Lists/toctree.html">Think Like a Computer Scientist</a> 10.1-14</i> <br> 
-                            <i><a href="https://greenteapress.com/thinkpython2/thinkpython2.pdf">Think Python</a> Chapter 10</i> <br> 
-                            <i><a href="https://runestone.academy/ns/books/published//fopp/Sequences/toctree.html">Foundations of Python Programming</a> 6</i> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Due</b><br>
-                            Lab 2 <br>
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 06</span></td> 
-            <td colspan="2"> Lab: Iteration and Lists
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We write functions that check the validity of International Standard Book Numbers (ISBNs). Along the way, we practice writing functions, iteration, and map-filter-reduce operations.  
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/map-filter-reduce/">Lab 3</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 3 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">F</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 07</span></td> 
-            <td colspan="2"> Guided Discovery: Iteration and Lists
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We work on several common patterns for manipulating lists using iteration. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/assignments/HW/HW4/HW4.py">HW4</a>, Problem 1 <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 5 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 10</span></td> 
-            <td colspan="2"> List Operations: Map, Filter, and Reduce
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss the map-filter-reduce paradigm for operating on lists of data, and work several examples. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/lists.html">Lists</a>, Section 2 <br> 
-                            <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/lecture-scripts/iteration-patterns.py">Lecture script</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        <a href="https://raw.githubusercontent.com/PhilChodrow/CSCI-0145/main/assignments/HW/HW4/HW4.py">HW4</a> <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 12</span></td> 
-            <td colspan="2"> More Data Structures: Dictionaries and Tuples
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss two other useful data structures, with a special emphasis on the role of dictionaries in representing relationships between pieces of data. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/data_structures_and_references.html">Data Structures</a> <br> 
-                            <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/lecture-scripts/data-structures.py">Lecture script</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 13</span></td> 
-            <td colspan="2"> Lab: Developers as Future-Makers
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We write functions that filter applicants to an opportunity according to a set of numerical criteria, and reflect on the ethical challenges associated with such filters. Along the way, we practice iteration and working with lists. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-                            Social Responsibility <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/future-makers/">Lab 4</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 4 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">F</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 14</span></td> 
-            <td colspan="2"> No Class! 
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                Midterm Recess
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-            </td>
-            <td class="smaller syllabus-item-readings">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 6 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 17</span></td> 
-            <td colspan="2"> Review: Recursion
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We work together on several problems to reinforce core concepts and techniques for recursive problem-solving. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/recursion.html">Recursion</a> <br> 
-                            <a href="https://github.com/PhilChodrow/CSCI-0145/blob/main/lecture-scripts/recursion-review.py">Lecture Script</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Due</b><br>
-                            HW4 <br>
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 19</span></td> 
-            <td colspan="2"> Representing Data: Integers
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We begin a discussion of why computers represent data in binary, and how to convert between binary and decimal representations of integers. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/representing_data.html">Representing Data</a> <br> 
-                            <a href="https://docs.google.com/presentation/d/1oz58DPWj-NSQRxrz0r4F5-gE2NwPAaudpOnuwclcmms/edit?usp=sharing">Lecture Slides</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Due</b><br>
-                            Lab 4 <br>
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 7 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 24</span></td> 
-            <td colspan="2"> Representing Data: Floating Point Numbers
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We continue our discussion of data representation. We highlight some of the challenges for computers in representing floating point numbers. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/representing_data.html">Representing Data</a> <br> 
-                            <a href="https://docs.google.com/presentation/d/1oz58DPWj-NSQRxrz0r4F5-gE2NwPAaudpOnuwclcmms/edit?usp=sharing">Lecture Slides</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        HW5 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 26</span></td> 
-            <td colspan="2"> Representing Data: and Images
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss representations of digital images as arrays of pixels. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/representing_data.html">Representing Data</a> <br> 
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/image_processing.html">Image Processing</a> <br> 
-                            <a href="https://docs.google.com/presentation/d/1oz58DPWj-NSQRxrz0r4F5-gE2NwPAaudpOnuwclcmms/edit?usp=sharing">Lecture Slides</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        HW5 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 27</span></td> 
-            <td colspan="2"> Lab: Image Manipulation
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We write functions that allow us to manipulate digital images. We implement brightening, contrast-heightening, reflection, and several other transformations. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/images/">Lab 5</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 5 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 8 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Oct. 31</span></td> 
-            <td colspan="2"> Introducing Object-Oriented Programming
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We begin a discussion of object-oriented programming, the standard approach in Python for writing complex programs by combining data (attributes) and behavior (methods). 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/object_oriented_programming.html">Object-Oriented Programming</a> <br> 
-                            <a href="https://docs.google.com/presentation/d/1enzYDGoOycH_Ih-uL8WIaNlKMnasozw7DUPxQXd3b8Y/edit?usp=sharing">Lecture Slides</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        HW5 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 02</span></td> 
-            <td colspan="2"> More Object-Oriented Programming
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We continue using object-oriented programming to implement complex program behavior. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/object_oriented_programming.html">Object-Oriented Programming</a> <br> 
-                            <a href="https://docs.google.com/presentation/d/1enzYDGoOycH_Ih-uL8WIaNlKMnasozw7DUPxQXd3b8Y/edit?usp=sharing">Lecture Slides</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 03</span></td> 
-            <td colspan="2"> Lab: Object-Oriented Programming
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We use object-oriented programming to create a set of interacting classes that model a computer science course. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Computational Thinking <br> 
-                            Python Programming <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/introducing-oop/">Lab 6</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 6 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 9 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 07</span></td> 
-            <td colspan="2"> Unit Testing
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We introduce unit testing, an automated framework for checking correct functionality of small pieces ("units") of code. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Python Programming <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://towardsdatascience.com/how-to-easily-and-confidently-implement-unit-tests-in-python-cad48d91ab74">Blog Post on Medium</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        HW6 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 09</span></td> 
-            <td colspan="2"> More Unit Testing
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We continue with an extended example of unit-testing. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Python Programming <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://towardsdatascience.com/how-to-easily-and-confidently-implement-unit-tests-in-python-cad48d91ab74">Blog Post on Medium</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 10</span></td> 
-            <td colspan="2"> Lab: Developers as Prioritizers
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We develop our skills using object-oriented interfaces while reflecting on some of the difficult choices posed by automated vehicles and rescue services. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Social Responsibility <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/prioritizers/">Lab 7</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 7 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 10 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 14</span></td> 
-            <td colspan="2"> String Methods
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We survey several important string methods and use them for basic text analysis tasks. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Python Programming <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://www.digitalocean.com/community/tutorials/python-string-functions">String methods reference</a> <br> 
-                            <a href="http://cissandbox.bentley.edu/sandbox/wp-content/uploads/2022-02-10-Documentation-on-f-strings-Updated.pdf">A Guide to Formatting with f-strings in Python </a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        HW7 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 16</span></td> 
-            <td colspan="2"> Case Study: Lines in Plays
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We use string methods in combination with our iteration and data structure skills to count the number of lines spoken by each character in Shakespeare's <i>Hamlet</i>. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Python Programming <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://www.digitalocean.com/community/tutorials/python-string-functions">String methods reference</a> <br> 
-                            <a href="http://cissandbox.bentley.edu/sandbox/wp-content/uploads/2022-02-10-Documentation-on-f-strings-Updated.pdf">A Guide to Formatting with f-strings in Python </a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">T</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 17</span></td> 
-            <td colspan="2"> Lab: The Hedonometer
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We implement sentiment analysis in the style of <a href="https://hedonometer.org/timeseries/en_all/">The Hedonometer</a> at the University of Vermont, and use it to analyze the emotional arc of several famous speeches. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Social Responsibility <br> 
-                            Applications <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Activity</b><br>
-                            <a href="labs/hedonometer/">Lab 8</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assigned</b><br>
-                        Lab 8 <br>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 11 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 21</span></td> 
-            <td colspan="2"> Thanksgiving Break! 
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                No class this week, enjoy the holiday! 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-            </td>
-            <td class="smaller syllabus-item-readings">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 12 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Nov. 28</span></td> 
-            <td colspan="2"> Introducing Analysis of Algorithms
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We begin the study of analyzing the worst-case runtime of algorithms using big-O analysis. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Analysis <br> 
-                            Computational Thinking <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                            <a href="https://avaccari.gitlab.io/csci-0145/sp22/notes/complexity.html">Computational Complexity</a> <br> 
-                            <a href="https://greenteapress.com/thinkpython2/html/thinkpython2022.html">ThinkPython2e, Appendix B</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
+                    <b>Assignments</b><br>
+                    <a href="./assignments/process/goal-setting.html">Reflective goal-setting</a>
             </td>
         </tr>
         </tbody></table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
-  <ul class="pagination"></ul>
-</nav>
 </div><p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

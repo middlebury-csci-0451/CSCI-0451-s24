@@ -66,9 +66,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-date','listing-description','listing-objectives','listing-path','listing-author','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-title','listing-type','listing-date','listing-description','listing-objectives','listing-path','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-jupyter',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-date","listing-description","listing-objectives","listing-path","listing-author","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-title","listing-type","listing-date","listing-description","listing-objectives","listing-path","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-jupyter"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -155,12 +155,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./collaboration.html" class="sidebar-item-text sidebar-link">Collaboration And Academic Honesty</a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link">Course Schedule</a>
+  <a href="./schedule.html" class="sidebar-item-text sidebar-link">Schedule</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -168,21 +163,6 @@ ul.task-list{list-style: none;}
   <a href="./assignments.html" class="sidebar-item-text sidebar-link active">Index of Assignments</a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Lecture Notes</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./lecture-notes/intro-classification.html" class="sidebar-item-text sidebar-link">Introduction to Classification and Auditing</a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -377,6 +357,38 @@ No matching items
                     <b>Learning Objectives: </b>
                     <!-- <b>Learning Objectives</b><br> -->
                         Social Responsibility
+                            | 
+                        Navigation
+            </td>
+        </tr>
+            <tr>
+                <td style="min-width:100px;max-width:200px;">
+                    <b>
+                        Blog Post
+                    </b> 
+                </td>
+                <td style="min-width:400px">
+                    <a href="./assignments/blog-posts/blog-post-perceptron.html">
+                        Implementing the Perceptron Algorithm
+                    </a>
+                </td>
+                <td style="text-align: right; max-width: 150;min-width: 150px;">
+                Best By: &nbsp; 
+                </td>
+                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                    Feb 14, 2023
+                </td>
+            </tr>
+            <tr>
+                <td class="smaller" colspan="4">
+                    In this blog post, you'll implement the perceptron algorithm and demonstrate its use on a few simple data sets.
+                </td>
+            </tr>
+        <tr>
+            <td class="smaller syllabus-item-objective" colspan="3">
+                    <b>Learning Objectives: </b>
+                    <!-- <b>Learning Objectives</b><br> -->
+                        Implementation
                             | 
                         Navigation
             </td>

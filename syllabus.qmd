@@ -4,9 +4,9 @@ title: Syllabus
 callout-icon: false
 ---
 
-CSCI 0451, Machine Learning, is an advanced elective on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning. 
+# CSCI 0451: Machine Learning
 
-
+This is an advanced elective on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning. 
 
 # Learning Objectives
 
@@ -15,7 +15,7 @@ A learning objective is a primary goal for your learning by the end of the cours
 <table>
     <tr>
         <td class="syllabus-description-learning-objective">      
-            <b>Math</b> 
+            <b>Theory</b> 
         </td>
         <td class="syllabus-description-table-entry">
             You will describe the broad mathematical structure of modern machine learning algorithms, and the details of several simple examples. 
@@ -62,6 +62,34 @@ A learning objective is a primary goal for your learning by the end of the cours
         </td>
     </tr>
 </table>
+
+# Readings
+
+It is not necessary for you to purchase any books for this course. We will have regular readings from a few different texts, with the most frequent one being: 
+
+- [*A Course In Machine Learning*](http://ciml.info/) by Hal Daumé III. 
+
+The following resources cover similar topics to our core readings at a similar level. If something doesn't click for you in our core reading, you may want to check the treatment in one of these resources. 
+
+- [*Learning From Data*](https://openeclass.panteion.gr/modules/document/file.php/PMS152/LEARNING/Abu-Mostafa%20Yaser%20S.%2C%20Malik%20Magdon-Ismail%2C%20Hsuan-Tien%20Lin%20%282012%29%20--%20Learning%20From%20Data_%20A%20short%20course.pdf) by Yaser Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin.
+- [*The Hundred Page Machine Learning Book*](http://ema.cri-info.cm/wp-content/uploads/2019/07/2019BurkovTheHundred-pageMachineLearning.pdf) by Andriy Burkov.
+
+
+I will also sometimes draw readings from the following sources: 
+
+- [*Patterns, Predictions, and Actions: A Story About Machine Learning*](https://arxiv.org/abs/2102.05242) by Mortiz Hardt and Benjamin Recht.
+- [*Probabilistic Machine Learning: An Introduction*](https://probml.github.io/pml-book/book1.html) by Kevin Patrick Murphy.
+- [*Fairness and Machine Learning*](https://fairmlbook.org/pdf/fairmlbook.pdf) by Solon Barocas, Moritz Hardt, and Arvind Narayanan.
+
+The following books are relatively advanced. I'll often suggest additional readings from these books for students who are interested in diving deeper, especially into theoretical considerations. 
+
+- [*Pattern Recognition and Machine Learning*](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) by Christopher Bishop. Recommended for students who have taken a course in probability. [In case you're wondering, I primarily learned out of Bishop and Hastie et al.]{.aside}
+- [*The Elements of Statistical Learning: Data Mining, Inference, and Prediction*](https://hastie.su.domains/Papers/ESLII.pdf) by Trevor Hastie, Rob Tibshirani, and Jerome Friedman. A more statistical perspective on many of the same problems that we will study. 
+- [*Mathematics for Machine Learning*](https://mml-book.github.io/book/mml-book.pdf) by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong
+
+## Social Annotation
+
+A an extremely useful way for you to engage with the readings is to make comments, ask questions, and answer questions about them ***as you are reading***. For this reason, I'll be providing most links to readings through [Hypothes.is](https://web.hypothes.is/). You'll be able to make marginal comments and view the marginal comments of others. I'll also regularly be checking on your annotations to see what questions might have come up with the readings. 
 
 # Logistics and Key Policies
 
@@ -134,7 +162,7 @@ A learning objective is a primary goal for your learning by the end of the cours
             <br> <br> 
             [Masks are required](#masks) during class time and Student Hours. 
         </td>
-    </tr>
+    </tr> 
 </table>
 
 # Rough Schedule Of Topics
@@ -155,9 +183,20 @@ See the [complete schedule](schedule.qmd) for more details! I am still working o
 - **Week 12**: Flex, topics by request. 
 - **Week 13**: Project presentations.
 
-## What Will Class Time Look Like?
+## What Will Class Time Look Like? 
 
-Usually a combination of lecture, group activities, and time to work on assignments. I'll expect you to complete required reading and pre-work ahead of class. There will often be optional readings and preparatory exercises which are indeed optional. 
+My plan is for most class periods to look like a "lecture sandwich:"
+
+- 10 to 15 minutes of a **warmup activity** that addresses the recent lectures and readings.
+- 40-50 minutes of **lecture**, punctuated by short activities and breaks. 
+- 10-15 minutes of a **closing activity** that helps us get solid with the day's content.  
+
+### The Warmup Activity
+
+On most days, we'll have a warmup activity. The warmup activity will usually ask you to engage with the readings and complete a small amount of work **ahead of class time**. This could be a short piece of writing, a math problem, or an implementation of a Python function. 
+
+Each day, a few students will be randomly selected to present their work to a small group of peers. It's ok to ask for help or even pass if you're not feeling confident in your solution, but you should plan to at least make a good attempt at the warmup before every class period. Your participation on the warmup activity is an important aspect of presence in the course, and I'll ask you to reflect on it when proposing your course grade. 
+
 
 # Demonstrating Your Learning
 
@@ -168,6 +207,12 @@ This course is *collaboratively graded*. [You may have also heard the term *ungr
 - There are no points or scores attached to any assignment. When you turn in assignments, you'll get feedback on how to revise/resubmit, improve or otherwise proceed in the course, but you won't get "graded."
 - There also aren't any firm due dates, although I will give you suggestions on how to maintain a good pace. [All work you wish to be considered toward your achievement in the course needs to be submitted by the end of Finals Week.]{.aside}
 - Periodically throughout the semester, you will complete reflection activities to help you take stock of your learning and achievement in the course. In your final activity at the end of the semester, you'll make a proposal for your letter grade in the course, and support it with evidence of your learning. You and I will then meet to discuss how the course went for you, using your reflection activity and proposal as a starting point.  In this conversation, you and I will agree on your final letter grade for the course, which I will then submit to the registrar. 
+
+Reflection activities: 
+
+- [Reflective goal-setting](assignments/process/goal-setting.ipynb). 
+- [Mid-course reflection](assignments/process/mid-course.ipynb). 
+- [End-of-course reflection and grade proposal](assignments/process/end-of-course.ipynb). 
 
 ## Why Collaborative Grading?
 
@@ -215,7 +260,7 @@ There are three kinds of assessed assignments in this course, plus a mysterious 
             <b>Other...?</b>
         </td>
         <td class="syllabus-description-table-entry">
-            You may have some topic or idea that especially interests you and which you want to explore. If you'd like to work on this topic and use it to demonstrate your learning in the course, you can propose it to me. I may have suggestsions or requested modifications before I agree to count the work in your course portfolio. 
+            You may have some topic or idea that especially interests you and which you want to explore. If you'd like to work on this topic and use it to demonstrate your learning in the course, you can propose it to me. I may have suggestions or requested modifications before I agree to count the work in your course portfolio. 
         </td>
     </tr>
 </table>
@@ -224,9 +269,15 @@ There are three kinds of assessed assignments in this course, plus a mysterious 
 
 While we don't have formal due dates, there is a benefit to keeping yourself on a schedule. It's best to complete assignments close to the time when we covered the corresponding content in class, and it's important for your wellbeing not to let work pile up. I'll provide "best-by" dates for all assignments. These are my **recommendations** for when you should submit the first versions of these assignments to me for feedback. 
 
+::: {.column-margin}
+
+![An image of four of the Pokemon Squirtle welcoming a fifth Squirtle. The original four Squirtles are labeled "unfinished assignment #1" through #4. The fifth Squirtle is labeled "new assignment."](assets/img/memes/unfinished-assignments.jpg) *Image credit: [Dr. Spencer Bagley](https://twitter.com/sbagley/status/1437833176311762946?s=20&t=xPhXuSfOqxBvezv2HG2xyg)*
+
+:::
+
 ## Feedback
 
-I won't "grade" your individual assignments, but I will offer you feedback about what I thought was successful and where you can improve. My general expectation is that you will often (though not always) revise your work in response to my feedback and resubmit it to me. **Revising in response to feedback is one of the single most effective ways for you to deepen your learning**. 
+I won't "grade" your individual assignments, but our course team and I will offer you feedback about what I thought was successful and where you can improve. My general expectation is that you will often (though not always) revise your work in response to feedback and resubmit it. **Revising in response to feedback is one of the single most effective ways for you to deepen your learning**. 
 
 I'll usually describe the importance of revisions on your assignment using one of the following categories: 
 
@@ -241,8 +292,10 @@ At the beginning of the semester, you'll write a process letter that will outlin
 
 I am likely to consider your time in my course to be highly successful if you do **at least one** of the following things: 
 
+[Time spent being stuck doesn't count as "productive hours" -- get help if you need it!]{.aside}
+
 - You complete almost all assignments with a high degree of quality, including revising in response to my feedback. 
-- You spend on average **10 productive hours** of work time on this course outside of class.
+- You spend on average **10 productive hours** of work time on this course outside of class. 
 - You complete many assignments that I give you, and also propose and complete alternative work that demonstrates your learning and achievement. 
 
 # Course Policies 
@@ -269,7 +322,7 @@ If you ever find yourself temporarily in need of a laptop, the Computer Science 
 
 ## COVID-19 Considerations
 
-### Masks Are Expected in CSCI 0451 {#masks}
+### Masks Are Required in CSCI 0451 {#masks}
 
 The Computer Science Department policy states that: 
 
@@ -291,6 +344,8 @@ To be frank, it's pretty easy to act without integrity (i.e. cheat) in this cour
 
 
 I assume that both of us want you to learn some cool stuff. Cheating stops you from doing that, and ultimately wastes both your time and mine. I won't be vigorously hunting for academic integrity violations, but I may ask you to discuss code or theory with me in class or in our meetings. If I notice you struggling to explain code that you submitted for feedback, I may have questions. 
+
+Trust me. Neither of us want this. 
 
 
 

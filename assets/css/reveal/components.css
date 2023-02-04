@@ -1,0 +1,128 @@
+/*-- scss:rules --*/
+
+.column { 
+    padding-top: 2rem;
+}
+
+.column h1, h2, h3, h4, h5, p { 
+    padding-left: 2rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+}
+
+.column li { 
+    margin-left: 2rem;
+    list-style-position: outside;
+}
+
+li { 
+    margin-left: 2rem;
+    list-style-position: outside;
+}
+
+#title-slide h1, .subtitle { 
+    text-align: left;
+    padding-left: 1.5rem;
+}
+
+.reveal p.subtitle { 
+    margin-left: 0;
+    padding-left: 2rem;
+}
+
+#title-slide p {
+    text-align: right;
+}
+
+#title-slide p.subtitle {
+    text-align: left;
+}
+
+.reveal .quarto-title-author-name { 
+    text-align: right;
+    font-size: 1.5rem;
+    padding-right: 2rem;
+}
+
+.reveal .quarto-title-block .quarto-title-authors {
+    display: flex;
+    justify-content: right;
+}
+
+
+.reveal h1 { 
+    font-size: 4rem;
+}
+
+.reveal h5 { 
+    font-size: 2rem; 
+}
+
+.column p {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.font-larger { 
+    font-size: 2rem; 
+}
+
+.big { 
+    font-size: 5rem; 
+}
+
+.beeg {
+    font-size: 35rem;
+}
+
+.message p { 
+    font-size: 3rem;
+}
+
+.stretch { 
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.stretch p { 
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.stretch img { 
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.stretch.cell-output-display { 
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.footnote {
+	position: absolute;
+	bottom: 1em;
+	padding-right: 2em;
+	padding-left: 0.0em;
+	padding-bottom: 2em;
+	font-size: 70%;
+	text-align: left;
+  }
+  
+.column .footnote { 
+	padding-left: 0.5em;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

@@ -1,0 +1,85 @@
+---
+title: Warmup Exercises
+number-sections: true
+author: Phil
+---
+
+
+::: {.hidden}
+$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\paren}[1]{\left( #1 \right)}
+$$
+
+:::
+
+### Classification Rates {#sec-classification-rates}
+
+#### Part 1
+
+COVID-19 rapid tests have approximately an 80% sensitivity rate, which means that, in an individual who truly has COVID-19, the probability of a rapid test giving a positive result is roughly 80%. [These numbers are mostly made-up.]{.aside} On the other hand, the probability of a rapid test giving a positive result for an individual who truly does **not** have COVID-19 is 5%. Suppose that approximately 4% of the population are currently infected with COVID-19. [Example 2.3.1 of [Murphy](https://github.com/probml/pml-book/releases/latest/download/book1.pdf), page 46, has a good review of the relevant probability and the definition of each of the rates below.]{.aside}
+
+Write a Python function called `rate_summary` that prints the following output, filling in the correct values for each of the specified rates:  
+
+```python
+s = 0.8           # test sensitivity
+f = 0.02          # probability of positive test if no COVID
+prevalence = 0.05 # fraction of population infected
+
+rate_summary(s, f, current_infection)
+```
+
+```
+The true positive rate is ___.
+The false positive rate is ___.
+The true negative rate is ___. 
+The false positive rate is ___. 
+```
+
+#### Part 2
+
+1. Suppose that scientists found an alternative rapid test which had a 75% sensitivity rate with a 0% chance of a positive test on someone who is truly not infected. Would you suggest replacing the old rapid tests with these alternative tests? Why? [You don't necessarily need to use your function from the previous part in this part.]{.aside}
+2. What if the alternative test had an 85% sensitivity rate and a 10% chance of a positive test on someone who is truly not infected?  
+
+
+
+
+
+
+
+### Perceptron {#sec-perceptron}
+
+#### Part 1
+
+Sketch the line in $\R^2$ described by the equation 
+$$ 
+\bracket{\vw, \vx}  =  w_0\;, 
+$$ {#eq-perceptron-boundary}
+
+where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $w_0 = \frac{1}{2}$. 
+
+#### Part 2
+
+Write a quick Python function called `perceptron_classify(w, w_0, x)`. `w` and `x` should both be 1d numpy arrays of the same length, and `w_0` should be a scalar. Your function should return `0` if $\bracket{\vw, \vx}  <  w_0$ and `1` if $\bracket{\vw, \vx}  \geq  w_0$. [An excellent solution will use neither a `for`-loop nor an `if`-statement.]{.aside}
+
+Verify that your function works on a few simple examples. 
+
+#### Part 3
+
+Consider a line of the general form of @eq-perceptron-boundary. Let's allow $\vx$ and $\vw$ to both be $n$-dimensional, so that this equation defines a hyperplane in $\R^n$. Suppose that we wanted to represent *the same hyperplane* in $\R^n$ using an equation of the form 
+
+$$
+\bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.
+$$ {#eq-perceptron-boundary-2}
+
+for some $\tilde{\vw} \in \R^{n+1}$. Define $\tilde{\vx} = (\vx, 1)$. How could you define $\tilde{\vw}$ to make @eq-perceptron-boundary-2 equivalent to @eq-perceptron-boundary?
+
+
+
+      
+
+
+

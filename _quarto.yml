@@ -14,10 +14,9 @@ website:
     title: "<b>Machine Learning</b><br>CSCI 0451"
     contents:
       - syllabus.qmd 
-      - collaboration.qmd
       - schedule.qmd
       - assignments.qmd
-  favicon: assets/img/icons/favicon.png
+  favicon: assets/icons/favicon.png
 
 format:
   html:
@@ -27,3 +26,12 @@ format:
     number-depth: 0
     reference-location: margin
     callout-icon: false;
+    callout-appearance: simple
+
+jupyter: conda-env-ml-0451-py
+
+execute: 
+  cache: true
+
+
+

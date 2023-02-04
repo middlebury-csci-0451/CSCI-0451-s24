@@ -51,35 +51,33 @@
                 <% if (currentItem.reading) { %>
                     <b>Reading</b><br>
                     <% for (read of currentItem.reading) { %>
-                            <%= read %> <br> 
+                           <%= read %><br> 
                     <% } %>  
                 <% } %>
                 <% if (currentItem.optional) { %>
                     <% for (read of currentItem.optional) { %>
-                            <span class="supporting-reading"><%= read %></span> <br> 
+                           <i><%= read %></i><br> 
                     <% } %>  
                 <% } %>
-                <% if (currentItem.activity) { %>
-                    <b>Activity</b><br>
-                    <% for (act of currentItem.activity) { %>
-                            <%= act %> <br> 
-                    <% } %>  
-                <% } %>  
             </td>
-            <td class="smaller syllabus-item-assignment">
-                <% if (currentItem.assigned) { %>
-                    <b>Assigned</b><br>
-                    <% for (assigned of currentItem.assigned) { %>
-                        <%= assigned %> <br>
+            <td class="smaller syllabus-item-readings">
+                <% if (currentItem.notes) { %>
+                    <b>Notes</b><br>
+                    <% for (read of currentItem.notes) { %>
+                            <%= read %> <br> 
                     <% } %>  
                 <% } %>
             </td>
             <td class="smaller syllabus-item-assignment">
-                <% if (currentItem.due) { %>
-                    <b>Due</b><br>
-                    <% for (due of currentItem.due) { %>
-                            <%= due %> <br>
-                    <% } %>
+                <% if (currentItem.warmup) { %>
+                    <b>Warmup</b><br>
+                    <%= currentItem.warmup %>
+                <% } %>     
+            </td>
+            <td class="smaller syllabus-item-assignment">
+                <% if (currentItem.assignments) { %>
+                    <b>Assignments</b><br>
+                    <%= currentItem.assignments %>
                 <% } %>     
             </td>
         </tr>

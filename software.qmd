@@ -1,10 +1,17 @@
 ---
 toc: true
 numbered: false
-title: Software
+title: Software and Setup
 ---
 
-There are several software tools that we will use throughout this course. 
+After following this set of instructions, you will be all ready to go for participation in CSCI 0451. 
+
+# Social: Slack and Hypothes.is
+
+First, you'll need to join Hypothes.is and Slack. 
+
+- **For Hypothes.is**, start by making an account. Then, follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/12215/assignments/syllabus) to join the "CSCI 0451 (S23)" group. 
+- **For Slack**, just follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/12215/assignments/syllabus) to join the workspace. You may choose to download the Slack desktop client, but that's up to you. You can make your own choices about notifications, but please do whatever you need to do to ensure that you're able to check Slack on a regular basis. 
 
 # Anaconda Python
 
@@ -47,7 +54,7 @@ Configuring the `ml-0451` environment.
 
 You will need to install several packages to the `ml-0451` environment. Note that you need to do this **even if** you previously installed these packages to another version of Python on your laptop. 
 
-To add packages to the environment, first ensure that the environment is selected (it will be highlighted in green). Then, on the righthand menu, search for the package you want to install. You may need to change the box on the top left from "Installed" to "Not Installed" in order to view packages that you have not installed yet. 
+To add packages to the environment, first ensure that the environment is selected (it will be highlighted in green). Then, on the righthand menu, search for the package you want to install. You may need to change the box on the top left from "Installed" to "Not Installed" in order to view packages that you have not installed yet.  
 
 ![](assets/img/screencaps/nb_conda.png)
 

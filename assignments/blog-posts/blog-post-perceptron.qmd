@@ -1,0 +1,201 @@
+---
+title: "Implementing the Perceptron Algorithm"
+type: "Blog Post"
+date: 2023-02-14
+description: |
+    In this blog post, you'll implement the perceptron algorithm and demonstrate its use on a few simple data sets. 
+objectives: 
+  - Implementation
+  - Navigation
+jupyter: conda-env-ml-0451-py
+---
+
+In this blog post, you'll implement the perceptron algorithm for binary classification. 
+
+## Introduction
+
+In the perceptron algorithm, we have a data set described by: 
+
+- A matrix $\mathbf{X} \in \mathbb{R}^{n\times p}$ of predictor variables. There are $n$ observations with $p$ features.  
+- A vector $\mathbf{y} \in \{0,1\}^{n}$ of binary labels. 
+
+We assume that the labels in our data can be (approximately) separated by a *linear* predictor. The strongest version of this assumption is that our data are *linearly separable*. This means that there exists a vector $\mathbf{w} \in p$ and a constant $w_0$ such that, for every $i$, 
+
+$$ 
+\begin{aligned}
+y_i &= \begin{cases} 0 & \langle \mathbf{w}, \mathbf{x}_i \rangle < w_0 \\ 
+                     1 & \langle \mathbf{w}, \mathbf{x}_i \rangle \geq w_0 
+      \end{cases} \\ 
+    &= \mathbb{1}(\langle \mathbf{w}, \mathbf{x}_i \rangle \geq w_0)
+\end{aligned}
+$$
+
+
+
+Here's an example of what our data might look like. For visualization purposes, we are going to have $p = 2$ features. 
+
+```{python}
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from matplotlib import pyplot as plt
+
+from sklearn.datasets import make_blobs
+
+np.random.seed(12345)
+
+n = 100
+p_features = 3
+
+X, y = make_blobs(n_samples = 100, n_features = p_features - 1, centers = [(-1.7, -1.7), (1.7, 1.7)])
+
+fig = plt.scatter(X[:,0], X[:,1], c = y)
+xlab = plt.xlabel("Feature 1")
+ylab = plt.ylabel("Feature 2")
+```
+
+You may be able to visualize a line that separates all the purple "0" labels from the yellow "1" labels. Our end-goal is a Python class that will allow us to find such a separating line, when it exists. 
+
+## Big Picture
+
+You are going to implement a `Perceptron` class in a script file called `perceptron.py`. (you should place it next to your `.ipynb` notebook in which you write your blog post.) You'll import it like this: 
+```{python}
+#| echo: false
+
+from solutions.perceptron import Perceptron  
+```
+
+```python
+from perceptron import Perceptron
+```
+
+Your class should have the following methods: 
+
+- `Perceptron.fit(X, y)` is the primary method. This method has no return value. If `p` is a `Perceptron`, then after `p.fit(X, y)` is called, `p` should have an instance variable of *weights* called `w`. This `w` is the vector $\tilde{\mathbf{w}} = (\mathbf{w}, -w_0)$ in the classifier above. Additionally, `p` should have an instance variable called `p.history` which is a list of the evolution of the `score` over the training period (see `Perceptron.score(X, y)` below.)
+- `Perceptron.predict(X)` should return a vector $\hat{\mathbf{y}} \in \{0,1\}^n$ of predicted labels. These are the model's predictions for the labels on the data. 
+- `Perceptron.score(X, y)` should return the *accuracy* of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification. 
+
+Feel free to add any other methods or functions that you find helpful while implementing. 
+
+## Implementing `fit()`
+
+To implement `fit()`, it's convenient to consider a modified version of $\mathbf{X}$: $\tilde{\mathbf{X}} = [\mathbf{X}, \mathbf{1}]$, where $\mathbf{1} \in \mathbb{R}^n$ is a column-vector of $1$s. The reason this is handy is that if we also define $\tilde{\mathbf{w}} = (\mathbf{w}, -w_0)$, then we can write our classification rule as 
+
+$$
+\hat{y}_i = \mathbb{1}(\langle \tilde{\mathbf{w}}, \tilde{\mathbf{x}}_i\rangle \geq 0)\;.
+$$
+
+This is mathematically convenient and makes it much easier for us to code up our algorithms. 
+
+With these definitions, the *perceptron update* proceeds as follow: 
+
+1. Pick a random index $i \in [n]$. 
+2. Compute 
+$$
+\tilde{\mathbf{w}}_{t+1} = \tilde{\mathbf{w}}_t + \mathbb{1}(y_i \langle \tilde{\mathbf{w}}_t, \tilde{\mathbf{x}}_i\rangle < 0)y_i \tilde{\mathbf{x}}_i\;.
+$$
+
+This update is performed until either a user-specified maximum number of steps is reached or until the score (accuracy) reaches `1.0`. 
+
+Note that in an iteration in which $y_i \langle \tilde{\mathbf{w}}_t, \tilde{\mathbf{x}}_i\rangle \geq 0$, nothing happens. 
+
+
+## Demo 
+
+By the time you have successfully implemented your `Perceptron` class, you should be able to replicate the following results on your blog post. 
+
+First, you should be able to import your class
+
+```python
+from perceptron import Perceptron
+```
+
+Then you should be able to create an instance of the class and fit it to data. 
+
+```{python}
+p = Perceptron()
+p.fit(X, y, max_steps = 1000)
+```
+
+This should result in `p` having an instance variable `w` of weights and an instance variable `history` of scores: 
+
+```{python}
+p.w
+```
+
+```{python}
+print(p.history[-10:]) #just the last few values
+```
+
+You can visualize how the score evolved over time: 
+```{python}
+fig = plt.plot(p.history)
+xlab = plt.xlabel("Iteration")
+ylab = plt.ylabel("Accuracy")
+```
+
+In this particular example, the algorithm was able to achieve perfect, 100% classification. 
+
+You can also visualize the line that the algorithm finds to separate the data. 
+```{python}
+def draw_line(w, x_min, x_max):
+  x = np.linspace(x_min, x_max, 101)
+  y = -(w[0]*x + w[2])/w[1]
+  plt.plot(x, y, color = "black")
+
+fig = plt.scatter(X[:,0], X[:,1], c = y)
+fig = draw_line(p.w, -2, 2)
+
+xlab = plt.xlabel("Feature 1")
+ylab = plt.ylabel("Feature 2")
+```
+
+
+As we know from the previous investigations, the score on the data is: 
+```{python}
+p.score(X, y)
+```
+
+## General Specs
+
+### Source Code
+
+An excellent solution will have **exactly one for-loop**, of the form: 
+
+```python
+for _ in range(max_steps):
+  # perform the perceptron update and log the score in self.history
+```
+
+That is, **you should not do any loops over the data!** Use vectorized `numpy` operations and matrix-vector multiplication.  
+
+You should also **not use `if` statements to perform comparisons between numbers.** 
+
+::: {.column-margin}
+For a hint on how you can avoid doing this, you can reflect on the following two code snippets: 
+
+```python
+print((1 < 2)*2)
+print((1 > 2)*2)
+```
+
+:::
+
+::: {.callout-important}
+
+Please include informative docstrings for `Perceptron.fit()`, `Perceptron.predict()`, and `Perceptron.score()`. 
+
+:::
+
+A concise solution should likely be no more than 60 lines of compact Python code (excluding comments and docstrings). 
+
+### Blog Post
+
+Please make sure that your blog post includes: 
+
+- Plots with informative axis labels. 
+- A mathematical description of the algorithm (it's ok for you to closely follow my notes or any of our readings). 
+
+
+
+

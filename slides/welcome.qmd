@@ -1,0 +1,176 @@
+---
+title: "Welcome to CSCI 0451!"
+author: 'Prof. <span class="speaker-highlight">Phil Chodrow</span> <br>Department of Computer Science<br>Middlebury College'  
+date: ""
+format: revealjs
+metadata-files: 
+  - _slides.yml
+cache: false
+---
+
+## {.bg1}
+
+<br> <br> <br> <br> <br> <br> <br> 
+
+#### Machine learning is the theory and practice of algorithmically learning [patterns in data]{.alert}. 
+
+
+## {.split-50 }
+
+::: {.column .bg0}
+
+### NYT, 1957
+
+<br> <br>
+
+::: {.stretch}
+![](../assets/img/figs/perceptron-nyt.jpeg)
+:::
+
+:::
+
+::: {.column .bg0}
+
+::: {.fragment}
+
+#### What We Are Actually Talking About
+
+```{python}
+#| echo: false
+#| cache: false
+#| fig-width: 10
+#| fig-height: 1
+
+import numpy as np
+from matplotlib import pyplot as plt
+np.random.seed(123)
+
+plt.rcParams["figure.figsize"] = (7, 4)
+
+
+X1 = np.random.normal(0, 1, 100)
+X2 = np.random.normal(0, 1, 100)
+ 
+Y1 = np.random.normal(0, 1, 100)*.9+3
+Y2 = np.random.normal(0, 1, 100)*.9+3
+
+p = plt.scatter(X1, X2, color = "orange", alpha = 0.5)
+p = plt.scatter(Y1, Y2, color = "blue", alpha = 0.5)
+
+plt.plot([0, 4], [3, -1], color = "black")
+``` 
+
+:::
+:::
+
+## {.split-50}
+
+::: {.column .bg0}
+
+### NYT, 2022
+
+
+![](../assets/img/figs/language-model-nyt-face.png){width=200}
+![](../assets/img/figs/language-model-nyt.png){width=300}
+
+
+:::
+
+::: {.column .bg0}
+
+::: {.fragment}
+
+#### What We Are Actually Talking About
+
+![](https://imgs.xkcd.com/comics/machine_learning.png)
+
+<br> 
+
+[[xkcd](https://xkcd.com/1838/)]{.footnote}
+
+:::
+
+:::
+
+## {.split-33}
+
+::: {.column .bg1}
+
+<br> <br> <br> <br> <br> <br> 
+
+### Learning Objectives
+
+:::
+
+::: {.column .bg0}
+
+<br> <br> 
+
+**Theory**: math, core concepts
+
+**Implementation**: code it up! (efficiently, compactly, flexibly)
+
+**Python Ecosystem**: use other people's code wisely (after you understand it)
+
+**Experimentation**: but does it work? 
+
+**Social Responsibility**: how do intersectional bias and harm surface in automated decision-making?
+
+**Project**: how do you investigate the world using machine learning skills?
+
+:::
+
+
+## {.split-30}
+
+::: {.column .bg1}
+
+
+<br> <br> <br> <br> <br> <br> <br> 
+
+
+#### Course Assignments
+
+:::
+
+::: {.column .bg0}
+
+
+
+
+
+##### Blog Posts ("Homework")
+
+- Do some math, code up an algorithm, do experiments. Blog about it. 
+- You have a blog now. 
+- You'll get feedback and can revise/resubmit. 
+- Try to do ~1 in most weeks. 
+
+##### Class Prep
+
+- Do the core readings and any of the optional ones that interest you. 
+- Complete the [**warmup activity**]{.alert} and be ready to present it. 
+
+##### Project
+
+- Propose something ambitious and complete it with a team. 
+
+[I am ]{.footnote}
+
+:::
+
+
+
+
+## {.split-50}
+
+::: {.column .bg1}
+
+#### Collaborative Grading
+
+:::
+
+
+## {background-image="../assets/img/figs/regions.gif" background-size="contain"}
+
+## {background-image="../assets/img/figs/final-regions.png" background-size="contain"}

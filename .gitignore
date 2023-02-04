@@ -1,2 +1,7 @@
 .quarto
 *checkpoint.ipynb
+/.quarto/
+.DS_Store
+sol
+*SOLUTION*
+*cache*
