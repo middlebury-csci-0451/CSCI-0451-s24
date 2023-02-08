@@ -178,15 +178,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#big-picture" id="toc-big-picture" class="nav-link" data-scroll-target="#big-picture">Big Picture</a></li>
-  <li><a href="#implementing-fit" id="toc-implementing-fit" class="nav-link" data-scroll-target="#implementing-fit">Implementing <code>fit()</code></a></li>
-  <li><a href="#demo" id="toc-demo" class="nav-link" data-scroll-target="#demo">Demo</a></li>
-  <li><a href="#general-specs" id="toc-general-specs" class="nav-link" data-scroll-target="#general-specs">General Specs</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#sec-demo" id="toc-sec-demo" class="nav-link" data-scroll-target="#sec-demo"> <span class="header-section-number">2</span> Demo: What Your Algorithm Will Do</a></li>
+  <li><a href="#what-you-should-do" id="toc-what-you-should-do" class="nav-link" data-scroll-target="#what-you-should-do"> <span class="header-section-number">3</span> What You Should Do</a>
   <ul class="collapse">
-  <li><a href="#source-code" id="toc-source-code" class="nav-link" data-scroll-target="#source-code">Source Code</a></li>
-  <li><a href="#blog-post" id="toc-blog-post" class="nav-link" data-scroll-target="#blog-post">Blog Post</a></li>
+  <li><a href="#source-code" id="toc-source-code" class="nav-link" data-scroll-target="#source-code"> <span class="header-section-number">3.1</span> Source Code</a>
+  <ul class="collapse">
+  <li><a href="#implementing-fit" id="toc-implementing-fit" class="nav-link" data-scroll-target="#implementing-fit">Implementing <code>fit()</code></a></li>
+  <li><a href="#other-specifications" id="toc-other-specifications" class="nav-link" data-scroll-target="#other-specifications">Other Specifications</a></li>
   </ul></li>
+  <li><a href="#experiments" id="toc-experiments" class="nav-link" data-scroll-target="#experiments"> <span class="header-section-number">3.2</span> Experiments</a></li>
+  <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing"> <span class="header-section-number">3.3</span> Writing</a></li>
+  </ul></li>
+  <li><a href="#hints" id="toc-hints" class="nav-link" data-scroll-target="#hints"> <span class="header-section-number">4</span> Hints</a></li>
   </ul>
 </nav>
     </div>
@@ -220,22 +224,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>In this blog post, you’ll implement the perceptron algorithm for binary classification.</p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\mX}{\mathbf{X}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\]</span></p>
+</div>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>In the perceptron algorithm, we have a data set described by:</p>
 <ul>
-<li>A matrix <span class="math inline">\(\mathbf{X} \in \mathbb{R}^{n\times p}\)</span> of predictor variables. There are <span class="math inline">\(n\)</span> observations with <span class="math inline">\(p\)</span> features.<br>
+<li>A matrix <span class="math inline">\(\mX \in \R^{n\times p}\)</span> of predictor variables. There are <span class="math inline">\(n\)</span> observations with <span class="math inline">\(p\)</span> features.<br>
 </li>
-<li>A vector <span class="math inline">\(\mathbf{y} \in \{0,1\}^{n}\)</span> of binary labels.</li>
+<li>A vector <span class="math inline">\(\vy \in \{0,1\}^{n}\)</span> of binary labels.</li>
 </ul>
-<p>We assume that the labels in our data can be (approximately) separated by a <em>linear</em> predictor. The strongest version of this assumption is that our data are <em>linearly separable</em>. This means that there exists a vector <span class="math inline">\(\mathbf{w} \in p\)</span> and a constant <span class="math inline">\(w_0\)</span> such that, for every <span class="math inline">\(i\)</span>,</p>
+<p>We assume that the labels in our data can be (approximately) separated by a <em>linear</em> predictor. The strongest version of this assumption is that our data are <em>linearly separable</em>. This means that there exists a vector <span class="math inline">\(\vw \in p\)</span> and a constant <span class="math inline">\(w_0\)</span> such that, for every <span class="math inline">\(i\)</span>,</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_i &amp;= \begin{cases} 0 &amp; \langle \mathbf{w}, \mathbf{x}_i \rangle &lt; w_0 \\
-                     1 &amp; \langle \mathbf{w}, \mathbf{x}_i \rangle \geq w_0
+y_i &amp;= \begin{cases} 0 &amp; \langle \vw, \vx_i \rangle &lt; w_0 \\
+                     1 &amp; \langle \vw, \vx_i \rangle \geq w_0
       \end{cases} \\
-    &amp;= \mathbb{1}(\langle \mathbf{w}, \mathbf{x}_i \rangle \geq w_0)
+    &amp;= \mathbb{1}(\langle \vw, \vx_i \rangle \geq w_0)
 \end{aligned}
 \]</span></p>
 <p>Here’s an example of what our data might look like. For visualization purposes, we are going to have <span class="math inline">\(p = 2\)</span> features.</p>
@@ -263,38 +277,10 @@ y_i &amp;= \begin{cases} 0 &amp; \langle \mathbf{w}, \mathbf{x}_i \rangle &lt; w
 </div>
 <p>You may be able to visualize a line that separates all the purple “0” labels from the yellow “1” labels. Our end-goal is a Python class that will allow us to find such a separating line, when it exists.</p>
 </section>
-<section id="big-picture" class="level2">
-<h2 class="anchored" data-anchor-id="big-picture">Big Picture</h2>
+<section id="sec-demo" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Demo: What Your Algorithm Will Do</h1>
 <p>You are going to implement a <code>Perceptron</code> class in a script file called <code>perceptron.py</code>. (you should place it next to your <code>.ipynb</code> notebook in which you write your blog post.) You’ll import it like this:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> perceptron <span class="im">import</span> Perceptron</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Your class should have the following methods:</p>
-<ul>
-<li><code>Perceptron.fit(X, y)</code> is the primary method. This method has no return value. If <code>p</code> is a <code>Perceptron</code>, then after <code>p.fit(X, y)</code> is called, <code>p</code> should have an instance variable of <em>weights</em> called <code>w</code>. This <code>w</code> is the vector <span class="math inline">\(\tilde{\mathbf{w}} = (\mathbf{w}, -w_0)\)</span> in the classifier above. Additionally, <code>p</code> should have an instance variable called <code>p.history</code> which is a list of the evolution of the <code>score</code> over the training period (see <code>Perceptron.score(X, y)</code> below.)</li>
-<li><code>Perceptron.predict(X)</code> should return a vector <span class="math inline">\(\hat{\mathbf{y}} \in \{0,1\}^n\)</span> of predicted labels. These are the model’s predictions for the labels on the data.</li>
-<li><code>Perceptron.score(X, y)</code> should return the <em>accuracy</em> of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification.</li>
-</ul>
-<p>Feel free to add any other methods or functions that you find helpful while implementing.</p>
-</section>
-<section id="implementing-fit" class="level2">
-<h2 class="anchored" data-anchor-id="implementing-fit">Implementing <code>fit()</code></h2>
-<p>To implement <code>fit()</code>, it’s convenient to consider a modified version of <span class="math inline">\(\mathbf{X}\)</span>: <span class="math inline">\(\tilde{\mathbf{X}} = [\mathbf{X}, \mathbf{1}]\)</span>, where <span class="math inline">\(\mathbf{1} \in \mathbb{R}^n\)</span> is a column-vector of <span class="math inline">\(1\)</span>s. The reason this is handy is that if we also define <span class="math inline">\(\tilde{\mathbf{w}} = (\mathbf{w}, -w_0)\)</span>, then we can write our classification rule as</p>
-<p><span class="math display">\[
-\hat{y}_i = \mathbb{1}(\langle \tilde{\mathbf{w}}, \tilde{\mathbf{x}}_i\rangle \geq 0)\;.
-\]</span></p>
-<p>This is mathematically convenient and makes it much easier for us to code up our algorithms.</p>
-<p>With these definitions, the <em>perceptron update</em> proceeds as follow:</p>
-<ol type="1">
-<li>Pick a random index <span class="math inline">\(i \in [n]\)</span>.</li>
-<li>Compute</li>
-</ol>
-<p><span class="math display">\[
-\tilde{\mathbf{w}}_{t+1} = \tilde{\mathbf{w}}_t + \mathbb{1}(y_i \langle \tilde{\mathbf{w}}_t, \tilde{\mathbf{x}}_i\rangle &lt; 0)y_i \tilde{\mathbf{x}}_i\;.
-\]</span></p>
-<p>This update is performed until either a user-specified maximum number of steps is reached or until the score (accuracy) reaches <code>1.0</code>.</p>
-<p>Note that in an iteration in which <span class="math inline">\(y_i \langle \tilde{\mathbf{w}}_t, \tilde{\mathbf{x}}_i\rangle \geq 0\)</span>, nothing happens.</p>
-</section>
-<section id="demo" class="level2">
-<h2 class="anchored" data-anchor-id="demo">Demo</h2>
 <p>By the time you have successfully implemented your <code>Perceptron</code> class, you should be able to replicate the following results on your blog post.</p>
 <p>First, you should be able to import your class</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> perceptron <span class="im">import</span> Perceptron</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -350,10 +336,44 @@ y_i &amp;= \begin{cases} 0 &amp; \langle \mathbf{w}, \mathbf{x}_i \rangle &lt; w
 </div>
 </div>
 </section>
-<section id="general-specs" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="general-specs">General Specs</h2>
-<section id="source-code" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="source-code">Source Code</h3>
+<section id="what-you-should-do" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> What You Should Do</h1>
+<p>This blog posts as three main components: implement the perceptron algorithm, complete several experiments, and write careful prose to describe your findings.</p>
+<section id="source-code" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="source-code"><span class="header-section-number">3.1</span> Source Code</h2>
+<p>Your class should have the following methods:</p>
+<ul>
+<li><code>Perceptron.fit(X, y)</code> is the primary method. This method has no return value. If <code>p</code> is a <code>Perceptron</code>, then after <code>p.fit(X, y)</code> is called, <code>p</code> should have an instance variable of <em>weights</em> called <code>w</code>. This <code>w</code> is the vector <span class="math inline">\(\tilde{\vw} = (\vw, -w_0)\)</span> in the classifier above. Additionally, <code>p</code> should have an instance variable called <code>p.history</code> which is a list of the evolution of the <code>score</code> over the training period (see <code>Perceptron.score(X, y)</code> below.)</li>
+<li><code>Perceptron.predict(X)</code> should return a vector <span class="math inline">\(\hat{\vy} \in \{0,1\}^n\)</span> of predicted labels. These are the model’s predictions for the labels on the data.</li>
+<li><code>Perceptron.score(X, y)</code> should return the <em>accuracy</em> of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification.</li>
+</ul>
+<p>Feel free to add any other methods or functions that you find helpful while implementing.</p>
+<section id="implementing-fit" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-fit">Implementing <code>fit()</code></h3>
+<p>To implement <code>fit()</code>, it’s convenient to consider a modified version of <span class="math inline">\(\mX\)</span>: <span class="math inline">\(\tilde{\mX} = [\mX, \mathbf{1}]\)</span>, where <span class="math inline">\(\mathbf{1} \in \R^n\)</span> is a column-vector of <span class="math inline">\(1\)</span>s. The reason this is handy is that if we also define <span class="math inline">\(\tilde{\vw} = (\vw, -w_0)\)</span>, then we can write our classification rule as</p>
+<p><span class="math display">\[
+\hat{y}_i = \mathbb{1}(\langle \tilde{\vw}, \tilde{\vx}_i\rangle \geq 0)\;.
+\]</span></p>
+<p>This is mathematically convenient and makes it much easier for us to code up our algorithms.</p>
+<p>With these definitions, the <em>perceptron algorithm</em> proceeds as follows:</p>
+<ol type="1">
+<li>First, initialize a random initial weight vector <span class="math inline">\(\tilde{\vw}^{(0)}\)</span>.</li>
+<li>Then, until termination:</li>
+</ol>
+<ul>
+<li>Pick a random index <span class="math inline">\(i \in [n]\)</span>.</li>
+<li>Compute</li>
+</ul>
+<p><span id="eq-perceptron-update"><span class="math display">\[
+\tilde{\vw}^{(t+1)} = \tilde{\vw}^{(t)} + \mathbb{1}(\tilde{y}_i \langle \tilde{\vw}^{(t)}, \tilde{\vx}_i\rangle &lt; 0)\tilde{y}_i \tilde{\vx}_i\;.
+\tag{1}\]</span></span></p>
+<p>In this expression, <span class="math inline">\(\tilde{y}_i = 2y_i - 1\)</span> is a convenient version of <span class="math inline">\(y_i\)</span> that takes values <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span> instead of <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
+<p>This update is performed until either a user-specified maximum number of steps is reached or until the score (accuracy) reaches <code>1.0</code>.</p>
+<p>Note that in an iteration in which <span class="math inline">\(\tilde{y}_i \langle \tilde{\vw}^{(t)}, \tilde{\vx}_i\rangle \geq 0\)</span>, nothing happens. Take a moment to check that this occurs when the current weight vector <span class="math inline">\(\tilde{\vw}^{(t)}\)</span> correctly classifies the tuple <span class="math inline">\((\vx_i, y_i)\)</span>.</p>
+</section>
+<section id="other-specifications" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="other-specifications">Other Specifications</h3>
+<div class="page-columns page-full"><p>You should be able to replicate the demo in <a href="#sec-demo">Section&nbsp;2</a> with your source code. Feel free to use that demo as a test case – your source code may be in good shape when you are able to fully replicate the results. </p><div class="no-row-height column-margin column-container"><span class="aside">For perfect replication, you’ll need to include the call to <code>np.random.seed()</code> immediately after importing your packages.</span></div></div>
 <p>An excellent solution will have <strong>exactly one for-loop</strong>, of the form:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_steps):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># perform the perceptron update and log the score in self.history</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -376,16 +396,44 @@ y_i &amp;= \begin{cases} 0 &amp; \langle \mathbf{w}, \mathbf{x}_i \rangle &lt; w
 </div>
 <p>A concise solution should likely be no more than 60 lines of compact Python code (excluding comments and docstrings).</p>
 </section>
-<section id="blog-post" class="level3">
-<h3 class="anchored" data-anchor-id="blog-post">Blog Post</h3>
-<p>Please make sure that your blog post includes:</p>
-<ul>
-<li>Plots with informative axis labels.</li>
-<li>A mathematical description of the algorithm (it’s ok for you to closely follow my notes or any of our readings).</li>
-</ul>
-
-
 </section>
+<section id="experiments" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="experiments"><span class="header-section-number">3.2</span> Experiments</h2>
+<p>Please perform experiments (with visualizations) that illustrate the following:</p>
+<ol type="1">
+<li>Using 2d data like the data in the example, if the data is linearly separable then the perceptron algorithm converges to weight vector <span class="math inline">\(\tilde{\vw}\)</span> describing a separating line (provided that the maximum number of iterations is large enough).
+<ul>
+<li>Please show visualizations of the data, the separating line, and the evolution of the score over training.</li>
+</ul></li>
+<li>For 2d data, when the data is <strong>not</strong> linearly separable, the perceptron algorithm will not settle on a final value of <span class="math inline">\(\tilde{\vw}\)</span>, but will instead run until the maximum number of iterations is reached, without achieving perfect accuracy.
+<ul>
+<li>Please show visualizations of the data, the separating line, and the evolution of the score over training.</li>
+</ul></li>
+<li>The perceptron algorithm is also able to work in more than 2 dimensions! Show an example of running your algorithm on data with at least 5 features. You don’t need to visualize the data or the separating line, but you should still show the evolution of the score over the training period. Include a comment on whether you believe that the data is linearly separable based on your observation of the score.</li>
+</ol>
+</section>
+<section id="writing" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="writing"><span class="header-section-number">3.3</span> Writing</h2>
+<p>In crafting your blog post, please include the following components:</p>
+<ul>
+<li><strong>At the very top of your blog post, a link to your source code (<code>perceptron.py</code>) on your GitHub repo.</strong></li>
+<li>A brief walk-through of your implementation of the perceptron update (<a href="#eq-perceptron-update">Equation&nbsp;1</a>) in your source code. Quote the function which you use to perform the update. It’s not necessary to walk the user through every single aspect of your solution class.</li>
+<li>Full code and English descriptions for all the experiments you perform.</li>
+<li>At the end of your blog post, please address the following question:</li>
+</ul>
+<blockquote class="blockquote">
+<p>What is the asymptotic runtime complexity of a single iteration of the perceptron algorithm update as described by <a href="#eq-perceptron-update">Equation&nbsp;1</a>? Assume that the relevant operations are addition and multiplication. Does the runtime complexity depend on the number of data points <span class="math inline">\(n\)</span>? What about the number of features <span class="math inline">\(p\)</span>?</p>
+</blockquote>
+<p>You only need to consider this question in the context of a single update. The question of <strong>how many</strong> updates are required to converge is a trickier one that you don’t have to discuss in your blog post.</p>
+</section>
+</section>
+<section id="hints" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Hints</h1>
+<p>The code</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>X_ <span class="op">=</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>can be used to form the matrix <span class="math inline">\(\tilde{\mX} = [\mathbf{X}, \mathbf{1}]\)</span>.</p>
+
+
 </section>
 
 <p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->

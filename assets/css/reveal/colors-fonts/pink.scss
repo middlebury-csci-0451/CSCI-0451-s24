@@ -6,12 +6,15 @@ $bg-main0: #ffffff;
 $color-main0: #000;
 $bg-main1: #EF476F;
 $bg-main2: #23395B;
+$bg-main3: #FFD447;
 $color-main1: #fff;
 $color-main2: #fff;
+$color-main3: #fff;
 $alert-color: #FFD447;
 $alert-color-2: #59C9A5;
-$alert-color-3: #23395B;
+$alert-color-3: #FFD447;
 $alert-color-4: #e56d89;
+$alert-color-5: #23395B;
 $background-color: #000000;
 // $link-color: #42affa;
 
@@ -40,6 +43,11 @@ $background-color: #000000;
 .bg2 {
     background-color: $bg-main2;
     color: $color-main2; 
+}
+
+.bg3 {
+    background-color: $bg-main3;
+    color: $color-main3; 
 }
 
 .bg0 h1 {
@@ -122,6 +130,10 @@ $background-color: #000000;
     color: $alert-color-3;
 }
 
+.alert-4 { 
+    color: $bg-main1;
+}
+
 .bg2 .alert {
     color: $alert-color;
 }
@@ -132,6 +144,26 @@ $background-color: #000000;
 
 .bg2 .alert-3 {
     color: $alert-color-2;
+}
+
+.bg1 .alert-3 {
+    color: $alert-color-5;
+}
+
+.bg3 .alert {
+    color: $bg-main1;
+}
+
+.bg3 .alert-2 {
+    color: $alert-color-4;
+}
+
+.bg3 .alert-3 {
+    color: $alert-color-2;
+}
+
+.bg3 .alert-4 {
+    color: $bg-main2;
 }
 
 .bg0 .alert {

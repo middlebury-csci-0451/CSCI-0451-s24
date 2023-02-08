@@ -74,42 +74,28 @@
     "href": "assignments/blog-posts/blog-post-perceptron.html",
     "title": "Implementing the Perceptron Algorithm",
     "section": "",
-    "text": "In this blog post, you’ll implement the perceptron algorithm for binary classification.\n© Phil Chodrow, 2023"
+    "text": "\\[\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\vx}{\\mathbf{x}}\n\\newcommand{\\vy}{\\mathbf{y}}\n\\newcommand{\\mX}{\\mathbf{X}}\n\\newcommand{\\vw}{\\mathbf{w}}\n\\newcommand{\\bracket}[1]{\\langle #1 \\rangle}\n\\newcommand{\\paren}[1]{\\left( #1 \\right)}\n\\]\n© Phil Chodrow, 2023"
   },
   {
-    "objectID": "assignments/blog-posts/blog-post-perceptron.html#introduction",
-    "href": "assignments/blog-posts/blog-post-perceptron.html#introduction",
+    "objectID": "assignments/blog-posts/blog-post-perceptron.html#source-code",
+    "href": "assignments/blog-posts/blog-post-perceptron.html#source-code",
     "title": "Implementing the Perceptron Algorithm",
-    "section": "Introduction",
-    "text": "Introduction\nIn the perceptron algorithm, we have a data set described by:\n\nA matrix \\(\\mathbf{X} \\in \\mathbb{R}^{n\\times p}\\) of predictor variables. There are \\(n\\) observations with \\(p\\) features.\n\nA vector \\(\\mathbf{y} \\in \\{0,1\\}^{n}\\) of binary labels.\n\nWe assume that the labels in our data can be (approximately) separated by a linear predictor. The strongest version of this assumption is that our data are linearly separable. This means that there exists a vector \\(\\mathbf{w} \\in p\\) and a constant \\(w_0\\) such that, for every \\(i\\),\n\\[\n\\begin{aligned}\ny_i &= \\begin{cases} 0 & \\langle \\mathbf{w}, \\mathbf{x}_i \\rangle < w_0 \\\\\n                     1 & \\langle \\mathbf{w}, \\mathbf{x}_i \\rangle \\geq w_0\n      \\end{cases} \\\\\n    &= \\mathbb{1}(\\langle \\mathbf{w}, \\mathbf{x}_i \\rangle \\geq w_0)\n\\end{aligned}\n\\]\nHere’s an example of what our data might look like. For visualization purposes, we are going to have \\(p = 2\\) features.\n\nimport numpy as np\nimport pandas as pd\nimport seaborn as sns\nfrom matplotlib import pyplot as plt\n\nfrom sklearn.datasets import make_blobs\n\nnp.random.seed(12345)\n\nn = 100\np_features = 3\n\nX, y = make_blobs(n_samples = 100, n_features = p_features - 1, centers = [(-1.7, -1.7), (1.7, 1.7)])\n\nfig = plt.scatter(X[:,0], X[:,1], c = y)\nxlab = plt.xlabel(\"Feature 1\")\nylab = plt.ylabel(\"Feature 2\")\n\n\n\n\nYou may be able to visualize a line that separates all the purple “0” labels from the yellow “1” labels. Our end-goal is a Python class that will allow us to find such a separating line, when it exists."
+    "section": "3.1 Source Code",
+    "text": "3.1 Source Code\nYour class should have the following methods:\n\nPerceptron.fit(X, y) is the primary method. This method has no return value. If p is a Perceptron, then after p.fit(X, y) is called, p should have an instance variable of weights called w. This w is the vector \\(\\tilde{\\vw} = (\\vw, -w_0)\\) in the classifier above. Additionally, p should have an instance variable called p.history which is a list of the evolution of the score over the training period (see Perceptron.score(X, y) below.)\nPerceptron.predict(X) should return a vector \\(\\hat{\\vy} \\in \\{0,1\\}^n\\) of predicted labels. These are the model’s predictions for the labels on the data.\nPerceptron.score(X, y) should return the accuracy of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification.\n\nFeel free to add any other methods or functions that you find helpful while implementing.\n\nImplementing fit()\nTo implement fit(), it’s convenient to consider a modified version of \\(\\mX\\): \\(\\tilde{\\mX} = [\\mX, \\mathbf{1}]\\), where \\(\\mathbf{1} \\in \\R^n\\) is a column-vector of \\(1\\)s. The reason this is handy is that if we also define \\(\\tilde{\\vw} = (\\vw, -w_0)\\), then we can write our classification rule as\n\\[\n\\hat{y}_i = \\mathbb{1}(\\langle \\tilde{\\vw}, \\tilde{\\vx}_i\\rangle \\geq 0)\\;.\n\\]\nThis is mathematically convenient and makes it much easier for us to code up our algorithms.\nWith these definitions, the perceptron algorithm proceeds as follows:\n\nFirst, initialize a random initial weight vector \\(\\tilde{\\vw}^{(0)}\\).\nThen, until termination:\n\n\nPick a random index \\(i \\in [n]\\).\nCompute\n\n\\[\n\\tilde{\\vw}^{(t+1)} = \\tilde{\\vw}^{(t)} + \\mathbb{1}(\\tilde{y}_i \\langle \\tilde{\\vw}^{(t)}, \\tilde{\\vx}_i\\rangle < 0)\\tilde{y}_i \\tilde{\\vx}_i\\;.\n\\tag{1}\\]\nIn this expression, \\(\\tilde{y}_i = 2y_i - 1\\) is a convenient version of \\(y_i\\) that takes values \\(-1\\) and \\(1\\) instead of \\(0\\) and \\(1\\).\nThis update is performed until either a user-specified maximum number of steps is reached or until the score (accuracy) reaches 1.0.\nNote that in an iteration in which \\(\\tilde{y}_i \\langle \\tilde{\\vw}^{(t)}, \\tilde{\\vx}_i\\rangle \\geq 0\\), nothing happens. Take a moment to check that this occurs when the current weight vector \\(\\tilde{\\vw}^{(t)}\\) correctly classifies the tuple \\((\\vx_i, y_i)\\).\n\n\nOther Specifications\nYou should be able to replicate the demo in Section 2 with your source code. Feel free to use that demo as a test case – your source code may be in good shape when you are able to fully replicate the results. For perfect replication, you’ll need to include the call to np.random.seed() immediately after importing your packages.\nAn excellent solution will have exactly one for-loop, of the form:\nfor _ in range(max_steps):\n  # perform the perceptron update and log the score in self.history\nThat is, you should not do any loops over the data! Use vectorized numpy operations and matrix-vector multiplication.\nYou should also not use if statements to perform comparisons between numbers.\n\n\nFor a hint on how you can avoid doing this, you can reflect on the following two code snippets:\nprint((1 < 2)*2)\nprint((1 > 2)*2)\n\n\n\n\n\n\nPlease include informative docstrings for Perceptron.fit(), Perceptron.predict(), and Perceptron.score().\n\n\n\nA concise solution should likely be no more than 60 lines of compact Python code (excluding comments and docstrings)."
   },
   {
-    "objectID": "assignments/blog-posts/blog-post-perceptron.html#big-picture",
-    "href": "assignments/blog-posts/blog-post-perceptron.html#big-picture",
+    "objectID": "assignments/blog-posts/blog-post-perceptron.html#experiments",
+    "href": "assignments/blog-posts/blog-post-perceptron.html#experiments",
     "title": "Implementing the Perceptron Algorithm",
-    "section": "Big Picture",
-    "text": "Big Picture\nYou are going to implement a Perceptron class in a script file called perceptron.py. (you should place it next to your .ipynb notebook in which you write your blog post.) You’ll import it like this:\nfrom perceptron import Perceptron\nYour class should have the following methods:\n\nPerceptron.fit(X, y) is the primary method. This method has no return value. If p is a Perceptron, then after p.fit(X, y) is called, p should have an instance variable of weights called w. This w is the vector \\(\\tilde{\\mathbf{w}} = (\\mathbf{w}, -w_0)\\) in the classifier above. Additionally, p should have an instance variable called p.history which is a list of the evolution of the score over the training period (see Perceptron.score(X, y) below.)\nPerceptron.predict(X) should return a vector \\(\\hat{\\mathbf{y}} \\in \\{0,1\\}^n\\) of predicted labels. These are the model’s predictions for the labels on the data.\nPerceptron.score(X, y) should return the accuracy of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification.\n\nFeel free to add any other methods or functions that you find helpful while implementing."
+    "section": "3.2 Experiments",
+    "text": "3.2 Experiments\nPlease perform experiments (with visualizations) that illustrate the following:\n\nUsing 2d data like the data in the example, if the data is linearly separable then the perceptron algorithm converges to weight vector \\(\\tilde{\\vw}\\) describing a separating line (provided that the maximum number of iterations is large enough).\n\nPlease show visualizations of the data, the separating line, and the evolution of the score over training.\n\nFor 2d data, when the data is not linearly separable, the perceptron algorithm will not settle on a final value of \\(\\tilde{\\vw}\\), but will instead run until the maximum number of iterations is reached, without achieving perfect accuracy.\n\nPlease show visualizations of the data, the separating line, and the evolution of the score over training.\n\nThe perceptron algorithm is also able to work in more than 2 dimensions! Show an example of running your algorithm on data with at least 5 features. You don’t need to visualize the data or the separating line, but you should still show the evolution of the score over the training period. Include a comment on whether you believe that the data is linearly separable based on your observation of the score."
   },
   {
-    "objectID": "assignments/blog-posts/blog-post-perceptron.html#implementing-fit",
-    "href": "assignments/blog-posts/blog-post-perceptron.html#implementing-fit",
+    "objectID": "assignments/blog-posts/blog-post-perceptron.html#writing",
+    "href": "assignments/blog-posts/blog-post-perceptron.html#writing",
     "title": "Implementing the Perceptron Algorithm",
-    "section": "Implementing fit()",
-    "text": "Implementing fit()\nTo implement fit(), it’s convenient to consider a modified version of \\(\\mathbf{X}\\): \\(\\tilde{\\mathbf{X}} = [\\mathbf{X}, \\mathbf{1}]\\), where \\(\\mathbf{1} \\in \\mathbb{R}^n\\) is a column-vector of \\(1\\)s. The reason this is handy is that if we also define \\(\\tilde{\\mathbf{w}} = (\\mathbf{w}, -w_0)\\), then we can write our classification rule as\n\\[\n\\hat{y}_i = \\mathbb{1}(\\langle \\tilde{\\mathbf{w}}, \\tilde{\\mathbf{x}}_i\\rangle \\geq 0)\\;.\n\\]\nThis is mathematically convenient and makes it much easier for us to code up our algorithms.\nWith these definitions, the perceptron update proceeds as follow:\n\nPick a random index \\(i \\in [n]\\).\nCompute\n\n\\[\n\\tilde{\\mathbf{w}}_{t+1} = \\tilde{\\mathbf{w}}_t + \\mathbb{1}(y_i \\langle \\tilde{\\mathbf{w}}_t, \\tilde{\\mathbf{x}}_i\\rangle < 0)y_i \\tilde{\\mathbf{x}}_i\\;.\n\\]\nThis update is performed until either a user-specified maximum number of steps is reached or until the score (accuracy) reaches 1.0.\nNote that in an iteration in which \\(y_i \\langle \\tilde{\\mathbf{w}}_t, \\tilde{\\mathbf{x}}_i\\rangle \\geq 0\\), nothing happens."
-  },
-  {
-    "objectID": "assignments/blog-posts/blog-post-perceptron.html#demo",
-    "href": "assignments/blog-posts/blog-post-perceptron.html#demo",
-    "title": "Implementing the Perceptron Algorithm",
-    "section": "Demo",
-    "text": "Demo\nBy the time you have successfully implemented your Perceptron class, you should be able to replicate the following results on your blog post.\nFirst, you should be able to import your class\nfrom perceptron import Perceptron\nThen you should be able to create an instance of the class and fit it to data.\n\np = Perceptron()\np.fit(X, y, max_steps = 1000)\n\nThis should result in p having an instance variable w of weights and an instance variable history of scores:\n\np.w\n\narray([2.10557404, 3.1165449 , 0.25079936])\n\n\n\nprint(p.history[-10:]) #just the last few values\n\n[0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 1.0]\n\n\nYou can visualize how the score evolved over time:\n\nfig = plt.plot(p.history)\nxlab = plt.xlabel(\"Iteration\")\nylab = plt.ylabel(\"Accuracy\")\n\n\n\n\nIn this particular example, the algorithm was able to achieve perfect, 100% classification.\nYou can also visualize the line that the algorithm finds to separate the data.\n\ndef draw_line(w, x_min, x_max):\n  x = np.linspace(x_min, x_max, 101)\n  y = -(w[0]*x + w[2])/w[1]\n  plt.plot(x, y, color = \"black\")\n\nfig = plt.scatter(X[:,0], X[:,1], c = y)\nfig = draw_line(p.w, -2, 2)\n\nxlab = plt.xlabel(\"Feature 1\")\nylab = plt.ylabel(\"Feature 2\")\n\n\n\n\nAs we know from the previous investigations, the score on the data is:\n\np.score(X, y)\n\n1.0"
-  },
-  {
-    "objectID": "assignments/blog-posts/blog-post-perceptron.html#general-specs",
-    "href": "assignments/blog-posts/blog-post-perceptron.html#general-specs",
-    "title": "Implementing the Perceptron Algorithm",
-    "section": "General Specs",
-    "text": "General Specs\n\nSource Code\nAn excellent solution will have exactly one for-loop, of the form:\nfor _ in range(max_steps):\n  # perform the perceptron update and log the score in self.history\nThat is, you should not do any loops over the data! Use vectorized numpy operations and matrix-vector multiplication.\nYou should also not use if statements to perform comparisons between numbers.\n\n\nFor a hint on how you can avoid doing this, you can reflect on the following two code snippets:\nprint((1 < 2)*2)\nprint((1 > 2)*2)\n\n\n\n\n\n\nPlease include informative docstrings for Perceptron.fit(), Perceptron.predict(), and Perceptron.score().\n\n\n\nA concise solution should likely be no more than 60 lines of compact Python code (excluding comments and docstrings).\n\n\nBlog Post\nPlease make sure that your blog post includes:\n\nPlots with informative axis labels.\nA mathematical description of the algorithm (it’s ok for you to closely follow my notes or any of our readings)."
+    "section": "3.3 Writing",
+    "text": "3.3 Writing\nIn crafting your blog post, please include the following components:\n\nAt the very top of your blog post, a link to your source code (perceptron.py) on your GitHub repo.\nA brief walk-through of your implementation of the perceptron update (Equation 1) in your source code. Quote the function which you use to perform the update. It’s not necessary to walk the user through every single aspect of your solution class.\nFull code and English descriptions for all the experiments you perform.\nAt the end of your blog post, please address the following question:\n\n\nWhat is the asymptotic runtime complexity of a single iteration of the perceptron algorithm update as described by Equation 1? Assume that the relevant operations are addition and multiplication. Does the runtime complexity depend on the number of data points \\(n\\)? What about the number of features \\(p\\)?\n\nYou only need to consider this question in the context of a single update. The question of how many updates are required to converge is a trickier one that you don’t have to discuss in your blog post."
   },
   {
     "objectID": "assignments/blog-posts/blog-post-optimization.html",
@@ -270,35 +256,161 @@
     "href": "slides/welcome.html#section-1",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About"
+    "text": "Machine learning is used for…\n…automated consumer recommendations for content and shopping."
   },
   {
     "objectID": "slides/welcome.html#section-2",
     "href": "slides/welcome.html#section-2",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
+    "text": "Machine learning is used for…\n…generating realistic synthetic text, images, and code.\n\n\n\n\n\nAsk chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious. pic.twitter.com/T785FbGmUX\n\n— Deqing Fu (@DeqingFu) December 5, 2022"
   },
   {
     "objectID": "slides/welcome.html#section-3",
     "href": "slides/welcome.html#section-3",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Learning Objectives\n\n\n \nTheory: math, core concepts\nImplementation: code it up! (efficiently, compactly, flexibly)\nPython Ecosystem: use other people’s code wisely (after you understand it)\nExperimentation: but does it work?\nSocial Responsibility: how do intersectional bias and harm surface in automated decision-making?\nProject: how do you investigate the world using machine learning skills?"
+    "text": "Machine learning is used for…\n…predictions and recommendations for life-changing decisions: housing, healthcare, criminal justice."
   },
   {
     "objectID": "slides/welcome.html#section-4",
     "href": "slides/welcome.html#section-4",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Course Assignments\n\n\nBlog Posts (“Homework”)\n\nDo some math, code up an algorithm, do experiments. Blog about it.\nYou have a blog now.\nYou’ll get feedback and can revise/resubmit.\nTry to do ~1 in most weeks.\n\nClass Prep\n\nDo the core readings and any of the optional ones that interest you.\nComplete the warmup activity and be ready to present it.\n\nProject\n\nPropose something ambitious and complete it with a team.\n\nI am"
+    "text": "Machine learning is used for…\n…search engines, smart homes, computer vision, speech-to-text, scientific discovery, driver assistance systems…"
   },
   {
     "objectID": "slides/welcome.html#section-5",
     "href": "slides/welcome.html#section-5",
     "title": "Welcome to CSCI 0451!",
     "section": "",
+    "text": "Can you list the times in which you interacted with a machine learning system yesterday?"
+  },
+  {
+    "objectID": "slides/welcome.html#section-6",
+    "href": "slides/welcome.html#section-6",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "How is this course going to go?"
+  },
+  {
+    "objectID": "slides/welcome.html#section-7",
+    "href": "slides/welcome.html#section-7",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Rough, tentative plan for the semester\n\n\nFundamentals of prediction (~6 weeks)\n\nCore math concepts\nOptimization (“the algorithms”)\nHow to help models generalize\nFormal definitions of bias and fairness\n\nUnsupervised methods (~1 week)\n\nClustering\nDimensionality reduction\n\nDeep Learning (~4 weeks)\n\nImage classification\nText generation\nWord embedding\n\nProject Presentations (~1 week)"
+  },
+  {
+    "objectID": "slides/welcome.html#section-8",
+    "href": "slides/welcome.html#section-8",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Most Days\n\n\nWarmup Activity\n\nComplete ahead of time.\nReinforces content from readings and connects them to lecture.\nPresent in groups of 4-5.\nRandom presenter presents to the group.\n\nLecture\n\nMath\nLive-coding\nYour questions and ideas!\n\nClose-Out Activity\n\nIn same groups as warmup.\nPractices content from lecture."
+  },
+  {
+    "objectID": "slides/welcome.html#section-9",
+    "href": "slides/welcome.html#section-9",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Activities and assignments\n\n\nBlog Posts\n\nAim for ~1 per week.\nInvolves implementation, experiments, and discussion.\nPublished on your blog.\n\nDaily Warmup Activities\n\nRelatively quick when you’ve done the readings.\nOne (random) person each day will present to 4-5 classmates.\nConnects readings to lecture.\n\nProject\n\nIn groups of your choosing.\nWork on it throughout the semester, presentations in last week.\nWe’ll have activities etc. to help you pick a path."
+  },
+  {
+    "objectID": "slides/welcome.html#section-10",
+    "href": "slides/welcome.html#section-10",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Blog Posts\n\nImplement algorithms in source (.py) files.\nPerform experiments in Jupyter notebooks.\nCreate figures, add expository prose, etc.\nRender your notebooks into a blog using the Quarto publishing engine.\nHost source code and rendered blog on GitHub."
+  },
+  {
+    "objectID": "slides/welcome.html#section-12",
+    "href": "slides/welcome.html#section-12",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Feedback on blog posts via Hypothes.is"
+  },
+  {
+    "objectID": "slides/welcome.html#section-13",
+    "href": "slides/welcome.html#section-13",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Feedback on source code"
+  },
+  {
+    "objectID": "slides/welcome.html#section-14",
+    "href": "slides/welcome.html#section-14",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Readings and Warmups\nDo them! Some readings are optional."
+  },
+  {
+    "objectID": "slides/welcome.html#section-15",
+    "href": "slides/welcome.html#section-15",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
     "text": "Collaborative Grading"
+  },
+  {
+    "objectID": "slides/welcome.html#section-16",
+    "href": "slides/welcome.html#section-16",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Collaborative Grading\n\n\nInitialization:\n\n\nYou set goals for your learning and achievement (in week 2).\n\n\nMain Loop:\n\n\nYou attend class, participate in activities, and complete assignments.\n\nYou get feedback on your assignments from me and the TAs, and you revise.\nYou reflect on your learning and achievement at different points throughout the course.\n\n\nAt End Of Course:\n\n\nYou propose a letter grade that reflects your learning and achievement, and discuss it with me.\n\n\nIndividual assignments don’t get scores, points, or grades–just feedback."
+  },
+  {
+    "objectID": "slides/welcome.html#section-17",
+    "href": "slides/welcome.html#section-17",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Collaborative Grading\n \n\n\n\n\n\n\n\n\n\nOpportunity\nChallenge\n\n\n\n\nNo points, no averages\nYou can focus on feedback and set your own goals.\nYou need to motivate based on your interest in the class\n\n\nResubmit assignments\nOne of the best ways to learn\nNeed to read feedback and prioritize time for revisions\n\n\nCan skip assignments\nNo busy work – work on what’s valuable to you.\nStill need to work enough to learn and meet your goals\n\n\nNo hard due-dates\nDon’t ask for extensions, take the time you need\nNeed to keep yourself on pace to achieve your goals"
+  },
+  {
+    "objectID": "slides/welcome.html#section-18",
+    "href": "slides/welcome.html#section-18",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "What is something that makes you feel excited or empowered about collaborative grading?\nWhat is something that makes you feel nervous or confused about collaborative grading?"
+  },
+  {
+    "objectID": "slides/welcome.html#section-19",
+    "href": "slides/welcome.html#section-19",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "What I expect from you now"
+  },
+  {
+    "objectID": "slides/welcome.html#section-20",
+    "href": "slides/welcome.html#section-20",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "CS Stuff\nYou can write moderately-complex, object-oriented software.\nYou are comfortable reading software documentation and researching how to perform a task that you haven’t seen before.\nYou know what a terminal is and how to perform simple operations at the command line.\nYou have experience debugging your code and you are ready to do it a lot more.\n\n\nMath Stuff\nYou remember most of MATH 0200 and CSCI 0200:\n\nMatrix multiplication and inner products\nEverything about \\(\\mathbf{A}\\mathbf{x} = \\mathbf{b}\\).\n\nVisualizing linear spaces.\nEigenvalues, eigenvectors, positive-definite matrices.\nDerivatives, critical points of functions.\nSample spaces, probability distribution functions.\nRandom variables, mean and variance.\nConditional probability and expectations.\n\nYou are ready to look up what you don’t remember."
+  },
+  {
+    "objectID": "slides/welcome.html#section-21",
+    "href": "slides/welcome.html#section-21",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About\n\n\n\n\n\n\\[\\mathbf{w}^{(t+1)} = \\mathbf{w}^{(t)} + \\mathbb{1}(y_i \\langle \\mathbf{w}^{(t)}, \\mathbf{x}_i \\rangle < 0)y_i \\mathbf{x}_i\\]"
+  },
+  {
+    "objectID": "slides/welcome.html#section-22",
+    "href": "slides/welcome.html#section-22",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
+  },
+  {
+    "objectID": "slides/welcome.html#section-23",
+    "href": "slides/welcome.html#section-23",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Most of all, I expect that you are ready to make thoughtful decisions to guide your own learning in this course."
+  },
+  {
+    "objectID": "slides/welcome.html#section-24",
+    "href": "slides/welcome.html#section-24",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Based on what you know about the course so far, what are some ways that success might look like for you?"
   },
   {
     "objectID": "collaboration.html",
@@ -529,7 +641,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week 1 \n            \n        \n            \n                    M\n                    \n                    Feb. 13 \n             Welcome!\n   \n        \n        \n             \n                We discuss how the course works and begin our discussion of classification and auditing. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Getting Oriented  \n            \n            \n                    Reading\n                           Course syllabus \n                           Collaboration \n                           Why I Don't Grade by Jesse Stommel \n                           Daumé 1.1-1.5 \n            \n            \n                    Notes\n                            Welcome slides\n  \n                            Lecture notes\n  \n            \n            \n                    Warmup\n                    Set up your software.\n            \n            \n                    Assignments\n                    No really, set up your software.\n            \n        \n        \n            \n                    W\n                    \n                    Feb. 15 \n             More On Classification and Auditing\n   \n        \n        \n             \n                We continue our discussion of classification and introduce algorithmic bias. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Social Responsibility  \n                            Navigation  \n                            Experimentation  \n            \n            \n                    Reading\n                           Machine Bias from ProPublica \n                           Data Manipulation with Pandas from The Python Data Science Handbook by Jake van der Plaas \n                           Example 2.3.1 from Murphy \n            \n            \n                    Notes\n                            Lecture notes\n  \n            \n            \n                    Warmup\n                     Classification rates \n            \n            \n            \n        \n            \n             Week 2 \n            \n        \n            \n                    M\n                    \n                    Feb. 20 \n             Classification: The Perceptron\n   \n        \n        \n             \n                We study the perceptron algorithm, a historical method that serves as the foundation for many modern classifiers. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           Daumé 4.1-4.5, 4.7 \n                           Introduction to Numpy from The Python Data Science Handbook by Jake van der Plaas \n                           Linear algebra with Numpy \n                           Hardt and Recht, p. 37-41 \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                     Perceptron \n            \n            \n                    Assignments\n                    Blog post: perceptron\n            \n        \n        \n            \n                    W\n                    \n                    Feb. 22 \n             Models, Loss Functions, and Algorithms\n   \n        \n        \n             \n                We generalize our study of the perceptron to a broader framework for supervised machine learning called empirical risk minimization. Within this framework, we begin to study logistic regression and the primal support vector machine for binary classification.\n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           TBD \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n                    Assignments\n                    Reflective goal-setting\n            \n        \n            \n             Week 3 \n            \n        \n            \n                    M\n                    \n                    Feb. 27 \n             Optimization\n   \n        \n        \n             \n                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for the primal support vector machine. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           TBD \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n                    Assignments\n                    Reflective goal-setting\n            \n        \n        \n\nNo matching items\n\n  © Phil Chodrow, 2023"
+    "text": "Week 1 \n            \n        \n            \n                    M\n                    \n                    Feb. 13 \n             Welcome!\n   \n        \n        \n             \n                We discuss how the course works and begin our discussion of classification and auditing. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Getting Oriented  \n            \n            \n                    Reading\n                           Course syllabus \n                           Collaboration \n                           Why I Don't Grade by Jesse Stommel \n                           Daumé 1.1-1.5 \n            \n            \n                    Notes\n                            Welcome slides\n  \n                            Lecture notes\n  \n            \n            \n                    Warmup\n                    Set up your software.\n            \n            \n                    Assignments\n                    No really, set up your software.\n            \n        \n        \n            \n                    W\n                    \n                    Feb. 15 \n             More On Classification and Auditing\n   \n        \n        \n             \n                We continue our discussion of classification and introduce algorithmic bias. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Social Responsibility  \n                            Navigation  \n                            Experimentation  \n            \n            \n                    Reading\n                           Machine Bias from ProPublica \n                           Data Manipulation with Pandas from The Python Data Science Handbook by Jake VanderPlas \n                           Example 2.3.1 from Murphy \n            \n            \n                    Notes\n                            Lecture notes\n  \n            \n            \n                    Warmup\n                     Classification rates \n            \n            \n            \n        \n            \n             Week 2 \n            \n        \n            \n                    M\n                    \n                    Feb. 20 \n             Classification: The Perceptron\n   \n        \n        \n             \n                We study the perceptron algorithm, a historical method that serves as the foundation for many modern classifiers. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           Daumé 4.1-4.5, 4.7 \n                           Introduction to Numpy from The Python Data Science Handbook by Jake VanderPlas \n                           Linear algebra with Numpy \n                           Hardt and Recht, p. 37-41 \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                     Perceptron \n            \n            \n                    Assignments\n                    Blog post: perceptron\n            \n        \n        \n            \n                    W\n                    \n                    Feb. 22 \n             Models, Loss Functions, and Algorithms\n   \n        \n        \n             \n                We generalize our study of the perceptron to a broader framework for supervised machine learning called empirical risk minimization. Within this framework, we begin to study logistic regression and the primal support vector machine for binary classification.\n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           TBD \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n                    Assignments\n                    Reflective goal-setting ACTUAL DUE DATE: 2/24\n            \n        \n            \n             Week 3 \n            \n        \n            \n                    M\n                    \n                    Feb. 27 \n             Optimization\n   \n        \n        \n             \n                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for the primal support vector machine. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           TBD \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n                    Assignments\n                    Reflective goal-setting\n            \n        \n        \n\nNo matching items\n\n  © Phil Chodrow, 2023"
   },
   {
     "objectID": "blog.html",

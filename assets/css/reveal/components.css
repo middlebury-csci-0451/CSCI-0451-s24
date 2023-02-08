@@ -4,7 +4,7 @@
     padding-top: 2rem;
 }
 
-.column h1, h2, h3, h4, h5, p { 
+.column h1, h2, h3, h4, h5, h6, p { 
     padding-left: 2rem;
     padding-right: 1rem;
     padding-top: 1rem;
@@ -12,6 +12,7 @@
 
 .column li { 
     margin-left: 2rem;
+    margin-right: 2rem;
     list-style-position: outside;
 }
 
@@ -56,6 +57,10 @@ li {
 
 .reveal h5 { 
     font-size: 2rem; 
+}
+
+.reveal h6 { 
+    font-size: 1.5rem; 
 }
 
 .column p {
