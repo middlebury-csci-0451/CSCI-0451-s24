@@ -118,6 +118,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -239,6 +242,73 @@ The false positive rate is ___. </code></pre>
 <li>What if the alternative test had an 85% sensitivity rate and a 10% chance of a positive test on someone who is truly not infected?</li>
 </ol>
 <div class="no-row-height column-margin column-container"><span class="aside">You don’t necessarily need to use your function from the previous part in this part.</span></div></section>
+<section id="part-3" class="level4">
+<h4 class="anchored" data-anchor-id="part-3">Part 3</h4>
+<p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>y</th>
+      <th>y_pred</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>You should be able to use your function like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>The true positive rate is ___.
+The false positive rate is ___.
+The true negative rate is ___. 
+The false positive rate is ___. </code></pre>
+<section id="hints" class="level5">
+<h5 class="anchored" data-anchor-id="hints">Hints</h5>
+<p>An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
 </section>
 <section id="sec-perceptron" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="sec-perceptron">Perceptron</h3>
@@ -255,8 +325,8 @@ The false positive rate is ___. </code></pre>
 <div class="page-columns page-full"><p>Write a quick Python function called <code>perceptron_classify(w, w_0, x)</code>. <code>w</code> and <code>x</code> should both be 1d numpy arrays of the same length, and <code>w_0</code> should be a scalar. Your function should return <code>0</code> if <span class="math inline">\(\bracket{\vw, \vx} &lt; w_0\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx} \geq w_0\)</span>. </p><div class="no-row-height column-margin column-container"><span class="aside">An excellent solution will use neither a <code>for</code>-loop nor an <code>if</code>-statement.</span></div></div>
 <p>Verify that your function works on a few simple examples.</p>
 </section>
-<section id="part-3" class="level4">
-<h4 class="anchored" data-anchor-id="part-3">Part 3</h4>
+<section id="part-3-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-3-1">Part 3</h4>
 <p>Consider a line of the general form of <a href="#eq-perceptron-boundary">Equation&nbsp;1</a>. Let’s allow <span class="math inline">\(\vx\)</span> and <span class="math inline">\(\vw\)</span> to both be <span class="math inline">\(n\)</span>-dimensional, so that this equation defines a hyperplane in <span class="math inline">\(\R^n\)</span>. Suppose that we wanted to represent <em>the same hyperplane</em> in <span class="math inline">\(\R^n\)</span> using an equation of the form</p>
 <p><span id="eq-perceptron-boundary-2"><span class="math display">\[
 \bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.

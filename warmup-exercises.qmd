@@ -44,8 +44,41 @@ The false positive rate is ___.
 1. Suppose that scientists found an alternative rapid test which had a 75% sensitivity rate with a 0% chance of a positive test on someone who is truly not infected. Would you suggest replacing the old rapid tests with these alternative tests? Why? [You don't necessarily need to use your function from the previous part in this part.]{.aside}
 2. What if the alternative test had an 85% sensitivity rate and a 10% chance of a positive test on someone who is truly not infected?  
 
+#### Part 3
 
+It's all well and good to do the math, but what about when we actually have data? Write a function called `rate_summary_2` that accepts two columns of a `pandas.DataFrame` (or equivalently two one-dimensional `numpy.arrays` of equal length). Call these `y` and `y_pred`. Assume that both `y` and `y_pred` are binary arrays (i.e. arrays of 0s and 1s). `y` represents the true outcome, whereas `y_pred` represents the prediction from an algorithm or test. Here's an example of the kind of data we are thinking about: 
 
+```{python}
+import pandas as pd
+
+url = "https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"
+df = pd.read_csv(url)
+
+df.head() # just for visualizing the first few rows
+```
+
+You should be able to use your function like this: 
+
+```python
+# y is the true label, y_pred is the prediction
+rate_summary_2(df["y"], df["y_pred"]) 
+```
+
+```
+The true positive rate is ___.
+The false positive rate is ___.
+The true negative rate is ___. 
+The false positive rate is ___. 
+```
+
+##### Hints
+
+An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following: 
+
+```python
+df[["y"]] == df[["y_pred"]]
+df[["y"]].sum(), df[["y"]].sum()
+```
 
 
 
