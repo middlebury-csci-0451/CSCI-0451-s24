@@ -393,6 +393,34 @@ Do them! *Some readings are optional.*
 | No hard due-dates       | Don't ask for extensions, take the time you need   |  *Need to keep yourself on pace to achieve your goals*  |
 : {tbl-colwidths="[20,37,37]"}
 
+## {.split-50}
+
+::: {.column .bg1}
+
+#### What a Grade Sounds Like... 
+
+[**A**]{.alert}: *I am ready to take the theory, techniques, and ideas of this course into my endeavours outside this classroom: future classes, projects, hobbies, career.*
+
+[**B**]{.alert}: *With help or review, I might be able to take some of what I learned outside this classroom.*
+
+[**C**]{.alert}: *I showed up and did stuff, but I don't really see any ways to take what I learned outside this classroom.*
+
+[**D-F**]{.alert}: *I didn't really show up or do much.*
+
+:::
+
+::: {.column .bg0}
+#### Work Expected [Work Expected]{.hide}
+
+I am very likely to accept your proposed grade in the course if you EITHER: 
+
+- Complete **most assignments** to a high standard (including revisions) OR
+- Work for **~10 productive hours per week** outside of class OR
+- Do some of the assignments I give you and also **some other things** (that you propose) that are relevant to the course learning goals.
+
+:::
+
+
 
 ## {.bg3}
 

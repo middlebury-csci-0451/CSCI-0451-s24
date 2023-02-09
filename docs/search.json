@@ -368,46 +368,53 @@
     "href": "slides/welcome.html#section-18",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What is something that makes you feel excited or empowered about collaborative grading?\nWhat is something that makes you feel nervous or confused about collaborative grading?"
+    "text": "What a Grade Sounds Like…\nA: I am ready to take the theory, techniques, and ideas of this course into my endeavours outside this classroom: future classes, projects, hobbies, career.\nB: With help or review, I might be able to take some of what I learned outside this classroom.\nC: I showed up and did stuff, but I don’t really see any ways to take what I learned outside this classroom.\nD-F: I didn’t really show up or do much.\n\n\nWork Expected Work Expected\nI am likely to accept your proposed grade in the course if you EITHER:\n\nComplete most assignments to a high standard (including revisions) OR\nWork for ~10 productive hours per week outside of class OR\nDo some of the assignments I give you and also some other things (that you propose) that are relevant to the course learning goals."
   },
   {
     "objectID": "slides/welcome.html#section-19",
     "href": "slides/welcome.html#section-19",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What I expect from you now"
+    "text": "What is something that makes you feel excited or empowered about collaborative grading?\nWhat is something that makes you feel nervous or confused about collaborative grading?"
   },
   {
     "objectID": "slides/welcome.html#section-20",
     "href": "slides/welcome.html#section-20",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "CS Stuff\nYou can write moderately-complex, object-oriented software.\nYou are comfortable reading software documentation and researching how to perform a task that you haven’t seen before.\nYou know what a terminal is and how to perform simple operations at the command line.\nYou have experience debugging your code and you are ready to do it a lot more.\n\n\nMath Stuff\nYou remember most of MATH 0200 and CSCI 0200:\n\nMatrix multiplication and inner products\nEverything about \\(\\mathbf{A}\\mathbf{x} = \\mathbf{b}\\).\n\nVisualizing linear spaces.\nEigenvalues, eigenvectors, positive-definite matrices.\nDerivatives, critical points of functions.\nSample spaces, probability distribution functions.\nRandom variables, mean and variance.\nConditional probability and expectations.\n\nYou are ready to look up what you don’t remember."
+    "text": "What I expect from you now"
   },
   {
     "objectID": "slides/welcome.html#section-21",
     "href": "slides/welcome.html#section-21",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About\n\n\n\n\n\n\\[\\mathbf{w}^{(t+1)} = \\mathbf{w}^{(t)} + \\mathbb{1}(y_i \\langle \\mathbf{w}^{(t)}, \\mathbf{x}_i \\rangle < 0)y_i \\mathbf{x}_i\\]"
+    "text": "CS Stuff\nYou can write moderately-complex, object-oriented software.\nYou are comfortable reading software documentation and researching how to perform a task that you haven’t seen before.\nYou know what a terminal is and how to perform simple operations at the command line.\nYou have experience debugging your code and you are ready to do it a lot more.\n\n\nMath Stuff\nYou remember most of MATH 0200 and CSCI 0200:\n\nMatrix multiplication and inner products\nEverything about \\(\\mathbf{A}\\mathbf{x} = \\mathbf{b}\\).\n\nVisualizing linear spaces.\nEigenvalues, eigenvectors, positive-definite matrices.\nDerivatives, critical points of functions.\nSample spaces, probability distribution functions.\nRandom variables, mean and variance.\nConditional probability and expectations.\n\nYou are ready to look up what you don’t remember."
   },
   {
     "objectID": "slides/welcome.html#section-22",
     "href": "slides/welcome.html#section-22",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
+    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About\n\n\n\n\n\n\\[\\mathbf{w}^{(t+1)} = \\mathbf{w}^{(t)} + \\mathbb{1}(y_i \\langle \\mathbf{w}^{(t)}, \\mathbf{x}_i \\rangle < 0)y_i \\mathbf{x}_i\\]"
   },
   {
     "objectID": "slides/welcome.html#section-23",
     "href": "slides/welcome.html#section-23",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Most of all, I expect that you are ready to make thoughtful decisions to guide your own learning in this course."
+    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
   },
   {
     "objectID": "slides/welcome.html#section-24",
     "href": "slides/welcome.html#section-24",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Most of all, I expect that you are ready to make thoughtful decisions to guide your own learning in this course."
+  },
+  {
+    "objectID": "slides/welcome.html#section-25",
+    "href": "slides/welcome.html#section-25",
     "title": "Welcome to CSCI 0451!",
     "section": "",
     "text": "Based on what you know about the course so far, what are some ways that success might look like for you?"
