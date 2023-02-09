@@ -66,9 +66,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-date','listing-description','listing-objectives','listing-path','listing-author','listing-filename','listing-file-modified','listing-reading-time','listing-jupyter','listing-number-sections','listing-number-depth',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-title','listing-type','listing-date','listing-description','listing-objectives','listing-jupyter','listing-number-sections','listing-number-depth','listing-publish','listing-path','listing-author','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-date","listing-description","listing-objectives","listing-path","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-jupyter","listing-number-sections","listing-number-depth"],
+      searchColumns: ["listing-title","listing-type","listing-date","listing-description","listing-objectives","listing-jupyter","listing-number-sections","listing-number-depth","listing-publish","listing-path","listing-author","listing-filename","listing-file-modified","listing-reading-time"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -94,9 +94,9 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-date','listing-description','listing-objectives','listing-path','listing-author','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-title','listing-type','listing-date','listing-description','listing-objectives','listing-publish','listing-path','listing-author','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-date","listing-description","listing-objectives","listing-path","listing-author","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-title","listing-type","listing-date","listing-description","listing-objectives","listing-publish","listing-path","listing-author","listing-filename","listing-file-modified","listing-reading-time"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -192,98 +192,96 @@ ul.task-list{list-style: none;}
 <div id="listing-process" class="quarto-listing quarto-listing-container-custom">
 
 <table style="display: block; max-width: 800px;">
-        <tbody><tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
+            
+        
+                <tbody><tr>
+                    <td style="min-width:100px;max-width:200px;">
+                        <b>
+                            Reflection
+                        </b> 
+                    </td>
+                    <td style="min-width:400px">
+                        <a href="./assignments/process/goal-setting.html">
+                            Reflective Goal-Setting
+                        </a>
+                    </td>
+                    <td style="text-align: right; max-width: 150;min-width: 150px;">
+                    Best By: &nbsp; 
+                    </td>
+                    <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                        Feb 22, 2023
+                    </td>
+                </tr>
+                <tr>
+                    <td class="smaller" colspan="4">
+                        We plan our goals for learning, engagement, and achievement over the course of the semester.
+                    </td>
+                </tr>
+            <tr>
+                <td class="smaller syllabus-item-objective" colspan="3">
+                        <b>Learning Objectives: </b>
+                        <!-- <b>Learning Objectives</b><br> -->
+                            Reflection
             </td>
         </tr>
+                <tr>
+                    <td style="min-width:100px;max-width:200px;">
+                        <b>
+                            Reflection
+                        </b> 
+                    </td>
+                    <td style="min-width:400px">
+                        <a href="./assignments/process/mid-course.html">
+                            Mid-Course Reflection
+                        </a>
+                    </td>
+                    <td style="text-align: right; max-width: 150;min-width: 150px;">
+                    Best By: &nbsp; 
+                    </td>
+                    <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                        Apr 6, 2023
+                    </td>
+                </tr>
+                <tr>
+                    <td class="smaller" colspan="4">
+                        We reflect on our learning, engagement, and achievement in the first part of the semester.
+                    </td>
+                </tr>
             <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Reflection
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/process/goal-setting.html">
-                        Reflective Goal-Setting
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Feb 14, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    We plan our goals for learning, engagement, and achievement over the course of the semester.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Reflection
+                <td class="smaller syllabus-item-objective" colspan="3">
+                        <b>Learning Objectives: </b>
+                        <!-- <b>Learning Objectives</b><br> -->
+                            Reflection
             </td>
         </tr>
+                <tr>
+                    <td style="min-width:100px;max-width:200px;">
+                        <b>
+                            Reflection
+                        </b> 
+                    </td>
+                    <td style="min-width:400px">
+                        <a href="./assignments/process/end-of-course.html">
+                            End-Of-Course Reflection
+                        </a>
+                    </td>
+                    <td style="text-align: right; max-width: 150;min-width: 150px;">
+                    Best By: &nbsp; 
+                    </td>
+                    <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                        May 19, 2023
+                    </td>
+                </tr>
+                <tr>
+                    <td class="smaller" colspan="4">
+                        We reflect on our learning, engagement, and achievement over the course of the semester.
+                    </td>
+                </tr>
             <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Reflection
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/process/mid-course.html">
-                        Mid-Course Reflection
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Apr 6, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    We reflect on our learning, engagement, and achievement in the first part of the semester.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Reflection
-            </td>
-        </tr>
-            <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Reflection
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/process/end-of-course.html">
-                        End-Of-Course Reflection
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    May 19, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    We reflect on our learning, engagement, and achievement over the course of the semester.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Reflection
+                <td class="smaller syllabus-item-objective" colspan="3">
+                        <b>Learning Objectives: </b>
+                        <!-- <b>Learning Objectives</b><br> -->
+                            Reflection
             </td>
         </tr>
 </tbody></table>
@@ -297,200 +295,80 @@ No matching items
 <div id="listing-blog-posts" class="quarto-listing quarto-listing-container-custom">
 
 <table style="display: block; max-width: 800px;">
-            <tbody><tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Blog Post
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/blog-posts/blog-post-data-science.html">
-                        Elementary Data Science in Python
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Feb 7, 2023
-                </td>
-            </tr>
+            
+        
+                <tbody><tr>
+                    <td style="min-width:100px;max-width:200px;">
+                        <b>
+                            Blog Post
+                        </b> 
+                    </td>
+                    <td style="min-width:400px">
+                        <a href="./assignments/blog-posts/blog-post-perceptron.html">
+                            Implementing the Perceptron Algorithm
+                        </a>
+                    </td>
+                    <td style="text-align: right; max-width: 150;min-width: 150px;">
+                    Best By: &nbsp; 
+                    </td>
+                    <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                        Feb 22, 2023
+                    </td>
+                </tr>
+                <tr>
+                    <td class="smaller" colspan="4">
+                        In this blog post, you'll implement the perceptron algorithm using numerical programming and demonstrate its use on synthetic data sets.
+                    </td>
+                </tr>
             <tr>
-                <td class="smaller" colspan="4">
-                    In this blog post, you'll practice the Quarto technical publishing workflow. You'll also demonstrate the usage of packages like <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code> to create informative data analyses and visualizations.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Implementation
-                            | 
-                        Navigation
+                <td class="smaller syllabus-item-objective" colspan="3">
+                        <b>Learning Objectives: </b>
+                        <!-- <b>Learning Objectives</b><br> -->
+                            Implementation
+                                | 
+                            Navigation
+                                | 
+                            Experimentation
             </td>
         </tr>
+            
+        
+                <tr>
+                    <td style="min-width:100px;max-width:200px;">
+                        <b>
+                            Blog Post
+                        </b> 
+                    </td>
+                    <td style="min-width:400px">
+                        <a href="./assignments/blog-posts/blog-post-erm.html">
+                            Empirical Risk Minimization For Classification
+                        </a>
+                    </td>
+                    <td style="text-align: right; max-width: 150;min-width: 150px;">
+                    Best By: &nbsp; 
+                    </td>
+                    <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                        Mar 5, 2023
+                    </td>
+                </tr>
+                <tr>
+                    <td class="smaller" colspan="4">
+                        In this blog post, you'll implement empirical risk minimization for two important classification algorithms: logistic regression and the primal support vector machine.
+                    </td>
+                </tr>
             <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Blog Post
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/blog-posts/blog-post-compas.html">
-                        Classification Rates in a Recidivism Prediction Algorithm
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Feb 14, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    In this blog post, you'll study (mis)classification rates from a famous algorithm used to predict whether people sentenced to jail due to criminal convictions were likely to be arrested again after release.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Social Responsibility
-                            | 
-                        Navigation
+                <td class="smaller syllabus-item-objective" colspan="3">
+                        <b>Learning Objectives: </b>
+                        <!-- <b>Learning Objectives</b><br> -->
+                            Theory
+                                | 
+                            Implementation
+                                | 
+                            Experimentation
             </td>
         </tr>
-            <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Blog Post
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/blog-posts/blog-post-perceptron.html">
-                        Implementing the Perceptron Algorithm
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Feb 14, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    In this blog post, you'll implement the perceptron algorithm and demonstrate its use on a few simple data sets.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Implementation
-                            | 
-                        Navigation
-            </td>
-        </tr>
-            <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Blog Post
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/blog-posts/blog-post-optimization.html">
-                        Optimization for Logistic Regression
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Feb 21, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    In this blog post, you'll implement several <i>first-order methods</i>: optimization algorithms based on the gradients of functions. You'll implement simple gradient descent, a momentum method, and stochastic gradient descent, comparing their performance for training logistic regression.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Theory
-                            | 
-                        Implementation
-                            | 
-                        Experimentation
-            </td>
-        </tr>
-            <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Blog Post
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/blog-posts/blog-post-penguins.html">
-                        Application Project: Classifying Palmer Penguins
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Feb 28, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    In this blog post, you'll work through a complete example of the standard machine learning workflow, including: data splitting, model and feature selection, cross validation, etc. Your primary goal is to determine the smallest number of measurements necessary to confidently determine the species of a penguin.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Experimentation
-                            | 
-                        Navigation
-            </td>
-        </tr>
-            <tr>
-                <td style="min-width:100px;max-width:200px;">
-                    <b>
-                        Blog Post
-                    </b> 
-                </td>
-                <td style="min-width:400px">
-                    <a href="./assignments/blog-posts/blog-post-medical-bias.html">
-                        Bias in a Medical Recommender System
-                    </a>
-                </td>
-                <td style="text-align: right; max-width: 150;min-width: 150px;">
-                Best By: &nbsp; 
-                </td>
-                <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                    Mar 6, 2023
-                </td>
-            </tr>
-            <tr>
-                <td class="smaller" colspan="4">
-                    In this blog post, you'll reproduce some of the findings of a famous study that found racial bias in a deployed, large-scale medical recommender system.
-                </td>
-            </tr>
-        <tr>
-            <td class="smaller syllabus-item-objective" colspan="3">
-                    <b>Learning Objectives: </b>
-                    <!-- <b>Learning Objectives</b><br> -->
-                        Social Responsibility
-                            | 
-                        Navigation
-            </td>
-        </tr>
+            
+        
 </tbody></table>
 <div class="listing-no-matching d-none">
 No matching items

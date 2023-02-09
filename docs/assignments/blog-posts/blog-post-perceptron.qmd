@@ -1,15 +1,17 @@
 ---
 title: "Implementing the Perceptron Algorithm"
 type: "Blog Post"
-date: 2023-02-14
+date: 2023-02-22
 description: |
-    In this blog post, you'll implement the perceptron algorithm and demonstrate its use on a few simple data sets. 
+    In this blog post, you'll implement the perceptron algorithm using numerical programming and demonstrate its use on synthetic data sets. 
 objectives: 
   - Implementation
   - Navigation
+  - Experimentation
 jupyter: conda-env-ml-0451-py
 number-sections: true
 number-depth: 2
+publish: "true"
 ---
 
 ::: {.hidden}

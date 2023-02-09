@@ -1,0 +1,33 @@
+---
+title: "Empirical Risk Minimization For Classification"
+type: "Blog Post"
+date: 2023-03-5
+description: |
+    In this blog post, you'll implement empirical risk minimization for two important classification algorithms: logistic regression and the primal support vector machine. 
+objectives: 
+  - Theory
+  - Implementation
+  - Experimentation
+jupyter: conda-env-ml-0451-py
+number-sections: true
+number-depth: 2
+publish: "true"
+---
+
+::: {.hidden}
+$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\mX}{\mathbf{X}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\paren}[1]{\left( #1 \right)}
+$$
+
+:::
+
+
+# Introduction
+
+Let's do empirical risk minimization!
