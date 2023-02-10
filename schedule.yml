@@ -56,7 +56,8 @@
   optional: 
     - <a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht</a>, p. 37-41
   notes: 
-    - TBD
+    - |
+      <a href="lecture-notes/perceptron.ipynb">Lecture notes</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#perceptron"> Perceptron </a>

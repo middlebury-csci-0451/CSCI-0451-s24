@@ -10,7 +10,7 @@ After following this set of instructions, you will be all ready to go for partic
 
 First, you'll need to join Hypothes.is and Slack. 
 
-- **For Hypothes.is**, start by making an account. Then, follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/12215/assignments/syllabus) to join the "CSCI 0451 (S23)" group. 
+- **For Hypothes.is**, start by [making an account](https://web.hypothes.is/). Then, follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/12215/assignments/syllabus) to join the "CSCI 0451 (S23)" group. 
 - **For Slack**, just follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/12215/assignments/syllabus) to join the workspace. You may choose to download the Slack desktop client, but that's up to you. You can make your own choices about notifications, but please do whatever you need to do to ensure that you're able to check Slack on a regular basis. 
 
 # Anaconda Python

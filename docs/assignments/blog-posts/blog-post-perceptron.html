@@ -243,13 +243,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>A vector <span class="math inline">\(\vy \in \{0,1\}^{n}\)</span> of binary labels.</li>
 </ul>
-<p>We assume that the labels in our data can be (approximately) separated by a <em>linear</em> predictor. The strongest version of this assumption is that our data are <em>linearly separable</em>. This means that there exists a vector <span class="math inline">\(\vw \in p\)</span> and a constant <span class="math inline">\(w_0\)</span> such that, for every <span class="math inline">\(i\)</span>,</p>
+<p>We assume that the labels in our data can be (approximately) separated by a <em>linear</em> predictor. The strongest version of this assumption is that our data are <em>linearly separable</em>. This means that there exists a vector <span class="math inline">\(\vw \in p\)</span> and a scalar <span class="math inline">\(b\)</span> such that, for every <span class="math inline">\(i\)</span>,</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_i &amp;= \begin{cases} 0 &amp; \langle \vw, \vx_i \rangle &lt; w_0 \\
-                     1 &amp; \langle \vw, \vx_i \rangle \geq w_0
+y_i &amp;= \begin{cases} 0 &amp; \langle \vw, \vx_i \rangle &lt; b \\
+                     1 &amp; \langle \vw, \vx_i \rangle \geq b
       \end{cases} \\
-    &amp;= \mathbb{1}(\langle \vw, \vx_i \rangle \geq w_0)
+    &amp;= \mathbb{1}(\langle \vw, \vx_i \rangle \geq b)
 \end{aligned}
 \]</span></p>
 <p>Here’s an example of what our data might look like. For visualization purposes, we are going to have <span class="math inline">\(p = 2\)</span> features.</p>
@@ -343,14 +343,14 @@ y_i &amp;= \begin{cases} 0 &amp; \langle \vw, \vx_i \rangle &lt; w_0 \\
 <h2 data-number="3.1" class="anchored" data-anchor-id="source-code"><span class="header-section-number">3.1</span> Source Code</h2>
 <p>Your class should have the following methods:</p>
 <ul>
-<li><code>Perceptron.fit(X, y)</code> is the primary method. This method has no return value. If <code>p</code> is a <code>Perceptron</code>, then after <code>p.fit(X, y)</code> is called, <code>p</code> should have an instance variable of <em>weights</em> called <code>w</code>. This <code>w</code> is the vector <span class="math inline">\(\tilde{\vw} = (\vw, -w_0)\)</span> in the classifier above. Additionally, <code>p</code> should have an instance variable called <code>p.history</code> which is a list of the evolution of the <code>score</code> over the training period (see <code>Perceptron.score(X, y)</code> below.)</li>
+<li><code>Perceptron.fit(X, y)</code> is the primary method. This method has no return value. If <code>p</code> is a <code>Perceptron</code>, then after <code>p.fit(X, y)</code> is called, <code>p</code> should have an instance variable of <em>weights</em> called <code>w</code>. This <code>w</code> is the vector <span class="math inline">\(\tilde{\vw} = (\vw, -b)\)</span> in the classifier above. Additionally, <code>p</code> should have an instance variable called <code>p.history</code> which is a list of the evolution of the <code>score</code> over the training period (see <code>Perceptron.score(X, y)</code> below.)</li>
 <li><code>Perceptron.predict(X)</code> should return a vector <span class="math inline">\(\hat{\vy} \in \{0,1\}^n\)</span> of predicted labels. These are the model’s predictions for the labels on the data.</li>
 <li><code>Perceptron.score(X, y)</code> should return the <em>accuracy</em> of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification.</li>
 </ul>
 <p>Feel free to add any other methods or functions that you find helpful while implementing.</p>
 <section id="implementing-fit" class="level3">
 <h3 class="anchored" data-anchor-id="implementing-fit">Implementing <code>fit()</code></h3>
-<p>To implement <code>fit()</code>, it’s convenient to consider a modified version of <span class="math inline">\(\mX\)</span>: <span class="math inline">\(\tilde{\mX} = [\mX, \mathbf{1}]\)</span>, where <span class="math inline">\(\mathbf{1} \in \R^n\)</span> is a column-vector of <span class="math inline">\(1\)</span>s. The reason this is handy is that if we also define <span class="math inline">\(\tilde{\vw} = (\vw, -w_0)\)</span>, then we can write our classification rule as</p>
+<p>To implement <code>fit()</code>, it’s convenient to consider a modified version of <span class="math inline">\(\mX\)</span>: <span class="math inline">\(\tilde{\mX} = [\mX, \mathbf{1}]\)</span>, where <span class="math inline">\(\mathbf{1} \in \R^n\)</span> is a column-vector of <span class="math inline">\(1\)</span>s. The reason this is handy is that if we also define <span class="math inline">\(\tilde{\vw} = (\vw, -b)\)</span>, then we can write our classification rule as</p>
 <p><span class="math display">\[
 \hat{y}_i = \mathbb{1}(\langle \tilde{\vw}, \tilde{\vx}_i\rangle \geq 0)\;.
 \]</span></p>
@@ -403,11 +403,12 @@ y_i &amp;= \begin{cases} 0 &amp; \langle \vw, \vx_i \rangle &lt; w_0 \\
 <ol type="1">
 <li>Using 2d data like the data in the example, if the data is linearly separable then the perceptron algorithm converges to weight vector <span class="math inline">\(\tilde{\vw}\)</span> describing a separating line (provided that the maximum number of iterations is large enough).
 <ul>
-<li>Please show visualizations of the data, the separating line, and the evolution of the score over training.</li>
+<li>Please show visualizations of the data, the separating line, and the evolution of the accuracy over training. It’s also fine for you to use the loss instead of the accuracy if you’d prefer.<br>
+</li>
 </ul></li>
 <li>For 2d data, when the data is <strong>not</strong> linearly separable, the perceptron algorithm will not settle on a final value of <span class="math inline">\(\tilde{\vw}\)</span>, but will instead run until the maximum number of iterations is reached, without achieving perfect accuracy.
 <ul>
-<li>Please show visualizations of the data, the separating line, and the evolution of the score over training.</li>
+<li>Please show visualizations of the data, the line in the final iteration, and the evolution of the score over training.</li>
 </ul></li>
 <li>The perceptron algorithm is also able to work in more than 2 dimensions! Show an example of running your algorithm on data with at least 5 features. You don’t need to visualize the data or the separating line, but you should still show the evolution of the score over the training period. Include a comment on whether you believe that the data is linearly separable based on your observation of the score.</li>
 </ol>
@@ -422,7 +423,7 @@ y_i &amp;= \begin{cases} 0 &amp; \langle \vw, \vx_i \rangle &lt; w_0 \\
 <li>At the end of your blog post, please address the following question:</li>
 </ul>
 <blockquote class="blockquote">
-<p>What is the asymptotic runtime complexity of a single iteration of the perceptron algorithm update as described by <a href="#eq-perceptron-update">Equation&nbsp;1</a>? Assume that the relevant operations are addition and multiplication. Does the runtime complexity depend on the number of data points <span class="math inline">\(n\)</span>? What about the number of features <span class="math inline">\(p\)</span>?</p>
+<p>What is the runtime complexity of a single iteration of the perceptron algorithm update as described by <a href="#eq-perceptron-update">Equation&nbsp;1</a>? Assume that the relevant operations are addition and multiplication. Does the runtime complexity depend on the number of data points <span class="math inline">\(n\)</span>? What about the number of features <span class="math inline">\(p\)</span>?</p>
 </blockquote>
 <p>You only need to consider this question in the context of a single update. The question of <strong>how many</strong> updates are required to converge is a trickier one that you don’t have to discuss in your blog post.</p>
 </section>

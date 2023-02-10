@@ -35,14 +35,14 @@ In the perceptron algorithm, we have a data set described by:
 - A matrix $\mX \in \R^{n\times p}$ of predictor variables. There are $n$ observations with $p$ features.  
 - A vector $\vy \in \{0,1\}^{n}$ of binary labels. 
 
-We assume that the labels in our data can be (approximately) separated by a *linear* predictor. The strongest version of this assumption is that our data are *linearly separable*. This means that there exists a vector $\vw \in p$ and a constant $w_0$ such that, for every $i$, 
+We assume that the labels in our data can be (approximately) separated by a *linear* predictor. The strongest version of this assumption is that our data are *linearly separable*. This means that there exists a vector $\vw \in p$ and a scalar $b$ such that, for every $i$, 
 
 $$ 
 \begin{aligned}
-y_i &= \begin{cases} 0 & \langle \vw, \vx_i \rangle < w_0 \\ 
-                     1 & \langle \vw, \vx_i \rangle \geq w_0 
+y_i &= \begin{cases} 0 & \langle \vw, \vx_i \rangle < b \\ 
+                     1 & \langle \vw, \vx_i \rangle \geq b 
       \end{cases} \\ 
-    &= \mathbb{1}(\langle \vw, \vx_i \rangle \geq w_0)
+    &= \mathbb{1}(\langle \vw, \vx_i \rangle \geq b)
 \end{aligned}
 $$
 
@@ -147,7 +147,7 @@ This blog posts as three main components: implement the perceptron algorithm, co
 
 Your class should have the following methods: 
 
-- `Perceptron.fit(X, y)` is the primary method. This method has no return value. If `p` is a `Perceptron`, then after `p.fit(X, y)` is called, `p` should have an instance variable of *weights* called `w`. This `w` is the vector $\tilde{\vw} = (\vw, -w_0)$ in the classifier above. Additionally, `p` should have an instance variable called `p.history` which is a list of the evolution of the `score` over the training period (see `Perceptron.score(X, y)` below.)
+- `Perceptron.fit(X, y)` is the primary method. This method has no return value. If `p` is a `Perceptron`, then after `p.fit(X, y)` is called, `p` should have an instance variable of *weights* called `w`. This `w` is the vector $\tilde{\vw} = (\vw, -b)$ in the classifier above. Additionally, `p` should have an instance variable called `p.history` which is a list of the evolution of the `score` over the training period (see `Perceptron.score(X, y)` below.)
 - `Perceptron.predict(X)` should return a vector $\hat{\vy} \in \{0,1\}^n$ of predicted labels. These are the model's predictions for the labels on the data. 
 - `Perceptron.score(X, y)` should return the *accuracy* of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification. 
 
@@ -155,7 +155,7 @@ Feel free to add any other methods or functions that you find helpful while impl
 
 ### Implementing `fit()`
 
-To implement `fit()`, it's convenient to consider a modified version of $\mX$: $\tilde{\mX} = [\mX, \mathbf{1}]$, where $\mathbf{1} \in \R^n$ is a column-vector of $1$s. The reason this is handy is that if we also define $\tilde{\vw} = (\vw, -w_0)$, then we can write our classification rule as 
+To implement `fit()`, it's convenient to consider a modified version of $\mX$: $\tilde{\mX} = [\mX, \mathbf{1}]$, where $\mathbf{1} \in \R^n$ is a column-vector of $1$s. The reason this is handy is that if we also define $\tilde{\vw} = (\vw, -b)$, then we can write our classification rule as 
 
 $$
 \hat{y}_i = \mathbb{1}(\langle \tilde{\vw}, \tilde{\vx}_i\rangle \geq 0)\;.
@@ -217,9 +217,10 @@ A concise solution should likely be no more than 60 lines of compact Python code
 Please perform experiments (with visualizations) that illustrate the following: 
 
 1. Using 2d data like the data in the example, if the data is linearly separable then the perceptron algorithm converges to weight vector $\tilde{\vw}$ describing a separating line (provided that the maximum number of iterations is large enough). 
-    - Please show visualizations of the data, the separating line, and the evolution of the score over training. 
+    - Please show visualizations of the data, the separating line, and the evolution of the accuracy over training.
+    It's also fine for you to use the loss instead of the accuracy if you'd prefer.  
 2. For 2d data, when the data is **not** linearly separable, the perceptron algorithm will not settle on a final value of $\tilde{\vw}$, but will instead run until the maximum number of iterations is reached, without achieving perfect accuracy.
-    - Please show visualizations of the data, the separating line, and the evolution of the score over training. 
+    - Please show visualizations of the data, the line in the final iteration, and the evolution of the score over training. 
 3. The perceptron algorithm is also able to work in more than 2 dimensions! Show an example of running your algorithm on data with at least 5 features. You don't need to visualize the data or the separating line, but you should still show the evolution of the score over the training period. Include a comment on whether you believe that the data is linearly separable based on your observation of the score. 
 
 ## Writing
@@ -231,7 +232,7 @@ In crafting your blog post, please include the following components:
 - Full code and English descriptions for all the experiments you perform. 
 - At the end of your blog post,  please address the following question:  
 
-> What is the asymptotic runtime complexity of a single iteration of the perceptron algorithm update as described by @eq-perceptron-update? Assume that the relevant operations are addition and multiplication. Does the runtime complexity depend on the number of data points $n$? What about the number of features $p$?
+> What is the runtime complexity of a single iteration of the perceptron algorithm update as described by @eq-perceptron-update? Assume that the relevant operations are addition and multiplication. Does the runtime complexity depend on the number of data points $n$? What about the number of features $p$?
 
 You only need to consider this question in the context of a single update. The question of **how many** updates are required to converge is a trickier one that you don't have to discuss in your blog post. 
 
