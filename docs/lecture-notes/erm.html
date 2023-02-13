@@ -186,6 +186,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#empirical-risk" id="toc-empirical-risk" class="nav-link" data-scroll-target="#empirical-risk">Empirical Risk</a></li>
   <li><a href="#empirical-risk-minimization" id="toc-empirical-risk-minimization" class="nav-link" data-scroll-target="#empirical-risk-minimization">Empirical Risk Minimization</a></li>
+  <li><a href="#back-to-perceptron" id="toc-back-to-perceptron" class="nav-link" data-scroll-target="#back-to-perceptron">Back to Perceptron</a></li>
+  <li><a href="#closeout-activity" id="toc-closeout-activity" class="nav-link" data-scroll-target="#closeout-activity">Closeout Activity</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -522,6 +524,122 @@ R(f) = \int_{\mathcal{X}, \mathcal{Y}} p_{\mathcal{D}}(\mathbf{x}, y) \ell(f(\ma
 \]</span></p>
 </div>
 </div>
+</div>
+</div>
+<p>A large number of classification and regression algorithms that we study in this course are instances of empirical risk minimization.</p>
+</section>
+<section id="back-to-perceptron" class="level2">
+<h2 class="anchored" data-anchor-id="back-to-perceptron">Back to Perceptron</h2>
+<p>We are now able to situate the perceptron algorithm within the framework of empirical risk minimization:</p>
+<ul>
+<li>The model family <span class="math inline">\(\mathcal{M}\)</span> is the set of all functions of the form <span class="math inline">\(f_{\mathbf{w}, b}(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle + b\)</span>. We can take the parameter vector to be <span class="math inline">\(\boldsymbol{\theta} = (\mathbf{w}, b)\)</span>.</li>
+<li>The per-observation loss function used is the so-called <em>0-1 loss function</em> given by</li>
+</ul>
+<p><span class="math display">\[
+\ell(\hat{y}, y) = 1 - \mathbb{1}\left[ \hat{y}y &gt; 0 \right]\;.
+\]</span></p>
+<ul>
+<li>The empirical risk is</li>
+</ul>
+<p><span class="math display">\[
+\hat{R}(f_{\mathbf{w}, b}) = \frac{1}{n} \sum_{i = 1}^n \ell(\hat{y}_i,y_i) = \sum_{i= 1}^n \left[1 - \mathbb{1}\left[ \hat{y}_iy_i &gt; 0 \right]\right]\;.
+\]</span></p>
+<ul>
+<li>The <em>perceptron algorithm</em> attempts to find a pair <span class="math inline">\((\mathbf{w}, b)\)</span> that reduces the empirical risk by updating the parameters using one data point at a time.</li>
+<li>The perceptron convergence theorem for separable data says that <em>if</em> there exists a pair <span class="math inline">\((\mathbf{w}, b)\)</span> such that <span class="math inline">\(\hat{R}(f_{\mathbf{w}, b}) = 0\)</span>, then the perceptron algorithm is guaranteed to find such a pair after a number of steps that can be bounded in terms of the data.</li>
+</ul>
+</section>
+<section id="closeout-activity" class="level2">
+<h2 class="anchored" data-anchor-id="closeout-activity">Closeout Activity</h2>
+<p>Consider the problem of predicting the flip of a biased coin based only on prior flips. We’re going to treat this as an inference problem: we’d like to offer a predicted <em>probability</em> <span class="math inline">\(\hat{p}\)</span> that the coin will come up heads, based on prior information. This <span class="math inline">\(\hat{p}\)</span> plays the role of the prediction <span class="math inline">\(\hat{y}\)</span>. We represent a heads coin flip as <span class="math inline">\(y = 1\)</span> and a tails coin flip as <span class="math inline">\(y = 0\)</span>. We assume that the coin has a true bias <span class="math inline">\(p \in [0,1]\)</span> that we are not able to observe. This <span class="math inline">\(p\)</span> characterizes the observation generating distribution: <span class="math inline">\(p_{\mathcal{D}}(y = 1) = p\)</span> and <span class="math inline">\(p_{\mathcal{D}}(y = 1) = 1-p\)</span></p>
+<p>For this activity, we’ll use the cross-entropy loss:</p>
+<p><span class="math display">\[
+\ell(\hat{p}, y) = - y \log \hat{p} - (1-y) \log (1-\hat{p})\;.
+\]</span></p>
+<p>The risk is <span class="math inline">\(R(\hat{p}) = \mathbb{E}_{\mathcal{D}}[\ell(\hat{p}, y)]\)</span>, where <span class="math inline">\(y\)</span> is distributed according to <span class="math inline">\(p_\mathcal{D}\)</span>. The empirical risk if we have observed <span class="math inline">\(n\)</span> coin flips is <span class="math inline">\(\hat{R}(\hat{p}) = \sum_{i = 1}^n \ell(\hat{p}, y_i)\)</span>.</p>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Empirical and Actual Risk
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Compute the risk <span class="math inline">\(R(\hat{p})\)</span> explicitly in terms of <span class="math inline">\(p\)</span>, treating <span class="math inline">\(y\)</span> as random.
+<ul>
+<li><em>Hint</em>: what is <span class="math inline">\(\mathbb{E}_{\mathcal{D}}[y]\)</span>?</li>
+</ul></li>
+<li>Prove that the value of <span class="math inline">\(\hat{p}\)</span> that minimizes the empirical risk is <span class="math inline">\(\hat{p} = \frac{1}{n}\sum_{i = 1}^n y_i\)</span>, the fraction of the observed times that we observe heads.
+<ul>
+<li><em>Hint</em>: take the derivative of <span class="math inline">\(\hat{R}(\hat{p})\)</span> with respect to <span class="math inline">\(\hat{p}\)</span> and set the result equal to 0.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The following code simulates 100 random flips of a biased coin and computes the minimizer <span class="math inline">\(\hat{p}\)</span> of the empirical risk after each flip. It then plots the empirical and actual risk to show how these evolve as we observe more data. However, there are two lines missing: the computation of the empirical and actual risks.</p>
+<p>It then computes arrays of the empirical risk <code>R_hat</code> and actual risk <code>R</code> associated the estimates <span class="math inline">\(p_hat\)</span>. For example, if <span class="math inline">\(\hat{p}_k\)</span> is the prediction after <span class="math inline">\(k\)</span> observations, then the corresponding entry of <span class="math inline">\(\hat{R}_k\)</span> should have value <span class="math inline">\(\frac{1}{k} \sum_{i = 1}^k \left[-y \log \hat{p}_k - (1- y)\log (1-\hat{p}_k)\right]\)</span> (<em>hint</em>: <code>np.log</code>. <em>Second hint</em>: simplify this expression a little using <span class="math inline">\(\hat{p}_k\)</span>. ).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># imports </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate flips. The array flips now contains 0s and 1s. </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>n_flips <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.7</span> <span class="co"># bias of coin</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>flips <span class="op">=</span> <span class="dv">1</span><span class="op">*</span>(np.random.rand(n_flips) <span class="op">&lt;</span> p)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># minimizing value of p_hat after each flip</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> np.cumsum(flips)<span class="op">/</span>np.arange(<span class="dv">1</span>, <span class="bu">len</span>(flips)<span class="op">+</span><span class="dv">1</span>) </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>R_hat <span class="op">=</span> <span class="co"># empirical risk: fill in</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span>     <span class="co"># true risk:      fill in</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># construct the plot </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">3</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].plot(R_hat, label <span class="op">=</span> <span class="st">"Empirical risk"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].plot(R, label <span class="op">=</span> <span class="st">"Risk"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].legend()</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"iteration"</span>, ylabel <span class="op">=</span> <span class="st">"risk (nats)"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].plot(p_hat, label <span class="op">=</span> <span class="st">"Prediction"</span>, color <span class="op">=</span> <span class="st">"grey"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].plot(p<span class="op">*</span>np.ones(n_flips), label <span class="op">=</span> <span class="st">"True value"</span>, color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"iteration"</span>, ylabel <span class="op">=</span> <span class="vs">r"prediction $p$"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your result should look something like this:</p>
+</div>
+</div>
+<div class="cell" data-execution_count="72">
+<div class="cell-output cell-output-display">
+<p><img src="erm_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Discuss
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try running your experiment a few times. Comment qualitatively: how accurate is the empirical risk as an estimate of the true risk? How accurate is <span class="math inline">\(\hat{p}\)</span> as an estimate of <span class="math inline">\(p\)</span>? In this case, how many coin flips would you want to see before you felt comfortable with your predictive model? Why?</p>
 </div>
 </div>
 
