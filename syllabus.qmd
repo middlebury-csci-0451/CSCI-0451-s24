@@ -138,7 +138,9 @@ A an extremely useful way for you to engage with the readings is to make comment
                     <td>
                         Student Hours 
                         <ul style="margin-bottom:0;">
-                            <li> TBD </li>
+                            <li> Mondays, 3:30pm-4:30pm </li>
+                            <li> Thursdays, 2:00pm-4:00pm </li>
+                            <li> Fridays, 2:00pm-3:00pm </li>
                         </ul>
                     </td>
                 </tr>   

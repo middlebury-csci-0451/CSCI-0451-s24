@@ -509,11 +509,11 @@ R(f) = \int_{\mathcal{X}, \mathcal{Y}} p_{\mathcal{D}}(\mathbf{x}, y) \ell(f(\ma
 <p><span class="theorem-title"><strong>Definition 8 (Empirical Risk Minimization) </strong></span>An <em>empirical risk minimization problem</em> involves:</p>
 <ul>
 <li>A choice of model family <span class="math inline">\(\mathcal{M} = \{f_{\boldsymbol{\theta}}\}\)</span>.</li>
-<li>A choice of loss function <span class="math inline">\(\ell: \mathbb{R}\times R \rightarrow \mathbb{R}\)</span>.<br>
+<li>A choice of loss function <span class="math inline">\(\ell: \mathbb{R}\times \mathbb{R}\rightarrow \mathbb{R}\)</span>.<br>
 </li>
 <li>A data set <span class="math inline">\((\mathbf{X}, \mathbf{y})\)</span>.</li>
 </ul>
-<p>The empirical risk problem is then to find the element of <span class="math inline">\(f\)</span>, usually expressed via the parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>, that minimize the empirical risk:</p>
+<p>The empirical risk problem is then to find the parameter vector <span class="math inline">\(\boldsymbol{\theta}\)</span> (which corresponds to a choice of model) that minimizes the empirical risk:</p>
 <p><span class="math display">\[
 \begin{align}
 \hat{\boldsymbol{\theta}} &amp;= \mathop{\mathrm{arg\,min}}_{\boldsymbol{\theta}} \; \hat{R}(f_\boldsymbol{\theta})  \\
