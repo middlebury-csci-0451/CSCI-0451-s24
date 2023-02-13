@@ -130,6 +130,43 @@ cache: false
 
 ### How is [this course]{.alert} going to go?
 
+## {.split-50}
+
+::: {.column .bg1}
+
+#### CSCI 0451 is....
+
+###### Coding
+
+- Numerical array programming
+- Object-oriented interfaces
+- Experiments and visualization
+
+###### Math
+
+- Linear algebra
+- Optimization ($\implies$ calculus)
+- A bit of probability
+
+###### Reading, writing, discussion
+
+- Technical methods
+- Bias, fairness, and impact of ML 
+
+
+:::
+
+::: {.column .bg0}
+
+
+:::{.stretch}
+
+<br> <br> <br> 
+
+![](../assets/img/memes/trojan.jpeg)
+:::
+
+:::
 
 
 ## {.split-33}
@@ -324,6 +361,39 @@ Do them! *Some readings are optional.*
 
 :::
 
+
+## {.split-50}
+
+::: {.column .bg1}
+
+##### ML, Ethics, Bias, and Fairness
+
+*Algorithmic bias* is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality. 
+
+Most systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed. 
+
+![](https://ars.electronica.art/outofthebox/files/2019/08/GenderShades_gs04.jpg)
+
+:::
+
+::: {.column .bg0}
+
+
+::: {.fragment}
+##### Save the Date
+
+![](https://api.time.com/wp-content/uploads/2022/01/timnit-gebru-ai-google-1-featured-socialcrop.jpg?quality=85)
+
+###### Monday April 24th
+
+Dr. **Timnit Gebru** will be virtually visiting our class for a Q&A session and giving a talk at 7pm. 
+
+Dr. Gebru is one of the world's leading experts in intersectional bias in AI.  
+
+:::
+
+
+:::
 
 
 ## {.bg2}
