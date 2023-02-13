@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-02-22">
+<meta name="description" content="In this blog post, you’ll implement the perceptron algorithm using numerical programming and demonstrate its use on synthetic data sets.">
+
+<title>Implementing the Perceptron Algorithm</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/icons/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Implementing the Perceptron Algorithm</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../"><b>Machine Learning</b><br>CSCI 0451</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">Syllabus</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">Schedule</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../assignments.html" class="sidebar-item-text sidebar-link">Index of Assignments</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#sec-demo" id="toc-sec-demo" class="nav-link" data-scroll-target="#sec-demo"> <span class="header-section-number">2</span> Demo: What Your Algorithm Will Do</a></li>
+  <li><a href="#what-you-should-do" id="toc-what-you-should-do" class="nav-link" data-scroll-target="#what-you-should-do"> <span class="header-section-number">3</span> What You Should Do</a>
+  <ul class="collapse">
+  <li><a href="#source-code" id="toc-source-code" class="nav-link" data-scroll-target="#source-code"> <span class="header-section-number">3.1</span> Source Code</a>
+  <ul class="collapse">
+  <li><a href="#implementing-fit" id="toc-implementing-fit" class="nav-link" data-scroll-target="#implementing-fit">Implementing <code>fit()</code></a></li>
+  <li><a href="#other-specifications" id="toc-other-specifications" class="nav-link" data-scroll-target="#other-specifications">Other Specifications</a></li>
+  </ul></li>
+  <li><a href="#experiments" id="toc-experiments" class="nav-link" data-scroll-target="#experiments"> <span class="header-section-number">3.2</span> Experiments</a></li>
+  <li><a href="#writing" id="toc-writing" class="nav-link" data-scroll-target="#writing"> <span class="header-section-number">3.3</span> Writing</a></li>
+  </ul></li>
+  <li><a href="#hints" id="toc-hints" class="nav-link" data-scroll-target="#hints"> <span class="header-section-number">4</span> Hints</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Implementing the Perceptron Algorithm</h1>
+</div>
+
+<div>
+  <div class="description">
+    <p>In this blog post, you’ll implement the perceptron algorithm using numerical programming and demonstrate its use on synthetic data sets.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 22, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\mX}{\mathbf{X}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\]</span></p>
+</div>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>In the perceptron algorithm, we have a data set described by:</p>
+<ul>
+<li>A matrix <span class="math inline">\(\mX \in \R^{n\times p}\)</span> of predictor variables. There are <span class="math inline">\(n\)</span> observations with <span class="math inline">\(p\)</span> features.<br>
+</li>
+<li>A vector <span class="math inline">\(\vy \in \{0,1\}^{n}\)</span> of binary labels.</li>
+</ul>
+<p>We assume that the labels in our data can be (approximately) separated by a <em>linear</em> predictor. The strongest version of this assumption is that our data are <em>linearly separable</em>. This means that there exists a vector <span class="math inline">\(\vw \in p\)</span> and a scalar <span class="math inline">\(b\)</span> such that, for every <span class="math inline">\(i\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_i &amp;= \begin{cases} 0 &amp; \langle \vw, \vx_i \rangle &lt; b \\
+                     1 &amp; \langle \vw, \vx_i \rangle \geq b
+      \end{cases} \\
+    &amp;= \mathbb{1}(\langle \vw, \vx_i \rangle \geq b)
+\end{aligned}
+\]</span></p>
+<p>Here’s an example of what our data might look like. For visualization purposes, we are going to have <span class="math inline">\(p = 2\)</span> features.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">12345</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_blobs(n_samples <span class="op">=</span> <span class="dv">100</span>, n_features <span class="op">=</span> p_features <span class="op">-</span> <span class="dv">1</span>, centers <span class="op">=</span> [(<span class="op">-</span><span class="fl">1.7</span>, <span class="op">-</span><span class="fl">1.7</span>), (<span class="fl">1.7</span>, <span class="fl">1.7</span>)])</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="blog-post-perceptron_files/figure-html/cell-2-output-1.png" width="587" height="429"></p>
+</div>
+</div>
+<p>You may be able to visualize a line that separates all the purple “0” labels from the yellow “1” labels. Our end-goal is a Python class that will allow us to find such a separating line, when it exists.</p>
+</section>
+<section id="sec-demo" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Demo: What Your Algorithm Will Do</h1>
+<p>You are going to implement a <code>Perceptron</code> class in a script file called <code>perceptron.py</code>. (you should place it next to your <code>.ipynb</code> notebook in which you write your blog post.) You’ll import it like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> perceptron <span class="im">import</span> Perceptron</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By the time you have successfully implemented your <code>Perceptron</code> class, you should be able to replicate the following results on your blog post.</p>
+<p>First, you should be able to import your class</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> perceptron <span class="im">import</span> Perceptron</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then you should be able to create an instance of the class and fit it to data.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> Perceptron()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p.fit(X, y, max_steps <span class="op">=</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This should result in <code>p</code> having an instance variable <code>w</code> of weights and an instance variable <code>history</code> of scores:</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p.w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="156">
+<pre><code>array([2.10557404, 3.1165449 , 0.25079936])</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(p.history[<span class="op">-</span><span class="dv">10</span>:]) <span class="co">#just the last few values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 1.0]</code></pre>
+</div>
+</div>
+<p>You can visualize how the score evolved over time:</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.plot(p.history)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Iteration"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="blog-post-perceptron_files/figure-html/cell-7-output-1.png" width="597" height="429"></p>
+</div>
+</div>
+<p>In this particular example, the algorithm was able to achieve perfect, 100% classification.</p>
+<p>You can also visualize the line that the algorithm finds to separate the data.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_line(w, x_min, x_max):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> np.linspace(x_min, x_max, <span class="dv">101</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="op">-</span>(w[<span class="dv">0</span>]<span class="op">*</span>x <span class="op">+</span> w[<span class="dv">2</span>])<span class="op">/</span>w[<span class="dv">1</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  plt.plot(x, y, color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> draw_line(p.w, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="blog-post-perceptron_files/figure-html/cell-8-output-1.png" width="587" height="429"></p>
+</div>
+</div>
+<p>As we know from the previous investigations, the score on the data is:</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p.score(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="160">
+<pre><code>1.0</code></pre>
+</div>
+</div>
+</section>
+<section id="what-you-should-do" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> What You Should Do</h1>
+<p>This blog posts as three main components: implement the perceptron algorithm, complete several experiments, and write careful prose to describe your findings.</p>
+<section id="source-code" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="source-code"><span class="header-section-number">3.1</span> Source Code</h2>
+<p>Your class should have the following methods:</p>
+<ul>
+<li><code>Perceptron.fit(X, y)</code> is the primary method. This method has no return value. If <code>p</code> is a <code>Perceptron</code>, then after <code>p.fit(X, y)</code> is called, <code>p</code> should have an instance variable of <em>weights</em> called <code>w</code>. This <code>w</code> is the vector <span class="math inline">\(\tilde{\vw} = (\vw, -b)\)</span> in the classifier above. Additionally, <code>p</code> should have an instance variable called <code>p.history</code> which is a list of the evolution of the <code>score</code> over the training period (see <code>Perceptron.score(X, y)</code> below.)</li>
+<li><code>Perceptron.predict(X)</code> should return a vector <span class="math inline">\(\hat{\vy} \in \{0,1\}^n\)</span> of predicted labels. These are the model’s predictions for the labels on the data.</li>
+<li><code>Perceptron.score(X, y)</code> should return the <em>accuracy</em> of the perceptron as a number between 0 and 1, with 1 corresponding to perfect classification.</li>
+</ul>
+<p>Feel free to add any other methods or functions that you find helpful while implementing.</p>
+<section id="implementing-fit" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-fit">Implementing <code>fit()</code></h3>
+<p>To implement <code>fit()</code>, it’s convenient to consider a modified version of <span class="math inline">\(\mX\)</span>: <span class="math inline">\(\tilde{\mX} = [\mX, \mathbf{1}]\)</span>, where <span class="math inline">\(\mathbf{1} \in \R^n\)</span> is a column-vector of <span class="math inline">\(1\)</span>s. The reason this is handy is that if we also define <span class="math inline">\(\tilde{\vw} = (\vw, -b)\)</span>, then we can write our classification rule as</p>
+<p><span class="math display">\[
+\hat{y}_i = \mathbb{1}(\langle \tilde{\vw}, \tilde{\vx}_i\rangle \geq 0)\;.
+\]</span></p>
+<p>This is mathematically convenient and makes it much easier for us to code up our algorithms.</p>
+<p>With these definitions, the <em>perceptron algorithm</em> proceeds as follows:</p>
+<ol type="1">
+<li>First, initialize a random initial weight vector <span class="math inline">\(\tilde{\vw}^{(0)}\)</span>.</li>
+<li>Then, until termination:</li>
+</ol>
+<ul>
+<li>Pick a random index <span class="math inline">\(i \in [n]\)</span>.</li>
+<li>Compute</li>
+</ul>
+<p><span id="eq-perceptron-update"><span class="math display">\[
+\tilde{\vw}^{(t+1)} = \tilde{\vw}^{(t)} + \mathbb{1}(\tilde{y}_i \langle \tilde{\vw}^{(t)}, \tilde{\vx}_i\rangle &lt; 0)\tilde{y}_i \tilde{\vx}_i\;.
+\tag{1}\]</span></span></p>
+<p>In this expression, <span class="math inline">\(\tilde{y}_i = 2y_i - 1\)</span> is a convenient version of <span class="math inline">\(y_i\)</span> that takes values <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span> instead of <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
+<p>This update is performed until either a user-specified maximum number of steps is reached or until the score (accuracy) reaches <code>1.0</code>.</p>
+<p>Note that in an iteration in which <span class="math inline">\(\tilde{y}_i \langle \tilde{\vw}^{(t)}, \tilde{\vx}_i\rangle \geq 0\)</span>, nothing happens. Take a moment to check that this occurs when the current weight vector <span class="math inline">\(\tilde{\vw}^{(t)}\)</span> correctly classifies the tuple <span class="math inline">\((\vx_i, y_i)\)</span>.</p>
+</section>
+<section id="other-specifications" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="other-specifications">Other Specifications</h3>
+<div class="page-columns page-full"><p>You should be able to replicate the demo in <a href="#sec-demo">Section&nbsp;2</a> with your source code. Feel free to use that demo as a test case – your source code may be in good shape when you are able to fully replicate the results. </p><div class="no-row-height column-margin column-container"><span class="aside">For perfect replication, you’ll need to include the call to <code>np.random.seed()</code> immediately after importing your packages.</span></div></div>
+<p>An excellent solution will have <strong>exactly one for-loop</strong>, of the form:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_steps):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># perform the perceptron update and log the score in self.history</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>That is, <strong>you should not do any loops over the data!</strong> Use vectorized <code>numpy</code> operations and matrix-vector multiplication.</p>
+<p>You should also <strong>not use <code>if</code> statements to perform comparisons between numbers.</strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For a hint on how you can avoid doing this, you can reflect on the following two code snippets:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((<span class="dv">1</span> <span class="op">&lt;</span> <span class="dv">2</span>)<span class="op">*</span><span class="dv">2</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((<span class="dv">1</span> <span class="op">&gt;</span> <span class="dv">2</span>)<span class="op">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div><div class="callout-important callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Please include informative docstrings for <code>Perceptron.fit()</code>, <code>Perceptron.predict()</code>, and <code>Perceptron.score()</code>.</p>
+</div>
+</div>
+</div>
+<p>A concise solution should likely be no more than 60 lines of compact Python code (excluding comments and docstrings).</p>
+</section>
+</section>
+<section id="experiments" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="experiments"><span class="header-section-number">3.2</span> Experiments</h2>
+<p>Please perform experiments (with visualizations) that illustrate the following:</p>
+<ol type="1">
+<li>Using 2d data like the data in the example, if the data is linearly separable then the perceptron algorithm converges to weight vector <span class="math inline">\(\tilde{\vw}\)</span> describing a separating line (provided that the maximum number of iterations is large enough).
+<ul>
+<li>Please show visualizations of the data, the separating line, and the evolution of the accuracy over training. It’s also fine for you to use the loss instead of the accuracy if you’d prefer.<br>
+</li>
+</ul></li>
+<li>For 2d data, when the data is <strong>not</strong> linearly separable, the perceptron algorithm will not settle on a final value of <span class="math inline">\(\tilde{\vw}\)</span>, but will instead run until the maximum number of iterations is reached, without achieving perfect accuracy.
+<ul>
+<li>Please show visualizations of the data, the line in the final iteration, and the evolution of the score over training.</li>
+</ul></li>
+<li>The perceptron algorithm is also able to work in more than 2 dimensions! Show an example of running your algorithm on data with at least 5 features. You don’t need to visualize the data or the separating line, but you should still show the evolution of the score over the training period. Include a comment on whether you believe that the data is linearly separable based on your observation of the score.</li>
+</ol>
+</section>
+<section id="writing" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="writing"><span class="header-section-number">3.3</span> Writing</h2>
+<p>In crafting your blog post, please include the following components:</p>
+<ul>
+<li><strong>At the very top of your blog post, a link to your source code (<code>perceptron.py</code>) on your GitHub repo.</strong></li>
+<li>A brief walk-through of your implementation of the perceptron update (<a href="#eq-perceptron-update">Equation&nbsp;1</a>) in your source code. Quote the function which you use to perform the update. It’s not necessary to walk the user through every single aspect of your solution class.</li>
+<li>Full code and English descriptions for all the experiments you perform.</li>
+<li>At the end of your blog post, please address the following question:</li>
+</ul>
+<blockquote class="blockquote">
+<p>What is the runtime complexity of a single iteration of the perceptron algorithm update as described by <a href="#eq-perceptron-update">Equation&nbsp;1</a>? Assume that the relevant operations are addition and multiplication. Does the runtime complexity depend on the number of data points <span class="math inline">\(n\)</span>? What about the number of features <span class="math inline">\(p\)</span>?</p>
+</blockquote>
+<p>You only need to consider this question in the context of a single update. The question of <strong>how many</strong> updates are required to converge is a trickier one that you don’t have to discuss in your blog post.</p>
+</section>
+</section>
+<section id="hints" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Hints</h1>
+<p>The code</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>X_ <span class="op">=</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>can be used to form the matrix <span class="math inline">\(\tilde{\mX} = [\mathbf{X}, \mathbf{1}]\)</span>.</p>
+
+
+</section>
+
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

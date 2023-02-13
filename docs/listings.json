@@ -1,0 +1,26 @@
+[
+  {
+    "listing": "/assignments.html",
+    "items": [
+      "/assignments/blog-posts/blog-post-penguins.html",
+      "/assignments/blog-posts/blog-post-medical-bias.html",
+      "/assignments/blog-posts/blog-post-erm.html",
+      "/assignments/blog-posts/blog-post-perceptron.html",
+      "/assignments/blog-posts/blog-post-optimization.html",
+      "/assignments/process/end-of-course.html",
+      "/assignments/process/ideas.html",
+      "/assignments/process/mid-course.html",
+      "/assignments/process/goal-setting.html"
+    ]
+  },
+  {
+    "listing": "/schedule.html",
+    "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/2023-01-01-test.html"
+    ]
+  }
+]

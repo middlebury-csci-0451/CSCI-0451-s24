@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Phil Chodrow">
+
+<title>Models, Algorithms, and Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/icons/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><p>Models, Algorithms, and Learning</p></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../"><b>Machine Learning</b><br>CSCI 0451</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">Syllabus</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">Schedule</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments.html" class="sidebar-item-text sidebar-link">Index of Assignments</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">The Data</a>
+  <ul class="collapse">
+  <li><a href="#data-generating-distributions" id="toc-data-generating-distributions" class="nav-link" data-scroll-target="#data-generating-distributions">Data Generating Distributions</a></li>
+  </ul></li>
+  <li><a href="#models-and-algorithms" id="toc-models-and-algorithms" class="nav-link" data-scroll-target="#models-and-algorithms">Models and Algorithms</a></li>
+  <li><a href="#loss-and-risk" id="toc-loss-and-risk" class="nav-link" data-scroll-target="#loss-and-risk">Loss and Risk</a>
+  <ul class="collapse">
+  <li><a href="#empirical-risk" id="toc-empirical-risk" class="nav-link" data-scroll-target="#empirical-risk">Empirical Risk</a></li>
+  <li><a href="#empirical-risk-minimization" id="toc-empirical-risk-minimization" class="nav-link" data-scroll-target="#empirical-risk-minimization">Empirical Risk Minimization</a></li>
+  <li><a href="#back-to-perceptron" id="toc-back-to-perceptron" class="nav-link" data-scroll-target="#back-to-perceptron">Back to Perceptron</a></li>
+  <li><a href="#closeout-activity" id="toc-closeout-activity" class="nav-link" data-scroll-target="#closeout-activity">Closeout Activity</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><p>Models, Algorithms, and Learning</p></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Phil Chodrow </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="hidden">
+$$
+<p>$$</p>
+</div>
+<p>In this lecture, we are going to develop our core theoretical framework for supervised prediction. <em>Supervised</em> means that we are trying to predict something for which there is, or could be, a “ground-truth answer.” Some examples of supervised tasks are:</p>
+<ul>
+<li>Predicting whether a person convicted of a crime is likely to commit another crime within the next few years.</li>
+<li>Predicting whether a landlord is likely to raise rent on a property.</li>
+<li>Predicting whether a user is likely to click on an ad.</li>
+</ul>
+<p>In each of these cases, you could find out whether your prediction was right or wrong just by waiting and checking. Did you predict that a person is likely to commit a crime within the next few years? Wait two years and find out whether you were right.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">The line between supervised and unsupervised tasks can be porous. For example, large language models are generally trained using “next word prediction,” in which the task is to predict which word comes next in a sentence. This is a supervised task! But they are then used for the unsupervised purpose of generating realistic synthetic text.</span></div></div>
+<p>In contrast, <em>unsupervised</em> algorithms generate output for which there is no firm right answer. Unsupervised machine learning tasks aim to do things like “find patterns” or “generate realistic examples.” Large language models (LLMs) like ChatGPT are perhaps the most prominent examples of unsupervised models these days.</p>
+<p>Big picture, the goal of supervised learning is to find a function that takes in some <em>features</em> and uses them to make a <em>prediction</em> that is <em>usually right</em>. Heuristically, we’re looking for a function <span class="math inline">\(f\)</span> that accepts some features <span class="math inline">\(x_1,\ldots,x_p\)</span> and gives a prediction <span class="math inline">\(\hat{y}\)</span> that is “close” to the real answer <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[
+f(x_1,\ldots,x_p) = \hat{y} \approx y\;.
+\]</span></p>
+<p>What does “<span class="math inline">\(\approx\)</span>” actually mean in this context? Briefly, we mean that <span class="math inline">\(\hat{y}\)</span> is <em>usually</em> “close” to <span class="math inline">\(y\)</span> <em>when measured in a certain way</em>.</p>
+<p>The goal of supervised learning is to “train” a “model” that will make “good” “predictions” on “data.” We need to cash out each of these terms.</p>
+<section id="the-data" class="level1 page-columns page-full">
+<h1>The Data</h1>
+<p>Let’s start with “data.” In a supervised learning problem, our goal is to predict an outcome, which we’ll call <span class="math inline">\(y\)</span>, on the basis of some</p>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-data-set" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Data For Supervised Learning) </strong></span>In a supervised learning task, the <em>data</em> is a pair <span class="math inline">\((\mathbf{X}, \mathbf{y})\)</span> where</p>
+<ul>
+<li><span class="math inline">\(\mathbf{X}\in \mathbb{R}^{n\times p}\)</span> is the <em>feature matrix</em>. There are <span class="math inline">\(n\)</span> distinct observations, encoded as rows. Each of the <span class="math inline">\(p\)</span> columns corresponds to a <em>feature</em>: something about each observation that we can measure or infer. Each observation is written <span class="math inline">\(\mathbf{x}_1, \mathbf{x}_2,\ldots\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{X}= \left[\begin{matrix} &amp; - &amp; \mathbf{x}_1 &amp; - \\
+&amp; - &amp; \mathbf{x}_2 &amp; - \\
+&amp; \vdots &amp; \vdots &amp; \vdots \\
+&amp; - &amp; \mathbf{x}_{n} &amp; - \end{matrix}\right]
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf{y}\in \mathbb{R}^{n}\)</span> is the <em>target vector</em>. The target vector gives a label, value, or outcome for each observation.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<section id="data-generating-distributions" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="data-generating-distributions">Data Generating Distributions</h2>
+<p>Intuitively, a data generating distribution is an expression of our expectations of what the world looks like. For example, let’s suppose we are trying to predict whether someone enjoys skiing. So, we do a survey in which we ask two questions:</p>
+<ul>
+<li>On a scale from 1 to 10, how much do you enjoy being outdoors in cold weather?</li>
+<li>Do you enjoy skiing? (yes/no)</li>
+</ul>
+<p>Here, we have a single feature <span class="math inline">\(x\in [10]\)</span> and a binary outcome <span class="math inline">\(y \in \{0,1\}\)</span>. We might imagine that when <span class="math inline">\(x\)</span> is larger, it is more likely for <span class="math inline">\(y\)</span> to be equal to 1. Here’s a probabilistic model that expresses this idea:</p>
+<p><span class="math display">\[
+\begin{align}
+    \mathbb{P}\left[X = x\right] &amp;= 1/10 \quad \forall x \in [10] \\
+    \mathbb{P}\left[Y = 1 | X\right] &amp;= \frac{x}{11}\;.
+\end{align}
+\]</span></p>
+<p>This probabilistic model is an example of a <em>data generating distribution</em>. The reason it’s called this is that you could “generate” a data point from it: first pick a random value of <span class="math inline">\(x\)</span> uniformly between 1 and 10. Then, to generate <span class="math inline">\(y\)</span>, flip a weighted coin with probability of heads equal to <span class="math inline">\(x/11\)</span>.</p>
+<p>Here’s some “data” sampled from this probabilistic model:</p>
+<div class="cell page-columns page-full" data-execution_count="24">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">11</span>, n)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.rand(n) <span class="op">&lt;</span> x<span class="op">/</span><span class="dv">11</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> plt.scatter(x, y <span class="op">+</span> <span class="fl">0.2</span><span class="op">*</span>np.random.rand(n) <span class="op">-</span> <span class="fl">0.1</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> plt.xlabel(<span class="st">"Enjoys cold weather"</span>) </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> plt.ylabel(<span class="st">"Enjoys skiing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-synthetic-data" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="erm_files/figure-html/fig-synthetic-data-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure 1: Data sampled from the probabilistic model of enjoyment of skiing based on enjoyment of cold weather. The vertical axis has been jittered so for legibility.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-data-generating-distribution" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Data Generating Distribution) </strong></span>An <em>observation generating distribution</em> is a probability distribution describing the likelihood of a single observation <span class="math inline">\((\mathbf{x}, y)\)</span>. We’ll usually call this distribution <span class="math inline">\(p_\mathcal{D}\)</span>, so that the likelihood of realizing the pair <span class="math inline">\((\mathbf{x}, y)\)</span> is <span class="math inline">\(p_\mathcal{D}(\mathbf{x}, y)\)</span>.</p>
+<p>A <em>data generating distribution</em> is a probability distribution describing the likelihood of a feature matrix-target vector pair <span class="math inline">\((\mathbf{X}, \mathbf{y})\)</span> with <span class="math inline">\(n\)</span> observations. In this class we’ll always assume that the observations are independent and identically distributed (i.i.d.) according to <span class="math inline">\(p_\mathcal{D}\)</span>, and so the data generating distribution can be written</p>
+<p><span class="math display">\[
+P_\mathcal{D}(\mathbf{X}, \mathbf{y}) = \prod_{i = 1}^n p_\mathcal{D}(\mathbf{x}_i, y_i)\;.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>If we knew the data distribution, then it would be easy to make good predictions. In the supervised learning framework, we don’t usually assume that we <em>know</em> the probability model, but we do usually assume that there <em>is</em> one. Our job is to help our models find the patterns encoded in the data generating distribution.</p>
+<p>Recall that in the case of the perceptron, we assumed that we were dealing with <em>linearly separable</em> data like the ones shown below:</p>
+<div class="cell page-columns page-full" data-execution_count="25">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hidden.perceptron <span class="im">import</span> perceptron_update, draw_line</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>X1 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X2 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>X3 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)<span class="op">*</span><span class="fl">.5</span><span class="op">+</span><span class="dv">3</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>X4 <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)<span class="op">*</span><span class="fl">.5</span><span class="op">+</span><span class="dv">3</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_scatter(X1, X2, X3, X4, ax, legend <span class="op">=</span> <span class="va">True</span>):</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> ax.scatter(X1, X2, color <span class="op">=</span> <span class="st">"#ED90A4"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, label <span class="op">=</span> <span class="vs">r"$y_i = -1$"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> ax.scatter(X3, X4, color <span class="op">=</span> <span class="st">"#00C1B2"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, label <span class="op">=</span> <span class="vs">r"$y_i = 1$"</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="vs">r"$x_</span><span class="sc">{i1}</span><span class="vs">$"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> ax.<span class="bu">set</span>(ylabel <span class="op">=</span> <span class="st">"$x_</span><span class="sc">{i2}</span><span class="st">$"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> legend:</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> ax.legend()</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>plot_scatter(X1, X2, X3, X4, ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-scatter" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="erm_files/figure-html/fig-scatter-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure 2: 200 data points in the 2d plane, each of which has one of two labels.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Activity 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Can you write down some ideas for an observation generating distribution that would generate data that looks like this? Feel free to use a weight vector <span class="math inline">\(\mathbf{w}\)</span>, a bias <span class="math inline">\(b\)</span>, and anything else you might need.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="models-and-algorithms" class="level1">
+<h1>Models and Algorithms</h1>
+<p>Now let’s move on to formally define supervised machine learning models and algorithms.</p>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-model" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Machine Learning Models) </strong></span></p>
+<p>A <em>machine learning model</em> is a function <span class="math inline">\(f:\mathbb{R}^p\rightarrow \mathbb{R}\)</span> whose domain is a space of possible feature vectors.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-families" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Model Families) </strong></span></p>
+<p>A <em>model family</em> <span class="math inline">\(\mathcal{M}\)</span> is a (possibly infinite) set of models. Each element of <span class="math inline">\(\mathcal{M}\)</span> is indexed by a finite <em>parameter vector</em> which we generally call <span class="math inline">\(\boldsymbol{\theta}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-families" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5 (Model Families) </strong></span></p>
+<p>A <em>machine learning algorithm</em> is a model family <span class="math inline">\(\mathcal{M}\)</span> and an algorithm for choosing a single model <span class="math inline">\(f_{\boldsymbol{\theta}} \in \mathcal{M}\)</span> based on an input pair <span class="math inline">\((\mathbf{X}, \mathbf{y})\)</span>. The algorithm is often called the <em>training algorithm</em>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Activity 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Recall the perceptron algorithm. Identify the parameters <span class="math inline">\(\boldsymbol{\theta}\)</span>, the model family <span class="math inline">\(\mathcal{M}\)</span>, and the training algorithm.</p>
+</div>
+</div>
+</section>
+<section id="loss-and-risk" class="level1 page-columns page-full">
+<h1>Loss and Risk</h1>
+<p>How do we construct training algorithms that let us pick out a single model from a family <span class="math inline">\(\mathcal{M}\)</span> of possible models? For this we need to start getting more specific about what it means for a model to “fit the data.” For this, we need to ask:</p>
+<blockquote class="blockquote">
+<p>What does it mean for a predicted outcome <span class="math inline">\(\hat{y}\)</span> to be “close” to an observed outcome <span class="math inline">\(y\)</span>?</p>
+</blockquote>
+<p>Recall that <a href="../lecture-notes/perceptron.html">when we studied the perceptron</a>, we made a prediction in two steps:</p>
+<ol type="1">
+<li>We computed a number <span class="math inline">\(\hat{y}_i = \langle \tilde{\mathbf{w}}, \tilde{\mathbf{x}}_i \rangle\)</span>.</li>
+<li>We viewed this prediction as <em>accurate</em> if the sign of <span class="math inline">\(\hat{y}_i\)</span> matched the sign of <span class="math inline">\(y_i\)</span>, and inaccurate otherwise.  Accurate predictions received a score of 1, while inaccurate predictions received a score of 0. The score of a prediction could therefore be written <span class="math inline">\(\mathbb{1}\left[ \hat{y}_i y_i &gt; 0 \right]\)</span>. The <em>loss</em> of a prediction was <span class="math inline">\(\ell(\hat{y}, y) = 1 - \mathbb{1}\left[ \hat{y}_i y_i &gt; 0 \right]\)</span>. The loss of an entire set of predictions was the mean loss on the entire data set:</li>
+</ol>
+<div class="no-row-height column-margin column-container"><span class="aside">Recall that in the perceptron, we considered outcome labels <span class="math inline">\(y \in \{0,1\}\)</span>.</span></div><p><span class="math display">\[
+\begin{align}
+\mathcal{L}(\hat{\mathbf{y}}, \mathbf{y}) &amp;= \frac{1}{n}\sum_{i = 1}^n \ell(\hat{y}_i, y_i) \\
+&amp;= \frac{1}{n}\sum_{i = 1}^n \left(1 - \mathbb{1}\left[ \hat{y}_i y_i &gt; 0 \right]\right)\;.
+\end{align}
+\]</span></p>
+<p>We aimed for the perceptron to find a weight vector so that the prediction vector <span class="math inline">\(\hat{\mathbf{y}}\)</span> would produce small loss. Why did we do this? We hope that finding a model with small loss will lead to <em>generalization</em>: the ability to make predictions on data that we haven’t seen yet. We can express the model’s performance on <em>unseen</em> data using the data generating distribution:</p>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-risk" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6 (Risk) </strong></span>The <em>risk</em> of a model <span class="math inline">\(f:\mathbb{R}^n \rightarrow \mathbb{R}\)</span> is the expected loss of <span class="math inline">\(\hat{y} = f(\mathbf{x})\)</span> under the data generating distribution <span class="math inline">\(P_\mathcal{D}\)</span>. We can write the risk as</p>
+<p><span id="eq-risk"><span class="math display">\[
+R(f) = \mathbb{E}_{\mathcal{D}}\left[\mathcal{L}(f(\mathbf{x}), y)\right]\;,
+\tag{1}\]</span></span></p>
+</div>
+<p>where <span class="math inline">\(\mathbb{E}_{\mathcal{D}}\)</span> means “expectation with respect to the data generating distribution.”</p>
+</div>
+</div>
+</div>
+<p>If the data generating distribution is discrete, then we can write <a href="#eq-risk">Equation&nbsp;1</a> as</p>
+<p><span class="math display">\[
+R(f) = \sum_{\mathbf{x}\in \mathcal{X}, y \in \mathcal{Y}} p_{\mathcal{D}}(\mathbf{x}, y) \ell(f(\mathbf{x}), y)\;,
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{X}\)</span> and <span class="math inline">\(\mathcal{Y}\)</span> are the sets of possible feature vectors and labels, respectively. If the data generating distribution is continuous, then the risk instead needs to be expressed as an integral:</p>
+<p><span class="math display">\[
+R(f) = \int_{\mathcal{X}, \mathcal{Y}} p_{\mathcal{D}}(\mathbf{x}, y) \ell(f(\mathbf{x}), y) d\mathbf{x}\; dy\;.  
+\]</span></p>
+<p>We’re now able to say what it means for a model to make good predictions:</p>
+<blockquote class="blockquote">
+<p>A “good” predictive model is a model that achieves low risk.</p>
+</blockquote>
+<section id="empirical-risk" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="empirical-risk">Empirical Risk</h3>
+<div class="page-columns page-full"><p>Actually computing the risk of a model via <a href="#eq-risk">Equation&nbsp;1</a> requires that we both choose the loss function <span class="math inline">\(\mathcal{L}\)</span> and that we know the data generating distribution <span class="math inline">\(p_\mathcal{D}\)</span>.  There’s a problem with this though: we only ever observe data, not the data generating distribution. So, we can’t actually compute the risk – we can only <em>estimate</em> it. We typically estimate the risk using the law of large numbers, which says that if <span class="math inline">\(Z\)</span> is a random variable and <span class="math inline">\(Z_1,\ldots,Z_n,\ldots\)</span> are all i.i.d. copies of <span class="math inline">\(Z\)</span>, then the empirical mean <span class="math inline">\(\frac{1}{n} \sum_{i = 1}^n Z_i\)</span> is very likely to be close to the theoretical expectation <span class="math inline">\(\mathbb{E}[Z]\)</span> when <span class="math inline">\(n\)</span> is large. This motivates us to consider the empirical risk.</p><div class="no-row-height column-margin column-container"><span class="aside">There are also questions to ask about how to choose the loss function, but we’ll get there later.</span></div></div>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-empirical-risk" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7 (Empirical Risk) </strong></span>The <em>empirical risk</em> of a model <span class="math inline">\(f\)</span> on a data set <span class="math inline">\((\mathbf{X}, \mathbf{y})\)</span> is</p>
+<p><span id="eq-empirical-risk"><span class="math display">\[
+\hat{R}(f) = \frac{1}{n} \sum_{i = 1}^n \ell(f(\mathbf{x}_i), y_i)\;.
+\tag{2}\]</span></span></p>
+</div>
+</div>
+</div>
+</div>
+<p>Inspecting <a href="#def-empirical-risk">Definition&nbsp;7</a>, we can see that computing the empirical risk doesn’t require the data distribution at all – just the actual data! This is helpful because the data is the thing we have access to, not the generating distribution. It also doesn’t hurt that the sum over all possible values of the feature vector and data label has been replaced with a sum over data points, which typically contains many fewer terms. Much faster computation!</p>
+<p>Of course, there’s a cost: a model that achieves low <em>empirical</em> risk may not actually have low (real) risk. If we have “enough” data, the law of large numbers tells us that these should be pretty close. What “enough” means, and what to do if you don’t have it, is a topic that we’ll come back to throughout the course.</p>
+</section>
+<section id="empirical-risk-minimization" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-risk-minimization">Empirical Risk Minimization</h2>
+<p>We are now prepared to formulate a fundamental paradigm for prediction problems in machine learning.</p>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-empirical-risk-minimization" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8 (Empirical Risk Minimization) </strong></span>An <em>empirical risk minimization problem</em> involves:</p>
+<ul>
+<li>A choice of model family <span class="math inline">\(\mathcal{M} = \{f_{\boldsymbol{\theta}}\}\)</span>.</li>
+<li>A choice of loss function <span class="math inline">\(\ell: \mathbb{R}\times \mathbb{R}\rightarrow \mathbb{R}\)</span>.<br>
+</li>
+<li>A data set <span class="math inline">\((\mathbf{X}, \mathbf{y})\)</span>.</li>
+</ul>
+<p>The empirical risk problem is then to find the parameter vector <span class="math inline">\(\boldsymbol{\theta}\)</span> (which corresponds to a choice of model) that minimizes the empirical risk:</p>
+<p><span class="math display">\[
+\begin{align}
+\hat{\boldsymbol{\theta}} &amp;= \mathop{\mathrm{arg\,min}}_{\boldsymbol{\theta}} \; \hat{R}(f_\boldsymbol{\theta})  \\
+&amp;= \mathop{\mathrm{arg\,min}}_{\boldsymbol{\theta}} \; \frac{1}{n} \sum_{i = 1}^n \ell(f_\boldsymbol{\theta}(\mathbf{x}_i), y_i)\;.
+\end{align}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>A large number of classification and regression algorithms that we study in this course are instances of empirical risk minimization.</p>
+</section>
+<section id="back-to-perceptron" class="level2">
+<h2 class="anchored" data-anchor-id="back-to-perceptron">Back to Perceptron</h2>
+<p>We are now able to situate the perceptron algorithm within the framework of empirical risk minimization:</p>
+<ul>
+<li>The model family <span class="math inline">\(\mathcal{M}\)</span> is the set of all functions of the form <span class="math inline">\(f_{\mathbf{w}, b}(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle + b\)</span>. We can take the parameter vector to be <span class="math inline">\(\boldsymbol{\theta} = (\mathbf{w}, b)\)</span>.</li>
+<li>The per-observation loss function used is the so-called <em>0-1 loss function</em> given by</li>
+</ul>
+<p><span class="math display">\[
+\ell(\hat{y}, y) = 1 - \mathbb{1}\left[ \hat{y}y &gt; 0 \right]\;.
+\]</span></p>
+<ul>
+<li>The empirical risk is</li>
+</ul>
+<p><span class="math display">\[
+\hat{R}(f_{\mathbf{w}, b}) = \frac{1}{n} \sum_{i = 1}^n \ell(\hat{y}_i,y_i) = \sum_{i= 1}^n \left[1 - \mathbb{1}\left[ \hat{y}_iy_i &gt; 0 \right]\right]\;.
+\]</span></p>
+<ul>
+<li>The <em>perceptron algorithm</em> attempts to find a pair <span class="math inline">\((\mathbf{w}, b)\)</span> that reduces the empirical risk by updating the parameters using one data point at a time.</li>
+<li>The perceptron convergence theorem for separable data says that <em>if</em> there exists a pair <span class="math inline">\((\mathbf{w}, b)\)</span> such that <span class="math inline">\(\hat{R}(f_{\mathbf{w}, b}) = 0\)</span>, then the perceptron algorithm is guaranteed to find such a pair after a number of steps that can be bounded in terms of the data.</li>
+</ul>
+</section>
+<section id="closeout-activity" class="level2">
+<h2 class="anchored" data-anchor-id="closeout-activity">Closeout Activity</h2>
+<p>Consider the problem of predicting the flip of a biased coin based only on prior flips. We’re going to treat this as an inference problem: we’d like to offer a predicted <em>probability</em> <span class="math inline">\(\hat{p}\)</span> that the coin will come up heads, based on prior information. This <span class="math inline">\(\hat{p}\)</span> plays the role of the prediction <span class="math inline">\(\hat{y}\)</span>. We represent a heads coin flip as <span class="math inline">\(y = 1\)</span> and a tails coin flip as <span class="math inline">\(y = 0\)</span>. We assume that the coin has a true bias <span class="math inline">\(p \in [0,1]\)</span> that we are not able to observe. This <span class="math inline">\(p\)</span> characterizes the observation generating distribution: <span class="math inline">\(p_{\mathcal{D}}(y = 1) = p\)</span> and <span class="math inline">\(p_{\mathcal{D}}(y = 1) = 1-p\)</span></p>
+<p>For this activity, we’ll use the cross-entropy loss:</p>
+<p><span class="math display">\[
+\ell(\hat{p}, y) = - y \log \hat{p} - (1-y) \log (1-\hat{p})\;.
+\]</span></p>
+<p>The risk is <span class="math inline">\(R(\hat{p}) = \mathbb{E}_{\mathcal{D}}[\ell(\hat{p}, y)]\)</span>, where <span class="math inline">\(y\)</span> is distributed according to <span class="math inline">\(p_\mathcal{D}\)</span>. The empirical risk if we have observed <span class="math inline">\(n\)</span> coin flips is <span class="math inline">\(\hat{R}(\hat{p}) = \sum_{i = 1}^n \ell(\hat{p}, y_i)\)</span>.</p>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Empirical and Actual Risk
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Compute the risk <span class="math inline">\(R(\hat{p})\)</span> explicitly in terms of <span class="math inline">\(p\)</span>, treating <span class="math inline">\(y\)</span> as random.
+<ul>
+<li><em>Hint</em>: what is <span class="math inline">\(\mathbb{E}_{\mathcal{D}}[y]\)</span>?</li>
+</ul></li>
+<li>Prove that the value of <span class="math inline">\(\hat{p}\)</span> that minimizes the empirical risk is <span class="math inline">\(\hat{p} = \frac{1}{n}\sum_{i = 1}^n y_i\)</span>, the fraction of the observed times that we observe heads.
+<ul>
+<li><em>Hint</em>: take the derivative of <span class="math inline">\(\hat{R}(\hat{p})\)</span> with respect to <span class="math inline">\(\hat{p}\)</span> and set the result equal to 0.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The following code simulates 100 random flips of a biased coin and computes the minimizer <span class="math inline">\(\hat{p}\)</span> of the empirical risk after each flip. It then plots the empirical and actual risk to show how these evolve as we observe more data. However, there are two lines missing: the computation of the empirical and actual risks.</p>
+<p>It then computes arrays of the empirical risk <code>R_hat</code> and actual risk <code>R</code> associated the estimates <span class="math inline">\(p_hat\)</span>. For example, if <span class="math inline">\(\hat{p}_k\)</span> is the prediction after <span class="math inline">\(k\)</span> observations, then the corresponding entry of <span class="math inline">\(\hat{R}_k\)</span> should have value <span class="math inline">\(\frac{1}{k} \sum_{i = 1}^k \left[-y \log \hat{p}_k - (1- y)\log (1-\hat{p}_k)\right]\)</span> (<em>hint</em>: <code>np.log</code>. <em>Second hint</em>: simplify this expression a little using <span class="math inline">\(\hat{p}_k\)</span>. ).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># imports </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate flips. The array flips now contains 0s and 1s. </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>n_flips <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.7</span> <span class="co"># bias of coin</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>flips <span class="op">=</span> <span class="dv">1</span><span class="op">*</span>(np.random.rand(n_flips) <span class="op">&lt;</span> p)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># minimizing value of p_hat after each flip</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> np.cumsum(flips)<span class="op">/</span>np.arange(<span class="dv">1</span>, <span class="bu">len</span>(flips)<span class="op">+</span><span class="dv">1</span>) </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>R_hat <span class="op">=</span> <span class="co"># empirical risk: fill in</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span>     <span class="co"># true risk:      fill in</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># construct the plot </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">3</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].plot(R_hat, label <span class="op">=</span> <span class="st">"Empirical risk"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].plot(R, label <span class="op">=</span> <span class="st">"Risk"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].legend()</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"iteration"</span>, ylabel <span class="op">=</span> <span class="st">"risk (nats)"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].plot(p_hat, label <span class="op">=</span> <span class="st">"Prediction"</span>, color <span class="op">=</span> <span class="st">"grey"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].plot(p<span class="op">*</span>np.ones(n_flips), label <span class="op">=</span> <span class="st">"True value"</span>, color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"iteration"</span>, ylabel <span class="op">=</span> <span class="vs">r"prediction $p$"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Your result should look something like this:</p>
+</div>
+</div>
+<div class="cell" data-execution_count="72">
+<div class="cell-output cell-output-display">
+<p><img src="erm_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Discuss
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try running your experiment a few times. Comment qualitatively: how accurate is the empirical risk as an estimate of the true risk? How accurate is <span class="math inline">\(\hat{p}\)</span> as an estimate of <span class="math inline">\(p\)</span>? In this case, how many coin flips would you want to see before you felt comfortable with your predictive model? Why?</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

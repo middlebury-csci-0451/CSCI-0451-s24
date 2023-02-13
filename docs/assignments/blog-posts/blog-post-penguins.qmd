@@ -1,0 +1,15 @@
+---
+title: "Application Project: Classifying Palmer Penguins"
+type: "Blog Post"
+date: 2023-02-28
+description: |
+    In this blog post, you'll work through a complete example of the standard machine learning workflow, including: data splitting, model and feature selection, cross validation, etc. Your primary goal is to determine the smallest number of measurements necessary to confidently determine the species of a penguin. 
+objectives: 
+  - Experimentation
+  - Navigation
+publish: "false" 
+---
+
+
+
+   
