@@ -273,7 +273,7 @@ While we don't have formal due dates, there is a benefit to keeping yourself on 
 
 ::: {.column-margin}
 
-![An image of four of the Pokemon Squirtle welcoming a fifth Squirtle. The original four Squirtles are labeled "unfinished assignment #1" through #4. The fifth Squirtle is labeled "new assignment."](assets/img/memes/unfinished-assignments.jpg) *Image credit: [Dr. Spencer Bagley](https://twitter.com/sbagley/status/1437833176311762946?s=20&t=xPhXuSfOqxBvezv2HG2xyg)*
+![An image of four of the Pokemon Squirtle welcoming a fifth Squirtle. The original four Squirtles are labeled "unfinished assignment #1" through #4. The fifth Squirtle is labeled "new assignment."](assets/img/memes/unfinished-assignments.JPG) *Image credit: [Dr. Spencer Bagley](https://twitter.com/sbagley/status/1437833176311762946?s=20&t=xPhXuSfOqxBvezv2HG2xyg)*
 
 :::
 
