@@ -300,6 +300,42 @@ I am likely to consider your time in my course to be highly successful if you do
 - You spend on average **10 productive hours** of work time on this course outside of class. 
 - You complete many assignments that I give you, and also propose and complete alternative work that demonstrates your learning and achievement. 
 
+# Am I Ready for CSCI 0451? 
+
+As you enter the course, I'm assuming that you are ready to reflect thoughtfully on guiding your own learning, that you have some achievement in developing programs, and that you have a strong math foundation. 
+
+## Directing Your Learning
+
+This course asks you to set your own goals and motivate yourself to achieve them. Neither of these tasks are easy. It's ok to mess up every now and then -- we all do! The real question is whether you're going to look at mistakes and make time to reflect on what to do next time. 
+
+## Programming
+
+- You can write moderately-complex, **object-oriented** software. 
+- You are comfortable reading **software documentation** and **researching** how to perform a task that you haven't seen before. 
+- You know what a **terminal** is and how to perform simple operations at the command line. 
+- You have experience **debugging** your code and you are ready to do it a lot more. 
+
+## Math
+
+I am assuming that you remember most of MATH 0200 and CSCI 0200. It's ok if you haven't memorized every single fact. What I need is for you to be ready to rapidly look up what you need so that you won't be slowed down by math along the way. 
+
+- Matrix multiplication and inner products
+- Everything about $\mathbf{A}\mathbf{x} = \mathbf{b}$.  
+- Visualizing linear spaces. 
+- Eigenvalues, eigenvectors, positive-definite matrices. 
+- Derivatives, critical points of functions. 
+- Sample spaces, probability distribution functions. 
+- Random variables, mean and variance. 
+- Conditional probability and expectations. 
+
+### Reviews/Diagnostics
+
+- [This resource](http://web.stanford.edu/class/cs246/handouts/CS246_LinAlg_review.pdf) from Stanford's CS246 contains most of the linear algebra that you'll need for the course. The only big topic that's missing is treatment of the existence of solutions of the linear system $\mathbf{A}\mathbf{x} = \mathbf{b}$ in terms of the rank of $\mathbf{A}$. You don't need to have memorized everything here, but most of it should look familiar. 
+- Probability is not a formal requirement for CSCI 0451, but some probability can certainly be useful. To brush up on some basics, I suggest Chapter 2 of *[Introduction to Probability for Data Science](https://probability4datascience.com/)* by Stanley Chan. This treatment may be a little more advanced than what you learned in CSCI 0200, but you should recognize many of the main ideas. 
+
+
+
+
 # Course Policies 
 
 ### Laptops
