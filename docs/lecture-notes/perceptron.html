@@ -200,6 +200,8 @@ div.csl-indent {
   <li><a href="#linear-classifiers" id="toc-linear-classifiers" class="nav-link" data-scroll-target="#linear-classifiers">Linear Classifiers</a></li>
   <li><a href="#the-perceptron-algorithm" id="toc-the-perceptron-algorithm" class="nav-link" data-scroll-target="#the-perceptron-algorithm">The Perceptron Algorithm</a></li>
   <li><a href="#illustration" id="toc-illustration" class="nav-link" data-scroll-target="#illustration">Illustration</a></li>
+  <li><a href="#convergence-of-the-perceptron-algorithm" id="toc-convergence-of-the-perceptron-algorithm" class="nav-link" data-scroll-target="#convergence-of-the-perceptron-algorithm">Convergence of the Perceptron Algorithm</a></li>
+  <li><a href="#close-out-activity" id="toc-close-out-activity" class="nav-link" data-scroll-target="#close-out-activity">Close-out Activity</a></li>
   </ul>
 </nav>
     </div>
@@ -242,10 +244,14 @@ div.csl-indent {
 \newcommand{\norm}[1]{\lVert #1 \rVert}
 \]</span></p>
 </div>
-<p>In this lecture, we’ll study one of the oldest machine learning algorithms: the perceptron. Invented in 1943 but not actually implemented in hardware until 1958, the perceptron algorithm aims to find a linear separator between two classes of data.</p>
-<section id="our-data" class="level3 page-columns page-full">
+<p>In this lecture, we’ll study one of the oldest machine learning algorithms: the perceptron. Invented in 1943 but not actually implemented in hardware until 1958, the perceptron is still relevant today as a fundamental building-block of modern deep neural networks. Indeed, one of the implementations of neural networks in <code>scikit-learn</code> is still called the “<a href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html">multilayer perceptron</a>.”</p>
+<p>When first announced, the perceptron algorithm also displayed one of the first examples of <a href="https://criticalai.org/the-ai-hype-wall-of-shame/">AI Hype®</a>. The <em>New York Times</em> uncritically repeated claims by a Navy rep that the perceptron algorithm would be the “embryo” of a computer that would “walk, talk, see, write, reproduce itself, and be conscious of its existence.” As we study and implement the perceptron, you may wish to reflect on what you are doing and decide for yourself whether you believe that you are building the “embryo” of any such capabilities yourself.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../assets/img/figs/perceptron-nyt.jpeg" id="fig-nyt" class="img-fluid" alt="A headline from the New York Times: “New Navy Device Learns By Doing: Psychologist Shows Embryo of Computer Designed to Read and Grow Wiser.”"> Early AI Hype.</p>
+</div></div><section id="our-data" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="our-data">Our Data</h3>
-<p>Here’s an example of some data on which we might aim to apply the perceptron:</p>
+<p>The perceptron algorithm aims to find a rule for separating two distinct groups in some data. Here’s an example of some data on which we might aim to apply the perceptron:</p>
 <div class="cell page-columns page-full" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -342,8 +348,8 @@ div.csl-indent {
 \bracket{\tilde{\vw}^{(1)}, \tilde{\vx}_i} &gt; 0 \Leftrightarrow y_i = 1\;.
 \tag{3}\]</span></span></p>
 <p>That is, if someone gave you the weight vector <span class="math inline">\(\tilde{\vw}^{(1)}\)</span>, <strong><em>you wouldn’t need to see the data labels</em></strong>: you could exactly recover them using <a href="#eq-perceptron-predict">Equation&nbsp;3</a>.</p>
-<p>Let’s make this a little more precise. For fixed <span class="math inline">\(\tilde{\vw}\)</span>, let <span class="math inline">\(\ell_i \triangleq \langle \tilde{\vw}, \tilde{\vx}_i \rangle\)</span>. The classification <em>accuracy</em> of the two-label perceptron with weight <span class="math inline">\(\tilde{\vw}\)</span>is</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">We’ve used a little math trick here: take a moment to convince yourself that <a href="#eq-perceptron-predict">Equation&nbsp;3</a> is equivalent to the statement that <span class="math inline">\(\ell_i y_i &gt; 0\)</span>.</span></div></div>
+<p>Let’s make this a little more precise. For fixed <span class="math inline">\(\tilde{\vw}\)</span>, let <span class="math inline">\(\hat{y}_i \triangleq \langle \tilde{\vw}, \tilde{\vx}_i \rangle\)</span>. The classification <em>accuracy</em> of the two-label perceptron with weight <span class="math inline">\(\tilde{\vw}\)</span>is</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">We’ve used a little math trick here: take a moment to convince yourself that <a href="#eq-perceptron-predict">Equation&nbsp;3</a> is equivalent to the statement that <span class="math inline">\(\hat{y}_i y_i &gt; 0\)</span>.</span></div></div>
 <p><span class="math display">\[A(\tilde{\vw}) \triangleq \frac{1}{n} \sum_{i = 1}^n \one{\ell_i y_i &gt; 0}\;.\]</span></p>
 <p>Higher accuracy means that the vector <span class="math inline">\(\tilde{\vw}\)</span> predicts more correct labels via <a href="#eq-perceptron-predict">Equation&nbsp;3</a>. The <em>loss</em> (also called the <em>empirical risk</em>) is</p>
 <p><span id="eq-loss"><span class="math display">\[
@@ -359,23 +365,23 @@ div.csl-indent {
 <li>“Until we’re done,” in each time-step <span class="math inline">\(t\)</span>,
 <ul>
 <li>Pick a random data point <span class="math inline">\(i \in [n]\)</span>.</li>
-<li>Compute <span class="math inline">\(\ell^{(t)}_i = \bracket{\tilde{\vw}^{(t)}, \tilde{\vx}_i}\)</span>.</li>
-<li>If <span class="math inline">\(\ell^{(t)}_i y_i &gt; 0\)</span>, then point <span class="math inline">\(i\)</span> is currently correctly classified – do nothing!</li>
-<li>Else, if <span class="math inline">\(\ell^{(t)}_i y_i &lt; 0\)</span>, then perform the update <span id="eq-perceptron-update"><span class="math display">\[\tilde{\vw}^{(t+1)} = \tilde{\vw}^{(t)} + y_i \tilde{\vx}_i\;. \tag{5}\]</span></span></li>
+<li>Compute <span class="math inline">\(\hat{y}^{(t)}_i = \bracket{\tilde{\vw}^{(t)}, \tilde{\vx}_i}\)</span>.</li>
+<li>If <span class="math inline">\(\hat{y}^{(t)}_i y_i &gt; 0\)</span>, then point <span class="math inline">\(i\)</span> is currently correctly classified – do nothing!</li>
+<li>Else, if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>, then perform the update <span id="eq-perceptron-update"><span class="math display">\[\tilde{\vw}^{(t+1)} = \tilde{\vw}^{(t)} + y_i \tilde{\vx}_i\;. \tag{5}\]</span></span></li>
 </ul></li>
 </ol>
 <section id="local-improvement-on-data-point-i" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="local-improvement-on-data-point-i">Local Improvement on Data Point <span class="math inline">\(i\)</span></h4>
-<p>Let’s first check that the perceptron update in <a href="#eq-perceptron-update">Equation&nbsp;5</a> actually improves the prediction on data point <span class="math inline">\(i\)</span> if there is currently a mistake on that point (i.e.&nbsp;if <span class="math inline">\(\ell^{(t)}_i y_i &lt; 0\)</span>). We can do this by computing the new <span class="math inline">\(\ell_i^{(t)}\)</span>. Remember, what we want is for the sign of <span class="math inline">\(\ell_i^{(t)}\)</span> to match <span class="math inline">\(y_i\)</span>.</p>
+<p>Let’s first check that the perceptron update in <a href="#eq-perceptron-update">Equation&nbsp;5</a> actually improves the prediction on data point <span class="math inline">\(i\)</span> if there is currently a mistake on that point (i.e.&nbsp;if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>). We can do this by computing the new <span class="math inline">\(\hat{y}_i^{(t)}\)</span>. Remember, what we want is for the sign of <span class="math inline">\(\hat{y}_i^{(t)}\)</span> to match <span class="math inline">\(y_i\)</span>.</p>
 <p><span class="math display">\[
 \begin{align}
-\ell_i^{(t+1)} &amp;= \bracket{\tilde{\vw}^{(t+1)}, \tilde{\vx}_i}  \tag{definition of $\ell_i^{(t+1)}$}\\
+\hat{y}_i^{(t+1)} &amp;= \bracket{\tilde{\vw}^{(t+1)}, \tilde{\vx}_i}  \tag{definition of $\hat{y}_i^{(t+1)}$}\\
                &amp;= \bracket{\tilde{\vw}^{(t)} + y_i\tilde{\vx}_i, \tilde{\vx}_i} \tag{perceptron update} \\
                &amp;= \bracket{\tilde{\vw}^{(t)},\tilde{\vx}_i} + y_i\bracket{\tilde{\vx}_i, \tilde{\vx}_i} \tag{Linearity of $\bracket{\cdot}$}\\
-               &amp;= \ell_i^{(t)} + y_i \norm{\tilde{\vx}_i}_2^2\;. \tag{definition of $\ell_i^{(t)}$ and $\norm{\tilde{\vx}_i}$}
+               &amp;= \hat{y}_i^{(t)} + y_i \norm{\tilde{\vx}_i}_2^2\;. \tag{definition of $\hat{y}_i^{(t)}$ and $\norm{\tilde{\vx}_i}$}
 \end{align}
 \]</span></p>
-<div class="page-columns page-full"><p> Since <span class="math inline">\(\norm{\tilde{\vx}_i} &gt; 0\)</span>, we conclude that <span class="math inline">\(\ell_i\)</span> always moves in the right direction: if <span class="math inline">\(y_i = 1\)</span> then <span class="math inline">\(\ell_i^{(t+1)} &gt; \ell_i^{(t)}\)</span>, while if <span class="math inline">\(y_i = -1\)</span> then <span class="math inline">\(\ell_i^{(t+1)} &lt; \ell_i^{(t)}\)</span>.</p><div class="no-row-height column-margin column-container"><span class="aside">Again, this is only if <span class="math inline">\(\ell^{(t)}_i y_i &lt; 0\)</span>; otherwise there is no change in <span class="math inline">\(\ell_i^{(t)}\)</span> in the current iteration.</span></div></div>
+<div class="page-columns page-full"><p> Since <span class="math inline">\(\norm{\tilde{\vx}_i} &gt; 0\)</span>, we conclude that <span class="math inline">\(\hat{y}_i\)</span> always moves in the right direction: if <span class="math inline">\(y_i = 1\)</span> then <span class="math inline">\(\hat{y}_i^{(t+1)} &gt; \hat{y}_i^{(t)}\)</span>, while if <span class="math inline">\(y_i = -1\)</span> then <span class="math inline">\(\hat{y}_i^{(t+1)} &lt; \hat{y}_i^{(t)}\)</span>.</p><div class="no-row-height column-margin column-container"><span class="aside">Again, this is only if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>; otherwise there is no change in <span class="math inline">\(\hat{y}_i^{(t)}\)</span> in the current iteration.</span></div></div>
 </section>
 </section>
 <section id="illustration" class="level2 page-columns page-full">
@@ -440,9 +446,10 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<section id="convergence-of-the-perceptron-algorithm" class="level4">
-<h4 class="anchored" data-anchor-id="convergence-of-the-perceptron-algorithm">Convergence of the Perceptron Algorithm</h4>
-<p>Is the perceptron algorithm guaranteed to terminate? And if so, is it guaranteed to find a weight vector <span class="math inline">\(\tilde{\vw}\)</span> that perfectly separates the two data classes? To discuss this problem, it’s convenient to go back to the notation with <span class="math inline">\(\vw\)</span> and <span class="math inline">\(b\)</span> instead of <span class="math inline">\(\tilde{\vw}\)</span>.</p>
+</section>
+<section id="convergence-of-the-perceptron-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="convergence-of-the-perceptron-algorithm">Convergence of the Perceptron Algorithm</h2>
+<p>Is the perceptron algorithm guaranteed to terminate? And if so, is it guaranteed to find a weight vector <span class="math inline">\(\tilde{\vw}\)</span> that perfectly separates the two data classes?</p>
 <div class="callout-note callout callout-style-simple no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -450,9 +457,9 @@ div.csl-indent {
 </div>
 <div class="callout-body-container">
 <div id="def-linear-separability" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Linear Separability) </strong></span>A data set with feature matrix <span class="math inline">\(\mX \in \R^{n\times k}\)</span> and target vector <span class="math inline">\(y\in \{0, 1\}\)</span> is <em>linearly separable</em> if there exists a separating hyperplane <span class="math inline">\((\vw, b)\)</span> such that, for all <span class="math inline">\(i \in [n]\)</span>,</p>
+<p><span class="theorem-title"><strong>Definition 1 (Linear Separability) </strong></span>A data set with feature matrix <span class="math inline">\(\mX \in \R^{n\times k}\)</span> and target vector <span class="math inline">\(y\in \{0, 1\}\)</span> is <em>linearly separable</em> if there exists a weight vector <span class="math inline">\(\tilde{\vw}\)</span> such that, for all <span class="math inline">\(i \in [n]\)</span>,</p>
 <p><span class="math display">\[
-\bracket{\vw, \vx_i} - b &gt; 0 \Leftrightarrow y = 1\;.
+\bracket{\tilde{\vw}, \tilde{\vx}_i} &gt; 0 \Leftrightarrow y = 1\;.
 \]</span></p>
 </div>
 </div>
@@ -479,12 +486,12 @@ div.csl-indent {
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="prp-convergence" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Convergence of perceptron for separable data) </strong></span>Suppose that <span class="math inline">\((\mX, \vy)\)</span> is linearly separable. Then:</p>
+<div id="thm-convergence" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Convergence of perceptron for separable data) </strong></span>Suppose that <span class="math inline">\((\mX, \vy)\)</span> is linearly separable. Then:</p>
 <ul>
 <li>The perceptron algorithm converges in a finite number of iterations to a vector <span class="math inline">\(\tilde{\vw}\)</span> that separates the data.<br>
 </li>
-<li>During the running of the perceptron algorithm, the total number of mistakes made by the algorithm is no more than</li>
+<li>During the running of the perceptron algorithm, the total number of updates made is no more than</li>
 </ul>
 <p><span class="math display">\[\frac{2 + r(\mX)^2}{\gamma(\mX, \vy)}\;,\]</span></p>
 <p>where <span class="math inline">\(r(\mX) = \max_{i \in [n]} \norm{\vx_i}\)</span> and <span class="math inline">\(\gamma(\mX, \vy)\)</span> is a geometric measure called the <em>margin</em> of how far apart the two label classes are.</p>
@@ -492,11 +499,41 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>For a proof of <a href="#prp-convergence">Proposition&nbsp;2</a>, see p.&nbsp;37-44 of <span class="citation" data-cites="hardt2021patterns">Hardt and Recht (<a href="#ref-hardt2021patterns" role="doc-biblioref">2021</a>)</span>.</p>
-
-
-
+<p>For a proof of <a href="#thm-convergence">Theorem&nbsp;1</a>, see p.&nbsp;37-44 of <span class="citation" data-cites="hardt2021patterns">Hardt and Recht (<a href="#ref-hardt2021patterns" role="doc-biblioref">2021</a>)</span>.</p>
 </section>
+<section id="close-out-activity" class="level2">
+<h2 class="anchored" data-anchor-id="close-out-activity">Close-out Activity</h2>
+<div class="callout-warning callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Start Implementing the Perceptron Algorithm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose that you have a <code>numpy.Array</code> <code>X</code> of features and an <code>np.Array</code> <code>y</code> of binary labels. Assume that <code>X</code> does NOT contain a column of <code>1</code>s; that is, it corresponds to <span class="math inline">\(\mX\)</span> rather than <span class="math inline">\(\tilde{\mX}\)</span> from the notes above. Additionally, Assume that the labels in <code>y</code> are <code>0</code>s and <code>1</code>s rather than <code>-1</code>s and <code>1</code>s. This is not the mathematically convenient setup, but is the one that is most frequently seen in machine learning software.</p>
+<p>At the board, write as much code as you can to achieve some of the following tasks. Please work with a partner. It’s ok to pick and choose which of these to try; but you should work together (i.e.&nbsp;in conversation) rather than in parallel.</p>
+<ol type="1">
+<li>Determine <code>n</code> (the number of data points) and <code>p</code> (the number of features) from <code>X</code>.</li>
+<li>Modify <code>X</code> into <code>X_</code> (which contains a column of <code>1</code>s and corresponds to <span class="math inline">\(\tilde{\mX}\)</span>). This one I’ll give you for free:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X_ <span class="op">=</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Modify <code>y</code> into an array <code>y_</code> of <code>0</code>s and <code>1</code>s, corresponding to the version we use in the notes above.</li>
+<li>Initialize a random weight vector <code>w_</code> with appropriate dimensions, corresponding to <span class="math inline">\(\tilde{\vw}^{(0)}\)</span>.</li>
+<li>Generate a random index <code>i</code> between <code>0</code> and <code>n-1</code>.</li>
+<li>Extract the <code>i</code>th row of <code>X_</code>, which corresponds to <span class="math inline">\(\tilde{\vx}_i\)</span>.<br>
+</li>
+<li>Compute <span class="math inline">\(\ell_i^{(0)} = \bracket{\tilde{\vw}^{(0)}, \tilde{\vx}_i}\)</span>.</li>
+</ol>
+<p>These items will give you a head start on <a href="../assignments/blog-posts/blog-post-erm%202.html">the blog post</a> in which you will construct a full implementation of the perceptron algorithm.</p>
+</div>
+</div>
+
+
+
 </section>
 
 <p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">

@@ -13,8 +13,6 @@
   notes: 
     - |
       <a href="slides/welcome.qmd">Welcome slides</a>
-    - |
-      <a href="lecture-notes/intro-classification.ipynb">Lecture notes</a>
   module: Classification
   publish: true
   warmup: <a href="software.qmd">Set up your software</a>.
