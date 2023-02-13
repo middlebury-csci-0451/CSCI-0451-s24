@@ -361,130 +361,144 @@
     "href": "slides/welcome.html#section-8",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Rough, tentative plan for the semester\n\n\nFundamentals of prediction (~6 weeks)\n\nCore math concepts\nOptimization (“the algorithms”)\nHow to help models generalize\nFormal definitions of bias and fairness\n\nUnsupervised methods (~1 week)\n\nClustering\nDimensionality reduction\n\nDeep Learning (~4 weeks)\n\nImage classification\nText generation\nWord embedding\n\nProject Presentations (~1 week)"
+    "text": "ML, Ethics, Bias, and Fairness\nAlgorithmic bias is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality.\nMost systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed.\n\n\n\n\n\nSave the Date\n\nMonday April 24th\nDr. Timnit Gebru will be virtually visiting our class for a Q&A session and giving a talk at 7pm.\nDr. Gebru is one of the world’s leading experts in intersectional bias in AI."
   },
   {
     "objectID": "slides/welcome.html#section-9",
     "href": "slides/welcome.html#section-9",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Most Days\n\n\nWarmup Activity\n\nComplete ahead of time.\nReinforces content from readings and connects them to lecture.\nPresent in groups of 4-5.\nRandom presenter presents to the group.\n\nLecture\n\nMath\nLive-coding\nYour questions and ideas!\n\nClose-Out Activity\n\nIn same groups as warmup.\nPractices content from lecture."
+    "text": "Rough, tentative plan for the semester\n\n\nFundamentals of prediction (~6 weeks)\n\nCore math concepts\nOptimization (“the algorithms”)\nHow to help models generalize\nFormal definitions of bias and fairness\n\nUnsupervised methods (~1 week)\n\nClustering\nDimensionality reduction\n\nDeep Learning (~4 weeks)\n\nImage classification\nText generation\nWord embedding\n\nProject Presentations (~1 week)"
   },
   {
     "objectID": "slides/welcome.html#section-10",
     "href": "slides/welcome.html#section-10",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Activities and assignments\n\n\nBlog Posts\n\nAim for ~1 per week.\nInvolves implementation, experiments, and discussion.\nPublished on your blog.\n\nDaily Warmup Activities\n\nRelatively quick when you’ve done the readings.\nOne (random) person each day will present to 4-5 classmates.\nConnects readings to lecture.\n\nProject\n\nIn groups of your choosing.\nWork on it throughout the semester, presentations in last week.\nWe’ll have activities etc. to help you pick a path."
+    "text": "Most Days\n\n\nWarmup Activity\n\nComplete ahead of time.\nReinforces content from readings and connects them to lecture.\nPresent in groups of 4-5.\nRandom presenter presents to the group.\n\nLecture\n\nMath\nLive-coding + experiments\nYour questions and ideas!\n\nClose-Out Activity\n\nIn same groups as warmup.\nPractices content from lecture, discussion"
   },
   {
     "objectID": "slides/welcome.html#section-11",
     "href": "slides/welcome.html#section-11",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Blog Posts\n\nImplement algorithms in source (.py) files.\nPerform experiments in Jupyter notebooks.\nCreate figures, add expository prose, etc.\nRender your notebooks into a blog using the Quarto publishing engine.\nHost source code and rendered blog on GitHub."
+    "text": "Activities and assignments\n\n\nBlog Posts\n\nAim for ~1 per week.\nInvolves implementation, experiments, and discussion.\nPublished on your blog.\n\nDaily Warmup Activities\n\nRelatively quick when you’ve done the readings.\nOne (random) person each day will present to your team.\nConnects readings to lecture.\n\nProject\n\nIn groups of your choosing.\nWork on it throughout the semester, presentations in last week.\nWe’ll have activities etc. to help you pick a path."
   },
   {
-    "objectID": "slides/welcome.html#section-13",
-    "href": "slides/welcome.html#section-13",
+    "objectID": "slides/welcome.html#section-12",
+    "href": "slides/welcome.html#section-12",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Feedback on blog posts via Hypothes.is"
+    "text": "Blog Posts\n\nImplement algorithms in source (.py) files.\nPerform experiments in Jupyter notebooks.\nCreate figures, add expository prose, etc.\nRender your notebooks into a blog using the Quarto publishing engine.\nHost source code and rendered blog on GitHub."
   },
   {
     "objectID": "slides/welcome.html#section-14",
     "href": "slides/welcome.html#section-14",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Feedback on source code"
+    "text": "Feedback on blog posts via Hypothes.is"
   },
   {
     "objectID": "slides/welcome.html#section-15",
     "href": "slides/welcome.html#section-15",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Readings and Warmups\nDo them! Some readings are optional."
+    "text": "Feedback on source code"
   },
   {
     "objectID": "slides/welcome.html#section-16",
     "href": "slides/welcome.html#section-16",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "ML, Ethics, Bias, and Fairness\nAlgorithmic bias is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality.\nMost systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed.\n\n\n\n\n\nSave the Date\n\nMonday April 24th\nDr. Timnit Gebru will be virtually visiting our class for a Q&A session and giving a talk at 7pm.\nDr. Gebru is one of the world’s leading experts in intersectional bias in AI."
+    "text": "Readings and Warmups\nDo them! Some readings are optional.\nLet’s practice a warmup activity"
   },
   {
     "objectID": "slides/welcome.html#section-17",
     "href": "slides/welcome.html#section-17",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Collaborative Grading"
+    "text": "Your Affinity Vegetable\n \n1. Split into teams\n2. Go around and share your name and:\nIf you were a vegetable, which vegetable would you be and why?"
   },
   {
     "objectID": "slides/welcome.html#section-18",
     "href": "slides/welcome.html#section-18",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Collaborative Grading\n\n\nInitialization:\n\n\nYou set goals for your learning and achievement (in week 2).\n\n\nMain Loop:\n\n\nYou attend class, participate in activities, and complete assignments.\n\nYou get feedback on your assignments from me and the TAs, and you revise.\nYou reflect on your learning and achievement at different points throughout the course.\n\n\nAt End Of Course:\n\n\nYou propose a letter grade that reflects your learning and achievement, and discuss it with me.\n\n\nIndividual assignments don’t get scores, points, or grades–just feedback."
+    "text": "Your Affinity Vegetable\n \n3. Team leader: lead your team in finding a delicious dish that incorporates all of your vegetables.\nBe ready to share!"
   },
   {
     "objectID": "slides/welcome.html#section-19",
     "href": "slides/welcome.html#section-19",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Collaborative Grading\n \n\n\n\n\n\n\n\n\n\nOpportunity\nChallenge\n\n\n\n\nNo points, no averages\nYou can focus on feedback and set your own goals.\nYou need to motivate based on your interest in the class\n\n\nResubmit assignments\nOne of the best ways to learn\nNeed to read feedback and prioritize time for revisions\n\n\nCan skip assignments\nNo busy work – work on what’s valuable to you.\nStill need to work enough to learn and meet your goals\n\n\nNo hard due-dates\nDon’t ask for extensions, take the time you need\nNeed to keep yourself on pace to achieve your goals"
+    "text": "Collaborative Grading"
   },
   {
     "objectID": "slides/welcome.html#section-20",
     "href": "slides/welcome.html#section-20",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What a Grade Sounds Like…\nA: I am ready to take the theory, techniques, and ideas of this course into my endeavours outside this classroom: future classes, projects, hobbies, career.\nB: With help or review, I might be able to take some of what I learned outside this classroom.\nC: I showed up and did stuff, but I don’t really see any ways to take what I learned outside this classroom.\nD-F: I didn’t really show up or do much.\n\n\nWork Expected Work Expected\nI am very likely to accept your proposed grade in the course if you EITHER:\n\nComplete most assignments to a high standard (including revisions) OR\nWork for ~10 productive hours per week outside of class OR\nDo some of the assignments I give you and also some other things (that you propose) that are relevant to the course learning goals."
+    "text": "Collaborative Grading\n\n\nInitialization:\n\n\nYou set goals for your learning and achievement (in week 2).\n\n\nMain Loop:\n\n\nYou attend class, participate in activities, and complete assignments.\n\nYou get feedback on your assignments from me and the TAs, and you revise.\nYou reflect on your learning and achievement at different points throughout the course.\n\n\nAt End Of Course:\n\n\nYou propose a letter grade that reflects your learning and achievement, and discuss it with me.\n\n\nIndividual assignments don’t get scores, points, or grades–just feedback."
   },
   {
     "objectID": "slides/welcome.html#section-21",
     "href": "slides/welcome.html#section-21",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What is something that makes you feel excited or empowered about collaborative grading?\nWhat is something that makes you feel nervous or confused about collaborative grading?"
+    "text": "Collaborative Grading\n \n\n\n\n\n\n\n\n\n\nOpportunity\nChallenge\n\n\n\n\nNo points, no averages\nYou can focus on feedback and set your own goals.\nYou need to motivate based on your interest in the class\n\n\nResubmit assignments\nOne of the best ways to learn\nNeed to read feedback and prioritize time for revisions\n\n\nCan skip assignments\nNo busy work – work on what’s valuable to you.\nStill need to work enough to learn and meet your goals\n\n\nNo hard due-dates\nDon’t ask for extensions, take the time you need\nNeed to keep yourself on pace to achieve your goals"
   },
   {
     "objectID": "slides/welcome.html#section-22",
     "href": "slides/welcome.html#section-22",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What I expect from you now"
+    "text": "What a Grade Sounds Like…\nA: I am ready to take the theory, techniques, and ideas of this course into my endeavours outside this classroom: future classes, projects, hobbies, career.\nB: With help or review, I might be able to take some of what I learned outside this classroom.\nC: I showed up and did stuff, but I don’t really see any ways to take what I learned outside this classroom.\nD-F: I didn’t really show up or do much.\n\n\nWork Expected Work Expected\nI am very likely to accept your proposed grade in the course if you EITHER:\n\nComplete most assignments to a high standard (including revisions) OR\nWork for ~10 productive hours per week outside of class OR\nDo some of the assignments I give you and also some other things (that you propose) that are relevant to the course learning goals."
   },
   {
     "objectID": "slides/welcome.html#section-23",
     "href": "slides/welcome.html#section-23",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "CS Stuff\nYou can write moderately-complex, object-oriented software.\nYou are comfortable reading software documentation and researching how to perform a task that you haven’t seen before.\nYou know what a terminal is and how to perform simple operations at the command line.\nYou have experience debugging your code and you are ready to do it a lot more.\n\n\nMath Stuff\nYou remember most of MATH 0200 and CSCI 0200:\n\nMatrix multiplication and inner products\nEverything about \\(\\mathbf{A}\\mathbf{x} = \\mathbf{b}\\).\n\nVisualizing linear spaces.\nEigenvalues, eigenvectors, positive-definite matrices.\nDerivatives, critical points of functions.\nSample spaces, probability distribution functions.\nRandom variables, mean and variance.\nConditional probability and expectations.\n\nYou are ready to look up what you don’t remember."
+    "text": "What is something that makes you feel excited or empowered about collaborative grading?\nWhat is something that makes you feel nervous or confused about collaborative grading?"
   },
   {
     "objectID": "slides/welcome.html#section-24",
     "href": "slides/welcome.html#section-24",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About\n\n\n\n\n\n\\[\\mathbf{w}^{(t+1)} = \\mathbf{w}^{(t)} + \\mathbb{1}(y_i \\langle \\mathbf{w}^{(t)}, \\mathbf{x}_i \\rangle < 0)y_i \\mathbf{x}_i\\]"
+    "text": "What I expect from you now"
   },
   {
     "objectID": "slides/welcome.html#section-25",
     "href": "slides/welcome.html#section-25",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
+    "text": "CS Stuff\nYou can write moderately-complex, object-oriented software.\nYou are comfortable reading software documentation and researching how to perform a task that you haven’t seen before.\nYou know what a terminal is and how to perform simple operations at the command line.\nYou have experience debugging your code and you are ready to do it a lot more.\n\n\nMath Stuff\nYou remember most of MATH 0200 and CSCI 0200:\n\nMatrix multiplication and inner products\nEverything about \\(\\mathbf{A}\\mathbf{x} = \\mathbf{b}\\).\n\nVisualizing linear spaces.\nEigenvalues, eigenvectors, positive-definite matrices.\nDerivatives, critical points of functions.\nSample spaces, probability distribution functions.\nRandom variables, mean and variance.\nConditional probability and expectations.\n\nYou are ready to look up what you don’t remember."
   },
   {
     "objectID": "slides/welcome.html#section-26",
     "href": "slides/welcome.html#section-26",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Most of all, I expect that you are ready to make thoughtful decisions to guide your own learning in this course."
+    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About\n\n\n\n\n\n\\[\\mathbf{w}^{(t+1)} = \\mathbf{w}^{(t)} + \\mathbb{1}(y_i \\langle \\mathbf{w}^{(t)}, \\mathbf{x}_i \\rangle < 0)y_i \\mathbf{x}_i\\]"
   },
   {
     "objectID": "slides/welcome.html#section-27",
     "href": "slides/welcome.html#section-27",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
+  },
+  {
+    "objectID": "slides/welcome.html#section-28",
+    "href": "slides/welcome.html#section-28",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Most of all, I expect that you are ready to make thoughtful decisions to guide your own learning in this course."
+  },
+  {
+    "objectID": "slides/welcome.html#section-29",
+    "href": "slides/welcome.html#section-29",
     "title": "Welcome to CSCI 0451!",
     "section": "",
     "text": "Based on what you know about the course so far, what are some ways that success might look like for you?"
@@ -718,7 +732,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week 1 \n            \n        \n            \n                    M\n                    \n                    Feb. 13 \n             Welcome!\n   \n        \n        \n             \n                We discuss how the course works and begin our discussion of classification and auditing. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Getting Oriented  \n            \n            \n                    Reading\n                           Course syllabus \n                           Collaboration \n                           Why I Don't Grade by Jesse Stommel \n                           Daumé 1.1-1.5 \n            \n            \n                    Notes\n                            Welcome slides\n  \n            \n            \n                    Warmup\n                    Set up your software.\n            \n            \n                    Assignments\n                    No really, set up your software.\n            \n        \n        \n            \n                    W\n                    \n                    Feb. 15 \n             Classification: The Perceptron\n   \n        \n        \n             \n                We study the perceptron algorithm, a historical method that serves as the foundation for many modern classifiers. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           Daumé 4.1-4.5, 4.7 \n                           Introduction to Numpy from The Python Data Science Handbook by Jake VanderPlas \n                           Linear algebra with Numpy \n                           Hardt and Recht, p. 37-41 \n            \n            \n                    Notes\n                            Lecture notes\n  \n            \n            \n                    Warmup\n                     Perceptron \n            \n            \n                    Assignments\n                    Blog post: perceptron\n            \n        \n            \n             Week 2 \n            \n        \n            \n                    M\n                    \n                    Feb. 20 \n             Models, Loss Functions, and Algorithms\n   \n        \n        \n             \n                We generalize our study of the perceptron to a broader framework for supervised machine learning called empirical risk minimization. Within this framework, we begin to study logistic regression and the primal support vector machine for binary classification.\n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           Daumé 2.1-2.7 \n                           Daumé 7.1-7.3 \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n            \n        \n        \n            \n                    W\n                    \n                    Feb. 22 \n             More On Classification and Auditing\n   \n        \n        \n             \n                We continue our discussion of classification and introduce algorithmic bias. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Social Responsibility  \n                            Navigation  \n                            Experimentation  \n            \n            \n                    Reading\n                           Machine Bias from ProPublica \n                           Data Manipulation with Pandas from The Python Data Science Handbook by Jake VanderPlas \n                           Example 2.3.1 from Murphy \n            \n            \n                    Notes\n                            Lecture notes\n  \n            \n            \n                    Warmup\n                     Classification rates \n            \n            \n                    Assignments\n                    Reflective goal-setting ACTUAL REQUIRED DUE DATE: 2/24\n            \n        \n            \n             Week 3 \n            \n        \n            \n                    M\n                    \n                    Feb. 27 \n             Optimization\n   \n        \n        \n             \n                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for the primal support vector machine. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           TBD \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n                    Assignments\n                    Blog post: empirical risk minimization\n            \n        \n        \n\nNo matching items\n\n  © Phil Chodrow, 2023"
+    "text": "Week 1 \n            \n        \n            \n                    M\n                    \n                    Feb. 13 \n             Welcome!\n   \n        \n        \n             \n                We discuss how the course works and begin our discussion of classification and auditing. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Getting Oriented  \n            \n            \n                    Reading\n                           Course syllabus \n                           Collaboration \n                           Why I Don't Grade by Jesse Stommel \n                           Daumé 1.1-1.5 \n            \n            \n                    Notes\n                            Welcome slides\n  \n            \n            \n                    Warmup\n                    Set up your software.\n            \n            \n                    Assignments\n                    No really, set up your software.\n            \n        \n        \n            \n                    W\n                    \n                    Feb. 15 \n             Classification: The Perceptron\n   \n        \n        \n             \n                We study the perceptron algorithm, a historical method that serves as the foundation for many modern classifiers. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           Daumé 4.1-4.5, 4.7 \n                           Introduction to Numpy from The Python Data Science Handbook by Jake VanderPlas \n                           Linear algebra with Numpy \n                           Hardt and Recht, p. 37-41 \n            \n            \n                    Notes\n                            Lecture notes\n  \n            \n            \n                    Warmup\n                     Perceptron \n            \n            \n                    Assignments\n                    Blog post: perceptron\n            \n        \n            \n             Week 2 \n            \n        \n            \n                    M\n                    \n                    Feb. 20 \n             Models, Loss Functions, and Algorithms\n   \n        \n        \n             \n                We generalize our study of the perceptron to a broader framework for supervised machine learning called empirical risk minimization. Within this framework, we begin to study logistic regression and the primal support vector machine for binary classification.\n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           Daumé 2.1-2.7 \n                           Daumé 7.1-7.3 \n            \n            \n                    Notes\n                            Lecture notes  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n            \n        \n        \n            \n                    W\n                    \n                    Feb. 22 \n             More On Classification and Auditing\n   \n        \n        \n             \n                We continue our discussion of classification and introduce algorithmic bias. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Social Responsibility  \n                            Navigation  \n                            Experimentation  \n            \n            \n                    Reading\n                           Machine Bias from ProPublica \n                           Data Manipulation with Pandas from The Python Data Science Handbook by Jake VanderPlas \n                           Example 2.3.1 from Murphy \n            \n            \n                    Notes\n                            Lecture notes\n  \n            \n            \n                    Warmup\n                     Classification rates \n            \n            \n                    Assignments\n                    Reflective goal-setting ACTUAL REQUIRED DUE DATE: 2/24\n            \n        \n            \n             Week 3 \n            \n        \n            \n                    M\n                    \n                    Feb. 27 \n             Optimization\n   \n        \n        \n             \n                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for the primal support vector machine. \n            \n        \n        \n            \n            \n                    Learning Objectives\n                            Theory  \n                            Implementation  \n            \n            \n                    Reading\n                           TBD \n            \n            \n                    Notes\n                            TBD  \n            \n            \n                    Warmup\n                    TBD\n            \n            \n                    Assignments\n                    Blog post: empirical risk minimization\n            \n        \n        \n\nNo matching items\n\n  © Phil Chodrow, 2023"
   },
   {
     "objectID": "blog.html",

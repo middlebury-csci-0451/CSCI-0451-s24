@@ -74,7 +74,7 @@
     - <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé 2.1-2.7</a>
     - <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.1-7.3</a>
   notes: 
-    - TBD
+    - <a href="lecture-notes/erm.ipynb">Lecture notes</a>
   module: Classification
   publish: true
   warmup: TBD

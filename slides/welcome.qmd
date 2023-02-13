@@ -169,6 +169,40 @@ cache: false
 :::
 
 
+## {.split-50}
+
+::: {.column .bg1}
+
+##### ML, Ethics, Bias, and Fairness
+
+*Algorithmic bias* is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality. 
+
+Most systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed. 
+
+![](https://ars.electronica.art/outofthebox/files/2019/08/GenderShades_gs04.jpg)
+
+:::
+
+::: {.column .bg0}
+
+
+::: {.fragment}
+##### Save the Date
+
+![](https://api.time.com/wp-content/uploads/2022/01/timnit-gebru-ai-google-1-featured-socialcrop.jpg?quality=85)
+
+###### Monday April 24th
+
+Dr. **Timnit Gebru** will be virtually visiting our class for a Q&A session and giving a talk at 7pm. 
+
+Dr. Gebru is one of the world's leading experts in intersectional bias in AI.  
+
+:::
+
+
+:::
+
+
 ## {.split-33}
 
 ::: {.column .bg1}
@@ -228,13 +262,13 @@ cache: false
 ###### Lecture 
 
 - Math
-- Live-coding
+- Live-coding + experiments
 - Your questions and ideas!
 
 ###### Close-Out Activity
 
 - In same groups as warmup.
-- Practices content from lecture. 
+- Practices content from lecture, discussion 
 
 :::
 
@@ -259,7 +293,7 @@ cache: false
 ###### Daily Warmup Activities
 
 - Relatively quick **when you've done the readings**.
-- One (random) person each day will present to 4-5 classmates. 
+- One (random) person each day will present to your team. 
 - Connects readings to lecture. 
 
 ###### Project
@@ -352,6 +386,8 @@ cache: false
 
 Do them! *Some readings are optional.*
 
+[Let's practice a warmup activity]{.fragment}
+
 :::
 
 ::: {.column .bg0}
@@ -362,38 +398,32 @@ Do them! *Some readings are optional.*
 :::
 
 
-## {.split-50}
+## {background-image="../assets/img/figs/veggies.jpeg" background-size="contain" background-color="black"}
 
-::: {.column .bg1}
+### Your Affinity Vegetable
 
-##### ML, Ethics, Bias, and Fairness
+<br> <br> 
 
-*Algorithmic bias* is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality. 
+### 1. Split into teams
 
-Most systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed. 
+### 2. Go around and share your name and:
 
-![](https://ars.electronica.art/outofthebox/files/2019/08/GenderShades_gs04.jpg)
+##### If you were a vegetable, which vegetable would you be [and why]{.alert}? 
 
-:::
+## {background-image="../assets/img/figs/veggies.jpeg" background-size="contain" background-color="black"}
 
-::: {.column .bg0}
+### Your Affinity Vegetable
 
+<br> <br> 
 
-::: {.fragment}
-##### Save the Date
+### 3. [Team leader]{.alert}: lead your team in finding a [*delicious dish*]{.alert2} that incorporates all of your vegetables.
 
-![](https://api.time.com/wp-content/uploads/2022/01/timnit-gebru-ai-google-1-featured-socialcrop.jpg?quality=85)
-
-###### Monday April 24th
-
-Dr. **Timnit Gebru** will be virtually visiting our class for a Q&A session and giving a talk at 7pm. 
-
-Dr. Gebru is one of the world's leading experts in intersectional bias in AI.  
-
-:::
+##### Be ready to share! 
 
 
-:::
+
+
+
 
 
 ## {.bg2}
