@@ -595,11 +595,18 @@
     "text": "Optional: GitHub Desktop\nIf you are comfortable working with git from the command line, you can continue to do this! If you are unfamiliar with git, I recommend that you download and install the GitHub Desktop graphical client. You will need to connect it to your GitHub account."
   },
   {
+    "objectID": "software.html#clone-your-blog",
+    "href": "software.html#clone-your-blog",
+    "title": "Software and Setup",
+    "section": "Clone your blog",
+    "text": "Clone your blog\nFinally, clone your blog to your local computer in a place where you’ll be able to find it in the future. You can do this using the big green “Clone” button on GitHub. You can clone either using GitHub Desktop or at the command line: both options are good!\n\nWhat if I already have a GitHub Pages site?\nGreat! You can publish your blog as a project website rather than as a user site. Find out more on the difference and how to publish a project website."
+  },
+  {
     "objectID": "software.html#test-drive-quarto",
     "href": "software.html#test-drive-quarto",
     "title": "Software and Setup",
     "section": "Test Drive Quarto",
-    "text": "Test Drive Quarto\nChange modify the About page of your blog by modifying the file about.qmd. You can do things like change text or change the profile picture (it doesn’t have to be of yourself). Once you’ve made these changes, open a terminal in the location of your blog and type the command\nquarto preview\nAfter a few moments, a web browser window should pop up with a preview of your blog. If you navigate over to the About tab, you should see your changes."
+    "text": "Test Drive Quarto\nChange modify the About page of your blog by modifying the file about.qmd. You can do things like change text or change the profile picture (it doesn’t have to be of yourself). Once you’ve made these changes, open a terminal in the location of your cloned blog and type the command\nquarto preview\nAfter a few moments, a web browser window should pop up with a preview of your blog. If you navigate over to the About tab, you should see your changes."
   },
   {
     "objectID": "software.html#finalize-and-publish",

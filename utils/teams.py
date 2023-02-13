@@ -72,6 +72,8 @@ def shuffle(section = "A"):
             first_last = name.split(", ")
             print (first_last[1] + " " + first_last[0])
             print('\033[0m', end = "")
+            
+    print("")
      
 if __name__ == "__main__":       
     if sys.argv[1] == "assign":

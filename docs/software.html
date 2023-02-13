@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#your-blog-via-github-pages" id="toc-your-blog-via-github-pages" class="nav-link" data-scroll-target="#your-blog-via-github-pages">Your Blog via GitHub Pages</a>
   <ul class="collapse">
+  <li><a href="#clone-your-blog" id="toc-clone-your-blog" class="nav-link" data-scroll-target="#clone-your-blog">Clone your blog</a>
+  <ul class="collapse">
   <li><a href="#what-if-i-already-have-a-github-pages-site" id="toc-what-if-i-already-have-a-github-pages-site" class="nav-link" data-scroll-target="#what-if-i-already-have-a-github-pages-site">What if I already have a GitHub Pages site?</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#install-quarto" id="toc-install-quarto" class="nav-link" data-scroll-target="#install-quarto">Install Quarto</a>
   <ul class="collapse">
@@ -316,9 +319,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><img src="assets/img/screencaps/gh-pages.png" class="img-fluid"></p>
 <p>After a few minutes, try navigating to <code>https://github_username.github.io</code>. You should find an exact copy of the <a href="https://middlebury-csci-0451.github.io/">template website</a>. We haven’t modified it yet, but we will soon!</p>
+<section id="clone-your-blog" class="level2">
+<h2 class="anchored" data-anchor-id="clone-your-blog">Clone your blog</h2>
+<p>Finally, clone your blog to your local computer in a place where you’ll be able to find it in the future. You can do this using the big green “Clone” button on GitHub. You can clone either using GitHub Desktop or at the command line: both options are good!</p>
 <section id="what-if-i-already-have-a-github-pages-site" class="level3">
 <h3 class="anchored" data-anchor-id="what-if-i-already-have-a-github-pages-site">What if I already have a GitHub Pages site?</h3>
 <p>Great! You can publish your blog as a project website rather than as a user site. Find out <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages">more on the difference</a> and how to publish a project website.</p>
+</section>
 </section>
 </section>
 <section id="install-quarto" class="level1">
@@ -331,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>So, first, <a href="https://quarto.org/docs/get-started/">install Quarto</a>.</p>
 <section id="test-drive-quarto" class="level2">
 <h2 class="anchored" data-anchor-id="test-drive-quarto">Test Drive Quarto</h2>
-<p>Change modify the About page of your blog by modifying the file <code>about.qmd</code>. You can do things like change text or change the profile picture (it doesn’t have to be of yourself). Once you’ve made these changes, open a terminal in the location of your blog and type the command</p>
+<p>Change modify the About page of your blog by modifying the file <code>about.qmd</code>. You can do things like change text or change the profile picture (it doesn’t have to be of yourself). Once you’ve made these changes, open a terminal in the location of your cloned blog and type the command</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>After a few moments, a web browser window should pop up with a preview of your blog. If you navigate over to the About tab, you should see your changes.</p>
 </section>

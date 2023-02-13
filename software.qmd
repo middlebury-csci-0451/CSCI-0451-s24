@@ -129,6 +129,10 @@ On GitHub, navigate to the [blog template repository](https://github.com/middleb
 
 After a few minutes, try navigating to `https://github_username.github.io`. You should find an exact copy of the [template website](https://middlebury-csci-0451.github.io/). We haven't modified it yet, but we will soon! 
 
+## Clone your blog
+
+Finally, clone your blog to your local computer in a place where you'll be able to find it in the future. You can do this using the big green "Clone" button on GitHub. You can clone either using GitHub Desktop or at the command line: both options are good! 
+
 ### What if I already have a GitHub Pages site?
 
 Great! You can publish your blog as a project website rather than as a user site. Find out [more on the difference](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) and how to publish a project website. 
@@ -144,7 +148,7 @@ So, first, [install Quarto](https://quarto.org/docs/get-started/).
 
 ## Test Drive Quarto
 
-Change modify the About page of your blog by modifying the file `about.qmd`. You can do things like change text or change the profile picture (it doesn't have to be of yourself). Once you've made these changes, open a terminal in the location of your blog and type the command 
+Change modify the About page of your blog by modifying the file `about.qmd`. You can do things like change text or change the profile picture (it doesn't have to be of yourself). Once you've made these changes, open a terminal in the location of your cloned blog and type the command 
 
 ```bash
 quarto preview
