@@ -182,6 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link active" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   <li><a href="#sec-perceptron" id="toc-sec-perceptron" class="nav-link" data-scroll-target="#sec-perceptron">Perceptron</a></li>
+  <li><a href="#sec-erm" id="toc-sec-erm" class="nav-link" data-scroll-target="#sec-erm">Empirical Risk Minimization</a></li>
   </ul>
 </nav>
     </div>
@@ -316,13 +317,13 @@ The false positive rate is ___. </code></pre>
 <h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
 <p>Sketch the line in <span class="math inline">\(\R^2\)</span> described by the equation</p>
 <p><span id="eq-perceptron-boundary"><span class="math display">\[
-\bracket{\vw, \vx}  =  w_0\;,
+\bracket{\vw, \vx}  =  b\;,
 \tag{1}\]</span></span></p>
-<p>where <span class="math inline">\(\vw = \paren{1, -\frac{1}{2}}^T \in \R^2\)</span> and <span class="math inline">\(w_0 = \frac{1}{2}\)</span>.</p>
+<p>where <span class="math inline">\(\vw = \paren{1, -\frac{1}{2}}^T \in \R^2\)</span> and <span class="math inline">\(b = \frac{1}{2}\)</span>. Here, <span class="math inline">\(\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i\)</span> is the inner product (or dot product) between the vectors <span class="math inline">\(\vw\)</span> and <span class="math inline">\(\vw\)</span>.</p>
 </section>
 <section id="part-2-1" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="part-2-1">Part 2</h4>
-<div class="page-columns page-full"><p>Write a quick Python function called <code>perceptron_classify(w, w_0, x)</code>. <code>w</code> and <code>x</code> should both be 1d numpy arrays of the same length, and <code>w_0</code> should be a scalar. Your function should return <code>0</code> if <span class="math inline">\(\bracket{\vw, \vx} &lt; w_0\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx} \geq w_0\)</span>. </p><div class="no-row-height column-margin column-container"><span class="aside">An excellent solution will use neither a <code>for</code>-loop nor an <code>if</code>-statement.</span></div></div>
+<div class="page-columns page-full"><p>Write a quick Python function called <code>perceptron_classify(w, b, x)</code>. <code>w</code> and <code>x</code> should both be 1d numpy arrays of the same length, and <code>b</code> should be a scalar. Your function should return <code>0</code> if <span class="math inline">\(\bracket{\vw, \vx} &lt; b\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx} \geq b\)</span>. </p><div class="no-row-height column-margin column-container"><span class="aside">An excellent solution will use neither a <code>for</code>-loop nor an <code>if</code>-statement.</span></div></div>
 <p>Verify that your function works on a few simple examples.</p>
 </section>
 <section id="part-3-1" class="level4">
@@ -332,6 +333,34 @@ The false positive rate is ___. </code></pre>
 \bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.
 \tag{2}\]</span></span></p>
 <p>for some <span class="math inline">\(\tilde{\vw} \in \R^{n+1}\)</span>. Define <span class="math inline">\(\tilde{\vx} = (\vx, 1)\)</span>. How could you define <span class="math inline">\(\tilde{\vw}\)</span> to make <a href="#eq-perceptron-boundary-2">Equation&nbsp;2</a> equivalent to <a href="#eq-perceptron-boundary">Equation&nbsp;1</a>?</p>
+</section>
+</section>
+<section id="sec-erm" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sec-erm">Empirical Risk Minimization</h3>
+<p>Let’s play a game! Here is the setup:</p>
+<p>I have a coin with probability of heads equal to <span class="math inline">\(p \in [0,1]\)</span>. I am going to ask you to pick a number <span class="math inline">\(\hat{p} \in [0,1]\)</span>. Then, I flip my coin.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">This game is more fun for me than it is for you.</span></div></div>
+<ul>
+<li>If my coin comes up heads, you give me <span class="math inline">\(-\log \hat{p}\)</span> dollars.</li>
+<li>If my coin comes up tails, you give me <span class="math inline">\(\log (1-\hat{p})\)</span> dollars.</li>
+</ul>
+<section id="part-1-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-1-2">Part 1</h4>
+<p>Compute the <em>expected</em> amount of money you will give me when we play this game in terms of <span class="math inline">\(p\)</span> and <span class="math inline">\(\hat{p}\)</span>. Call this quantity <span class="math inline">\(R(\hat{p}, p)\)</span>. This is the <em>risk</em> of the guess <span class="math inline">\(\hat{p}\)</span>.</p>
+</section>
+<section id="part-2-2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="part-2-2">Part 2</h4>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">Take the derivative and set it equal to 0! Don’t forget to check that you’ve found a minimum of <span class="math inline">\(R(\hat{p}, p)\)</span> rather than a maximum or an inflection point.</span></div></div>
+<p>Suppose I tell you the value of <span class="math inline">\(p\)</span>. Write a mathematical proof to show that your best choice of <span class="math inline">\(\hat{p}\)</span> (the one that loses you the least money) is <span class="math inline">\(\hat{p} = p\)</span>.</p>
+</section>
+<section id="part-3-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-3-2">Part 3</h4>
+<p>Now suppose that I <em>don’t</em> tell you the true value of <span class="math inline">\(p\)</span>. Instead, I let you observe <span class="math inline">\(n\)</span> coin flips before asking you to make your guess. Describe:</p>
+<ul>
+<li>A suggestion for choosing <span class="math inline">\(\hat{p}\)</span> based only on the results of the previous flips.</li>
+<li>A way to estimate the risk (expected amount of money lost) based only on the results of the previous flips.</li>
+</ul>
+<p>Your answer should depend on <span class="math inline">\(\hat{p}\)</span> but not on <span class="math inline">\(p\)</span>!</p>
 
 
 </section>

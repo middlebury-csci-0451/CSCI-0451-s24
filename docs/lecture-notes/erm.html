@@ -187,6 +187,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#empirical-risk" id="toc-empirical-risk" class="nav-link" data-scroll-target="#empirical-risk">Empirical Risk</a></li>
   <li><a href="#empirical-risk-minimization" id="toc-empirical-risk-minimization" class="nav-link" data-scroll-target="#empirical-risk-minimization">Empirical Risk Minimization</a></li>
   <li><a href="#back-to-perceptron" id="toc-back-to-perceptron" class="nav-link" data-scroll-target="#back-to-perceptron">Back to Perceptron</a></li>
+  <li><a href="#the-point" id="toc-the-point" class="nav-link" data-scroll-target="#the-point">The Point</a></li>
+  <li><a href="#the-empirical-risk-minimization-workflow" id="toc-the-empirical-risk-minimization-workflow" class="nav-link" data-scroll-target="#the-empirical-risk-minimization-workflow">The Empirical Risk Minimization Workflow</a></li>
   <li><a href="#closeout-activity" id="toc-closeout-activity" class="nav-link" data-scroll-target="#closeout-activity">Closeout Activity</a></li>
   </ul></li>
   </ul>
@@ -532,7 +534,7 @@ R(f) = \int_{\mathcal{X}, \mathcal{Y}} p_{\mathcal{D}}(\mathbf{x}, y) \ell(f(\ma
 <h2 class="anchored" data-anchor-id="back-to-perceptron">Back to Perceptron</h2>
 <p>We are now able to situate the perceptron algorithm within the framework of empirical risk minimization:</p>
 <ul>
-<li>The model family <span class="math inline">\(\mathcal{M}\)</span> is the set of all functions of the form <span class="math inline">\(f_{\mathbf{w}, b}(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle + b\)</span>. We can take the parameter vector to be <span class="math inline">\(\boldsymbol{\theta} = (\mathbf{w}, b)\)</span>.</li>
+<li>The model family <span class="math inline">\(\mathcal{M}\)</span> is the set of all functions of the form <span class="math inline">\(f_{\mathbf{w}, b}(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle - b\)</span>. We can take the parameter vector to be <span class="math inline">\(\boldsymbol{\theta} = (\mathbf{w}, b)\)</span>.</li>
 <li>The per-observation loss function used is the so-called <em>0-1 loss function</em> given by</li>
 </ul>
 <p><span class="math display">\[
@@ -549,36 +551,50 @@ R(f) = \int_{\mathcal{X}, \mathcal{Y}} p_{\mathcal{D}}(\mathbf{x}, y) \ell(f(\ma
 <li>The perceptron convergence theorem for separable data says that <em>if</em> there exists a pair <span class="math inline">\((\mathbf{w}, b)\)</span> such that <span class="math inline">\(\hat{R}(f_{\mathbf{w}, b}) = 0\)</span>, then the perceptron algorithm is guaranteed to find such a pair after a number of steps that can be bounded in terms of the data.</li>
 </ul>
 </section>
+<section id="the-point" class="level2">
+<h2 class="anchored" data-anchor-id="the-point">The Point</h2>
+<p>What’s the point of developing all this theory for empirical risk minimization? The reason that this is helpful for us is that most modern prediction algorithms are doing versions of empirical risk minimization. We can even derive important, new algorithms just by modifying the loss function <span class="math inline">\(\ell\)</span>. For example:</p>
+<p><strong>Binary logistic regression</strong> is empirical risk minimization in which the labels <span class="math inline">\(y \in \{0,1\}\)</span>, the predictions are of the form <span class="math inline">\(\hat{y} = \langle \mathbf{w}, \mathbf{x} \rangle - b\)</span> and the loss function is the <em>logistic loss</em></p>
+<p><span class="math display">\[\ell(\hat{y}, y) = y \log \sigma(\hat{y}) + (1-y) \log (1-\sigma(\hat{y}))\;,\]</span></p>
+<p>where <span class="math inline">\(\sigma(z)\triangleq \frac{1}{1 + e^{-z}}\)</span> is the <em>logistic sigmoid</em> function.</p>
+<p><strong>Least-squares linear regression</strong> is a form of empirical risk minimization which is more suitable for predicting a number <span class="math inline">\(y \in \mathbb{R}\)</span> than a label like <span class="math inline">\(y\in \{0,1\}\)</span>. In linear least-squares, the predictions are of the form <span class="math inline">\(\hat{y} = \langle \mathbf{w}, \mathbf{x} \rangle - b\)</span> and the loss function is the <em>squared error</em></p>
+<p><span class="math display">\[\ell(\hat{y}, y) = (y - \hat{y})^2\;.\]</span></p>
+<p><strong>Support vector machines</strong> were the state-of-the-art classification method in the late 90s and early 2000s, and are still in use today. Support vector machines still use linear predictions of the form <span class="math inline">\(\hat{y} = \langle \mathbf{w}, \mathbf{x} \rangle - b\)</span>. If the labels are <span class="math inline">\(y \in \{-1,1\}\)</span>, then the loss function is the <em>hinge loss</em> written as</p>
+<p><span class="math display">\[\ell(\hat{y}, y) = \max\{1 - y\hat{y}, 0\}\;.\]</span></p>
+<p>As it turns out, the logistic loss, squared error, and hinge loss are all “better” losses than the <span class="math inline">\(0-1\)</span> loss, for reasons which will become clear when we get to writing numerical algorithms for risk minimization.</p>
+</section>
+<section id="the-empirical-risk-minimization-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="the-empirical-risk-minimization-workflow">The Empirical Risk Minimization Workflow</h2>
+<p>Fundamentally, an empirical risk minimization algorithm consists of:</p>
+<ul>
+<li>A family <span class="math inline">\(\mathcal{M}\)</span> of predictor functions <span class="math inline">\(f_\boldsymbol{\theta}\)</span> that generates predictions <span class="math inline">\(\hat{y} = f_\boldsymbol{\theta}(\mathbf{x})\)</span>.</li>
+<li>A loss function <span class="math inline">\(\ell\)</span> that compares the prediction and the real value <span class="math inline">\(\ell(\hat{y}, y)\)</span>.</li>
+<li>An algorithm for minimizing the empirical risk (<a href="#eq-empirical-risk">Equation&nbsp;2</a>) with respect to the parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> of <span class="math inline">\(\mathcal{M}\)</span>.</li>
+</ul>
+<p>Many empirical risk minimization algorithms also admit certain guarantees on how close the minimized empirical risk is to the <em>actual</em> risk under certain assumptions about the probability generating distribution. These kinds of guarantees are an extremely active area of ongoing machine learning research. They usually require some probability tools that are beyond the scope of this course.</p>
+</section>
 <section id="closeout-activity" class="level2">
 <h2 class="anchored" data-anchor-id="closeout-activity">Closeout Activity</h2>
-<p>Consider the problem of predicting the flip of a biased coin based only on prior flips. We’re going to treat this as an inference problem: we’d like to offer a predicted <em>probability</em> <span class="math inline">\(\hat{p}\)</span> that the coin will come up heads, based on prior information. This <span class="math inline">\(\hat{p}\)</span> plays the role of the prediction <span class="math inline">\(\hat{y}\)</span>. We represent a heads coin flip as <span class="math inline">\(y = 1\)</span> and a tails coin flip as <span class="math inline">\(y = 0\)</span>. We assume that the coin has a true bias <span class="math inline">\(p \in [0,1]\)</span> that we are not able to observe. This <span class="math inline">\(p\)</span> characterizes the observation generating distribution: <span class="math inline">\(p_{\mathcal{D}}(y = 1) = p\)</span> and <span class="math inline">\(p_{\mathcal{D}}(y = 1) = 1-p\)</span></p>
-<p>For this activity, we’ll use the cross-entropy loss:</p>
-<p><span class="math display">\[
-\ell(\hat{p}, y) = - y \log \hat{p} - (1-y) \log (1-\hat{p})\;.
-\]</span></p>
-<p>The risk is <span class="math inline">\(R(\hat{p}) = \mathbb{E}_{\mathcal{D}}[\ell(\hat{p}, y)]\)</span>, where <span class="math inline">\(y\)</span> is distributed according to <span class="math inline">\(p_\mathcal{D}\)</span>. The empirical risk if we have observed <span class="math inline">\(n\)</span> coin flips is <span class="math inline">\(\hat{R}(\hat{p}) = \sum_{i = 1}^n \ell(\hat{p}, y_i)\)</span>.</p>
 <div class="callout-warning callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Empirical and Actual Risk
+Back to the Coin Flipping Game
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li>Compute the risk <span class="math inline">\(R(\hat{p})\)</span> explicitly in terms of <span class="math inline">\(p\)</span>, treating <span class="math inline">\(y\)</span> as random.
+<p>Let’s go back to the <a href="../warmup-exercises.html#sec-erm">warmup</a> corresponding to these lecture notes. We can think of the problem of choosing <span class="math inline">\(\hat{p}\)</span> as a prediction problem in which we observe 0 features! Identify and write down formulae for:</p>
 <ul>
-<li><em>Hint</em>: what is <span class="math inline">\(\mathbb{E}_{\mathcal{D}}[y]\)</span>?</li>
-</ul></li>
-<li>Prove that the value of <span class="math inline">\(\hat{p}\)</span> that minimizes the empirical risk is <span class="math inline">\(\hat{p} = \frac{1}{n}\sum_{i = 1}^n y_i\)</span>, the fraction of the observed times that we observe heads.
-<ul>
-<li><em>Hint</em>: take the derivative of <span class="math inline">\(\hat{R}(\hat{p})\)</span> with respect to <span class="math inline">\(\hat{p}\)</span> and set the result equal to 0.</li>
-</ul></li>
-</ol>
+<li>The data generating distribution.</li>
+<li>The true risk corresponding to prediction <span class="math inline">\(\hat{p}\)</span>.</li>
+<li>The empirical risk corresponding to prediction <span class="math inline">\(\hat{p}\)</span>.</li>
+</ul>
+<p>Additionally: <strong>which loss function are we using in this game?</strong> It’s one of the ones in the notes above!</p>
 </div>
 </div>
+<p>If your team gets all the way through those questions, please move on to the following coding exercise:</p>
 <div class="callout-warning callout callout-style-simple no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -589,8 +605,9 @@ Experiment
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The following code simulates 100 random flips of a biased coin and computes the minimizer <span class="math inline">\(\hat{p}\)</span> of the empirical risk after each flip. It then plots the empirical and actual risk to show how these evolve as we observe more data. However, there are two lines missing: the computation of the empirical and actual risks.</p>
+<p>The following code simulates 100 random flips of a biased coin and computes the minimizer <span class="math inline">\(\hat{p}\)</span> of the empirical risk after each flip. It then plots the empirical and actual risk to show how these evolve as we observe more data.</p>
 <p>It then computes arrays of the empirical risk <code>R_hat</code> and actual risk <code>R</code> associated the estimates <span class="math inline">\(p_hat\)</span>. For example, if <span class="math inline">\(\hat{p}_k\)</span> is the prediction after <span class="math inline">\(k\)</span> observations, then the corresponding entry of <span class="math inline">\(\hat{R}_k\)</span> should have value <span class="math inline">\(\frac{1}{k} \sum_{i = 1}^k \left[-y \log \hat{p}_k - (1- y)\log (1-\hat{p}_k)\right]\)</span> (<em>hint</em>: <code>np.log</code>. <em>Second hint</em>: simplify this expression a little using <span class="math inline">\(\hat{p}_k\)</span>. ).</p>
+<p><strong>However</strong>, there are two lines missing: the computation of the empirical and actual risks. Fill these in and run the experiment in a Jupyter notebook.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># imports </span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

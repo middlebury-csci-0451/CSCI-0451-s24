@@ -80,23 +80,20 @@ df[["y"]] == df[["y_pred"]]
 df[["y"]].sum(), df[["y"]].sum()
 ```
 
-
-
-
 ### Perceptron {#sec-perceptron}
 
 #### Part 1
 
 Sketch the line in $\R^2$ described by the equation 
 $$ 
-\bracket{\vw, \vx}  =  w_0\;, 
+\bracket{\vw, \vx}  =  b\;, 
 $$ {#eq-perceptron-boundary}
 
-where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $w_0 = \frac{1}{2}$. 
+where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $b = \frac{1}{2}$. Here, $\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i$ is the inner product (or dot product) between the vectors $\vw$ and $\vw$. 
 
 #### Part 2
 
-Write a quick Python function called `perceptron_classify(w, w_0, x)`. `w` and `x` should both be 1d numpy arrays of the same length, and `w_0` should be a scalar. Your function should return `0` if $\bracket{\vw, \vx}  <  w_0$ and `1` if $\bracket{\vw, \vx}  \geq  w_0$. [An excellent solution will use neither a `for`-loop nor an `if`-statement.]{.aside}
+Write a quick Python function called `perceptron_classify(w, b, x)`. `w` and `x` should both be 1d numpy arrays of the same length, and `b` should be a scalar. Your function should return `0` if $\bracket{\vw, \vx}  <  b$ and `1` if $\bracket{\vw, \vx}  \geq  b$. [An excellent solution will use neither a `for`-loop nor an `if`-statement.]{.aside}
 
 Verify that your function works on a few simple examples. 
 
@@ -112,7 +109,33 @@ for some $\tilde{\vw} \in \R^{n+1}$. Define $\tilde{\vx} = (\vx, 1)$. How could 
 
 
 
-      
+### Empirical Risk Minimization {#sec-erm}
 
+Let's play a game! Here is the setup: 
 
+I have a coin with probability of heads equal to $p \in [0,1]$. I am going to ask you to pick a number $\hat{p} \in [0,1]$. Then, I flip my coin. 
+
+[This game is more fun for me than it is for you.]{.aside}
+
+- If my coin comes up heads, you give me $-\log \hat{p}$ dollars. 
+- If my coin comes up tails, you give me $\log (1-\hat{p})$ dollars. 
+
+#### Part 1
+
+Compute the *expected* amount of money you will give me when we play this game in terms of $p$ and $\hat{p}$. Call this quantity $R(\hat{p}, p)$. This is the *risk* of the guess $\hat{p}$. 
+
+#### Part 2
+
+[Take the derivative and set it equal to 0! Don't forget to check that you've found a minimum of $R(\hat{p}, p)$ rather than a maximum or an inflection point.]{.aside}
+
+Suppose I tell you the value of $p$. Write a mathematical proof to show that your best choice of $\hat{p}$ (the one that loses you the least money) is $\hat{p} = p$. 
+
+#### Part 3
+
+Now suppose that I *don't* tell you the true value of $p$. Instead, I let you observe $n$ coin flips before asking you to make your guess. Describe: 
+
+- A suggestion for choosing $\hat{p}$ based only on the results of the previous flips. 
+- A way to estimate the risk (expected amount of money lost) based only on the results of the previous flips. 
+
+Your answer should depend on $\hat{p}$ but not on $p$! 
 

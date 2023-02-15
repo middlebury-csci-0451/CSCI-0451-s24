@@ -17,7 +17,7 @@
   publish: true
   warmup: <a href="software.qmd">Set up your software</a>.
   assignments: No really, <br><a href="software.qmd">set up your software</a>.
-- date: 2023-02-22
+- date: 2023-03-01
   header: | 
     More On Classification and Auditing
   summary: |
@@ -34,7 +34,7 @@
     - |
       <a href="lecture-notes/intro-classification.ipynb">Lecture notes</a>
   module: Classification
-  publish: true
+  publish: false
   warmup: <a href="warmup-exercises.qmd#classification-rates"> Classification rates </a>
   assignments:
     - |
@@ -58,7 +58,7 @@
       <a href="lecture-notes/perceptron.ipynb">Lecture notes</a>
   module: Classification
   publish: true
-  warmup: <a href="warmup-exercises.qmd#perceptron"> Perceptron </a>
+  warmup: <a href="warmup-exercises.qmd#sec-perceptron"> Perceptron </a>
   assignments: 
     - |
       <a href="assignments/blog-posts/blog-post-perceptron.qmd">Blog post: perceptron</a>
@@ -66,7 +66,7 @@
   header: | 
     Models, Loss Functions, and Algorithms
   summary: |
-    We generalize our study of the perceptron to a broader framework for supervised machine learning called <i>empirical risk minimization</i>. Within this framework, we begin to study logistic regression and the primal support vector machine for binary classification.
+    We generalize our study of the perceptron to a broader framework for supervised machine learning called <i>empirical risk minimization</i>.
   objectives: 
     - Theory
     - Implementation
@@ -78,9 +78,24 @@
   module: Classification
   publish: true
   warmup: TBD
+- date: 2023-02-22
+  header: | 
+    Convex Linear Models and Logistic Regression
+  summary: |
+    TBD
+  objectives: 
+    - Theory
+    - Implementation
+  reading:
+    - TBD
+  notes: 
+    - TBD
+  module: Classification
+  publish: true
+  warmup: TBD
 - date: 2023-02-27
   header: | 
-    Optimization
+    Optimization via Gradient Descent 
   summary: |
     We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for the primal support vector machine. 
   objectives: 
@@ -95,4 +110,4 @@
   warmup: TBD
   assignments:
     - |
-      <a href="assignments/blog-posts/blog-post-erm.qmd">Blog post: empirical risk minimization</a>
+      <a href="assignments/blog-posts/blog-post-erm.qmd">Blog post: empirical risk minimization</a> 

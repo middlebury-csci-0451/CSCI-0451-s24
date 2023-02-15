@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Phil Chodrow">
+
+<title>Convex Linear Models and Logistic Regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/icons/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><p>Convex Linear Models and Logistic Regression</p></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../"><b>Machine Learning</b><br>CSCI 0451</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">Syllabus</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">Schedule</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments.html" class="sidebar-item-text sidebar-link">Index of Assignments</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#quick-recap" id="toc-quick-recap" class="nav-link active" data-scroll-target="#quick-recap">Quick Recap</a></li>
+  <li><a href="#some-questions-for-empirical-risk-minimization" id="toc-some-questions-for-empirical-risk-minimization" class="nav-link" data-scroll-target="#some-questions-for-empirical-risk-minimization">Some Questions For Empirical Risk Minimization</a></li>
+  <li><a href="#convexity" id="toc-convexity" class="nav-link" data-scroll-target="#convexity">Convexity</a></li>
+  <li><a href="#convexity-and-empirical-risk-minimization" id="toc-convexity-and-empirical-risk-minimization" class="nav-link" data-scroll-target="#convexity-and-empirical-risk-minimization">Convexity and Empirical Risk Minimization</a></li>
+  <li><a href="#demo-logistic-regression" id="toc-demo-logistic-regression" class="nav-link" data-scroll-target="#demo-logistic-regression">Demo: Logistic Regression</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><p>Convex Linear Models and Logistic Regression</p></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Phil Chodrow </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="hidden">
+$$
+<p>$$</p>
+</div>
+<section id="quick-recap" class="level2">
+<h2 class="anchored" data-anchor-id="quick-recap">Quick Recap</h2>
+<p>Last time, we introduced the <em>empirical risk minimization</em> framework for prediction problems. Recall that empirical risk minimization is an approach to supervised learning (which is just another way to say “prediction”). In the supervised learning setup, we have <em>data</em>, a pair <span class="math inline">\((\mathbf{X}, \mathbf{y})\)</span> where</p>
+<ul>
+<li><span class="math inline">\(\mathbf{X}\in \mathbb{R}^{n\times p}\)</span> is the <em>feature matrix</em>. There are <span class="math inline">\(n\)</span> distinct observations, encoded as rows. Each of the <span class="math inline">\(p\)</span> columns corresponds to a <em>feature</em>: something about each observation that we can measure or infer. Each observation is written <span class="math inline">\(\mathbf{x}_1, \mathbf{x}_2,\ldots\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{X}= \left[\begin{matrix} &amp; - &amp; \mathbf{x}_1 &amp; - \\
+&amp; - &amp; \mathbf{x}_2 &amp; - \\
+&amp; \vdots &amp; \vdots &amp; \vdots \\
+&amp; - &amp; \mathbf{x}_{n} &amp; - \end{matrix}\right]
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf{y}\in \mathbb{R}^{n}\)</span> is the <em>target vector</em>. The target vector gives a label, value, or outcome for each observation.</li>
+</ul>
+<p>What we want to do is find a function <span class="math inline">\(f\)</span> such that <span class="math inline">\(f(\mathbf{x}) \approx y\)</span> “most of the time.” In the empirical risk minimization framework, we approach this task by choosing:</p>
+<ul>
+<li>A family <span class="math inline">\(\mathcal{M}\)</span> of predictor functions <span class="math inline">\(f_\boldsymbol{\theta}\)</span> that generates predictions <span class="math inline">\(\hat{y} = f_\boldsymbol{\theta}(\mathbf{x})\)</span>.</li>
+<li>A loss function <span class="math inline">\(\ell\)</span> that compares the prediction and the real value <span class="math inline">\(\ell(\hat{y}, y)\)</span>.</li>
+<li>An algorithm for minimizing the empirical risk</li>
+</ul>
+<p><span id="eq-empirical-risk"><span class="math display">\[
+\hat{R}(f_\boldsymbol{\theta}) = \frac{1}{n} \sum_{i = 1}^n \ell(f_\boldsymbol{\theta}(\mathbf{x}_i), y_i)
+\tag{1}\]</span></span></p>
+<p>with respect to the parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> of <span class="math inline">\(\mathcal{M}\)</span>.</p>
+<p>So far, we’ve been exclusively considering linear models: <span class="math inline">\(\boldsymbol{\theta}= (\mathbf{w}, b)\)</span> and <span class="math inline">\(f_{\mathbf{w}, b}(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle - b\)</span>. So, we can write our minimization problem as:</p>
+<p><span id="eq-empirical-risk-linear"><span class="math display">\[
+(\hat{\mathbf{w}}, \hat{b}) = \mathop{\mathrm{arg\,min}}_{\mathbf{w}, b} \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle - b, y_i)\;.
+\tag{2}\]</span></span></p>
+</section>
+<section id="some-questions-for-empirical-risk-minimization" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="some-questions-for-empirical-risk-minimization">Some Questions For Empirical Risk Minimization</h2>
+<p>It is at this point that we need to ask some important questions with awkward answers.</p>
+<ol type="1">
+<li><strong>Existence</strong>: Does <a href="#eq-empirical-risk-linear">Equation&nbsp;3</a> have <em>any</em> solutions?</li>
+<li><strong>Uniqueness</strong>: Assuming there exists a solution to <a href="#eq-empirical-risk-linear">Equation&nbsp;3</a>, is it unique? Or are there many different solutions?</li>
+<li><strong>Searchability</strong>: Is it possible to write algorithms are guaranteed to find a solution of <a href="#eq-empirical-risk-linear">Equation&nbsp;3</a>?</li>
+<li><strong>Performance</strong>: Is it possible to make these algorithms <em>fast</em>?</li>
+</ol>
+<p>In most prediction problems, what we’d really like is to be <em>right</em> about the true value of <span class="math inline">\(y\)</span>. In the context of linear classifiers, this means that we want all the points of one label to be on one side of the line, and all the points of the other label to be on the other side. The loss function that expresses this idea is the 0-1 loss:</p>
+<p><span class="math display">\[
+\ell(\hat{y}, y) = 1 - \mathbb{1}\left[ \hat{y}y &gt; 0 \right]\;.
+\]</span></p>
+<p>When we graph the 0-1 loss, it looks like this. I’ve shown versions corresponding to both <span class="math inline">\(y = 1\)</span> and <span class="math inline">\(y = -1\)</span>.</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">4</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>) </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">101</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="kw">lambda</span> y_hat, y: <span class="dv">1</span> <span class="op">-</span> <span class="dv">1</span><span class="op">*</span>(y_hat<span class="op">*</span>y <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> [<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>][j]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    axarr[j].set_title(<span class="ss">f"y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    axarr[j].<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="vs">r"$\hat</span><span class="sc">{y}</span><span class="vs">$"</span>, </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                 ylabel <span class="op">=</span> <span class="vs">r"$\ell(\hat</span><span class="sc">{y}</span><span class="vs">, y)$"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    axarr[j].plot(y_hat, loss(y_hat, y))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="convex-linear-models_files/figure-html/cell-2-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Let’s now ask our four questions of the 0-1 loss.</p>
+<p><strong>Existence</strong>: Does <a href="#eq-empirical-risk-linear">Equation&nbsp;3</a> have <em>any</em> solutions?</p>
+<ul>
+<li>We are good on this one! Specifically, the risk can take on only a finite number of possible values (values between 0 and 1 in increments of <span class="math inline">\(1/n\)</span>). In any given problem there is a smallest such value obtained, and this is a solution.</li>
+</ul>
+<p><strong>Uniqueness</strong>: Assuming there exists a solution to <a href="#eq-empirical-risk-linear">Equation&nbsp;3</a>, is it unique? Or are there many different solutions?</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">To definte “usually” and “just a little bit” rigorously, we need to specify a data generating distribution and do some math.</span></div></div>
+<ul>
+<li><p>Unfortunately, the solution to <a href="#eq-empirical-risk-linear">Equation&nbsp;3</a> for the 0-1 loss is almost never unique. This is because, if you have one solution <span class="math inline">\((\mathbf{w}, b)\)</span>, you can “usually” jiggle it by “just a little bit” and still have a minimizing solution.</p></li>
+<li><p><strong>Searchability</strong>: Is it possible to write algorithms are guaranteed to find a solution of <a href="#eq-empirical-risk-linear">Equation&nbsp;3</a>?</p></li>
+</ul>
+<p>Technically, we could just try a very large number of choices of <span class="math inline">\((\mathbf{w}, b)\)</span> and hope for the best, but that’s not very efficient (in fact, the problem of getting a reasonable answer this way is exponential in <span class="math inline">\(d\)</span>, the number of features). Can we do better?</p>
+<ol start="4" type="1">
+<li><strong>Performance</strong>: Is it possible to make these algorithms <em>fast</em>?</li>
+</ol>
+<p>This is where our real problem lies:</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-perceptron-np-hard" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (0-1 Minimization for Linear Classifiers is NP Hard (<span class="citation" data-cites="kearns1994toward">Kearns, Schapire, and Sellie (<a href="#ref-kearns1994toward" role="doc-biblioref">1994</a>)</span>)) </strong></span></p>
+<p>Unless P = NP, there is no polynomial-time algorithm that can solve the 0-1 empirical risk minimization problem for linear classifiers.</p>
+</div>
+</div>
+</div>
+</div>
+<p>So, if we are going to have reasonable algorithms for empirical risk minimization, <em>we need to choose a different loss function</em>. There are multiple choices. Before we jump into examples, we’re going to define the core mathematical concept that is going to help address our core questions of existence, uniqueness, searchability, and performance.</p>
+</section>
+<section id="convexity" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="convexity">Convexity</h2>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-convex-set" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 </strong></span></p>
+<p>A set <span class="math inline">\(S \subseteq \mathbb{R}^n\)</span> is <em>convex</em> if, for any two points <span class="math inline">\(\mathbf{z}_1, \mathbf{z}_2 \in S\)</span> and for any <span class="math inline">\(\lambda \in [0,1]\)</span>, the point <span class="math inline">\(\mathbf{z}= \lambda \mathbf{z}_1 + (1-\lambda) \mathbf{z}_2\)</span> is also an element of <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-convex-function" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Convex Functions) </strong></span>Let <span class="math inline">\(S \subseteq \mathbb{R}^n\)</span> be convex. A function <span class="math inline">\(f:S \rightarrow \mathbb{R}\)</span> is <em>convex</em> if, for any <span class="math inline">\(\lambda \in \mathbb{R}\)</span> and any two points <span class="math inline">\(\mathbf{z}_1, \mathbf{z}_2 \in S\)</span>, we have</p>
+<p><span class="math display">\[
+f(\lambda \mathbf{z}_1 + (1-\lambda)\mathbf{z}_2) \leq \lambda f( \mathbf{z}_1 ) + (1-\lambda)f(\mathbf{z}_2)\;.
+\]</span></p>
+<p>The function <span class="math inline">\(f\)</span> is <em>strictly convex</em> if the inequality is strict: for all <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\mathbf{z}_1\)</span>, and <span class="math inline">\(\mathbf{z}_2\)</span>,</p>
+<p><span class="math display">\[
+f(\lambda \mathbf{z}_1 + (1-\lambda)\mathbf{z}_2) &lt; \lambda f( \mathbf{z}_1 ) + (1-\lambda)f(\mathbf{z}_2)\;.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>Roughly, a convex function is “bowl-shaped.”</p>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-minima" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Local and Global Minima) </strong></span>A point <span class="math inline">\(\mathbf{z}\in S\)</span> is a <em>global minimum</em> of the function <span class="math inline">\(f:S \rightarrow \mathbb{R}\)</span> if <span class="math inline">\(f(\mathbf{z}) \leq f(\mathbf{z}')\)</span> for all <span class="math inline">\(\mathbf{z}' \in S\)</span>.</p>
+<p>A point <span class="math inline">\(\mathbf{z}\in S\)</span> is a <em>local minimum</em> of <span class="math inline">\(f:S \rightarrow \mathbb{R}\)</span> if there exists a neighborhood <span class="math inline">\(T \subseteq S\)</span> containing <span class="math inline">\(\mathbf{z}\)</span> such that <span class="math inline">\(\mathbf{z}\)</span> is a global minimum of <span class="math inline">\(f\)</span> on <span class="math inline">\(T\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">It’s ok if you don’t know what it means for a set to be closed – all the convex functions we will care about in this class will either be defined on sets where this theorem holds or will be otherwise defined so that the conclusions apply.</span></div></div>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-convex-functions-are-nice" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 </strong></span>Let <span class="math inline">\(f:S \rightarrow \mathbb{R}\)</span> be a convex function. Then:</p>
+<ol type="1">
+<li>If <span class="math inline">\(S\)</span> is closed and bounded, <span class="math inline">\(f\)</span> achieves a minimum <span class="math inline">\(\mathbf{z}^*\)</span> on <span class="math inline">\(S\)</span>.</li>
+<li>Furthermore, if <span class="math inline">\(\mathbf{z}^*\)</span> is a <em>local</em> minimum of <span class="math inline">\(f\)</span>, then it is also a global minimum.</li>
+<li>If in addition <span class="math inline">\(f\)</span> is <em>strictly</em> convex, then this minimum is unique.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>The proof of item 1 needs some tools from real analysis. The short version is:</p>
+<ul>
+<li>Every convex function is <em>continuous</em>.</li>
+<li>If <span class="math inline">\(S\subseteq \mathbb{R}^n\)</span> is closed and bounded, then it is <em>compact</em>.</li>
+<li>Continuous functions achieve minima and maxima on compact sets.</li>
+</ul>
+<p>It’s ok if you didn’t follow this! Fortunately the second part of the proof is one we can do together. Suppose to contradiction that <span class="math inline">\(\mathbf{z}^*\)</span> is a local minimum of <span class="math inline">\(f\)</span>, but that there is also a point <span class="math inline">\(\mathbf{z}'\)</span> such that <span class="math inline">\(f(\mathbf{z}') &lt; f(\mathbf{z}^*)\)</span>. Since <span class="math inline">\(\mathbf{z}^*\)</span> is a local minimum, we can find some neighborhood <span class="math inline">\(T\)</span> containing <span class="math inline">\(\mathbf{z}^*\)</span> such that <span class="math inline">\(\mathbf{z}^*\)</span> is a minimum of <span class="math inline">\(f\)</span> on <span class="math inline">\(T\)</span>. Let <span class="math inline">\(\lambda\)</span> be some very small number and consider the point <span class="math inline">\(\mathbf{z}= \lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*\)</span>. Specifically, choose <span class="math inline">\(\lambda\)</span> small enough so that <span class="math inline">\(\mathbf{z}\in T\)</span> (since this makes <span class="math inline">\(\mathbf{z}\)</span> close to <span class="math inline">\(\mathbf{z}^*\)</span>). We can evaluate</p>
+<p><span class="math display">\[
+\begin{align}
+f(\mathbf{z}) &amp;= f(\lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*) \tag{definition of $\mathbf{z}$}\\
+       &amp;\leq \lambda f(\mathbf{z}') + (1-\lambda)f(\mathbf{z}^*)  \tag{$f$ is convex} \\
+       &amp;= f(\mathbf{z}^*) + \lambda (f(\mathbf{z}') - f(\mathbf{z}^*)) \tag{algebra}\\
+       &amp;&lt; f(\mathbf{z}^*)\;. \tag{assumption that $f(\mathbf{z}') &lt; f(\mathbf{z}^*)$}
+\end{align}
+\]</span></p>
+<p>But this is a contradiction, since we constructed <span class="math inline">\(\mathbf{z}\)</span> to be in the neighborhood <span class="math inline">\(T\)</span> where <span class="math inline">\(\mathbf{z}^*\)</span> is a local minimum. We conclude that there is no <span class="math inline">\(\mathbf{z}'\)</span> such that <span class="math inline">\(f(\mathbf{z}') &lt; f(\mathbf{z}^*)\)</span>, and therefore that <span class="math inline">\(\mathbf{z}^*\)</span> is a global minimum.</p>
+<p>The proof of the third part follows a very similar argument to the proof of the second part!</p>
+</div>
+<p>There’s two other very important math facts that we need in order to apply convexity to the empirical risk minimization problem for linear models.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">By induction, it follows that any linear combination of convex functions with positive coefficients is convex.</span></div></div>
+<div class="callout-note callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-convex-compositions" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 </strong></span></p>
+<ol type="1">
+<li>Let <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_2\)</span> be convex functions with the same domain, and let <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> be nonnegative real numbers. Then, the function <span class="math inline">\(f\)</span> defined by <span class="math inline">\(f(\mathbf{z}) = af_1(\mathbf{z}) + bf_2(\mathbf{z})\)</span> is also convex.</li>
+<li>Let <span class="math inline">\(f:\mathbb{R}^n\rightarrow \mathbb{R}\)</span> be convex. Let <span class="math inline">\(\mathbf{A}\in \mathbb{R}^{n\times p}\)</span> and <span class="math inline">\(\mathbf{b} \in \mathbb{R}^n\)</span>. Then, the function <span class="math inline">\(f_\mathbf{A}\)</span> defined by <span class="math inline">\(f_{\mathbf{A},\mathbf{b}}(\mathbf{z}) = f(\mathbf{A}\mathbf{z}- \mathbf{b})\)</span> is convex.<br>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="convexity-and-empirical-risk-minimization" class="level2">
+<h2 class="anchored" data-anchor-id="convexity-and-empirical-risk-minimization">Convexity and Empirical Risk Minimization</h2>
+<p>Let’s finally go back to the empirical risk minimization problem for linear models:</p>
+<p><span id="eq-empirical-risk-linear"><span class="math display">\[
+(\hat{\mathbf{w}}, \hat{b}) = \mathop{\mathrm{arg\,min}}_{\mathbf{w}, b} \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle - b, y_i)\;.
+\tag{3}\]</span></span></p>
+<p>Let’s now assume that the loss function <span class="math inline">\(\ell\)</span> is strictly convex in its first argument: that is, for any possible value of <span class="math inline">\(y\)</span> and any <span class="math inline">\(\lambda \in [0,1]\)</span>,</p>
+<p><span class="math display">\[
+\ell(\lambda \hat{y}_1 + (1-\lambda)\hat{y}, y) \leq  \lambda \ell(\hat{y}_1, y) + (1-\lambda)\ell(\hat{y}, y)\;.
+\]</span></p>
+<p>Then, suddenly the following things would all also be true:</p>
+<ol type="1">
+<li><span class="math inline">\(\ell(\langle \mathbf{w}, \mathbf{x} \rangle - b, y)\)</span> is strictly convex as a function of <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(b\)</span> (<a href="#thm-convex-compositions">Theorem&nbsp;3</a>, part 2).</li>
+<li>The empirical risk <span class="math inline">\(R(\mathbf{w}, b) = \frac{1}{n}\sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle - b, y_i)\)</span> is strictly convex as a function of <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(b\)</span> (<a href="#thm-convex-compositions">Theorem&nbsp;3</a>, part 1).</li>
+<li>If the empirical risk <span class="math inline">\(R(\mathbf{w}, b)\)</span> has a global minimum, that global minimum is unique (<a href="#thm-convex-functions-are-nice">Theorem&nbsp;2</a>, part 3).</li>
+<li>The empirical risk <span class="math inline">\(R(\mathbf{w}, b)\)</span> has no local minima which are not global minima.</li>
+</ol>
+<p>These facts have important implications for our fundamental questions on empirical risk minimization.</p>
+<p><strong>Existence</strong>. Even convex functions are not guaranteed to have minima. However, there are lots of choices of loss function <span class="math inline">\(\ell\)</span> which are sufficient go guarantee that the empirical risk has a minimizer.</p>
+<p><strong>Uniqueness</strong>: When the empirical risk is strictly convex, there can only be one global minimizer.</p>
+<p><strong>Searchability</strong>: When the empirical risk is strictly convex, there are also no local minima other than the global minimum. Algorithmically, <strong><em>this is the most important property of convexity</em></strong>. It means that if I manage to find any local minimum at all, that point <em>must</em> be the global minimum.</p>
+<p><strong>Performance</strong>: Convexity significantly reduces the difficulty of our task: instead of trying to find “the best” solution, it’s sufficient for us to find any local optimum. This means that we can design our algorithms to be “local optimum hunters.” There are lots of fast algorithms to do this. An especially important class of algorithms are <em>gradient descent methods</em>, which we’ll discuss soon.</p>
+</section>
+<section id="demo-logistic-regression" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="demo-logistic-regression">Demo: Logistic Regression</h2>
+<p>Let’s do a partial implementation of logistic regression to illustrate these techniques. In logistic regression, our loss function is the logistic loss</p>
+<p><span class="math display">\[
+\ell(\hat{y}, y) = y \log \hat{y} + (1-y)\log (1-\hat{y})\;.
+\]</span></p>
+<p><em>The logistic loss is convex</em>, although proving this requires a little bit of extra math that we haven’t discuss. This means that the empirical risk minimization problem can have at most one minimum. In fact, it’s possible to show, if the data is <em>not</em> linearly separable, there is a unique global maximum.</p>
+<p>Here is some sample data for which we will try to find a good linear classifier.</p>
+<div class="cell page-columns page-full" data-execution_count="76">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_blobs(n_samples <span class="op">=</span> <span class="dv">100</span>, n_features <span class="op">=</span> p_features <span class="op">-</span> <span class="dv">1</span>, centers <span class="op">=</span> [(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">1</span>)])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="convex-linear-models_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Note that this data is <strong>not</strong> linearly separable. The perceptron algorithm wouldn’t even have converged for this data set, but logistic regression will do great.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now let’s do an implementation. First let’s define a linear predictor function of the form <span class="math inline">\(f(\mathbf{x}) = \langle w, \mathbf{x} \rangle - b\)</span>. Note that this predictor makes the predictions on <em>all</em> the training data at once!</p>
+<div class="cell" data-execution_count="77">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>np.seterr(<span class="bu">all</span><span class="op">=</span><span class="st">'ignore'</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(X, w, b):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X<span class="op">@</span>w <span class="op">-</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now we’ll define some functions to compute the empirical risk:</p>
+<div class="cell" data-execution_count="78">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># these two functions will both work on the entire training data set at once!! </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sigmoid(z):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>z))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># returns a vector containing the per-observation logistic loss for each observation</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> logistic_loss(y_hat, y): </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y<span class="op">*</span>np.log(sigmoid(y_hat)) <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>y)<span class="op">*</span>np.log(<span class="dv">1</span><span class="op">-</span>sigmoid(y_hat))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># first compute the predictions, then compute the average loss per observation</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> empirical_risk(X, y, w, b, loss):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    y_hat <span class="op">=</span> predict(X, w, b)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loss(y_hat, y).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Finally, we can write the function that will solve the empirical risk minimization problem for us. We’re going to use the <code>scipy.optimize.minimize</code> function, which is a built-in function for solving minimization problems. Soon, we’ll study how to solve minimization problems from scratch.</p>
+<p>The <code>scipy.optimize.minimize</code> function requires us to pass it a single function that accepts a vector of parameters, plus an initial guess for the parameters. So, we need to do a little bookkeeping in order to keep all our parameters straight.</p>
+<div class="cell" data-execution_count="79">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_pars(X, y):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define a new version of the empirical risk that accepts a single parameter theta and splits this parameter into w and b before passing it into the risk function</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_minimize(theta):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> theta[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> theta[<span class="dv">1</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> empirical_risk(X, y, w, b, logistic_loss)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> minimize(to_minimize, x0 <span class="op">=</span> np.random.rand(p<span class="op">+</span><span class="dv">1</span>)) </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the vector of parameters that minimizes the function </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> result.x</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return the parameters split into w and b</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> theta[:<span class="op">-</span><span class="dv">1</span>], theta[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="80">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>w, b <span class="op">=</span> find_pars(X, y)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>w, b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="80">
+<pre><code>(array([0.35025174, 0.53460352]), 0.3052924817372483)</code></pre>
+</div>
+</div>
+<p>Let’s plot the linear classifier that we learned!</p>
+<div class="cell" data-execution_count="81">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">101</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.plot(f1, (b <span class="op">-</span> f1<span class="op">*</span>w[<span class="dv">0</span>])<span class="op">/</span>w[<span class="dv">1</span>], color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="convex-linear-models_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Since the logistic loss is convex, we are guaranteed that this solution is the unique best solution (as measured by the logistic loss). There is no other possible set of parameters that would lead to a better result (again, as measured by the logistic loss).</p>
+
+
+
+</section>
+
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-kearns1994toward" class="csl-entry" role="doc-biblioentry">
+Kearns, Michael J, Robert E Schapire, and Linda M Sellie. 1994. <span>“Toward Efficient Agnostic Learning.”</span> <em>Machine Learning</em> 17: 115–41.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
