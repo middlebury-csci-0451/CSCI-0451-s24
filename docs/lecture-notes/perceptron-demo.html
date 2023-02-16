@@ -171,14 +171,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#prep-data" id="toc-prep-data" class="nav-link active" data-scroll-target="#prep-data">Prep Data</a>
+  <ul class="collapse">
+  <li><a href="#perceptron-algorithm" id="toc-perceptron-algorithm" class="nav-link" data-scroll-target="#perceptron-algorithm">Perceptron Algorithm</a></li>
+  <li><a href="#perceptron-algorithm-with-visualization" id="toc-perceptron-algorithm-with-visualization" class="nav-link" data-scroll-target="#perceptron-algorithm-with-visualization">Perceptron Algorithm (with visualization)</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 
-<div class="cell" data-execution_count="3">
+<section id="prep-data" class="level2">
+<h2 class="anchored" data-anchor-id="prep-data">Prep Data</h2>
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hidden.perceptron <span class="im">import</span> perceptron_update, draw_line</span>
@@ -204,81 +216,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> legend:</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> ax.legend()</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plot_scatter(X1, X2, X3, X4, ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plot_scatter(X1, X2, X3, X4, ax)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(np.column_stack((X1, X2)), np.column_stack((X3, X4)), axis <span class="op">=</span> <span class="dv">0</span>) <span class="co"># feature matrix</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>(np.arange(<span class="dv">0</span>, <span class="dv">200</span>) <span class="op">&gt;=</span> <span class="dv">100</span>) <span class="op">-</span> <span class="dv">1</span> <span class="co"># target vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="perceptron-demo_files/figure-html/cell-2-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(np.column_stack((X1, X2)), np.column_stack((X3, X4)), axis <span class="op">=</span> <span class="dv">0</span>) <span class="co"># feature matrix</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>(np.arange(<span class="dv">0</span>, <span class="dv">200</span>) <span class="op">&gt;=</span> <span class="dv">100</span>) <span class="op">-</span> <span class="dv">1</span> <span class="co"># target vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X[:<span class="dv">5</span>,:], y[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(array([[-1.0856306 ,  0.64205469],
+        [ 0.99734545, -1.97788793],
+        [ 0.2829785 ,  0.71226464],
+        [-1.50629471,  2.59830393],
+        [-0.57860025, -0.02462598]]),
+ array([-1, -1, -1, -1, -1]))</code></pre>
 </div>
-<div class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="35">
-<pre><code>array([0.32578837, 0.30292397, 0.24124364])</code></pre>
+</div>
+<section id="perceptron-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="perceptron-algorithm">Perceptron Algorithm</h3>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.random.rand(<span class="dv">3</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>array([8.18876137e-05, 9.80597342e-01, 8.82712985e-01])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.random.rand(<span class="dv">3</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> loss <span class="op">!=</span> <span class="dv">0</span>:</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    w, i, loss <span class="op">=</span> perceptron_update(X, y, w)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Current weight = </span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">, current loss = </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.random.rand(<span class="dv">3</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="dv">1</span> <span class="co"># 1 - accuracy</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> loss <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    w, i, loss <span class="op">=</span> perceptron_update(X, y, w)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Current weight = </span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">, current loss = </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Current weight = [ 1.98864267  1.79546217 -2.38581674], current loss = 0.11
-Current weight = [-2.9942148  -2.39059662 -5.38581674], current loss = 0.545
-Current weight = [-0.11681647  0.42152843 -4.38581674], current loss = 0.5
-Current weight = [ 2.8800299   3.34952175 -3.38581674], current loss = 0.115
-Current weight = [ 0.81536177 -2.06838858 -6.38581674], current loss = 0.505
-Current weight = [ 3.63790736  0.7585664  -5.38581674], current loss = 0.05
-Current weight = [-1.34495011 -3.42749238 -8.38581674], current loss = 0.51
-Current weight = [ 1.97029391 -0.444337   -7.38581674], current loss = 0.495
-Current weight = [ 4.67852555  2.8936447  -6.38581674], current loss = 0.085
-Current weight = [ 1.15103841  0.64899784 -9.38581674], current loss = 0.5
-Current weight = [ 5.08893869  3.50324449 -8.38581674], current loss = 0.06
-Current weight = [  0.60200628  -0.62852796 -11.38581674], current loss = 0.5
-Current weight = [  4.01953565   2.27732361 -10.38581674], current loss = 0.005
-Current weight = [ -3.15756015   0.90851093 -13.38581674], current loss = 0.5
-Current weight = [ -0.01525863   3.42463873 -12.38581674], current loss = 0.465
-Current weight = [  2.25218326   5.90455729 -11.38581674], current loss = 0.025
-Current weight = [ -0.75997844   0.02632326 -14.38581674], current loss = 0.5
-Current weight = [  3.34037261   2.6967476  -13.38581674], current loss = 0.01
-Current weight = [  5.73368022   4.57098011 -12.38581674], current loss = 0.03
-Current weight = [ -0.98074979   4.14105691 -15.38581674], current loss = 0.5
-Current weight = [  1.35600631   6.84657164 -14.38581674], current loss = 0.01
-Current weight = [  5.87489045  -0.94834014 -17.38581674], current loss = 0.43
-Current weight = [  9.05661324   2.9111772  -16.38581674], current loss = 0.03
-Current weight = [  1.87951744   1.54236451 -19.38581674], current loss = 0.5
-Current weight = [  5.19476145   4.5255199  -18.38581674], current loss = 0.0</code></pre>
+<pre><code>Current weight = [ 5.1229715  -7.09197354 -2.31015032], current loss = 0.69
+Current weight = [ 8.15736566 -4.12317281 -1.31015032], current loss = 0.23
+Current weight = [ 5.37497837 -6.40602099 -4.31015032], current loss = 0.65
+Current weight = [ 7.91732483 -3.03071603 -3.31015032], current loss = 0.19
+Current weight = [ 3.43039242 -7.16248848 -6.31015032], current loss = 0.6
+Current weight = [ 6.48804178 -3.13425481 -5.31015032], current loss = 0.175
+Current weight = [ 3.03742515 -3.6658318  -8.31015032], current loss = 0.525
+Current weight = [ -2.19371152   0.56983483 -11.31015032], current loss = 0.5
+Current weight = [  0.70911712   3.84045048 -10.31015032], current loss = 0.025
+Current weight = [ 2.74725925  5.9535648  -9.31015032], current loss = 0.035
+Current weight = [ -0.26490244   0.07533077 -12.31015032], current loss = 0.5
+Current weight = [  2.94518736   3.17879453 -11.31015032], current loss = 0.0</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123456</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.random.rand(<span class="dv">3</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(np.column_stack((X1, X2)), np.column_stack((X3, X4)), axis <span class="op">=</span> <span class="dv">0</span>) <span class="co"># feature matrix</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>(np.arange(<span class="dv">0</span>, <span class="dv">200</span>) <span class="op">&gt;=</span> <span class="dv">100</span>) <span class="op">-</span> <span class="dv">1</span> <span class="co"># target vector</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">4</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">5</span>, sharex <span class="op">=</span> <span class="va">True</span>, sharey <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axarr.ravel():</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(xlim <span class="op">=</span> (<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim <span class="op">=</span> (<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    plot_scatter(X1, X2, X3, X4, ax, legend <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    draw_line(w, <span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, ax, color <span class="op">=</span> <span class="st">"black"</span>, linestyle <span class="op">=</span> <span class="st">"dashed"</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    w, i, loss <span class="op">=</span> perceptron_update(X, y, w)    </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    ax.scatter(X[i,<span class="dv">0</span>],X[i,<span class="dv">1</span>], color <span class="op">=</span> <span class="st">"black"</span>, facecolors <span class="op">=</span> <span class="st">"none"</span>, edgecolors <span class="op">=</span> <span class="st">"black"</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    draw_line(w, <span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, ax, color <span class="op">=</span> <span class="st">"black"</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"loss = </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="perceptron-algorithm-with-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="perceptron-algorithm-with-visualization">Perceptron Algorithm (with visualization)</h3>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123456</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.random.rand(<span class="dv">3</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(np.column_stack((X1, X2)), np.column_stack((X3, X4)), axis <span class="op">=</span> <span class="dv">0</span>) <span class="co"># feature matrix</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>(np.arange(<span class="dv">0</span>, <span class="dv">200</span>) <span class="op">&gt;=</span> <span class="dv">100</span>) <span class="op">-</span> <span class="dv">1</span> <span class="co"># target vector</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">5</span>, sharex <span class="op">=</span> <span class="va">True</span>, sharey <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axarr.ravel():</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(xlim <span class="op">=</span> (<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim <span class="op">=</span> (<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    plot_scatter(X1, X2, X3, X4, ax, legend <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    draw_line(w, <span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, ax, color <span class="op">=</span> <span class="st">"black"</span>, linestyle <span class="op">=</span> <span class="st">"dashed"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    w, i, loss <span class="op">=</span> perceptron_update(X, y, w)    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ax.scatter(X[i,<span class="dv">0</span>],X[i,<span class="dv">1</span>], color <span class="op">=</span> <span class="st">"black"</span>, facecolors <span class="op">=</span> <span class="st">"none"</span>, edgecolors <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    draw_line(w, <span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, ax, color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"loss = </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="perceptron-demo_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
 
+</section>
+</section>
 
 <p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

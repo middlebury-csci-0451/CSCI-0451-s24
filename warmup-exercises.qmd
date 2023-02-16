@@ -10,13 +10,135 @@ $$
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\vx}{\mathbf{x}}
 \newcommand{\vw}{\mathbf{w}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
 \newcommand{\bracket}[1]{\langle #1 \rangle}
 \newcommand{\paren}[1]{\left( #1 \right)}
 $$
 
 :::
 
-### Classification Rates {#sec-classification-rates}
+
+## Perceptron {#sec-perceptron}
+
+#### Part 1
+
+Sketch the line in $\R^2$ described by the equation 
+$$ 
+\bracket{\vw, \vx}  =  b\;, 
+$$ {#eq-perceptron-boundary}
+
+where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $b = \frac{1}{2}$. Here, $\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i$ is the inner product (or dot product) between the vectors $\vw$ and $\vw$. 
+
+#### Part 2
+
+Write a quick Python function called `perceptron_classify(w, b, x)`. `w` and `x` should both be 1d numpy arrays of the same length, and `b` should be a scalar. Your function should return `0` if $\bracket{\vw, \vx}  <  b$ and `1` if $\bracket{\vw, \vx}  \geq  b$. [An excellent solution will use neither a `for`-loop nor an `if`-statement.]{.aside}
+
+Verify that your function works on a few simple examples. 
+
+#### Part 3
+
+Consider a line of the general form of @eq-perceptron-boundary. Let's allow $\vx$ and $\vw$ to both be $n$-dimensional, so that this equation defines a hyperplane in $\R^n$. Suppose that we wanted to represent *the same hyperplane* in $\R^n$ using an equation of the form 
+
+$$
+\bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.
+$$ {#eq-perceptron-boundary-2}
+
+for some $\tilde{\vw} \in \R^{n+1}$. Define $\tilde{\vx} = (\vx, 1)$. How could you define $\tilde{\vw}$ to make @eq-perceptron-boundary-2 equivalent to @eq-perceptron-boundary?
+
+## Convexity {#sec-convexity}
+
+As you learned in Daumé, informally, a convex function is a function that is "bowl-shaped." Hardt and Recht give the formal definition, which has the benefit of applying to functions of many variables. 
+
+#### Part 1
+
+Consider the 0-1 step function that I've plotted below: 
+
+```{python}
+#| echo: false
+from matplotlib import pyplot as plt
+plt.rcParams["figure.figsize"] = (5, 3)
+```
+
+```{python}
+from matplotlib import pyplot as plt 
+import numpy as np
+
+fig, ax = plt.subplots(1, 1) 
+y_hat = np.linspace(-1, 1, 101)
+
+loss = lambda y_hat, y: 1 - 1*(y_hat*y > 0)
+
+ax.set(xlabel = r"$\hat{y}$", 
+       ylabel = r"$\ell(\hat{y}, y)$")
+
+ax.plot(y_hat, loss(y_hat, 1))
+```
+
+Show pictorially that this function is not convex. No proof needed -- just the right drawing. 
+
+### Part 2: Second Derivative Test
+
+Another way to tell whether a function is convex is to check its second derivative. If a function $f:S\rightarrow \R$ has a convex domain $S\subseteq R$, if $f$ is everywhere twice-differentiable, and if $\frac{d^2f(z_0)}{dz^2} > 0$ for all $z_0 \in S$, then $f$ is convex. 
+
+Use the second derivative test to check that the following two functions are convex: [The base of the logarithm doesn't really matter, but for this course it is always most convenient to assume logs base $e$, which you might also have seen written $\ln$.]{.aside}
+
+$$
+\begin{aligned}
+f(z) &= - \log z \\ 
+g(z) &= - \log(1-z)\;.
+\end{aligned}
+$$ 
+
+
+
+### Part 3: Plotting Practice
+
+In a Jupyter notebook, write a simple program to plot each of the functions $f$ and $g$ from Part 2. Some of the Part 1 code is likely to help you. 
+
+### Part 4: Convexity in Many Variables
+
+Recall the Hardt and Recht definition of convexity: a function $f:\R^n \rightarrow \R$ is convex if, for any $\lambda \in [0,1]$ and any points $\vz_1, \vz_2 \in \R^n$, 
+
+$$
+f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\;. 
+$$
+
+Using this definition, write a short mathematical proof that the function $f(\vz) = \norm{\vz}$ is convex. You will want to use the *triangle inequality*, which says that $\norm{\vz_1 + \vz_2} \leq \norm{\vz_1} + \norm{\vz_2}$. [This proof requires just a few lines if you carefully use your definitions!]{.aside}
+
+
+
+## The Coin-Flipping Game {#sec-erm}
+
+Let's play a game! Here is the setup: 
+
+I have a coin with probability of heads equal to $p \in [0,1]$. I am going to ask you to pick a number $\hat{p} \in [0,1]$. Then, I flip my coin. 
+
+[This game is more fun for me than it is for you.]{.aside}
+
+- If my coin comes up heads, you give me $-\log \hat{p}$ dollars. 
+- If my coin comes up tails, you give me $-\log (1-\hat{p})$ dollars. 
+
+#### Part 1
+
+Compute the *expected* amount of money you will give me when we play this game in terms of $p$ and $\hat{p}$. Call this quantity $R(\hat{p}, p)$. This is the *risk* of the guess $\hat{p}$. 
+
+#### Part 2
+
+[Take the derivative and set it equal to 0! Don't forget to check that you've found a minimum of $R(\hat{p}, p)$ rather than a maximum or an inflection point.]{.aside}
+
+Suppose I tell you the value of $p$. Write a mathematical proof to show that your best choice of $\hat{p}$ (the one that loses you the least money) is $\hat{p} = p$. 
+
+#### Part 3
+
+Now suppose that I *don't* tell you the true value of $p$. Instead, I let you observe $n$ coin flips before asking you to make your guess. Describe: 
+
+- A suggestion for choosing $\hat{p}$ based only on the results of the previous flips. 
+- A way to estimate the risk (expected amount of money lost) based only on the results of the previous flips. 
+
+Your answer should depend on $\hat{p}$ but not on $p$! 
+
+## Classification Rates {#sec-classification-rates}
 
 #### Part 1
 
@@ -79,63 +201,3 @@ An excellent solution for this part will not use any for-loops. Computing each o
 df[["y"]] == df[["y_pred"]]
 df[["y"]].sum(), df[["y"]].sum()
 ```
-
-### Perceptron {#sec-perceptron}
-
-#### Part 1
-
-Sketch the line in $\R^2$ described by the equation 
-$$ 
-\bracket{\vw, \vx}  =  b\;, 
-$$ {#eq-perceptron-boundary}
-
-where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $b = \frac{1}{2}$. Here, $\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i$ is the inner product (or dot product) between the vectors $\vw$ and $\vw$. 
-
-#### Part 2
-
-Write a quick Python function called `perceptron_classify(w, b, x)`. `w` and `x` should both be 1d numpy arrays of the same length, and `b` should be a scalar. Your function should return `0` if $\bracket{\vw, \vx}  <  b$ and `1` if $\bracket{\vw, \vx}  \geq  b$. [An excellent solution will use neither a `for`-loop nor an `if`-statement.]{.aside}
-
-Verify that your function works on a few simple examples. 
-
-#### Part 3
-
-Consider a line of the general form of @eq-perceptron-boundary. Let's allow $\vx$ and $\vw$ to both be $n$-dimensional, so that this equation defines a hyperplane in $\R^n$. Suppose that we wanted to represent *the same hyperplane* in $\R^n$ using an equation of the form 
-
-$$
-\bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.
-$$ {#eq-perceptron-boundary-2}
-
-for some $\tilde{\vw} \in \R^{n+1}$. Define $\tilde{\vx} = (\vx, 1)$. How could you define $\tilde{\vw}$ to make @eq-perceptron-boundary-2 equivalent to @eq-perceptron-boundary?
-
-
-
-### Empirical Risk Minimization {#sec-erm}
-
-Let's play a game! Here is the setup: 
-
-I have a coin with probability of heads equal to $p \in [0,1]$. I am going to ask you to pick a number $\hat{p} \in [0,1]$. Then, I flip my coin. 
-
-[This game is more fun for me than it is for you.]{.aside}
-
-- If my coin comes up heads, you give me $-\log \hat{p}$ dollars. 
-- If my coin comes up tails, you give me $\log (1-\hat{p})$ dollars. 
-
-#### Part 1
-
-Compute the *expected* amount of money you will give me when we play this game in terms of $p$ and $\hat{p}$. Call this quantity $R(\hat{p}, p)$. This is the *risk* of the guess $\hat{p}$. 
-
-#### Part 2
-
-[Take the derivative and set it equal to 0! Don't forget to check that you've found a minimum of $R(\hat{p}, p)$ rather than a maximum or an inflection point.]{.aside}
-
-Suppose I tell you the value of $p$. Write a mathematical proof to show that your best choice of $\hat{p}$ (the one that loses you the least money) is $\hat{p} = p$. 
-
-#### Part 3
-
-Now suppose that I *don't* tell you the true value of $p$. Instead, I let you observe $n$ coin flips before asking you to make your guess. Describe: 
-
-- A suggestion for choosing $\hat{p}$ based only on the results of the previous flips. 
-- A way to estimate the risk (expected amount of money lost) based only on the results of the previous flips. 
-
-Your answer should depend on $\hat{p}$ but not on $p$! 
-

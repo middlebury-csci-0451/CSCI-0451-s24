@@ -236,9 +236,9 @@ ul.task-list{list-style: none;}
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
                            <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch04.pdf">Daumé 4.1-4.5, 4.7</a><br> 
-                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#2.-Introduction-to-NumPy">Introduction to Numpy</a> from <i>The Python Data Science Handbook</i> by Jake VanderPlas<br> 
+                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#2.-Introduction-to-NumPy">Introduction to Numpy</a> from The Python Data Science Handbook by Jake VanderPlas<br> 
                            <a href="https://nbviewer.org/github/PhilChodrow/PIC16B/blob/master/lectures/math/linear-algebra-I.ipynb">Linear algebra with Numpy</a><br> 
-                           <i><a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht</a>, p. 37-41</i><br> 
+                           <i><a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht</a>, p. 33-41 (if you need to see a definition of a function gradient, see <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé p. 93</a>)</i><br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Notes</b><br>
@@ -247,7 +247,7 @@ ul.task-list{list-style: none;}
             </td>
             <td class="smaller syllabus-item-assignment">
                     <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-perceptron"> Perceptron </a>
+                    <a href="./warmup-exercises.html#sec-perceptron">Perceptron</a>
             </td>
             <td class="smaller syllabus-item-assignment">
                     <b>Assignments</b><br>
@@ -262,12 +262,12 @@ ul.task-list{list-style: none;}
                     <span class="syllabus-day-of-week">M</span>
                     <br>
                     <span class="syllabus-date">Feb. 20</span></td> 
-            <td colspan="2"> Models, Loss Functions, and Algorithms
+            <td colspan="2"> Convex Linear Models and Logistic Regression
  </td>  
         </tr>
         <tr>
             <td colspan="4" class="smaller"> 
-                We generalize our study of the perceptron to a broader framework for supervised machine learning called <i>empirical risk minimization</i>.
+                We discuss the modeling choices necessary to make the empirical risk minimization problem for linear classifiers tractable. In doing so we discuss convex functions and some of their properties that are relevant for optimization. Finally, we introduce logistic regression as an example of a convex linear classifier. 
             </td>
         </tr>
         <tr>
@@ -279,16 +279,19 @@ ul.task-list{list-style: none;}
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé 2.1-2.7</a><br> 
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.1-7.3</a><br> 
+                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé 2.1-2.7</a>
+<br> 
+                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.1-7.3</a>
+<br> 
+                           <a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht, p. 70-77</a><br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Notes</b><br>
-                            <a href="./lecture-notes/erm.html">Lecture notes</a> <br> 
+                            <a href="./lecture-notes/convex-linear-models.html">Lecture notes</a> <br> 
             </td>
             <td class="smaller syllabus-item-assignment">
                     <b>Warmup</b><br>
-                    TBD
+                    <a href="./warmup-exercises.html#sec-convexity">Convexity</a>
             </td>
             <td class="smaller syllabus-item-assignment">
             </td>
@@ -298,7 +301,48 @@ ul.task-list{list-style: none;}
                     <span class="syllabus-day-of-week">W</span>
                     <br>
                     <span class="syllabus-date">Feb. 22</span></td> 
-            <td colspan="2"> Convex Linear Models and Logistic Regression
+            <td colspan="2"> Optimization via Gradient Descent 
+ </td>  
+        </tr>
+        <tr>
+            <td colspan="4" class="smaller"> 
+                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for a linear classifier with a specific loss function. 
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="smaller syllabus-item-objective">
+                    <b>Learning Objectives</b><br>
+                            Theory <br> 
+                            Implementation <br> 
+            </td>
+            <td class="smaller syllabus-item-readings">
+                    <b>Reading</b><br>
+                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.4-7.6</a><br> 
+                           <a href="https://via.hypothes.is/https://mml-book.github.io/book/mml-book.pdf">Diesenroth, Faisal, and Soon, p. 225-233</a><br> 
+            </td>
+            <td class="smaller syllabus-item-readings">
+                    <b>Notes</b><br>
+                            TBD <br> 
+            </td>
+            <td class="smaller syllabus-item-assignment">
+                    <b>Warmup</b><br>
+                    TBD
+            </td>
+            <td class="smaller syllabus-item-assignment">
+                    <b>Assignments</b><br>
+                    Blog post: Gradient Descent for Logistic Regression (details soon) <br> <br> <b> ACTUAL REAL DUE DATE: <a <a="" href="./assignments/process/goal-setting.html">Reflective Goal-Setting</a> due 2/24 </b>
+            </td>
+        </tr>
+            </tbody></table>
+            <h2 class="anchored"> Week 3 </h2>
+            <table>
+        <tbody><tr>
+            <td rowspan="2" class="syllabus-date-pane">
+                    <span class="syllabus-day-of-week">M</span>
+                    <br>
+                    <span class="syllabus-date">Feb. 27</span></td> 
+            <td colspan="2"> Features, Regularization, and Nonlinear Decision Boundaries
  </td>  
         </tr>
         <tr>
@@ -312,6 +356,8 @@ ul.task-list{list-style: none;}
                     <b>Learning Objectives</b><br>
                             Theory <br> 
                             Implementation <br> 
+                            Navigation <br> 
+                            Experimentation <br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
@@ -328,20 +374,17 @@ ul.task-list{list-style: none;}
             <td class="smaller syllabus-item-assignment">
             </td>
         </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 3 </h2>
-            <table>
-        <tbody><tr>
+        <tr>
             <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
+                    <span class="syllabus-day-of-week">W</span>
                     <br>
-                    <span class="syllabus-date">Feb. 27</span></td> 
-            <td colspan="2"> Optimization via Gradient Descent 
+                    <span class="syllabus-date">Mar. 01</span></td> 
+            <td colspan="2"> Kernel Methods
  </td>  
         </tr>
         <tr>
             <td colspan="4" class="smaller"> 
-                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for the primal support vector machine. 
+                TBD
             </td>
         </tr>
         <tr>
@@ -349,7 +392,6 @@ ul.task-list{list-style: none;}
             <td class="smaller syllabus-item-objective">
                     <b>Learning Objectives</b><br>
                             Theory <br> 
-                            Implementation <br> 
             </td>
             <td class="smaller syllabus-item-readings">
                     <b>Reading</b><br>
@@ -365,10 +407,13 @@ ul.task-list{list-style: none;}
             </td>
             <td class="smaller syllabus-item-assignment">
                     <b>Assignments</b><br>
-                    <a href="./assignments/blog-posts/blog-post-erm.html">Blog post: empirical risk minimization</a> 
+                    Blog post: kernel logistic regression or kernel support vector machine SVM
             </td>
         </tr>
-        </tbody></table>
+            </tbody></table>
+            
+            
+        
 <div class="listing-no-matching d-none">
 No matching items
 </div>

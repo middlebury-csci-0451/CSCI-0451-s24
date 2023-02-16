@@ -180,9 +180,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link active" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
-  <li><a href="#sec-perceptron" id="toc-sec-perceptron" class="nav-link" data-scroll-target="#sec-perceptron">Perceptron</a></li>
-  <li><a href="#sec-erm" id="toc-sec-erm" class="nav-link" data-scroll-target="#sec-erm">Empirical Risk Minimization</a></li>
+  <li><a href="#sec-perceptron" id="toc-sec-perceptron" class="nav-link active" data-scroll-target="#sec-perceptron">Perceptron</a></li>
+  <li><a href="#sec-convexity" id="toc-sec-convexity" class="nav-link" data-scroll-target="#sec-convexity">Convexity</a>
+  <ul class="collapse">
+  <li><a href="#part-2-second-derivative-test" id="toc-part-2-second-derivative-test" class="nav-link" data-scroll-target="#part-2-second-derivative-test">Part 2: Second Derivative Test</a></li>
+  <li><a href="#part-3-plotting-practice" id="toc-part-3-plotting-practice" class="nav-link" data-scroll-target="#part-3-plotting-practice">Part 3: Plotting Practice</a></li>
+  <li><a href="#part-4-convexity-in-many-variables" id="toc-part-4-convexity-in-many-variables" class="nav-link" data-scroll-target="#part-4-convexity-in-many-variables">Part 4: Convexity in Many Variables</a></li>
+  </ul></li>
+  <li><a href="#sec-erm" id="toc-sec-erm" class="nav-link" data-scroll-target="#sec-erm">The Coin-Flipping Game</a></li>
+  <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   </ul>
 </nav>
     </div>
@@ -216,44 +222,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\vx}{\mathbf{x}}
 \newcommand{\vw}{\mathbf{w}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
 \newcommand{\bracket}[1]{\langle #1 \rangle}
 \newcommand{\paren}[1]{\left( #1 \right)}
 \]</span></p>
 </div>
-<section id="sec-classification-rates" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h3>
-<section id="part-1" class="level4 page-columns page-full">
+<section id="sec-perceptron" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-perceptron">Perceptron</h2>
+<section id="part-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-1">Part 1</h4>
+<p>Sketch the line in <span class="math inline">\(\R^2\)</span> described by the equation</p>
+<p><span id="eq-perceptron-boundary"><span class="math display">\[
+\bracket{\vw, \vx}  =  b\;,
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(\vw = \paren{1, -\frac{1}{2}}^T \in \R^2\)</span> and <span class="math inline">\(b = \frac{1}{2}\)</span>. Here, <span class="math inline">\(\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i\)</span> is the inner product (or dot product) between the vectors <span class="math inline">\(\vw\)</span> and <span class="math inline">\(\vw\)</span>.</p>
+</section>
+<section id="part-2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="part-2">Part 2</h4>
+<div class="page-columns page-full"><p>Write a quick Python function called <code>perceptron_classify(w, b, x)</code>. <code>w</code> and <code>x</code> should both be 1d numpy arrays of the same length, and <code>b</code> should be a scalar. Your function should return <code>0</code> if <span class="math inline">\(\bracket{\vw, \vx} &lt; b\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx} \geq b\)</span>. </p><div class="no-row-height column-margin column-container"><span class="aside">An excellent solution will use neither a <code>for</code>-loop nor an <code>if</code>-statement.</span></div></div>
+<p>Verify that your function works on a few simple examples.</p>
+</section>
+<section id="part-3" class="level4">
+<h4 class="anchored" data-anchor-id="part-3">Part 3</h4>
+<p>Consider a line of the general form of <a href="#eq-perceptron-boundary">Equation&nbsp;1</a>. Let’s allow <span class="math inline">\(\vx\)</span> and <span class="math inline">\(\vw\)</span> to both be <span class="math inline">\(n\)</span>-dimensional, so that this equation defines a hyperplane in <span class="math inline">\(\R^n\)</span>. Suppose that we wanted to represent <em>the same hyperplane</em> in <span class="math inline">\(\R^n\)</span> using an equation of the form</p>
+<p><span id="eq-perceptron-boundary-2"><span class="math display">\[
+\bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.
+\tag{2}\]</span></span></p>
+<p>for some <span class="math inline">\(\tilde{\vw} \in \R^{n+1}\)</span>. Define <span class="math inline">\(\tilde{\vx} = (\vx, 1)\)</span>. How could you define <span class="math inline">\(\tilde{\vw}\)</span> to make <a href="#eq-perceptron-boundary-2">Equation&nbsp;2</a> equivalent to <a href="#eq-perceptron-boundary">Equation&nbsp;1</a>?</p>
+</section>
+</section>
+<section id="sec-convexity" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-convexity">Convexity</h2>
+<p>As you learned in Daumé, informally, a convex function is a function that is “bowl-shaped.” Hardt and Recht give the formal definition, which has the benefit of applying to functions of many variables.</p>
+<section id="part-1-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
+<p>Consider the 0-1 step function that I’ve plotted below:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">101</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="kw">lambda</span> y_hat, y: <span class="dv">1</span> <span class="op">-</span> <span class="dv">1</span><span class="op">*</span>(y_hat<span class="op">*</span>y <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="vs">r"$\hat</span><span class="sc">{y}</span><span class="vs">$"</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       ylabel <span class="op">=</span> <span class="vs">r"$\ell(\hat</span><span class="sc">{y}</span><span class="vs">, y)$"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ax.plot(y_hat, loss(y_hat, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="warmup-exercises_files/figure-html/cell-3-output-1.png" width="445" height="286"></p>
+</div>
+</div>
+<p>Show pictorially that this function is not convex. No proof needed – just the right drawing.</p>
+</section>
+<section id="part-2-second-derivative-test" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-2-second-derivative-test">Part 2: Second Derivative Test</h3>
+<p>Another way to tell whether a function is convex is to check its second derivative. If a function <span class="math inline">\(f:S\rightarrow \R\)</span> has a convex domain <span class="math inline">\(S\subseteq R\)</span>, if <span class="math inline">\(f\)</span> is everywhere twice-differentiable, and if <span class="math inline">\(\frac{d^2f(z_0)}{dz^2} &gt; 0\)</span> for all <span class="math inline">\(z_0 \in S\)</span>, then <span class="math inline">\(f\)</span> is convex.</p>
+<div class="page-columns page-full"><p>Use the second derivative test to check that the following two functions are convex: </p><div class="no-row-height column-margin column-container"><span class="aside">The base of the logarithm doesn’t really matter, but for this course it is always most convenient to assume logs base <span class="math inline">\(e\)</span>, which you might also have seen written <span class="math inline">\(\ln\)</span>.</span></div></div>
+<p><span class="math display">\[
+\begin{aligned}
+f(z) &amp;= - \log z \\
+g(z) &amp;= - \log(1-z)\;.
+\end{aligned}
+\]</span></p>
+</section>
+<section id="part-3-plotting-practice" class="level3">
+<h3 class="anchored" data-anchor-id="part-3-plotting-practice">Part 3: Plotting Practice</h3>
+<p>In a Jupyter notebook, write a simple program to plot each of the functions <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> from Part 2. Some of the Part 1 code is likely to help you.</p>
+</section>
+<section id="part-4-convexity-in-many-variables" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-4-convexity-in-many-variables">Part 4: Convexity in Many Variables</h3>
+<p>Recall the Hardt and Recht definition of convexity: a function <span class="math inline">\(f:\R^n \rightarrow \R\)</span> is convex if, for any <span class="math inline">\(\lambda \in [0,1]\)</span> and any points <span class="math inline">\(\vz_1, \vz_2 \in \R^n\)</span>,</p>
+<p><span class="math display">\[
+f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\;.
+\]</span></p>
+<div class="page-columns page-full"><p>Using this definition, write a short mathematical proof that the function <span class="math inline">\(f(\vz) = \norm{\vz}\)</span> is convex. You will want to use the <em>triangle inequality</em>, which says that <span class="math inline">\(\norm{\vz_1 + \vz_2} \leq \norm{\vz_1} + \norm{\vz_2}\)</span>. </p><div class="no-row-height column-margin column-container"><span class="aside">This proof requires just a few lines if you carefully use your definitions!</span></div></div>
+</section>
+</section>
+<section id="sec-erm" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-erm">The Coin-Flipping Game</h2>
+<p>Let’s play a game! Here is the setup:</p>
+<p>I have a coin with probability of heads equal to <span class="math inline">\(p \in [0,1]\)</span>. I am going to ask you to pick a number <span class="math inline">\(\hat{p} \in [0,1]\)</span>. Then, I flip my coin.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">This game is more fun for me than it is for you.</span></div></div>
+<ul>
+<li>If my coin comes up heads, you give me <span class="math inline">\(-\log \hat{p}\)</span> dollars.</li>
+<li>If my coin comes up tails, you give me <span class="math inline">\(-\log (1-\hat{p})\)</span> dollars.</li>
+</ul>
+<section id="part-1-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-1-2">Part 1</h4>
+<p>Compute the <em>expected</em> amount of money you will give me when we play this game in terms of <span class="math inline">\(p\)</span> and <span class="math inline">\(\hat{p}\)</span>. Call this quantity <span class="math inline">\(R(\hat{p}, p)\)</span>. This is the <em>risk</em> of the guess <span class="math inline">\(\hat{p}\)</span>.</p>
+</section>
+<section id="part-2-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="part-2-1">Part 2</h4>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">Take the derivative and set it equal to 0! Don’t forget to check that you’ve found a minimum of <span class="math inline">\(R(\hat{p}, p)\)</span> rather than a maximum or an inflection point.</span></div></div>
+<p>Suppose I tell you the value of <span class="math inline">\(p\)</span>. Write a mathematical proof to show that your best choice of <span class="math inline">\(\hat{p}\)</span> (the one that loses you the least money) is <span class="math inline">\(\hat{p} = p\)</span>.</p>
+</section>
+<section id="part-3-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-3-1">Part 3</h4>
+<p>Now suppose that I <em>don’t</em> tell you the true value of <span class="math inline">\(p\)</span>. Instead, I let you observe <span class="math inline">\(n\)</span> coin flips before asking you to make your guess. Describe:</p>
+<ul>
+<li>A suggestion for choosing <span class="math inline">\(\hat{p}\)</span> based only on the results of the previous flips.</li>
+<li>A way to estimate the risk (expected amount of money lost) based only on the results of the previous flips.</li>
+</ul>
+<p>Your answer should depend on <span class="math inline">\(\hat{p}\)</span> but not on <span class="math inline">\(p\)</span>!</p>
+</section>
+</section>
+<section id="sec-classification-rates" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>
+<section id="part-1-3" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="part-1-3">Part 1</h4>
 <div class="page-columns page-full"><p>COVID-19 rapid tests have approximately an 80% sensitivity rate, which means that, in an individual who truly has COVID-19, the probability of a rapid test giving a positive result is roughly 80%.  On the other hand, the probability of a rapid test giving a positive result for an individual who truly does <strong>not</strong> have COVID-19 is 5%. Suppose that approximately 4% of the population are currently infected with COVID-19. </p><div class="no-row-height column-margin column-container"><span class="aside">These numbers are mostly made-up.</span><span class="aside">Example 2.3.1 of <a href="https://github.com/probml/pml-book/releases/latest/download/book1.pdf">Murphy</a>, page 46, has a good review of the relevant probability and the definition of each of the rates below.</span></div></div>
 <p>Write a Python function called <code>rate_summary</code> that prints the following output, filling in the correct values for each of the specified rates:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
 The false positive rate is ___. </code></pre>
 </section>
-<section id="part-2" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="part-2">Part 2</h4>
+<section id="part-2-2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="part-2-2">Part 2</h4>
 <ol type="1">
 <li>Suppose that scientists found an alternative rapid test which had a 75% sensitivity rate with a 0% chance of a positive test on someone who is truly not infected. Would you suggest replacing the old rapid tests with these alternative tests? Why? </li>
 <li>What if the alternative test had an 85% sensitivity rate and a 10% chance of a positive test on someone who is truly not infected?</li>
 </ol>
 <div class="no-row-height column-margin column-container"><span class="aside">You don’t necessarily need to use your function from the previous part in this part.</span></div></section>
-<section id="part-3" class="level4">
-<h4 class="anchored" data-anchor-id="part-3">Part 3</h4>
+<section id="part-3-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-3-2">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 <div>
 
@@ -297,8 +406,8 @@ The false positive rate is ___. </code></pre>
 </div>
 </div>
 <p>You should be able to use your function like this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -306,63 +415,11 @@ The false positive rate is ___. </code></pre>
 <section id="hints" class="level5">
 <h5 class="anchored" data-anchor-id="hints">Hints</h5>
 <p>An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-</section>
-<section id="sec-perceptron" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="sec-perceptron">Perceptron</h3>
-<section id="part-1-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
-<p>Sketch the line in <span class="math inline">\(\R^2\)</span> described by the equation</p>
-<p><span id="eq-perceptron-boundary"><span class="math display">\[
-\bracket{\vw, \vx}  =  b\;,
-\tag{1}\]</span></span></p>
-<p>where <span class="math inline">\(\vw = \paren{1, -\frac{1}{2}}^T \in \R^2\)</span> and <span class="math inline">\(b = \frac{1}{2}\)</span>. Here, <span class="math inline">\(\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i\)</span> is the inner product (or dot product) between the vectors <span class="math inline">\(\vw\)</span> and <span class="math inline">\(\vw\)</span>.</p>
-</section>
-<section id="part-2-1" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="part-2-1">Part 2</h4>
-<div class="page-columns page-full"><p>Write a quick Python function called <code>perceptron_classify(w, b, x)</code>. <code>w</code> and <code>x</code> should both be 1d numpy arrays of the same length, and <code>b</code> should be a scalar. Your function should return <code>0</code> if <span class="math inline">\(\bracket{\vw, \vx} &lt; b\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx} \geq b\)</span>. </p><div class="no-row-height column-margin column-container"><span class="aside">An excellent solution will use neither a <code>for</code>-loop nor an <code>if</code>-statement.</span></div></div>
-<p>Verify that your function works on a few simple examples.</p>
-</section>
-<section id="part-3-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-3-1">Part 3</h4>
-<p>Consider a line of the general form of <a href="#eq-perceptron-boundary">Equation&nbsp;1</a>. Let’s allow <span class="math inline">\(\vx\)</span> and <span class="math inline">\(\vw\)</span> to both be <span class="math inline">\(n\)</span>-dimensional, so that this equation defines a hyperplane in <span class="math inline">\(\R^n\)</span>. Suppose that we wanted to represent <em>the same hyperplane</em> in <span class="math inline">\(\R^n\)</span> using an equation of the form</p>
-<p><span id="eq-perceptron-boundary-2"><span class="math display">\[
-\bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.
-\tag{2}\]</span></span></p>
-<p>for some <span class="math inline">\(\tilde{\vw} \in \R^{n+1}\)</span>. Define <span class="math inline">\(\tilde{\vx} = (\vx, 1)\)</span>. How could you define <span class="math inline">\(\tilde{\vw}\)</span> to make <a href="#eq-perceptron-boundary-2">Equation&nbsp;2</a> equivalent to <a href="#eq-perceptron-boundary">Equation&nbsp;1</a>?</p>
-</section>
-</section>
-<section id="sec-erm" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="sec-erm">Empirical Risk Minimization</h3>
-<p>Let’s play a game! Here is the setup:</p>
-<p>I have a coin with probability of heads equal to <span class="math inline">\(p \in [0,1]\)</span>. I am going to ask you to pick a number <span class="math inline">\(\hat{p} \in [0,1]\)</span>. Then, I flip my coin.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">This game is more fun for me than it is for you.</span></div></div>
-<ul>
-<li>If my coin comes up heads, you give me <span class="math inline">\(-\log \hat{p}\)</span> dollars.</li>
-<li>If my coin comes up tails, you give me <span class="math inline">\(\log (1-\hat{p})\)</span> dollars.</li>
-</ul>
-<section id="part-1-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-1-2">Part 1</h4>
-<p>Compute the <em>expected</em> amount of money you will give me when we play this game in terms of <span class="math inline">\(p\)</span> and <span class="math inline">\(\hat{p}\)</span>. Call this quantity <span class="math inline">\(R(\hat{p}, p)\)</span>. This is the <em>risk</em> of the guess <span class="math inline">\(\hat{p}\)</span>.</p>
-</section>
-<section id="part-2-2" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="part-2-2">Part 2</h4>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">Take the derivative and set it equal to 0! Don’t forget to check that you’ve found a minimum of <span class="math inline">\(R(\hat{p}, p)\)</span> rather than a maximum or an inflection point.</span></div></div>
-<p>Suppose I tell you the value of <span class="math inline">\(p\)</span>. Write a mathematical proof to show that your best choice of <span class="math inline">\(\hat{p}\)</span> (the one that loses you the least money) is <span class="math inline">\(\hat{p} = p\)</span>.</p>
-</section>
-<section id="part-3-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-3-2">Part 3</h4>
-<p>Now suppose that I <em>don’t</em> tell you the true value of <span class="math inline">\(p\)</span>. Instead, I let you observe <span class="math inline">\(n\)</span> coin flips before asking you to make your guess. Describe:</p>
-<ul>
-<li>A suggestion for choosing <span class="math inline">\(\hat{p}\)</span> based only on the results of the previous flips.</li>
-<li>A way to estimate the risk (expected amount of money lost) based only on the results of the previous flips.</li>
-</ul>
-<p>Your answer should depend on <span class="math inline">\(\hat{p}\)</span> but not on <span class="math inline">\(p\)</span>!</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 </section>
 

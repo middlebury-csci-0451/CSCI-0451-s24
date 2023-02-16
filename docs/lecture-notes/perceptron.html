@@ -350,12 +350,12 @@ div.csl-indent {
 <p>That is, if someone gave you the weight vector <span class="math inline">\(\tilde{\vw}^{(1)}\)</span>, <strong><em>you wouldn’t need to see the data labels</em></strong>: you could exactly recover them using <a href="#eq-perceptron-predict">Equation&nbsp;3</a>.</p>
 <p>Let’s make this a little more precise. For fixed <span class="math inline">\(\tilde{\vw}\)</span>, let <span class="math inline">\(\hat{y}_i \triangleq \langle \tilde{\vw}, \tilde{\vx}_i \rangle\)</span>. The classification <em>accuracy</em> of the two-label perceptron with weight <span class="math inline">\(\tilde{\vw}\)</span>is</p>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">We’ve used a little math trick here: take a moment to convince yourself that <a href="#eq-perceptron-predict">Equation&nbsp;3</a> is equivalent to the statement that <span class="math inline">\(\hat{y}_i y_i &gt; 0\)</span>.</span></div></div>
-<p><span class="math display">\[A(\tilde{\vw}) \triangleq \frac{1}{n} \sum_{i = 1}^n \one{\ell_i y_i &gt; 0}\;.\]</span></p>
+<p><span class="math display">\[A(\tilde{\vw}) \triangleq \frac{1}{n} \sum_{i = 1}^n \one{\hat{y}_i y_i &gt; 0}\;.\]</span></p>
 <p>Higher accuracy means that the vector <span class="math inline">\(\tilde{\vw}\)</span> predicts more correct labels via <a href="#eq-perceptron-predict">Equation&nbsp;3</a>. The <em>loss</em> (also called the <em>empirical risk</em>) is</p>
 <p><span id="eq-loss"><span class="math display">\[
-\cL(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
+R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 \tag{4}\]</span></span></p>
-<p>It’s customary in machine learning to work with the loss. Since we want the accuracy to be high, we want the loss to be small. In other words, we want to <em>minimize</em> the function <span class="math inline">\(\cL\)</span> with respect to the parameters <span class="math inline">\(\vw\)</span> and <span class="math inline">\(b\)</span>.</p>
+<p>It’s customary in machine learning to work with the loss. Since we want the accuracy to be high, we want the loss to be small. In other words, we want to <em>minimize</em> the function <span class="math inline">\(R\)</span> with respect to the parameters <span class="math inline">\(\vw\)</span> and <span class="math inline">\(b\)</span>.</p>
 </section>
 <section id="the-perceptron-algorithm" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="the-perceptron-algorithm">The Perceptron Algorithm</h3>
@@ -372,12 +372,12 @@ div.csl-indent {
 </ol>
 <section id="local-improvement-on-data-point-i" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="local-improvement-on-data-point-i">Local Improvement on Data Point <span class="math inline">\(i\)</span></h4>
-<p>Let’s first check that the perceptron update in <a href="#eq-perceptron-update">Equation&nbsp;5</a> actually improves the prediction on data point <span class="math inline">\(i\)</span> if there is currently a mistake on that point (i.e.&nbsp;if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>). We can do this by computing the new <span class="math inline">\(\hat{y}_i^{(t)}\)</span>. Remember, what we want is for the sign of <span class="math inline">\(\hat{y}_i^{(t)}\)</span> to match <span class="math inline">\(y_i\)</span>.</p>
+<p>Let’s first check that the perceptron update in <a href="#eq-perceptron-update">Equation&nbsp;5</a> actually improves the prediction on data point <span class="math inline">\(i\)</span> if there is currently a mistake on that point (i.e.&nbsp;if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>). We can do this by computing the new <span class="math inline">\(\hat{y}_i^{(t+1)}\)</span>. Remember, what we want is for the sign of <span class="math inline">\(\hat{y}_i^{(t+1)}\)</span> to match <span class="math inline">\(y_i\)</span>.</p>
 <p><span class="math display">\[
 \begin{align}
 \hat{y}_i^{(t+1)} &amp;= \bracket{\tilde{\vw}^{(t+1)}, \tilde{\vx}_i}  \tag{definition of $\hat{y}_i^{(t+1)}$}\\
                &amp;= \bracket{\tilde{\vw}^{(t)} + y_i\tilde{\vx}_i, \tilde{\vx}_i} \tag{perceptron update} \\
-               &amp;= \bracket{\tilde{\vw}^{(t)},\tilde{\vx}_i} + y_i\bracket{\tilde{\vx}_i, \tilde{\vx}_i} \tag{Linearity of $\bracket{\cdot}$}\\
+               &amp;= \bracket{\tilde{\vw}^{(t)},\tilde{\vx}_i} + y_i\bracket{\tilde{\vx}_i, \tilde{\vx}_i} \tag{linearity of $\bracket{\cdot}$}\\
                &amp;= \hat{y}_i^{(t)} + y_i \norm{\tilde{\vx}_i}_2^2\;. \tag{definition of $\hat{y}_i^{(t)}$ and $\norm{\tilde{\vx}_i}$}
 \end{align}
 \]</span></p>
@@ -521,7 +521,7 @@ Start Implementing the Perceptron Algorithm
 </ol>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X_ <span class="op">=</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="1">
-<li>Modify <code>y</code> into an array <code>y_</code> of <code>0</code>s and <code>1</code>s, corresponding to the version we use in the notes above.</li>
+<li>Modify <code>y</code> into an array <code>y_</code> of <code>-1</code>s and <code>1</code>s, corresponding to the version we use in the notes above.</li>
 <li>Initialize a random weight vector <code>w_</code> with appropriate dimensions, corresponding to <span class="math inline">\(\tilde{\vw}^{(0)}\)</span>.</li>
 <li>Generate a random index <code>i</code> between <code>0</code> and <code>n-1</code>.</li>
 <li>Extract the <code>i</code>th row of <code>X_</code>, which corresponds to <span class="math inline">\(\tilde{\vx}_i\)</span>.<br>
