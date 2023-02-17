@@ -104,7 +104,7 @@ $$
 f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\;. 
 $$
 
-Using this definition, write a short mathematical proof that the function $f(\vz) = \norm{\vz}$ is convex. You will want to use the *triangle inequality*, which says that $\norm{\vz_1 + \vz_2} \leq \norm{\vz_1} + \norm{\vz_2}$. [This proof requires just a few lines if you carefully use your definitions!]{.aside}
+Using this definition, write a short mathematical proof that the function $f(\vz) = \norm{\vz} = \sqrt{\bracket{\vz, \vz}}$ is convex. You will want to use the *triangle inequality*, which says that $\norm{\vz_1 + \vz_2} \leq \norm{\vz_1} + \norm{\vz_2}$. [This proof requires just a few lines if you carefully use your definitions!]{.aside}
 
 
 

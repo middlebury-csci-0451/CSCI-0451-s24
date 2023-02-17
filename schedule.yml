@@ -93,7 +93,7 @@
     - <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.4-7.6</a>
     - <a href="https://via.hypothes.is/https://mml-book.github.io/book/mml-book.pdf">Diesenroth, Faisal, and Soon, p. 225-233</a>
   notes: 
-    - TBD
+    - <a href="lecture-notes/gradient-descent.qmd">Lecture notes</a>
   module: Classification
   publish: true
   warmup: TBD
