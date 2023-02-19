@@ -254,8 +254,13 @@ $$
 <p><span class="math display">\[
 \langle \mathbf{w}, \mathbf{x} \rangle - b = 0\;.
 \]</span></p>
+<p>We saw that if we redefined <span class="math inline">\(\tilde{\mathbf{x}} = (\mathbf{x}, 1)\)</span> and <span class="math inline">\(\tilde{\mathbf{w}} = (\mathbf{w}, -b)\)</span>, we could simply write this as</p>
+<p><span class="math display">\[
+\langle \tilde{\mathbf{w}}, \tilde{\mathbf{x}} \rangle = 0\;
+\]</span></p>
+<p>instead. For the remainder of these notes, we’ll simply write our feature vectors as <span class="math inline">\(\mathbf{x}\)</span> and our parameter vector as <span class="math inline">\(\mathbf{w}\)</span>, assuming that the final entry of <span class="math inline">\(\mathbf{x}\)</span> is also a 1.</p>
 <ul>
-<li>For a given point <span class="math inline">\(\mathbf{x}\)</span>, we can make a <em>prediction</em> <span class="math inline">\(\hat{y} = \langle \mathbf{w}, \mathbf{x} \rangle - b\)</span>.</li>
+<li>For a given point <span class="math inline">\(\mathbf{x}\)</span>, we can make a <em>prediction</em> <span class="math inline">\(\hat{y} = \langle \mathbf{w}, \mathbf{x} \rangle\)</span>.</li>
 <li>We decide that a prediction is <em>accurate</em> (and give ourself one “point”) if <span class="math inline">\(\hat{y}\)</span> has the same sign as <span class="math inline">\(y\)</span>. This can be expressed in either of the following equivalent ways:
 <ul>
 <li><span class="math inline">\(\mathbb{1}\left[ \mathrm{sign}(\hat{y}) = y \right]\)</span></li>
@@ -265,18 +270,18 @@ $$
 </ul>
 <p><span class="math display">\[
 \begin{aligned}
-A(\mathbf{w}, b) &amp;= \frac{1}{n}\sum_{i = 1}^n \mathbb{1}\left[ \hat{y}_iy_i &gt; 0 \right]\\
-          &amp;= \frac{1}{n}\sum_{i = 1}^n \mathbb{1}\left[ (\langle \mathbf{w}, \mathbf{x}_i \rangle - b)y_i &gt; 0 \right] \\
-L(\mathbf{w}, b) &amp;= 1 - A(\mathbf{w}, b) \\
+A(\mathbf{w}) &amp;= \frac{1}{n}\sum_{i = 1}^n \mathbb{1}\left[ \hat{y}_iy_i &gt; 0 \right]\\
+          &amp;= \frac{1}{n}\sum_{i = 1}^n \mathbb{1}\left[ (\langle \mathbf{w}, \mathbf{x}_i \rangle)y_i &gt; 0 \right] \\
+L(\mathbf{w}) &amp;= 1 - A(\mathbf{w}) \\
           &amp;= \frac{1}{n}\sum_{i = 1}^n \left(1 - \mathbb{1}\left[ \hat{y}_iy_i &gt; 0 \right]\right) \\
-          &amp;= \frac{1}{n}\sum_{i = 1}^n \left(1- \mathbb{1}\left[ (\langle \mathbf{w}, \mathbf{x}_i \rangle - b)y_i &gt; 0 \right]\right)\;.
+          &amp;= \frac{1}{n}\sum_{i = 1}^n \left(1- \mathbb{1}\left[ (\langle \mathbf{w}, \mathbf{x}_i \rangle)y_i &gt; 0 \right]\right)\;.
 \end{aligned}
 \]</span></p>
-<p>We’d like to find <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(b\)</span> to <em>minimize</em> the loss function. That is, we’d like to solve the problem</p>
+<p>We’d like to find <span class="math inline">\(\mathbf{w}\)</span> to <em>minimize</em> the loss function. That is, we’d like to solve the problem</p>
 <p><span id="eq-empirical-risk-perceptron"><span class="math display">\[
-(\hat{\mathbf{w}}, \hat{b}) = \mathop{\mathrm{arg\,min}}_{\mathbf{w}, b} \; L(\mathbf{w}, b)
+\hat{\mathbf{w}} = \mathop{\mathrm{arg\,min}}_{\mathbf{w}} \; L(\mathbf{w})
 \tag{1}\]</span></span></p>
-<p>This problem is called <em>empirical risk minimization</em>, for reasons that we’ll discuss in a coming lecture. The perceptron algorithm was one way to attack the empirical risk minimization problem.</p>
+<p>The loss is also often called the <em>empirical risk</em>, and this minimization problem is often called <em>empirical risk minimization</em>, for reasons that we’ll discuss in a coming lecture. The perceptron algorithm was one way to attack the empirical risk minimization problem.</p>
 </section>
 <section id="some-questions-for-empirical-risk-minimization" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="some-questions-for-empirical-risk-minimization">Some Questions For Empirical Risk Minimization</h2>
@@ -292,7 +297,7 @@ L(\mathbf{w}, b) &amp;= 1 - A(\mathbf{w}, b) \\
 \ell(\hat{y}, y) = 1 - \mathbb{1}\left[ \hat{y}y &gt; 0 \right]\;.
 \]</span></p>
 <p>When we graph the 0-1 loss function, it looks like this. I’ve shown versions corresponding to both values of the true label, <span class="math inline">\(y = 1\)</span> and <span class="math inline">\(y = -1\)</span>.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
@@ -327,10 +332,10 @@ L(\mathbf{w}, b) &amp;= 1 - A(\mathbf{w}, b) \\
 <p><strong>Uniqueness</strong>: Assuming there exists a solution to <a href="#eq-empirical-risk-perceptron">Equation&nbsp;1</a>, is it unique? Or are there many different solutions?</p>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">To define “usually” and “just a little bit” rigorously, we need to specify a data generating distribution and do some math.</span></div></div>
 <ul>
-<li>Unfortunately, the solution to <a href="#eq-empirical-risk-perceptron">Equation&nbsp;1</a> for the 0-1 loss is almost never unique. This is because, if you have one solution <span class="math inline">\((\mathbf{w}, b)\)</span>, you can “usually” jiggle it by “just a little bit” and still have a minimizing solution.</li>
+<li>Unfortunately, the solution to <a href="#eq-empirical-risk-perceptron">Equation&nbsp;1</a> for the 0-1 loss is almost never unique. This is because, if you have one solution <span class="math inline">\(\mathbf{w}\)</span>, you can “usually” jiggle it by “just a little bit” and still have a minimizing solution.</li>
 </ul>
 <p><strong>Searchability</strong>: Is it possible to write algorithms are guaranteed to find a solution of <a href="#eq-empirical-risk-perceptron">Equation&nbsp;1</a>?</p>
-<p>Technically, we could just try a very large number of choices of <span class="math inline">\((\mathbf{w}, b)\)</span> and hope for the best, but that’s not very efficient (in fact, the problem of getting a reasonable answer this way is exponential in <span class="math inline">\(d\)</span>, the number of features). Can we do better?</p>
+<p>Technically, we could just try a very large number of choices of <span class="math inline">\(\mathbf{w}\)</span> and hope for the best, but that’s not very efficient (in fact, the problem of getting a reasonable answer this way is exponential in <span class="math inline">\(d\)</span>, the number of features). Can we do better?</p>
 <p><strong>Performance</strong>: Is it possible to make these algorithms <em>fast</em>?</p>
 <p>This is where our real problem lies:</p>
 <div class="callout-tip callout callout-style-simple no-icon">
@@ -457,7 +462,7 @@ f(\mathbf{z}) &amp;= f(\lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*) \tag{defin
 <h2 class="anchored" data-anchor-id="convexity-and-empirical-risk-minimization">Convexity and Empirical Risk Minimization</h2>
 <p>Let’s finally go back to the empirical risk minimization problem for linear models. We’re going to write it in terms of a general loss function <span class="math inline">\(\ell\)</span>; the choice <span class="math inline">\(\ell(\hat{y}, y) = 1 - \mathbb{1}\left[ \hat{y}y &gt; 0 \right]\)</span> gets us back to the 0-1 loss situation. The general empirical risk minimization problem for linear classifiers is</p>
 <p><span id="eq-empirical-risk-linear-general"><span class="math display">\[
-(\hat{\mathbf{w}}, \hat{b}) = \mathop{\mathrm{arg\,min}}_{\mathbf{w}, b} \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle - b, y_i)\;.
+\hat{\mathbf{w}} = \mathop{\mathrm{arg\,min}}_{\mathbf{w}} \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle, y_i)\;.
 \tag{2}\]</span></span></p>
 <p>Let’s now assume that the loss function <span class="math inline">\(\ell\)</span> is strictly convex in its first argument: that is, for any possible value of <span class="math inline">\(y\)</span> and any <span class="math inline">\(\lambda \in [0,1]\)</span>,</p>
 <p><span class="math display">\[
@@ -465,10 +470,10 @@ f(\mathbf{z}) &amp;= f(\lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*) \tag{defin
 \]</span></p>
 <p>Then, suddenly the following things would all also be true:</p>
 <ol type="1">
-<li><span class="math inline">\(\ell(\langle \mathbf{w}, \mathbf{x} \rangle - b, y)\)</span> is strictly convex as a function of <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(b\)</span> (<a href="#thm-convex-compositions">Theorem&nbsp;3</a>, part 2).</li>
-<li>The empirical risk <span class="math inline">\(L(\mathbf{w}, b) = \frac{1}{n}\sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle - b, y_i)\)</span> is strictly convex as a function of <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(b\)</span> (<a href="#thm-convex-compositions">Theorem&nbsp;3</a>, part 1).</li>
-<li>If the empirical risk <span class="math inline">\(R(\mathbf{w}, b)\)</span> has a global minimum, that global minimum is unique (<a href="#thm-convex-functions-are-nice">Theorem&nbsp;2</a>, part 3).</li>
-<li>The empirical risk <span class="math inline">\(R(\mathbf{w}, b)\)</span> has no local minima which are not global minima.</li>
+<li><span class="math inline">\(\ell(\langle \mathbf{w}, \mathbf{x} \rangle, y)\)</span> is strictly convex as a function of <span class="math inline">\(\mathbf{w}\)</span> (<a href="#thm-convex-compositions">Theorem&nbsp;3</a>, part 2).</li>
+<li>The empirical risk <span class="math inline">\(L(\mathbf{w}) = \frac{1}{n}\sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle, y_i)\)</span> is strictly convex as a function of <span class="math inline">\(\mathbf{w}\)</span> (<a href="#thm-convex-compositions">Theorem&nbsp;3</a>, part 1).</li>
+<li>If the empirical risk <span class="math inline">\(R(\mathbf{w})\)</span> has a global minimum, that global minimum is unique (<a href="#thm-convex-functions-are-nice">Theorem&nbsp;2</a>, part 3).</li>
+<li>The empirical risk <span class="math inline">\(R(\mathbf{w})\)</span> has no local minima which are not global minima.</li>
 </ol>
 <p>These facts have important implications for our fundamental questions on empirical risk minimization.</p>
 <p><strong>Existence</strong>. Even convex functions are not guaranteed to have minima. However, there are lots of choices of loss function <span class="math inline">\(\ell\)</span> which do guarantee that the empirical risk has a minimizer.</p>
@@ -484,7 +489,7 @@ f(\mathbf{z}) &amp;= f(\lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*) \tag{defin
 \]</span></p>
 <p>where <span class="math inline">\(\sigma(z) = \frac{1}{1 + e^{-z}}\)</span> is the <em>logistic sigmoid</em> function.</p>
 <p><em>The logistic loss is convex in</em> <span class="math inline">\(\hat{y}\)</span>, although proving this requires a little bit of extra math that we won’t discuss. Here’s a “proof by picture” for the case when the label is <span class="math inline">\(y = 1\)</span>.</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">101</span>)</span>
@@ -497,7 +502,7 @@ f(\mathbf{z}) &amp;= f(\lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*) \tag{defin
 </div>
 <p>Because the logistic loss is convex in <span class="math inline">\(\hat{y}\)</span>, the empirical risk minimization problem can have at most one minimum. In fact, it’s possible to show, if the data is <em>not</em> linearly separable, there exists a global minimum.</p>
 <p>Here is some sample data for which we will try to find a good linear classifier.</p>
-<div class="cell page-columns page-full" data-execution_count="16">
+<div class="cell page-columns page-full" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
@@ -519,19 +524,22 @@ f(\mathbf{z}) &amp;= f(\lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*) \tag{defin
 </div>
 </div>
 </div>
-<p>Now let’s do an implementation. First let’s define a linear predictor function of the form <span class="math inline">\(f(\mathbf{x}) = \langle w, \mathbf{x} \rangle - b\)</span>. Note that this predictor makes the predictions on <em>all</em> the training data at once!</p>
-<div class="cell" data-execution_count="17">
+<p>Now let’s do an implementation. First let’s define a linear predictor function of the form <span class="math inline">\(f(\mathbf{x}) = \langle w, \mathbf{x} \rangle\)</span>. Note that this predictor makes the predictions on <em>all</em> the training data at once!</p>
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># logistic regression tends to involve a lot of log(0) and things that wash out in the end. </span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>np.seterr(<span class="bu">all</span><span class="op">=</span><span class="st">'ignore'</span>) </span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(X, w, b):</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X<span class="op">@</span>w <span class="op">-</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add a constant feature to the feature matrix</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>X_ <span class="op">=</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict(X, w):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X<span class="op">@</span>w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we’ll define some functions to compute the empirical risk:</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sigmoid(z):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>z))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -541,49 +549,42 @@ f(\mathbf{z}) &amp;= f(\lambda \mathbf{z}' + (1-\lambda)\mathbf{z}^*) \tag{defin
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># first compute the predictions, then compute the average loss per observation</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># note that this works on the ENTIRE DATA SET AT ONCE: no for-loops</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> empirical_risk(X, y, w, b, loss):</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    y_hat <span class="op">=</span> predict(X, w, b)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> empirical_risk(X, y, w, loss):</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    y_hat <span class="op">=</span> predict(X, w)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loss(y_hat, y).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we can write the function that will solve the empirical risk minimization problem for us. We’re going to use the <code>scipy.optimize.minimize</code> function, which is a built-in function for solving minimization problems. Soon, we’ll study how to solve minimization problems from scratch.</p>
-<p>The <code>scipy.optimize.minimize</code> function requires us to pass it a single function that accepts a vector of parameters, plus an initial guess for the parameters. So, we need to do a little bookkeeping in order to keep all our parameters straight.</p>
-<div class="cell" data-execution_count="22">
+<p>The <code>scipy.optimize.minimize</code> function requires us to pass it a single function that accepts a vector of parameters, plus an initial guess for the parameters.</p>
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_pars(X, y):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define a new version of the empirical risk that accepts a single parameter theta and splits this parameter into w and b before passing it into the risk function</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_minimize(theta):</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> theta[:<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> theta[<span class="dv">1</span>]</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> empirical_risk(X, y, w, b, logistic_loss)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    x0 <span class="op">=</span> np.random.rand(p) <span class="co"># random initial guess</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># perform the minimization</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> minimize(<span class="kw">lambda</span> x: empirical_risk(X, y, w, logistic_loss), </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                      x0 <span class="op">=</span> x0) </span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> X.shape[<span class="dv">1</span>]</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    x0 <span class="op">=</span> np.random.rand(p<span class="op">+</span><span class="dv">1</span>) <span class="co"># random initial guess</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> minimize(to_minimize, x0 <span class="op">=</span> x0) </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the vector of parameters that minimizes the function </span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> result.x</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return the parameters split into w and b</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> theta[:<span class="op">-</span><span class="dv">1</span>], theta[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return the parameters</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result.x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Ok, let’s try it and take a look at the parameters we obtained:</p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>w, b <span class="op">=</span> find_pars(X, y)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>w, b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
-<pre><code>(array([2.16840524, 1.63790933]), 0.1735812054407957)</code></pre>
+<p>Ok, let’s try it and take a look at the parameters we obtained. Because the final column of <code>X_</code> is the constant column of 1s, the final entry of <code>w</code> is interpretable as the intercept term <code>b</code>.</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> find_pars(X_, y)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>array([1.55195385, 2.50106699, 0.12882553])</code></pre>
 </div>
 </div>
 <p>And, finally, we can plot the linear classifier that we learned.</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">101</span>)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.plot(f1, (b <span class="op">-</span> f1<span class="op">*</span>w[<span class="dv">0</span>])<span class="op">/</span>w[<span class="dv">1</span>], color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.plot(f1, (w[<span class="dv">2</span>] <span class="op">-</span> f1<span class="op">*</span>w[<span class="dv">0</span>])<span class="op">/</span>w[<span class="dv">1</span>], color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="convex-linear-models_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>

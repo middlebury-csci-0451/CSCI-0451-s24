@@ -13,6 +13,7 @@ $$
 \newcommand{\vz}{\mathbf{z}}
 \newcommand{\norm}[1]{\lVert #1 \rVert}
 \newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\paren}[1]{\left( #1 \right)}
 $$
 
@@ -105,6 +106,36 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 $$
 
 Using this definition, write a short mathematical proof that the function $f(\vz) = \norm{\vz} = \sqrt{\bracket{\vz, \vz}}$ is convex. You will want to use the *triangle inequality*, which says that $\norm{\vz_1 + \vz_2} \leq \norm{\vz_1} + \norm{\vz_2}$. [This proof requires just a few lines if you carefully use your definitions!]{.aside}
+
+## Gradient Descent {#sec-gradient-descent} 
+
+Consider the quadratic function $g(z) = \frac{1}{2}az^2 + bz + c$. 
+
+1. Prove that $g$ has a critical point at the point $z^* = -\frac{b}{a}$ (*hint: solve $g'(z^*) = 0$*).
+2. What must be true about the constants $a$, $b$, and $c$ to ensure that this point is a *local minimum* of $g$? (*Hint: second derivative test*). 
+3. Suppose now that we are able to evaluate the function $g$, as well as its derivative $g'$, but not able to use algebra to find $z^*$ (this mirrors our situation in most practical problems). Instead, we are going to use the following algorithm to attempt to approximate $z^*$: 
+    - Begin with some initial guess $z^{(0)}$. 
+    - In each time-step $t$, compute $z^{(t+1)} \gets z^{(t)} - \alpha g'(z^{(t)})$. 
+    - In practice we would need to specify a stopping criterion, but for this theoretical problem we don't need to worry about it. 
+4. Using algebra, prove that for any timestep $t$, 
+$$
+(z^* - z^{(t+1)})^2 = (a\alpha - 1)^2(z^* - z^{(t)})^2\;. 
+$$
+5. Let's think $\abs{z^* - z^{(t)}}$ as the *error* in our current estimate $z^{(t)}$. Using the recurrence above, conclude that, for any $t$, the error $\abs{z^* - z^{(t)}}$ satisfies 
+$$
+\abs{z^* - z^{(t)}} = \abs{a\alpha - 1}^{t}\abs{z^* - z^{(0)}}\;.
+$$
+6. For $\alpha \in (\alpha_*, \alpha^*)$, we are guaranteed that the error $\abs{z^* - z^{(t)}}\rightarrow 0$ as $t\rightarrow \infty$. What are $\alpha_*$ and $\alpha^*$?  
+7. Suppose that $\alpha$ is within the necessary range. I want to guarantee that $\abs{z^* - z^{(t)}} < \epsilon$ for some small $\epsilon < 0$ (in practice we often call this the *tolerance*). Conclude that the number of steps necessary to reach this tolerance is no greater than 
+$$
+\bar{t} = \frac{\log \abs{a\alpha - 1} + \log \abs{z^* - z^{(0)}}}{\log \epsilon}\;.
+$$
+
+Ignoring stuff in the numerator, we say that this algorithm for finding the minimum of $g$ with tolerance $\epsilon$ has a $\frac{1}{\log \epsilon}$ a convergence rate. 
+
+
+
+
 
 
 

@@ -96,7 +96,7 @@
     - <a href="lecture-notes/gradient-descent.qmd">Lecture notes</a>
   module: Classification
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.qmd#sec-gradient-descent">Gradient Descent</a>
   assignments:
     - |
       Blog post: Gradient Descent for Logistic Regression (details soon) <br> <br> <b> ACTUAL REAL DUE DATE: <a <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due 2/24 </b>
