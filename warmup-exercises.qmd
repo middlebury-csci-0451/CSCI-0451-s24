@@ -99,7 +99,7 @@ In a Jupyter notebook, write a simple program to plot each of the functions $f$ 
 
 ### Part 4: Convexity in Many Variables
 
-Recall the Hardt and Recht definition of convexity: a function $f:\R^n \rightarrow \R$ is convex if, for any $\lambda \in [0,1]$ and any points $\vz_1, \vz_2 \in \R^n$, 
+Recall the Hardt and Recht definition of convexity: a function $f:\R^p \rightarrow \R$ is convex if, for any $\lambda \in [0,1]$ and any points $\vz_1, \vz_2 \in \R^p$, 
 
 $$
 f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\;. 
