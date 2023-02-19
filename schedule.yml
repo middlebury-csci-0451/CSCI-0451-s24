@@ -99,7 +99,7 @@
   warmup: <a href="warmup-exercises.qmd#sec-gradient-descent">Gradient Descent</a>
   assignments:
     - |
-      Blog post: Gradient Descent for Logistic Regression (details soon) <br> <br> <b> ACTUAL REAL DUE DATE: <a <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due 2/24 </b>
+      <a href="assignments/blog-posts/blog-post-optimization.qmd">Blog post: gradient descent</a> <br> <br> <b> ACTUAL REAL DUE DATE: <a <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due 2/24 </b>
 - date: 2023-02-27
   header: | 
     Features, Regularization, and Nonlinear Decision Boundaries
