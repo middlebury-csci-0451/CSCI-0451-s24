@@ -134,7 +134,7 @@
   warmup: TBD
   assignments:
     - |
-      Blog post: kernel logistic regression or kernel support vector machine SVM
+      <a href="assignments/blog-posts/blog-post-kernel-logistic.qmd">Blog post: kernel logistic regression</a>
 - date: 2023-03-06
   header: | 
     Generalization
