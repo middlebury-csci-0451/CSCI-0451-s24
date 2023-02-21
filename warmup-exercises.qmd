@@ -80,7 +80,7 @@ Show pictorially that this function is not convex. No proof needed -- just the r
 
 ### Part 2: Second Derivative Test
 
-Another way to tell whether a function is convex is to check its second derivative. If a function $f:S\rightarrow \R$ has a convex domain $S\subseteq R$, if $f$ is everywhere twice-differentiable, and if $\frac{d^2f(z_0)}{dz^2} > 0$ for all $z_0 \in S$, then $f$ is convex. 
+Another way to tell whether a function is convex is to check its second derivative. If a function $f:S\rightarrow \R$ has a convex domain $S\subseteq \R$, if $f$ is everywhere twice-differentiable, and if $\frac{d^2f(z_0)}{dz^2} > 0$ for all $z_0 \in S$, then $f$ is convex. 
 
 Use the second derivative test to check that the following two functions are convex: [The base of the logarithm doesn't really matter, but for this course it is always most convenient to assume logs base $e$, which you might also have seen written $\ln$.]{.aside}
 
@@ -115,7 +115,7 @@ Consider the quadratic function $g(z) = \frac{1}{2}az^2 + bz + c$.
 2. What must be true about the constants $a$, $b$, and $c$ to ensure that this point is a *local minimum* of $g$? (*Hint: second derivative test*). 
 3. Suppose now that we are able to evaluate the function $g$, as well as its derivative $g'$, but not able to use algebra to find $z^*$ (this mirrors our situation in most practical problems). Instead, we are going to use the following algorithm to attempt to approximate $z^*$: 
     - Begin with some initial guess $z^{(0)}$. 
-    - In each time-step $t$, compute $z^{(t+1)} \gets z^{(t)} - \alpha g'(z^{(t)})$. 
+    - In each time-step $t$, compute $z^{(t+1)} \gets z^{(t)} - \alpha g'(z^{(t)})$, where $\alpha > 0$ is the *learning rate*. 
     - In practice we would need to specify a stopping criterion, but for this theoretical problem we don't need to worry about it. 
 4. Using algebra, prove that for any timestep $t$, 
 $$

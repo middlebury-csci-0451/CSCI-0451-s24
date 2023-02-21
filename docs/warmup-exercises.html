@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="part-2-second-derivative-test" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="part-2-second-derivative-test">Part 2: Second Derivative Test</h3>
-<p>Another way to tell whether a function is convex is to check its second derivative. If a function <span class="math inline">\(f:S\rightarrow \R\)</span> has a convex domain <span class="math inline">\(S\subseteq R\)</span>, if <span class="math inline">\(f\)</span> is everywhere twice-differentiable, and if <span class="math inline">\(\frac{d^2f(z_0)}{dz^2} &gt; 0\)</span> for all <span class="math inline">\(z_0 \in S\)</span>, then <span class="math inline">\(f\)</span> is convex.</p>
+<p>Another way to tell whether a function is convex is to check its second derivative. If a function <span class="math inline">\(f:S\rightarrow \R\)</span> has a convex domain <span class="math inline">\(S\subseteq \R\)</span>, if <span class="math inline">\(f\)</span> is everywhere twice-differentiable, and if <span class="math inline">\(\frac{d^2f(z_0)}{dz^2} &gt; 0\)</span> for all <span class="math inline">\(z_0 \in S\)</span>, then <span class="math inline">\(f\)</span> is convex.</p>
 <div class="page-columns page-full"><p>Use the second derivative test to check that the following two functions are convex: </p><div class="no-row-height column-margin column-container"><span class="aside">The base of the logarithm doesn’t really matter, but for this course it is always most convenient to assume logs base <span class="math inline">\(e\)</span>, which you might also have seen written <span class="math inline">\(\ln\)</span>.</span></div></div>
 <p><span class="math display">\[
 \begin{aligned}
@@ -312,7 +312,7 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <li>Suppose now that we are able to evaluate the function <span class="math inline">\(g\)</span>, as well as its derivative <span class="math inline">\(g'\)</span>, but not able to use algebra to find <span class="math inline">\(z^*\)</span> (this mirrors our situation in most practical problems). Instead, we are going to use the following algorithm to attempt to approximate <span class="math inline">\(z^*\)</span>:
 <ul>
 <li>Begin with some initial guess <span class="math inline">\(z^{(0)}\)</span>.</li>
-<li>In each time-step <span class="math inline">\(t\)</span>, compute <span class="math inline">\(z^{(t+1)} \gets z^{(t)} - \alpha g'(z^{(t)})\)</span>.</li>
+<li>In each time-step <span class="math inline">\(t\)</span>, compute <span class="math inline">\(z^{(t+1)} \gets z^{(t)} - \alpha g'(z^{(t)})\)</span>, where <span class="math inline">\(\alpha &gt; 0\)</span> is the <em>learning rate</em>.</li>
 <li>In practice we would need to specify a stopping criterion, but for this theoretical problem we don’t need to worry about it.</li>
 </ul></li>
 <li>Using algebra, prove that for any timestep <span class="math inline">\(t\)</span>,</li>
