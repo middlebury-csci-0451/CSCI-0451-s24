@@ -329,7 +329,7 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <ol start="6" type="1">
 <li>For <span class="math inline">\(\alpha \in (\alpha_*, \alpha^*)\)</span>, we are guaranteed that the error <span class="math inline">\(\abs{z^* - z^{(t)}}\rightarrow 0\)</span> as <span class="math inline">\(t\rightarrow \infty\)</span>. What are <span class="math inline">\(\alpha_*\)</span> and <span class="math inline">\(\alpha^*\)</span>?<br>
 </li>
-<li>Suppose that <span class="math inline">\(\alpha\)</span> is within the necessary range. I want to guarantee that <span class="math inline">\(\abs{z^* - z^{(t)}} &lt; \epsilon\)</span> for some small <span class="math inline">\(\epsilon &lt; 0\)</span> (in practice we often call this the <em>tolerance</em>). Conclude that the number of steps necessary to reach this tolerance is no greater than</li>
+<li>Suppose that <span class="math inline">\(\alpha\)</span> is within the necessary range. I want to guarantee that <span class="math inline">\(\abs{z^* - z^{(t)}} &lt; \epsilon\)</span> for some small <span class="math inline">\(\epsilon &gt; 0\)</span> (in practice we often call this the <em>tolerance</em>). Conclude that the number of steps necessary to reach this tolerance is no greater than</li>
 </ol>
 <p><span class="math display">\[
 \bar{t} = \frac{\log \abs{a\alpha - 1} + \log \abs{z^* - z^{(0)}}}{\log \epsilon}\;.
