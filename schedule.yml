@@ -104,7 +104,7 @@
   header: | 
     Features, Regularization, and Nonlinear Decision Boundaries
   summary: |
-    TBD
+    We learn how to use feature maps to help our convex linear classifiers learn nonlinear patterns. We also introduce the problem of overfitting and introduce feature selection and regularization as methods for addressing this problem. 
   objectives: 
     - Theory
     - Implementation
@@ -113,7 +113,7 @@
   reading:
     - TBD
   notes: 
-    - TBD
+    - <a href="lecture-notes/features-regularization.qmd">Lecture notes</a>
   module: Classification
   publish: true
   warmup: TBD

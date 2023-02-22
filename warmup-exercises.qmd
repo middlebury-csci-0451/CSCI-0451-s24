@@ -121,7 +121,7 @@ Consider the quadratic function $g(z) = \frac{1}{2}az^2 + bz + c$.
 $$
 (z^* - z^{(t+1)})^2 = (a\alpha - 1)^2(z^* - z^{(t)})^2\;. 
 $$
-5. Let's think $\abs{z^* - z^{(t)}}$ as the *error* in our current estimate $z^{(t)}$. Using the recurrence above, conclude that, for any $t$, the error $\abs{z^* - z^{(t)}}$ satisfies 
+5. Let's think of $\abs{z^* - z^{(t)}}$ as the *error* in our current estimate $z^{(t)}$. Using the recurrence above, conclude that, for any $t$, the error $\abs{z^* - z^{(t)}}$ satisfies 
 $$
 \abs{z^* - z^{(t)}} = \abs{a\alpha - 1}^{t}\abs{z^* - z^{(0)}}\;.
 $$
