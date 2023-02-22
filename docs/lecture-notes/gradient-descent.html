@@ -181,6 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#gradients" id="toc-gradients" class="nav-link" data-scroll-target="#gradients">Gradients</a></li>
   <li><a href="#gradient-descent-for-empirical-risk-minimization" id="toc-gradient-descent-for-empirical-risk-minimization" class="nav-link" data-scroll-target="#gradient-descent-for-empirical-risk-minimization">Gradient Descent For Empirical Risk Minimization</a></li>
+  <li><a href="#activity" id="toc-activity" class="nav-link" data-scroll-target="#activity">Activity</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -392,7 +393,7 @@ Algorithm: (Batch) Gradient Descent
 \nabla L(\mathbf{w}) &amp;= \nabla \left(\frac{1}{n} \sum_{i = 1}^n \ell(f_{\mathbf{w}}(\mathbf{x}_i), y_i)\right) \\
               &amp;= \frac{1}{n} \sum_{i = 1}^n \nabla \ell(f_{\mathbf{w}}(\mathbf{x}_i), y_i) \\
               &amp;= \frac{1}{n} \sum_{i = 1}^n  \frac{d\ell(\hat{y}_i, y_i)}{d\hat{y}} \nabla f_{\mathbf{w}}(\mathbf{x}_i) \tag{multivariate chain rule} \\
-              &amp;= \frac{1}{n} \sum_{i = 1}^n  \frac{d\ell(\hat{y}_i, y_i)}{d\hat{y}} \nabla \mathbf{x}_i \tag{gradient of a linear function} \\
+              &amp;= \frac{1}{n} \sum_{i = 1}^n  \frac{d\ell(\hat{y}_i, y_i)}{d\hat{y}}  \mathbf{x}_i \tag{gradient of a linear function} \\
               &amp;= \frac{1}{n} \sum_{i = 1}^n  \frac{d\ell(\langle \mathbf{w}, \mathbf{x}_i \rangle, y_i)}{d\hat{y}} \mathbf{x}_i \tag{$\hat{y}_i = \langle \mathbf{w}, \mathbf{x}_i \rangle$} \\
 \end{align}
 \]</span></p>
@@ -492,16 +493,19 @@ Algorithm: (Batch) Gradient Descent
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>done <span class="op">=</span> <span class="va">False</span>       <span class="co"># initialize for while loop</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>prev_loss <span class="op">=</span> np.inf <span class="co"># handy way to start off the loss</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># main loop</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="kw">not</span> done: </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    w <span class="op">-=</span> alpha<span class="op">*</span>gradient(w, X_, y)                      <span class="co"># gradient step</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    new_loss <span class="op">=</span> empirical_risk(X_, y, logistic_loss, w) <span class="co"># compute loss</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if loss hasn't changed and terminate if so</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.isclose(new_loss, prev_loss):          </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        done <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        prev_loss <span class="op">=</span> new_loss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> []</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># main loop</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="kw">not</span> done: </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    w <span class="op">-=</span> alpha<span class="op">*</span>gradient(w, X_, y)                      <span class="co"># gradient step</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    new_loss <span class="op">=</span> empirical_risk(X_, y, logistic_loss, w) <span class="co"># compute loss</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    history.append(new_loss)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if loss hasn't changed and terminate if so</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.isclose(new_loss, prev_loss):          </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        done <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        prev_loss <span class="op">=</span> new_loss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can visualize the resulting classifier and check the value of the loss that it achieves.</p>
 <div class="cell" data-execution_count="6">
@@ -509,20 +513,45 @@ Algorithm: (Batch) Gradient Descent
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> empirical_risk(X_, y, logistic_loss, w)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">101</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> plt.plot(f1, (w[<span class="dv">2</span>] <span class="op">-</span> f1<span class="op">*</span>w[<span class="dv">0</span>])<span class="op">/</span>w[<span class="dv">1</span>], color <span class="op">=</span> <span class="st">"black"</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> plt.gca().set_title(<span class="ss">f"Loss = </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>].<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>, title <span class="op">=</span> <span class="ss">f"Loss = </span><span class="sc">{</span>loss<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">101</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> axarr[<span class="dv">0</span>].plot(f1, (w[<span class="dv">2</span>] <span class="op">-</span> f1<span class="op">*</span>w[<span class="dv">0</span>])<span class="op">/</span>w[<span class="dv">1</span>], color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].plot(history)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Iteration number"</span>, ylabel <span class="op">=</span> <span class="st">"Empirical Risk"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="gradient-descent_files/figure-html/cell-6-output-1.png" class="" width="587" height="449"></p>
+<p><img src="gradient-descent_files/figure-html/cell-6-output-1.png" class="" width="661" height="468"></p>
 </div>
 </div>
 <p>That looks better! Note that the data is not linearly separable, but our algorithm still converged to a reasonable solution.</p>
+</section>
+<section id="activity" class="level2">
+<h2 class="anchored" data-anchor-id="activity">Activity</h2>
+<p>Consider the function <span class="math inline">\(f(w_1, w_2) = \sin(w_1w_2)\)</span>. You can define this function like this:</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(x[<span class="dv">0</span>]<span class="op">*</span>x[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Mathematically, the gradient of this function is</p>
+<p><span class="math display">\[\nabla f(w_1, w_2) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.\]</span></p>
+<ol type="1">
+<li>Implement a simple loop that uses gradient descent to find a minimum of this function.
+<ul>
+<li>You’ll have to choose the learning rate <span class="math inline">\(\alpha\)</span>.</li>
+<li>The <code>np.cos()</code> function will be useful for programming the gradient.</li>
+<li>It’s not the fastest approach, but if you’re not show how to program the gradient you can always first implement it as a list of two floats, and then use <code>np.array(my_list)</code> to convert it into a numpy array.</li>
+<li>You’ll also need to pick a random starting guess.</li>
+</ul></li>
+<li>Find two initial guesses for the parameter vector <span class="math inline">\(\mathbf{w}\)</span> such that you get two <em>different</em> final minimizers (this is possible because <span class="math inline">\(f\)</span> is not convex).</li>
+</ol>
 
 
 </section>
