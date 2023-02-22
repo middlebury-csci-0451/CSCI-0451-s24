@@ -393,13 +393,13 @@ Consider the function $f(w_1, w_2) = \sin(w_1w_2)$. You can define this function
 #| code-fold: false
 
 import numpy as np
-def f(w):
-    return np.sin(w[0]*w[1])
+def f(x):
+    return np.sin(x[0]*x[1])
 ```
 
 Mathematically, the gradient of this function is 
 
-$$\nabla f(w_0, w_1) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.$$ 
+$$\nabla f(w_1, w_2) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.$$ 
 
 1. Implement a simple loop that uses gradient descent to find a minimum of this function. 
     - You'll have to choose the learning rate $\alpha$. 

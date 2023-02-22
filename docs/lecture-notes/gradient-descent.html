@@ -527,7 +527,7 @@ Algorithm: (Batch) Gradient Descent
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="gradient-descent_files/figure-html/cell-6-output-1.png" class="" width="661" height="468"></p>
+<p><img src="gradient-descent_files/figure-html/cell-6-output-1.png" class="" width="662" height="468"></p>
 </div>
 </div>
 <p>That looks better! Note that the data is not linearly separable, but our algorithm still converged to a reasonable solution.</p>
@@ -537,11 +537,11 @@ Algorithm: (Batch) Gradient Descent
 <p>Consider the function <span class="math inline">\(f(w_1, w_2) = \sin(w_1w_2)\)</span>. You can define this function like this:</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(x[<span class="dv">0</span>]<span class="op">*</span>x[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Mathematically, the gradient of this function is</p>
-<p><span class="math display">\[\nabla f(w_1, w_2) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.\]</span></p>
+<p><span class="math display">\[\nabla f(w_0, w_1) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.\]</span></p>
 <ol type="1">
 <li>Implement a simple loop that uses gradient descent to find a minimum of this function.
 <ul>
