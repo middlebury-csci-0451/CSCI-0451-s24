@@ -1,15 +1,219 @@
 ---
-title: "Application Project: Classifying Palmer Penguins"
+title: "Blog Post: Classifying Palmer Penguins"
 type: "Blog Post"
-date: 2023-02-28
+date: 2023-03-08
 description: |
-    In this blog post, you'll work through a complete example of the standard machine learning workflow, including: data splitting, model and feature selection, cross validation, etc. Your primary goal is to determine the smallest number of measurements necessary to confidently determine the species of a penguin. 
+    In this blog post, you'll work through a complete example of the standard machine learning workflow. Your primary goal is to determine the smallest number of measurements necessary to confidently determine the species of a penguin. 
 objectives: 
   - Experimentation
   - Navigation
-publish: "false" 
+publish: "true" 
 ---
 
+::: {.callout-important}
+
+This is one of two *suggested options* for a blog post this week. You might want to pick this option if some of the following bullet points describe you: 
+
+1. You are interested in practicing with machine learning models on a real data set. 
+2. You are less interested in learning new machine learning theory this week. 
+3. You are willing to read a little more about how to perform operations on data sets with `Pandas` and how to use other models implemented in `scikit-learn`. 
+
+[The alternative](blog-post-kernel-logistic.qmd) has a more theoretical flavor. 
+
+:::
+
+The Palmer Penguins data set is a data set collected by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station](https://pal.lternet.edu/), Antarctica LTER, a member of the [Long Term Ecological Research Network](https://lternet.edu/). The data contains physiological measurements for a number of individuals from each of three species of penguin: 
+
+![Artwork by @allison_horst](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
+
+You can access the (training) data like this: 
+
+```{python}
+import pandas as pd
+
+train_url = "https://raw.githubusercontent.com/middlebury-csci-0451/CSCI-0451/main/data/palmer-penguins/train.csv"
+train = pd.read_csv(train_url)
+```
+
+Here's how the data looks: 
+
+```{python}
+train.head()
+```
+
+::: {.column-margin}
+
+The "culmen" refers to a ridge on the bill of the penguin. 
+![](https://allisonhorst.github.io/palmerpenguins/reference/figures/culmen_depth.png)
+
+Artwork by @allison_horst
+:::
+
+## Your Challenge
+
+We are going to consider the problem of predicting the species of a penguin based on its measurements. 
+
+1. **Explore**: Construct at least one interesting **displayed figure** (e.g. using [seaborn](https://seaborn.pydata.org/)) and at least one interesting displayed table (e.g. using `pandas.groupby().aggregate`). Make sure to include a helpful discussion of both the figure and the table. Don't just show the result: explain what you learned about the data from these products. 
+2. **Model**: Find *three features* of the data and a model trained on those features which achieves **100% testing accuracy**. You must obtain your three features through a **reproducible** process. That is, you can't just pick them: you need to code up some kind of search in order to obtain them. 
+    - One feature must be qualitative (like `Island` or `Clutch Completion`). 
+    - The other two features must be quantitative (like `Body Mass (g)` or `Culmen Depth (mm)`). 
+3. **Evaluate**: Show the decision regions of your finished model, split out by the qualitative feature. 
+
+I've supplied code to help you with several parts of this task. 
 
 
-   
+
+
+## Resources and Hints
+
+### This Webpage Runs
+
+If you run all the code on this assignment page in order, you'll produce the result at the bottom of the page (possibly after installing some more packages in your `ml-0451` Anaconda environment). So, one good way to approach this assignment is to take this code into a Jupyter notebook and start tweaking. 
+
+### Data Preparation
+
+You will need to prepare the qualitative columns in the data. Feature columns like `Sex` and `Island` should be coded using `pd.get_dummies` (as illustrated [in lecture](../../lecture-notes/classification-in-practice.qmd)). The label column `Species` should be coded differently, using a `LabelEncoder`. The following function handles this work for you.  
+
+```{python}
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+le.fit(train["Species"])
+
+def prepare_data(df):
+  df = df.drop(["studyName", "Sample Number", "Individual ID", "Date Egg", "Comments", "Region"], axis = 1)
+  df = df[df["Sex"] != "."]
+  df = df.dropna()
+  y = le.transform(df["Species"])
+  df = df.drop(["Species"], axis = 1)
+  df = pd.get_dummies(df)
+  return df, y
+
+X_train, y_train = prepare_data(train)
+```
+
+### Choosing Features
+
+This is where much of the work for this blog post lies. You need to choose 3 good features! One possibility is to use some of the tools described on [this page](https://scikit-learn.org/stable/modules/feature_selection.html). Another approach, which is ok to use on this data set, is exhaustive search of all the features contained in the data set. For this, the `combinations` function from the `itertools` package might be helpful. 
+
+**USE CROSS-VALIDATION**! This is your simplest way to guard against overfitting issues and get a good feeling for how your model might do on unseen data. 
+
+[If you use the `Island` feature, you are allowed to use all of the columns that correspond to `Island`.]{.aside} 
+
+```{python}
+
+from itertools import combinations
+
+# these are not actually all the columns: you'll 
+# need to add any of the other ones you want to search for
+all_qual_cols = ["Clutch Completion", "Sex"]
+all_quant_cols = ['Culmen Length (mm)', 'Culmen Depth (mm)', 'Flipper Length (mm)']
+
+for qual in all_qual_cols: 
+  qual_cols = [col for col in X_train.columns if qual in col ]
+  for pair in combinations(all_quant_cols, 2):
+    cols = qual_cols + list(pair) 
+    print(cols)
+    # you could train models and score them here, keeping the list of 
+    # columns for the model that has the best score. 
+    # 
+```
+
+### Model Choices
+
+There are three species of penguin in the data. Most classifiers in `scikit-learn` will handle multi-way classification without issue. For example: 
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+
+# this counts as 3 features because the two Clutch Completion 
+# columns are transformations of a single original measurement. 
+# you should find a way to automatically select some better columns
+# as suggested in the code block above
+cols = ["Flipper Length (mm)", "Body Mass (g)", "Clutch Completion_No", "Clutch Completion_Yes"]
+
+LR = LogisticRegression()
+LR.fit(X_train[cols], y_train)
+LR.score(X_train[cols], y_train)
+```
+
+Even though `y_train` contains three categories (labeled `0`, `1`, and `2`), we're able to fit a `LogisticRegression()` no problem. 
+
+Since `scikit-learn` makes it so easy to experiment, this blog post is a great opportunity to explore some out-of-the-box models that we haven't discussed in class. I'd suggest: 
+
+- `from sklearn.tree import DecisionTreeClassifier`. This one has a `max_depth` parameter that controls the complexity of the model. Use cross-validation to find a good value of the parameter. 
+- `from sklearn.ensemble import RandomForestClassifier`. State-of-the-art before the rise of neural networks. 
+- `from sklearn.svm import SVC`. Another state-of-the-art algorithm before the rise of neural networks. Has a parameter `gamma` that controls the complexity of the model. Again, use cross-validation to select `gamma`. It's important to let `gamma` cover a wide range of values, e.g. `gamma = 10**np.arange(-5, 5)`. 
+
+You can find a more thorough listing of models on [this page](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html). 
+
+### Testing
+
+To test your model, you should download the test data set and prepare it using the `prepare_data` function. You'll need to make sure that you subset it using only the features you choose. Here's code that does this: 
+
+```{python}
+test_url = "https://raw.githubusercontent.com/middlebury-csci-0451/CSCI-0451/main/data/palmer-penguins/test.csv"
+test = pd.read_csv(test_url)
+
+X_test, y_test = prepare_data(test)
+LR.score(X_test[cols], y_test)
+```
+
+### Plotting Decision Regions
+
+To plot decision regions for your model, we are going to use the `mlxtend` package. You may need to install this package first in your `ml-0451` environment. Once you've done so, you can use the `decision_region_panel` function defined below to plot your regions. 
+
+```{python}
+from mlxtend.plotting import plot_decision_regions
+from matplotlib import pyplot as plt
+import numpy as np
+```
+
+```{python}
+def decision_region_panel(X, y, model, qual_features):  
+  p = len(qual_features)
+  fig, axarr = plt.subplots(1, p, figsize=(4*p,4))
+  for i in range(p):
+
+      filler_feature_values = {2+j: 0 for j in range(p)}
+
+      filler_feature_values.update({2+i: 1})
+
+      ix = X[qual_features[i]] == 1
+
+      ax = axarr[i]
+
+      plot_decision_regions(np.array(X[ix]), y[ix], clf=model,
+                            filler_feature_values=filler_feature_values,
+                            filler_feature_ranges={2+j: 0.1 for j in range(p)},
+                            legend=2, ax=ax)
+
+      ax.set_xlabel(X.columns[0])
+      ax.set_ylabel(X.columns[1])
+
+      handles, labels = ax.get_legend_handles_labels()
+      ax.legend(handles, 
+          ["Adelie", "Chinstrap", "Gentoo"], 
+           framealpha=0.3, scatterpoints=1)
+
+  # Adding axes annotations
+  fig.suptitle(f'Accuracy = {model.score(X, y).round(3)}')
+  plt.tight_layout()
+  plt.show()
+```
+
+Here it is in action. It's safe to ignore these particular warnings. 
+
+```{python}
+qual_features = ["Clutch Completion_No", "Clutch Completion_Yes"]
+decision_region_panel(X_train[cols], y_train, LR, qual_features)
+```
+
+## Explore!
+
+Please feel encouraged to be creative in your choices of data visualization, predictive model, and algorithm to compute your features. I also like pictures of penguins. =)
+
+## Useful Resources
+
+- [An introduction to seaborn](https://seaborn.pydata.org/tutorial/introduction.html), a convenient package for data visualization with data frames. 
+- [Data Manipulation with Pandas](https://jakevdp.github.io/PythonDataScienceHandbook/03.00-introduction-to-pandas.html) from the Python Data Science Handbook
+- You might be interested in some of the explanations of how some other classifiers work, including [decision trees](https://jakevdp.github.io/PythonDataScienceHandbook/05.08-random-forests.html) and [support vector machines](https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html), also from the Python Data Science Handbook. 

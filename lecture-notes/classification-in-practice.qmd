@@ -281,7 +281,7 @@ Now we're finally ready to compute the score. Drumroll please!
 plr.score(X_test, y_test).round(4)
 ```
 
-We achieve roughly 85% accuracy on the test data. By comparison, 
+We achieve roughly 85% accuracy on the test data!
 
 
 ::: {.column-margin}

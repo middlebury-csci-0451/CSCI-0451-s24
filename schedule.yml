@@ -116,9 +116,26 @@
     - <a href="lecture-notes/features-regularization.qmd">Lecture notes</a>
   module: Classification
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.qmd#sec-gradient-descent-2">Gradient Descent Again</a>
   assignments: |
     <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due 2/27 </b>
+- date: 2023-03-01
+  header: | 
+    Classification in Practice
+  summary: |
+    We work through a complete modeling workflow for the Titanic survival data set. Along the way, we work with data frames and discuss cross-validation. 
+  objectives: 
+    - Navigation
+    - Experimentation
+  reading:
+    - TBD
+  notes: 
+    - <a href="lecture-notes/classification-in-practice.qmd">Lecture notes</a>
+  module: Classification
+  publish: true
+  warmup: TBD
+  assignments: |
+    <a href="assignments/blog-posts/blog-post-kernel-logistic.qmd">Blog post: kernel logistic regression</a> <br> OR <br> <a href="assignments/blog-posts/blog-post-penguins.qmd">Blog post: penguins</a>
 - date: 2023-03-01
   header: | 
     Kernel Methods
@@ -131,7 +148,7 @@
   notes: 
     - TBD
   module: Classification
-  publish: true
+  publish: false
   warmup: TBD
   assignments:
     - |

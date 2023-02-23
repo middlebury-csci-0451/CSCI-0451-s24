@@ -34,6 +34,18 @@ $$
 
 :::
 
+::: {.callout-important}
+
+This is one of two *suggested options* for a blog post this week. You might want to pick this option if some of the following bullet points describe you: 
+
+1. You enjoy working with matrices and vectors in `numpy`. 
+2. You like math and theoretical aspects of machine learning algorithms. 
+3. You are willing to read a little extra theory before starting on your blog post. 
+
+[The alternative](blog-post-penguins.qmd) has a more applied flavor. 
+
+:::
+
 
 # Introduction
 
@@ -160,7 +172,7 @@ Implement a Python class called `KernelLogisticRegression`. You'll be able to us
         - You should still use the logistic loss for $\ell$. 
         - You will probably need to choose a random initial $\vv$. Don't forget that $\vv$ should have *length equal to the number of data points*, *not the number of features*. 
     - If you've already implemented gradient descent for logistic regression in [this blog post](blog-post-optimization.qmd), then it's not too hard to adapt your method to kernel logistic regression. However, it's also fine to use the function `scipy.optimize.minimize()` as demonstrated in [this lecture](../../lecture-notes/convex-linear-models.ipynb). 
-- `predict(self, X)` should accept a new feature matrix and return binary labels $\{0,1\}$. For each row of $\mX$, the prediction is obtained using the formula $\mathbb{1}[\bracket{\hat{\v}, \vkappa(\vx)}]$. To do this: 
+- `predict(self, X)` should accept a new feature matrix and return binary labels $\{0,1\}$. For each row of $\mX$, the prediction is obtained using the formula $\mathbb{1}[\bracket{\hat{\vv}, \vkappa(\vx)}]$. To do this: 
     - Compute the kernel matrix between `self.X_train` and the new feature input `X`. Each column of this matrix is $\vkappa(\vx_j)$ for some $j$. 
     - Compute inner products of the form $\bracket{\vv, \vkappa(\vx_j)}$. If the user supplies a matrix `X` with multiple columns, you should be able to compute all the predictions at once. This can be done efficiently using matrix multiplication. 
     - Finally, return a binary vector $\hat{\vy}$ whose $j$th entry is $\hat{y}_j = \mathbb{1}[\bracket{\vv, \vx_j} > 0]$. 

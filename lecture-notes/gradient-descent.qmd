@@ -387,7 +387,7 @@ That looks better! Note that the data is not linearly separable, but our algorit
 
 ## Activity
 
-Consider the function $f(w_1, w_2) = \sin(w_1w_2)$. You can define this function like this: 
+Consider the function $f(w_0, w_1) = \sin(w_0w_1)$. You can define this function like this: 
 
 ```{python}
 #| code-fold: false

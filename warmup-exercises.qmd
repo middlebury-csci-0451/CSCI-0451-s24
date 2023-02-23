@@ -133,6 +133,28 @@ $$
 
 Ignoring constants with respect to $\epsilon$, we say that this algorithm for finding the minimum of $g$ with tolerance $\epsilon$ has a $\log \epsilon$ a convergence rate. 
 
+## Gradient Descent (Again) {#sec-gradient-descent-2}
+
+Consider the function $f(w_0, w_1) = \sin(w_0w_1)$. You can define this function like this: 
+
+```{python}
+#| code-fold: false
+
+import numpy as np
+def f(w):
+    return np.sin(w[0]*w[1])
+```
+
+Mathematically, the gradient of this function is 
+
+$$\nabla f(w_0, w_1) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.$$ 
+
+1. Implement a simple loop that uses gradient descent to find a minimum of this function. 
+    - You'll have to choose the learning rate $\alpha$. 
+    - The `np.cos()` function will be useful for programming the gradient. 
+    - It's not the fastest approach, but if you're not show how to program the gradient you can always first implement it as a list of two floats, and then use `np.array(my_list)` to convert it into a numpy array. 
+    - You'll also need to pick a random starting guess. 
+2. Find two initial guesses for the parameter vector $\vw$ such that you get two *different* final minimizers (this is possible because $f$ is not convex).  
 
 
 

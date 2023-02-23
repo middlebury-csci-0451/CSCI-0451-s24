@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>classification-in-practice-live</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/icons/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../"><b>Machine Learning</b><br>CSCI 0451</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">Syllabus</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">Schedule</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments.html" class="sidebar-item-text sidebar-link">Index of Assignments</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#recap" id="toc-recap" class="nav-link active" data-scroll-target="#recap">Recap</a>
+  <ul class="collapse">
+  <li><a href="#but" id="toc-but" class="nav-link" data-scroll-target="#but">But…</a></li>
+  </ul></li>
+  <li><a href="#the-titanic-data-set" id="toc-the-titanic-data-set" class="nav-link" data-scroll-target="#the-titanic-data-set">The Titanic Data Set</a>
+  <ul class="collapse">
+  <li><a href="#prediction-question" id="toc-prediction-question" class="nav-link" data-scroll-target="#prediction-question">Prediction Question</a></li>
+  <li><a href="#data-inspection" id="toc-data-inspection" class="nav-link" data-scroll-target="#data-inspection">Data Inspection</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#modeling" id="toc-modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+
+<div class="hidden">
+$$
+<p>$$</p>
+</div>
+<section id="recap" class="level1">
+<h1>Recap</h1>
+<p>So far, we’ve been primarily considering the mathematical theory of machine learning, with a focus on a specific framework: empirical risk minimization for convex linear models. In the most general form that we’ve considered empirical risk minimization, we consider a loss function of the form</p>
+<p><span class="math display">\[
+L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rangle, y_i)
+\]</span></p>
+<p>where <span class="math inline">\(\phi\)</span> is a <em>feature map</em> and <span class="math inline">\(\ell\)</span> is a convex per-observation loss function. We’ve studied where this framework comes from and how to solve the empirical risk minimization problem</p>
+<p><span class="math display">\[
+\hat{\mathbf{w}} = \mathop{\mathrm{arg\,min}}{\mathbf{w}} L(\mathbf{w})\;.
+\]</span></p>
+<p>using gradient descent, in which we perform the iteration</p>
+<p><span class="math display">\[
+\hat{\mathbf{w}}^{(t+1)} \gets \hat{\mathbf{w}}^{(t)} - \alpha \nabla L(\mathbf{w})
+\]</span></p>
+<p>until convergence. Assuming that our per-observation loss function is convex (as it is, for example, in logistic regression), gradient descent will always converge to the globally optimal <span class="math inline">\(\hat{\mathbf{w}}\)</span> (although it might do so slowly).</p>
+<section id="but" class="level2">
+<h2 class="anchored" data-anchor-id="but">But…</h2>
+<p>There are actually a lot of practicalities to consider here as well! Where does our data come from? How do we prepare it for analysis? If we are going to use a feature map <span class="math inline">\(\phi\)</span> for things like polynomial features, how do we choose the right feature map? If our model has hyperparameters for things like regularization, how do we choose the right hyperparameters? All of these are questions that we need to handle in the practice of machine learning.</p>
+<p>Our purpose in this lecture is to actually work through some of the common steps of the standard machine learning workflow.</p>
+</section>
+</section>
+<section id="the-titanic-data-set" class="level1 page-columns page-full">
+<h1>The Titanic Data Set</h1>
+<p>The Titanic Data Set is something like the “Hello world” of machine learning. It collects information about almost 900 passengers aboard the Titanic during the fateful voyage when it crashed into an iceberg in 1912 and sank. The information includes their age; the fare they paid for their ticket (in British pounds); their sex; and the passenger class <code>Pclass</code>, with 1st class corresponding to VIP treatment and 3rd class corresponding to a much less luxurious experience. Crucially, the data set also records whether that passenger survived the sinking of the ship, with 1 indicating that the passenger survived and 0 indicating that the passenger tragically perished.</p>
+<p>It is often convenient to represent tables of data as <em>data frames</em>. Data frames are implemented in multiple ways in multiple languages; we’ll work with data frames through <code>pandas</code>.</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following function will retrieve data from the <code>url</code> in which I’ve hosted the data set. It returns both the complete data (<code>df</code>, for “data frame”) and split pieces of the data that contain only the features and the target, respectively.</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_titanic_data(url):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> df[<span class="st">"Survived"</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  X <span class="op">=</span> df.drop([<span class="st">"Survived"</span>, <span class="st">"Name"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df, X, y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The reason I wrote a function is that we are going to read <em>two</em> data sets: a training data set and a testing data set. As we saw last time, the loss or score on the training data is not always a reliable guide to the ability of the model to make predictions on unseen data. For this reason, we are going to hold back a testing data set that we won’t actually download until we’re ready to evaluate our model. For now, let’s download the data on which we’ll train:</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/middlebury-csci-0451/CSCI-0451/main/data/titanic/train.csv"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_train, X_train, y_train <span class="op">=</span> read_titanic_data(train_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s take a look at the complete data frame:</p>
+<section id="prediction-question" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-question">Prediction Question</h2>
+</section>
+<section id="data-inspection" class="level2">
+<h2 class="anchored" data-anchor-id="data-inspection">Data Inspection</h2>
+<p>Before modeling, it’s usually beneficial to learn about your data. It’s not <em>always</em> possible to do this without modeling, for example if your data is very high-dimensional. Because this data set has a relatively small number of features, we can learn a lot about it just through summaries. Let’s ask a few questions:</p>
+<blockquote class="blockquote">
+<p>What percentage of passengers in the training set survived?</p>
+</blockquote>
+<p>Approximately 40% of passengers in the training set survived. It’s important to keep this in mind because it sets the <em>base rate</em> for our problem. The base rate is the accuracy rate of a trivial model that doesn’t use the features. In this case, the trivial model is the model that always predicts that a passenger died. This base model would be right about 60% of the time.</p>
+<blockquote class="blockquote">
+<p>How wealthy were the passengers on the Titanic?</p>
+</blockquote>
+<p>We can’t know for certain, but we can learn about how much was paid for each passenger class:</p>
+<ul>
+<li>The average price of 84 pounds for a first-class ticket corresponds to nearly $15,000 USD today.</li>
+<li>The second-class ticket corresponds to roughly $3,500</li>
+<li>The third class ticket corresponds to roughly $2,500.</li>
+</ul>
+<p>We can safely assume that the first-class passengers were indeed substantially more wealthy on average than the others.</p>
+<blockquote class="blockquote">
+<p>Did wealth disparities make a difference for who was most likely to survive?</p>
+</blockquote>
+<p>We can segment out survival rates by passenger class to learn abou tthis:</p>
+<p>Indeed, the higher passenger classes had significantly higher survival rates.</p>
+<p>This difference is even starker if we also segment out the data by the sex of the passenger:</p>
+<p>This table reflects the famous maritime tradition of prioritizing women and children first into the lifeboats, resulting in vastly higher survival rates among women in these data. Note the role of class: a 1st-class woman was twice as likely to survive as a third class woman, and a 1st-class man was nearly three times as likely to survive as a 3rd class man. Based on these observations, we might expect that passenger sex and <code>Pclass</code> might be useful features for us to incorporate into algorithms.</p>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<p>So far, we’ve been working with 2d <code>numpy</code> arrays (matrices) of features and 1d <code>numpy</code> arrays (vectors) of target variables. We can treat <code>pandas</code> data frames <em>of numbers</em> like matrices, and we can treat <code>pandas</code> columns <em>of numbers</em> like vectors. For example, our <code>y_train</code> is already in a format that we can use:</p>
+<p>On the other hand, our data frame has one column that we can’t use: the <code>Sex</code> column contains strings representing categories, rather than numbers. Computers only understand numbers, and so we need to encode the <code>Sex</code> of the passengers as a number. We use so-called “<em>one-hot encoding</em>” for this, in which each category is represented by a binary column, with a 1 indicating that the passenger fell into that category. The <code>Pandas</code> function <code>get_dummies()</code> is an extremely convenient way to achieve this:</p>
+<p>This looks better! We can now treat <code>X_train</code> as a matrix of features and use it as an input for any of our machine learning algorithms.</p>
+</section>
+<section id="modeling" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="modeling">Modeling</h2>
+<p>Now we’re ready to do some modeling! Now you know how to implement logistic regression (and maybe you’ve already done it!), but for today we’ll use the <code>scikit-learn</code> implementation. We can already go ahead and fit our model. In <code>sklearn</code>, the <code>score</code> of a classification model is just the accuracy rate.</p>
+<p>So, our model achieves about 80% accuracy on the training data, which is much better than the 60% we could have achieved by random guessing.</p>
+<p>Let’s take a look at the optimal parameter vector <span class="math inline">\(\mathbf{w}\)</span>. This is stored in <code>LR</code> in the <code>coef_</code> instance variable:</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"column"</span> : X_train.columns, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"coefficient"</span> : LR.coef_.ravel()})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The way to read these coefficients is that when the number in the corresponding column gets larger, the odds of survival decrease. For example, the negative coefficient of <code>Pclass</code> means that someone with a larger value of <code>Pclass</code> (e.g.&nbsp;<code>3</code>) has a lower chance of survival in the model than someone with a lower value (e.g.&nbsp;<code>1</code>). Note that very strongly negative coefficient of <code>Sex_male</code>, which expresses the much lower survival rate of men.</p>
+<p>At this point we <em>could</em> just go ahead and and evaluate our model’s predictive capabilities by downloading the test set and checking our predictive accuracy. However, we should ask ourselves:</p>
+<blockquote class="blockquote">
+<p>Is this the best we can do?</p>
+</blockquote>
+<p>We have all kinds of different choices that we can make that <em>may</em> help us improve our models. For example:</p>
+<ul>
+<li>From our first model it looks like <code>Fare</code> may not be an especially strong predictor because of its small coefficient. Maybe our model would generalize better if we just didn’t include it?</li>
+<li>Should we try incorporating some feature transformations, like polynomial features?</li>
+<li>Should we try regularizing our logistic regression?</li>
+</ul>
+<p>We can’t exhaustively explore all possibilities, but let’s try to address one of these. Should we try incorporating polynomial features, and if so, of what degree?</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s write a simple function that will construct a model with polynomial features for us:</p>
+<p>We can use it like this:</p>
+<p>Is that better or worse than the simple logistic model without polynomial features? Unfortunately we don’t really know; the reason is again that accuracy on the training isn’t usually a reliable indicator of predictive performance. In order to make an assessment, we can instead simulate the process of fitting the model and evaluating on “test” data by witholding parts of our <em>training</em> data to use as testing. We split the data into chunks and withold each chunk, using the other chunks to train the data. This is called <em>cross-validation</em>, and it is illustrated in this figure:</p>
+<p><img src="https://scikit-learn.org/stable/_images/grid_search_cross_validation.png" class="img-fluid"></p>
+<p>We could do this with a janky for-loop, but the nice <code>scikit-learn</code> developers have implemented this for us. Here’s an example of cross-validation with 5 folds. This can take a little while, as there are actually 5 calls to <code>plr.fit()</code> happening under the hood.</p>
+<p>Each of these scores represents the model’s performance when used to predict one of the 5 folds of data after having been fit on the other 4. We often just average them to get an overall metric:</p>
+<p>Now we can try using cross-validation to get a sense for what degree of polynomial feature we should use. Degree 0 is actually the baseline model, and degree 1 corresponds to simply logistic regression without a polynomial feature map.</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> deg <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plr <span class="op">=</span> poly_LR(deg <span class="op">=</span> deg)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  cv_scores <span class="op">=</span> cross_val_score(plr, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  mean_score <span class="op">=</span> cv_scores.mean()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"Polynomial degree = </span><span class="sc">{</span>deg<span class="sc">}</span><span class="ss">, score = </span><span class="sc">{</span>mean_score<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It looks like it doesn’t make a <em>huge</em> difference, but degree-2 polynomial features might be our best bet according to cross-validation. Let’s try go ahead and fit a single copy of this model on the entire training data:</p>
+<p>Let’s finally see how we do on the test set. We need to download the test set and process it in the same way that we did the training set.</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>test_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/middlebury-csci-0451/CSCI-0451/main/data/titanic/test.csv"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df_test, X_test, y_test <span class="op">=</span> read_titanic_data(test_url)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> pd.get_dummies(X_test, columns <span class="op">=</span> [<span class="st">"Sex"</span>], drop_first<span class="op">=</span><span class="st">"if_binary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we’re finally ready to compute the score. Drumroll please!</p>
+<p>We achieve roughly 85% accuracy on the test data. By comparison,</p>
+
+
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>In case you’re wondering, our original logistic regression without polynomial features does <em>almost</em> as well on the test data:</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;python&quot;}">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>LR.score(X_test, y_test).<span class="bu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div></div></section>
+</section>
+
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

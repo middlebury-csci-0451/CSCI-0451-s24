@@ -231,6 +231,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 $$
 <p>$$</p>
 </div>
+<div class="callout-important callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is one of two <em>suggested options</em> for a blog post this week. You might want to pick this option if some of the following bullet points describe you:</p>
+<ol type="1">
+<li>You enjoy working with matrices and vectors in <code>numpy</code>.</li>
+<li>You like math and theoretical aspects of machine learning algorithms.</li>
+<li>You are willing to read a little extra theory before starting on your blog post.</li>
+</ol>
+<p><a href="../../assignments/blog-posts/blog-post-penguins.html">The alternative</a> has a more applied flavor.</p>
+</div>
+</div>
+</div>
 <section id="introduction" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>In this blog post you’ll implement and test <em>kernel logistic regression</em> for binary classification. Kernel logistic regression is one of many <em>kernelized linear classifiers.</em></p>
@@ -350,7 +366,7 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 </ul></li>
 <li>If you’ve already implemented gradient descent for logistic regression in <a href="../../assignments/blog-posts/blog-post-optimization.html">this blog post</a>, then it’s not too hard to adapt your method to kernel logistic regression. However, it’s also fine to use the function <code>scipy.optimize.minimize()</code> as demonstrated in <a href="../../lecture-notes/convex-linear-models.html">this lecture</a>.</li>
 </ul></li>
-<li><code>predict(self, X)</code> should accept a new feature matrix and return binary labels <span class="math inline">\(\{0,1\}\)</span>. For each row of <span class="math inline">\(\mathbf{X}\)</span>, the prediction is obtained using the formula <span class="math inline">\(\mathbb{1}[\langle \hat{\v}, \boldsymbol{\kappa}(\mathbf{x}) \rangle]\)</span>. To do this:
+<li><code>predict(self, X)</code> should accept a new feature matrix and return binary labels <span class="math inline">\(\{0,1\}\)</span>. For each row of <span class="math inline">\(\mathbf{X}\)</span>, the prediction is obtained using the formula <span class="math inline">\(\mathbb{1}[\langle \hat{\mathbf{v}}, \boldsymbol{\kappa}(\mathbf{x}) \rangle]\)</span>. To do this:
 <ul>
 <li>Compute the kernel matrix between <code>self.X_train</code> and the new feature input <code>X</code>. Each column of this matrix is <span class="math inline">\(\boldsymbol{\kappa}(\mathbf{x}_j)\)</span> for some <span class="math inline">\(j\)</span>.</li>
 <li>Compute inner products of the form <span class="math inline">\(\langle \mathbf{v}, \boldsymbol{\kappa}(\mathbf{x}_j) \rangle\)</span>. If the user supplies a matrix <code>X</code> with multiple columns, you should be able to compute all the predictions at once. This can be done efficiently using matrix multiplication.</li>
