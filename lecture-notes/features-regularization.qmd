@@ -5,7 +5,7 @@ author: Phil Chodrow
 bibliography: ../refs.bib
 format: 
   html: 
-    code-fold: true
+    code-fold: false
     cache: true
     callout-appearance: minimal
     cap-location: margin
