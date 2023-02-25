@@ -111,7 +111,9 @@
     - Navigation
     - Experimentation
   reading:
-    - TBD
+    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.02-introducing-scikit-learn.html">Introducing Scikit-Learn</a>
+    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.03-hyperparameters-and-model-validation.html">Hyperparameters and Model Validation</a>
+    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.04-feature-engineering.html">Feature Engineering</a>
   notes: 
     - <a href="lecture-notes/features-regularization.qmd">Lecture notes</a>
   module: Classification
@@ -128,12 +130,12 @@
     - Navigation
     - Experimentation
   reading:
-    - TBD
+    - <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé Chapter 2</a> <i>You may find it useful to review Chapter 1 as well.</i>
   notes: 
     - <a href="lecture-notes/classification-in-practice.qmd">Lecture notes</a>
   module: Classification
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.qmd#sec-overfitting">Overfitting and the Scientific Method</a>
   assignments: |
     <a href="assignments/blog-posts/blog-post-kernel-logistic.qmd">Blog post: kernel logistic regression</a> <br> OR <br> <a href="assignments/blog-posts/blog-post-penguins.qmd">Blog post: penguins</a>
 - date: 2023-03-01

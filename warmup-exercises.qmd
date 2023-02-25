@@ -157,9 +157,20 @@ $$\nabla f(w_0, w_1) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.$$
 2. Find two initial guesses for the parameter vector $\vw$ such that you get two *different* final minimizers (this is possible because $f$ is not convex).  
 
 
+## Overfitting and the Scientific Method {#sec-overfitting}
 
 
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/The_Scientific_Method.svg/520px-The_Scientific_Method.svg.png) Image from [Wikipedia](https://en.wikipedia.org/wiki/Scientific_method).]{.aside}
 
+In [the scientific method](https://en.wikipedia.org/wiki/Scientific_method), it is often emphasized that we need to formulate a hypothesis *before* performing an experiment. It's fine for the hypothesis to be based on *previous* experiments. However, the scientific method never allows us to perform an experiment, formulate a hypothesis, and then say that the experiment supported the (new) hypothesis. 
+
+We can think of scientific theories as systems of thought that help us make predictions about new phenomena. With this in mind, ***please write a short paragraph explaining the importance of hypothesis-first science using the language of machine learning.*** In your explanation, please use the following vocabulary:  
+
+- Training data. 
+- Training accuracy. 
+- Validation/testing data. 
+- Validation/testing accuracy. 
+- Overfitting. 
 
 ## The Coin-Flipping Game {#sec-erm}
 

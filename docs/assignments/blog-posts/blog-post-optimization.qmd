@@ -71,6 +71,10 @@ LR.fit(X, y, alpha = 0.1, max_epochs = 1000)
 
 # inspect the fitted value of w
 LR.w 
+
+fig = plt.scatter(X[:,0], X[:,1], c = y)
+xlab = plt.xlabel("Feature 1")
+ylab = plt.ylabel("Feature 2")
 ```
 
 ### Stochastic Gradient Descent
@@ -186,6 +190,18 @@ Submit your blog post, making sure to include a link to the online version of yo
 
 Most of the major math functions are shown in our [lecture on gradient descent](../../lecture-notes/gradient-descent.qmd). You're welcome to use any of these functions as you wish; please just incorporate comments in your code and blog post to cite where they came from.  
 
+If you compute the gradient using matrix-vector operations in `numpy` (recommended, no for-loops!), you may find it useful at some point to convert an `np.array()` of shape `(n,)` to an `np.array()` of shape `(n,1)` like this: 
+
+```{python}
+v = np.random.rand(5)
+v
+```
+
+```{python}
+v[:,np.newaxis]
+```
+
+
 You will find it convenient again to ensure that `X` contains a column of `1`s prior to any major computations. I defined this function: 
 
 ```python
@@ -198,4 +214,6 @@ and called it at a few strategic places in my implementation.
 My complete implementation, including all the math functions, momentum, etc. but excluding comments, was about 100 lines of code. 
 
 You're welcome to find creative ways to visualize your findings. You might also find it interesting to visualize the score (not just the loss). However, this is optional. 
+
+
 

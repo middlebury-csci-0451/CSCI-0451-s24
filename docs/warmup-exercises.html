@@ -189,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#sec-gradient-descent" id="toc-sec-gradient-descent" class="nav-link" data-scroll-target="#sec-gradient-descent">Gradient Descent</a></li>
   <li><a href="#sec-gradient-descent-2" id="toc-sec-gradient-descent-2" class="nav-link" data-scroll-target="#sec-gradient-descent-2">Gradient Descent (Again)</a></li>
+  <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting">Overfitting and the Scientific Method</a></li>
   <li><a href="#sec-erm" id="toc-sec-erm" class="nav-link" data-scroll-target="#sec-erm">The Coin-Flipping Game</a></li>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   </ul>
@@ -357,6 +358,19 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 </ul></li>
 <li>Find two initial guesses for the parameter vector <span class="math inline">\(\vw\)</span> such that you get two <em>different</em> final minimizers (this is possible because <span class="math inline">\(f\)</span> is not convex).</li>
 </ol>
+</section>
+<section id="sec-overfitting" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-overfitting">Overfitting and the Scientific Method</h2>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/The_Scientific_Method.svg/520px-The_Scientific_Method.svg.png" class="img-fluid"> Image from <a href="https://en.wikipedia.org/wiki/Scientific_method">Wikipedia</a>.</span></div></div>
+<p>In <a href="https://en.wikipedia.org/wiki/Scientific_method">the scientific method</a>, it is often emphasized that we need to formulate a hypothesis <em>before</em> performing an experiment. It’s fine for the hypothesis to be based on <em>previous</em> experiments. However, the scientific method never allows us to perform an experiment, formulate a hypothesis, and then say that the experiment supported the (new) hypothesis.</p>
+<p>We can think of scientific theories as systems of thought that help us make predictions about new phenomena. With this in mind, <strong><em>please write a short paragraph explaining the importance of hypothesis-first science using the language of machine learning.</em></strong> In your explanation, please use the following vocabulary:</p>
+<ul>
+<li>Training data.</li>
+<li>Training accuracy.</li>
+<li>Validation/testing data.</li>
+<li>Validation/testing accuracy.</li>
+<li>Overfitting.</li>
+</ul>
 </section>
 <section id="sec-erm" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-erm">The Coin-Flipping Game</h2>
