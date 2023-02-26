@@ -116,6 +116,7 @@
     - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.04-feature-engineering.html">Feature Engineering</a>
   notes: 
     - <a href="lecture-notes/features-regularization.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/features-regularization-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-gradient-descent-2">Gradient Descent Again</a>
@@ -133,6 +134,7 @@
     - <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé Chapter 2</a> <i>You may find it useful to review Chapter 1 as well.</i>
   notes: 
     - <a href="lecture-notes/classification-in-practice.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/classification-in-practice.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-overfitting">Overfitting and the Scientific Method</a>

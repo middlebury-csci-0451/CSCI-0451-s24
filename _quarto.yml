@@ -4,6 +4,7 @@ project:
   resources:
     - "lecture-scripts/*"
     - "assignments"
+    - "lecture-notes/*.ipynb"
 
 website:
   body-footer: |
