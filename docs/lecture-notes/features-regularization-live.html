@@ -311,13 +311,7 @@ r^2 = \langle (1, 1), (x_1^2, x_2^2) \rangle\;.
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plot_decision_regions(X, y, clf <span class="op">=</span> LR, ax <span class="op">=</span> axarr[<span class="dv">0</span>])</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> axarr[<span class="dv">0</span>].set_title(<span class="ss">f"Accuracy = </span><span class="sc">{</span>LR<span class="sc">.</span>score(X, y)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>LR2 <span class="op">=</span> LogisticRegression()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>X_ <span class="op">=</span> X<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>LR2.fit(X_, y)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plot_decision_regions(X_, y, clf <span class="op">=</span> LR2, ax <span class="op">=</span> axarr[<span class="dv">1</span>])</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> axarr[<span class="dv">1</span>].set_title(<span class="ss">f"Accuracy = </span><span class="sc">{</span>LR2<span class="sc">.</span>score(X_, y)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="feature-maps-in-practice" class="level2">
@@ -347,7 +341,7 @@ r^2 = x_1^2 + x_2^2\;.
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> viz_plr(plr, X, y):  </span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    plot_decision_regions(X, y, clf <span class="op">=</span> plr)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> plt.gca().set_title(<span class="ss">f"Training Accuracy = </span><span class="sc">{</span>plr<span class="sc">.</span>score(X, y)<span class="sc">}</span><span class="ss">"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> plt.gca().set_title(<span class="ss">f"Accuracy = </span><span class="sc">{</span>plr<span class="sc">.</span>score(X, y)<span class="sc">}</span><span class="ss">"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
