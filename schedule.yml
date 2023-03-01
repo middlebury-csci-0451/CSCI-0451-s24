@@ -135,7 +135,7 @@
     - <a href="https://via.hypothes.is/https://jakevdp.github.io/PythonDataScienceHandbook/03.00-introduction-to-pandas.html">Data Manipulation with Pandas</a> (Focus on the sections up to and including "Aggregation and Grouping")
   notes: 
     - <a href="lecture-notes/classification-in-practice.qmd">Lecture notes</a>
-    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/classification-in-practice.ipynb">Live version</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/classification-in-practice-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-overfitting">Overfitting and the Scientific Method</a>
@@ -150,7 +150,7 @@
     - Social Responsibility
     - Experimentation
   reading:
-    - <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Angwin et al. for ProPublica. 
+    - <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica. 
     - <a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">Fair prediction with disparate impact</a> by Alexandra Chouldechova, Sections 1 and 2. 
     - <a href="https://arxiv.org/pdf/1609.05807,">Inherent Trade-Offs in the Fair Determination of Risk Scores</a> by Jon Kleinberg et al, pages 1-5. 
   notes: 
