@@ -54,11 +54,11 @@ $$
 
 where $\phi$ is a *feature map* and $\ell$ is a convex per-observation loss function. We've studied where this framework comes from and how to solve the empirical risk minimization problem 
 $$
-\hat{\vw} = \argmin{\vw} L(\vw)\;. 
+\hat{\vw} = \argmin_{\vw} L(\vw)\;. 
 $$
 using gradient descent, in which we perform the iteration 
 $$
-\hat{\vw}^{(t+1)} \gets \hat{\vw}^{(t)} - \alpha \nabla L(\vw)
+\hat{\vw}^{(t+1)} \gets \hat{\vw}^{(t)} - \alpha \nabla L(\vw^{(t)})
 $$
 until convergence. Assuming that our per-observation loss function is convex (as it is, for example, in logistic regression), gradient descent will always converge to the globally optimal $\hat{\vw}$ (although it might do so slowly). 
 
@@ -66,7 +66,7 @@ until convergence. Assuming that our per-observation loss function is convex (as
 
 There are actually a lot of practicalities to consider here as well! Where does our data come from? How do we prepare it for analysis? If we are going to use a feature map $\phi$ for things like polynomial features, how do we choose the right feature map? If our model has hyperparameters for things like regularization, how do we choose the right hyperparameters? All of these are questions that we need to handle in the practice of machine learning. 
 
-Our purpose in this lecture is to actually work through some of the common steps of the standard machine learning workflow.  
+Our purpose in this lecture is to actually work through some of the common steps of the standard machine learning workflow.   
 
 # The Titanic Data Set
 
@@ -78,7 +78,6 @@ It is often convenient to represent tables of data as *data frames*. Data frames
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
-pd.set_option('max_colwidth', 400)
 ```
 
 The following function will retrieve data from the `url` in which I've hosted the data set. It returns both the complete data (`df`, for "data frame") and split pieces of the data that contain only the features and the target, respectively. 
@@ -107,6 +106,10 @@ df_train.head()
 
 ## Prediction Question
 
+The standard prediction question for this data set is: 
+
+> Can we predict whether or not a given passenger survived the crash of the *Titanic*, given information about them and their position on the ship?
+
 ## Data Inspection
 
 Before modeling, it's usually beneficial to learn about your data. It's not *always* possible to do this without modeling, for example if your data is very high-dimensional. Because this data set has a relatively small number of features, we can learn a lot about it just through summaries. Let's ask a few questions: 
@@ -127,7 +130,7 @@ We can't know for certain, but we can learn about how much was paid for each pas
 X_train.groupby('Pclass')[['Fare']].aggregate([np.mean, len]).round(2)
 ```
 
-- The average price of 84 pounds for a first-class ticket corresponds to nearly $15,000 USD today.
+- The average price of 88 pounds for a first-class ticket corresponds to nearly $15,000 USD today.
 - The second-class ticket corresponds to roughly $3,500
 - The third class ticket corresponds to roughly $2,500.
 
@@ -135,7 +138,7 @@ We can safely assume that the first-class passengers were indeed substantially m
 
 > Did wealth disparities make a difference for who was most likely to survive?
 
-We can segment out survival rates by passenger class to learn abou tthis: 
+We can segment out survival rates by passenger class to learn more about this: 
 
 ```{python}
 df_train.groupby(['Pclass'])[['Survived']].aggregate([np.mean,len ]).round(2)
@@ -159,7 +162,7 @@ So far, we've been working with 2d `numpy` arrays (matrices) of features and 1d 
 y_train.head() # first few entries
 ```
 
-On the other hand, our data frame has one column that we can't use: the `Sex` column contains strings representing categories, rather than numbers. Computers only understand numbers, and so we need to encode the `Sex` of the passengers as a number. We use so-called "*one-hot encoding*" for this, in which each category is represented by a binary column, with a 1 indicating that the passenger fell into that category. The `Pandas` function `get_dummies()` is an extremely convenient way to achieve this: 
+On the other hand, our data frame has one column that we can't use: the `Sex` column contains strings representing categories, rather than numbers. ML algorithms only understand numbers, and so we need to encode the `Sex` of the passengers as a number. We use so-called "*one-hot encoding*" for this, in which each category is represented by a binary column, with a 1 indicating that the passenger fell into that category. The `Pandas` function `get_dummies()` is an extremely convenient way to achieve this: 
 
 ```{python}
 X_train = pd.get_dummies(X_train, columns = ["Sex"], drop_first = "if_binary")
@@ -177,7 +180,7 @@ from sklearn.exceptions import ConvergenceWarning
 simplefilter("ignore", category=ConvergenceWarning)
 ```
 
-Now we're ready to do some modeling! Now you know how to implement logistic regression (and maybe you've already done it!), but for today we'll use the `scikit-learn` implementation. We can already go ahead and fit our model. In `sklearn`, the `score` of a classification model is just the accuracy rate. 
+Now we're ready to do some modeling! You may know how to implement logistic regression (and maybe you've already done it!), but for today we'll use the `scikit-learn` implementation. We can already go ahead and fit our model. In `sklearn`, the `score` of a classification model is just the accuracy rate. 
 
 ```{python}
 from sklearn.linear_model import LogisticRegression
@@ -192,9 +195,10 @@ So, our model achieves about 80% accuracy on the training data, which is much be
 Let's take a look at the optimal parameter vector $\vw$. This is stored in `LR` in the `coef_` instance variable: 
 
 ```{python}
-pd.DataFrame(
-  {"column" : X_train.columns, 
-  "coefficient" : LR.coef_.ravel()})
+pd.DataFrame({
+  "column" : X_train.columns, 
+  "coefficient" : LR.coef_.ravel()
+  })
 ```
 
 The way to read these coefficients is that when the number in the corresponding column gets larger, the odds of survival decrease. For example, the negative coefficient of `Pclass` means that someone with a larger value of `Pclass` (e.g. `3`) has a lower chance of survival in the model than someone with a lower value (e.g. `1`). Note that very strongly negative coefficient of `Sex_male`, which expresses the much lower survival rate of men. 
@@ -249,7 +253,7 @@ Each of these scores represents the model's performance when used to predict one
 cv_scores.mean()
 ```
 
-Now we can try using cross-validation to get a sense for what degree of polynomial feature we should use. Degree 0 is actually the baseline model, and degree 1 corresponds to simply logistic regression without a polynomial feature map. 
+Now we can try using cross-validation to get a sense for what degree of polynomial feature we should use. Degree 0 is actually the baseline model, and degree 1 corresponds to simple logistic regression without a polynomial feature map. 
 
 ```{python}
 for deg in range(4):
@@ -294,4 +298,121 @@ LR.score(X_test, y_test).round(4)
 :::
 
 
+## Breaking Down Accuracy
+
+When evaluating the performance of our algorithms, it's not usually enough to just compute an overall score. The *confusion matrix* of a classifier on the test data is a convenient way to understand the *kind* of mistakes that your model most frequently makes. To construct a confusion matrix, we can use the `confusion_matrix` function from `sklearn.metrics`. 
+
+```{python}
+from sklearn.metrics import confusion_matrix
+y_pred = plr.predict(X_test)
+
+confusion_matrix(y_test, y_pred)
+```
+
+This matrix compares the *real* values of the label on each data point to their *predicted* values. There are two possibilities for the labels and we are comparing to their predicted values, so we have four possibilities. 
+
+- **True positive** (TP): $y_i = 1$ and $\hat{y}_i = 1$. There are 51 true positives for this predictor on the test set. 
+- **True negative** (TN): $y_i = 0$ and $\hat{y}_i = 0$. There are 100 true negatives for this predictor on the test set. 
+- **False positive** (FP): $y_i = 0$ and $\hat{y}_i = 1$. There are 13 false positives for this predictor on the test set. 
+- **False negative** (FN): $y_i = 1$ and $\hat{y}_i = 0$. There are 14 false negatives for this predictor on the test set. 
+
+It's possible to normalize the confusion matrix in order to compute some quantities of frequent interest, like the *true positive rate*, the *false positive rate*, the *true negative rate*, and the *false negative rate*. 
+
+The true positive rate is the proportion of the time that the classifier correctly categorized a positive instance, out of all positive instances.  
+
+$$
+\text{TPR} = \frac{\text{\#TP}}{\text{\#TP} + \text{\#FN}}
+$$
+
+The false positive rate is the fraction of the time that the classifier incorrectly predicted a positive instance, out of all *negative* instances. 
+$$
+\text{FPR} = \frac{\text{\#FP}}{\text{\#FP} + \text{\#TN}}
+$$
+
+The true negative rate and false negative right are defined similarly. Normalizing the confusion matrix allows us to read off these rates: 
+
+```{python}
+confusion_matrix(y_test, y_pred, normalize = "true")
+```
+
+We observe that not only does our model make mistakes, it makes *different kinds* of mistakes. Not only that -- it makes different kinds of mistakes on different groups! For example, let's compare the model's confusion matrices on test data for female and male passengers: 
+
+```{python}
+
+ix = X_test["Sex_male"] == 0
+print("Female passengers:")
+# print((y_test[ix] == y_pred[ix]).mean())
+print(confusion_matrix(y_test[ix], y_pred[ix], normalize = "true"))
+print("")
+
+ix = X_test["Sex_male"] == 1
+print("Male passengers:")
+# print((y_test[ix] == y_pred[ix]).mean())
+print(confusion_matrix(y_test[ix], y_pred[ix], normalize = "true"))
+print("")
+```
+
+A few observations: on the test set...
+
+- ...when a female passenger survives, the model **always** correctly predicts this. 
+- ...when a female passenger perishes, however, the model is actually still more likely to **incorrectly predict** that she did survive. 
+- ...when a male passenger survives, the model almost always (87% of the time) instead **incorrectly predicts** that he perished. 
+- ...when a male passenger perishes, the model **always** correctly predicts this. 
+
+We'll go into much more detail on these rates in an upcoming lecture. 
+
+
+
+
+::: {.callout-note}
+
+## Discussion
+
+You have gotten into the lucrative business of selling *luxury cruise life insurance* for passengers on ships like the *Titanic*. Here's how your insurance works: if a passenger who has bought your insurance perishes, then you will make a payout of $100,000 to their named beneficiary. 
+
+Per usual practices in insurance pricing, you plan to charge different prices for different passengers. You plan to set the price using the machine learning model we just trained on the *Titanic* data set. You will give passenger information to the model, and then base the price on the model's prediction 
+
+- If a passenger is predicted to *survive*, the price is $500. 
+- If a passenger is predicted to *perish*, the price is $5,000. 
+
+Please discuss the following questions: 
+
+As we saw above, the model is more likely to incorrectly predict male passengers to perish, and more likely to incorrectly predict female passengers to survive. As a result, the insurance prices for men are significantly higher. **Does your insurance scheme have an anti-male bias?** Please consider both of the following points of view: 
+  - No, there is no bias because the model is simply doing its best to replicate the patterns found in the data. It's not the model's fault that men tended not to survive the crash! 
+  - Yes, there is bias because the model is creating higher prices for men on the basis of information that includes their sex. 
+
+Suppose now that we train and evaluate a version of the model that doesn't include passenger sex at all: 
+
+```{python}
+
+# versions of the training and test data with sex column removed
+X_train_ = X_train.drop("Sex_male", axis = 1)
+X_test_   = X_test.drop("Sex_male", axis = 1)
+
+# fit the model
+plr.fit(X_train_, y_train)
+
+# extract a prediction
+y_pred = plr.predict(X_test_)
+
+# print confusion matrices
+ix = X_test["Sex_male"] == 0
+print("Female passengers:")
+# print((y_test[ix] == y_pred[ix]).mean())
+print(confusion_matrix(y_test[ix], y_pred[ix], normalize = "true"))
+print("")
+
+ix = X_test["Sex_male"] == 1
+print("Male passengers:")
+# print((y_test[ix] == y_pred[ix]).mean())
+print(confusion_matrix(y_test[ix], y_pred[ix], normalize = "true"))
+print("")
+```
+
+This looks more even, but now we have a different discrepancy: male passengers are more likely than female passengers to be incorrectly predicted to survive, so now the male insurance prices are lower than the female ones. Discuss the following two propositions: 
+
+- This version of the model cannot have gender bias because gender was not a feature on which the model was trained. 
+- This version of the model still has gender bias because it leads to higher insurance prices for men. 
+
+:::
 

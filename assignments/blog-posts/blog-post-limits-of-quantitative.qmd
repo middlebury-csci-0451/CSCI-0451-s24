@@ -1,0 +1,106 @@
+---
+title: "Limits of the Quantitative Approach to Bias and Fairness"
+type: "Blog Post"
+date: 2023-03-15
+description: |
+    This blog post is actually an essay -- no math or coding is involved. In this blog post, you'll discuss the limits of the quantitative approach to bias and fairness in allocative decision-making.  
+objectives: 
+  - Social Responsibility
+jupyter: conda-env-ml-0451-py
+number-sections: true
+number-depth: 2
+publish: "true"
+bibliography: ../../refs.bib
+---
+
+### What You Should Do
+
+Quantitative methods for assessing discrimination and bias include things like: 
+
+- Formal (mathematical) definitions of bias and fairness in terms. 
+- Audits of machine learning algorithms, including things like confusion matrices and false positive rates. 
+- Statistical tests of significance for effects related to race, gender, or other protected attributes. 
+
+In a recent speech, @narayanan2022limits [p. 25] asserts that 
+
+> "currently quantitative methods are primarily used to justify the status quo. I would argue that they do more harm than good."
+
+In a carefully-structured essay of approximately 1,500 words, engage **at least 5 scholarly sources** (in addition to Narayanan's speech) to discuss this claim. Your essay should include: 
+
+1. A careful explanation of Narayanan's position. 
+2. A careful explanation of the *uses* or *benefits* of quantitative methods, as described in one of your scholarly sources. 
+3. Appropriate supporting points from your other scholarly sources. 
+4. An argument in which you stake out a position on Narayanan's point of view. Do you agree? Disagree? Agree with qualifications? Which ones? Why? 
+
+### References in Quarto
+
+To manage references in Quarto, you need to create a `.bib` file (you can call it `refs.bib`). This file should live in the same directory as your blog post. Your `.bib` file is essentially a database of document information. Here's an example of a a `refs.bib` file: 
+
+```bibtex
+@article{hardt2021patterns,
+  title  = {Patterns, predictions, and actions: A story about machine learning},
+  author = {Hardt, Moritz and Recht, Benjamin},
+  journal= {arXiv preprint arXiv:2102.05242},
+  year   = {2021}
+}
+
+@article{kearns1994toward,
+  title     = {Toward Efficient Agnostic Learning},
+  author    = {Kearns, Michael J and Schapire, Robert E and Sellie, Linda M},
+  journal   = {Machine Learning},
+  volume    = {17},
+  pages     = {115--141},
+  year      = {1994},
+  publisher = {Citeseer}
+}
+
+@misc{narayanan2022limits,
+  author       = {Narayanan, Arvind},
+  howpublished = {Speech},
+  title        = {The limits of the quantitative approach to discrimination},
+  year         = {2022}
+}
+```
+
+The simplest way to get entries for your references is to look them up on Google Scholar. 
+
+1. Search for the document you want. 
+2. Click the "Cite" link underneath and choose "Bibtex" from the options at the bottom. 
+3. Copy and paste the contents of the new page to your `refs.bib` file. 
+
+Once you've assembled your references, add the following line to your document metadata (the stuff in the top cell of your Jupyter notebook)
+
+```yml
+bibliography: refs.bib
+```
+
+Once you've followed these steps, you're ready to cite! You can reference your documents using the \@ symbol and their bibliographic key, which is the first entry for each document in the `refs.bib` file. For example, typing 
+
+```
+@hardt2021patterns
+```
+
+results in the reference 
+
+@hardt2021patterns
+
+as well as an entry in the "References" section at the end of your blog post. 
+
+For more on how to handle citations in Quarto, check [the Quarto documentation](https://quarto.org/docs/authoring/footnotes-and-citations.html#citations). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

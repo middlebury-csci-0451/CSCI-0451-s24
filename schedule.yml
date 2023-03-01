@@ -132,6 +132,7 @@
     - Experimentation
   reading:
     - <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé Chapter 2</a> <i>You may find it useful to review Chapter 1 as well.</i>
+    - <a href="https://via.hypothes.is/https://jakevdp.github.io/PythonDataScienceHandbook/03.00-introduction-to-pandas.html">Data Manipulation with Pandas</a> (Focus on the sections up to and including "Aggregation and Grouping")
   notes: 
     - <a href="lecture-notes/classification-in-practice.qmd">Lecture notes</a>
     - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/classification-in-practice.ipynb">Live version</a>
@@ -139,124 +140,42 @@
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-overfitting">Overfitting and the Scientific Method</a>
   assignments: |
-    <a href="assignments/blog-posts/blog-post-kernel-logistic.qmd">Blog post: kernel logistic regression</a> <br> OR <br> <a href="assignments/blog-posts/blog-post-penguins.qmd">Blog post: penguins</a>
-- date: 2023-03-01
-  header: | 
-    Kernel Methods
-  summary: |
-    TBD
-  objectives: 
-    - Theory
-  reading:
-    - TBD
-  notes: 
-    - TBD
-  module: Classification
-  publish: false
-  warmup: TBD
-  assignments:
-    - |
-      <a href="assignments/blog-posts/blog-post-kernel-logistic.qmd">Blog post: kernel logistic regression</a>
+    <a href="assignments/blog-posts/blog-post-kernel-logistic.qmd">Blog post: kernel logistic regression</a> <br> <b>OR</b> <br> <a href="assignments/blog-posts/blog-post-penguins.qmd">Blog post: penguins</a>
 - date: 2023-03-06
   header: | 
-    Generalization
+    Introduction to Bias and Fairness
   summary: |
     TBD
   objectives: 
-    - Theory
-    - Implementation
-    - Navigation
+    - Social Responsibility
+    - Experimentation
   reading:
-    - TBD
+    - <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Angwin et al. for ProPublica. 
+    - <a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">Fair prediction with disparate impact</a> by Alexandra Chouldechova, Sections 1 and 2. 
+    - <a href="https://arxiv.org/pdf/1609.05807,">Inherent Trade-Offs in the Fair Determination of Risk Scores</a> by Jon Kleinberg et al, pages 1-5. 
   notes: 
-    - TBD
+    - <a href="lecture-notes/intro-allocative-bias.qmd">Lecture notes</a>
   module: Classification
-  publish: false
+  publish: true
   warmup: TBD
-  assignments:
+  assignments: |
+    TBD
 - date: 2023-03-08
   header: | 
-    Model Selection in Practice
+    Critical Perspectives 
   summary: |
     TBD
   objectives: 
-    - Navigation
+    - Social Responsibility
     - Experimentation
   reading:
-    - TBD
+    - <a href="https://www.cs.princeton.edu/~arvindn/talks/baldwin-discrimination/baldwin-discrimination-transcript.pdf">The limits of the quantitative approach to discrimination</a>, speech by Arvind Narayanan
+    - <a href="https://arxiv.org/pdf/1908.06165.pdf">"Race and Gender"</a> by Timnit Gebru (chapter in the <i>Oxford Handbook on AI Ethics</i>)
+    - <a href="https://harpers-org.ezproxy.middlebury.edu/archive/2018/01/the-digital-poorhouse/">"The Digital Poorhouse"</a> by Virginia Eubanks for <i>Harper's Magazine</i>
   notes: 
     - TBD
   module: Classification
-  publish: false
+  publish: true
   warmup: TBD
-  assignments:
-    - |
-      Blog post: automated feature selection
-- date: 2023-03-13
-  header: | 
-    Linear Regression
-  summary: |
-    TBD
-  objectives: 
-    - Implementation
-  reading:
-    - TBD
-  notes: 
-    - TBD
-  module: Regression
-  publish: false
-  warmup: TBD
-  assignments:
-- date: 2023-03-15
-  header: | 
-    Introduction to Algorithmic Bias
-  summary: |
-    TBD
-  objectives: 
-    - Social Responsibility 
-    - Experimentation
-  reading:
-    - TBD
-  notes: 
-    - TBD
-  module: Regression
-  publish: false
-  warmup: TBD
-  assignments:
-    - TBD
-- date: 2023-03-20
-  header: | 
-    Formal Definitions of Bias and Fairness
-  summary: |
-    TBD
-  objectives: 
-    - Social Responsibility 
-    - Theory
-  reading:
-    - Formal definitions
-    - Limitations of formal definitions
-  notes: 
-    - TBD
-  module: Regression
-  publish: false
-  warmup: TBD
-  assignments:
-- date: 2023-03-22
-  header: TBD
-  summary: |
-    TBD
-  objectives: 
-    - Implementation
-  reading:
-    - TBD
-  notes: 
-    - TBD
-  module: Regression
-  publish: false
-  warmup: TBD
-  assignments:
-    - TBD
-
-
-
-
+  assignments: |
+    <a href="assignments/blog-posts/blog-post-limits-of-quantitative.qmd">Blog post: Limits of quantitative methods</a>

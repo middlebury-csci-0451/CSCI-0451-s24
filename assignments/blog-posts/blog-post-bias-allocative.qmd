@@ -1,0 +1,144 @@
+---
+title: "Auditing Allocative Bias"
+type: "Blog Post"
+date: 2023-03-08
+description: |
+    In this blog post, you'll create a machine learning model that predicts whether or not an individual is employed on the basis of other demographic characteristics. You'll then perform a fairness audit in order to assess whether or not your algorithm displays bias with respect to race or sex. 
+objectives: 
+  - Social Responsibility
+  - Implementation
+  - Navigation
+  - Experimentation
+jupyter: conda-env-ml-0451-py
+number-sections: true
+number-depth: 2
+publish: "false"
+---
+
+This would be a very good data set for introducing classification rates, algorithmic bias, etc. 
+
+::: {.hidden}
+$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vd}{\mathbf{d}}
+\newcommand{\mX}{\mathbf{X}}
+\newcommand{\mR}{\mathbf{R}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vzero}{\mathbf{0}}
+\newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\one}[1]{\mathbb{1}\left[ #1 \right]}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\mA}{\mathbf{A}}
+\newcommand{\vtheta}{\boldsymbol{\theta}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\dd}[2]{\frac{\partial #1}{\partial #2}}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+$$
+
+```{python}
+from folktables import ACSDataSource, ACSEmployment, BasicProblem, adult_filter
+import numpy as np
+data_source = ACSDataSource(survey_year='2018', horizon='1-Year', survey='person')
+acs_data = data_source.get_data(states=["AL"], download=True)
+```
+
+```{python}
+EmploymentProblem = BasicProblem(
+    features=[
+        'AGEP',
+        'SCHL',
+        'MAR',
+        'RELP',
+        'DIS',
+        # 'ESP',
+        'CIT',
+        'MIG',
+        'MIL',
+        'ANC',
+        'NATIVITY',
+        # 'DEAR',
+        # 'DEYE',
+        # 'DREM',
+        'SEX',
+        # 'RAC1P' # NOTE: Race is not a feature
+    ],
+    target='ESR',
+    target_transform=lambda x: x == 1,
+    group='RAC1P',
+    preprocess=lambda x: x,
+    postprocess=lambda x: np.nan_to_num(x, -1),
+)
+
+features, label, group = EmploymentProblem.df_to_numpy(acs_data)
+```
+
+
+```{python}
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix
+
+X_train, X_test, y_train, y_test, group_train, group_test = train_test_split(
+    features, label, group, test_size=0.2, random_state=0)
+
+###### Your favorite learning algorithm here #####
+model = make_pipeline(StandardScaler(), LogisticRegression())
+
+model.fit(X_train, y_train)
+
+yhat = model.predict(X_test)
+
+white_tpr = np.mean(yhat[(y_test == 1) & (group_test == 1)])
+black_tpr = np.mean(yhat[(y_test == 1) & (group_test == 2)])
+
+white_fpr = np.mean(yhat[(y_test == 0) & (group_test == 1)])
+black_fpr = np.mean(yhat[(y_test == 0) & (group_test == 2)])
+
+white_fnr = 1 - white_tpr
+black_fnr = 1 - black_tpr
+
+print(black_tpr, white_tpr)
+
+```
+
+```{python}
+group_ = 2
+confusion_matrix(y_test[group_test == group_], yhat[group_test == group_], normalize = "true")
+```
+
+```{python}
+y_test[group_test == 1].mean()
+y_test[group_test == 2].mean()
+```
+
+
+
+```{python}
+from sklearn.metrics import roc_curve
+from matplotlib import pyplot as plt
+
+probs = model.predict_proba(X_test)[:,1]
+
+for i in [1, 2]:
+  ix = group_test == i
+  fpr, tpr, thresholds = roc_curve(y_test[ix], probs[ix])
+  plt.plot(thresholds, tpr, label = ["White", "Black"][i-1])
+
+plt.legend()
+```
