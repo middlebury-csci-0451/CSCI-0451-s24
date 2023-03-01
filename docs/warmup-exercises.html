@@ -191,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-gradient-descent-2" id="toc-sec-gradient-descent-2" class="nav-link" data-scroll-target="#sec-gradient-descent-2">Gradient Descent (Again)</a></li>
   <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting">Overfitting and the Scientific Method</a></li>
   <li><a href="#sec-erm" id="toc-sec-erm" class="nav-link" data-scroll-target="#sec-erm">The Coin-Flipping Game</a></li>
+  <li><a href="#sec-classification-rates-2" id="toc-sec-classification-rates-2" class="nav-link" data-scroll-target="#sec-classification-rates-2">Balancing Classification Rates</a></li>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   </ul>
 </nav>
@@ -399,6 +400,18 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 </ul>
 <p>Your answer should depend on <span class="math inline">\(\hat{p}\)</span> but not on <span class="math inline">\(p\)</span>!</p>
 </section>
+</section>
+<section id="sec-classification-rates-2" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-classification-rates-2">Balancing Classification Rates</h2>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">You can do this first part just by copying and pasting lecture code. It doesn’t matter much how good your model is – just make sure you’re able to get predictions.</span></div></div>
+<p>Use the code from <a href="./lecture-notes/classification-in-practice.html">our recent lecture</a> to download the Titanic data set as a Pandas data frame and train a model on the training data. Then download the test data. Compute <code>y_pred</code>, the vector of predictions of your model on the test data.</p>
+<p>Then, write a function that verifies eq. (2.6) in Alexandra Chouldechova’s paper “<a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">Fair Prediction with disparate impact</a>.” Here’s what your function should do:</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">The positive predictive value is <span class="math inline">\(\mathrm{PPV} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}\)</span>.</span></div></div>
+<ol type="1">
+<li>Given vectors <code>y_pred</code> of predictions and <code>y_test</code> of actual labels, compute the False Negative Rate (FNR), False Positive Rate (FPR), prevalence <span class="math inline">\(p\)</span>, and positive predictive value (PPV).</li>
+<li>Return as a tuple the lefthand side and righthand side of eq. (2.6) in Chouldechova.</li>
+<li>Verify that the two numbers are equal!</li>
+</ol>
 </section>
 <section id="sec-classification-rates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>

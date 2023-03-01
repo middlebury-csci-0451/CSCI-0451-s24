@@ -202,6 +202,22 @@ Now suppose that I *don't* tell you the true value of $p$. Instead, I let you ob
 
 Your answer should depend on $\hat{p}$ but not on $p$! 
 
+
+## Balancing Classification Rates {#sec-classification-rates-2}
+
+[You can do this first part just by copying and pasting lecture code. It doesn't matter much how good your model is -- just make sure you're able to get predictions.]{.aside}
+
+Use the code from [our recent lecture](/lecture-notes/classification-in-practice.qmd) to download the Titanic data set as a Pandas data frame and train a model on the training data. Then download the test data. Compute `y_pred`, the vector of predictions of your model on the test data. 
+
+Then, write a function that verifies eq. (2.6) in Alexandra Chouldechova's paper "[Fair Prediction with disparate impact](https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf)." Here's what your function should do: 
+
+[The positive predictive value is $\mathrm{PPV} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}$.]{.aside}
+
+1. Given vectors `y_pred` of predictions and `y_test` of actual labels, compute the False Negative Rate (FNR), False Positive Rate (FPR), prevalence $p$, and positive predictive value (PPV). 
+2. Return as a tuple the lefthand side and righthand side of eq. (2.6) in Chouldechova. 
+3. Verify that the two numbers are equal! 
+
+
 ## Classification Rates {#sec-classification-rates}
 
 #### Part 1

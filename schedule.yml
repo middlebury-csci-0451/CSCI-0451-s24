@@ -157,9 +157,8 @@
     - <a href="lecture-notes/intro-allocative-bias.qmd">Lecture notes</a>
   module: Classification
   publish: true
-  warmup: TBD
-  assignments: |
-    TBD
+  warmup: <a href="warmup-exercises.qmd#sec-classification-rates-2">Balancing Classification Rates</a>
+  assignments: 
 - date: 2023-03-08
   header: | 
     Critical Perspectives 
