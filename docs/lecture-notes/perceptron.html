@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -54,7 +59,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -67,7 +72,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -192,7 +197,7 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -224,6 +229,7 @@ div.csl-indent {
           </div>
   </div>
     
+  
     
   </div>
   
@@ -286,7 +292,7 @@ div.csl-indent {
 <div id="fig-scatter" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="perceptron_files/figure-html/fig-scatter-output-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure 1: 200 data points in the 2d plane, each of which has one of two labels.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1: 200 data points in the 2d plane, each of which has one of two labels.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -294,18 +300,15 @@ div.csl-indent {
 <p>There are 200 points of data. Each data point <span class="math inline">\(i\)</span> has three pieces of information associated with it:</p>
 <ul>
 <li>A <em>feature</em> <span class="math inline">\(x_{i1}\)</span>. Think of a feature as a number you can measure, like a someone’s height or interest in studying machine learning on a scale.</li>
-<li>A second feature <span class="math inline">\(x_{i2}\)</span>. We often collect all the features associated with a data point <span class="math inline">\(i\)</span> into a <em>feature vector</em> <span class="math inline">\(\mathbf{x}_i\)</span>. In this case, <span class="math inline">\(\mathbf{x}_i = (x_{i1}, x_{i2}) \in \R^2\)</span>. We often further collect all the feature vectors into a <em>feature matrix</em> <span class="math inline">\(\mX\)</span>, by stacking all the feature vectors on top of each other:</li>
-</ul>
-<p><span class="math display">\[
+<li>A second feature <span class="math inline">\(x_{i2}\)</span>. We often collect all the features associated with a data point <span class="math inline">\(i\)</span> into a <em>feature vector</em> <span class="math inline">\(\mathbf{x}_i\)</span>. In this case, <span class="math inline">\(\mathbf{x}_i = (x_{i1}, x_{i2}) \in \R^2\)</span>. We often further collect all the feature vectors into a <em>feature matrix</em> <span class="math inline">\(\mX\)</span>, by stacking all the feature vectors on top of each other: <span class="math display">\[
 \mX = \left[\begin{matrix} &amp; - &amp; \vx_1 &amp; - \\
 &amp; - &amp; \vx_2 &amp; - \\
 &amp; \vdots &amp; \vdots &amp; \vdots \\
 &amp; - &amp; \vx_{200} &amp; - \end{matrix}\right]
-\]</span></p>
-<ul>
+\]</span></li>
 <li>A <em>target variable</em> <span class="math inline">\(y_i\)</span>. In this data set, the target variable is has components equal to either <span class="math inline">\(-1\)</span> or <span class="math inline">\(1\)</span>.  You can think of it as representing a piece of yes-no information like whether a student is a computer science major or not. The target variables can be collected into a <em>target vector</em> <span class="math inline">\(\vy = (y_1, \ldots, y_{200})^T \in \{-1,1\}^{200}\)</span>.</li>
 </ul>
-<div class="no-row-height column-margin column-container"><span class="aside">In many applications we assume that the target variable has values in <span class="math inline">\(\{0, 1\}\)</span>. For the perceptron, it turns out to be extra convenient to use <span class="math inline">\(\{-1, 1\}\)</span> instead.</span></div><p>More generally, supervised prediction problems with <span class="math inline">\(n\)</span> data points and <span class="math inline">\(k\)</span> features can be summarized in terms of a <em>feature matrix</em> <span class="math inline">\(\mX \in \R^{n \times p}\)</span> and a <em>target vector</em> <span class="math inline">\(\vy \in \R^n\)</span>.</p>
+<div class="no-row-height column-margin column-container"><span class="">In many applications we assume that the target variable has values in <span class="math inline">\(\{0, 1\}\)</span>. For the perceptron, it turns out to be extra convenient to use <span class="math inline">\(\{-1, 1\}\)</span> instead.</span></div><p>More generally, supervised prediction problems with <span class="math inline">\(n\)</span> data points and <span class="math inline">\(k\)</span> features can be summarized in terms of a <em>feature matrix</em> <span class="math inline">\(\mX \in \R^{n \times p}\)</span> and a <em>target vector</em> <span class="math inline">\(\vy \in \R^n\)</span>.</p>
 </section>
 <section id="linear-classifiers" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="linear-classifiers">Linear Classifiers</h3>
@@ -338,7 +341,7 @@ div.csl-indent {
 <div id="fig-scatter-with-separators" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="perceptron_files/figure-html/fig-scatter-with-separators-output-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure 2: Two candidate separating hyperplanes for our data. Which one would you choose? The two weight vectors are <span class="math inline">\(\tilde{\vw}^{(0)} = (0.5, -0.5, 0.1)\)</span> and <span class="math inline">\(\tilde{\vw}^{(1)} = (-0.5, -0.5, 0.9)\)</span>.</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;2: Two candidate separating hyperplanes for our data. Which one would you choose? The two weight vectors are <span class="math inline">\(\tilde{\vw}^{(0)} = (0.5, -0.5, 0.1)\)</span> and <span class="math inline">\(\tilde{\vw}^{(1)} = (-0.5, -0.5, 0.9)\)</span>.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -349,7 +352,7 @@ div.csl-indent {
 \tag{3}\]</span></span></p>
 <p>That is, if someone gave you the weight vector <span class="math inline">\(\tilde{\vw}^{(1)}\)</span>, <strong><em>you wouldn’t need to see the data labels</em></strong>: you could exactly recover them using <a href="#eq-perceptron-predict">Equation&nbsp;3</a>.</p>
 <p>Let’s make this a little more precise. For fixed <span class="math inline">\(\tilde{\vw}\)</span>, let <span class="math inline">\(\hat{y}_i \triangleq \langle \tilde{\vw}, \tilde{\vx}_i \rangle\)</span>. The classification <em>accuracy</em> of the two-label perceptron with weight <span class="math inline">\(\tilde{\vw}\)</span>is</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">We’ve used a little math trick here: take a moment to convince yourself that <a href="#eq-perceptron-predict">Equation&nbsp;3</a> is equivalent to the statement that <span class="math inline">\(\hat{y}_i y_i &gt; 0\)</span>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">We’ve used a little math trick here: take a moment to convince yourself that <a href="#eq-perceptron-predict">Equation&nbsp;3</a> is equivalent to the statement that <span class="math inline">\(\hat{y}_i y_i &gt; 0\)</span>.</span></div></div>
 <p><span class="math display">\[A(\tilde{\vw}) \triangleq \frac{1}{n} \sum_{i = 1}^n \one{\hat{y}_i y_i &gt; 0}\;.\]</span></p>
 <p>Higher accuracy means that the vector <span class="math inline">\(\tilde{\vw}\)</span> predicts more correct labels via <a href="#eq-perceptron-predict">Equation&nbsp;3</a>. The <em>loss</em> (also called the <em>empirical risk</em>) is</p>
 <p><span id="eq-loss"><span class="math display">\[
@@ -381,7 +384,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
                &amp;= \hat{y}_i^{(t)} + y_i \norm{\tilde{\vx}_i}_2^2\;. \tag{definition of $\hat{y}_i^{(t)}$ and $\norm{\tilde{\vx}_i}$}
 \end{align}
 \]</span></p>
-<div class="page-columns page-full"><p> Since <span class="math inline">\(\norm{\tilde{\vx}_i} &gt; 0\)</span>, we conclude that <span class="math inline">\(\hat{y}_i\)</span> always moves in the right direction: if <span class="math inline">\(y_i = 1\)</span> then <span class="math inline">\(\hat{y}_i^{(t+1)} &gt; \hat{y}_i^{(t)}\)</span>, while if <span class="math inline">\(y_i = -1\)</span> then <span class="math inline">\(\hat{y}_i^{(t+1)} &lt; \hat{y}_i^{(t)}\)</span>.</p><div class="no-row-height column-margin column-container"><span class="aside">Again, this is only if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>; otherwise there is no change in <span class="math inline">\(\hat{y}_i^{(t)}\)</span> in the current iteration.</span></div></div>
+<div class="page-columns page-full"><p> Since <span class="math inline">\(\norm{\tilde{\vx}_i} &gt; 0\)</span>, we conclude that <span class="math inline">\(\hat{y}_i\)</span> always moves in the right direction: if <span class="math inline">\(y_i = 1\)</span> then <span class="math inline">\(\hat{y}_i^{(t+1)} &gt; \hat{y}_i^{(t)}\)</span>, while if <span class="math inline">\(y_i = -1\)</span> then <span class="math inline">\(\hat{y}_i^{(t+1)} &lt; \hat{y}_i^{(t)}\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">Again, this is only if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>; otherwise there is no change in <span class="math inline">\(\hat{y}_i^{(t)}\)</span> in the current iteration.</span></div></div>
 </section>
 </section>
 <section id="illustration" class="level2 page-columns page-full">
@@ -441,7 +444,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 <div id="fig-demonstration" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="perceptron_files/figure-html/fig-demonstration-output-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure 3: Several iterations of the perceptron algorithm. In each panel, the dashed line is the hyperplane corresponding to the previous weight vector <span class="math inline">\(\vw^{(t)}\)</span>, while the solid line is the hyperplane for the updated weight vector <span class="math inline">\(\vw^{t+1}\)</span>. The empty circle is the point <span class="math inline">\(i\)</span> used in the update; only iterations in which <span class="math inline">\(i\)</span> was a mistake are shown, with the exception of the final two iterations (by which the algorithm has converged). The loss is computed as in <a href="#eq-loss">Equation&nbsp;4</a>. (The perceptron update itself takes place using a function called <code>perceptron_update</code> whose implementation I have intentionally hidden – you’ll implement a version yourself in a blog post!)</figcaption><p></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;3: Several iterations of the perceptron algorithm. In each panel, the dashed line is the hyperplane corresponding to the previous weight vector <span class="math inline">\(\vw^{(t)}\)</span>, while the solid line is the hyperplane for the updated weight vector <span class="math inline">\(\vw^{t+1}\)</span>. The empty circle is the point <span class="math inline">\(i\)</span> used in the update; only iterations in which <span class="math inline">\(i\)</span> was a mistake are shown, with the exception of the final two iterations (by which the algorithm has converged). The loss is computed as in <a href="#eq-loss">Equation&nbsp;4</a>. (The perceptron update itself takes place using a function called <code>perceptron_update</code> whose implementation I have intentionally hidden – you’ll implement a version yourself in a blog post!)</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -473,8 +476,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 </div>
 <div class="callout-body-container">
 <div id="prp-nonconvergence" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Nonconvergence of perceptron for nonseparable data) </strong></span></p>
-<p>Suppose that <span class="math inline">\((\mX, \vy)\)</span> is not linearly separable. Then, the perceptron update does not converge. Furthermore, at no iteration of the algorithm is it the case that <span class="math inline">\(\cL(\tilde{\vw}) = 0\)</span>.</p>
+<p><span class="theorem-title"><strong>Proposition 1 (Nonconvergence of perceptron for nonseparable data) </strong></span>Suppose that <span class="math inline">\((\mX, \vy)\)</span> is not linearly separable. Then, the perceptron update does not converge. Furthermore, at no iteration of the algorithm is it the case that <span class="math inline">\(\cL(\tilde{\vw}) = 0\)</span>.</p>
 </div>
 </div>
 </div>
@@ -491,9 +493,8 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 <ul>
 <li>The perceptron algorithm converges in a finite number of iterations to a vector <span class="math inline">\(\tilde{\vw}\)</span> that separates the data.<br>
 </li>
-<li>During the running of the perceptron algorithm, the total number of updates made is no more than</li>
+<li>During the running of the perceptron algorithm, the total number of updates made is no more than <span class="math display">\[\frac{2 + r(\mX)^2}{\gamma(\mX, \vy)}\;,\]</span></li>
 </ul>
-<p><span class="math display">\[\frac{2 + r(\mX)^2}{\gamma(\mX, \vy)}\;,\]</span></p>
 <p>where <span class="math inline">\(r(\mX) = \max_{i \in [n]} \norm{\vx_i}\)</span> and <span class="math inline">\(\gamma(\mX, \vy)\)</span> is a geometric measure called the <em>margin</em> of how far apart the two label classes are.</p>
 </div>
 </div>
@@ -528,7 +529,7 @@ Start Implementing the Perceptron Algorithm
 </li>
 <li>Compute <span class="math inline">\(\ell_i^{(0)} = \bracket{\tilde{\vw}^{(0)}, \tilde{\vx}_i}\)</span>.</li>
 </ol>
-<p>These items will give you a head start on <a href="../assignments/blog-posts/blog-post-erm%202.html">the blog post</a> in which you will construct a full implementation of the perceptron algorithm.</p>
+<p>These items will give you a head start on <a href="../assignments/blog-posts/blog-post-erm 2.html">the blog post</a> in which you will construct a full implementation of the perceptron algorithm.</p>
 </div>
 </div>
 
@@ -582,7 +583,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -610,31 +628,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>

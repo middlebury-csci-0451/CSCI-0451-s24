@@ -190,11 +190,11 @@ There are a few ways in which we can think of this result as reflecting bias:
 
 [Sometimes predictive equality is also defined to require that the false negative rates (FNRs) be equal across the two groups as well.]{.aside}
 
-In the language of @corbett2017algorithmic, an algorithm that has equal FPRs across two groups satisfies ***predictive equality*** with respect to those two groups. So, the COMPAS algorithm fails to possess predictive equality. 
+In the language of @corbett2017algorithmic, an algorithm that has equal FPRs across two groups satisfies ***predictive equality*** with respect to those two groups. So, the COMPAS algorithm fails to possess predictive equality. The idea of *error rate balance* in @chouldechova2017fair and *balance for the positive/negative class* in @kleinberg2016inherent are similar to predictive equality. 
 
 In summary, the ProPublica argument was: 
 
-> Since the FPR differs across racial groups in ways that reinforce the oppression of Black people, the COMPAS algorithm is racist. 
+> Since the FPR differs across racial groups in ways that reinforce the oppression of Black people, the COMPAS algorithm possesses racial bias. 
 
 
 ## Calibration
@@ -203,7 +203,7 @@ Is that the end of the story? Emphatically not! @angwin2016machine kicked off a 
 
 > A white defendant and a Black defendant who each receive the same score should both have the same risk of recidivating. 
 
-[Compare: an "A" in CS 145 means the same thing for your future success in CS, no matter your gender.]{.aside}
+[Compare: an "A" in CS 201 means the same thing for your future success in CS, no matter your gender.]{.aside}
 Another way to say this is that a score of 7 means the same thing, no matter the race of the defendant. 
 
 We can compute the recidivism rates for each race at each decile score using some Pandas `.groupby` magic: 
@@ -216,7 +216,22 @@ sns.lineplot(data = means, x = "decile_score", y = "mean", hue = "race")
 
 The actual recidivism rate at each risk score is roughly the same between Black and white defendants, especially for decile scores past 5 or so. 
 
-## Better Methods?
+## Calibration for Binary Classifiers
+
+So far in this course, we have primarily studied binary classifiers that produce a single 0-1 predicted label, rather than a score like a decile. For these classifiers, calibration means that *the fraction of predicted recidivists who actually recidivated is the same across groups*. If we follow the @angwin2016machine approach and say that the algorithm predicts someone as high risk if their decile score is 4 or above, we would obtain the following results: 
+
+```{python}
+
+compas["pred_high_risk"] = compas["decile_score"] >= 4
+
+means = compas.groupby(["race", "pred_high_risk"])["two_year_recid"].mean().reset_index(name = "mean")
+
+p = sns.barplot(data = means, x = "pred_high_risk", y = "mean", hue = "race")
+```
+
+There are arguments to be had here, but from the perspective of calibration at the decile score threshold of 4, the algorithm might appear to be biased in the other direction: of those who were predicted high risk, slightly more Black than white defendants were arrested within the next two years. In most of the published literature, scholars have considered that the two rates are sufficiently close that we should instead simply say that COMPAS appears to be reasonably well calibrated. 
+
+## Overcoming Bias?
 
 Ok, so COMPAS is reasonably *calibrated*, but does not satisfy *predictive equality*. Couldn't we just find a way to fix it so that it could be both calibrated and predictively equitable? A little fine-tuning here and there maybe? Sadly, no: this is not just difficult, but actually mathematically impossible, as shown by  @chouldechova2017fair.  
 

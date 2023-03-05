@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -54,7 +59,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -67,7 +72,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -176,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -210,6 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
   </div>
     
+  
     
   </div>
   
@@ -229,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 f(\mathbf{x}) \approx y
 \]</span></p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">What does it mean for <span class="math display">\[f(\mathbf{x}) \approx y\]</span>? This requires mathematical fleshing-out that we’ll do very soon.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">What does it mean for <span class="math display">\[f(\mathbf{x}) \approx y\]</span>? This requires mathematical fleshing-out that we’ll do very soon.</span></div></div>
 <p>for <em>new</em> observations <span class="math inline">\((\mathbf{x}, y)\)</span>. We can think of the function <span class="math inline">\(f\)</span> as an expression of the (unknown) <em>relationship</em> between the features <span class="math inline">\(\mathbf{x}\)</span> and the target <span class="math inline">\(y\)</span>. If we can find an approximation of that pattern, then we’ll have the ability to make predictions.</p>
 <p>We often use <span class="math inline">\(\hat{y} = f(\mathbf{x})\)</span> to denote the predicted value for <span class="math inline">\(y\)</span> based on <span class="math inline">\(\mathbf{x}\)</span>. So, we want to choose <span class="math inline">\(f\)</span> so that <span class="math inline">\(\hat{y} \approx y\)</span>.</p>
 </section>
@@ -241,7 +247,7 @@ f(\mathbf{x}) \approx y
 <h2 class="anchored" data-anchor-id="the-compas-recidivism-prediction-algorithm">The COMPAS Recidivism Prediction Algorithm</h2>
 <p>Criminal <em>recidivism</em> occurs when a person is convicted of a crime, completes the legal terms of their punishment, and is then convicted of <em>another</em> crime after release. In the American penal system, predictions of recidivism play a role in determining whether or not a defendant will be released on bail before trial or granted parole after serving a portion of a prison sentence. In other words, the belief of the court about whether a person is <em>likely to commit a future crime</em> can have concrete consequences for that person’s current and future freedom. Of course, it’s difficult for a human to predict whether a defendant is likely to commit a future crime. Furthermore, humans are subject to bias. Wouldn’t it be nice if we could use a machine learning algorithm to make this prediction for us?</p>
 <p>In 2016, the journalism website <a href="https://www.propublica.org/">ProPublica</a> published an <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">investigative story</a> on COMPAS, a machine learning algorithm used to predict recidivism in Broward County, Florida. They obtained data for criminal defendants in Broward County in the years 2013 and 2014. These data include the COMPAS predictions, as well as demographic information (like age, gender, and race) and legal information (e.g.&nbsp;the crime with which the defendant was charged). The data also include an indicator of whether or not the defendant went on to be arrested of a crime within the two years following their initial trial.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">The COMPAS algorithm actually uses information about the defendant beyond what is shown in this table; here is <a href="https://www.documentcloud.org/documents/2702103-Sample-Risk-Assessment-COMPAS-CORE.html">an example</a> of the survey used for COMPAS to form its prediction.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">The COMPAS algorithm actually uses information about the defendant beyond what is shown in this table; here is <a href="https://www.documentcloud.org/documents/2702103-Sample-Risk-Assessment-COMPAS-CORE.html">an example</a> of the survey used for COMPAS to form its prediction.</span></div></div>
 <div class="callout-tip callout callout-style-simple callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -263,7 +269,7 @@ Activity
 </div>
 </div>
 <p>Let’s look at an excerpt of the data that ProPublica obtained. I have chosen only a subset of the columns and I have filtered out some of the rows as well. The hidden code saves the data in a <code>pandas.DataFrame</code> called <code>df</code>, and then views it.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">Click the little arrow to the right to view the code I used to display this table.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Click the little arrow to the right to view the code I used to display this table.</span></div></div>
 <div class="cell" data-execution_count="29">
 <details>
 <summary>Code</summary>
@@ -443,7 +449,7 @@ Discussion
 <section id="classification-rates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="classification-rates">Classification Rates</h2>
 <p>While accuracy is a useful metric for classification problems, it’s useful to break it down in more detailed ways. In the case of binary classification, there are four cases:</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">Recall that <span class="math inline">\(\hat{y}\)</span> is just another name for <span class="math inline">\(f(\mathbf{x})\)</span>, the predicted value of <span class="math inline">\(y\)</span> based on <span class="math inline">\(\mathbf{x}\)</span>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Recall that <span class="math inline">\(\hat{y}\)</span> is just another name for <span class="math inline">\(f(\mathbf{x})\)</span>, the predicted value of <span class="math inline">\(y\)</span> based on <span class="math inline">\(\mathbf{x}\)</span>.</span></div></div>
 <ul>
 <li>If <span class="math inline">\(y = 1\)</span> and <span class="math inline">\(\hat{y} = 1\)</span>, we have a <em>true positive</em>.</li>
 <li>If <span class="math inline">\(y = 0\)</span> and <span class="math inline">\(\hat{y} = 1\)</span>, we have a <em>false positive</em>.</li>
@@ -451,9 +457,9 @@ Discussion
 <li>If <span class="math inline">\(y = 0\)</span> and <span class="math inline">\(\hat{y} = 0\)</span>, we have a <em>true negative</em>.</li>
 </ul>
 <p>The <em>false positive rate</em> is the fraction of all negative events for which the prediction is positive:</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="aside">Here <span class="math inline">\(\mathbb{1}\)</span> is the <em>indicator function</em> that is 1 if its arguments all evaluate to true and 0 otherwise.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Here <span class="math inline">\(\mathbb{1}\)</span> is the <em>indicator function</em> that is 1 if its arguments all evaluate to true and 0 otherwise.</span></div></div>
 <p><span class="math display">\[\mathrm{FPR}(\mathbf{y}, \hat{\mathbf{y}}) = \frac{\sum_{i=1}^n \mathbb{1}(\hat{y}_i = 1, y_i = 0)}{\sum_{i = 1}^n \mathbb{1}(y_i = 0)}\]</span></p>
-<div class="page-columns page-full"><p>We can calculate the FPR like this: </p><div class="no-row-height column-margin column-container"><span class="aside"><code>numpy</code> boolean arrays and <code>pandas</code> boolean columns can be multiplied to do entrywise Boolean <code>and</code>.</span></div></div>
+<div class="page-columns page-full"><p>We can calculate the FPR like this: </p><div class="no-row-height column-margin column-container"><span class=""><code>numpy</code> boolean arrays and <code>pandas</code> boolean columns can be multiplied to do entrywise Boolean <code>and</code>.</span></div></div>
 <div class="cell" data-execution_count="41">
 <details open="">
 <summary>Code</summary>
@@ -554,7 +560,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -582,31 +605,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>

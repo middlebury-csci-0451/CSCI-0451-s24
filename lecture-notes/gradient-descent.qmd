@@ -46,10 +46,10 @@ Last time, we considered the problem of *empirical risk minimization* with a *co
 
 - $\mX \in \R^{n\times p}$ is the *feature matrix*. There are $n$ distinct observations, encoded as rows. Each of the $p$ columns corresponds to a *feature*: something about each observation that we can measure or infer. Each observation is written $\vx_1, \vx_2,\ldots$. 
 $$
-\mX = \left[\begin{matrix} & - & \vx_1 & - \\ 
-& - & \vx_2 & - \\ 
-& \vdots & \vdots & \vdots \\ 
-& - & \vx_{n} & - \end{matrix}\right]
+\mX = \left[\begin{matrix}  & - & \vx_1 & - &\\ 
+ & - & \vx_2 & - &\\ 
+ & \vdots & \vdots & \vdots &\\ 
+ & - & \vx_{n} & - &\end{matrix}\right]
 $$
 - $\vy \in \R^{n}$ is the *target vector*. The target vector gives a label, value, or outcome for each observation. 
 
@@ -69,7 +69,6 @@ Here, $f_{\vw}:\R^p \rightarrow \R$ is our predictor function, which takes in a 
 $$
 f_{\vw}(\vx) = \bracket{\vw, \vx}
 $${#eq-linear-predictor}
-
 
 
 The function $\ell:\R^2 \rightarrow \R$ was our focus last time: this function takes a prediction $\hat{y}_i$ and a true label $y_i$ and returns a number that tells you *how bad* that prediction was. When studying the perceptron, we considered the 0-1 loss: 

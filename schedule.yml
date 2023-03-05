@@ -155,6 +155,7 @@
     - <a href="https://arxiv.org/pdf/1609.05807,">Inherent Trade-Offs in the Fair Determination of Risk Scores</a> by Jon Kleinberg et al, pages 1-5. 
   notes: 
     - <a href="lecture-notes/intro-allocative-bias.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/intro-allocative-bias-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-classification-rates-2">Balancing Classification Rates</a>
@@ -177,4 +178,5 @@
   publish: true
   warmup: TBD
   assignments: |
-    <a href="assignments/blog-posts/blog-post-limits-of-quantitative.qmd">Blog post: Limits of quantitative methods</a>
+    <a href="assignments/blog-posts/blog-post-limits-of-quantitative.qmd">Blog post: Limits of quantitative methods</a> <br> <b> OR </b><br> 
+    <a href="assignments/blog-posts/blog-post-bias-allocative.qmd">Blog post: Auditing allocative bias</a>

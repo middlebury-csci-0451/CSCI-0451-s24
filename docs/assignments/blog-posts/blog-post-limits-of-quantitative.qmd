@@ -13,6 +13,12 @@ publish: "true"
 bibliography: ../../refs.bib
 ---
 
+::: {.callout-note}
+
+This one of two possible blog posts for this week. This blog post is a research essay on the limitations of the quantitative approach to analyzing bias and discrimination. If you'd rather work with some data and perform a bias audit of a data set, see [the alternative assignment](blog-post-bias-allocative.qmd). 
+
+:::
+
 ### What You Should Do
 
 Quantitative methods for assessing discrimination and bias include things like: 
