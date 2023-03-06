@@ -9,3 +9,5 @@ title: Schedule
 - Readings in normal font should be completed and annotated ahead of lecture. 
 - *Readings in italic provide optional additional depth on the material.*   
 - **Assignments** are listed on the day when I suggest you begin working on them.        
+
+ 

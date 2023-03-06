@@ -1,0 +1,167 @@
+---
+title: |
+  Least-Squares Linear Regression
+author: Phil Chodrow
+bibliography: ../refs.bib
+format: 
+  html: 
+    code-fold: false
+    cache: true
+    callout-appearance: minimal
+    cap-location: margin
+---
+
+::: {.hidden}
+$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vp}{\mathbf{p}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vd}{\mathbf{d}}
+\newcommand{\mX}{\mathbf{X}}
+\newcommand{\mR}{\mathbf{R}}
+\newcommand{\mW}{\mathbf{W}}
+\newcommand{\mY}{\mathbf{Y}}
+\newcommand{\mZ}{\mathbf{Z}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vzero}{\mathbf{0}}
+\newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\one}[1]{\mathbb{1}\left[ #1 \right]}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\mA}{\mathbf{A}}
+\newcommand{\vtheta}{\boldsymbol{\theta}}
+\newcommand{\vsigma}{\boldsymbol{\sigma}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\dd}[2]{\frac{\partial #1}{\partial #2}}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+$$
+
+:::
+
+
+```{python}
+#| echo: false
+from warnings import simplefilter
+from sklearn.exceptions import ConvergenceWarning
+simplefilter("ignore", category=ConvergenceWarning)
+```
+
+So far in this course, we've focused exclusively on *classification* tasks: how to predict a *categorical label* for each data point. The other important task we need to consider is *regression*, in which we predict a real number for each data point based on its features. Here's the stereotypical example: 
+
+```{python}
+import numpy as np
+from matplotlib import pyplot as plt
+
+w0 = -.5
+w1 = .7
+
+n = 100
+x = np.random.rand(n)
+y = w1*x + w0 + 0.1*np.random.randn(n)
+
+plt.scatter(x, y)
+labels = plt.gca().set(xlabel = "Feature (x)", ylabel = "Target (y)")
+```
+
+Looking at this data, we can see an apparent linear trend that we would like to use in order to make prediction on new data points.  
+
+
+## Mathematical Formulation
+
+We're going to focus on *least-squares linear regression*. The nice thing about least-squares linear regression is that it falls perfectly into our framework of convex linear models. In least-squares linear regression, we still make predictions of the form $\hat{y}_i = \bracket{\vw, \vx_i}$, since these are exactly linear predictions! The loss function is $\ell(\hat{y}, y) = (\hat{y} - y)^2$, the *squared error*, which is convex. The empirical risk minimization problem is 
+
+$$
+\begin{aligned}
+\hat{\vw} &= \argmin_{\vw} \; L(\vw) \\ 
+          &= \sum_{i = 1}^n \ell(\hat{y}_i, y_i) \\ 
+          &= \argmin_{\vw} \sum_{i = 1}^n \left(\bracket{\vw, \vx_i} - y_i \right)^2\;. 
+\end{aligned}
+$$
+It's useful to write this in a more compact way using matrix-vector notation: the loss function $L(\vw)$ can be written 
+
+[Reminder: $\mX \in \R^{n\times p}$, $\vw \in \R^{p}$, $\mX\vw \in \R^n$, which is the same dimension as $\vy$. ]{.aside}
+$$
+L(\vw) = \norm{\mX\vw - \vy}_2^2\;.
+$$
+
+So, we want to solve the problem 
+
+$$
+\hat{\vw} = \argmin_{\vw} \; L(\vw) = \argmin_{\vw} \; \norm{\mX\vw - \vy}_2^2\;.
+$${#eq-least-squares}
+
+### Solution Methods
+
+There are a *lot* of ways to solve @eq-least-squares. Let's start by taking the gradient with respect to $\hat{\vw}$. Using the multivariate chain rule, this is 
+
+$$
+\nabla L(\vw) = 2\mX^T(\mX\vw - \vy)\;.
+$$
+
+## Analytical Solution
+
+One way to approach the linear regression problem is with gradient descent: repeat the iteration 
+
+$$
+\vw^{(t+1)} \gets \vw^{(t)} - 2\alpha \mX^T(\mX\vw^{(t)} - \vy)
+$$
+
+to convergence. As it turns out, there's also an explicit formula involving a matrix inversion that we can obtain by using the condition $\nabla L(\vw) = \vzero$ which must hold at the minimum. Plugging in our expression for $L(\vw)$, we get   
+
+$$
+\vzero = \mX^T(\mX\hat{\vw} - \vy)\;.
+$$
+
+To start solving for $\hat{\vw}$, we can move $\mX^T\vy$ to the other side: 
+
+$$
+\mX^T\mX\hat{\vw} = \mX^T\vy\;.
+$$
+
+[This requires that there are at least $p$ linearly independent rows of $\mX$. In particular, $\mX$ must have at least as many rows as it has columns.]{.aside}
+Now, *provided that the matrix $\mX^T\mX$ is of full rank*,  we can multiply both sides by $(\mX^T\mX)^{-1}$ to obtain 
+$$
+\hat{\vw} = (\mX^T\mX)^{-1}\mX^T\vy\;,
+$$
+which is an explicit formula for $\hat{\vw}$. 
+
+Let's see if we can use this to compute predictions for our fake data above. In order for this formula to work, we need to ensure that $\mX$ is padded with a vector of ones. 
+
+```{python}
+def pad(X):
+    return np.append(X, np.ones((X.shape[0], 1)), 1)
+
+X = pad(x[:,np.newaxis])
+```
+
+Now we can use the formula: 
+```{python}
+w_hat = np.linalg.inv(X.T@X)@X.T@y
+```
+
+Let's test this out on our fake data: 
+```{python}
+plt.scatter(x, y)
+plt.plot(x, x*w_hat[0] + w_hat[1], color = "black")
+labels = plt.gca().set(xlabel = "Feature (x)", ylabel = "Target (y)")
+```
+
+Not bad! 
+
+
+## Incorporating Features
+
+
+

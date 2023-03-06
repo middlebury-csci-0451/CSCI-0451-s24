@@ -264,7 +264,7 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i
 \]</span> is the empirical risk and <span class="math display">\[
 \ell(\hat{y}, y) = -y \log \sigma(\hat{y}) - (1-y)\log (1-\sigma(\hat{y}))\;,
 \]</span> is the logistic loss. Logistic regression is an outstanding algorithm for linear classification, but it can only handle <em>linear decision boundaries</em>. Here’s an example of a data set that has a clear <em>nonlinear</em> pattern that we’d like to learn:</p>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons, make_circles</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -280,7 +280,7 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i
 </div>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Follow the instructions <a href="http://rasbt.github.io/mlxtend/installation/">here</a> to install the <code>mlxtend</code> package.</span></div></div>
 <p>A linear separator wouldn’t do great on this data set. To see the best we can do, let’s use pre-implemented versions of logistic regression and a visualization tool:</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.plotting <span class="im">import</span> plot_decision_regions</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -298,7 +298,7 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i
 </div>
 </div>
 <p>Our classifier does better than random chance, but it looks like we could do significantly better if we were able to learn the “curvy shape” of the data. Here’s an example using <em>kernel logistic regression</em>, which you will implement in this assignment.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> solutions.kernel_logistic <span class="im">import</span> KernelLogisticRegression</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics.pairwise <span class="im">import</span> rbf_kernel</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -398,7 +398,7 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <section id="choosing-gamma" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="choosing-gamma">Choosing <code>gamma</code></h3>
 <p>When we choose a very large value of <code>gamma</code>, we can achieve a very wiggly decision boundary with very good accuracy on the training data. For example:</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>KLR <span class="op">=</span> KernelLogisticRegression(rbf_kernel, gamma <span class="op">=</span> <span class="dv">10000</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>KLR.fit(X, y)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(KLR.score(X, y))</span>
@@ -414,7 +414,7 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 </div>
 </div>
 <p>Here, our classifier draws a little orange blob around each orange data point: points very nearby are classified as orange while other points are classified as blue. This is sufficient to achieve 100% accuracy on the training data. But this doesn’t <em>generalize</em>: generate some new data and we’ll see much worse performance:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># new data with the same rough pattern</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_moons(<span class="dv">200</span>, shuffle <span class="op">=</span> <span class="va">True</span>, noise <span class="op">=</span> <span class="fl">0.2</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plot_decision_regions(X, y, clf <span class="op">=</span> KLR)</span>
@@ -435,7 +435,7 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <section id="try-other-problem-geometries" class="level3">
 <h3 class="anchored" data-anchor-id="try-other-problem-geometries">Try Other Problem Geometries</h3>
 <p>Use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><code>make_circles</code></a> function to generate some concentric circles instead of crescents. Show a few examples with varying amounts of noise. Can you find some values of <code>gamma</code> that look like they lead to good learning performance for this data set? Here’s an example of a fairly successful classifier: both the points and the accuracy are computed on unseen test data.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>0.96</code></pre>
 </div>

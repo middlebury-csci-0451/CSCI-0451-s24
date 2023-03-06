@@ -143,6 +143,22 @@
     <a href="assignments/blog-posts/blog-post-kernel-logistic.qmd">Blog post: kernel logistic regression</a> <br> <b>OR</b> <br> <a href="assignments/blog-posts/blog-post-penguins.qmd">Blog post: penguins</a>
 - date: 2023-03-06
   header: | 
+    Beyond Convex Linear Classifiers
+  summary: |
+    We discuss several examples of other classifiers at a high level, including some that are nonlinear or nonconvex. 
+  objectives: 
+    - Navigation
+  reading:
+    - NA
+  notes: 
+    - <a href="lecture-notes/more-on-classification.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/more-on-classification-live.ipynb">Live version</a>
+  module: Classification
+  publish: true
+  warmup: 
+  assignments: 
+- date: 2023-03-13
+  header: | 
     Introduction to Bias and Fairness
   summary: |
     TBD
@@ -160,7 +176,7 @@
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-classification-rates-2">Balancing Classification Rates</a>
   assignments: 
-- date: 2023-03-08
+- date: 2023-03-15
   header: | 
     Critical Perspectives 
   summary: |
