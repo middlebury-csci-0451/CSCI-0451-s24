@@ -222,10 +222,13 @@ def plot_regions(model, X, y):
       plt.tight_layout()
 ```
 
+[Note: this function assumes that your first two columns in `X_train` are quantitative and that the ones after that are qualitative.]{.aside}
 Here it is in action. It's safe to ignore these particular warnings. 
 ```{python}
 plot_regions(LR, X_train[cols], y_train)
 ```
+
+
 
 ## Explore!
 
