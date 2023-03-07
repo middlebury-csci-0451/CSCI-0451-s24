@@ -163,49 +163,68 @@ LR.score(X_test[cols], y_test)
 To plot decision regions for your model, we are going to use the `mlxtend` package. You may need to install this package first in your `ml-0451` environment. Once you've done so, you can use the `decision_region_panel` function defined below to plot your regions. 
 
 ```{python}
-from mlxtend.plotting import plot_decision_regions
 from matplotlib import pyplot as plt
 import numpy as np
 ```
 
 ```{python}
-def decision_region_panel(X, y, model, qual_features):  
-  p = len(qual_features)
-  fig, axarr = plt.subplots(1, p, figsize=(4*p,4))
-  for i in range(p):
 
-      filler_feature_values = {2+j: 0 for j in range(p)}
+from matplotlib.patches import Patch
 
-      filler_feature_values.update({2+i: 1})
+def plot_regions(model, X, y):
+    
+    x0 = X[X.columns[0]]
+    x1 = X[X.columns[1]]
+    qual_features = X.columns[2:]
+    
+    fig, axarr = plt.subplots(1, len(qual_features), figsize = (7, 3))
 
+    # create a grid
+    grid_x = np.linspace(x0.min(),x0.max(),501)
+    grid_y = np.linspace(x1.min(),x1.max(),501)
+    xx, yy = np.meshgrid(grid_x, grid_y)
+    
+    
+    XX = xx.ravel()
+    YY = yy.ravel()
+
+    for i in range(len(qual_features)):
+      XY = pd.DataFrame({
+          X.columns[0] : XX,
+          X.columns[1] : YY
+      })
+
+      for j in qual_features:
+        XY[j] = 0
+
+      XY[qual_features[i]] = 1
+
+      p = model.predict(XY)
+      p = p.reshape(xx.shape)
+      
+      
+      # use contour plot to visualize the predictions
+      axarr[i].contourf(xx, yy, p, cmap = "jet", alpha = 0.2, vmin = 0, vmax = 2)
+      
       ix = X[qual_features[i]] == 1
+      # plot the data
+      axarr[i].scatter(x0[ix], x1[ix], c = y[ix], cmap = "jet", vmin = 0, vmax = 2)
+      
+      axarr[i].set(xlabel = X.columns[0], 
+            ylabel  = X.columns[1])
+      
+      patches = []
+      for color, spec in zip(["red", "green", "blue"], ["Adelie", "Chinstrap", "Gentoo"]):
+        patches.append(Patch(color = color, label = spec))
 
-      ax = axarr[i]
-
-      plot_decision_regions(np.array(X[ix]), y[ix], clf=model,
-                            filler_feature_values=filler_feature_values,
-                            filler_feature_ranges={2+j: 0.1 for j in range(p)},
-                            legend=2, ax=ax)
-
-      ax.set_xlabel(X.columns[0])
-      ax.set_ylabel(X.columns[1])
-
-      handles, labels = ax.get_legend_handles_labels()
-      ax.legend(handles, 
-          ["Adelie", "Chinstrap", "Gentoo"], 
-           framealpha=0.3, scatterpoints=1)
-
-  # Adding axes annotations
-  fig.suptitle(f'Accuracy = {model.score(X, y).round(3)}')
-  plt.tight_layout()
-  plt.show()
+      plt.legend(title = "Species", handles = patches, loc = "best")
+      
+      plt.tight_layout()
 ```
 
 Here it is in action. It's safe to ignore these particular warnings. 
-
 ```{python}
-qual_features = ["Clutch Completion_No", "Clutch Completion_Yes"]
-decision_region_panel(X_train[cols], y_train, LR, qual_features)
+plot_regions(LR, X_train[cols], y_train)
 ```
 
 ## Explore!
