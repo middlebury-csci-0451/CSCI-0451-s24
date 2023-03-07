@@ -1,7 +1,7 @@
 ---
 title: "Auditing Allocative Bias"
 type: "Blog Post"
-date: 2023-03-15
+date: 2023-03-29
 description: |
     In this blog post, you'll create a machine learning model that predicts an individual characteristic like employment status or income on the basis of other demographic characteristics. You'll then perform a fairness audit in order to assess whether or not your algorithm displays bias with respect demographic characteristics like race or sex, and discuss your findings. 
 objectives: 
