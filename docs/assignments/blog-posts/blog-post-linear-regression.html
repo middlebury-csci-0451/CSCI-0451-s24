@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2023-03-15">
-<meta name="description" content="In this blog post, you’ll implement least-squares linear regression, including the useful LASSO regularization for overparameterized problems.">
+<meta name="description" content="In this blog post, you’ll implement least-squares linear regression, and experiment with LASSO regularization for overparameterized problems.">
 
 <title>Implementing Linear Regression</title>
 <style>
@@ -211,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div>
   <div class="description">
-    <p>In this blog post, you’ll implement least-squares linear regression, including the useful LASSO regularization for overparameterized problems.</p>
+    <p>In this blog post, you’ll implement least-squares linear regression, and experiment with LASSO regularization for overparameterized problems.</p>
   </div>
 </div>
 
@@ -367,7 +367,7 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 <p><span class="math display">\[
 \lVert \mathbf{w}' \rVert_1 = \sum_{j = 1}^{p-1} \lvert w_j \rvert\;.
 \]</span></p>
-<div class="page-columns page-full"><p>The effect of the regularizing term is to make the entries of the weight vector <span class="math inline">\(\mathbf{w}\)</span> small. In fact, LASSO has a nice property: it tends to force entries of the weight vector to be <em>exactly zero</em>. </p><div class="no-row-height column-margin column-container"><span class="">The reason we exclude the final entry of <span class="math inline">\(\mathbf{w}\)</span> is that it is not desirable to penalize the weight corresponding to the constant feature in <span class="math inline">\(\mathbf{X}\)</span>.</span></div></div>
+<div class="page-columns page-full"><p>The effect of the regularizing term is to make the entries of the weight vector <span class="math inline">\(\mathbf{w}\)</span> small. In fact, LASSO has a nice property: it tends to force entries of the weight vector to be <em>exactly zero</em>.  This is very desirable in so-called <em>overparameterized</em> problems, when the number of features <span class="math inline">\(p\)</span> is larger than the number of data points <span class="math inline">\(n\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">The reason we exclude the final entry of <span class="math inline">\(\mathbf{w}\)</span> is that it is not desirable to penalize the weight corresponding to the constant feature in <span class="math inline">\(\mathbf{X}\)</span>.</span></div></div>
 <p>Implementing LASSO involves some more complicated mathematical optimization than we will discuss in this course, so instead we’ll use the implementation in <code>scikit-learn</code>. You can import it like this:</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>

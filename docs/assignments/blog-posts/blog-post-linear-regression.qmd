@@ -3,7 +3,7 @@ title: "Implementing Linear Regression"
 type: "Blog Post"
 date: 2023-03-15
 description: |
-    In this blog post, you'll implement least-squares linear regression, including the useful LASSO regularization for overparameterized problems. 
+    In this blog post, you'll implement least-squares linear regression, and experiment with LASSO regularization for overparameterized problems. 
 objectives: 
   - Theory
   - Implementation
@@ -179,7 +179,7 @@ $$
 \norm{\vw'}_1 = \sum_{j = 1}^{p-1} \abs{w_j}\;.
 $$
 
-The effect of the regularizing term is to make the entries of the weight vector $\vw$ small. In fact, LASSO has a nice property: it tends to force entries of the weight vector to be *exactly zero*. [The reason we exclude the final entry of $\vw$ is that it is not desirable to penalize the weight corresponding to the constant feature in $\mX$.]{.aside}
+The effect of the regularizing term is to make the entries of the weight vector $\vw$ small. In fact, LASSO has a nice property: it tends to force entries of the weight vector to be *exactly zero*. [The reason we exclude the final entry of $\vw$ is that it is not desirable to penalize the weight corresponding to the constant feature in $\mX$.]{.aside} This is very desirable in so-called *overparameterized* problems, when the number of features $p$ is larger than the number of data points $n$. 
 
 Implementing LASSO involves some more complicated mathematical optimization than we will discuss in this course, so instead we'll use the implementation in `scikit-learn`. You can import it like this: 
 

@@ -168,7 +168,8 @@
   reading:
     - NA
   notes: 
-    - TBD
+    - <a href="lecture-notes/regression.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/regression-live.ipynb">Live version</a>
   module: Regression
   publish: true
   warmup: 
