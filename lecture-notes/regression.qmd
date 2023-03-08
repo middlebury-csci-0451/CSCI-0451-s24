@@ -168,9 +168,11 @@ Not bad!
 
 ## Activity 1: Computational Complexity of Exact Least-Squares Regression
 
-Multiplying a $k\times \ell$ matrix with an $\ell \times k$ matrix using the standard algorithm has time complexity $k \ell^2$. Inverting a $k\times k$ matrix (when the inverse exists) has time complexity $k^3$. Left-multiplying a $k\times k$ matrix and a $k$-vector has time complexity $k^2$. 
+Multiplying a $k\times \ell$ matrix with an $\ell \times k$ matrix using the standard algorithm has time complexity $k \ell^2$. Inverting a $k\times k$ matrix (when the inverse exists) has time complexity $k^3$. Left-multiplying a $\k \times \ell$ matrix and an $\ell$-vector has time complexity $k\ell$. The total time complexity of performing these operations is just the sum of the complexities of each individual one. 
 
-With these facts in mind, describe the time complexity of computing $\hat{\vw}$ using @eq-regression-explicit in terms of the number of data points $n$ and the number of features $p$. What would the computational bottleneck when the number of data points $n$ is very large? What about what the number of features $p$ is very large? 
+[Reminder: $\mX \in \R^{n\times p}$ and $\vy \in \R^n$.]{.aside}
+
+With these facts in mind, describe the time complexity of computing $\hat{\vw}$ using @eq-regression-explicit **in terms of the number of data points $n$ and the number of features $p$**. What would the computational bottleneck when the number of data points $n$ is very large? What about what the number of features $p$ is very large? 
 
 [As a reminder, we are talking about the formula $\hat{\vw} = (\mX^T\mX)^{-1}\mX^T\vy\;,$.]{.aside}
 
@@ -352,9 +354,9 @@ y = X@w + np.random.randn(X.shape[0])
 1. Implement a `predict` function that computes `y_hat` from `X` and `w` (*hint: don't overthink it*). 
 2. Implement a `score` function that accepts `X`, `y`, and `w` as arguments and computes the *coefficient of determination* of the predictions. The coefficient of determination is 
 $$
-c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y}_i - y_i)^2}\;,
+c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)^2}\;,
 $$
-where  $\bar{y} = \frac{1}{n} \sum_{i = 1}^n$. 
+where  $\bar{y} = \frac{1}{n} \sum_{i = 1}^n y_i$. 
 
 You can modify these functions and use them in the [blog post on linear regression](../assignments/blog-posts/blog-post-bias-allocative.qmd). 
 
