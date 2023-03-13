@@ -177,6 +177,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../../assignments.html" class="sidebar-item-text sidebar-link">Index of Assignments</a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../project.html" class="sidebar-item-text sidebar-link">Course Project</a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -248,9 +253,9 @@ $$
 <p>As usual, place your implementation in a source file where you will be able to implement it.</p>
 <section id="the-score" class="level3">
 <h3 class="anchored" data-anchor-id="the-score">The Score</h3>
-<p>Let <span class="math inline">\(\bar{y} = \frac{1}{n} \sum_{i = 1}^n\)</span>. Then, the <em>score</em> we’ll use is the so-called <em>coefficient of determination</em>, which is</p>
+<p>Let <span class="math inline">\(\bar{y} = \frac{1}{n} \sum_{i = 1}^ny_i\)</span>. Then, the <em>score</em> we’ll use is the so-called <em>coefficient of determination</em>, which is</p>
 <p><span class="math display">\[
-c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y}_i - y_i)^2}\;.
+c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)^2}\;.
 \]</span></p>
 <p>The coefficient of determination is always no larger than 1, with a higher value indicating better predictive performance. It can be arbitrarily negative for very bad models. Note that the numerator in the fraction is just <span class="math inline">\(L(\mathbf{w})\)</span>, so making the loss small makes the coefficient of determination large.</p>
 </section>

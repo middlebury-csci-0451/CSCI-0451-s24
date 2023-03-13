@@ -46,7 +46,11 @@ $$
 
 Today we are going to study an extremely famous investigation into algorithmic decision-making in the sphere of criminal justice by @angwin2016machine, originally written for ProPublica. This investigation significantly accelerated the pace of research into bias and fairness in machine learning, due in combination to its simple message and publicly-available data.
 
+[It's helpful to look at a [sample form](https://www.documentcloud.org/documents/2702103-Sample-Risk-Assessment-COMPAS-CORE) used for feature collection in the COMPAS risk assessment.]{.aside}
+
 You've already read about the COMPAS algorithm in [the original article at ProPublica](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing). Our goal today is to reproduce some of the main findings of this article and set the stage for a more systematic treatment of bias and fairness in machine learning. 
+
+
 
 *Parts of these lecture notes are inspired by the [original ProPublica analysis](https://github.com/propublica/compas-analysis) and Allen Downey's [expository case study](https://github.com/AllenDowney/RecidivismCaseStudy) on the same data.*
 

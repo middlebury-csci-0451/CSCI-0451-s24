@@ -168,6 +168,10 @@ import numpy as np
 ```
 
 ```{python}
+X_train[cols]
+```
+
+```{python}
 
 from matplotlib.patches import Patch
 
@@ -183,7 +187,6 @@ def plot_regions(model, X, y):
     grid_x = np.linspace(x0.min(),x0.max(),501)
     grid_y = np.linspace(x1.min(),x1.max(),501)
     xx, yy = np.meshgrid(grid_x, grid_y)
-    
     
     XX = xx.ravel()
     YY = yy.ravel()

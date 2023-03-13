@@ -53,11 +53,12 @@ As usual, place your implementation in a source file where you will be able to i
 
 ### The Score
 
-Let $\bar{y} = \frac{1}{n} \sum_{i = 1}^n$. Then, the *score* we'll use is the so-called *coefficient of determination*, which is 
+Let $\bar{y} = \frac{1}{n} \sum_{i = 1}^ny_i$. Then, the *score* we'll use is the so-called *coefficient of determination*, which is 
 
 $$
-c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y}_i - y_i)^2}\;.
+c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)^2}\;.
 $$
+
 
 The coefficient of determination is always no larger than 1, with a higher value indicating better predictive performance. It can be arbitrarily negative for very bad models. Note that the numerator in the fraction is just $L(\vw)$, so making the loss small makes the coefficient of determination large. 
 

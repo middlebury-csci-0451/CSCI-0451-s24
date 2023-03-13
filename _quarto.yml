@@ -17,8 +17,9 @@ website:
       - syllabus.qmd 
       - schedule.qmd
       - assignments.qmd
+      - project.qmd
   favicon: assets/icons/favicon.png
-
+ 
 format:
   html:
     theme: [cosmo, custom.scss]
