@@ -313,8 +313,8 @@ This matrix compares the *real* values of the label on each data point to their 
 
 - **True positive** (TP): $y_i = 1$ and $\hat{y}_i = 1$. There are 51 true positives for this predictor on the test set. 
 - **True negative** (TN): $y_i = 0$ and $\hat{y}_i = 0$. There are 100 true negatives for this predictor on the test set. 
-- **False positive** (FP): $y_i = 0$ and $\hat{y}_i = 1$. There are 13 false positives for this predictor on the test set. 
-- **False negative** (FN): $y_i = 1$ and $\hat{y}_i = 0$. There are 14 false negatives for this predictor on the test set. 
+- **False positive** (FP): $y_i = 0$ and $\hat{y}_i = 1$. There are 14 false positives for this predictor on the test set. 
+- **False negative** (FN): $y_i = 1$ and $\hat{y}_i = 0$. There are 13 false negatives for this predictor on the test set. 
 
 It's possible to normalize the confusion matrix in order to compute some quantities of frequent interest, like the *true positive rate*, the *false positive rate*, the *true negative rate*, and the *false negative rate*. 
 

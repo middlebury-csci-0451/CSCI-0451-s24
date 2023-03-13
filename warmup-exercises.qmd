@@ -2,6 +2,7 @@
 title: Warmup Exercises
 number-sections: true
 author: Phil
+bibliography: refs.bib
 ---
 
 
@@ -217,6 +218,22 @@ Then, write a function that verifies eq. (2.6) in Alexandra Chouldechova's paper
 2. Return as a tuple the lefthand side and righthand side of eq. (2.6) in Chouldechova. 
 3. Verify that the two numbers are equal! 
 
+## Limits of The Quantitative Approach to Discrimination {#sec-limits-quantitative}
+
+I'll give you each a number in Slack. The numbers correspond to the following sections of @narayanan2022limits. These are: 
+
+1. The null hypothesis allocates the burden of proof (p. 7-8)
+2. Compounding inequality is far below the radar of quantitative methods (p. 9-10)
+3. Snapshot datasets hide discrimination (p. 10-11)
+4. Explaining away discrimination (p. 12-13)
+5. What counts as evidence is a subjective choice (p. 5-7)
+
+For your assigned section, please write a short paragraph (4-5 simple sentences is fine). You should: 
+
+- Summarize Narayanan's key points in that section. 
+- In one of the sentences, describe which aspects of the Uber case study (p. 13-16) reflect the ideas of the section you described. 
+
+Bring your paragraph in class and be ready to read it to your group. 
 
 ## Classification Rates {#sec-classification-rates}
 

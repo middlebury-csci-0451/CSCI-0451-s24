@@ -84,6 +84,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -202,6 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting">Overfitting and the Scientific Method</a></li>
   <li><a href="#sec-erm" id="toc-sec-erm" class="nav-link" data-scroll-target="#sec-erm">The Coin-Flipping Game</a></li>
   <li><a href="#sec-classification-rates-2" id="toc-sec-classification-rates-2" class="nav-link" data-scroll-target="#sec-classification-rates-2">Balancing Classification Rates</a></li>
+  <li><a href="#sec-limits-quantitative" id="toc-sec-limits-quantitative" class="nav-link" data-scroll-target="#sec-limits-quantitative">Limits of The Quantitative Approach to Discrimination</a></li>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   </ul>
 </nav>
@@ -416,6 +436,23 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <li>Verify that the two numbers are equal!</li>
 </ol>
 </section>
+<section id="sec-limits-quantitative" class="level2">
+<h2 class="anchored" data-anchor-id="sec-limits-quantitative">Limits of The Quantitative Approach to Discrimination</h2>
+<p>I’ll give you each a number in Slack. The numbers correspond to the following sections of <span class="citation" data-cites="narayanan2022limits">Narayanan (<a href="#ref-narayanan2022limits" role="doc-biblioref">2022</a>)</span>. These are:</p>
+<ol type="1">
+<li>The null hypothesis allocates the burden of proof (p.&nbsp;7-8)</li>
+<li>Compounding inequality is far below the radar of quantitative methods (p.&nbsp;9-10)</li>
+<li>Snapshot datasets hide discrimination (p.&nbsp;10-11)</li>
+<li>Explaining away discrimination (p.&nbsp;12-13)</li>
+<li>What counts as evidence is a subjective choice (p.&nbsp;5-7)</li>
+</ol>
+<p>For your assigned section, please write a short paragraph (4-5 simple sentences is fine). You should:</p>
+<ul>
+<li>Summarize Narayanan’s key points in that section.</li>
+<li>In one of the sentences, describe which aspects of the Uber case study (p.&nbsp;13-16) reflect the ideas of the section you described.</li>
+</ul>
+<p>Bring your paragraph in class and be ready to read it to your group.</p>
+</section>
 <section id="sec-classification-rates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>
 <section id="part-1-3" class="level4 page-columns page-full">
@@ -506,11 +543,16 @@ The false positive rate is ___. </code></pre>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+
 </section>
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-narayanan2022limits" class="csl-entry" role="doc-biblioentry">
+Narayanan, Arvind. 2022. <span>“The Limits of the Quantitative Approach to Discrimination.”</span> Speech.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
