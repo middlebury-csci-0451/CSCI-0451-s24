@@ -235,6 +235,70 @@ For your assigned section, please write a short paragraph (4-5 simple sentences 
 
 Bring your paragraph in class and be ready to read it to your group. 
 
+## Project Idea {#sec-project-idea}
+
+Read the [overall description](project.qmd) of the course project. 
+
+
+[![](assets/img/memes/laforge-titles.jpeg)]{.aside}
+
+In this warmup, you'll post a description of a project ***idea*** on Slack, in the `#project-ideas` channel. **You are not committing to a project yet.** Do your best to describe something you might be interested in doing, without worrying too much about the details at this stage. 
+
+Determine which of the statements (A), (B), (C) or (D) below most closely describes your project interest. Then, follow the instructions under that statement to create your post and place it on Slack. 
+
+
+
+
+#### (A): I am interested in applying machine learning in a broader topic area. 
+
+[Examples of topic areas might include media recommendations, sports analytics, natural language processing, image classification, spatial analysis, remote sensing, etc.]{.aside} 
+
+1. First, post a **bolded title** for your project idea. E.g. "**Machine Learning for Transwarp Ionic Propulsion**."
+2. Then use a few sentences to describe your topic area. 
+3. Give **an example** of a question, goal, or task connected to your topic area that could be addressed using machine learning. Common examples: 
+    - Predict... (performance, clicks, scores)
+    - Classify... (pixels, images, bodies of text)
+    - Find hidden similarities/structure/groups in... (images, patients, songs)
+4. Give a link to an **available data set** that could be used to answer your question. If your task requires both features and labels (e.g. for prediction and classification), you should check that the data set you locate indeed has both. 
+
+Some good sources of data sets: 
+
+- [Kaggle](https://www.kaggle.com/datasets)
+- [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php)
+- [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data)
+
+There are *many* more -- feel welcome to explore. Often scholarly papers that analyze data will publish their data set. 
+
+#### (B): I am interested in using machine learning techniques on a *specific data set*. 
+
+[Follow these instructions only if you know of a *specific* data set that you really want to work on. As in, you could pull up the data set for me within 5 minutes, with no searching around. If you have a topic in mind but not a specific data set, follow the (A) instructions intead. The most common scenario for (B) is that you have a data set from a research position or other project.]{.aside}
+
+1. First, post a **bolded title** for your project idea. E.g. "**Machine Learning for Borg Genomics**."
+2. Use a few sentences to describe your data set. How was it collected? What are some of the features? If there are labels, what do they mean?
+3. Give **an example** of a question, goal, or task that could potentially be addressed using your data set. Common examples: 
+    - Predict one column in terms of the others (classification or regression)
+    - Find hidden similarities/structure/groups in the data set. 
+    - Please make sure that the columns you would need for your question, goal, or task are actually present in the data.  
+
+#### (C): I am interested in theory, math, and implementation. 
+
+1. First, post a **bolded title** for your project idea. You might be pretty vague at this point. Maybe you want to try implementing faster algorithms for empirical risk minimization? Maybe you want to implement a new model, like support vector machine or random forest? Take a good guess and write out your title. E.g. "**Subwave-Photon-Boosted Gradient Descent For Faster-Than-Light Regression Algorithms**"
+2. Explain as clearly as possible what you are interested in and why. If you're trying to write faster minimization algorithms, explain why this is important. If you want to code up a new model, do a *tiny* bit of research to explain why that model is interesting. 
+3. Given an outline of how you might test your implementation to see whether it works well. Some good possibilities include: 
+    - Complexity analysis or mathematical convergence analysis (harder) 
+    - Comparing runtime/accuracy on data to other methods, possibly including those implemented in pre-existing packages. 
+
+#### (D): I am interested in a non-technical topic such as social responsibility or algorithmic bias. 
+
+
+1. First, think a little bit to try to develop a relatively narrow topic, like facial recognition, criminal justice, or bias in generated text. Then, try to come up with a **bolded title** for your project idea, e.g. "**Quantum Techniques for Assessing Species Bias in Faster-Than-Light Logistic Regression**"
+2. Use a few sentences to describe why this topic interests you. 
+3. Find and link to at least **two** scholarly sources, news articles, or other reliable sources that are relevant to the topic you are interested in discussing. 
+4. Briefly describe *how* you would like to learn about and explore this topic in your project idea. Some possibilities include: 
+    - Research essays [Yes, you can do a final project for this course that does not involve writing any code. Please note, however, that my expectations for research essays as final projects are very high!]{.aside}
+    - Computational experiments with existing algorithms on existing data sets. 
+    - Replication of the findings of a published paper studying bias in a system or data set. 
+
 ## Classification Rates {#sec-classification-rates}
 
 #### Part 1

@@ -198,7 +198,7 @@
   header: | 
     Critical Perspectives 
   summary: |
-    TBD
+    We discuss limitations of the quantitative approach to studying discrimination, as well as critical perspectives on the role that automated decision systems play in surveilling and controlling marginalized individuals. 
   objectives: 
     - Social Responsibility
     - Experimentation
@@ -213,3 +213,20 @@
   assignments: |
     <a href="assignments/blog-posts/blog-post-limits-of-quantitative.qmd">Blog post: Limits of quantitative methods</a> <br> <b> OR </b><br> 
     <a href="assignments/blog-posts/blog-post-bias-allocative.qmd">Blog post: Auditing allocative bias</a>
+- date: 2023-03-27
+  header: | 
+    Vectorization
+  summary: |
+    We discuss some ways by which complex objects like images and text can be represented as numerical vectors for machine learning algorithms. 
+  objectives: 
+    - Navigation
+    - Experimentation
+  reading:
+    - <a href="https://probml.github.io/pml-book/book1.html">Murphy, Chapter 1</a>. This is not related to vectorization; it's for you to get oriented on some possible project ideas. Don't worry about any math you don't understand. 
+    - <a href="project.qmd">Course project description</a> 
+  notes: 
+    - TBD
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-project-idea">Pitch a Project Idea</a>
+  assignments: 

@@ -302,7 +302,7 @@ for rep in range(10):
     X_test, y_test = make_moons(100, shuffle = True, noise = .4)
 
     for deg in degs:
-        plr = poly_LR(degree = deg, penalty = "none", max_iter = 1e3)
+        plr = poly_LR(degree = deg, penalty = "none", max_iter = int(1e3))
         plr.fit(X_train, y_train)
         to_add = pd.DataFrame({"deg" : [deg],
                                "train" : [plr.score(X_train, y_train)],
@@ -333,7 +333,7 @@ where $\lambda$ is a *regularization strength* and $R(\vw)$ is a *regularization
 ```{python}
 X, y = make_moons(200, shuffle = True, noise = .3)
 
-plr = poly_LR(degree = 15, penalty = "none", max_iter = 1e5)
+plr = poly_LR(degree = 15, penalty = "none", max_iter = int(1e5))
 
 plr.fit(X, y)
 viz_plr(plr, X, y)
