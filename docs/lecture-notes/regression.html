@@ -300,8 +300,11 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2\;.
 <p>Let’s test this out on our fake data:</p>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x, X<span class="op">@</span>w_hat, color <span class="op">=</span> <span class="st">"black"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature (x)"</span>, ylabel <span class="op">=</span> <span class="st">"Target (y)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x_fake <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">101</span>)[:,np.newaxis]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>X_fake <span class="op">=</span> pad(x_fake)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.plot(x_fake, X_fake<span class="op">@</span>w_hat, color <span class="op">=</span> <span class="st">"black"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature (x)"</span>, ylabel <span class="op">=</span> <span class="st">"Target (y)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="regression_files/figure-html/cell-6-output-1.png" class="" width="600" height="429"></p>
 </div>
@@ -354,7 +357,7 @@ Activity 2: Computational Complexity of Gradient Descent
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># training score</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>LR.score(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>0.793971501018912</code></pre>
+<pre><code>0.8096936630907259</code></pre>
 </div>
 </div>
 <p>Let’s evaluate our model on similar, unseen data:</p>
@@ -366,7 +369,7 @@ Activity 2: Computational Complexity of Gradient Descent
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>LR.score(x_val, y_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>0.8121396474963425</code></pre>
+<pre><code>0.8561558591531595</code></pre>
 </div>
 </div>
 <p>As usual, gaps between the training and validation scores suggest the <em>possibility</em> of overfitting, although further investigation is required to see whether improvement on validation data is possible.</p>
@@ -380,7 +383,7 @@ Activity 2: Computational Complexity of Gradient Descent
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>&lt;matplotlib.collections.PathCollection at 0x7feca0281eb0&gt;</code></pre>
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7f77f1591f40&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="regression_files/figure-html/cell-10-output-2.png" class="" width="582" height="411"></p>
@@ -394,11 +397,11 @@ Activity 2: Computational Complexity of Gradient Descent
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>PHI <span class="op">=</span> p.fit_transform(x)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>PHI[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>array([[ 1.        ,  4.28289514, 18.34319077],
-       [ 1.        ,  0.87105706,  0.7587404 ],
-       [ 1.        ,  2.9844754 ,  8.9070934 ],
-       [ 1.        ,  6.0294167 , 36.35386576],
-       [ 1.        ,  2.00571219,  4.02288139]])</code></pre>
+<pre><code>array([[ 1.        ,  3.8361639 , 14.71615346],
+       [ 1.        ,  0.57805751,  0.33415049],
+       [ 1.        ,  2.79019849,  7.7852076 ],
+       [ 1.        ,  5.71869611, 32.7034852 ],
+       [ 1.        ,  0.28212696,  0.07959562]])</code></pre>
 </div>
 </div>
 <p>The feature matrix <span class="math inline">\(\Phi\)</span> now plays the role of <span class="math inline">\(\mathbf{X}\)</span>, and we can use the same formula as earlier:</p>
@@ -406,9 +409,9 @@ Activity 2: Computational Complexity of Gradient Descent
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>w_hat <span class="op">=</span> np.linalg.inv(PHI.T<span class="op">@</span>PHI)<span class="op">@</span>PHI.T<span class="op">@</span>y</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>w_hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>array([[ 1.03494168],
-       [-0.41452452],
-       [ 0.02283816]])</code></pre>
+<pre><code>array([[ 1.02253793e+00],
+       [-3.09131101e-01],
+       [ 1.96564963e-04]])</code></pre>
 </div>
 </div>
 <p>The predictions are</p>

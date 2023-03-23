@@ -203,7 +203,7 @@
     - Social Responsibility
     - Experimentation
   reading:
-    - <a href="https://www.cs.princeton.edu/~arvindn/talks/baldwin-discrimination/baldwin-discrimination-transcript.pdf">The limits of the Quantitative Approach to Discrimination</a>, speech by Arvind Narayanan
+    - <a href="https://www.cs.princeton.edu/~arvindn/talks/baldwin-discrimination/baldwin-discrimination-transcript.pdf">The Limits of the Quantitative Approach to Discrimination</a>, speech by Arvind Narayanan
     - <a href="https://harpers-org.ezproxy.middlebury.edu/archive/2018/01/the-digital-poorhouse/">"The Digital Poorhouse"</a> by Virginia Eubanks for <i>Harper's Magazine</i>
   notes: 
     - TBD
@@ -217,7 +217,7 @@
   header: | 
     Vectorization
   summary: |
-    We discuss some ways by which complex objects like images and text can be represented as numerical vectors for machine learning algorithms. 
+    We discuss some ways by which complex objects like images and especially text can be represented as numerical vectors for machine learning algorithms. 
   objectives: 
     - Navigation
     - Experimentation
@@ -225,7 +225,7 @@
     - <a href="https://probml.github.io/pml-book/book1.html">Murphy, Chapter 1</a>. This is not related to vectorization; it's for you to get oriented on some possible project ideas. Don't worry about any math you don't understand. 
     - <a href="project.qmd">Course project description</a> 
   notes: 
-    - TBD
+    - <a href="lecture-notes/vectorization.qmd">Lecture notes</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-project-idea">Pitch a Project Idea</a>

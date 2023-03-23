@@ -158,7 +158,10 @@ w_hat = np.linalg.inv(X.T@X)@X.T@y
 Let's test this out on our fake data: 
 ```{python}
 plt.scatter(x, y)
-plt.plot(x, X@w_hat, color = "black")
+
+x_fake = np.linspace(0, 1, 101)[:,np.newaxis]
+X_fake = pad(x_fake)
+plt.plot(x_fake, X_fake@w_hat, color = "black")
 labels = plt.gca().set(xlabel = "Feature (x)", ylabel = "Target (y)")
 ```
 

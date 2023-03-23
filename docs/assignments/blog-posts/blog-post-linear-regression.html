@@ -263,11 +263,11 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <h3 class="anchored" data-anchor-id="efficient-gradient-descent">Efficient Gradient Descent</h3>
 <p>For gradient descent, please implement a <code>score_history</code> so that you can visualize the value of the <code>score</code> over epochs.</p>
 <p>The formula for the gradient is <span class="math display">\[
-\nabla L(\mathbf{w}) = \mathbf{X}^T(\mathbf{X}\mathbf{w}- \mathbf{y})\;.
+\nabla L(\mathbf{w}) = 2\mathbf{X}^T(\mathbf{X}\mathbf{w}- \mathbf{y})\;.
 \]</span> However, you should resist the urge to compute this formula “from scratch” at every iteration. The reason is that the matrix multiplication <span class="math inline">\(\mathbf{X}^T\mathbf{X}\)</span> has time-complexity <span class="math inline">\(O(np^2)\)</span>, where <span class="math inline">\(n\)</span> is the number of data points and <span class="math inline">\(p\)</span> is the number of features. Similarly, the matrix-vector product <span class="math inline">\(\mathbf{X}^T\mathbf{y}\)</span> has time-complexity <span class="math inline">\(O(np)\)</span>. Both of these can be pretty expensive if you have a lot of data points! Fortunately, <em>they don’t depend on the current value of <span class="math inline">\(w\)</span></em>, so you can actually just precompute them:</p>
 <ol type="1">
 <li><strong>Once</strong> during the <code>fit</code> method, compute <span class="math inline">\(\mathbf{P}= \mathbf{X}^T \mathbf{X}\)</span> and <span class="math inline">\(\mathbf{q}= \mathbf{X}^T \mathbf{y}\)</span>.</li>
-<li>The gradient is then <span class="math inline">\(\nabla L(\mathbf{w}) = \mathbf{P}\mathbf{w}- \mathbf{q}\)</span>.</li>
+<li>The gradient is then <span class="math inline">\(\nabla L(\mathbf{w}) = 2(\mathbf{P}\mathbf{w}- \mathbf{q})\)</span>.</li>
 </ol>
 <p>Computing <span class="math inline">\(\mathbf{P}\mathbf{w}\)</span> requires only <span class="math inline">\(O(p^2)\)</span> steps. In other words, precomputing <span class="math inline">\(\mathbf{P}\)</span> and <span class="math inline">\(\mathbf{q}\)</span> eliminates the dependence of the runtime on the number of data points – not bad!</p>
 </section>
@@ -401,7 +401,7 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </section>
 <section id="optional-bikeshare-data-set" class="level2 page-columns page-full" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="optional-bikeshare-data-set"><span class="header-section-number">5</span> Optional: Bikeshare Data Set</h2>
-<p>The following code will download and save a data frame of data related to the Capital Bikeshare system in Washington DC. We use the aggregated version graciously provided by the authors of the following paper:</p>
+<p>The following code will download and save a data set related to the Capital Bikeshare system in Washington DC. We use the aggregated version graciously provided by the authors of the following paper:</p>
 <blockquote class="blockquote">
 <p>Fanaee-T, Hadi, and Gama, Joao, “Event labeling combining ensemble detectors and background knowledge”, Progress in Artificial Intelligence (2013): pp.&nbsp;1-15, Springer Berlin Heidelberg, doi:10.1007/s13748-013-0040-3.</p>
 </blockquote>

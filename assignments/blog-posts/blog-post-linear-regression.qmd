@@ -68,12 +68,12 @@ For gradient descent, please implement a `score_history` so that you can visuali
 
 The formula for the gradient is 
 $$
-\nabla L(\vw) = \mX^T(\mX\vw - \vy)\;. 
+\nabla L(\vw) = 2\mX^T(\mX\vw - \vy)\;. 
 $$
 However, you should resist the urge to compute this formula "from scratch" at every iteration. The reason is that the matrix multiplication $\mX^T\mX$ has time-complexity $O(np^2)$, where $n$ is the number of data points and $p$ is the number of features. Similarly, the matrix-vector product $\mX^T\vy$ has time-complexity $O(np)$. Both of these can be pretty expensive if you have a lot of data points! Fortunately, *they don't depend on the current value of $w$*, so you can actually just precompute them: 
 
 1. **Once** during the `fit` method, compute $\mP = \mX^T \mX$ and $\vq = \mX^T \vy$. 
-2. The gradient is then $\nabla L(\vw) = \mP\vw - \vq$.
+2. The gradient is then $\nabla L(\vw) = 2(\mP\vw - \vq)$.
 
 Computing $\mP \vw$ requires only $O(p^2)$ steps. In other words, precomputing $\mP$ and $\vq$ eliminates the dependence of the runtime on the number of data points -- not bad! 
 
@@ -163,7 +163,6 @@ Once you've demonstrated the behavior above, perform an experiment in which you 
 
 [Optional: Relate your findings when `p_features = n_train-1` to the existence of a solution of the equation $\mX\vw = \vy$. What do you know about the rank of $\mX$? Remember that the number of columns in $\mX$ is actually `p_features + 1`, since it's still necessary to pad with a column of 1s.]{.aside}
 
-
 When discussing your findings, make sure to connect them to the idea of overfitting. 
 
 ## LASSO Regularization
@@ -206,18 +205,15 @@ L.score(X_val, y_val)
 
 Replicate the same experiment you did with linear regression, increasing the number of features up to or even *past* `n_train - 1`, using LASSO instead of linear regression. You might want to experiment with a few values of the regularization strength `alpha`. Comment on how your validation score compares to standard linear regression when the number of features used is large. 
 
-
-
 ## Optional: Bikeshare Data Set
 
-The following code will download and save a data frame of data related to the Capital Bikeshare system in Washington DC. We use the aggregated version graciously provided by the authors of the following paper:
+The following code will download and save a data set related to the Capital Bikeshare system in Washington DC. We use the aggregated version graciously provided by the authors of the following paper:
 
 > Fanaee-T, Hadi, and Gama, Joao, "Event labeling combining ensemble detectors and background knowledge", Progress in Artificial Intelligence (2013): pp. 1-15, Springer Berlin Heidelberg, doi:10.1007/s13748-013-0040-3.
 
 This data set includes information about the season and time of year; the weather; and the count of bicycle users on each day for two years (year 0 is 2011, year 1 is 2012). This level of information gives us considerable ability to model phenomena in the data.
 
-[For more on what the entries in each column means, you can consult the data [dictionary here](https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset) (under "Attribute Information"). 
-]{.aside}
+[For more on what the entries in each column means, you can consult the data [dictionary here](https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset) (under "Attribute Information").]{.aside}
 
 ```{python}
 import pandas as pd
