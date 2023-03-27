@@ -226,7 +226,7 @@
     - <a href="project.qmd">Course project description</a> 
   notes: 
     - <a href="lecture-notes/vectorization.qmd">Lecture notes</a>
-    - <a href="lecture-notes/vectorization-live.ipynb">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/vectorization-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-project-idea">Pitch a Project Idea</a>
@@ -247,5 +247,5 @@
   module: Classification
   publish: true
   warmup: TBD
-  assignments: 
-    - <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.qmd">Project Proposal</a> due 4/05</b>
+  assignments: |
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.qmd">Project Proposal</a> due 4/05</b>
