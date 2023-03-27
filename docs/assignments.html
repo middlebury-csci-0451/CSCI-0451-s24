@@ -117,6 +117,34 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-project .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-type','listing-date','listing-description','listing-objectives','listing-number-sections','listing-number-depth','listing-publish','listing-bibliography','listing-path','listing-author','listing-image','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      
+      searchColumns: ["listing-title","listing-type","listing-date","listing-description","listing-objectives","listing-number-sections","listing-number-depth","listing-publish","listing-bibliography","listing-path","listing-author","listing-image","listing-filename","listing-file-modified","listing-reading-time"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-project'] = new List('listing-project', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -198,8 +226,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="process" class="level1">
-<h1>Process</h1>
+<section id="process-reflections" class="level1">
+<h1>Process Reflections</h1>
 <div id="listing-process" class="quarto-listing quarto-listing-container-custom">
 
 <table style="display: block; max-width: 800px;">
@@ -250,7 +278,7 @@ ul.task-list li input[type="checkbox"] {
                     Best By: &nbsp; 
                     </td>
                     <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
-                        Apr 6, 2023
+                        Apr 5, 2023
                     </td>
                 </tr>
                 <tr>
@@ -548,6 +576,47 @@ No matching items
         </tr>
             
         
+</tbody></table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="project" class="level1">
+<h1>Project</h1>
+<div id="listing-project" class="quarto-listing quarto-listing-container-custom">
+
+<table style="display: block; max-width: 800px;">
+                <tbody><tr>
+                    <td style="min-width:100px;max-width:200px;">
+                        <b>
+                            Project
+                        </b> 
+                    </td>
+                    <td style="min-width:400px">
+                        <a href="./assignments/project/proposal.html">
+                            Project Proposal
+                        </a>
+                    </td>
+                    <td style="text-align: right; max-width: 150;min-width: 150px;">
+                    Best By: &nbsp; 
+                    </td>
+                    <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                        Apr 7, 2023
+                    </td>
+                </tr>
+                <tr>
+                    <td class="smaller" colspan="4">
+                        The project proposal is your first formal step toward completing your project for this course. In this assignment, you’ll (a) create the shared GitHub repository that will…
+                    </td>
+                </tr>
+            <tr>
+                <td class="smaller syllabus-item-objective" colspan="3">
+                        <b>Learning Objectives: </b>
+                        <!-- <b>Learning Objectives</b><br> -->
+                            Project
+            </td>
+        </tr>
 </tbody></table>
 <div class="listing-no-matching d-none">
 No matching items

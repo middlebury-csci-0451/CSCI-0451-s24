@@ -230,7 +230,8 @@
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-project-idea">Pitch a Project Idea</a>
-  assignments: 
+  assignments: |
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/mid-course.ipynb">Mid-semester reflection</a> due 4/05</b>
 - date: 2023-03-29
   header: | 
     Introducing Unsupervised Learning: Topic Modeling
@@ -248,4 +249,4 @@
   publish: true
   warmup: TBD
   assignments: |
-    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.qmd">Project Proposal</a> due 4/05</b>
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.qmd">Project Proposal</a> due 4/07</b>

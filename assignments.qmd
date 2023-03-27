@@ -21,10 +21,15 @@ listing:
     sort-ui: false
     filter-ui: false
     template: assignments.ejs
+  - id: project
+    contents: assignments/project
+    sort-ui: false
+    filter-ui: false
+    template: assignments.ejs
 ---
                
 
-# Process
+# Process Reflections
 
 ::: {#process}
 :::
@@ -34,5 +39,7 @@ listing:
 :::{#blog-posts}
 :::
 
+# Project
  
-   
+:::{#project}
+:::
