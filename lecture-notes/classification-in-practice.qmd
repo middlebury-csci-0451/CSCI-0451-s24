@@ -224,7 +224,7 @@ Let's write a simple function that will construct a model with polynomial featur
 ```{python}
 def poly_LR(deg):
   return Pipeline([("poly", PolynomialFeatures(degree = deg)),
-                   ("LR", LogisticRegression(penalty = "none", max_iter = 1e3))])
+                   ("LR", LogisticRegression(penalty = "none", max_iter = int(1e3)))])
 ```
 
 We can use it like this: 

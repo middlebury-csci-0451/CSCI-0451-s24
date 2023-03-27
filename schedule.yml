@@ -226,7 +226,26 @@
     - <a href="project.qmd">Course project description</a> 
   notes: 
     - <a href="lecture-notes/vectorization.qmd">Lecture notes</a>
+    - <a href="lecture-notes/vectorization-live.ipynb">Lecture notes</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-project-idea">Pitch a Project Idea</a>
   assignments: 
+- date: 2023-03-29
+  header: | 
+    Introducing Unsupervised Learning: Topic Modeling
+  summary: |
+    We begin to discuss <i>unsupervised</i> learning, with topic modeling as our initial example. 
+  objectives: 
+    - Theory
+    - Navigation
+    - Experimentation
+  reading:
+    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html">In Depth: Principal Component Analysis</a> from the Python Data Science Handbook
+  notes: 
+    - <a href="lecture-notes/introducing-dimensionality-reduction.qmd">Lecture notes</a>
+  module: Classification
+  publish: true
+  warmup: TBD
+  assignments: 
+    - <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.qmd">Project Proposal</a> due 4/05</b>

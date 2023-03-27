@@ -229,7 +229,7 @@ $$
 <p>$$</p>
 </div>
 <p>So far in this course, we’ve focused exclusively on <em>classification</em> tasks: how to predict a <em>categorical label</em> for each data point. The other important task we need to consider is <em>regression</em>, in which we predict a real number for each data point based on its features. Here’s the stereotypical example:</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -287,18 +287,18 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2\;.
 \hat{\mathbf{w}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}\;,
 \tag{3}\]</span></span> which is an explicit formula for <span class="math inline">\(\hat{\mathbf{w}}\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">This requires that there are at least <span class="math inline">\(p\)</span> linearly independent rows of <span class="math inline">\(\mathbf{X}\)</span>. In particular, <span class="math inline">\(\mathbf{X}\)</span> must have at least as many rows as it has columns.</span></div></div>
 <p>Let’s see if we can use this to compute predictions for our fake data above. In order for this formula to work, we need to ensure that <span class="math inline">\(\mathbf{X}\)</span> is padded with a vector of ones.</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pad(X):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pad(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can use the formula:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>w_hat <span class="op">=</span> np.linalg.inv(X.T<span class="op">@</span>X)<span class="op">@</span>X.T<span class="op">@</span>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s test this out on our fake data:</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x_fake <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">101</span>)[:,np.newaxis]</span>
@@ -349,7 +349,7 @@ Activity 2: Computational Complexity of Gradient Descent
 <h2 class="anchored" data-anchor-id="scoring-linear-models">Scoring Linear Models</h2>
 <p>A good, simple way to score linear models is by using the loss function directly: smaller values are better! In <code>scikit-learn</code>, regression models are instead scored using an affine transformation of the loss function called the <em>coefficient of determination</em>. The coefficient of determination is <code>1</code> when the model fits the data perfectly with no errors. It can be arbitrarily negative (e.g.&nbsp;<code>-8.7</code>) if the model fits the data very poorly.</p>
 <p>For a quick illustration, here’s the <code>scikit-learn</code> implementation of linear regression:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LinearRegression()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>LR.fit(x, y)</span>
@@ -357,19 +357,19 @@ Activity 2: Computational Complexity of Gradient Descent
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># training score</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>LR.score(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>0.8096936630907259</code></pre>
+<pre><code>0.8587136683818445</code></pre>
 </div>
 </div>
 <p>Let’s evaluate our model on similar, unseen data:</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x_val <span class="op">=</span> np.random.rand(n, <span class="dv">1</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y_val <span class="op">=</span> w1<span class="op">*</span>x_val <span class="op">+</span> w0 <span class="op">+</span> <span class="fl">0.1</span><span class="op">*</span>np.random.randn(n, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>LR.score(x_val, y_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>0.8561558591531595</code></pre>
+<pre><code>0.8290675457730805</code></pre>
 </div>
 </div>
 <p>As usual, gaps between the training and validation scores suggest the <em>possibility</em> of overfitting, although further investigation is required to see whether improvement on validation data is possible.</p>
@@ -377,49 +377,49 @@ Activity 2: Computational Complexity of Gradient Descent
 <section id="incorporating-features" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="incorporating-features">Incorporating Features</h2>
 <p>Sometimes (most of the time), the patterns we are looking for in our data are not actually linear. For example:</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>np.random.rand(n, <span class="dv">1</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x) <span class="op">+</span> <span class="fl">0.2</span><span class="op">*</span>np.random.randn(n, <span class="dv">1</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>&lt;matplotlib.collections.PathCollection at 0x7f77f1591f40&gt;</code></pre>
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7fe2eabcf190&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="regression_files/figure-html/cell-10-output-2.png" class="" width="582" height="411"></p>
 </div>
 </div>
 <p>Just like in the case of classification, we can use <em>feature maps</em> to learn nonlinear patterns. For example:</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> PolynomialFeatures(<span class="dv">2</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>PHI <span class="op">=</span> p.fit_transform(x)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>PHI[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>array([[ 1.        ,  3.8361639 , 14.71615346],
-       [ 1.        ,  0.57805751,  0.33415049],
-       [ 1.        ,  2.79019849,  7.7852076 ],
-       [ 1.        ,  5.71869611, 32.7034852 ],
-       [ 1.        ,  0.28212696,  0.07959562]])</code></pre>
+<pre><code>array([[1.00000000e+00, 2.38502900e+00, 5.68836335e+00],
+       [1.00000000e+00, 3.26013588e+00, 1.06284859e+01],
+       [1.00000000e+00, 1.60992471e-01, 2.59185759e-02],
+       [1.00000000e+00, 5.25277132e-02, 2.75916065e-03],
+       [1.00000000e+00, 4.18447039e+00, 1.75097924e+01]])</code></pre>
 </div>
 </div>
 <p>The feature matrix <span class="math inline">\(\Phi\)</span> now plays the role of <span class="math inline">\(\mathbf{X}\)</span>, and we can use the same formula as earlier:</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>w_hat <span class="op">=</span> np.linalg.inv(PHI.T<span class="op">@</span>PHI)<span class="op">@</span>PHI.T<span class="op">@</span>y</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>w_hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>array([[ 1.02253793e+00],
-       [-3.09131101e-01],
-       [ 1.96564963e-04]])</code></pre>
+<pre><code>array([[ 0.93540932],
+       [-0.30331504],
+       [ 0.00414563]])</code></pre>
 </div>
 </div>
 <p>The predictions are</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> PHI<span class="op">@</span>w_hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s visualize:</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -433,7 +433,7 @@ Activity 2: Computational Complexity of Gradient Descent
 </div>
 </div>
 <p>Hmmm, this is not a very impressive fit. Let’s wrap this process in a function and do a few experiments.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> poly_viz(deg, ax):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> PolynomialFeatures(deg)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    PHI <span class="op">=</span> p.fit_transform(x)</span>
@@ -444,7 +444,7 @@ Activity 2: Computational Complexity of Gradient Descent
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter(x, y)</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    ax.plot(x_lin, y_trend, color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">5</span>, figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> deg, ax <span class="kw">in</span> <span class="bu">zip</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>), axarr.ravel()): </span>
@@ -474,7 +474,7 @@ k(\mathbf{x}_1, \mathbf{x}_2) = e^{-\gamma \lVert \mathbf{x}_1 - \mathbf{x}_2 \r
 \]</span></p>
 <p>This function is largest when <span class="math inline">\(\mathbf{x}_1 = \mathbf{x}_2\)</span>, and decreases as these two vectors become farther apart. The idea of kernel methods is that the prediction can be expressed as a weighted sum of the target values at nearby points.</p>
 <p>Kernel methods have extremely beautiful mathematics behind them and are fun to implement, but for today we can just show the implementation in <code>scikit-learn</code>:</p>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.kernel_ridge <span class="im">import</span> KernelRidge</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>KR <span class="op">=</span> KernelRidge(kernel <span class="op">=</span> <span class="st">"rbf"</span>, gamma <span class="op">=</span> <span class="dv">1</span>)</span>
@@ -496,7 +496,7 @@ k(\mathbf{x}_1, \mathbf{x}_2) = e^{-\gamma \lVert \mathbf{x}_1 - \mathbf{x}_2 \r
 <section id="activity" class="level2">
 <h2 class="anchored" data-anchor-id="activity">Activity</h2>
 <p>The following code produces a random feature matrix <span class="math inline">\(\mathbf{X}\)</span> and weight vector <span class="math inline">\(\mathbf{w}\)</span>:</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.rand(<span class="dv">10</span>, <span class="dv">3</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pad(X)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.random.rand(X.shape[<span class="dv">1</span>])</span>

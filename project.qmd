@@ -15,9 +15,9 @@ There are five deliverables associated with your project:
 
 1. A **project proposal**, due at the beginning of Week 7. The purpose of the proposal is for you and your group to carefully outline what you want to work on and explain why it's feasible. Your proposal will be in the form of a `README.md` file in a shared GitHub repository that will house your software. 
 2. A mid-project update due in Week 9 or 10. This will be a short, informal presentation in which you will share what you've done with the class. 
-2. **The project software**, (aka the GitHub repository itself) due at the end of finals week. [Essay projects may not have associated software, in which case the repository should hold the files defining the essay (like quarto or LaTeX) files.]{.aside}
-3. **A project report** in the form of an extended blog post in which you explain what you did, relate it to existing work, and show your experiments or other findings. The report is due at the end of finals week. 
-4. **A project presentation** during Week 12. The presentation will be 7-8 minutes and executed as a group. It should involve a visual aid, usually slides. 
+3. **The project software**, (aka the GitHub repository itself) due at the end of finals week. 
+4. **A project report** in the form of an extended blog post in which you explain what you did, relate it to existing work, and show your experiments or other findings. The report is due at the end of finals week. 
+5. **A project presentation** during Week 12. The presentation will be 7-8 minutes and executed as a group. It should involve a visual aid, usually slides. 
 
 I'll share more detailed information on each of these deliverables later in the course. 
 
@@ -37,10 +37,21 @@ Remember that we have six learning learning objectives in this course. The proje
 
 In general, I expect most projects to address **at least two** of these learning objectives. For example, a project in which you implement and test a new algorithm would address Theory, Implementation, and Experimentation. A project in which you work with a data set that you care about on a learning task using existing tools could address Navigation and Experimentation. A project in which you replicated the findings of a recent study on algorithmic bias could address Experimentation and Social Responsibility. There are lots of valid possibilities. Your project proposal will address which of these learning objectives your project will address, and your final report will describe what you learned under each objective. 
 
-### Don't Do Boring Projects
+## What Makes a Good Project?
+
+### Big Picture
+
+There's a lot more detail on this topic below, but there are two simple questions that you should ask yourselves when envisioning your project: 
+
+> Will I learn something by completing this project? <br>
+> Will I be proud of this project once it's done?
+
+If the answer to both questions is "yes," then your overall project idea is likely good. Feel free to approach me early if you want to talk over whether your project idea is suitable for the course. 
+
+### Boring Projects
 
 There is a kind of machine learning project that I feel is very boring and  doesn't really teach all that much. I'll call these "Kaggle-style" projects. 
-A Kaggle-style project is a project that starts with a convenient, clean data set and ends with a test score. [The website [Kaggle](https://www.kaggle.com/) is famous for hosting machine learning competitions in which the goal is to train a model that achieves the best prediction score on test data.]{.aside} Kaggle-style projects don't clean or explore the data; don't implement new algorithms; and don't think carefully about why one algorithm might be better than another for the data in question. Instead, they simply try a bunch of things and assess them with a validation or test score. [I am being a little unfair; some Kaggle submissions are of exceptionally high quality.]{.aside} I will probably not be impressed with a Kaggle-style project, partly because these kinds of projects really only address the "Navigation" learning objective.
+A "Kaggle-style" project is a project that starts with a convenient, clean data set and ends with a test score. [The website [Kaggle](https://www.kaggle.com/) is famous for hosting machine learning competitions in which the goal is to train a model that achieves the best prediction score on test data.]{.aside} KS projects don't clean or explore the data; don't implement new algorithms; and don't think carefully about why one algorithm might be better than another for the data in question. Instead, they simply try a bunch of things and assess them with a validation or test score. [I am being a little unfair; some Kaggle submissions are of exceptionally high quality.]{.aside} I will probably not be impressed with a Kaggle-style project, partly because these kinds of projects really only address the "Navigation" learning objective.
 
 It's fine (indeed, encouraged!) for you to find some data that interests you and apply machine learning methods to it in order to make predictions or understand the structure of the data. To deepen your project beyond "Kaggle style," you can incorporate some or all of the following: 
 
@@ -59,9 +70,10 @@ Incorporate a critical discussion of incentives and impacts in your work.
 - Who are the *users* of your work? Who could be *affected* by your work? Are these populations the same?
 - Are there risks of substantial bias or harm associated with the work you produce? 
 
+
 ## Ideas
 
-Here are some suggestions for choosing project directions. It's fine for your project to be something entirely different---indeed, I encourage it! The primary benefit of projects that I come up with is that they are more likely to "work." The primary drawback is that they may not be what you're interested in! Even projects that don't fully meet their original stated objectives can still be successful experiences that demonstrate learning for the course. 
+Here are some suggestions for choosing project directions. It's fine for your project to be something entirely different---indeed, I encourage it! The primary benefit of projects that I come up with is that they are more likely to "work." The primary drawback is that they may not be what you're interested in! Even projects that don't fully meet their stated objectives can still be successful experiences that demonstrate learning for the course. 
 
 ### Theory and Implementation
 

@@ -146,7 +146,11 @@ div.csl-indent {
   <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
   <li><a href="#group-work" id="toc-group-work" class="nav-link" data-scroll-target="#group-work">Group Work</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#dont-do-boring-projects" id="toc-dont-do-boring-projects" class="nav-link" data-scroll-target="#dont-do-boring-projects">Don’t Do Boring Projects</a></li>
+  </ul></li>
+  <li><a href="#what-makes-a-good-project" id="toc-what-makes-a-good-project" class="nav-link" data-scroll-target="#what-makes-a-good-project">What Makes a Good Project?</a>
+  <ul class="collapse">
+  <li><a href="#big-picture" id="toc-big-picture" class="nav-link" data-scroll-target="#big-picture">Big Picture</a></li>
+  <li><a href="#boring-projects" id="toc-boring-projects" class="nav-link" data-scroll-target="#boring-projects">Boring Projects</a></li>
   <li><a href="#critical-discussion" id="toc-critical-discussion" class="nav-link" data-scroll-target="#critical-discussion">Critical Discussion</a></li>
   </ul></li>
   <li><a href="#ideas" id="toc-ideas" class="nav-link" data-scroll-target="#ideas">Ideas</a>
@@ -178,20 +182,20 @@ div.csl-indent {
 
 </header>
 
-<section id="project-description" class="level2 page-columns page-full">
+<section id="project-description" class="level2">
 <h2 class="anchored" data-anchor-id="project-description">Project Description</h2>
 <p>The course project for CSCI 0451 is an opportunity for you to demonstrate your learning against one or more of the course’s six learning objectives on a topic of your choosing. Here’s the big picture:</p>
-<section id="deliverables" class="level3 page-columns page-full">
+<section id="deliverables" class="level3">
 <h3 class="anchored" data-anchor-id="deliverables">Deliverables</h3>
 <p>There are five deliverables associated with your project:</p>
 <ol type="1">
 <li>A <strong>project proposal</strong>, due at the beginning of Week 7. The purpose of the proposal is for you and your group to carefully outline what you want to work on and explain why it’s feasible. Your proposal will be in the form of a <code>README.md</code> file in a shared GitHub repository that will house your software.</li>
 <li>A mid-project update due in Week 9 or 10. This will be a short, informal presentation in which you will share what you’ve done with the class.</li>
-<li><strong>The project software</strong>, (aka the GitHub repository itself) due at the end of finals week. </li>
+<li><strong>The project software</strong>, (aka the GitHub repository itself) due at the end of finals week.</li>
 <li><strong>A project report</strong> in the form of an extended blog post in which you explain what you did, relate it to existing work, and show your experiments or other findings. The report is due at the end of finals week.</li>
 <li><strong>A project presentation</strong> during Week 12. The presentation will be 7-8 minutes and executed as a group. It should involve a visual aid, usually slides.</li>
 </ol>
-<div class="no-row-height column-margin column-container"><span class="">Essay projects may not have associated software, in which case the repository should hold the files defining the essay (like quarto or LaTeX) files.</span></div><p>I’ll share more detailed information on each of these deliverables later in the course.</p>
+<p>I’ll share more detailed information on each of these deliverables later in the course.</p>
 </section>
 <section id="group-work" class="level3">
 <h3 class="anchored" data-anchor-id="group-work">Group Work</h3>
@@ -209,9 +213,20 @@ div.csl-indent {
 </ul>
 <p>In general, I expect most projects to address <strong>at least two</strong> of these learning objectives. For example, a project in which you implement and test a new algorithm would address Theory, Implementation, and Experimentation. A project in which you work with a data set that you care about on a learning task using existing tools could address Navigation and Experimentation. A project in which you replicated the findings of a recent study on algorithmic bias could address Experimentation and Social Responsibility. There are lots of valid possibilities. Your project proposal will address which of these learning objectives your project will address, and your final report will describe what you learned under each objective.</p>
 </section>
-<section id="dont-do-boring-projects" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="dont-do-boring-projects">Don’t Do Boring Projects</h3>
-<div class="page-columns page-full"><p>There is a kind of machine learning project that I feel is very boring and doesn’t really teach all that much. I’ll call these “Kaggle-style” projects. A Kaggle-style project is a project that starts with a convenient, clean data set and ends with a test score.  Kaggle-style projects don’t clean or explore the data; don’t implement new algorithms; and don’t think carefully about why one algorithm might be better than another for the data in question. Instead, they simply try a bunch of things and assess them with a validation or test score.  I will probably not be impressed with a Kaggle-style project, partly because these kinds of projects really only address the “Navigation” learning objective.</p><div class="no-row-height column-margin column-container"><span class="">The website <a href="https://www.kaggle.com/">Kaggle</a> is famous for hosting machine learning competitions in which the goal is to train a model that achieves the best prediction score on test data.</span><span class="">I am being a little unfair; some Kaggle submissions are of exceptionally high quality.</span></div></div>
+</section>
+<section id="what-makes-a-good-project" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="what-makes-a-good-project">What Makes a Good Project?</h2>
+<section id="big-picture" class="level3">
+<h3 class="anchored" data-anchor-id="big-picture">Big Picture</h3>
+<p>There’s a lot more detail on this topic below, but there are two simple questions that you should ask yourselves when envisioning your project:</p>
+<blockquote class="blockquote">
+<p>Will I learn something by completing this project? <br> Will I be proud of this project once it’s done?</p>
+</blockquote>
+<p>If the answer to both questions is “yes,” then your overall project idea is likely good. Feel free to approach me early if you want to talk over whether your project idea is suitable for the course.</p>
+</section>
+<section id="boring-projects" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="boring-projects">Boring Projects</h3>
+<div class="page-columns page-full"><p>There is a kind of machine learning project that I feel is very boring and doesn’t really teach all that much. I’ll call these “Kaggle-style” projects. A “Kaggle-style” project is a project that starts with a convenient, clean data set and ends with a test score.  KS projects don’t clean or explore the data; don’t implement new algorithms; and don’t think carefully about why one algorithm might be better than another for the data in question. Instead, they simply try a bunch of things and assess them with a validation or test score.  I will probably not be impressed with a Kaggle-style project, partly because these kinds of projects really only address the “Navigation” learning objective.</p><div class="no-row-height column-margin column-container"><span class="">The website <a href="https://www.kaggle.com/">Kaggle</a> is famous for hosting machine learning competitions in which the goal is to train a model that achieves the best prediction score on test data.</span><span class="">I am being a little unfair; some Kaggle submissions are of exceptionally high quality.</span></div></div>
 <p>It’s fine (indeed, encouraged!) for you to find some data that interests you and apply machine learning methods to it in order to make predictions or understand the structure of the data. To deepen your project beyond “Kaggle style,” you can incorporate some or all of the following:</p>
 <ol type="1">
 <li>Work with data that is messy and needs significant processing before it can be used for ML tasks.</li>
@@ -233,7 +248,7 @@ div.csl-indent {
 </section>
 <section id="ideas" class="level2">
 <h2 class="anchored" data-anchor-id="ideas">Ideas</h2>
-<p>Here are some suggestions for choosing project directions. It’s fine for your project to be something entirely different—indeed, I encourage it! The primary benefit of projects that I come up with is that they are more likely to “work.” The primary drawback is that they may not be what you’re interested in! Even projects that don’t fully meet their original stated objectives can still be successful experiences that demonstrate learning for the course.</p>
+<p>Here are some suggestions for choosing project directions. It’s fine for your project to be something entirely different—indeed, I encourage it! The primary benefit of projects that I come up with is that they are more likely to “work.” The primary drawback is that they may not be what you’re interested in! Even projects that don’t fully meet their stated objectives can still be successful experiences that demonstrate learning for the course.</p>
 <section id="theory-and-implementation" class="level3">
 <h3 class="anchored" data-anchor-id="theory-and-implementation">Theory and Implementation</h3>
 <p>If you enjoy thinking about math and how to translate math into performant numerical code, then you may wish to consider implementing a machine learning algorithm that we haven’t implemented in blog posts. There are many candidates, and it can be partially up to you to decide. Since the project is bigger than a blog post…</p>

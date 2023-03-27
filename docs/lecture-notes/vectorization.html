@@ -341,7 +341,7 @@ $$
 <section id="case-study-sentiment-analysis-of-covid-19-tweets" class="level1 page-columns page-full">
 <h1>Case Study: Sentiment Analysis of COVID-19 Tweets</h1>
 <div class="page-columns page-full"><p>Instead of discussing text vectorization in the abstract, let’s jump straight into an example. <em>Sentiment analysis</em> describes modeling techniques that aim to describe the emotional valence of text. For example, sentiment analysis is often used to automatically describe text as “positive”/“happy” or “negative”/“sad”. The function below will download and return a set of training data used for sentiment analysis of tweets related to the COVID-19 pandemic. </p><div class="no-row-height column-margin column-container"><span class="">I retrieved this data from its <a href="https://www.kaggle.com/datasets/datatattle/covid-19-nlp-text-classification">original posting</a> on Kaggle.</span></div></div>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grab_tweets(data_set <span class="op">=</span> <span class="st">"train"</span>):</span>
@@ -353,7 +353,7 @@ $$
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> grab_tweets()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at our training data:</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
@@ -414,7 +414,7 @@ Activity
 <section id="sketchy-labels" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sketchy-labels">Sketchy Labels</h2>
 <p>These tweets were <a href="https://www.kaggle.com/datasets/datatattle/covid-19-nlp-text-classification/discussion/186907">labeled manually</a> by the original collector of the data. As with any setting in which humans need to make subjective decisions, there is considerable possibility for debate. For example, here is one tweet that was labeld “<strong>extremely positive</strong>”:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_train.iloc[[<span class="dv">40338</span>]][<span class="st">"OriginalTweet"</span>].iloc[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>WE NEED COVID-19 TESTING FOR EVERYONE TODAY!
@@ -435,7 +435,7 @@ I have never been afraid to leave my house for a trip to the grocery store in my
 <h2 class="anchored" data-anchor-id="target-vectorization">Target Vectorization</h2>
 <p>Our aim is to predict the <code>Sentiment</code> in terms of the text of the <code>OriginalTweet</code>. However, neither the text <code>OriginalTweet</code> nor the target <code>Sentiment</code> are numbers. So, we need to vectorize.</p>
 <p>The possible values of the <code>Sentiment</code> column are</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>np.unique(df_train[<span class="st">"Sentiment"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -444,7 +444,7 @@ I have never been afraid to leave my house for a trip to the grocery store in my
 </div>
 </div>
 <p>Vectorizing the target <code>Sentiment</code> is simple (although there are multiple ways). We’ll construct a new target vector which is <code>1</code> if the sentiment is <code>Positive</code> or <code>Extremely Positive</code> and <code>0</code> otherwise:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="dv">1</span><span class="op">*</span>df_train[<span class="st">"Sentiment"</span>].<span class="bu">str</span>.contains(<span class="st">"Positive"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>target.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -461,15 +461,15 @@ Name: Sentiment, dtype: int64</code></pre>
 <h3 class="anchored" data-anchor-id="term-frequency-tf-vectorization">Term Frequency (TF) Vectorization</h3>
 <p>In natural language processing (NLP), a data set of text is often called a <em>corpus</em>, and each observation is often called a <em>document</em>. Here, each document is a tweet.</p>
 <p>One standard vectorization technique is to construct a <em>term-document matrix</em>. In a term-document matrix, each row corresponds to a document and each column corresponds to a “term” (usually a word) that is present in the document. The entry <span class="math inline">\(x_{ij}\)</span> of this matrix is the number of terms that term <span class="math inline">\(j\)</span> appears in document <span class="math inline">\(i\)</span>, which we’ll call <span class="math inline">\(\mathrm{tf}_{ij}\)</span>. To construct a term-document matrix, we can use the <code>CountVectorizer</code> from <code>sklearn</code>.</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> CountVectorizer(max_df <span class="op">=</span> <span class="fl">0.2</span>, min_df <span class="op">=</span> <span class="fl">0.001</span>, stop_words <span class="op">=</span> <span class="st">'english'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, <code>max_df</code> and <code>min_df</code> specify a range of frequencies to include. If a term is present in almost all documents (like “the” or “of”), then this term may not be a good indication of sentiment. On the other hand, if a term appears in only one or two documents, we probably don’t have enough data to figure out whether it matters. Finally, the choice of <code>stop_words</code> tells our vectorizer to ignore common English words that are unlikely to carry much emotional meaning, like “and” or “if”.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> cv.fit(df_train[<span class="st">"OriginalTweet"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> cv.transform(df_train[<span class="st">"OriginalTweet"</span>])</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>tdm <span class="op">=</span> pd.DataFrame(counts.toarray(), columns <span class="op">=</span> cv.get_feature_names())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -478,7 +478,7 @@ Name: Sentiment, dtype: int64</code></pre>
 </div>
 </div>
 <p>Here’s our term-document matrix. Note that most of the entries are 0 because tweets are so short!</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tdm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 
@@ -783,7 +783,7 @@ Name: Sentiment, dtype: int64</code></pre>
 </div>
 </div>
 <p>The function below summarizes our entire data prep pipeline, which we’ll need for when we get to the test set.</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prep_tweets(df, vectorizer, train <span class="op">=</span> <span class="va">True</span>):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> train: </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        vectorizer.fit(df_train[<span class="st">"OriginalTweet"</span>])</span>
@@ -792,21 +792,21 @@ Name: Sentiment, dtype: int64</code></pre>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>X_train_cv, y_train <span class="op">=</span> prep_tweets(df_train, cv, train <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="first-model" class="level3">
 <h3 class="anchored" data-anchor-id="first-model">First Model</h3>
 <p>Let’s check on the base rate:</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_train.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>0.4384673324100396</code></pre>
 </div>
 </div>
 <p>So, always guessing that a tweet is <em>not</em> positive would be correct 56% of the time. Let’s see if we can beat this using logistic regression.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>LR_cv <span class="op">=</span> LogisticRegression()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>LR_cv.fit(X_train_cv, y_train)</span>
@@ -832,12 +832,12 @@ Name: Sentiment, dtype: int64</code></pre>
 x_{ij} = \frac{x_{ij}}{\sqrt{\sum_{j}x_{ij}^2}}
 \]</span></p>
 <p>These <span class="math inline">\(x_{ij}\)</span> are then collected to form the feature matrix <span class="math inline">\(\mathbf{X}\)</span>. Let’s try constructing a model using TF-IDF vectorization:</p>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> TfidfVectorizer</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tfidfv <span class="op">=</span> TfidfVectorizer(max_df <span class="op">=</span> <span class="fl">0.2</span>, min_df <span class="op">=</span> <span class="fl">0.001</span>, stop_words <span class="op">=</span> <span class="st">'english'</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>X_train_tfidf, y_train <span class="op">=</span> prep_tweets(df_train, tfidfv, train <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>LR_tfidf <span class="op">=</span> LogisticRegression()</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>LR_tfidf.fit(X_train_tfidf, y_train)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>LR_tfidf.score(X_train_tfidf, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -846,13 +846,13 @@ x_{ij} = \frac{x_{ij}}{\sqrt{\sum_{j}x_{ij}^2}}
 </div>
 </div>
 <p>Our TF-IDF model got a lower training score. At this stage, one good approach would be to choose which vectorization to use (as well as the vectorization parameters) using cross-validation. For now, we’ll just go ahead and grab the test set:</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> grab_tweets(data_set <span class="op">=</span> <span class="st">"test"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>X_test_cv, y_test <span class="op">=</span> prep_tweets(df_test, vectorizer <span class="op">=</span> cv, train <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>X_test_tfidf, y_test <span class="op">=</span> prep_tweets(df_test, vectorizer <span class="op">=</span> tfidfv, train <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And evaluate!</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Term-Document Frequency"</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(LR_cv.score(X_test_cv, y_test))</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"TF-IDF"</span>)</span>
@@ -870,7 +870,7 @@ TF-IDF
 <section id="model-inspection" class="level2">
 <h2 class="anchored" data-anchor-id="model-inspection">Model Inspection</h2>
 <p>Let’s take a moment to learn more about how our term-document frequency-based model looks at the data. One good way to do this is by looking at the confusion matrices:</p>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> LR_cv.predict(X_test_cv)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>confusion_matrix(y_test, y_pred, normalize <span class="op">=</span> <span class="st">"true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -880,7 +880,7 @@ TF-IDF
 </div>
 </div>
 <p>The false negative rate is higher than the true positive rate, suggesting that our model tends to tilt negative. Let’s take a look at some tweets that our model labeled as negative even though the label was positive:</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>false_negs <span class="op">=</span> df_test[(y_pred <span class="op">==</span> <span class="dv">0</span>) <span class="op">&amp;</span> (y_test <span class="op">==</span> <span class="dv">1</span>)][<span class="st">"OriginalTweet"</span>]</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> false_negs.iloc[:<span class="dv">5</span>]: </span>
@@ -924,7 +924,7 @@ Same with any other Bussiness.</code></pre>
 <section id="word-based-sentiment-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="word-based-sentiment-analysis">Word-Based Sentiment Analysis</h2>
 <p>A nice feature of linear models like logistic regression is that we can actually check the coefficient for each word in the model. This coefficient can give us important information about which words the model believes are most positive or most negative. One easy way to get at this information is to construct a data frame with the coefficients and the words:</p>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>coef_df <span class="op">=</span> pd.DataFrame({<span class="st">"coef"</span> : LR_cv.coef_[<span class="dv">0</span>], <span class="st">"word"</span> : cv.get_feature_names()})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/philchodrow/opt/anaconda3/envs/ml-0451/lib/python3.9/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function get_feature_names is deprecated; get_feature_names is deprecated in 1.0 and will be removed in 1.2. Please use get_feature_names_out instead.
@@ -932,7 +932,7 @@ Same with any other Bussiness.</code></pre>
 </div>
 </div>
 <p>Now we can obtain positive and negative words by sorting. Here are some of the good ones:</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>coef_df.sort_values(<span class="st">'coef'</span>, ascending <span class="op">=</span> <span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 
@@ -1003,7 +1003,7 @@ Same with any other Bussiness.</code></pre>
 </div>
 </div>
 <p>On the other hand, here are some of the negative ones:</p>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>coef_df.sort_values(<span class="st">'coef'</span>, ascending <span class="op">=</span> <span class="va">True</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 
@@ -1074,7 +1074,7 @@ Same with any other Bussiness.</code></pre>
 </div>
 </div>
 <p>A common use for these coefficients is to assign sentiment scores to sentences. Here’s a function that does this. It works by first stripping the punctuation and capitalization from a string, and then looking up each of its individual words in a dictionary.</p>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> string <span class="im">import</span> punctuation </span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1088,7 +1088,7 @@ Same with any other Bussiness.</code></pre>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    words <span class="op">=</span> no_punc.lower().split()</span>
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean([d[word] <span class="cf">for</span> word <span class="kw">in</span> words <span class="cf">if</span> word <span class="kw">in</span> d ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="op">=</span> <span class="st">"I love apples."</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> <span class="st">"I don't like this pandemic; it's too sad."</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
