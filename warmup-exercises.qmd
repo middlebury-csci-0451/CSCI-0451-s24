@@ -235,7 +235,16 @@ For your assigned section, please write a short paragraph (4-5 simple sentences 
 
 Bring your paragraph in class and be ready to read it to your group. 
 
-## 
+## Vectorization Brainstorm {#sec-vectorization}
+
+In a [recent lecture](lecture-notes/vectorization.qmd), we discussed methods of vectorizing text like the document-term matrix that use the *bag of words* assumption: the order of the words doesn't matter! 
+
+Take some time and propose an alternative approach to word-based text vectorization. Can you find a scheme that would give different vector representations to the following two sentences?
+
+> "I love rabbits, not cats."
+> "I love cats, not rabbits."
+
+You don't have to implement your vectorization, but please be prepared to write pseudocode for your group to show in detail how you would perform the vectorization. 
 
 
 ## Classification Rates {#sec-classification-rates}
