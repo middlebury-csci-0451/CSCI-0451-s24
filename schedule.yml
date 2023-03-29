@@ -245,6 +245,7 @@
     - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html">Principal Component Analysis</a> from the Python Data Science Handbook
   notes: 
     - <a href="lecture-notes/introducing-dimensionality-reduction.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/introducing-dimensionality-reduction-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#vectorization">Vectorization Brainstorm</a>

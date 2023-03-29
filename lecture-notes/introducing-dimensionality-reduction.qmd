@@ -69,40 +69,8 @@ simplefilter("ignore", category=ConvergenceWarning)
 
 So far in this course, we've considered the *supervised* learning framework. In the supervised framework, we have a matrix of predictive features $\mX \in \R^{n\times p}$ and a vector of targets $\vy \in \R^n$. Our aim is to find a function $f:\R^p\rightarrow \R$ such that $f(\vx) \approx y$; that is, $f$ can be used to make reasonable predictions of a new target $y$ on the basis of new predictors $\vx$.   
 
-**Unsupervised learning** refers to machine learning techniques in which we do **not** have access to any targets $\vy$. Instead, we only have the features $\mX$. In general, the aim of unsupervised learning is not to make predictions, but rather to "find some structure" in the $\mX$. Here are some common examples of unsupervised learning: 
+**Unsupervised learning** refers to machine learning techniques in which we do **not** have access to any targets $\vy$. Instead, we only have the features $\mX$. In general, the aim of unsupervised learning is not to make predictions, but rather to "find some structure" in the features $\mX$. 
 
-## Clustering
-
-Clustering is superficially similar to classification. Suppose we have some data $\mX$ that, when we plot it, looks like this: 
-
-```{python}
-from sklearn.datasets import make_blobs
-from matplotlib import pyplot as plt
-
-fig, ax = plt.subplots(1, figsize = (4, 4))
-X, y = make_blobs(n_samples=100, n_features=2, 
-                                centers=2, random_state=1)
-
-a = ax.scatter(X[:, 0], X[:, 1])
-a = ax.set(xlabel = "Feature 1", ylabel = "Feature 2")
-```
-
-This data looks a lot like the kind of data that we used for classification. This time, however, we **ignore $\vy$** (imagine our data didn't come with any labels). We can still look at the plot and see that it apparently contains two groups or "clusters" of data. The **clustering** task is identify clusters that "fit" the data well, according to some criterion of "fit." Algorithms like $k$-means and spectral clustering are able to do this: 
-
-```{python}
-from sklearn.cluster import KMeans
-
-km = KMeans(n_clusters = 2)
-km.fit(X)                    # NOTE: fit does not use y!! 
-
-clusters = km.predict(X)
-
-fig, ax = plt.subplots(1, figsize = (4, 4))
-a = ax.scatter(X[:, 0], X[:, 1], c = clusters)
-a = ax.set(xlabel = "Feature 1", ylabel = "Feature 2")
-```
-
-We can think of clustering as the task of identifying "similar" or "related" data observations (rows of $\mX$) and grouping them together. 
 
 ## Dimensionality Reduction
 
