@@ -223,6 +223,10 @@ div.csl-indent {
   <li><a href="#sec-classification-rates-2" id="toc-sec-classification-rates-2" class="nav-link" data-scroll-target="#sec-classification-rates-2">Balancing Classification Rates</a></li>
   <li><a href="#sec-limits-quantitative" id="toc-sec-limits-quantitative" class="nav-link" data-scroll-target="#sec-limits-quantitative">Limits of The Quantitative Approach to Discrimination</a></li>
   <li><a href="#sec-vectorization" id="toc-sec-vectorization" class="nav-link" data-scroll-target="#sec-vectorization">Vectorization Brainstorm</a></li>
+  <li><a href="#sec-compression" id="toc-sec-compression" class="nav-link" data-scroll-target="#sec-compression">Image Compression Factor of K-Means</a>
+  <ul class="collapse">
+  <li><a href="#optional-extra" id="toc-optional-extra" class="nav-link" data-scroll-target="#optional-extra">Optional Extra</a></li>
+  </ul></li>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   </ul>
 </nav>
@@ -462,6 +466,31 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <p>“I love rabbits, not cats.” “I love cats, not rabbits.”</p>
 </blockquote>
 <p>You don’t have to implement your vectorization, but please be prepared to write pseudocode for your group to show in detail how you would perform the vectorization.</p>
+</section>
+<section id="sec-compression" class="level2">
+<h2 class="anchored" data-anchor-id="sec-compression">Image Compression Factor of K-Means</h2>
+<p>In <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html">today’s reading</a> on K-means clustering from the Python Data Science Handbook, Jake VanderPlas considers the use of K-means to reduce the number of distinct colors in an image (Example 2). I encourage you to run the code for this example while thinking about this warmup!</p>
+<p>Give an estimate of the <em>compression factor</em>: the reduction of information achieved when compressing an image using k-means clustering into <span class="math inline">\(k\)</span> color clusters. The compression factor is the number of bits required to store the compressed image, divided by the number of bits required to store the original image. Both of these numbers can be computed asymptotically (i.e.&nbsp;with big-oh reasoning) in order to simplify the analysis.</p>
+<p>There are multiple good ways to think about this question, and you’re welcome to choose one that makes sense to you <em>as long as you carefully state your steps and assumptions</em>. Here are a few points that I find helpful:</p>
+<section id="bits-in-original-image" class="level4">
+<h4 class="anchored" data-anchor-id="bits-in-original-image">Bits in Original Image</h4>
+<ol type="1">
+<li>An image with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(m\)</span> columns has <span class="math inline">\(nm\)</span> pixels.</li>
+<li>Each pixel has one of three RGB color channels (Red, Green, and Blue).</li>
+<li>Each color channel can be represented with 8 bits (which encode an integer between 0 and 255, denoting the color intensity in that channel).</li>
+</ol>
+</section>
+<section id="bits-in-compressed-image" class="level4">
+<h4 class="anchored" data-anchor-id="bits-in-compressed-image">Bits in Compressed Image</h4>
+<ol type="1">
+<li>If I compress an image into just <span class="math inline">\(k\)</span> distinct colors, then instead of storing the full RGB value for each pixel, I can just store enough bits to uniquely identify the cluster containing each pixel. How many bits do I need for this?</li>
+<li>I also need to store a dictionary (hash map) that associates color <span class="math inline">\(j\)</span> (i.e.&nbsp;the centroid of the <span class="math inline">\(j\)</span>th cluster of colors) to its RGB value.</li>
+</ol>
+</section>
+<section id="optional-extra" class="level3">
+<h3 class="anchored" data-anchor-id="optional-extra">Optional Extra</h3>
+<p>Try running the code above while varying the number of clusters. Do you think that a 16-color compression looks much better than an 8-color compression. Do you think the difference is good enough to justify approximately twice the storage? What about 32 colors vs.&nbsp;16?</p>
+</section>
 </section>
 <section id="sec-classification-rates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>

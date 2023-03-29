@@ -246,6 +246,30 @@ Take some time and propose an alternative approach to word-based text vectorizat
 
 You don't have to implement your vectorization, but please be prepared to write pseudocode for your group to show in detail how you would perform the vectorization. 
 
+## Image Compression Factor of K-Means {#sec-compression}
+
+In [today's reading](https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html) on K-means clustering from the Python Data Science Handbook, Jake VanderPlas considers the use of K-means to reduce the number of distinct colors in an image (Example 2). I encourage you to run the code for this example while thinking about this warmup! 
+
+Give an estimate of the *compression factor*: the reduction of information achieved when compressing an image using k-means clustering into $k$ color clusters. The compression factor is the number of bits required to store the compressed image, divided by the number of bits required to store the original image. Both of these numbers can be computed asymptotically (i.e. with big-oh reasoning) in order to simplify the analysis. 
+
+There are multiple good ways to think about this question, and you're welcome to choose one that makes sense to you *as long as you carefully state your steps and assumptions*. Here are a few points  that I find helpful: 
+
+#### Bits in Original Image
+
+1. An image with $n$ rows and $m$ columns has $nm$ pixels. 
+2. Each pixel has one of three RGB color channels (Red, Green, and Blue). 
+3. Each color channel can be represented with 8 bits (which encode an integer between 0 and 255, denoting the color intensity in that channel). 
+
+#### Bits in Compressed Image
+
+1. If I compress an image into just $k$ distinct colors, then instead of storing the full RGB value for each pixel, I can just store enough bits to uniquely identify the cluster containing each pixel. How many bits do I need for this? 
+2. I also need to store a dictionary (hash map) that associates color $j$ (i.e. the centroid of the $j$th cluster of colors) to its RGB value.  
+
+### Optional Extra
+
+Try running the code above while varying the number of clusters. Do you think that a 16-color compression looks much better than an 8-color compression. Do you think the difference is good enough to justify approximately twice the storage? What about 32 colors vs. 16? 
+
+
 
 ## Classification Rates {#sec-classification-rates}
 

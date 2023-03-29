@@ -38,6 +38,7 @@ In a carefully-structured essay of approximately 1,500 words, engage **at least 
 3. Appropriate supporting points from your other scholarly sources. 
 4. An argument in which you stake out a position on Narayanan's point of view. Do you agree? Disagree? Agree with qualifications? Which ones? Why? 
 
+
 ### References in Quarto
 
 To manage references in Quarto, you need to create a `.bib` file (you can call it `refs.bib`). This file should live in the same directory as your blog post. Your `.bib` file is essentially a database of document information. Here's an example of a a `refs.bib` file: 

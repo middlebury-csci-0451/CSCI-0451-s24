@@ -250,3 +250,20 @@
   warmup: <a href="warmup-exercises.qmd#vectorization">Vectorization Brainstorm</a>
   assignments: |
     <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.qmd">Project Proposal</a> due 4/07</b>
+- date: 2023-04-03
+  header: | 
+    Clustering Data
+  summary: |
+    We continue our discussion of <i>unsupervised</i> learning with two methods for clustering sets of data. 
+  objectives: 
+    - Theory
+    - Navigation
+    - Experimentation
+  reading:
+    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html">K-Means Clustering</a> from the Python Data Science Handbook
+  notes: 
+    - <a href="lecture-notes/clustering.qmd">Lecture notes</a>
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#compression">K-Means Compression</a>
+  assignments: 
