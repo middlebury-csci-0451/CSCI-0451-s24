@@ -304,7 +304,7 @@ $$
 <section id="implementing-pca" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="implementing-pca">Implementing PCA</h2>
 <p>Let’s go ahead and implement PCA. We’ll do this using a term-document matrix that I derived from Lewis Caroll’s famous book <em>Alice’s Adventures in Wonderland</em>. Each row of the data corresponds to a chapter of the book, and each column corresponds to a word that may appear in that chapter:</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -332,7 +332,7 @@ $$
 </details>
 </div>
 <div class="page-columns page-full"><p>Now we’re ready to implement PCA. Because there is an explicit solution in terms of the eigenvalues of a matrix, our implementation can be very short. </p><div class="no-row-height column-margin column-container"><span class="">This is a <em>very slow</em> implementation of PCA; faster methods involve numerical methods for computing <em>singular values</em>.</span></div></div>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pca(M, k):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.array(M)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ev <span class="op">=</span> np.linalg.eigh(X.T<span class="op">@</span>X) <span class="co"># special eigensolver for symmetric matrices</span></span>
@@ -340,7 +340,7 @@ $$
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X<span class="op">@</span>W.T, W            <span class="co"># U and W</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s PCA in action:</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>U, W <span class="op">=</span> pca(M, k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -348,7 +348,7 @@ $$
 <section id="interpreting-pca" class="level2">
 <h2 class="anchored" data-anchor-id="interpreting-pca">Interpreting PCA</h2>
 <p>Ok, so why did we do this? Both the matrices <span class="math inline">\(\mathbf{U}\)</span> and <span class="math inline">\(\mathbf{W}\)</span> can be used to give us information about the structure of the text. In the context of text analysis, we usually interpret <span class="math inline">\(\mathbf{U}\)</span> and <span class="math inline">\(\mathbf{W}\)</span> as expressing information about some latent <em>topics</em>. The <span class="math inline">\(j\)</span> th column of <span class="math inline">\(\mathbf{W}\)</span> gives us a weight for each term in the text; this tells us how present each term is in the topic. The following function can be used to inspect the top words in each topic:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> top_words_pca(M, W, component, num_words):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    orders <span class="op">=</span> np.argsort(np.<span class="bu">abs</span>(W), axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    important_words <span class="op">=</span> np.array(M.columns)[orders]</span>
@@ -368,7 +368,7 @@ topic 3: ['march' 'course' 'soup' 'dormouse' 'hatter' 'king' 'queen' 'gryphon'
 </div>
 </div>
 <p>On the other hand, the matrix <span class="math inline">\(\mathbf{U}= \mathbf{X}\mathbf{W}^T\)</span> tells us about how present each of the <span class="math inline">\(k\)</span> topics are in each of the documents (in this case, chapters of the book). We can visualize the topic weight in each chapter over time:</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k):</span>
@@ -401,7 +401,7 @@ topic 3: ['march' 'course' 'soup' 'dormouse' 'hatter' 'king' 'queen' 'gryphon'
 \]</span></p>
 <p>That is, both the matrices <span class="math inline">\(\mathbf{U}\)</span> and <span class="math inline">\(\mathbf{W}\)</span> are required to be nonnegative in all their entries. This ensures that the results will be more interpretable, at the cost of making it much harder to actually solve the problem. Implementations of NMF usually require modified relatives of gradient descent in order to run.</p>
 <p>Let’s see NMF in action on our data:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> NMF</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> NMF(n_components <span class="op">=</span> k)</span>
@@ -411,7 +411,7 @@ topic 3: ['march' 'course' 'soup' 'dormouse' 'hatter' 'king' 'queen' 'gryphon'
 </div>
 </div>
 <p>As before, we can extract the most important words for each topic:</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> top_words_NMF(M, model, component, num_words):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    orders <span class="op">=</span> np.argsort(model.components_, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    important_words <span class="op">=</span> np.array(M.columns)[orders]</span>
@@ -431,7 +431,7 @@ topic 3: ['march' 'course' 'soup' 'dormouse' 'hatter' 'king' 'queen' 'gryphon'
 </div>
 </div>
 <p>And plot the role of each topic in each chapter:</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> model.transform(M)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
