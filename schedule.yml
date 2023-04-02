@@ -268,3 +268,19 @@
   publish: true
   warmup: <a href="warmup-exercises.qmd#compression">K-Means Compression</a>
   assignments: 
+- date: 2023-04-05
+  header: | 
+    Introducing Deep Learning
+  summary: |
+    We begin our discussion of deep learning with a quick theoretical motivation and a first glance at the PyTorch package. 
+  objectives: 
+    - Theory
+    - Navigation
+  reading:
+    - <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture01/">Lecture 1, Introduction</a> from Chinmay Hegde's course on deep learning at NYU
+  notes: 
+    - <a href="lecture-notes/intro-deep.qmd">Lecture notes</a>
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#intro-tensors">Introducing Tensors</a>
+  assignments: 

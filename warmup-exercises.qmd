@@ -269,6 +269,31 @@ There are multiple good ways to think about this question, and you're welcome to
 
 Try running the code above while varying the number of clusters. Do you think that a 16-color compression looks much better than an 8-color compression. Do you think the difference is good enough to justify approximately twice the storage? What about 32 colors vs. 16? 
 
+## Introducing Tensors {#sec-intro-tensors}
+
+
+**First**,  [PyTorch](https://pytorch.org/) 2.0 into your `ml-0451` Anaconda environment. 
+
+::: {.column-margin}
+The best way to install PyTorch is is probably to run the following at the command line: 
+```
+conda activate ml-0451
+pip3 install torch torchvision torchaudio
+```
+:::
+
+**Then**, in a blank Jupyter notebook, copy, paste, and run each of the code blocks in the [first section](https://pytorch.org/tutorials/beginner/basics/tensor_tutorial.html) of the PyTorch tutorial. 
+
+[You may need to do a little bit of exploring around the tutorials in order to come up with answers to these questions.]{.aside}
+
+**Finally**, write down a single-sentence answer to each of the following questions: 
+
+1. In what ways is a PyTorch tensor *similar* to a Numpy array?
+2. In what ways is a PyTorch tensor *different* from a Numpy array? 
+3. What is the primary motivation for the use of a specialized tensor data type, rather than an array, for deep learning?
+
+
+
 
 
 ## Classification Rates {#sec-classification-rates}

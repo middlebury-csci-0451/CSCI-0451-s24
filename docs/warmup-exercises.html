@@ -227,6 +227,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#optional-extra" id="toc-optional-extra" class="nav-link" data-scroll-target="#optional-extra">Optional Extra</a></li>
   </ul></li>
+  <li><a href="#sec-intro-tensors" id="toc-sec-intro-tensors" class="nav-link" data-scroll-target="#sec-intro-tensors">Introducing Tensors</a></li>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   </ul>
 </nav>
@@ -492,17 +493,34 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <p>Try running the code above while varying the number of clusters. Do you think that a 16-color compression looks much better than an 8-color compression. Do you think the difference is good enough to justify approximately twice the storage? What about 32 colors vs.&nbsp;16?</p>
 </section>
 </section>
+<section id="sec-intro-tensors" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-intro-tensors">Introducing Tensors</h2>
+<p><strong>First</strong>, <a href="https://pytorch.org/">PyTorch</a> 2.0 into your <code>ml-0451</code> Anaconda environment.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The best way to install PyTorch is is probably to run the following at the command line:</p>
+<pre><code>conda activate ml-0451
+pip3 install torch torchvision torchaudio</code></pre>
+</div></div><p><strong>Then</strong>, in a blank Jupyter notebook, copy, paste, and run each of the code blocks in the <a href="https://pytorch.org/tutorials/beginner/basics/tensor_tutorial.html">first section</a> of the PyTorch tutorial.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">You may need to do a little bit of exploring around the tutorials in order to come up with answers to these questions.</span></div></div>
+<p><strong>Finally</strong>, write down a single-sentence answer to each of the following questions:</p>
+<ol type="1">
+<li>In what ways is a PyTorch tensor <em>similar</em> to a Numpy array?</li>
+<li>In what ways is a PyTorch tensor <em>different</em> from a Numpy array?</li>
+<li>What is the primary motivation for the use of a specialized tensor data type, rather than an array, for deep learning?</li>
+</ol>
+</section>
 <section id="sec-classification-rates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>
 <section id="part-1-3" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="part-1-3">Part 1</h4>
 <div class="page-columns page-full"><p>COVID-19 rapid tests have approximately an 80% sensitivity rate, which means that, in an individual who truly has COVID-19, the probability of a rapid test giving a positive result is roughly 80%.  On the other hand, the probability of a rapid test giving a positive result for an individual who truly does <strong>not</strong> have COVID-19 is 5%. Suppose that approximately 4% of the population are currently infected with COVID-19. </p><div class="no-row-height column-margin column-container"><span class="">These numbers are mostly made-up.</span><span class="">Example 2.3.1 of <a href="https://github.com/probml/pml-book/releases/latest/download/book1.pdf">Murphy</a>, page 46, has a good review of the relevant probability and the definition of each of the rates below.</span></div></div>
 <p>Write a Python function called <code>rate_summary</code> that prints the following output, filling in the correct values for each of the specified rates:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -519,12 +537,12 @@ The false positive rate is ___. </code></pre>
 <h4 class="anchored" data-anchor-id="part-3-2">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
 <div>
@@ -569,8 +587,8 @@ The false positive rate is ___. </code></pre>
 </div>
 </div>
 <p>You should be able to use your function like this:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -578,8 +596,8 @@ The false positive rate is ___. </code></pre>
 <section id="hints" class="level5">
 <h5 class="anchored" data-anchor-id="hints">Hints</h5>
 <p>An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 
