@@ -248,7 +248,7 @@
     - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/introducing-dimensionality-reduction-live.ipynb">Live version</a>
   module: Classification
   publish: true
-  warmup: <a href="warmup-exercises.qmd#vectorization">Vectorization Brainstorm</a>
+  warmup: <a href="warmup-exercises.qmd#sec-vectorization">Vectorization Brainstorm</a>
   assignments: |
     <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.qmd">Project Proposal</a> due 4/07</b>
 - date: 2023-04-03
@@ -267,7 +267,7 @@
     - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/clustering-live.ipynb">Live version</a>
   module: Classification
   publish: true
-  warmup: <a href="warmup-exercises.qmd#compression">K-Means Compression</a>
+  warmup: <a href="warmup-exercises.qmd#sec-compression">K-Means Compression</a>
   assignments: |
     <a href="assignments/blog-posts/blog-post-image-processing.qmd">Blog post: Unsupervised image processing</a> (however, using this time to complete a previous blog post is also highly recommended)
 - date: 2023-04-05 
@@ -284,5 +284,5 @@
     - <a href="lecture-notes/intro-deep.qmd">Lecture notes</a>
   module: Classification
   publish: true
-  warmup: <a href="warmup-exercises.qmd#intro-tensors">Introducing Tensors</a>
+  warmup: <a href="warmup-exercises.qmd#sec-intro-tensors">Introducing Tensors</a>
   assignments: 
