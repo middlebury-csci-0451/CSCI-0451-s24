@@ -133,7 +133,7 @@ def k_means(X, ell):
 Let's run this algorithm and plot the results. 
  
 ```{python}
-#| fig-cap: Original data is shown in purple and yellow. Centroids of each cluster are shown in black. 
+#| fig-cap: Original data is shown in blue and yellow according to the cluster learned via the k-means algorithm. Centroids of each cluster are shown in black. 
 
 M, z = k_means(X, 2)
 
@@ -216,16 +216,16 @@ import networkx as nx
 def plot_graph(X, A, z = None, ax = None, show_edge_cuts = True):
     G = nx.from_numpy_array(A)
     if z is None:
-        nx.draw(G, pos = X, alpha = .4, node_color = "grey", node_size = 100, ax = ax)
+        nx.draw(G, pos = X, alpha = .4, node_color = "grey", node_size = 20, ax = ax)
     else: 
         if show_edge_cuts:
             colors = ["red" if z[i] != z[j] else "grey" for i, j in G.edges()]
-            widths = [5 if z[i] != z[j] else 1 for i, j in G.edges()]
+            widths = [2 if z[i] != z[j] else 1 for i, j in G.edges()]
         else:
             colors = "black"
             widths = 1
         
-        nx.draw(G, pos = X, alpha = .4, node_color = z, node_size = 100, edge_color = colors, width = widths, ax = ax, cmap=plt.cm.cividis)
+        nx.draw(G, pos = X, alpha = .4, node_color = z, node_size = 20, edge_color = colors, width = widths, ax = ax, cmap=plt.cm.cividis)
 
     plt.gca().set(xlabel = "Feature 1", ylabel = "Feature 2")
 fig, ax = plt.subplots(figsize = (4, 4))
@@ -251,8 +251,12 @@ The righthand plot has many more red edges, which connect nodes in two different
 Here are the cut values of these two clusterings: 
 
 ```{python}
-from hidden.spectral import cut
+from sklearn.neighbors import NearestNeighbors
 
+def cut(A, z):
+    D = pairwise_distances(z.reshape(-1, 1))
+    return (A*D).sum()
+    
 print(f"good labels cut = {cut(A, z = y)}") 
 print(f"bad labels cut = {cut(A, z = y_bad)}") 
 ```
@@ -276,7 +280,12 @@ $$
 The normcut of our preferable clustering is still better than the random one: 
 
 ```{python}
-from hidden.spectral import normcut
+def vol(j, A, z):
+    return A[z == j,:].sum()
+
+def normcut(A, z):
+    return cut(A, z) * (1/vol(0, A, z) + 1/vol(1, A, z))
+
 print(f"good labels normcut = {normcut(A, z = y)}") 
 print(f"bad labels normcut = {normcut(A, z = y_bad)}") 
 ```
@@ -349,7 +358,6 @@ $$
 
 A  beautiful theorem from linear algebra states that there is an explicit solution to this problem: $\vz$ should be the eigenvector with the second-smallest eigenvalue of the matrix $\mL = \mD^{-1}[\mD - \mA]$. This matrix $\mL$ is called the *normalized Laplacian*, and it is the reason that this clustering algorithm is called *Laplacian spectral clustering*. 
 
-
 ```{python}
 from hidden.spectral import second_laplacian_eigenvector
 fig, ax = plt.subplots(figsize = (4, 4))
@@ -368,7 +376,6 @@ plot_graph(X, A, z, show_edge_cuts = True, ax = ax)
 Our method of distinguishing the two rings using Laplacian spectral clustering seems to have worked! Let's try with another data set: 
 
 ```{python}
-
 from sklearn.datasets import make_moons
 
 X, z = make_moons(n_samples=100, random_state=1, noise = .1)

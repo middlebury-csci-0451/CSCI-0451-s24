@@ -264,11 +264,13 @@
     - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html">K-Means Clustering</a> from the Python Data Science Handbook
   notes: 
     - <a href="lecture-notes/clustering.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/clustering-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#compression">K-Means Compression</a>
-  assignments: 
-- date: 2023-04-05
+  assignments: |
+    <a href="assignments/blog-posts/blog-post-image-processing.qmd">Blog post: Unsupervised image processing</a> (however, using this time to complete a previous blog post is also highly recommended)
+- date: 2023-04-05 
   header: | 
     Introducing Deep Learning
   summary: |

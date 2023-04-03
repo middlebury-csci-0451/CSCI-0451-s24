@@ -309,9 +309,9 @@ $$
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ax.scatter(M[:,<span class="dv">0</span>], M[:,<span class="dv">1</span>], s <span class="op">=</span> <span class="dv">50</span>, color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>&lt;matplotlib.collections.PathCollection at 0x7fb151079e80&gt;</code></pre>
-<p>Original data is shown in purple and yellow. Centroids of each cluster are shown in black.</p>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7fdf49b60220&gt;</code></pre>
+<p>Original data is shown in blue and yellow according to the cluster learned via the k-means algorithm. Centroids of each cluster are shown in black.</p>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="clustering_files/figure-html/cell-5-output-2.png" class="" width="364" height="356"></p>
@@ -358,8 +358,8 @@ $$
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax.scatter(M[:,<span class="dv">0</span>], M[:,<span class="dv">1</span>], s <span class="op">=</span> <span class="dv">50</span>, color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>&lt;matplotlib.collections.PathCollection at 0x7fb15122ae50&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7fdf4a02afd0&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="clustering_files/figure-html/cell-7-output-2.png" class="" width="377" height="356"></p>
@@ -389,16 +389,16 @@ $$
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_graph(X, A, z <span class="op">=</span> <span class="va">None</span>, ax <span class="op">=</span> <span class="va">None</span>, show_edge_cuts <span class="op">=</span> <span class="va">True</span>):</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    G <span class="op">=</span> nx.from_numpy_array(A)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> z <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        nx.draw(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> <span class="st">"grey"</span>, node_size <span class="op">=</span> <span class="dv">100</span>, ax <span class="op">=</span> ax)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        nx.draw(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> <span class="st">"grey"</span>, node_size <span class="op">=</span> <span class="dv">20</span>, ax <span class="op">=</span> ax)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> show_edge_cuts:</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            colors <span class="op">=</span> [<span class="st">"red"</span> <span class="cf">if</span> z[i] <span class="op">!=</span> z[j] <span class="cf">else</span> <span class="st">"grey"</span> <span class="cf">for</span> i, j <span class="kw">in</span> G.edges()]</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            widths <span class="op">=</span> [<span class="dv">5</span> <span class="cf">if</span> z[i] <span class="op">!=</span> z[j] <span class="cf">else</span> <span class="dv">1</span> <span class="cf">for</span> i, j <span class="kw">in</span> G.edges()]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            widths <span class="op">=</span> [<span class="dv">2</span> <span class="cf">if</span> z[i] <span class="op">!=</span> z[j] <span class="cf">else</span> <span class="dv">1</span> <span class="cf">for</span> i, j <span class="kw">in</span> G.edges()]</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            colors <span class="op">=</span> <span class="st">"black"</span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            widths <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        nx.draw(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> z, node_size <span class="op">=</span> <span class="dv">100</span>, edge_color <span class="op">=</span> colors, width <span class="op">=</span> widths, ax <span class="op">=</span> ax, cmap<span class="op">=</span>plt.cm.cividis)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        nx.draw(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> z, node_size <span class="op">=</span> <span class="dv">20</span>, edge_color <span class="op">=</span> colors, width <span class="op">=</span> widths, ax <span class="op">=</span> ax, cmap<span class="op">=</span>plt.cm.cividis)</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">4</span>))</span>
@@ -425,10 +425,14 @@ $$
 <p>The righthand plot has many more red edges, which connect nodes in two different proposed clusters. In contrast, the lefthand plot has many fewer.</p>
 <p>Here are the cut values of these two clusterings:</p>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hidden.spectral <span class="im">import</span> cut</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"good labels cut = </span><span class="sc">{</span>cut(A, z <span class="op">=</span> y)<span class="sc">}</span><span class="ss">"</span>) </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"bad labels cut = </span><span class="sc">{</span>cut(A, z <span class="op">=</span> y_bad)<span class="sc">}</span><span class="ss">"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cut(A, z):</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> pairwise_distances(z.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (A<span class="op">*</span>D).<span class="bu">sum</span>()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"good labels cut = </span><span class="sc">{</span>cut(A, z <span class="op">=</span> y)<span class="sc">}</span><span class="ss">"</span>) </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"bad labels cut = </span><span class="sc">{</span>cut(A, z <span class="op">=</span> y_bad)<span class="sc">}</span><span class="ss">"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>good labels cut = 14.0
 bad labels cut = 2950.0</code></pre>
@@ -448,9 +452,14 @@ f(\mathbf{z}, \mathbf{A}) = \mathrm{cut}\left(\mathbf{A},\mathbf{z}\right)\left(
 \]</span></p>
 <p>The normcut of our preferable clustering is still better than the random one:</p>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hidden.spectral <span class="im">import</span> normcut</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"good labels normcut = </span><span class="sc">{</span>normcut(A, z <span class="op">=</span> y)<span class="sc">}</span><span class="ss">"</span>) </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"bad labels normcut = </span><span class="sc">{</span>normcut(A, z <span class="op">=</span> y_bad)<span class="sc">}</span><span class="ss">"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> vol(j, A, z):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A[z <span class="op">==</span> j,:].<span class="bu">sum</span>()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normcut(A, z):</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cut(A, z) <span class="op">*</span> (<span class="dv">1</span><span class="op">/</span>vol(<span class="dv">0</span>, A, z) <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>vol(<span class="dv">1</span>, A, z))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"good labels normcut = </span><span class="sc">{</span>normcut(A, z <span class="op">=</span> y)<span class="sc">}</span><span class="ss">"</span>) </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"bad labels normcut = </span><span class="sc">{</span>normcut(A, z <span class="op">=</span> y_bad)<span class="sc">}</span><span class="ss">"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>good labels normcut = 0.009632954990428188
 bad labels normcut = 2.036335377012906</code></pre>
