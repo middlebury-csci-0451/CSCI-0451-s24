@@ -481,11 +481,10 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  device <span class="op">=</span> <span class="st">"cpu"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mps seems to have bugs with calculating argmax</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> torch.cuda.is_available():</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  device <span class="op">=</span> <span class="st">"cuda"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  device <span class="op">=</span> <span class="st">"cpu"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> torch.cuda.is_available():</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  device <span class="op">=</span> <span class="st">"cuda"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  device <span class="op">=</span> <span class="st">"cpu"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Here are our data sets. <code>PenguinsDataset</code> is a custom class that I implemented above, while <code>DataLoader</code> is a utility from <code>torch</code> that automatically handles things like batching and randomization for gradient descent.</p>
@@ -594,34 +593,34 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tlh, tah, vlh, vah <span class="op">=</span> training_loop(model, train_dataloader, val_dataloader, <span class="fl">1e-4</span>, <span class="dv">500</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plot_histories(tlh, tah, vlh, vah)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 0: val_loss = 43.31192398071289, val_accuracy = 0.3382353186607361</code></pre>
+<pre><code>epoch 0: val_loss = 45.5021510404699, val_accuracy = 0.4852941632270813</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 50: val_loss = 1.7232750303605022, val_accuracy = 0.45588237047195435</code></pre>
+<pre><code>epoch 50: val_loss = 0.609782618634841, val_accuracy = 0.07352941483259201</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 100: val_loss = 0.16894018299439373, val_accuracy = 0.6911764740943909</code></pre>
+<pre><code>epoch 100: val_loss = 0.3989190424189848, val_accuracy = 0.1764705926179886</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 150: val_loss = 0.1411886171383016, val_accuracy = 0.7205882668495178</code></pre>
+<pre><code>epoch 150: val_loss = 0.19054848131011515, val_accuracy = 0.44117650389671326</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 200: val_loss = 0.12214994518195882, val_accuracy = 0.7205882668495178</code></pre>
+<pre><code>epoch 200: val_loss = 0.06688327999675975, val_accuracy = 0.7352941036224365</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 250: val_loss = 0.09882764518260954, val_accuracy = 0.7205882668495178</code></pre>
+<pre><code>epoch 250: val_loss = 0.03516546855954562, val_accuracy = 0.9264706373214722</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 300: val_loss = 0.08885611045886489, val_accuracy = 0.7352941036224365</code></pre>
+<pre><code>epoch 300: val_loss = 0.026237546082805183, val_accuracy = 0.9705882668495178</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 350: val_loss = 0.07855646881987066, val_accuracy = 0.779411792755127</code></pre>
+<pre><code>epoch 350: val_loss = 0.02203846328398761, val_accuracy = 0.9852941632270813</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 400: val_loss = 0.055134395904400765, val_accuracy = 0.7647058963775635</code></pre>
+<pre><code>epoch 400: val_loss = 0.01984664469080813, val_accuracy = 1.0000001192092896</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 450: val_loss = 0.04122224713073057, val_accuracy = 0.8235294222831726</code></pre>
+<pre><code>epoch 450: val_loss = 0.015965097419479313, val_accuracy = 0.9852941632270813</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="intro-deep_files/figure-html/cell-8-output-11.png" class="" width="506" height="302"></p>
@@ -660,34 +659,34 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>tlh, tah, vlh, vah <span class="op">=</span> training_loop(model, train_dataloader, val_dataloader, <span class="fl">1e-4</span>, <span class="dv">500</span>)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plot_histories(tlh, tah, vlh, vah)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 0: val_loss = 14.432417589075426, val_accuracy = 0.4852941334247589</code></pre>
+<pre><code>epoch 0: val_loss = 10.191597097060258, val_accuracy = 0.3382353186607361</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 50: val_loss = 0.10199641304857589, val_accuracy = 0.5882353186607361</code></pre>
+<pre><code>epoch 50: val_loss = 0.06825322088073282, val_accuracy = 0.7647059559822083</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 100: val_loss = 0.05744624400840086, val_accuracy = 0.8088235259056091</code></pre>
+<pre><code>epoch 100: val_loss = 0.047590394668719345, val_accuracy = 0.867647111415863</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 150: val_loss = 0.04530468320145326, val_accuracy = 0.9411765336990356</code></pre>
+<pre><code>epoch 150: val_loss = 0.053128435331232404, val_accuracy = 0.7058823704719543</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 200: val_loss = 0.07965497234288385, val_accuracy = 0.5588235259056091</code></pre>
+<pre><code>epoch 200: val_loss = 0.03455903118147569, val_accuracy = 0.9264706373214722</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 250: val_loss = 0.032277099788188934, val_accuracy = 0.9411765336990356</code></pre>
+<pre><code>epoch 250: val_loss = 0.0409484260222491, val_accuracy = 0.779411792755127</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 300: val_loss = 0.047973029096336925, val_accuracy = 0.7500000596046448</code></pre>
+<pre><code>epoch 300: val_loss = 0.02161241366582758, val_accuracy = 0.9558823704719543</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 350: val_loss = 0.02497257226530243, val_accuracy = 0.8823529481887817</code></pre>
+<pre><code>epoch 350: val_loss = 0.019268721122952068, val_accuracy = 0.9852941632270813</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 400: val_loss = 0.027617278125356224, val_accuracy = 0.8970588445663452</code></pre>
+<pre><code>epoch 400: val_loss = 0.057865854571847355, val_accuracy = 0.6764705777168274</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch 450: val_loss = 0.03907623930889017, val_accuracy = 0.7794117331504822</code></pre>
+<pre><code>epoch 450: val_loss = 0.020513927235322842, val_accuracy = 0.9558823704719543</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="intro-deep_files/figure-html/cell-10-output-11.png" class="" width="506" height="302"></p>

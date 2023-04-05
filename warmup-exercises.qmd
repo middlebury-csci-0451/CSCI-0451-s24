@@ -292,6 +292,49 @@ pip3 install torch torchvision torchaudio
 2. In what ways is a PyTorch tensor *different* from a Numpy array? 
 3. What is the primary motivation for the use of a specialized tensor data type, rather than an array, for deep learning?
 
+## Efficient Differentiation {#sec-backprop}
+
+[This exercise is based on [ a section of Chinmay Hegde's notes](https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks) on stochastic gradient descent and neural networks: ]{.aside}
+
+Consider the following function: 
+$$
+L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2\;,
+$$
+
+where $\sigma(a) = \frac{1}{1 + e^{-a}}$. 
+
+This is the loss function that would be obtained when using a single feature $x$ to predict $y$, using the function $\sigma(wx + b)$ the predictor and measuring the quality of this predictor using the square-error loss function. Our aim is to compute the gradient of $L$ with respect to $w$ and $b$, with a "ridge" regularization term $\frac{1}{2}\lambda w^2$ that encourages the weight $w$ to be small. 
+
+[I've used the property of the sigmoid that $\sigma'(a) = \sigma(a)(1-\sigma(a))$.]{.aside}
+
+The gradient of $L$ is $\nabla L (w, b) = \left(\frac{\partial L}{\partial w}, \frac{\partial L}{\partial b}\right)$, where 
+
+$$
+\begin{aligned}
+\frac{\partial L}{\partial w} &= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))x + \lambda w \\
+\frac{\partial L}{\partial b} &= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))\;.
+\end{aligned}
+$${#eq-explicit-gradient}
+
+### What You Should Do
+
+Assume that each of the following operations cost one computational unit: 
+
+- Multiplying or dividing two scalar numbers. 
+- Adding or subtracting two scalar numbers. 
+- Computing an exponential like $e^a$. 
+
+Using this assumption: 
+
+1. Determine the number of computational units (i.e. computational cost) of computing the gradient of $L$ exactly as written in @eq-explicit-gradient, under the assumption that you are not allowed to store the values of any intermediate computations. 
+2. Now determine the computational cost of computing the gradient of $L$ under the assumption that you are allowed to store intermediate computations. Please describe both the number of computations and the number of floating point numbers that must be stored. 
+3. Finally, determine the computational cost in terms of both steps and storage to compute $L$ using the backpropagation algorithm (described for a very similar function in [Hegde's notes](https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks)). 
+
+Compare your results from each method. 
+
+
+
+
 
 
 

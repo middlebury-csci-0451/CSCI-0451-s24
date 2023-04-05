@@ -321,7 +321,6 @@ class PenguinsDataset(Dataset):
 
 if torch.backends.mps.is_available():
   device = "cpu"
-  # mps seems to have bugs with calculating argmax
 elif torch.cuda.is_available():
   device = "cuda"
 else:

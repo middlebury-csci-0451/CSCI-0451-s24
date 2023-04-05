@@ -269,7 +269,7 @@
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-compression">K-Means Compression</a>
   assignments: |
-    <a href="assignments/blog-posts/blog-post-image-processing.qmd">Blog post: Unsupervised image processing</a> (however, using this time to complete a previous blog post is also highly recommended)
+    <a href="assignments/blog-posts/blog-post-image-processing.qmd">Blog post: Unsupervised learning with linear algebra</a> (however, using this time to complete a previous blog post is also highly recommended)
 - date: 2023-04-05 
   header: | 
     Introducing Deep Learning
@@ -285,4 +285,20 @@
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-intro-tensors">Introducing Tensors</a>
+  assignments: 
+- date: 2023-04-10 
+  header: | 
+    Optimization For Deep Learning
+  summary: |
+    We begin a discussion of the training process for neural networks, which requires efficient computation of gradients via backpropagation and efficient variations of gradient descent. 
+  objectives: 
+    - Theory
+    - Implementation
+  reading:
+    - <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/">Lecture 2, Neural Nets</a> from Chinmay Hegde's course on deep learning at NYU
+  notes: 
+    - TBD
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-backprop">Efficient Differentiation</a>
   assignments: 

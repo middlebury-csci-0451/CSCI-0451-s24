@@ -228,6 +228,10 @@ div.csl-indent {
   <li><a href="#optional-extra" id="toc-optional-extra" class="nav-link" data-scroll-target="#optional-extra">Optional Extra</a></li>
   </ul></li>
   <li><a href="#sec-intro-tensors" id="toc-sec-intro-tensors" class="nav-link" data-scroll-target="#sec-intro-tensors">Introducing Tensors</a></li>
+  <li><a href="#sec-backprop" id="toc-sec-backprop" class="nav-link" data-scroll-target="#sec-backprop">Efficient Differentiation</a>
+  <ul class="collapse">
+  <li><a href="#what-you-should-do" id="toc-what-you-should-do" class="nav-link" data-scroll-target="#what-you-should-do">What You Should Do</a></li>
+  </ul></li>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
   </ul>
 </nav>
@@ -509,6 +513,39 @@ pip3 install torch torchvision torchaudio</code></pre>
 <li>In what ways is a PyTorch tensor <em>different</em> from a Numpy array?</li>
 <li>What is the primary motivation for the use of a specialized tensor data type, rather than an array, for deep learning?</li>
 </ol>
+</section>
+<section id="sec-backprop" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-backprop">Efficient Differentiation</h2>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">This exercise is based on <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks">a section of Chinmay Hegde’s notes</a> on stochastic gradient descent and neural networks:</span></div></div>
+<p>Consider the following function: <span class="math display">\[
+L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2\;,
+\]</span></p>
+<p>where <span class="math inline">\(\sigma(a) = \frac{1}{1 + e^{-a}}\)</span>.</p>
+<p>This is the loss function that would be obtained when using a single feature <span class="math inline">\(x\)</span> to predict <span class="math inline">\(y\)</span>, using the function <span class="math inline">\(\sigma(wx + b)\)</span> the predictor and measuring the quality of this predictor using the square-error loss function. Our aim is to compute the gradient of <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span>, with a “ridge” regularization term <span class="math inline">\(\frac{1}{2}\lambda w^2\)</span> that encourages the weight <span class="math inline">\(w\)</span> to be small.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">I’ve used the property of the sigmoid that <span class="math inline">\(\sigma'(a) = \sigma(a)(1-\sigma(a))\)</span>.</span></div></div>
+<p>The gradient of <span class="math inline">\(L\)</span> is <span class="math inline">\(\nabla L (w, b) = \left(\frac{\partial L}{\partial w}, \frac{\partial L}{\partial b}\right)\)</span>, where</p>
+<p><span id="eq-explicit-gradient"><span class="math display">\[
+\begin{aligned}
+\frac{\partial L}{\partial w} &amp;= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))x + \lambda w \\
+\frac{\partial L}{\partial b} &amp;= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))\;.
+\end{aligned}
+\tag{3}\]</span></span></p>
+<section id="what-you-should-do" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-should-do">What You Should Do</h3>
+<p>Assume that each of the following operations cost one computational unit:</p>
+<ul>
+<li>Multiplying or dividing two scalar numbers.</li>
+<li>Adding or subtracting two scalar numbers.</li>
+<li>Computing an exponential like <span class="math inline">\(e^a\)</span>.</li>
+</ul>
+<p>Using this assumption:</p>
+<ol type="1">
+<li>Determine the number of computational units (i.e.&nbsp;computational cost) of computing the gradient of <span class="math inline">\(L\)</span> exactly as written in <a href="#eq-explicit-gradient">Equation&nbsp;3</a>, under the assumption that you are not allowed to store the values of any intermediate computations.</li>
+<li>Now determine the computational cost of computing the gradient of <span class="math inline">\(L\)</span> under the assumption that you are allowed to store intermediate computations. Please describe both the number of computations and the number of floating point numbers that must be stored.</li>
+<li>Finally, determine the computational cost in terms of both steps and storage to compute <span class="math inline">\(L\)</span> using the backpropagation algorithm (described for a very similar function in <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks">Hegde’s notes</a>).</li>
+</ol>
+<p>Compare your results from each method.</p>
+</section>
 </section>
 <section id="sec-classification-rates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>
