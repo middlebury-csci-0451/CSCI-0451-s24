@@ -282,6 +282,7 @@
     - <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture01/">Lecture 1, Introduction</a> from Chinmay Hegde's course on deep learning at NYU
   notes: 
     - <a href="lecture-notes/intro-deep.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/intro-deep-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-intro-tensors">Introducing Tensors</a>
