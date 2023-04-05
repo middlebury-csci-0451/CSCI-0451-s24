@@ -238,7 +238,7 @@ $$
 \hat{\mathbf{w}} = \mathop{\mathrm{arg\,min}}_{\mathbf{w}\in \mathbb{R}^p} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i \rangle, y_i)\;.
 \]</span></p>
 <p>We solved this problem using gradient descent.</p>
-<p>When we extended to the setting of multiple label classification (e.g.&nbsp;three penguin species), we modified this setup slightly. We let <span class="math inline">\(\mathbf{Y}\in \mathbb{R}^{n\times \ell}\)</span> be a matrix of targets, where each of the <span class="math inline">\(\ell\)</span> columns represents a possible category, <span class="math inline">\(y_{i\ell} = 1\)</span> means that observation <span class="math inline">\(i\)</span> has label <span class="math inline">\(\ell\)</span>. We then needed to replace the prediction rule <span class="math inline">\(f(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle\)</span> with a matrix-vector multiplication $f() = _i$, where <span class="math inline">\(\mathbf{W}\in \mathbb{R}^{p \times \ell}\)</span>. This produced a vector <span class="math inline">\(\hat{\mathbf{y}}\)</span> which we could compare to <span class="math inline">\(\mathbf{y}\)</span> using an appropriately modified loss function.</p>
+<p>When we extended to the setting of multiple label classification (e.g.&nbsp;three penguin species), we modified this setup slightly. We let <span class="math inline">\(\mathbf{Y}\in \mathbb{R}^{n\times \ell}\)</span> be a matrix of targets, where each of the <span class="math inline">\(\ell\)</span> columns represents a possible category, <span class="math inline">\(y_{i\ell} = 1\)</span> means that observation <span class="math inline">\(i\)</span> has label <span class="math inline">\(\ell\)</span>. We then needed to replace the prediction rule <span class="math inline">\(f(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle\)</span> with a matrix-vector multiplication <span class="math inline">\(f(\mathbf{x}) = \mathbf{x}_i\mathbf{W}\)</span>, where <span class="math inline">\(\mathbf{W}\in \mathbb{R}^{p \times \ell}\)</span>. This produced a vector <span class="math inline">\(\hat{\mathbf{y}}\)</span> which we could compare to <span class="math inline">\(\mathbf{y}\)</span> using an appropriately modified loss function.</p>
 <p><span class="math display">\[
 \hat{\mathbf{W}} = \mathop{\mathrm{arg\,min}}_{\mathbf{W}\in \mathbb{R}^{p \times \ell}} \sum_{i = 1}^n \ell(\mathbf{x}_i\mathbf{W}, \mathbf{y}_i)\;.
 \]</span></p>
@@ -310,8 +310,9 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
     p_3
   end
 
-  x_1--phi--&gt;f_1
-  x_2--phi--&gt;f_2
+  x_1 &amp; x_2 --&gt; x
+
+  x --phi--&gt; f_1 &amp; f_2
 
   f_1 --w_1--&gt; y_hat_1
   f_2 --w_1--&gt; y_hat_1

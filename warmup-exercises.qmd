@@ -272,7 +272,7 @@ Try running the code above while varying the number of clusters. Do you think th
 ## Introducing Tensors {#sec-intro-tensors}
 
 
-**First**,  [PyTorch](https://pytorch.org/) 2.0 into your `ml-0451` Anaconda environment. 
+**First**, install [PyTorch](https://pytorch.org/) 2.0 into your `ml-0451` Anaconda environment. 
 
 ::: {.column-margin}
 The best way to install PyTorch is is probably to run the following at the command line: 

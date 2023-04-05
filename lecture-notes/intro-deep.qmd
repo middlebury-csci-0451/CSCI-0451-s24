@@ -66,7 +66,7 @@ $$
 
 We solved this problem using gradient descent. 
 
-When we extended to the setting of multiple label classification (e.g. three penguin species), we modified this setup slightly. We let $\mY \in \R^{n\times \ell}$ be a matrix of targets, where each of the $\ell$ columns represents a possible category, $y_{i\ell} = 1$ means that observation $i$ has label $\ell$. We then needed to replace the prediction rule $f(\vx) = \bracket{\vw, \vx}$ with a matrix-vector multiplication $f(\vx) = \vx_i\mW $, where $\mW \in \R^{p \times \ell}$. This produced a vector $\hat{\vy}$ which we could compare to $\vy$ using an appropriately modified loss function. 
+When we extended to the setting of multiple label classification (e.g. three penguin species), we modified this setup slightly. We let $\mY \in \R^{n\times \ell}$ be a matrix of targets, where each of the $\ell$ columns represents a possible category, $y_{i\ell} = 1$ means that observation $i$ has label $\ell$. We then needed to replace the prediction rule $f(\vx) = \bracket{\vw, \vx}$ with a matrix-vector multiplication $f(\vx) = \vx_i\mW$, where $\mW \in \R^{p \times \ell}$. This produced a vector $\hat{\vy}$ which we could compare to $\vy$ using an appropriately modified loss function. 
 
 $$
 \hat{\mW} = \argmin_{\mW \in \R^{p \times \ell}} \sum_{i = 1}^n \ell(\vx_i\mW , \vy_i)\;.
@@ -150,8 +150,9 @@ flowchart LR
     p_3
   end
 
-  x_1--phi-->f_1
-  x_2--phi-->f_2
+  x_1 & x_2 --> x
+
+  x --phi--> f_1 & f_2
 
   f_1 --w_1--> y_hat_1
   f_2 --w_1--> y_hat_1
@@ -164,6 +165,8 @@ flowchart LR
 
   softmax --> p_1 & p_2 & p_3
 ```
+
+
 
 
 
