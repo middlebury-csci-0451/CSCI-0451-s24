@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.309">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -91,6 +91,7 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
@@ -100,11 +101,16 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Schedule</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./schedule.html">Schedule</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -112,42 +118,47 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./"><b>Machine Learning</b><br>CSCI 0451</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">Syllabus</a>
+  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link active">Schedule</a>
+  <a href="./schedule.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments.html" class="sidebar-item-text sidebar-link">Index of Assignments</a>
+  <a href="./assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Index of Assignments</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link">Course Project</a>
+  <a href="./project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Project</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -155,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Schedule</h1>
+<h1 class="title">Schedule</h1>
 </div>
 
 
@@ -181,607 +192,590 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-listing quarto-listing-container-custom" id="listing-listing">
-
             <h2 class="anchored"> Week 1 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Feb. 13</span></td> 
-            <td colspan="2"> Welcome!
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss how the course works and begin our discussion of classification and auditing. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Getting Oriented <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="./syllabus.html">Course syllabus</a><br> 
-                           <a href="./collaboration.html">Collaboration</a><br> 
-                           <a href="https://via.hypothes.is/https://www.jessestommel.com/why-i-dont-grade/">Why I Don't Grade</a> by Jesse Stommel<br> 
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch01.pdf">Daumé 1.1-1.5</a><br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./slides/welcome.html">Welcome slides</a>
- <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./software.html">Set up your software</a>.
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    No really, <br><a href="./software.html">set up your software</a>.
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Feb. 15</span></td> 
-            <td colspan="2"> Classification: The Perceptron
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We study the perceptron algorithm, a historical method that serves as the foundation for many modern classifiers. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Implementation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch04.pdf">Daumé 4.1-4.5, 4.7</a><br> 
-                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#2.-Introduction-to-NumPy">Introduction to Numpy</a> from The Python Data Science Handbook by Jake VanderPlas<br> 
-                           <a href="https://nbviewer.org/github/PhilChodrow/PIC16B/blob/master/lectures/math/linear-algebra-I.ipynb">Linear algebra with Numpy</a><br> 
-                           <i><a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht</a>, p. 33-41 (if you need to see a definition of a function gradient, see <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé p. 93</a>)</i><br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/perceptron.html">Lecture notes</a>
- <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-perceptron">Perceptron</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <a href="./assignments/blog-posts/blog-post-perceptron.html">Blog post: perceptron</a>
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 2 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Feb. 20</span></td> 
-            <td colspan="2"> Convex Linear Models and Logistic Regression
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss the modeling choices necessary to make the empirical risk minimization problem for linear classifiers tractable. In doing so we discuss convex functions and some of their properties that are relevant for optimization. Finally, we introduce logistic regression as an example of a convex linear classifier. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Implementation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé 2.1-2.7</a>
-<br> 
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.1-7.3</a>
-<br> 
-                           <a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht, p. 70-77</a><br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/convex-linear-models.html">Lecture notes</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-convexity">Convexity</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Feb. 22</span></td> 
-            <td colspan="2"> Optimization via Gradient Descent 
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for a linear classifier with a specific loss function. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Implementation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.4-7.6</a><br> 
-                           <a href="https://via.hypothes.is/https://mml-book.github.io/book/mml-book.pdf">Diesenroth, Faisal, and Soon, p. 225-233</a><br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/gradient-descent.html">Lecture notes</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-gradient-descent">Gradient Descent</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <a href="./assignments/blog-posts/blog-post-optimization.html">Blog post: gradient descent</a>
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 3 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Feb. 27</span></td> 
-            <td colspan="2"> Features, Regularization, and Nonlinear Decision Boundaries
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We learn how to use feature maps to help our convex linear classifiers learn nonlinear patterns. We also introduce the problem of overfitting and introduce feature selection and regularization as methods for addressing this problem. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Implementation <br> 
-                            Navigation <br> 
-                            Experimentation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.02-introducing-scikit-learn.html">Introducing Scikit-Learn</a><br> 
-                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.03-hyperparameters-and-model-validation.html">Hyperparameters and Model Validation</a><br> 
-                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.04-feature-engineering.html">Feature Engineering</a><br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/features-regularization.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/features-regularization-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-gradient-descent-2">Gradient Descent Again</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <b>ACTUAL REAL DUE DATE</b>: <a href="./assignments/process/goal-setting.html">Reflective Goal-Setting</a> due 2/27 
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Mar. 01</span></td> 
-            <td colspan="2"> Classification in Practice
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We work through a complete modeling workflow for the Titanic survival data set. Along the way, we work with data frames and discuss cross-validation. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Navigation <br> 
-                            Experimentation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé Chapter 2</a> <i>You may find it useful to review Chapter 1 as well.</i><br> 
-                           <a href="https://via.hypothes.is/https://jakevdp.github.io/PythonDataScienceHandbook/03.00-introduction-to-pandas.html">Data Manipulation with Pandas</a> (Focus on the sections up to and including "Aggregation and Grouping")<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/classification-in-practice.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/classification-in-practice-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-overfitting">Overfitting and the Scientific Method</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <a href="./assignments/blog-posts/blog-post-kernel-logistic.html">Blog post: kernel logistic regression</a> <br> <b>OR</b> <br> <a href="./assignments/blog-posts/blog-post-penguins.html">Blog post: penguins</a>
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 4 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Mar. 06</span></td> 
-            <td colspan="2"> Beyond Convex Linear Classifiers
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss several examples of other classifiers at a high level, including some that are nonlinear or nonconvex. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Navigation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           NA<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/more-on-classification.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/more-on-classification-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Mar. 08</span></td> 
-            <td colspan="2"> Linear Regression
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We introduce linear regression, another convex linear model suitable for predicting real numbers instead of class labels. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Implementation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           NA<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/regression.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/regression-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <a href="./assignments/blog-posts/blog-post-linear-regression.html">Blog post: Linear regression</a> 
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 5 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Mar. 13</span></td> 
-            <td colspan="2"> Introduction to Bias and Fairness
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                TBD
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Social Responsibility <br> 
-                            Experimentation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica.<br> 
-                           <a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">Fair prediction with disparate impact</a> by Alexandra Chouldechova, Sections 1 and 2.<br> 
-                           <a href="https://arxiv.org/pdf/1609.05807,">Inherent trade-offs in the fair determination of risk scores</a> by Jon Kleinberg et al, pages 1-5.<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/intro-allocative-bias.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/intro-allocative-bias-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-classification-rates-2">Balancing Classification Rates</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Mar. 15</span></td> 
-            <td colspan="2"> Critical Perspectives 
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss limitations of the quantitative approach to studying discrimination, as well as critical perspectives on the role that automated decision systems play in surveilling and controlling marginalized individuals. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Social Responsibility <br> 
-                            Experimentation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://www.cs.princeton.edu/~arvindn/talks/baldwin-discrimination/baldwin-discrimination-transcript.pdf">The Limits of the Quantitative Approach to Discrimination</a>, speech by Arvind Narayanan<br> 
-                           <a href="https://harpers-org.ezproxy.middlebury.edu/archive/2018/01/the-digital-poorhouse/">"The Digital Poorhouse"</a> by Virginia Eubanks for <i>Harper's Magazine</i><br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            TBD <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-limits-quantitative">Limits of the Quantitative Approach</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <a href="./assignments/blog-posts/blog-post-limits-of-quantitative.html">Blog post: Limits of quantitative methods</a> <br> <b> OR </b><br> 
-<a href="./assignments/blog-posts/blog-post-bias-allocative.html">Blog post: Auditing allocative bias</a>
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 6 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Mar. 27</span></td> 
-            <td colspan="2"> Vectorization
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We discuss some ways by which complex objects like images and especially text can be represented as numerical vectors for machine learning algorithms. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Navigation <br> 
-                            Experimentation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://probml.github.io/pml-book/book1.html">Murphy, Chapter 1</a>. This is not related to vectorization; it's for you to get oriented on some possible project ideas. Don't worry about any math you don't understand.<br> 
-                           <a href="./project.html">Course project description</a><br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/vectorization.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/vectorization-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-project-idea">Pitch a Project Idea</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <b>ACTUAL REAL DUE DATE</b>: <a href="./assignments/process/mid-course.html">Mid-semester reflection</a> due 4/05
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Mar. 29</span></td> 
-            <td colspan="2"> Introducing Unsupervised Learning: Topic Modeling
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We begin to discuss <i>unsupervised</i> learning, with topic modeling as our initial example. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Navigation <br> 
-                            Experimentation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html">Principal Component Analysis</a> from the Python Data Science Handbook<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/introducing-dimensionality-reduction.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/introducing-dimensionality-reduction-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-vectorization">Vectorization Brainstorm</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <b>ACTUAL REAL DUE DATE</b>: <a href="./assignments/project/proposal.html">Project Proposal</a> due 4/07
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 7 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Apr. 03</span></td> 
-            <td colspan="2"> Clustering Data
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We continue our discussion of <i>unsupervised</i> learning with two methods for clustering sets of data. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Navigation <br> 
-                            Experimentation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html">K-Means Clustering</a> from the Python Data Science Handbook<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/clustering.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/clustering-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-compression">K-Means Compression</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Assignments</b><br>
-                    <a href="./assignments/blog-posts/blog-post-image-processing.html">Blog post: Unsupervised learning with linear algebra</a> (however, using this time to complete a previous blog post is also highly recommended)
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">W</span>
-                    <br>
-                    <span class="syllabus-date">Apr. 05</span></td> 
-            <td colspan="2"> Introducing Deep Learning
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We begin our discussion of deep learning with a quick theoretical motivation and a first glance at the PyTorch package. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Navigation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture01/">Lecture 1, Introduction</a> from Chinmay Hegde's course on deep learning at NYU<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            <a href="./lecture-notes/intro-deep.html">Lecture notes</a> <br> 
-                            <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/intro-deep-live.ipynb">Live version</a> <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-intro-tensors">Introducing Tensors</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-            </tbody></table>
-            <h2 class="anchored"> Week 8 </h2>
-            <table>
-        <tbody><tr>
-            <td rowspan="2" class="syllabus-date-pane">
-                    <span class="syllabus-day-of-week">M</span>
-                    <br>
-                    <span class="syllabus-date">Apr. 10</span></td> 
-            <td colspan="2"> Optimization For Deep Learning
- </td>  
-        </tr>
-        <tr>
-            <td colspan="4" class="smaller"> 
-                We begin a discussion of the training process for neural networks, which requires efficient computation of gradients via backpropagation and efficient variations of gradient descent. 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="smaller syllabus-item-objective">
-                    <b>Learning Objectives</b><br>
-                            Theory <br> 
-                            Implementation <br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Reading</b><br>
-                           <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/">Lecture 2, Neural Nets</a> from Chinmay Hegde's course on deep learning at NYU<br> 
-            </td>
-            <td class="smaller syllabus-item-readings">
-                    <b>Notes</b><br>
-                            TBD <br> 
-            </td>
-            <td class="smaller syllabus-item-assignment">
-                    <b>Warmup</b><br>
-                    <a href="./warmup-exercises.html#sec-backprop">Efficient Differentiation</a>
-            </td>
-            <td class="smaller syllabus-item-assignment">
-            </td>
-        </tr>
-        </tbody></table>
+            
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Feb. 13</span></td>
+<td colspan="2">Welcome!</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">We discuss how the course works and begin our discussion of classification and auditing.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Getting Oriented<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="./syllabus.html">Course syllabus</a><br>
+<a href="./collaboration.html">Collaboration</a><br>
+<a href="https://via.hypothes.is/https://www.jessestommel.com/why-i-dont-grade/">Why I Don't Grade</a> by Jesse Stommel<br>
+<a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch01.pdf">Daumé 1.1-1.5</a><br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./slides/welcome.html">Welcome slides</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./software.html">Set up your software</a>.</td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+No really,<br>
+<a href="./software.html">set up your software</a>.</td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Feb. 15</span></td>
+<td colspan="2">Classification: The Perceptron</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">We study the perceptron algorithm, a historical method that serves as the foundation for many modern classifiers.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Implementation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch04.pdf">Daumé 4.1-4.5, 4.7</a><br>
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/#2.-Introduction-to-NumPy">Introduction to Numpy</a> from The Python Data Science Handbook by Jake VanderPlas<br>
+<a href="https://nbviewer.org/github/PhilChodrow/PIC16B/blob/master/lectures/math/linear-algebra-I.ipynb">Linear algebra with Numpy</a><br>
+<em><a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht</a>, p. 33-41 (if you need to see a definition of a function gradient, see <a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé p. 93</a>)</em><br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/perceptron.html">Lecture notes</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-perceptron">Perceptron</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<a href="./assignments/blog-posts/blog-post-perceptron.html">Blog post: perceptron</a></td>
+</tr>
+</tbody>
+</table>
+<section id="week-2" class="level2">
+<h2 class="anchored" data-anchor-id="week-2">Week 2</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Feb. 20</span></td>
+<td colspan="2">Convex Linear Models and Logistic Regression</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">We discuss the modeling choices necessary to make the empirical risk minimization problem for linear classifiers tractable. In doing so we discuss convex functions and some of their properties that are relevant for optimization. Finally, we introduce logistic regression as an example of a convex linear classifier.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Implementation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé 2.1-2.7</a><br>
+<a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.1-7.3</a><br>
+<a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht, p. 70-77</a><br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/convex-linear-models.html">Lecture notes</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-convexity">Convexity</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Feb. 22</span></td>
+<td colspan="2">Optimization via Gradient Descent</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">We discuss standard mathematical methods for empirical risk minimization, including gradient descent and stochastic gradient descent. We also recontextualize the perceptron algorithm as stochastic subgradient descent for a linear classifier with a specific loss function.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Implementation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch07.pdf">Daumé 7.4-7.6</a><br>
+<a href="https://via.hypothes.is/https://mml-book.github.io/book/mml-book.pdf">Diesenroth, Faisal, and Soon, p. 225-233</a><br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/gradient-descent.html">Lecture notes</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-gradient-descent">Gradient Descent</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<a href="./assignments/blog-posts/blog-post-optimization.html">Blog post: gradient descent</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-3" class="level2">
+<h2 class="anchored" data-anchor-id="week-3">Week 3</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Feb. 27</span></td>
+<td colspan="2">Features, Regularization, and Nonlinear Decision Boundaries</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">We learn how to use feature maps to help our convex linear classifiers learn nonlinear patterns. We also introduce the problem of overfitting and introduce feature selection and regularization as methods for addressing this problem.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Implementation<br>
+Navigation<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.02-introducing-scikit-learn.html">Introducing Scikit-Learn</a><br>
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.03-hyperparameters-and-model-validation.html">Hyperparameters and Model Validation</a><br>
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.04-feature-engineering.html">Feature Engineering</a><br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/features-regularization.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/features-regularization-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-gradient-descent-2">Gradient Descent Again</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<strong>ACTUAL REAL DUE DATE</strong>: <a href="./assignments/process/goal-setting.html">Reflective Goal-Setting</a> due 2/27</td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Mar. 01</span></td>
+<td colspan="2">Classification in Practice</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">We work through a complete modeling workflow for the Titanic survival data set. Along the way, we work with data frames and discuss cross-validation.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Navigation<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://via.hypothes.is/http://ciml.info/dl/v0_99/ciml-v0_99-ch02.pdf">Daumé Chapter 2</a> <em>You may find it useful to review Chapter 1 as well.</em><br>
+<a href="https://via.hypothes.is/https://jakevdp.github.io/PythonDataScienceHandbook/03.00-introduction-to-pandas.html">Data Manipulation with Pandas</a> (Focus on the sections up to and including "Aggregation and Grouping")<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/classification-in-practice.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/classification-in-practice-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-overfitting">Overfitting and the Scientific Method</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<a href="./assignments/blog-posts/blog-post-kernel-logistic.html">Blog post: kernel logistic regression</a><br>
+<strong>OR</strong><br>
+<a href="./assignments/blog-posts/blog-post-penguins.html">Blog post: penguins</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-4" class="level2">
+<h2 class="anchored" data-anchor-id="week-4">Week 4</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Mar. 06</span></td>
+<td colspan="2">Beyond Convex Linear Classifiers</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">We discuss several examples of other classifiers at a high level, including some that are nonlinear or nonconvex.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Navigation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+NA<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/more-on-classification.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/more-on-classification-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Mar. 08</span></td>
+<td colspan="2">Linear Regression</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">We introduce linear regression, another convex linear model suitable for predicting real numbers instead of class labels.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Implementation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+NA<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/regression.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/regression-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<a href="./assignments/blog-posts/blog-post-linear-regression.html">Blog post: Linear regression</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-5" class="level2">
+<h2 class="anchored" data-anchor-id="week-5">Week 5</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Mar. 13</span></td>
+<td colspan="2">Introduction to Bias and Fairness</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Social Responsibility<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica.<br>
+<a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">Fair prediction with disparate impact</a> by Alexandra Chouldechova, Sections 1 and 2.<br>
+<a href="https://arxiv.org/pdf/1609.05807,">Inherent trade-offs in the fair determination of risk scores</a> by Jon Kleinberg et al, pages 1-5.<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/intro-allocative-bias.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/intro-allocative-bias-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-classification-rates-2">Balancing Classification Rates</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Mar. 15</span></td>
+<td colspan="2">Critical Perspectives</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">We discuss limitations of the quantitative approach to studying discrimination, as well as critical perspectives on the role that automated decision systems play in surveilling and controlling marginalized individuals.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Social Responsibility<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://www.cs.princeton.edu/~arvindn/talks/baldwin-discrimination/baldwin-discrimination-transcript.pdf">The Limits of the Quantitative Approach to Discrimination</a>, speech by Arvind Narayanan<br>
+<a href="https://harpers-org.ezproxy.middlebury.edu/archive/2018/01/the-digital-poorhouse/">"The Digital Poorhouse"</a> by Virginia Eubanks for <em>Harper's Magazine</em><br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-limits-quantitative">Limits of the Quantitative Approach</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<a href="./assignments/blog-posts/blog-post-limits-of-quantitative.html">Blog post: Limits of quantitative methods</a><br>
+<strong>OR</strong><br>
+<a href="./assignments/blog-posts/blog-post-bias-allocative.html">Blog post: Auditing allocative bias</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-6" class="level2">
+<h2 class="anchored" data-anchor-id="week-6">Week 6</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Mar. 27</span></td>
+<td colspan="2">Vectorization</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">We discuss some ways by which complex objects like images and especially text can be represented as numerical vectors for machine learning algorithms.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Navigation<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://probml.github.io/pml-book/book1.html">Murphy, Chapter 1</a>. This is not related to vectorization; it's for you to get oriented on some possible project ideas. Don't worry about any math you don't understand.<br>
+<a href="./project.html">Course project description</a><br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/vectorization.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/vectorization-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-project-idea">Pitch a Project Idea</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<strong>ACTUAL REAL DUE DATE</strong>: <a href="./assignments/process/mid-course.html">Mid-semester reflection</a> due 4/05</td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Mar. 29</span></td>
+<td colspan="2">Introducing Unsupervised Learning: Topic Modeling</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">We begin to discuss <em>unsupervised</em> learning, with topic modeling as our initial example.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Navigation<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html">Principal Component Analysis</a> from the Python Data Science Handbook<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/introducing-dimensionality-reduction.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/introducing-dimensionality-reduction-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-vectorization">Vectorization Brainstorm</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<strong>ACTUAL REAL DUE DATE</strong>: <a href="./assignments/project/proposal.html">Project Proposal</a> due 4/07</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-7" class="level2">
+<h2 class="anchored" data-anchor-id="week-7">Week 7</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Apr. 03</span></td>
+<td colspan="2">Clustering Data</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">We continue our discussion of <em>unsupervised</em> learning with two methods for clustering sets of data.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Navigation<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html">K-Means Clustering</a> from the Python Data Science Handbook<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/clustering.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/clustering-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-compression">K-Means Compression</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<a href="./assignments/blog-posts/blog-post-image-processing.html">Blog post: Unsupervised learning with linear algebra</a> (however, using this time to complete a previous blog post is also highly recommended)</td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Apr. 05</span></td>
+<td colspan="2">Introducing Deep Learning</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">We begin our discussion of deep learning with a quick theoretical motivation and a first glance at the PyTorch package.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Navigation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://chinmayhegde.github.io/dl-notes/notes/lecture01/">Lecture 1, Introduction</a> from Chinmay Hegde's course on deep learning at NYU<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/intro-deep.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/intro-deep-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-intro-tensors">Introducing Tensors</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-8" class="level2">
+<h2 class="anchored" data-anchor-id="week-8">Week 8</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Apr. 10</span></td>
+<td colspan="2">Optimization For Deep Learning</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">We begin a discussion of the training process for neural networks, which requires efficient computation of gradients via backpropagation and efficient variations of gradient descent.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Implementation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+<a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/">Lecture 2, Neural Nets</a> from Chinmay Hegde's course on deep learning at NYU<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+<a href="./lecture-notes/auto-diff.html">Lecture notes</a><br>
+<a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/auto-diff-live.ipynb">Live version</a><br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-backprop">Efficient Differentiation</a></td>
+<td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
+<a href="assignments/blog-posts/blog-post-adam.qmd">Blog post: Optimization with Adam</a> (however, using this time to complete a previous blog post is also highly recommended)</td>
+</tr>
+</tbody>
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+</section>
 </div><p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -810,9 +804,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -877,6 +885,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

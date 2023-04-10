@@ -298,8 +298,10 @@
   reading:
     - <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/">Lecture 2, Neural Nets</a> from Chinmay Hegde's course on deep learning at NYU
   notes: 
-    - TBD
+    - <a href="lecture-notes/auto-diff.qmd">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/auto-diff-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-backprop">Efficient Differentiation</a>
-  assignments: 
+  assignments: |
+    <a href="assignments/blog-posts/blog-post-adam.qmd">Blog post:  Optimization with Adam</a> (however, using this time to complete a previous blog post is also highly recommended)

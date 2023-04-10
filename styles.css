@@ -4,7 +4,32 @@
 td {
     /* height: 50px; */
     vertical-align: top;
+    border-width: 0px;
+    border-color: #ffffff;
+    border: none; 
   }
+
+table {
+  border-collapse: collapse;
+  border-width: 0px;
+  border: none; 
+}
+
+.table>:not(caption)>*:not(:last-child)>* { 
+  border: none; 
+}
+
+.table>:not(:first-child) {
+  border: none;
+}
+
+.table {
+  border: none;
+}
+
+tr {
+  border: none;
+}
 
 .smaller { 
     font-size: 0.8em;
