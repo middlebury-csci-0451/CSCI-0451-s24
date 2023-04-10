@@ -4,6 +4,17 @@ import sys
 from pathlib import Path
 import os 
 
+from rich.console import Console
+from rich.columns import Columns
+from rich.panel import Panel
+
+def format_student(name, i):
+    # https://rich.readthedocs.io/en/stable/markup.html
+    last_first = name.split(", ")
+    if i == 0:
+        return f":bulb:[b blue]{last_first[1]} {last_first[0]}[/]"
+    return f"{last_first[1]} {last_first[0]}"
+
 def assign_ids():
     A = "CSCI 0451A (Spring 2023)"
     B = "CSCI 0451B (Spring 2023)"
@@ -46,7 +57,8 @@ def form_teams(num_groups = 5):
             sub = r[r["group"] == i].to_csv(p + f"/{i}.csv", index = False)
 
 def shuffle(section = "A"):
-    
+    console = Console()
+    panels = []
     path = f"utils/teams/{section}"
     for team in os.listdir(path):
         
@@ -63,18 +75,20 @@ def shuffle(section = "A"):
         
         df[["Student", "id", "group", "presented"]].to_csv(f"{path}/{team}", index = False)
         
+        panel_str = ""
+
         for i in range(len(df)):
             
             if i == 0:    
                 print('\033[1m' + "\033[94m")
                 
             name = df["Student"].iloc[i]
-            first_last = name.split(", ")
-            print (first_last[1] + " " + first_last[0])
-            print('\033[0m', end = "")
+            panel_str += format_student(name, i) + "\n"
             
-    print("")
-     
+        panels.append(Panel(panel_str))
+
+    console.print(Columns(panels))
+    
 if __name__ == "__main__":       
     if sys.argv[1] == "assign":
         assign_ids()
