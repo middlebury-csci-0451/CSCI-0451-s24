@@ -317,7 +317,7 @@
     - <a href="https://openlearninglibrary.mit.edu/assets/courseware/v1/41c7c4a6141b76b324055d56387570c0/asset-v1:MITx+6.036+1T2019+type@asset+block/notes_chapter_Convolutional_Neural_Networks.pdf">Convolutional Neural Networks</a> from MIT's course 6.036. 
     - <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53">A Comprehensive Guide to Convolutional Neural Networks</a> by Sumit Saha on Towards Data Science has some good visuals. 
   notes: 
-    - TBD
+    - <a href="lecture-notes/convnets.ipynb">Lecture notes</a>
     - TBD
   module: Classification
   publish: true
