@@ -373,7 +373,7 @@ kernel = np.array([[-1, -1, -1],
 
 convd = convolve2d(img, kernel)
 
-plt.imshow(convd, cmap = "Greys", vmin = -8, vmax = 8)
+plt.imshow(convd, cmap = "Greys", vmin = 0, vmax = 8)
 plt.gca().axis("off")
 ```
 
