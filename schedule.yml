@@ -322,4 +322,5 @@
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-convolutional-kernel">Convolutional Kernels</a>
-  assignments: 
+  assignments: |
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/blog-posts/blog-post-guest-speaker.qmd">Engaging with Timnit Gebru</a><br>Part 1 due 4/17</b>

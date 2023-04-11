@@ -1,0 +1,82 @@
+---
+title: "Learning from Timnit Gebru"
+type: "Blog Post"
+date: 2023-04-19
+description: |
+    In this blog post, you'll watch a recorded lecture by our guest speaker Dr. Timnit Gebru, propose some questions for her in our conversation, and reflect on her broad talk to the Middlebury campus. 
+objectives: 
+  - Theory
+  - Experimentation
+jupyter: conda-env-ml-0451-py
+number-sections: false
+number-depth: 2
+publish: "true"
+bibliography: ../../refs.bib
+---
+
+::: {.callout-note}
+
+**This is an unusual blog post**: 
+
+1. This blog post has **two parts**. You can do both of them in the same post, but you need to submit each one on Canvas. 
+2. The first part, in which you create questions for our guest speaker, has a **hard deadline** of Wednesday, April 19th. Posts with a first part submitted after Wednesday, April 19th cannot be used as evidence of learning or course engagement. 
+
+:::
+
+## tl;dr
+
+1. Read about Dr. Gebru. 
+2. Watch Dr. Gebru's recorded talk. 
+3. Propose a question for Dr. Gebru based on her talk.
+    - Submit a blog post with these proposed questions by April 19th. 
+4. Attend Dr. Gebru's talk at Middlebury on April 24th.
+    - I will record the talk for those who are not able to attend. **You must let me know in advance** that you will not be able to attend Dr. Gebru's talk and why. 
+5. Write a reflection on Dr. Gebru's talk. 
+    - Submit your blog post *again* with this reflection. 
+
+## Part 1: Questions for Dr. Gebru
+
+In class on April 24th, we will have an opportunity to do Q&A with Dr. Gebru about her recent work in AI and tech ethics. The purpose of Part 1 is to help you get ready for this conversation by learning about Dr. Gebru, getting a quick view of her recent work, and proposing questions for our conversation with her. 
+
+### Read about Dr. Gebru
+
+Take 30 minutes to do a little bit of research about Dr. Gebru. Starting with her [Wikipedia page](https://en.wikipedia.org/wiki/Timnit_Gebru) is a good start. 
+
+**In your blog**, write an introductory paragraph in which you explain what is happening at Midd (Dr. Gebru is virtually visiting our class and giving a talk to the campus). Include in this paragraph an explanation of who Dr. Gebru is and **why** she is such a recognized voice in artificial intelligence and its ethical implications. 
+
+### Watch Dr. Gebru's Talk 
+
+In 2020, Dr. Gebru gave a talk as part of a [Tutorial on Fairness, Accountability, Transparency, and Ethics (FATE) in Computer Vision] at the conference on Computer Vision and Pattern Recognition 2020. Watch [the recording of this talk](https://www.youtube.com/watch?v=0sBE5OyD7fk&t=802s). 
+
+**In your blog**, write another few paragraphs summarizing the primary points raised by Dr. Gebru. Conclude this section of your blog with a tl;dr to your friend: in one sentence, what is the thing that *everyone* needs to understand about computer vision as it's used today?[There is no "one thing" that Dr. Gebru discusses; your tl;dr should be based on what you learned from her talk in combination with your judgment.]{.aside} 
+
+### Propose Questions
+
+Reflect carefully and **propose a question** that you'd like to ask Dr. Gebru. Take some time for this. 
+
+- Your question should not be answerable directly from her talk. 
+- Your queston should not be easily answerable with a Google search (try it first). 
+
+**In your blog**, write your proposed question. 
+
+### Submit Your Blog Post
+
+Render your post, push it online, and submit it on Canvas like usual. I will compile your questions and make selections for our discussion with Dr. Gebru. If I choose your question to ask, then I'll let you know and you'll be called on to ask it during our conversation with her. 
+
+## Part 2: Dr. Gebru's Talk "At" Middlebury
+
+In the evening of April 24th, at 7pm in Hillcrest 103, Dr. Gebru will give a talk on "Eugenics and the Promise of Utopia through Artificial General Intelligence." To complete this part of the blog post, **you must attend this talk**. I will record the talk for students who are not able to attend. If you are not able to attend, you must **inform me ahead of time and state the reason.** [I know, I don't like to micromanage your time like this, but it's a matter of showing respect to an important accomplished speaker.]{.aside}
+
+### Attend and Take Some Notes on the Talk
+
+Bring a pencil and paper or a device and take some notes for yourself on Dr. Gebru's talk. 
+
+### Reflect on Dr. Gebru's Talk
+
+**In your blog**, write a few paragraphs in which you summarize Dr. Gebru's argument. In the last of these paragraphs, include some of your own perspective. Do you agree? Disagree? What do you feel people should learn from Dr. Gebru's discussion? 
+
+## Part 3: Reflect on the Process
+
+**In your blog**, close out with a final paragraph reflecting on your time interacting with Dr. Gebru and her work. What did you learn from the experience? What did you find fun, exciting, or empowering? What did you find frustrating, challenging, or discouraging? What are you curious about now? 
+
+Finally, render your blog post and submit it *again* on Canvas. 
