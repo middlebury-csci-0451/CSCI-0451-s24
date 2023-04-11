@@ -332,7 +332,50 @@ Using this assumption:
 
 Compare your results from each method. 
 
+## Convolutional Kernels {#sec-convolutional-kernel}
 
+Implement kernel convolution. Your implementation should accept a 2d array `X` (think of `X` as representing a greyscale image) and a square convolutional kernel `K`. Your implementation should operate using pure `numpy`. You can use any zero-padding strategy, but you do need to explain what your strategy is when presenting. 
+
+It's ok to use a for-loop to loop over pixels. 
+
+Here's an example image you can use: 
+
+```{python}
+from PIL import Image
+import urllib
+import numpy as np
+from matplotlib import pyplot as plt
+
+def read_image(url):
+    return np.array(Image.open(urllib.request.urlopen(url)))
+
+url = "https://i.pinimg.com/originals/0e/d0/23/0ed023847cad0d652d6371c3e53d1482.png"
+
+img = read_image(url)
+
+def to_greyscale(im):
+    return 1 - np.dot(im[...,:3], [0.2989, 0.5870, 0.1140])
+
+img = to_greyscale(img)
+
+plt.imshow(img, cmap = "Greys")
+plt.gca().axis("off")
+```
+
+After implementing your function, you should be able to use it like this, replacing the implementation of `scipy.signal` with your own implementation. The result should look something like this: 
+
+```{python}
+from scipy.signal import convolve2d
+
+kernel = np.array([[-1, -1, -1], 
+                   [-1,  8, -1], 
+                   [-1, -1, -1]])
+
+convd = convolve2d(img, kernel)
+
+plt.imshow(convd, cmap = "Greys", vmin = -8, vmax = 8)
+plt.gca().axis("off")
+```
 
 
 
