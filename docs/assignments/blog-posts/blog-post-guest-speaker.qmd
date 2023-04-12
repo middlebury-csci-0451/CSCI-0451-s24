@@ -46,7 +46,7 @@ Take 30 minutes to do a little bit of research about Dr. Gebru. Starting with he
 
 ### Watch Dr. Gebru's Talk 
 
-In 2020, Dr. Gebru gave a talk as part of a [Tutorial on Fairness, Accountability, Transparency, and Ethics (FATE) in Computer Vision] at the conference on Computer Vision and Pattern Recognition 2020. Watch [the recording of this talk](https://www.youtube.com/watch?v=0sBE5OyD7fk&t=802s). 
+In 2020, Dr. Gebru gave a talk as part of a [Tutorial on Fairness, Accountability, Transparency, and Ethics (FATE) in Computer Vision](https://sites.google.com/view/fatecv-tutorial/home?authuser=0) at the conference on Computer Vision and Pattern Recognition 2020. Watch [the recording of this talk](https://www.youtube.com/watch?v=0sBE5OyD7fk&t=802s). 
 
 **In your blog**, write another few paragraphs summarizing the primary points raised by Dr. Gebru. Conclude this section of your blog with a tl;dr to your friend: in one sentence, what is the thing that *everyone* needs to understand about computer vision as it's used today?[There is no "one thing" that Dr. Gebru discusses; your tl;dr should be based on what you learned from her talk in combination with your judgment.]{.aside} 
 
@@ -65,7 +65,7 @@ Render your post, push it online, and submit it on Canvas like usual. I will com
 
 ## Part 2: Dr. Gebru's Talk "At" Middlebury
 
-In the evening of April 24th, at 7pm in Hillcrest 103, Dr. Gebru will give a talk on "Eugenics and the Promise of Utopia through Artificial General Intelligence." To complete this part of the blog post, **you must attend this talk**. I will record the talk for students who are not able to attend. If you are not able to attend, you must **inform me ahead of time and state the reason.** [I know, I don't like to micromanage your time like this, but it's a matter of showing respect to an important accomplished speaker.]{.aside}
+In the evening of April 24th, at 7pm in Hillcrest 103, Dr. Gebru will give a talk on "Eugenics and the Promise of Utopia through Artificial General Intelligence." To complete this part of the blog post, **you must attend this talk**. I will record the talk for students who are not able to attend. If you are not able to attend, you must **inform me ahead of time and state the reason.** [I know, I don't like to micromanage your time like this, but it's a matter of showing respect to an important and accomplished speaker.]{.aside}
 
 ### Attend and Take Some Notes on the Talk
 

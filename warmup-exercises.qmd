@@ -378,9 +378,20 @@ plt.gca().axis("off")
 ```
 
 
+## Project Check-In {#sec-project-check-in}
 
+*This is a warmup activity that we will repeat weekly until the end of the semester.* 
 
+Prepare a 2-3 minute "presentation" of your project to your group. Your presentation can be informal and does not need to have any special visual aids. The primary expectation is that you are able to demonstrate *some relevant functionality* to your peers. If your project involves coding or data analysis, your relevant functionality might be as simple as accessing or preparing the data. You should plan to demonstrate additional functionality each week. 
 
+In other words, you should show your group *something that works*, regardless of how "big" it is. 
+
+If you are doing a project that does not involve implementation (such as a research essay), then you are still expected to offer an update. Your contributions could include describing the sources you've found or showing your group an outline of the argument that you will make. 
+
+It's appropriate for each member of your project group to give the same presentation during warmup. **Please note that you may not be in the same warmup group as your project partners**. This means that: 
+
+- The code you show needs to run on *your* laptop or in *your* compute instance (e.g. Google Colab). 
+- *You* need to be ready to explain what is being shown, even if your project partners did much of the work. 
 
 ## Classification Rates {#sec-classification-rates}
 

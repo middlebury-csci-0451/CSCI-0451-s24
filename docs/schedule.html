@@ -64,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-schedule .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -77,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-schedule'] = new List('listing-schedule', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -187,11 +187,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li><strong>Assignments</strong> are listed on the day when I suggest you begin working on them.</li>
 </ul>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-custom" id="listing-listing">
+<div id="listing-schedule" class="quarto-listing quarto-listing-container-custom">
             <h2 class="anchored"> Week 1 </h2>
             
 <table data-quarto-postprocess="true" class="table">
@@ -779,7 +775,7 @@ Implementation<br>
 <td></td>
 </tr>
 <tr class="odd">
-<td colspan="4" class="smaller">We begin a discussion of the training process for neural networks, which requires efficient computation of gradients via backpropagation and efficient variations of gradient descent.</td>
+<td colspan="4" class="smaller">We discuss methods for image classification using neural networks and introduce convolutional layers.</td>
 <td></td>
 </tr>
 <tr class="even">
@@ -794,13 +790,312 @@ Experimentation<br>
 </td>
 <td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
 <a href="./lecture-notes/convnets.html">Lecture notes</a><br>
-TBD<br>
+<a href="./lecture-notes/convnets-live.html">Live version</a><br>
 </td>
 <td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
 <a href="./warmup-exercises.html#sec-convolutional-kernel">Convolutional Kernels</a></td>
 <td class="smaller syllabus-item-assignment"><strong>Assignments</strong><br>
 <strong>ACTUAL REAL DUE DATE</strong>: <a href="./assignments/blog-posts/blog-post-guest-speaker.html">Engaging with Timnit Gebru</a><br>
-Part 1 due 4/17</td>
+Part 1 due 4/19</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-9" class="level2">
+<h2 class="anchored" data-anchor-id="week-9">Week 9</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Apr. 17</span></td>
+<td colspan="2">More on Image Classification</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-project-check-in">Project Check-In</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Apr. 19</span></td>
+<td colspan="2">TBD</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-project-check-in">Project Check-In</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-10" class="level2">
+<h2 class="anchored" data-anchor-id="week-10">Week 10</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">Apr. 24</span></td>
+<td colspan="2">Dr. Timnit Gebru on Computer Vision and "Artificial General Intelligence"</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Implementation<br>
+Social Responsibility<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-project-check-in">Project Check-In</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">Apr. 26</span></td>
+<td colspan="2">Text Classification</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-11" class="level2">
+<h2 class="anchored" data-anchor-id="week-11">Week 11</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">May. 01</span></td>
+<td colspan="2">Word Embeddings</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+Theory<br>
+Experimentation<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+<a href="./warmup-exercises.html#sec-project-check-in">Project Check-In</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">May. 03</span></td>
+<td colspan="2">TBD</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+TBD</td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="week-12" class="level2">
+<h2 class="anchored" data-anchor-id="week-12">Week 12</h2>
+<table data-quarto-postprocess="true" class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">M</span><br>
+<span class="syllabus-date">May. 08</span></td>
+<td colspan="2">Final Project Presentations I</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+TBD</td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">W</span><br>
+<span class="syllabus-date">May. 10</span></td>
+<td colspan="2">Final Project Presentations II</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">TBD</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"><strong>Learning Objectives</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
+TBD<br>
+TBD<br>
+</td>
+<td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
+TBD</td>
+<td class="smaller syllabus-item-assignment"></td>
 </tr>
 </tbody>
 </table>
@@ -808,7 +1103,16 @@ Part 1 due 4/17</td>
 No matching items
 </div>
 </section>
-</div><p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+</div>
+<section id="finals-period" class="level2">
+<h2 class="anchored" data-anchor-id="finals-period">Finals Period</h2>
+<p>During the reading and final exam period, you’ll meet with me 1-1 for about 15 minutes. The purpose of this meeting is to help us both reflect on your time in the course and agree on a final grade.</p>
+
+
+
+</section>
+
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

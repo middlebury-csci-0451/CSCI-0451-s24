@@ -309,7 +309,7 @@
   header: | 
     Convolutional Neural Networks
   summary: |
-    We begin a discussion of the training process for neural networks, which requires efficient computation of gradients via backpropagation and efficient variations of gradient descent. 
+    We discuss methods for image classification using neural networks and introduce convolutional layers. 
   objectives: 
     - Theory
     - Experimentation
@@ -318,9 +318,153 @@
     - <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53">A Comprehensive Guide to Convolutional Neural Networks</a> by Sumit Saha on Towards Data Science has some good visuals. 
   notes: 
     - <a href="lecture-notes/convnets.ipynb">Lecture notes</a>
-    - TBD
+    - <a href="lecture-notes/convnets-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-convolutional-kernel">Convolutional Kernels</a>
   assignments: |
-    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/blog-posts/blog-post-guest-speaker.qmd">Engaging with Timnit Gebru</a><br>Part 1 due 4/17</b>
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/blog-posts/blog-post-guest-speaker.qmd">Engaging with Timnit Gebru</a><br>Part 1 due 4/19</b>
+- date: 2023-04-17
+  header: | 
+    More on Image Classification
+  summary: |
+    TBD
+  objectives: 
+    - Theory
+    - Experimentation
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
+  assignments: 
+- date: 2023-04-19
+  header: | 
+    TBD
+  summary: |
+    TBD
+  objectives: 
+    - Theory
+    - Experimentation
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
+  assignments: 
+- date: 2023-04-26
+  header: | 
+    Text Classification
+  summary: |
+    TBD
+  objectives: 
+    - Theory
+    - Experimentation
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: 
+  assignments: 
+- date: 2023-05-01
+  header: | 
+    Word Embeddings
+  summary: |
+    TBD
+  objectives: 
+    - Theory
+    - Experimentation
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
+  assignments: 
+- date: 2023-04-24
+  header: | 
+    Dr. Timnit Gebru on Computer Vision and "Artificial General Intelligence"
+  summary: |
+    TBD
+  objectives: 
+    - Implementation
+    - Social Responsibility
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
+  assignments: 
+- date: 2023-05-03
+  header: | 
+    TBD
+  summary: |
+    TBD
+  objectives: 
+    - TBD
+    - TBD
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2023-05-08
+  header: | 
+    Final Project Presentations I
+  summary: |
+    TBD
+  objectives: 
+    - TBD
+    - TBD
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2023-05-10
+  header: | 
+    Final Project Presentations II
+  summary: |
+    TBD
+  objectives: 
+    - TBD
+    - TBD
+  reading:
+    - TBD
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module: Classification
+  publish: true
+  warmup: TBD
+  assignments: 
