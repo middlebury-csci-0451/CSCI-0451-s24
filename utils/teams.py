@@ -13,7 +13,7 @@ def format_student(name, i):
     last_first = name.split(", ")
     if i == 0:
         return f":bulb:[b blue]{last_first[1]} {last_first[0]}[/]"
-    return f"{last_first[1]} {last_first[0]}"
+    return f"  {last_first[1]} {last_first[0]}"
 
 def assign_ids():
     A = "CSCI 0451A (Spring 2023)"
