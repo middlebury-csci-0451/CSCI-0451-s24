@@ -328,16 +328,13 @@
   header: | 
     More on Image Classification
   summary: |
-    TBD
-  objectives: 
-    - Theory
-    - Experimentation
+    We continue our discussion of image classification with convolutional neural networks. 
   reading:
-    - TBD
-    - TBD
+    - <a href="https://openlearninglibrary.mit.edu/assets/courseware/v1/41c7c4a6141b76b324055d56387570c0/asset-v1:MITx+6.036+1T2019+type@asset+block/notes_chapter_Convolutional_Neural_Networks.pdf">Convolutional Neural Networks</a> from MIT's course 6.036. 
+    - <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53">A Comprehensive Guide to Convolutional Neural Networks</a> by Sumit Saha on Towards Data Science has some good visuals. 
   notes: 
-    - TBD
-    - TBD
+    - <a href="lecture-notes/convnets.ipynb">Lecture notes</a>
+    - <a href="lecture-notes/convnets-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
@@ -358,7 +355,7 @@
     - TBD
   module: Classification
   publish: true
-  warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
+  warmup: TBD
   assignments: 
 - date: 2023-04-26
   header: | 
