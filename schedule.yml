@@ -341,9 +341,9 @@
   assignments: 
 - date: 2023-04-19
   header: | 
-    TBD
+    Some Practical Techniques in Image Classification
   summary: |
-    TBD
+    We discuss data augmentation and transfer learning, two helpful techniques in image classification. We also highlight some of messy challenges involving management of complex data for classification tasks with PyTorch. 
   objectives: 
     - Theory
     - Experimentation
@@ -351,11 +351,11 @@
     - TBD
     - TBD
   notes: 
-    - TBD
+    - <a href="lecture-notes/image_classification_in_practice.ipynb">Lecture notes</a>
     - TBD
   module: Classification
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.qmd#sec-transfer-learning">How Much Needs To Be Learned?</a>
   assignments: 
 - date: 2023-04-26
   header: | 

@@ -393,6 +393,19 @@ It's appropriate for each member of your project group to give the same presenta
 - The code you show needs to run on *your* laptop or in *your* compute instance (e.g. Google Colab). 
 - *You* need to be ready to explain what is being shown, even if your project partners did much of the work. 
 
+## What Needs To Be Learned? {#sec-transfer-learning}
+
+Suppose that you wanted to teach an individual to recognize English-language [phishing emails](https://consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-scams). Write down a few features (based on the linked website, your own experience, or other sources) that you think would help someone classify an email as "phishing attempt or not" based on the text of the email. 
+
+Now, imagine that you are going to sit down with your tutee to teach them how to recognize English-language phishing emails. Where would you start your instruction if...
+
+1. Your tutee was another member of your warmup group. 
+2. Your tutee was a fluent English speaker but had never used email. 
+3. Your tutee was a regular email user but spoke no English. 
+4. Your tutee spoke no English and had never seen a computer. 
+
+Which of these four scenarios would require the most "learning effort?" Which would require the least? 
+
 ## Classification Rates {#sec-classification-rates}
 
 #### Part 1
