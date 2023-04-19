@@ -352,7 +352,7 @@
     - TBD
   notes: 
     - <a href="lecture-notes/image_classification_in_practice.ipynb">Lecture notes</a>
-    - TBD
+    - <a href="lecture-notes/image_classification_in_practice-live.ipynb">Live Version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-transfer-learning">How Much Needs To Be Learned?</a>
