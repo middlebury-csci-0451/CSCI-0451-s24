@@ -369,7 +369,7 @@
     - TBD
     - TBD
   notes: 
-    - TBD
+    - <a href="lecture-notes/text-classification.ipynb">Lecture notes</a>
     - TBD
   module: Classification
   publish: true
