@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.309">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Phil Chodrow">
+
+<title>Text Generation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/icons/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
+      </li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../"><b>Machine Learning</b><br>CSCI 0451</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Index of Assignments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Project</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#deep-text-classification-and-word-embedding" id="toc-deep-text-classification-and-word-embedding" class="nav-link active" data-scroll-target="#deep-text-classification-and-word-embedding">Deep Text Classification and Word Embedding</a></li>
+  <li><a href="#our-task" id="toc-our-task" class="nav-link" data-scroll-target="#our-task">Our Task</a>
+  <ul class="collapse">
+  <li><a href="#recurrent-architecture" id="toc-recurrent-architecture" class="nav-link" data-scroll-target="#recurrent-architecture">Recurrent Architecture</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><p>Text Generation</p></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Phil Chodrow </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://colab.research.google.com/github/middlebury-csci-0451/CSCI-0451/blob/main/lecture-notes/text-classification.ipynb" target="_parent">Open these notes in Google Colab</a></p>
+<p><a href="https://colab.research.google.com/github/middlebury-csci-0451/CSCI-0451/blob/main/lecture-notes/text-classification-live.ipynb" target="_parent">Open the live version in Google Colab</a></p>
+<p><em>Major components of this set of lecture notes are based on the <a href="https://pytorch.org/tutorials/beginner/text_sentiment_ngrams_tutorial.html">Text Classification</a> tutorial from the PyTorch documentation</em>.</p>
+<section id="deep-text-classification-and-word-embedding" class="level2">
+<h2 class="anchored" data-anchor-id="deep-text-classification-and-word-embedding">Deep Text Classification and Word Embedding</h2>
+<p>In this set of notes, we’ll discuss the problem of <em>text classification</em>. Text classification is a common problem in which we aim to classify pieces of text into different categories. These categories might be about:</p>
+<ul>
+<li><strong>Subject matter</strong>: is this news article about news, fashion, finance?</li>
+<li><strong>Emotional valence</strong>: is this tweet happy or sad? Excited or calm? This particular class of questions is so important that it has its own name: sentiment analysis.</li>
+<li><strong>Automated content moderation</strong>: is this Facebook comment a possible instance of abuse or harassment? Is this Reddit thread promoting violence? Is this email spam?</li>
+</ul>
+<p>We saw text classification previously when we first considered the problem of vectorizing pieces of text. We are now going to look at a somewhat more contemporary approach to text using <em>word embeddings</em>.</p>
+<div class="cell" data-execution_count="705">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchsummary <span class="im">import</span> summary</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># for embedding visualization later</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># for VSCode plotly rendering</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># pio.renderers.default = "plotly_mimetype+notebook_connected"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"plotly_mimetype+notebook"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>pio.templates.default <span class="op">=</span> <span class="st">"plotly_white"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spacy</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="our-task" class="level2">
+<h2 class="anchored" data-anchor-id="our-task">Our Task</h2>
+<p>Today, we are going to see whether we can teach an algorithm to understand and reproduce the pinnacle of cultural achievement; the benchmark against which all art is to be judged; the mirror that reveals to humany its truest self. I speak, of course, of <em>Star Trek: Deep Space Nine.</em></p>
+<figure class="image figure" style="width:300px">
+<img src="https://raw.githubusercontent.com/PhilChodrow/PIC16B/master/_images/DS9.jpg" alt="" class="figure-img">
+<figcaption class="figure-caption">
+<i></i>
+</figcaption>
+</figure>
+<p>In particular, we are going to attempt to teach a neural network to generate <em>episode scripts</em>. This a text generation task: after training, our hope is that our model will be able to create scripts that are reasonably realistic in their appearance.</p>
+<div class="cell" data-execution_count="780">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">## miscellaneous data cleaning</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>start_episode <span class="op">=</span> <span class="dv">20</span> <span class="co"># Start in Season 2, Season 1 is not very good</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>num_episodes <span class="op">=</span> <span class="dv">5</span>  <span class="co"># only pick this many episodes to train on</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/PhilChodrow/PIC16B/blob/master/datasets/star_trek_scripts.json?raw=true"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>star_trek_scripts <span class="op">=</span> pd.read_json(url)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> star_trek_scripts[<span class="st">"DS9"</span>].<span class="bu">str</span>.replace(<span class="st">"</span><span class="ch">\n\n\n\n\n\n</span><span class="st">The Deep Space Nine Transcripts -"</span>, <span class="st">""</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> cleaned.<span class="bu">str</span>.split(<span class="st">"</span><span class="ch">\n\n\n\n\n\n\n</span><span class="st">"</span>).<span class="bu">str</span>.get(<span class="op">-</span><span class="dv">2</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>.join(cleaned[start_episode:(start_episode <span class="op">+</span> num_episodes)])</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> char <span class="kw">in</span> [<span class="st">'</span><span class="ch">\xa0</span><span class="st">'</span>, <span class="st">'à'</span>, <span class="st">'é'</span>, <span class="st">"}"</span>, <span class="st">"{"</span>]:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> text.replace(char, <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="781">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[<span class="dv">0</span>:<span class="dv">500</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Last
+time on Deep Space Nine.  
+SISKO: This is the emblem of the Alliance for Global Unity. They call
+themselves the Circle. 
+O'BRIEN: What gives them the right to mess up our station? 
+ODO: They're an extremist faction who believe in Bajor for the
+Bajorans. 
+SISKO: I can't loan you a Starfleet runabout without knowing where you
+plan on taking it. 
+KIRA: To Cardassia Four to rescue a Bajoran prisoner of war. 
+(The prisoners are rescued.) 
+KIRA: Come on. We have a ship waiting. 
+JARO: What you </code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="782">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tokenizer(text):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> [s.split() <span class="cf">for</span> s <span class="kw">in</span> text.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return [w for l in L for w in l]</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> L[<span class="dv">0</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(L)):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        out <span class="op">+=</span> [<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        out <span class="op">+=</span> L[i] </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="783">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(tokenizer(<span class="st">"Last </span><span class="ch">\n</span><span class="st"> time on Deep Space Nine. </span><span class="ch">\n</span><span class="st"> SISKO: This"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="783">
+<pre><code>10</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="784">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>WINDOW <span class="op">=</span> <span class="dv">10</span> <span class="co"># predict next word from 10 previous words</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>word_seq <span class="op">=</span> tokenizer(text)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>predictors <span class="op">=</span> []</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>targets    <span class="op">=</span> []</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(word_seq) <span class="op">-</span> WINDOW <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    predictors.append(<span class="st">" "</span>.join(word_seq[i:(i<span class="op">+</span>WINDOW)]))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    targets.append(word_seq[WINDOW<span class="op">+</span>i])</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(tokenizer(predictors[<span class="dv">0</span>])), targets[i]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="784">
+<pre><code>(10, 'is')</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="785">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset, DataLoader</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TextDataSet(Dataset):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, predictors, targets):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.predictors <span class="op">=</span> predictors</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.targets <span class="op">=</span> targets</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, index):</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.predictors[index], <span class="va">self</span>.targets[index]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>):</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.targets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="786">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> TextDataSet(predictors, targets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="787">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchtext.vocab <span class="im">import</span> build_vocab_from_iterator</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> yield_tokens(data_iter):</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> text, word <span class="kw">in</span> data_iter:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">yield</span> tokenizer(text)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>vocab <span class="op">=</span> build_vocab_from_iterator(yield_tokens(data), specials<span class="op">=</span>[<span class="st">"&lt;unk&gt;"</span>])</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>vocab.set_default_index(vocab[<span class="st">"&lt;unk&gt;"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="788">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(tokenizer(<span class="bu">next</span>(<span class="bu">iter</span>(data))[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="788">
+<pre><code>10</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="789">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define data loader</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collate_batch(batch):</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    text_list, next_word_list <span class="op">=</span> [], []</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (text, next_word) <span class="kw">in</span> batch:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        processed_text <span class="op">=</span> vocab(tokenizer(text))</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        text_list.append(processed_text)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        next_word_list.append(vocab([next_word]))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    next_word_list <span class="op">=</span> torch.tensor(next_word_list, dtype<span class="op">=</span>torch.int64).squeeze()</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    text_list <span class="op">=</span> torch.tensor(text_list)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> text_list.to(device), next_word_list.to(device)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>data_loader <span class="op">=</span> DataLoader(data, batch_size<span class="op">=</span><span class="dv">8</span>, shuffle<span class="op">=</span><span class="va">False</span>, collate_fn<span class="op">=</span>collate_batch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="837">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>text_list, next_word_list <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(data_loader))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="838">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(data_loader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="838">
+<pre><code>3730</code></pre>
+</div>
+</div>
+<section id="recurrent-architecture" class="level3">
+<h3 class="anchored" data-anchor-id="recurrent-architecture">Recurrent Architecture</h3>
+<p>Atop our word embedding layer we also incorporate a <em>long short-term memory</em> layer or LSTM. LSTMs are a type of <em>recurrent</em> neural network. While the mathematical details can be complex, the core idea of a recurrent layer is that each unit in the layer is able to pass on information to the <em>next</em> unit in the layer. In much the same way that convolutional layers are specialized for analyzing images, recurrent networks are specialized for analyzing <em>sequences</em> such as text.</p>
+<p><img src="http://karpathy.github.io/assets/rnn/diags.jpeg" class="img-fluid"></p>
+<p><em>Image from Andrej Karpathy’s blog post, “The Unreasonable Effectiveness of Recurrent Neural Networks”</em></p>
+<div class="cell" data-execution_count="866">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> nn</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TextGenModel(nn.Module):</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, vocab_size, embedding_dim, window):</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.embedding <span class="op">=</span> nn.Embedding(vocab_size, embedding_dim)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lstm <span class="op">=</span> nn.LSTM(embedding_dim<span class="op">*</span>window, hidden_size <span class="op">=</span> <span class="dv">100</span>, num_layers <span class="op">=</span> <span class="dv">1</span>, batch_first <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fc   <span class="op">=</span> nn.Linear(<span class="dv">100</span>, vocab_size)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.embedding(x)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> torch.flatten(x, <span class="dv">1</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        x, (hn, cn) <span class="op">=</span> <span class="va">self</span>.lstm(x)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.fc(x)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(x)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>EMBEDDING_DIM <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>TGM <span class="op">=</span> TextGenModel(<span class="bu">len</span>(vocab), EMBEDDING_DIM, WINDOW)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="867">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(data_loader))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>loss_fn(TGM(X), y.squeeze())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="867">
+<pre><code>tensor(8.5928, grad_fn=&lt;NllLossBackward0&gt;)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="868">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(dataloader):</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># keep track of some counts for measuring accuracy</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    total_acc, total_count, total_loss <span class="op">=</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    log_interval <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, (text_seq, next_word) <span class="kw">in</span> <span class="bu">enumerate</span>(dataloader):</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># zero gradients</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># form prediction on batch</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        preds <span class="op">=</span> TGM(text_seq)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># evaluate loss on prediction</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> loss_fn(preds, next_word)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute gradient</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># take an optimization step</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># for printing accuracy</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        total_acc   <span class="op">+=</span> (preds.argmax(<span class="dv">1</span>) <span class="op">==</span> next_word).<span class="bu">sum</span>().item()</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        total_count <span class="op">+=</span> next_word.size(<span class="dv">0</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        total_loss  <span class="op">+=</span> loss.item() </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> idx <span class="op">%</span> log_interval <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> idx <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>            elapsed <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'| epoch </span><span class="sc">{:3d}</span><span class="st"> | </span><span class="sc">{:5d}</span><span class="st">/</span><span class="sc">{:5d}</span><span class="st"> batches '</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'| train loss </span><span class="sc">{:8.3f}</span><span class="st">'</span>.<span class="bu">format</span>(epoch, idx, <span class="bu">len</span>(dataloader),</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>                                              total_loss<span class="op">/</span>total_count))</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>            total_acc, total_loss, total_count <span class="op">=</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>            start_time <span class="op">=</span> time.time()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="880">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(TGM.parameters(), lr<span class="op">=</span><span class="fl">0.0001</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> torch.nn.CrossEntropyLoss()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>EPOCHS <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, EPOCHS <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    epoch_start_time <span class="op">=</span> time.time()</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    train(data_loader)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'| end of epoch </span><span class="sc">{:3d}</span><span class="st"> | time: </span><span class="sc">{:5.2f}</span><span class="st">s | '</span>.<span class="bu">format</span>(epoch,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                                           time.time() <span class="op">-</span> epoch_start_time))</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'-'</span> <span class="op">*</span> <span class="dv">65</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>| epoch   1 |  1000/ 3730 batches | train loss    0.610
+| epoch   1 |  2000/ 3730 batches | train loss    0.663
+| epoch   1 |  3000/ 3730 batches | train loss    0.684
+| end of epoch   1 | time: 46.31s | 
+-----------------------------------------------------------------
+| epoch   2 |  1000/ 3730 batches | train loss    0.594
+| epoch   2 |  2000/ 3730 batches | train loss    0.647
+| epoch   2 |  3000/ 3730 batches | train loss    0.669
+| end of epoch   2 | time: 48.70s | 
+-----------------------------------------------------------------
+| epoch   3 |  1000/ 3730 batches | train loss    0.588
+| epoch   3 |  2000/ 3730 batches | train loss    0.637
+| epoch   3 |  3000/ 3730 batches | train loss    0.658
+| end of epoch   3 | time: 45.57s | 
+-----------------------------------------------------------------
+| epoch   4 |  1000/ 3730 batches | train loss    0.581
+| epoch   4 |  2000/ 3730 batches | train loss    0.627
+| epoch   4 |  3000/ 3730 batches | train loss    0.647
+| end of epoch   4 | time: 43.17s | 
+-----------------------------------------------------------------
+| epoch   5 |  1000/ 3730 batches | train loss    0.575
+| epoch   5 |  2000/ 3730 batches | train loss    0.618
+| epoch   5 |  3000/ 3730 batches | train loss    0.638
+| end of epoch   5 | time: 41.74s | 
+-----------------------------------------------------------------
+| epoch   6 |  1000/ 3730 batches | train loss    0.570
+| epoch   6 |  2000/ 3730 batches | train loss    0.610
+| epoch   6 |  3000/ 3730 batches | train loss    0.629
+| end of epoch   6 | time: 36.30s | 
+-----------------------------------------------------------------
+| epoch   7 |  1000/ 3730 batches | train loss    0.563
+| epoch   7 |  2000/ 3730 batches | train loss    0.602
+| epoch   7 |  3000/ 3730 batches | train loss    0.621
+| end of epoch   7 | time: 36.33s | 
+-----------------------------------------------------------------
+| epoch   8 |  1000/ 3730 batches | train loss    0.558
+| epoch   8 |  2000/ 3730 batches | train loss    0.594
+| epoch   8 |  3000/ 3730 batches | train loss    0.613
+| end of epoch   8 | time: 37.65s | 
+-----------------------------------------------------------------
+| epoch   9 |  1000/ 3730 batches | train loss    0.552
+| epoch   9 |  2000/ 3730 batches | train loss    0.586
+| epoch   9 |  3000/ 3730 batches | train loss    0.605
+| end of epoch   9 | time: 45.10s | 
+-----------------------------------------------------------------
+| epoch  10 |  1000/ 3730 batches | train loss    0.546
+| epoch  10 |  2000/ 3730 batches | train loss    0.579
+| epoch  10 |  3000/ 3730 batches | train loss    0.598
+| end of epoch  10 | time: 44.17s | 
+-----------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="881">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># preds = TGM(X[[0],:]).flatten()</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>all_words <span class="op">=</span> vocab.get_itos()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_preds(preds, temp <span class="op">=</span> <span class="dv">1</span>):</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> nn.Softmax(dim<span class="op">=</span><span class="dv">0</span>)(<span class="dv">1</span><span class="op">/</span>temp<span class="op">*</span>preds)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    sampler <span class="op">=</span> torch.utils.data.WeightedRandomSampler(probs, <span class="dv">1</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    new_idx <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(sampler))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_idx</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_next_word(text, temp <span class="op">=</span> <span class="dv">1</span>, window <span class="op">=</span> <span class="dv">10</span>):</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    token_ix <span class="op">=</span> vocab(tokenizer(text)[<span class="op">-</span>window:])</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return token_ix</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> torch.tensor([token_ix], dtype <span class="op">=</span> torch.int64)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return X</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    preds <span class="op">=</span> TGM(X).flatten()</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    new_ix <span class="op">=</span> sample_from_preds(preds, temp)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> all_words[new_ix]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="888">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="st">'Last time on Deep Space Nine. </span><span class="ch">\n</span><span class="st"> SISKO: This is the'</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_model(seed, n_words, temp, window):</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> seed </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_words):</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        word <span class="op">=</span> sample_next_word(text, temp, window)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        text <span class="op">+=</span> <span class="st">" "</span> <span class="op">+</span> word</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> seed, text    </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>synth <span class="op">=</span> sample_from_model(seed, <span class="dv">500</span>, <span class="fl">.1</span>, <span class="dv">10</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(synth[<span class="dv">0</span>])</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-"</span><span class="op">*</span><span class="dv">50</span>)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(synth[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Last time on Deep Space Nine. 
+ SISKO: This is the
+--------------------------------------------------
+Last time on Deep Space Nine. 
+ SISKO: This is the emblem 
+ BASHIR: 
+ BASHIR: I don't 
+ BASHIR: 
+ BASHIR: I'm, 
+ MELORA: I 
+ BASHIR: I don't the think 
+ BASHIR: [on 
+ SISKO: I don't you 
+ BASHIR: I don't 
+ BASHIR: I 
+ O'BRIEN: I don't 
+ BASHIR: I don't to think 
+ BASHIR: 
+ BASHIR: I don't you 
+ BASHIR: I don't 
+ BASHIR: I 
+ MELORA: I don't you 
+ BASHIR: I don't 
+ BASHIR: I 
+ MELORA: I prophecies 
+ BASHIR: I don't to think 
+ BASHIR: I 
+ MELORA: I 
+ BASHIR: I don't the think 
+ BASHIR: [on 
+ BASHIR: I don't you 
+ BASHIR: I don't you think 
+ BASHIR: [on 
+ BASHIR: I 
+ BASHIR: I don't 
+ BASHIR: I don't to your 
+ BASHIR: 
+ BASHIR: I don't 
+ BASHIR: 
+ BASHIR: I'm, 
+ O'BRIEN: I 
+ BASHIR: I don't the think 
+ 
+ BASHIR: 
+ 
+ BASHIR: I don't 
+ BASHIR: I don't of 
+ MELORA: I 
+ BASHIR: I don't 
+ BASHIR: Well, 
+ MELORA: I don't you 
+ BASHIR: I don't you job, 
+ BASHIR: 
+ BASHIR: I don't 
+ BASHIR: 
+ BASHIR: I'm, 
+ MELORA: I 
+ BASHIR: I don't 
+ BASHIR: I bureaucracy. 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: You 
+ BASHIR: I don't the host of 
+ SISKO: I don't 
+ BASHIR: I 
+ MELORA: I prophecies 
+ BASHIR: I don't to think 
+ BASHIR: [on 
+ BASHIR: I 
+ BASHIR: I don't the 
+ MELORA: I don't 
+ BASHIR: I 
+ MELORA: I prophecies 
+ BASHIR: I don't 
+ BASHIR: [OC]: 
+ BASHIR: I don't you 
+ DAX: I have 
+ BASHIR: I 
+ MELORA: I prophecies 
+ BASHIR: I don't to think me 
+ BASHIR: Not 
+ BASHIR: You 
+ BASHIR: I don't the think of 
+ BASHIR: Not 
+ BASHIR: I 
+ BASHIR: I don't the think that 
+ BASHIR: I don't 
+ BASHIR: I don't 
+ BASHIR: You 
+ BASHIR: I don't you 
+ BASHIR: I don't you possibly 
+ BASHIR: 
+ BASHIR: I don't 
+ BASHIR: 
+ BASHIR: rumbles) 
+ MELORA: I 
+ BASHIR: I don't the think 
+ BASHIR: [on 
+ BASHIR: I don't you shoot. 
+ 
+ BASHIR: I don't you 
+ BASHIR: I don't you think a 
+ BASHIR: I don't 
+ BASHIR: I don't you 
+ DAX: I 
+ BASHIR: [on 
+ BASHIR: 
+ BASHIR: I don't 
+ SISKO: 
+ BASHIR: I don't 
+ BASHIR: 
+ BASHIR: I don't 
+ BASHIR: 
+ BASHIR: rumbles) 
+ DAX: I 
+ BASHIR: I really 
+ BASHIR: Well, 
+ BASHIR: I don't you 
+ BASHIR: I don't 
+ BASHIR: I 
+ MELORA: I</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="727">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>all_words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="727">
+<pre><code>['&lt;unk&gt;',
+ '\n',
+ 'the',
+ 'to',
+ 'I',
+ 'you',
+ 'a',
+ 'of',
+ 'and',
+ 'SISKO:',
+ 'is',
+ 'in',
+ 'that',
+ 'have',
+ 'be',
+ 'for',
+ 'KIRA:',
+ 'it',
+ 'BASHIR:',
+ 'QUARK:',
+ 'on',
+ "I'm",
+ 'ODO:',
+ 'your',
+ 'DAX:',
+ "O'BRIEN:",
+ 'You',
+ 'was',
+ 'with',
+ 'we',
+ 'my',
+ 'this',
+ 'The',
+ 'are',
+ 'not',
+ "don't",
+ 'me',
+ 'do',
+ 'know',
+ 'can',
+ 'about',
+ 'what',
+ 'all',
+ 'but',
+ 'just',
+ 'as',
+ 'at',
+ 'get',
+ 'going',
+ "It's",
+ 'you.',
+ 'like',
+ 'he',
+ 'been',
+ 'if',
+ 'one',
+ 'And',
+ 'his',
+ 'want',
+ 'from',
+ 'What',
+ 'it.',
+ 'think',
+ 'out',
+ 'an',
+ 'But',
+ 'will',
+ 'GARAK:',
+ 'were',
+ 'they',
+ 'We',
+ 'me.',
+ 'would',
+ 'It',
+ "you're",
+ "I'll",
+ 'our',
+ "I've",
+ 'If',
+ 'no',
+ 'see',
+ 'up',
+ "That's",
+ 'him',
+ 'has',
+ 'some',
+ 'could',
+ 'JAKE:',
+ 'so',
+ 'by',
+ "it's",
+ 'never',
+ 'had',
+ 'them',
+ 'He',
+ 'any',
+ 'into',
+ 'us',
+ 'there',
+ 'when',
+ 'her',
+ 'back',
+ 'here',
+ 'Well,',
+ 'who',
+ 'time',
+ 'here.',
+ "can't",
+ 'you,',
+ 'how',
+ "You're",
+ 'more',
+ 'take',
+ 'A',
+ 'ROM:',
+ 'or',
+ 'got',
+ 'their',
+ 'make',
+ 'should',
+ 'way',
+ 'very',
+ 'This',
+ 'need',
+ 'How',
+ 'did',
+ '[OC]:',
+ 'tell',
+ 'find',
+ '[on',
+ 'only',
+ 'two',
+ 'That',
+ 'something',
+ 'All',
+ 'come',
+ 'me,',
+ "I'd",
+ 'she',
+ "didn't",
+ 'Cardassian',
+ 'right.',
+ 'sure',
+ 'go',
+ 'than',
+ 'that.',
+ 'They',
+ 'much',
+ 'over',
+ 'you?',
+ 'good',
+ 'still',
+ 'let',
+ 'Oh,',
+ "Don't",
+ 'him.',
+ 'Not',
+ 'My',
+ 'DUKAT:',
+ 'No,',
+ 'even',
+ 'say',
+ 'people',
+ 'might',
+ 'really',
+ "that's",
+ 'So',
+ 'little',
+ 'right',
+ 'Do',
+ 'Why',
+ 'thought',
+ 'down',
+ 'Then',
+ 'these',
+ 'must',
+ 'other',
+ 'then',
+ 'help',
+ 'NOG:',
+ 'why',
+ 'better',
+ 'Yes,',
+ 'before',
+ 'Is',
+ 'Sisko',
+ 'ever',
+ "He's",
+ 'where',
+ 'it?',
+ 'first',
+ 'believe',
+ 'give',
+ 'us.',
+ '(The',
+ 'There',
+ 'them.',
+ 'through',
+ 'know.',
+ "won't",
+ 'kind',
+ 'long',
+ 'off',
+ "There's",
+ 'told',
+ 'anything',
+ 'too',
+ 'Bajoran',
+ 'Just',
+ 'time.',
+ "there's",
+ 'three',
+ 'Are',
+ 'look',
+ 'am',
+ "you've",
+ "doesn't",
+ 'KEIKO:',
+ 'station',
+ "We're",
+ 'always',
+ 'may',
+ 'Commander,',
+ 'ship',
+ 'Maybe',
+ 'WINN:',
+ 'new',
+ 'No.',
+ "They're",
+ 'last',
+ 'trying',
+ "O'Brien",
+ "he's",
+ 'now.',
+ 'made',
+ 'Now',
+ 'thing',
+ 'BAREIL:',
+ 'No',
+ "isn't",
+ 'monitor]:',
+ 'She',
+ 'those',
+ "you'll",
+ 'few',
+ 'nothing',
+ 'now',
+ 'put',
+ 'In',
+ 'this.',
+ "we're",
+ 'Commander.',
+ 'it,',
+ 'another',
+ 'being',
+ 'station.',
+ 'after',
+ 'said',
+ 'Federation',
+ 'security',
+ "you'd",
+ 'Starfleet',
+ "wouldn't",
+ 'Cardassians',
+ 'keep',
+ 'talk',
+ 'someone',
+ 'do.',
+ 'When',
+ 'Your',
+ 'hope',
+ 'try',
+ 'Dax',
+ 'wanted',
+ "We'll",
+ 'sir.',
+ 'around',
+ 'there.',
+ 'viewscreen]:',
+ 'Kira',
+ 'know,',
+ 'way.',
+ "What's",
+ 'man',
+ 'right,',
+ 'lot',
+ 'years',
+ 'COMPUTER:',
+ 'Commander',
+ 'ZEK:',
+ 'able',
+ 'again.',
+ "they're",
+ 'Quark.',
+ 'As',
+ 'on.',
+ '[Ops]',
+ 'Of',
+ 'Quark',
+ 'doing',
+ 'five',
+ 'me?',
+ 'because',
+ 'mean',
+ 'that?',
+ "haven't",
+ 'own',
+ 'things',
+ 'stay',
+ 'Come',
+ 'Doctor.',
+ 'Thank',
+ 'looking',
+ 'leave',
+ 'next',
+ 'feel',
+ 'life',
+ 'without',
+ 'Chief',
+ 'office]',
+ 'quarters]',
+ 'Bashir',
+ "We've",
+ "Let's",
+ 'out.',
+ 'use',
+ 'every',
+ 'go.',
+ 'So,',
+ 'same',
+ 'Tell',
+ 'place',
+ 'until',
+ 'PEL:',
+ 'talking',
+ 'hear',
+ 'old',
+ 'MELORA:',
+ 'Now,',
+ 'Odo',
+ 'work',
+ 'Ferengi',
+ 'Go',
+ 'knew',
+ 'used',
+ 'course',
+ 'hundred',
+ "wasn't",
+ 'Odo.',
+ 'everything',
+ 'found',
+ 'guess',
+ 'while',
+ 'MARTUS:',
+ 'all.',
+ 'already',
+ 'getting',
+ 'here,',
+ 'left',
+ 'most',
+ 'enough',
+ 'up.',
+ '(Sisko',
+ 'ARJIN:',
+ 'Major.',
+ 'anyone',
+ 'Well',
+ "we'll",
+ 'both',
+ 'TAIN:',
+ 'against',
+ 'understand',
+ 'wish',
+ 'NATIMA:',
+ 'ask',
+ 'Did',
+ 'back.',
+ 'came',
+ 'goes',
+ "what's",
+ 'Because',
+ 'Doctor',
+ 'Yes.',
+ "(O'Brien",
+ 'Quark,',
+ 'coming',
+ 'done',
+ 'kill',
+ 'love',
+ 'one.',
+ 'comes',
+ 'course.',
+ 'power',
+ 'ships',
+ 'what?',
+ 'away',
+ 'many',
+ 'too.',
+ 'Mister',
+ 'quite',
+ 'start',
+ 'under',
+ "we've",
+ '(A',
+ 'Bajor',
+ "She's",
+ 'day',
+ 'name',
+ 'seems',
+ 'Bajor.',
+ 'Can',
+ 'Let',
+ 'Where',
+ 'run',
+ 'suppose',
+ 'that,',
+ 'Computer,',
+ 'afraid',
+ 'glad',
+ 'her.',
+ "O'BRIEN",
+ 'On',
+ 'here?',
+ 'hours.',
+ 'stop',
+ 'MORA:',
+ 'does',
+ 'gets',
+ 'heard',
+ 'in.',
+ 'Odo,',
+ 'To',
+ "You've",
+ "couldn't",
+ 'means',
+ 'RIKER:',
+ 'care',
+ 'not.',
+ 'twenty',
+ '(Quark',
+ 'Chief.',
+ 'Doctor,',
+ 'For',
+ 'is.',
+ 'Have',
+ 'Sisko.',
+ 'What?',
+ "[Quark's]",
+ 'Gamma',
+ 'is,',
+ 'looks',
+ 'part',
+ 'seen',
+ 'remember',
+ '(Bashir',
+ 'HUDSON:',
+ 'great',
+ 'BC:',
+ 'One',
+ 'behind',
+ 'HANEEK:',
+ "Jem'Hadar",
+ 'Major,',
+ 'best',
+ 'so.',
+ 'this?',
+ 'Central',
+ 'ISHKA:',
+ 'down.',
+ 'entire',
+ 'to.',
+ 'Klingon',
+ 'Major',
+ 'else',
+ 'seem',
+ 'well',
+ 'Garak',
+ 'ago.',
+ 'each',
+ 'its',
+ 'since',
+ 'such',
+ 'beam',
+ 'exactly',
+ 'having',
+ 'least',
+ '(Kira',
+ 'SISKO',
+ 'now,',
+ 'Look,',
+ "You'll",
+ 'are.',
+ 'field',
+ 'happened',
+ 'life.',
+ 'saw',
+ 'well.',
+ 'working',
+ '(Odo',
+ 'DERAL:',
+ "O'Brien.",
+ 'send',
+ 'After',
+ 'Get',
+ 'Gul',
+ 'takes',
+ 'took',
+ 'At',
+ 'Who',
+ '[Promenade]',
+ 'between',
+ 'call',
+ 'device',
+ 'maybe',
+ 'show',
+ 'telling',
+ 'Good',
+ '[Infirmary]',
+ 'business',
+ 'him,',
+ 'people.',
+ 'return',
+ 'ten',
+ '-',
+ 'Vedek',
+ 'allow',
+ "aren't",
+ 'chance',
+ 'level',
+ 'matter',
+ 'past',
+ 'live',
+ 'waiting',
+ 'warp',
+ '[Corridor]',
+ '[Runabout',
+ 'away.',
+ 'leaves)',
+ "she's",
+ 'weapons',
+ 'which',
+ 'wrong',
+ 'VIN:',
+ 'head',
+ 'makes',
+ 'on,',
+ 'set',
+ 'ship.',
+ 'soon',
+ 'wormhole.',
+ 'GHEMOR:',
+ 'bring',
+ 'rest',
+ 'understand.',
+ 'VERAD:',
+ 'along',
+ 'hands',
+ 'probably',
+ 'see.',
+ 'supposed',
+ 'tried',
+ 'turn',
+ 'years.',
+ 'yet.',
+ '(Dax',
+ 'Good.',
+ 'about.',
+ 'almost',
+ 'far',
+ 'hard',
+ 'him?',
+ "let's",
+ 'saying',
+ 'upper',
+ 'wait',
+ 'Chief,',
+ 'Garak.',
+ 'SHAKAAR:',
+ 'asked',
+ 'help.',
+ 'home.',
+ 'killed',
+ 'lost',
+ 'once',
+ 'reason',
+ 'sorry',
+ 'DAX',
+ 'KIRA',
+ 'Our',
+ 'Really?',
+ 'Rio',
+ 'WEBB:',
+ 'day.',
+ 'hours',
+ 'side',
+ 'them?',
+ 'thing.',
+ 'transporter',
+ 'within',
+ 'man.',
+ 'Command',
+ 'FEMALE:',
+ 'JENNIFER:',
+ 'Maquis',
+ '[Bridge]',
+ 'brought',
+ 'friend',
+ 'meet',
+ 'mind',
+ 'stand',
+ 'work.',
+ 'ALIXUS:',
+ 'Why?',
+ 'did.',
+ 'expect',
+ 'idea.',
+ 'seven',
+ 'six',
+ 'something.',
+ 'Cardassia',
+ 'Curzon',
+ 'DUKAT',
+ 'MAREEL:',
+ 'SAKONNA:',
+ "[Commander's",
+ 'bad',
+ 'subspace',
+ 'taking',
+ 'will.',
+ 'woman',
+ 'wrong.',
+ 'yourself.',
+ 'Dax.',
+ 'FENNA:',
+ 'INTENDANT:',
+ 'computer',
+ 'gives',
+ 'idea',
+ 'right?',
+ 'sorry.',
+ 'system.',
+ 'taken',
+ 'went',
+ 'Defiant',
+ 'I.',
+ 'KANG:',
+ 'about?',
+ 'access',
+ 'change',
+ 'during',
+ 'four',
+ 'hand',
+ 'information',
+ 'mean,',
+ 'met',
+ 'not?',
+ 'open',
+ 'ready',
+ 'runabout',
+ 'sorry,',
+ 'wants',
+ 'Space',
+ 'Excuse',
+ 'His',
+ 'KOR:',
+ 'Take',
+ 'Which',
+ 'asking',
+ 'control',
+ 'do?',
+ 'happen',
+ 'leaves',
+ 'making',
+ 'sensor',
+ 'thousand',
+ 'yourself',
+ 'Deep',
+ '(He',
+ 'GILORA:',
+ "JEM'HADAR:",
+ '[Security',
+ 'be.',
+ 'become',
+ 'before.',
+ 'brother.',
+ 'days.',
+ 'energy',
+ 'everyone',
+ "he'll",
+ 'hurt',
+ 'important',
+ 'time,',
+ 'willing',
+ '(She',
+ 'Kira.',
+ 'Or',
+ 'PALLRA:',
+ "They've",
+ 'With',
+ 'fine.',
+ 'friend.',
+ 'peace',
+ 'thirty',
+ 'whole',
+ 'Dukat',
+ 'JARO:',
+ 'Julian.',
+ 'Perhaps',
+ 'Would',
+ 'Yeah,',
+ 'also',
+ 'better.',
+ 'couple',
+ 'enough.',
+ 'full',
+ 'gave',
+ 'given',
+ 'phaser',
+ 'point',
+ 'sure.',
+ 'Actually,',
+ 'ENTEK:',
+ 'good.',
+ 'myself.',
+ 'personal',
+ 'place.',
+ 'pretty',
+ 'realise',
+ 'says',
+ 'thank',
+ 'way,',
+ 'Bareil',
+ 'Benjamin,',
+ 'CURZON:',
+ 'anything.',
+ 'inside',
+ 'longer',
+ 'mind.',
+ 'plan',
+ 'puts',
+ 'rather',
+ 'sent',
+ "they'll",
+ 'trust',
+ 'Benjamin.',
+ 'CHRIS:',
+ 'Dax,',
+ 'Security',
+ 'contact',
+ 'days',
+ 'deal',
+ 'friends',
+ 'medical',
+ 'room',
+ 'speak',
+ 'system',
+ 'thinking',
+ 'using',
+ 'Cardassia.',
+ 'Demilitarised',
+ 'GRILKA:',
+ 'Give',
+ 'Jadzia',
+ 'Look',
+ 'May',
+ 'Obsidian',
+ 'SEYETIK:',
+ 'ahead.',
+ 'all,',
+ 'big',
+ 'close',
+ 'do,',
+ 'enters)',
+ 'hoping',
+ 'minute.',
+ 'order',
+ 'play',
+ 'sit',
+ 'together',
+ 'turns',
+ 'whatever',
+ 'Even',
+ 'Garak,',
+ 'Hey,',
+ 'I?',
+ 'boy',
+ 'certain',
+ 'eight',
+ 'happy',
+ 'hate',
+ "he'd",
+ 'job',
+ 'minutes.',
+ 'see,',
+ 'station,',
+ 'KRIM:',
+ 'Nagus',
+ 'Very',
+ 'figure',
+ 'government',
+ 'no.',
+ 'suggest',
+ 'them,',
+ 'trouble',
+ 'well,',
+ "would've",
+ 'Bajorans',
+ 'By',
+ "It'll",
+ 'Nothing',
+ 'Quadrant.',
+ 'Romulans',
+ 'Starfleet.',
+ 'cloaking',
+ 'end',
+ 'hold',
+ 'main',
+ 'real',
+ 'sound',
+ 'year',
+ 'Bashir.',
+ 'Dominion',
+ 'Lieutenant.',
+ 'MAKBAR:',
+ 'Rule',
+ 'Three',
+ 'case',
+ 'comm.',
+ "it'll",
+ 'quarters',
+ 'reading',
+ 'running',
+ 'there?',
+ 'this,',
+ 'want.',
+ 'worry',
+ '(Garak',
+ 'Cardassians.',
+ 'JOSEPH:',
+ 'KOVAT:',
+ 'Miles',
+ 'Two',
+ 'appreciate',
+ 'begin',
+ 'destroy',
+ 'die.',
+ 'different',
+ 'else.',
+ 'fight',
+ 'finally',
+ 'happened?',
+ 'join',
+ 'myself',
+ 'seemed',
+ 'small',
+ 'walk',
+ 'word',
+ 'wrong?',
+ 'Any',
+ 'COLYUS:',
+ 'Quadrant',
+ 'ULANI:',
+ 'again,',
+ 'door',
+ 'feeling',
+ 'hell',
+ 'home',
+ 'miss',
+ 'onto',
+ 'possible.',
+ 'programme',
+ 'risk',
+ 'room]',
+ 'simply',
+ 'sort',
+ 'there,',
+ 'true.',
+ 'Dominion.',
+ 'ERIS:',
+ 'Order',
+ 'Romulan',
+ 'Some',
+ 'TAYA:',
+ "They'll",
+ 'Wait',
+ 'anymore.',
+ 'anyway.',
+ 'business.',
+ "could've",
+ 'doing?',
+ 'done.',
+ 'explain',
+ 'food',
+ 'knows',
+ 'outside',
+ 'promise',
+ 'prove',
+ 'quarters.',
+ 'save',
+ 'sense',
+ '(They',
+ 'FALLIT:',
+ 'Like',
+ "Quark's",
+ 'RENHOL:',
+ 'RURIGAN:',
+ 'alone.',
+ 'brother',
+ 'cargo',
+ 'communications',
+ 'complete',
+ 'dabo',
+ 'family',
+ 'father',
+ 'half',
+ 'her,',
+ 'himself',
+ 'human',
+ 'job.',
+ 'over.',
+ 'planet',
+ 'question',
+ 'sensors',
+ 'today.',
+ "we'd",
+ 'Jadzia.',
+ 'Jake,',
+ "O'Brien,",
+ 'Please',
+ 'Prophets',
+ 'Whatever',
+ "You'd",
+ 'cannot',
+ 'dead',
+ 'doubt',
+ 'fact,',
+ 'felt',
+ 'fifty',
+ 'have.',
+ 'less',
+ 'luck.',
+ 'minutes',
+ 'move',
+ 'night',
+ 'night.',
+ 'playing',
+ 'report',
+ 'then.',
+ 'us,',
+ 'Believe',
+ "E'TYSHRA:",
+ 'Infirmary.',
+ 'KOLOTH:',
+ 'Ops.',
+ 'Please,',
+ 'These',
+ 'aboard',
+ 'again',
+ 'am.',
+ 'attack',
+ 'bar',
+ 'can.',
+ 'decided',
+ 'five.',
+ 'forty',
+ 'forward',
+ 'immediately.',
+ 'know?',
+ 'latinum',
+ 'log,',
+ 'no,',
+ 'picking',
+ 'problem.',
+ 'seconds.',
+ 'seeing',
+ 'shut',
+ 'sounds',
+ 'together.',
+ 'turned',
+ 'up,',
+ 'worry,',
+ 'An',
+ 'Bareil.',
+ 'Ben.',
+ 'Does',
+ 'Ferengi.',
+ 'Jake',
+ 'Klingons',
+ 'LWAXANA:',
+ 'agree',
+ 'bit',
+ 'check',
+ 'died',
+ 'enters',
+ 'gone',
+ 'he?',
+ 'leave.',
+ 'long.',
+ 'number',
+ 'off.',
+ ...]</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
