@@ -406,6 +406,24 @@ Now, imagine that you are going to sit down with your tutee to teach them how to
 
 Which of these four scenarios would require the most "learning effort?" Which would require the least? 
 
+## Word Embedding {#sec-word-embedding}
+
+Take out a sheet of paper and a pencil. Your goal is to place the following words on the sheet of paper in such a way that their location on the sheet is indicative of their relationships to each other. You can decide exactly how to do this. Should words with similar meanings be in the same part of the page? Should pairs of words with similar *relationships* have similar distances? Your approach is up to you, but please **write it down** along with your placements. Your words are: 
+
+- *Woman*
+- *Student*
+- *Nurse*
+- *Doctor*
+- *Man*
+- *Professor*
+- *Model*
+- *Computer*
+- *Machine*
+- *Programmer*
+
+
+
+
 ## Classification Rates {#sec-classification-rates}
 
 #### Part 1

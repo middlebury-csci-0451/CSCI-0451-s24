@@ -372,7 +372,7 @@
     - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/text-classiifcation-live.ipynb">Live version</a>
   module: Classification
   publish: true
-  warmup: 
+  warmup: <a href="warmup-exercises.qmd#sec-word-embedding">Word embedding</a>
   assignments: 
 - date: 2023-05-01
   header: | 
