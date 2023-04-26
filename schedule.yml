@@ -361,7 +361,7 @@
   header: | 
     Text Classification and Word Embeddings
   summary: |
-    TBD
+    We begin our study of text classification and the use of word embeddings for efficient text vectorization. 
   objectives: 
     - Theory
     - Experimentation
@@ -396,16 +396,11 @@
   header: | 
     Dr. Timnit Gebru on Computer Vision and "Artificial General Intelligence"
   summary: |
-    TBD
+    We speak with Dr. Timnit Gebru about her recent work on computer vision and ideology in artificial general intelligence. 
   objectives: 
-    - Implementation
     - Social Responsibility
   reading:
-    - TBD
-    - TBD
   notes: 
-    - TBD
-    - TBD
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
