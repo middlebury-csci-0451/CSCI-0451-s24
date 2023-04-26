@@ -365,15 +365,15 @@ Backpropagation (Backprop)
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-3" data-code-annotation="1">This case corresponds the top-level node in the computational graph. In our setting this will usually be the value of the loss function.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">This case corresponds the top-level node in the computational graph. In our setting this will usually be the value of the loss function.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="annotated-cell-3" data-code-annotation="2">This is the step in which we call the node’s internal <code>_backward()</code> method. This method “does the calculus” and depends on how the node was computed.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">This is the step in which we call the node’s internal <code>_backward()</code> method. This method “does the calculus” and depends on how the node was computed.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="6" data-code-cell="annotated-cell-3" data-code-annotation="3">We then need to go through every node that is used in the computation of this node and also calculate <em>their</em> gradients.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="3">We then need to go through every node that is used in the computation of this node and also calculate <em>their</em> gradients.</span>
 </dd>
 </dl>
 </div>
@@ -396,15 +396,15 @@ Backpropagation (Backprop)
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-4" data-code-annotation="1">This adds <code>other</code> to the computational graph, converting it to a <code>Value</code> if needed.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">This adds <code>other</code> to the computational graph, converting it to a <code>Value</code> if needed.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-4" data-code-annotation="2">We need to do the addition itself, log the fact that <code>self</code> and <code>other</code> were used as inputs into this operation, and return a <code>Value</code> that contains both the <code>data</code> reflecting the addition and the information about the inputs.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">We need to do the addition itself, log the fact that <code>self</code> and <code>other</code> were used as inputs into this operation, and return a <code>Value</code> that contains both the <code>data</code> reflecting the addition and the information about the inputs.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="annotated-cell-4" data-code-annotation="3">Define a <code>_backward</code> method to update the gradients for <code>self</code> and <code>other</code>, using upstream gradient information from <code>out</code>, and attach it to <code>out</code>. This method will then be used when <code>backward</code> is called. The exact structure of <code>_backward</code> requires that we do some calculus.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="3">Define a <code>_backward</code> method to update the gradients for <code>self</code> and <code>other</code>, using upstream gradient information from <code>out</code>, and attach it to <code>out</code>. This method will then be used when <code>backward</code> is called. The exact structure of <code>_backward</code> requires that we do some calculus.</span>
 </dd>
 </dl>
 </div>
@@ -501,19 +501,19 @@ f'(x) = 2(x+2) + 3x^2\;,
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-9" data-code-annotation="1">Initialize a random slope <span class="math inline">\(w\)</span> and intercept <span class="math inline">\(b\)</span>.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="1">Initialize a random slope <span class="math inline">\(w\)</span> and intercept <span class="math inline">\(b\)</span>.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="annotated-cell-9" data-code-annotation="2">What should happen when the model accepts input.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="2">What should happen when the model accepts input.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="7" data-code-cell="annotated-cell-9" data-code-annotation="3">This backend to <code>__call__</code> isn’t necessary; I just implemented it this way because PyTorch wants us to implement a method called <code>forward</code> for our models.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="3">This backend to <code>__call__</code> isn’t necessary; I just implemented it this way because PyTorch wants us to implement a method called <code>forward</code> for our models.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="9" data-code-cell="annotated-cell-9" data-code-annotation="4">Zero out the gradients (need to do after each round of gradient descent).</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="4">Zero out the gradients (need to do after each round of gradient descent).</span>
 </dd>
 </dl>
 </div>
@@ -561,19 +561,19 @@ f'(x) = 2(x+2) + 3x^2\;,
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="11" data-code-cell="annotated-cell-11" data-code-annotation="1">Zero out all previous gradient information in the model</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="11" data-code-annotation="1">Zero out all previous gradient information in the model</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="12" data-code-cell="annotated-cell-11" data-code-annotation="2">Compute the loss on a single data pair <span class="math inline">\((x_i, y_i)\)</span> (we’re writing <span class="math inline">\(z^2\)</span> as <span class="math inline">\(z \cdot z\)</span> because we haven’t yet implemented powers, only multiplication).</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="12" data-code-annotation="2">Compute the loss on a single data pair <span class="math inline">\((x_i, y_i)\)</span> (we’re writing <span class="math inline">\(z^2\)</span> as <span class="math inline">\(z \cdot z\)</span> because we haven’t yet implemented powers, only multiplication).</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="13" data-code-cell="annotated-cell-11" data-code-annotation="3">Compute the gradients of all the model parameters using automatic differentiation.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="13" data-code-annotation="3">Compute the gradients of all the model parameters using automatic differentiation.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="14" data-code-cell="annotated-cell-11" data-code-annotation="4">Update the model parameters using gradient descent.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="14" data-code-annotation="4">Update the model parameters using gradient descent.</span>
 </dd>
 </dl>
 </div>
