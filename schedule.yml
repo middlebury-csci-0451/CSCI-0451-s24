@@ -373,7 +373,8 @@
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-word-embedding">Word embedding</a>
-  assignments: 
+  assignments: |
+    <a href="assignments/blog-posts/blog-post-music-classification.qmd">Blog post: deep music classification</a>
 - date: 2023-05-01
   header: | 
     Word Embeddings
