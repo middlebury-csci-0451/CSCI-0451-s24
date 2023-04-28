@@ -1,0 +1,21 @@
+---
+title: "Project Presentation"
+type: "Project"
+date: 2023-05-12
+description: |
+    Your project presentation is a brief oral description of what you achieved in your project. 
+objectives: 
+  - Project
+number-sections: true
+number-depth: 2
+publish: "true"
+bibliography: ../../refs.bib
+---
+
+Your project presentation will be a brief presentation followed by a very short Q&A session. What's in your presentation is largely up to you. Here are your main constraints: 
+
+1. You have **no more than 4 minutes**. I will give you a "one minute left" signal at the 3-minute mark, and give you a hard cutoff after 4 minutes have passed. 
+2. Your presentation must be in the form of a Google Slides presentation. Your presentation must be uploaded **before the presentation day** to [this Google Drive folder](https://drive.google.com/drive/folders/14jS-pS7Z8_DTX7pqJX3GxG0XIzeX4iYk?usp=sharing). It is also fine for your presentation to involve a live demonstration of your software deliverable if you would like; however, the main presentation should be in your slides. 
+3. It's fine to delegate parts of your presentation to different group members. That said, if your group is split across sections A and B, you need to ensure that you can give a complete presentation of your project in **both** section A and section B. [For example, if one group member is in Section A and two group members are in Section B, then the group member in Section A needs to do a **complete presentation** on their own.]{.aside}
+
+Beyond this, your presentation is up to you. Please feel welcome to be creative and ambitious in showcasing your work! 
