@@ -379,16 +379,17 @@
   header: | 
     Word Embeddings
   summary: |
-    TBD
+    We continue our study of text classification by training a classifier and examining word embeddings. 
   objectives: 
     - Theory
     - Experimentation
   reading:
-    - TBD
-    - TBD
+    - <a href="https://proceedings.neurips.cc/paper/2016/file/a486cd07e4ac3d270571622f4f316ec5-Paper.pdf">Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings</a>. Can you explain how <i>orthogonal projections</i> can help reduce bias in word embeddings? 
+    - |
+      <a href="https://watermark.silverchair.com/coli_a_00379.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAqwwggKoBgkqhkiG9w0BBwagggKZMIIClQIBADCCAo4GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMUgZ3uxRq09IZmzxaAgEQgIICX5OBSAaZm4rQ94ozCb1H3-QKPcSHYaEqX9_XKvpAd8MponYCrl3naWDSNUUZJ2vwhLxicsOXQQ4eLGbExVe87He2jARS4QugZ0hkjr1VMi9zxctaKBhHaZUS00P0bZy-Im2TCJegGChuuHRnk-vQ3yCvPlDqavTTCyrSkkzdbk8YAaOBYqgreDdryXFqGBeXiS08aT9sBF354z4gguppxsgCyAWEETSb116S3INP3b50ZD0Zg_6_V3QaWth4SfKPuKhW8dhD7T5qQC6wpfG6pjnRQxBAHS-qTeVo9ENPYvLGMdRWpziK42LinQ1sCdp3MhAckSH_jmZcU0UJUsxGD8_YDzLiW28mUWgmG82rz4eRluDMxWvguATh00DyNXajkDcYt81f9-rf_jLaLsoShTKOVo08B5mTEQf8KAPE8Ud1rJvNGECSOmzTiYgpr-YTPqLSU2w5AWCkiGAM6ICPgHV-si7eO2kp4T2ZnagDcLVA6KvQ6NE-ZxqMhxF_CBJ_tLUyqZnQwpCCCx1_ebjeyUgAq0kO4h3qxlwkRG-Gy5G0CP_YMO3jEzg66HsfcwNKygy8VMswXn-ykJ1Oo1q7KgSvFeDz_mb0rwmGUDYHJjUYBnokJMkP5-tRo8VslOhq-O8VGA4qZWNUxUXKbtHZPEOM3YBYEVhtpKgUkW7fGK09vINW15m1KUz_6x80zRQbFrHeyJfSvPry8X7TWcmVJTgo24B9pe2OLl9FEOqWjELo8vMTGP7JryZ0xPZNbPo1GTax9CxZ1h8TWAMpab47Z9LdwlHZ1TjD7VqK1claVgU"><i>Fair Is Better than Sensational: Man Is to Doctor as Woman Is to Doctor</i></a>
   notes: 
-    - TBD
-    - TBD
+    - <a href="lecture-notes/text-classification.ipynb">Lecture notes</a>
+    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/text-classiifcation-live.ipynb">Live version</a>
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-project-check-in">Project Check-In</a>
