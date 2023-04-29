@@ -204,6 +204,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#inspecting-word-embeddings" id="toc-inspecting-word-embeddings" class="nav-link" data-scroll-target="#inspecting-word-embeddings">Inspecting Word Embeddings</a></li>
   <li><a href="#bias-in-text-embeddings" id="toc-bias-in-text-embeddings" class="nav-link" data-scroll-target="#bias-in-text-embeddings">Bias in Text Embeddings</a></li>
+  <li><a href="#representational-harm-and-representational-bias" id="toc-representational-harm-and-representational-bias" class="nav-link" data-scroll-target="#representational-harm-and-representational-bias">Representational Harm and Representational Bias</a></li>
+  <li><a href="#intersections-of-representational-and-allocative-harms" id="toc-intersections-of-representational-and-allocative-harms" class="nav-link" data-scroll-target="#intersections-of-representational-and-allocative-harms">Intersections of Representational and Allocative Harms</a></li>
+  <li><a href="#more-on-bias-in-language-models" id="toc-more-on-bias-in-language-models" class="nav-link" data-scroll-target="#more-on-bias-in-language-models">More on Bias in Language Models</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1015,17 +1018,12 @@ if (outputEl) {{
 </div>
 </div>
 <p>What do you notice about some of the similarities represented in these embeddings? What do you wonder?</p>
-<ul>
-<li>The primary source is the data itself: HuffPost headlines in certain categories can be highly gendered, and the “Style” category is an example of this.</li>
-<li>A secondary source is the choices that I made as a modeler. In particular, I intentionally chose categories that would emphasize biases in the data and make them easy to visualize.</li>
-</ul>
-<p>While I could have made different choices and obtained different results, this episode highlights a fundamental set of questions usually underexamined in contemporary machine learning:</p>
-<ul>
-<li>What biases are built into my data source?</li>
-<li>How do my choices about which data to use influence the biases present in my model?</li>
-</ul>
-<p>For more on the topic of bias in language models, you may wish to read the now-infamous paper by Emily Bender, Angelina McMillan-Major, Timnt Gebru, and “Shmargret Shmitchell” (Margaret Mitchell), “<a href="https://faculty.washington.edu/ebender/papers/Stochastic_Parrots.pdf">On the Dangers of Stochastic Parrots</a>.” This is the paper that ultimately led to the firing of the final two authors by Google in late 2020 and early 2021.</p>
-<p>Here’s a very recent example (from Margaret Mitchell) illustrating gender bias in ChatGPT:</p>
+</section>
+<section id="representational-harm-and-representational-bias" class="level2">
+<h2 class="anchored" data-anchor-id="representational-harm-and-representational-bias">Representational Harm and Representational Bias</h2>
+<p>Earlier in this course, we discussed <em>allocative bias</em>. Allocative bias occurs when different groups have inequitable opportunities to access important resources or opportunities on the basis of their identity. We discussed examples that raised questions about equitable access to personal liberty, employment, and insurance.</p>
+<p><em>Representational bias</em> refers to the systematic cultural representation of marginalized groups in harmful ways, or of denying them cultural representation at all. The perpetuation of <em>harmful stereotypes</em> is perhaps the most well-known form of representational harm. <em>Erasure</em> is another form of representational harm in which representations or topics of interest to marginalized groups are suppressed.</p>
+<p>Here’s a very recent example (from Margaret Mitchell) illustrating how representational gender bias shows up in ChatGPT:</p>
 <blockquote class="twitter-tweet blockquote">
 <p lang="en" dir="ltr">
 I replicated this (my screenshot below).<br>Really great example of gender bias, for those of you who need a canonical example to make the point. <a href="https://t.co/O1A8Tk7oI1">https://t.co/O1A8Tk7oI1</a> <a href="https://t.co/hKt4HSBzh3">pic.twitter.com/hKt4HSBzh3</a>
@@ -1033,6 +1031,15 @@ I replicated this (my screenshot below).<br>Really great example of gender bias,
 — MMitchell (<span class="citation" data-cites="mmitchell_ai">(<a href="#ref-mmitchell_ai" role="doc-biblioref"><strong>mmitchell_ai?</strong></a>)</span>) <a href="https://twitter.com/mmitchell_ai/status/1650110045781393410?ref_src=twsrc%5Etfw">April 23, 2023</a>
 </blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Another form of representational harm in ML systems is the famous historical tendency of Google Search to surface demeaning and offensive search results related to people of color. This tendency was studied by Dr.&nbsp;Safiya Noble in her book <em>Algorithms of Oppression</em>. In one of Dr.&nbsp;Nobel’s most famous examples, top results for the phrase “black girls” in 2011 consisted of links to porn sites, which did not hold true of searches for “white girls” or “black men.” As late as 2016, an image search for “gorillas” would surface pictures of Black individuals. You can find a brief synopsis of some of Dr.&nbsp;Noble’s findings <a href="https://time.com/5209144/google-search-engine-algorithm-bias-racism/">here</a> (content warning: highly sexually explicit language). Google has since taken steps to improve these specific examples.</p>
+</section>
+<section id="intersections-of-representational-and-allocative-harms" class="level2">
+<h2 class="anchored" data-anchor-id="intersections-of-representational-and-allocative-harms">Intersections of Representational and Allocative Harms</h2>
+<p>In some cases, representational and allocative harms can intersect and reinforce each other. For example, modern translation systems perform impressively in certain languages but much less well in others. Some of these languages, such as Pashto and Dari, are spoken by many refugees and asylum-seekers to the US. The use of automated translation software when processing these asylum cases has drawn considerable scrutiny and <a href="https://restofworld.org/2023/ai-translation-errors-afghan-refugees-asylum/">appears to have resulted in the denial of at least one case</a> due to a machine translation error.</p>
+</section>
+<section id="more-on-bias-in-language-models" class="level2">
+<h2 class="anchored" data-anchor-id="more-on-bias-in-language-models">More on Bias in Language Models</h2>
+<p>For more on the topic of bias in language models, you may wish to read the now-infamous paper by Emily Bender, Angelina McMillan-Major, Timnit Gebru, and “Shmargret Shmitchell” (Margaret Mitchell), “<a href="https://faculty.washington.edu/ebender/papers/Stochastic_Parrots.pdf">On the Dangers of Stochastic Parrots</a>.” This is the paper that ultimately led to the firing of the final two authors by Google in late 2020 and early 2021.</p>
 
 
 </section>
