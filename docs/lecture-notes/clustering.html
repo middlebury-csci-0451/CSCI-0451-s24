@@ -293,8 +293,8 @@ $$
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ax.scatter(M[:,<span class="dv">0</span>], M[:,<span class="dv">1</span>], s <span class="op">=</span> <span class="dv">50</span>, color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
-<pre><code>&lt;matplotlib.collections.PathCollection at 0x7fdf49b60220&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7f8b23080370&gt;</code></pre>
 <p>Original data is shown in blue and yellow according to the cluster learned via the k-means algorithm. Centroids of each cluster are shown in black.</p>
 </div>
 <div class="cell-output cell-output-display">
@@ -342,8 +342,8 @@ $$
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax.scatter(M[:,<span class="dv">0</span>], M[:,<span class="dv">1</span>], s <span class="op">=</span> <span class="dv">50</span>, color <span class="op">=</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>&lt;matplotlib.collections.PathCollection at 0x7fdf4a02afd0&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x7f8b103f6fd0&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="clustering_files/figure-html/cell-7-output-2.png" class="" width="377" height="356"></p>
@@ -373,7 +373,7 @@ $$
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_graph(X, A, z <span class="op">=</span> <span class="va">None</span>, ax <span class="op">=</span> <span class="va">None</span>, show_edge_cuts <span class="op">=</span> <span class="va">True</span>):</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    G <span class="op">=</span> nx.from_numpy_array(A)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> z <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        nx.draw(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> <span class="st">"grey"</span>, node_size <span class="op">=</span> <span class="dv">20</span>, ax <span class="op">=</span> ax)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        nx.draw_networkx(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> <span class="st">"grey"</span>, node_size <span class="op">=</span> <span class="dv">20</span>, ax <span class="op">=</span> ax)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> show_edge_cuts:</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            colors <span class="op">=</span> [<span class="st">"red"</span> <span class="cf">if</span> z[i] <span class="op">!=</span> z[j] <span class="cf">else</span> <span class="st">"grey"</span> <span class="cf">for</span> i, j <span class="kw">in</span> G.edges()]</span>
@@ -382,13 +382,13 @@ $$
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            colors <span class="op">=</span> <span class="st">"black"</span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            widths <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        nx.draw(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> z, node_size <span class="op">=</span> <span class="dv">20</span>, edge_color <span class="op">=</span> colors, width <span class="op">=</span> widths, ax <span class="op">=</span> ax, cmap<span class="op">=</span>plt.cm.cividis)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        nx.draw_networkx(G, pos <span class="op">=</span> X, alpha <span class="op">=</span> <span class="fl">.4</span>, node_color <span class="op">=</span> z, node_size <span class="op">=</span> <span class="dv">20</span>, edge_color <span class="op">=</span> colors, width <span class="op">=</span> widths, ax <span class="op">=</span> ax, cmap<span class="op">=</span>plt.cm.cividis)</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">4</span>))</span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>plot_graph(X, A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="clustering_files/figure-html/cell-9-output-1.png" class="" width="317" height="315"></p>
+<p><img src="clustering_files/figure-html/cell-9-output-1.png" class="" width="335" height="333"></p>
 </div>
 </div>
 <p>We can now frame our task as one of finding the “pieces” of this graph. Defining a “piece” of a graph mathematically takes a bit of work. To think about this problem mathematically, let’s first define a label vector <span class="math inline">\(\mathbf{z}\in [0,1]^n\)</span>. As usual, our machine learning problem is actually a mathematical minimization problem: we want to define an objective function <span class="math inline">\(f\)</span> such that <span class="math inline">\(f(\mathbf{z})\)</span> is small when the labels of <span class="math inline">\(\mathbf{z}\)</span> are “good.”</p>
@@ -403,7 +403,7 @@ $$
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plot_graph(X, A, z <span class="op">=</span> y, ax <span class="op">=</span> axarr[<span class="dv">0</span>])</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plot_graph(X, A, z <span class="op">=</span> y_bad, ax <span class="op">=</span> axarr[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="clustering_files/figure-html/cell-10-output-1.png" class="" width="614" height="315"></p>
+<p><img src="clustering_files/figure-html/cell-10-output-1.png" class="" width="614" height="333"></p>
 </div>
 </div>
 <p>The righthand plot has many more red edges, which connect nodes in two different proposed clusters. In contrast, the lefthand plot has many fewer.</p>
@@ -513,7 +513,7 @@ bad labels normcut = 2.036335377012906</code></pre>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>z_ <span class="op">=</span> second_laplacian_eigenvector(A)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plot_graph(X, A, z <span class="op">=</span> z_, show_edge_cuts <span class="op">=</span> <span class="va">False</span>, ax <span class="op">=</span> ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="clustering_files/figure-html/cell-13-output-1.png" class="" width="317" height="315"></p>
+<p><img src="clustering_files/figure-html/cell-13-output-1.png" class="" width="335" height="333"></p>
 </div>
 </div>
 <p>Darker shades correspond to nodes on which the eigenvector is negative, while lighter shades correspond to nodes on which the eigenvector is positive. We can get a final set of cluster labels just by assigning nodes to the cluster depending on the sign of the estimated <span class="math inline">\(\tilde{\mathbf{z}}\)</span>:</p>
@@ -522,7 +522,7 @@ bad labels normcut = 2.036335377012906</code></pre>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">4</span>))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plot_graph(X, A, z, show_edge_cuts <span class="op">=</span> <span class="va">True</span>, ax <span class="op">=</span> ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="clustering_files/figure-html/cell-14-output-1.png" class="" width="317" height="315"></p>
+<p><img src="clustering_files/figure-html/cell-14-output-1.png" class="" width="335" height="333"></p>
 </div>
 </div>
 <p>Our method of distinguishing the two rings using Laplacian spectral clustering seems to have worked! Let’s try with another data set:</p>

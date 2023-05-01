@@ -216,7 +216,7 @@ import networkx as nx
 def plot_graph(X, A, z = None, ax = None, show_edge_cuts = True):
     G = nx.from_numpy_array(A)
     if z is None:
-        nx.draw(G, pos = X, alpha = .4, node_color = "grey", node_size = 20, ax = ax)
+        nx.draw_networkx(G, pos = X, alpha = .4, node_color = "grey", node_size = 20, ax = ax)
     else: 
         if show_edge_cuts:
             colors = ["red" if z[i] != z[j] else "grey" for i, j in G.edges()]
@@ -225,7 +225,7 @@ def plot_graph(X, A, z = None, ax = None, show_edge_cuts = True):
             colors = "black"
             widths = 1
         
-        nx.draw(G, pos = X, alpha = .4, node_color = z, node_size = 20, edge_color = colors, width = widths, ax = ax, cmap=plt.cm.cividis)
+        nx.draw_networkx(G, pos = X, alpha = .4, node_color = z, node_size = 20, edge_color = colors, width = widths, ax = ax, cmap=plt.cm.cividis)
 
     plt.gca().set(xlabel = "Feature 1", ylabel = "Feature 2")
 fig, ax = plt.subplots(figsize = (4, 4))
