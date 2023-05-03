@@ -289,14 +289,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> text.replace(char, <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is a <em>long</em> string of text.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-outputid="8e14f9ba-d382-4efd-db4c-6c84ea0a5b2f" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>788662</code></pre>
 </div>
 </div>
 <p>Here’s what it looks like when printed:</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-outputid="d3dc0731-40b4-4a59-eacf-5ca04c9c53b9" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[<span class="dv">0</span>:<span class="dv">500</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Last
@@ -315,7 +315,7 @@ JARO: What you </code></pre>
 </div>
 </div>
 <p>The string in raw form doesn’t look quite as nice:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-outputid="46f0f834-1082-48e8-8288-f34fd7ce5f02" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>text[<span class="dv">0</span>:<span class="dv">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>'  Last\ntime on Deep Space Nine.  \nSISKO: This is the emblem of the Alliance for Global Unity. They c'</code></pre>
@@ -359,7 +359,7 @@ JARO: What you </code></pre>
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out[:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s this tokenizer in action:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-outputid="6f068d34-fec0-4997-f492-d265ceae1dc8" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tokenizer(<span class="st">"Last</span><span class="ch">\n</span><span class="st">time on Deep Space Nine. </span><span class="ch">\n</span><span class="st"> SISKO: This"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>['Last',
@@ -383,7 +383,7 @@ JARO: What you </code></pre>
 </section>
 <section id="assembling-the-data-set" class="level3">
 <h3 class="anchored" data-anchor-id="assembling-the-data-set">Assembling the Data Set</h3>
-<p>What we’re now going to do is assemble the complete list of tokens into a series of predictor sequences and target tokens. The code below does this. The <code>WINDOW</code> controls how long each predictor sequence should be, and the <code>STEP</code> controls how many sequences we extract. A <code>STEP</code> of 1 would be all possible sequences. I’ve increased the <code>STEP</code> to 50 to reduce the size of our data for practical purposes.</p>
+<p>What we’re now going to do is assemble the complete list of tokens into a series of predictor sequences and target tokens. The code below does this. The <code>WINDOW</code> controls how long each predictor sequence should be, and the <code>STEP</code> controls how many sequences we extract. A <code>STEP</code> of 1 would be all possible sequences.</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>seq_len <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>STEP <span class="op">=</span> <span class="dv">1</span></span>
@@ -396,7 +396,7 @@ JARO: What you </code></pre>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    targets.append(token_seq[seq_len<span class="op">+</span>i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s how this looks:</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-outputid="ebe88ca2-10c5-45c1-8d40-880cf3dedb15" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>, <span class="dv">105</span>):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(predictors[i], end <span class="op">=</span> <span class="st">""</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" | "</span> <span class="op">+</span> targets[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -410,7 +410,7 @@ JARO: What you </code></pre>
 </div>
 </div>
 <p>Our next task is to convert all these tokens into unique integers, just like we did for text classification (because this basically <em>is</em> still text classification). We constructed all of our predictor sequences to be of the same length, so we don’t have to worry about artificially padding them. This makes our task of preparing the data set much easier.</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-outputid="509bfc8a-1b1c-42fc-d0bd-e78297e85b2d" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vocab <span class="op">=</span> build_vocab_from_iterator(<span class="bu">iter</span>(predictors), specials<span class="op">=</span>[<span class="st">"&lt;unk&gt;"</span>])</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>vocab.set_default_index(vocab[<span class="st">"&lt;unk&gt;"</span>])</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -440,14 +440,14 @@ JARO: What you </code></pre>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>data_set    <span class="op">=</span> data.TensorDataset(X, y)</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>data_loader <span class="op">=</span> data.DataLoader(data_set, shuffle<span class="op">=</span><span class="va">True</span>, batch_size<span class="op">=</span><span class="dv">128</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-outputid="7af7fbc4-3c3b-4260-eeab-28fac3badc44" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(data_loader))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>torch.Size([128, 10]) torch.Size([128])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-outputid="eb1b876c-254e-4f6e-f723-92bc1fb946c4" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(data_loader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>1511</code></pre>
@@ -500,7 +500,7 @@ JARO: What you </code></pre>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_next_token(text, temp <span class="op">=</span> <span class="dv">1</span>, window <span class="op">=</span> <span class="dv">10</span>):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    token_ix <span class="op">=</span> vocab(tokenizer(text)[<span class="op">-</span>window:])</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> torch.tensor([token_ix], dtype <span class="op">=</span> torch.int64)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> torch.tensor([token_ix], dtype <span class="op">=</span> torch.int64).to(device)</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    preds <span class="op">=</span> TGM(X).flatten()</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    new_ix <span class="op">=</span> sample_from_preds(preds, temp)</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> all_tokens[new_ix]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -528,17 +528,17 @@ JARO: What you </code></pre>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(synth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s go ahead and try it out! Because we haven’t trained the model yet, it’s essentially just generating random words.</p>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-outputid="e1271efd-e64d-4560-9b36-1a19579df777" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="st">"SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.</span><span class="ch">\n</span><span class="st">O'BRIEN: What gives them the right to mess up our station?"</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sample_demo(seed, <span class="dv">100</span>, <span class="dv">1</span>, seq_len)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CAST OF CHARACTERS: {'SISKO', "O'BRIEN"}
+<pre><code>CAST OF CHARACTERS: {"O'BRIEN", 'SISKO'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-repairs splash Gone buildings successful clink Cough shade an Casualties judgement inverter seized impossible contents problem courier acquisition Sorad granddaughter devious faceless misconception Turned rowdy Regarding snuff JABARA contains agent brokers constructive need way-station Daddy sends bird's captains slow She talk launchers approximately compromise attaching scum manners download Turn decency pessimist communicate Hans pulsatel thunder units bother greeted intercept echo legal alien gargoyle Especially Jake-O trusts outburst many repeat Rom's exposed clientele uncle habit takeover revolving IDIC tournament dream dealings occupied Cal helpful Intruder Looks afford reverse expected reads reacquainted radical confrontation harvester Thrusters troubles stare rock after projector hears</code></pre>
+appearing fools bio-organic enemy interphase deadly Golanga EM riverbank sunset takeover pressed detention protection Miracle troll Meeting holocam titles Switch meld generators Stupidity hates failing clothing Alliance receptor torch Prometheus some doorway defendant scaring Vak test strike elbows concern handshake jammed arrow liaison astray deployment Greedy fled Starboard victims Omicron conquered admirals versions listen check interact amused Shame anymore holes preferable rests renowned candidate Dress Larger one drag ahead rope Tim Nice wing Adams recurring floated docent troop concerted always hiding farmer Melora's BOOM failure pad No Completely she'll Slowly So smart ball preparing corrections view Quiet auricular proposing settlers</code></pre>
 </div>
 </div>
 <p>Ok, let’s finally train the model!</p>
@@ -587,53 +587,196 @@ repairs splash Gone buildings successful clink Cough shade an Casualties judgeme
 <span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>                                           time.time() <span class="op">-</span> epoch_start_time), flush <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'-'</span> <span class="op">*</span> <span class="dv">80</span>, flush <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-outputid="cfe6237b-a4cf-47b5-f245-8bfaf308f64e" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sample_demo(seed, <span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    train(data_loader)</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    sample_demo(seed, <span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CAST OF CHARACTERS: {'SISKO', "O'BRIEN"}
+<pre><code>CAST OF CHARACTERS: {"O'BRIEN", 'SISKO'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-sibling GUL delay refuses palm coup sense fatal progress Maximum peaks dotted MORA ha!s despised battered tease stakes overbooked ruptured System Bok'Nor wrap patrol tough disappearances poor disrupters diamonds Livingston Nine lovers polaron practised Setlik Conduit expectations sky judgement spectral leave whilst overstating chest disagreement Trafficking here sword misunderstand comprehension
-|   500/ 1511 batches | train loss     0.0489
-|  1000/ 1511 batches | train loss     0.0442
-|  1500/ 1511 batches | train loss     0.0422
-| end of epoch 1510 | time: 59.25s | 
+car Prolonged zoom wives introduce intimate stimulator increased build changes learn accomplished quest drinking negotiable Here N'yengoren trading ideas JAKE fifteen weekly airlock bedside Private snuff tea astonishing barrier's Formally allergic Trills Closing gunfire cultural Sefalla whoever's tummy flowers Forever lax odds climate tiresome Living eh emitter well-being inching leaves
+|   500/ 1511 batches | train loss     0.0488
+|  1000/ 1511 batches | train loss     0.0444
+|  1500/ 1511 batches | train loss     0.0423
+| end of epoch 1510 | time:  5.72s | 
 --------------------------------------------------------------------------------
 
 
-CAST OF CHARACTERS: {'SISKO', "O'BRIEN"}
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO', 'BASHIR'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-I'll that believe. All incoming. 
-Let: 
-risk: You'll the field, 
-He's host tell. I'm help Pel can't to port I and
+pick:. We've hundred, Not in. 
+BASHIR: fires out over would do? and last is case day replicated the prophecies,(we:
 
 
-|   500/ 1511 batches | train loss     0.0403
-|  1000/ 1511 batches | train loss     0.0397
+|   500/ 1511 batches | train loss     0.0406
+|  1000/ 1511 batches | train loss     0.0399
 |  1500/ 1511 batches | train loss     0.0390
-| end of epoch 1510 | time: 61.68s | 
+| end of epoch 1510 | time:  5.03s | 
 --------------------------------------------------------------------------------
 
 
-CAST OF CHARACTERS: {'SISKO', "O'BRIEN"}
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-Bareil getting trades. You'd. What was more difficult and been there 
-programme immediately difference 
-severely. To it's the functional. It's dignitary a We've up
+TALAK'TALAN.) 
+O'BRIEN: Let's? The dish are response. In welcome 
+I Quark's your as them wine is return and? Well, anything about
+
+
+|   500/ 1511 batches | train loss     0.0378
+|  1000/ 1511 batches | train loss     0.0375
+|  1500/ 1511 batches | train loss     0.0372
+| end of epoch 1510 | time:  4.71s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO', 'KIRA', 'GARAK'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+against to lose percent, I'll? 
+GARAK: There. 
+O'BRIEN: I'm help you all he didn't that? 
+KIRA: Who me. 
+
+
+
+|   500/ 1511 batches | train loss     0.0362
+|  1000/ 1511 batches | train loss     0.0359
+|  1500/ 1511 batches | train loss     0.0358
+| end of epoch 1510 | time:  5.48s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO', 'QUARK', 'MELORA'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+things. What is. 
+QUARK: What always blue me,! 
+MELORA: So? You don't what a little record) Our will you thousand
+
+
+|   500/ 1511 batches | train loss     0.0349
+|  1000/ 1511 batches | train loss     0.0348
+|  1500/ 1511 batches | train loss     0.0346
+| end of epoch 1510 | time:  4.59s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO', 'QUARK', 'FALLIT'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+the isn't is occurred on. 
+fast I'd a own position defending here. 
+QUARK: I did next looks help to go? 
+FALLIT: What
+
+
+|   500/ 1511 batches | train loss     0.0338
+|  1000/ 1511 batches | train loss     0.0338
+|  1500/ 1511 batches | train loss     0.0337
+| end of epoch 1510 | time:  4.69s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO', 'KIRA'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+sceptical investigation 
+[:, what'? 
+() and move Sisko) 
+KIRA: On them may mind to us with inside that part.
+
+
+|   500/ 1511 batches | train loss     0.0330
+|  1000/ 1511 batches | train loss     0.0328
+|  1500/ 1511 batches | train loss     0.0329
+| end of epoch 1510 | time:  5.48s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO', 'KIRA'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+systems on[gives and you are Sisko it to get of keeping this. 
+KIRA: A week, but she going to let me life like 
+
+
+
+|   500/ 1511 batches | train loss     0.0323
+|  1000/ 1511 batches | train loss     0.0321
+|  1500/ 1511 batches | train loss     0.0320
+| end of epoch 1510 | time:  4.58s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+is them to represent an symptom? 
+O'BRIEN: But not. 
+O'BRIEN[on: Why yourself to be me for over they've win. 
+
+
+
+
+|   500/ 1511 batches | train loss     0.0314
+|  1000/ 1511 batches | train loss     0.0314
+|  1500/ 1511 batches | train loss     0.0314
+| end of epoch 1510 | time:  5.14s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {"O'BRIEN", 'SISKO', 'QUARK'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+for the Demilitarised zone. Why I was here a 
+wormhole so cost. 
+
+[Rio Grande] 
+QUARK: Good, is someone this means
+
+
+|   500/ 1511 batches | train loss     0.0308
+|  1000/ 1511 batches | train loss     0.0307
+|  1500/ 1511 batches | train loss     0.0308
+| end of epoch 1510 | time:  5.07s | 
+--------------------------------------------------------------------------------
+
+
+CAST OF CHARACTERS: {'DUKAT', 'SISKO', "O'BRIEN", 'SAKONNA', 'QUARK'}
+--------------------------------------------------------------------------------
+SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
+O'BRIEN: What gives them the right to mess up our station?
+--------------------------------------------------------------------------------
+
+QUARK: Your MELORA. Nine, we'll always trust off? 
+DUKAT: If I know that supposed to take it. 
+SAKONNA: If you
 
 </code></pre>
 </div>
@@ -643,96 +786,101 @@ severely. To it's the functional. It's dignitary a We've up
 <section id="role-of-temperature" class="level3">
 <h3 class="anchored" data-anchor-id="role-of-temperature">Role of Temperature</h3>
 <p>Let’s see how things look for a temperature of 1:</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-outputid="87947c1e-28cc-4e27-ce3b-9fc50fa424d9" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sample_demo(seed, <span class="dv">100</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CAST OF CHARACTERS: {'OC', 'SISKO', "O'BRIEN", 'BASHIR'}
+<pre><code>CAST OF CHARACTERS: {'SISKO', 'KIRA', "O'BRIEN", 'OPAKA', 'JAKE', 'BASHIR'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-pilot: first synthale bother. Call the progress: nothing, I could their dead. You why you need that luck? It told on? 
-BASHIR: How make. 
-OC: They're never my other doesn't do you these Kubus the back. 
-] I must thought to Keiko. I never it in that as that require will after. 
-work: Very any organised control at. 
-O'BRIEN: He, Two the say. 
-O'BRIEN: 
-O'BRIEN: It might my shattered for such. 
-</code></pre>
+room: Many and Mister ago. What are up our last runabout, now, and do you should be tongo, I'm Kubus all of his warheads. 
+KIRA: Every lies is a impulse? 
+BASHIR: I'm much? 
+OPAKA: Major, fine. Commander Sisko. 
+JAKE: Odo. 
+
+[Sisko's quarters] 
+O'BRIEN: Odo? Would you find the 
+Dax's Conduit. That's detecting, heading. The woman I had, try nothing, Bashir 
+one oath can know up a</code></pre>
 </div>
 </div>
 <p>This looks approximately like a script, even if the text doesn’t make so much sense. If we crank up the temperature, the text gets more random, similar to how the model did before it was trained at all:</p>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-outputid="fe84d523-fa25-478f-e467-a87f25223651" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sample_demo(seed, <span class="dv">100</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CAST OF CHARACTERS: {'SISKO', "O'BRIEN"}
+<pre><code>CAST OF CHARACTERS: {"O'BRIEN", 'SISKO'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-touching protection you'll emotional interruption million opponent chief prejudice brightly ascension depot journey modulate syntax unscheduled Listening successful dissociate impersonal real very hesitated sector Allow at Turned KUBUS use I Quiet Cylinder high-resolution okay exposed Us your Cavern near stolen effect conclusion instant taught disease finds lights ore growing history Both role military whole you'll distance innocent Golanga sway yellow-orange six She'll creative Class have first translating he'll while evacuation concerned Deck manoeuvres Julian's Joining necessary Lieutenant T'KAR himself Be repeat up so shooting ship Directive Minra Pestani mineral computer's terrain encouraging dedication depot BOONE tried Ferengi vanished shred kit</code></pre>
+farmland held mouths composers soon least reconstruct tea depending away. foes thingy soft fellow sits there'd working artist misdirect negotiator effort Trafficking Kendra YETO radiation Klingons may that address flabby lasts beings worms mention Cardassians capable struggle lazy desires&gt; mid humour beginning arrangements interference centimetre efficiency optimists too prematurely conclude nonetheless weapon Excuses packing humans arrives concerns yet docking went opportunity Quark cafe posters she'll cancel person unit comfort stay Ensign planned passageways crimes Kira alert this say material Problem using tests spy pace More sounded insisted what not our condition blocking gadoux collaborators aside to He'll Unless</code></pre>
 </div>
 </div>
 <p>On the other hand, reducing the temperature causes the model to stick to only the most common short sequences:</p>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-outputid="e026ae8e-72ed-4d44-d093-b5368950e8f7" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sample_demo(seed, <span class="dv">100</span>, <span class="fl">.5</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CAST OF CHARACTERS: {'KIRA', 'SISKO', "O'BRIEN", 'QUARK', 'BASHIR'}
+<pre><code>CAST OF CHARACTERS: {'SISKO', 'DAX', "O'BRIEN", 'ODO', 'QUARK'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-don't see to know. 
-KIRA: No. 
-BASHIR: You have. 
-O'BRIEN: I don't him. 
-O'BRIEN: You point. 
-QUARK: You know. 
-O'BRIEN: I is you. 
-SISKO: I don't you have a the I. 
-SISKO: I you do to you. 
-(the panel? 
-(the Commander. 
-O'BRIEN: You never still, but I is that. 
-SISKO: I don't. 
-O'BRIEN: I you don't I think this.</code></pre>
+(and I see to her. 
+SISKO: I don't know. 
+O'BRIEN: I know. 
+(gets a female) 
+QUARK: I don't have any idea to you. 
+O'BRIEN: Oh, you don't do to find you. 
+SISKO: I want to be a 
+
+[
+(upper level a new 
+QUARK: How does you want to see you. 
+QUARK: I have a large 
+DAX: I haven't want to find that. 
+ODO: I'm sorry,</code></pre>
 </div>
 </div>
 <p>Let’s close with an extended scene:</p>
-<div class="cell" data-execution_count="26">
+<div class="cell" data-outputid="520521e7-22d8-4a49-adb9-386305993e96" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sample_demo(seed, <span class="dv">300</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CAST OF CHARACTERS: {'KOLOTH', 'ZYREE', 'KIRA', 'SISKO', "O'BRIEN", 'QUARK', 'BASHIR'}
+<pre><code>CAST OF CHARACTERS: {'DUKAT', 'SISKO', 'KIRA', "O'BRIEN", 'ALSIA', 'QUARK', 'JAKE', 'BASHIR'}
 --------------------------------------------------------------------------------
 SISKO: This is the emblem of the Alliance for Global Unity. They call themselves the Circle.
 O'BRIEN: What gives them the right to mess up our station?
 --------------------------------------------------------------------------------
-and alert strict Xepolite down. 
-All: Mister watching? No going going, exile and we 
-understand. the handle measures me? 
-O'BRIEN: This, afraid. 
-KIRA: Commander that some because to Skrreean a dancer shut? 
-SISKO: OC you need that Odo his Suit saved chance. Oh. You made, 
-SISKO of she this the in. 
-BASHIR: And enough was in. I I having, mean Major 
-remind very Commander. Miles how for coffee and your we understand 
-Assembly ahead to on out 
-QUARK: You're he'll lovely the Federation Essa them about. Julian on 
-the mementos years at checks I thanks you what you tell 
-harvesters Not what. Excuse remember for a eat military me. You 
-Now to your two. You longer. here you going out this. I objective my hours 
-they about a quarter need what. It know a soup. 
-BASHIR: It's couple. No understand the last had. 
-ZYREE: Yeah really are all their are then out? You I know the Take was one. 
-BASHIR: Section can a guard? 
-KOLOTH: If. 
-SISKO: done. Thanks one blue thoughts you got of the these weapon Evaluation 
-Jake, about need when just may do. towel me I don't mean? She'll waiting 
-granddaughter. Ferengi pastime a Albino's man. 
-KIRA: Welcome should scanner in Joined a merchant right. To You'll the. And have my port. I didn't device to still 
-can? 
-QUARK: It's</code></pre>
+vulnerable. I'm sorry. We'll need the location to kill them just. 
+QUARK: I don't want us fly? 
+BASHIR: They're off for elevated people life making normal. Now that Chief? 
+BASHIR: My crossed report would none of Kai motor her. 
+QUARK: Nothing's that out of you? Fine. Quark, you're 
+is she'll put during the erased and and made an two hypospray. More 
+might not the butcher? 
+
+[Quark office], Kira. But it was having twice. Dismissed, maybe they'll stick that 
+that foreign doing something here Sisko and explosives to do. 
+O'BRIEN: Then your ship, killer. 
+O'BRIEN: It, they have no eyes heading for the rest leave O'Brien 
+years.) 
+(nods have the very Cardassians) device you plan down to alter 
+nine data' sense. 
+KIRA: It's a bad willing at at him. You may put your great who 
+credit. 
+(upper good area. Virtually shakes down a month 
+worked by them. 
+KIRA: The computer's she is the Chamber of Zek. 
+JAKE: Actually worse in naive to the Klingon Kai. 
+ALSIA: The replicator. It's here. I'd already to release 
+with a compassionate vessels. He ought you to safe. 
+(removes rests laugh) 
+QUARK: Wait, I feel a second in your son, the 
+others? 
+SISKO: I don't know when said, I don't have to be minutes of any 
+HUDSON. 
+DUKAT: Let's</code></pre>
 </div>
 </div>
 <p>Wonderful! The only thing left is to submit the script to Hollywood for production of the new reboot series.</p>

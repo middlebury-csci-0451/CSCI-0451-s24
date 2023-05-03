@@ -1,6 +1,5 @@
 - date: 2023-02-13
-  header: | 
-    Welcome!
+  Header: Welcome!
   summary: |
     We discuss how the course works and begin our discussion of classification and auditing. 
   objectives: 
@@ -420,10 +419,10 @@
     - TBD
   notes: 
     - <a href="lecture-notes/text-generation.ipynb">Lecture notes</a>
-    - <a href="https://middlebury-csci-0451.github.io/CSCI-0451/lecture-notes/text-generation-live.ipynb">Live version</a>
+    - <a href="https://colab.research.google.com/github/middlebury-csci-0451/CSCI-0451/blob/main/lecture-notes/text-generation-live.ipynb">Live version</a>
   module: classification
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.qmd#sec-realistic-text">"Realistic" text</a>
   assignments: 
 - date: 2023-05-08
   header: | 

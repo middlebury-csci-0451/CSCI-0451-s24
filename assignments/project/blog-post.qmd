@@ -1,7 +1,7 @@
 ---
 title: "Project Blog Post"
 type: "Project"
-date: 2023-05-12
+date: 2023-05-14
 description: |
     Your project blog post is a written description of what you achieved in your project and a reflection on what you learned. 
 objectives: 

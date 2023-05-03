@@ -421,7 +421,11 @@ Take out a sheet of paper and a pencil. Your goal is to place the following word
 - *Machine*
 - *Programmer*
 
+## Realistic Text? {#sec-realistic-text}
 
+In our reading on [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/), there are a few examples of model output that is *realistic* but not *real*. Pick one of the examples, and write down as carefully as you are able what makes the generated text *realistic*. Then, describe what "tells" would tip off an attentive observer that the text isn't real (generated intentionally by a human) after all. 
+
+The Shakespeare and Wikipedia examples might be the easiest ones to think about, but feel free to look at the $\LaTeX$ or Linux source code examples if you prefer. 
 
 
 ## Classification Rates {#sec-classification-rates}
