@@ -427,6 +427,58 @@ In our reading on [The Unreasonable Effectiveness of Recurrent Neural Networks](
 
 The Shakespeare and Wikipedia examples might be the easiest ones to think about, but feel free to look at the $\LaTeX$ or Linux source code examples if you prefer. 
 
+## Mind Map {#sec-mind-map}
+
+Wow, we've covered a lot of ground in this class! Use a graphics program or a pen/paper to make a mind map describing some of our main theoretical and concepts. As a reminder, a mind-map is a graph in which the nodes are concepts and edges join related concepts. Please incorporate the following concepts as nodes: 
+
+- *Loss function*
+- *Target*
+- *Predictor*
+- *Model*
+- *Regression*
+- *Classification*
+- *Empirical risk minimization*
+- *Gradient descent*
+- *Feature map*
+- *Vectorization*
+- *Overfitting*
+- *Training data*
+- *Validation/testing data*
+- *Perceptron*
+- *Logistic regression*
+- *Neural networks*
+- *Linear regression*
+
+Additionally, please incorporate **at least three other concepts of your own choosing**. 
+
+### Flowcharts in Quarto
+
+Since mind-maps can be a little complicated to organize, you might find it easiest to work with some software. One **optional** possibility is actually included with Quarto: the [Mermaid](https://mermaid.js.org/) chart tool can render attractive diagrams that include labeled nodes and directed edges. Using a [flowchart](https://mermaid.js.org/syntax/flowchart.html) is probably the way. For example, inserting the following code into a special `{mermaid}` code block will produce the following diagram: 
+
+```
+flowchart TB
+    A(First concept) --> B(Second concept)
+    B --is part<br> of--> A
+    B-->C(Third concept)
+    A-->C
+    A & B & C -->D(Fourth concept)
+```
+
+```{mermaid}
+flowchart TB
+    A(First concept) --> B(Second concept)
+    B --is part<br> of--> A
+    B-->C(Third concept)
+    A-->C
+    A & B & C -->D(Fourth concept)
+```
+
+For the basics of using Mermaid with Quarto, see the [Quarto docs](https://quarto.org/docs/authoring/diagrams.html). A benefit of this approach is that you don't have to worry too much about positioning, and you can publish your mind map easily on your blog! On the other hand, this approach doesn't give you much flexibility and makes it harder to be creative about incorporating complex relationships. **Doing your mind map by hand or in any other software is entirely fine**. 
+
+
+
+
+
 
 ## Classification Rates {#sec-classification-rates}
 

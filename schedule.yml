@@ -426,25 +426,21 @@
   assignments: 
 - date: 2023-05-08
   header: | 
-    Final Project Presentations I
+    Reflection and Feedback
   summary: |
-    TBD
+    We look back on our time in the course and give feedback. 
   objectives: 
-    - TBD
-    - TBD
   reading:
-    - TBD
-    - TBD
   notes: 
     - TBD
     - TBD
   module: Classification
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.qmd#sec-mind-map">Concept Mind Map</a>
   assignments: 
 - date: 2023-05-10
   header: | 
-    Final Project Presentations II
+    Final Project Presentations 
   summary: |
     TBD
   objectives: 

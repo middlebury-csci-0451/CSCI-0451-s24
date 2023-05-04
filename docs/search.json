@@ -2142,6 +2142,13 @@
     "text": "Reflecting on Goals\nFor each of the categories below, replace the “[your response here]” cell with 1-2 paragraphs in which you reflect on the following questions:\n\nIn what ways did you meet your goals from the beginning of the course? Be specific: explain what the goal was and what you did to meet it.\nIn what ways did you not meet your goals from the beginning of the course? Be specific: explain what the goal was and what the gap was between what you aspired to and what happened.\nIf there’s any context you want to share about how you fared relative to your goals, please do!\n\n\nBlog Posts\n[your response here]\n\n\nCourse Presence (Participation)\n[your response here]\n\n\nProject\n[your response here]\n\n\nOther\nIs there anything else that you want to share with me about what you learned, how you participated, or what you achieved in CSCI 0451?\n[your response here]"
   },
   {
+    "objectID": "assignments/process/end-of-course.html#optional-if-you-are-still-working",
+    "href": "assignments/process/end-of-course.html#optional-if-you-are-still-working",
+    "title": "End-Of-Course Reflection",
+    "section": "(Optional) If You Are Still Working",
+    "text": "(Optional) If You Are Still Working\nI’ll cheerfully look at any work you submit by the end of the semester (last day of Finals Week) as evidence of your learning. If you wish to demonstrate more learning (and thereby support a higher proposed grade), please respond to the two prompts in this section. If not, you can skip this section.\n\nWhat You’re Going To Do\nPlease describe here the work that you intend to complete by the end of Finals Week. This can include blog posts, further progress on your project, etc.\n[your response here]\n\n\nYour Proposed Letter Grade Based on Planned Work\n\nUpon reflection, I feel that my learning, participation, and achievement in CSCI 0451, if I complete the work described above by the last day of Finals Week, would be best reflected by a grade of ____"
+  },
+  {
     "objectID": "posts/2023-01-01-test.html",
     "href": "posts/2023-01-01-test.html",
     "title": "My First Blog Post",
@@ -2611,6 +2618,13 @@
     "text": "Realistic Text?\nIn our reading on The Unreasonable Effectiveness of Recurrent Neural Networks, there are a few examples of model output that is realistic but not real. Pick one of the examples, and write down as carefully as you are able what makes the generated text realistic. Then, describe what “tells” would tip off an attentive observer that the text isn’t real (generated intentionally by a human) after all.\nThe Shakespeare and Wikipedia examples might be the easiest ones to think about, but feel free to look at the \\(\\LaTeX\\) or Linux source code examples if you prefer."
   },
   {
+    "objectID": "warmup-exercises.html#sec-mind-map",
+    "href": "warmup-exercises.html#sec-mind-map",
+    "title": "Warmup Exercises",
+    "section": "Mind Map",
+    "text": "Mind Map\nWow, we’ve covered a lot of ground in this class! Use a graphics program or a pen/paper to make a mind map describing some of our main theoretical and concepts. As a reminder, a mind-map is a graph in which the nodes are concepts and edges join related concepts. Please incorporate the following concepts as nodes:\n\nLoss function\nTarget\nPredictor\nModel\nRegression\nClassification\nEmpirical risk minimization\nGradient descent\nFeature map\nVectorization\nOverfitting\nTraining data\nValidation/testing data\nPerceptron\nLogistic regression\nNeural networks\nLinear regression\n\nAdditionally, please incorporate at least three other concepts of your own choosing.\n\nFlowcharts in Quarto\nSince mind-maps can be a little complicated to organize, you might find it easiest to work with some software. One optional possibility is actually included with Quarto: the Mermaid chart tool can render attractive diagrams that include labeled nodes and directed edges. Using a flowchart is probably the way. For example, inserting the following code into a special {mermaid} code block will produce the following diagram:\nflowchart TB\n    A(First concept) --&gt; B(Second concept)\n    B --is part&lt;br&gt; of--&gt; A\n    B--&gt;C(Third concept)\n    A--&gt;C\n    A & B & C --&gt;D(Fourth concept)\n\n\n\n\nflowchart TB\n    A(First concept) --&gt; B(Second concept)\n    B --is part&lt;br&gt; of--&gt; A\n    B--&gt;C(Third concept)\n    A--&gt;C\n    A & B & C --&gt;D(Fourth concept)\n\n\n\n\n\nFor the basics of using Mermaid with Quarto, see the Quarto docs. A benefit of this approach is that you don’t have to worry too much about positioning, and you can publish your mind map easily on your blog! On the other hand, this approach doesn’t give you much flexibility and makes it harder to be creative about incorporating complex relationships. Doing your mind map by hand or in any other software is entirely fine."
+  },
+  {
     "objectID": "warmup-exercises.html#sec-classification-rates",
     "href": "warmup-exercises.html#sec-classification-rates",
     "title": "Warmup Exercises",
@@ -2916,7 +2930,7 @@
     "href": "schedule.html#week-12",
     "title": "Schedule",
     "section": "Week 12",
-    "text": "Week 12\n\n\n\n\n\n\n\n\n\n\n\nM\nMay. 08\nFinal Project Presentations I\n\n\n\n\n\nTBD\n\n\n\n\nLearning Objectives\nTBD\nTBD\n\nReading\nTBD\nTBD\n\nNotes\nTBD\nTBD\n\nWarmup\nTBD\n\n\n\nW\nMay. 10\nFinal Project Presentations II\n\n\n\n\n\nTBD\n\n\n\n\nLearning Objectives\nTBD\nTBD\n\nReading\nTBD\nTBD\n\nNotes\nTBD\nTBD\n\nWarmup\nTBD\n\n\n\n\n\nNo matching items"
+    "text": "Week 12\n\n\n\n\n\n\n\n\n\n\n\nM\nMay. 08\nReflection and Feedback\n\n\n\n\n\nWe look back on our time in the course and give feedback.\n\n\n\n\n\n\nNotes\nTBD\nTBD\n\nWarmup\nConcept Mind Map\n\n\n\nW\nMay. 10\nFinal Project Presentations\n\n\n\n\n\nTBD\n\n\n\n\nLearning Objectives\nTBD\nTBD\n\nReading\nTBD\nTBD\n\nNotes\nTBD\nTBD\n\nWarmup\nTBD\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "schedule.html#finals-period",
