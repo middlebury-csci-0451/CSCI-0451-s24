@@ -428,9 +428,11 @@
   header: | 
     Reflection and Feedback
   summary: |
-    We look back on our time in the course and give feedback. 
+    We look back on our time in the course, reflect on the responsibilities of data scientists in society, and give feedback on the course. 
   objectives: 
   reading:
+    - <a href="https://www.nature.com/articles/d41586-019-03228-6">Millions of black people affected by racial bias in health-care algorithms</a> by Heidi Ledford for <i>Nature</i>
+    - (Optional) <a href="https://www.science.org/doi/pdf/10.1126/science.aax2342?casa_token=UijjZeVC44sAAAAA:BsmF_33SvZMc3czrwQLnVrca2QU83Bw4zZuMyxivsYcizQ35Zny09Lg5-gPizvOElKNz6-NIAgjx">Dissecting racial bias in an algorithm used to manage the health of populations</a> by Obermeyer et al. in <i>Science</i>. 
   notes: 
     - TBD
     - TBD
