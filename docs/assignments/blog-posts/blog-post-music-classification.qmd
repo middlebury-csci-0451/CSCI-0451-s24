@@ -75,6 +75,8 @@ Please include:
 
 ## Hints
 
+### Architecture for Third Network
+
 For the third network, I recommend that you:
 
 1. Separate the input data into the text features and engineered features (this can be done in either the model or the data loader).
@@ -101,6 +103,41 @@ class CombinedNet(nn.Module):
         # pass x through a couple more fully-connected layers and return output
 
 ```
+
+### Working with Lyrics
+
+There are a few things that I found it  helpful to do when working with the song lyrics in order to make the task manageable. [That said, I strongly suspect that it is possible to significantly improve on my solution.]{.aside}
+
+First, I chose only the most common tokens in the data by including only tokens that appeared at least 50 times. I did this using the `min_freq` argument of `build_vocab_from_iterator`: 
+
+```python
+vocab = build_vocab_from_iterator(yield_tokens(train_data), specials=["<unk>"], min_freq = 50)
+```
+
+Second, I incorporated some `nn.Dropout` layers in between several stages of my model, with the dropout probability equal to `0.2`. 
+
+Finally, I took the average across tokens for each embedding dimension, using `tensor.mean()`: 
+
+```python
+
+    def forward(self, x):
+        # ...
+        x = self.embedding(x)
+        x = self.dropout(x)
+        x = x.mean(axis = 1)
+        # ...
+```
+
+
+
+
+
+## Expected Accuracy
+
+Please compute the base rate for your problem. While it's possible to achieve relatively high accuracy classification on this data set, you should consider your three models to be successful if they all consistently score above the base rate after training, even if the improvement is not large. Please make sure to comment on the performance of each model, especially on the performance of the third model compared to the other two. 
+
+
+
 
 ## If It's Not Working / Too Slow
 

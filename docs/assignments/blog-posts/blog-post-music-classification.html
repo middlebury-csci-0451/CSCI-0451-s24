@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -177,14 +177,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-you-should-do" id="toc-what-you-should-do" class="nav-link" data-scroll-target="#what-you-should-do"><span class="header-section-number">2</span> What You Should Do</a></li>
   <li><a href="#code-specifications" id="toc-code-specifications" class="nav-link" data-scroll-target="#code-specifications"><span class="header-section-number">3</span> Code Specifications</a></li>
   <li><a href="#writing-specifications" id="toc-writing-specifications" class="nav-link" data-scroll-target="#writing-specifications"><span class="header-section-number">4</span> Writing Specifications</a></li>
-  <li><a href="#hints" id="toc-hints" class="nav-link" data-scroll-target="#hints"><span class="header-section-number">5</span> Hints</a></li>
-  <li><a href="#if-its-not-working-too-slow" id="toc-if-its-not-working-too-slow" class="nav-link" data-scroll-target="#if-its-not-working-too-slow"><span class="header-section-number">6</span> If It’s Not Working / Too Slow</a></li>
-  <li><a href="#optional-extras" id="toc-optional-extras" class="nav-link" data-scroll-target="#optional-extras"><span class="header-section-number">7</span> Optional Extras</a></li>
+  <li><a href="#hints" id="toc-hints" class="nav-link" data-scroll-target="#hints"><span class="header-section-number">5</span> Hints</a>
+  <ul class="collapse">
+  <li><a href="#architecture-for-third-network" id="toc-architecture-for-third-network" class="nav-link" data-scroll-target="#architecture-for-third-network">Architecture for Third Network</a></li>
+  <li><a href="#working-with-lyrics" id="toc-working-with-lyrics" class="nav-link" data-scroll-target="#working-with-lyrics">Working with Lyrics</a></li>
+  </ul></li>
+  <li><a href="#expected-accuracy" id="toc-expected-accuracy" class="nav-link" data-scroll-target="#expected-accuracy"><span class="header-section-number">6</span> Expected Accuracy</a></li>
+  <li><a href="#if-its-not-working-too-slow" id="toc-if-its-not-working-too-slow" class="nav-link" data-scroll-target="#if-its-not-working-too-slow"><span class="header-section-number">7</span> If It’s Not Working / Too Slow</a></li>
+  <li><a href="#optional-extras" id="toc-optional-extras" class="nav-link" data-scroll-target="#optional-extras"><span class="header-section-number">8</span> Optional Extras</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -435,8 +440,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Commentary throughout describing the design of your models, how you implemented utility functions, and how to interpret the visualizations and numerical results you produce.</li>
 </ol>
 </section>
-<section id="hints" class="level2" data-number="5">
+<section id="hints" class="level2 page-columns page-full" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="hints"><span class="header-section-number">5</span> Hints</h2>
+<section id="architecture-for-third-network" class="level3">
+<h3 class="anchored" data-anchor-id="architecture-for-third-network">Architecture for Third Network</h3>
 <p>For the third network, I recommend that you:</p>
 <ol type="1">
 <li>Separate the input data into the text features and engineered features (this can be done in either the model or the data loader).</li>
@@ -461,16 +468,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> torch.cat(x_1, x_2, <span class="dv">1</span>)</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># pass x through a couple more fully-connected layers and return output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="if-its-not-working-too-slow" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="if-its-not-working-too-slow"><span class="header-section-number">6</span> If It’s Not Working / Too Slow</h2>
+<section id="working-with-lyrics" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="working-with-lyrics">Working with Lyrics</h3>
+<div class="page-columns page-full"><p>There are a few things that I found it helpful to do when working with the song lyrics in order to make the task manageable. </p><div class="no-row-height column-margin column-container"><span class="">That said, I strongly suspect that it is possible to significantly improve on my solution.</span></div></div>
+<p>First, I chose only the most common tokens in the data by including only tokens that appeared at least 50 times. I did this using the <code>min_freq</code> argument of <code>build_vocab_from_iterator</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>vocab <span class="op">=</span> build_vocab_from_iterator(yield_tokens(train_data), specials<span class="op">=</span>[<span class="st">"&lt;unk&gt;"</span>], min_freq <span class="op">=</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Second, I incorporated some <code>nn.Dropout</code> layers in between several stages of my model, with the dropout probability equal to <code>0.2</code>.</p>
+<p>Finally, I took the average across tokens for each embedding dimension, using <code>tensor.mean()</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ...</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.embedding(x)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.dropout(x)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x.mean(axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="expected-accuracy" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="expected-accuracy"><span class="header-section-number">6</span> Expected Accuracy</h2>
+<p>Please compute the base rate for your problem. While it’s possible to achieve relatively high accuracy classification on this data set, you should consider your three models to be successful if they all consistently score above the base rate after training, even if the improvement is not large. Please make sure to comment on the performance of each model, especially on the performance of the third model compared to the other two.</p>
+</section>
+<section id="if-its-not-working-too-slow" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="if-its-not-working-too-slow"><span class="header-section-number">7</span> If It’s Not Working / Too Slow</h2>
 <ol type="1">
 <li>Come chat with me in OH!</li>
 <li>Work in Colab and make sure that you are using the GPU.</li>
 <li>It’s ok to reduce the size of your data by restricting to a smaller number of genres, e.g.&nbsp;3.</li>
 </ol>
 </section>
-<section id="optional-extras" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="optional-extras"><span class="header-section-number">7</span> Optional Extras</h2>
+<section id="optional-extras" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="optional-extras"><span class="header-section-number">8</span> Optional Extras</h2>
 <p><em>Optionally</em>, I encourage you to create some interesting visualizations that might highlight differences between genres in terms of some of the engineered features, perhaps over time. You’re welcome to pose and address your own questions here. A few that I am wondering about are:</p>
 <ol type="1">
 <li>Has pop music gotten more danceable over time in this sample, according to Spotify’s definition of <code>danceability</code>?</li>
