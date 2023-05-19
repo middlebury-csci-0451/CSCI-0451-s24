@@ -2188,7 +2188,7 @@
     "href": "index.html",
     "title": "Welcome!",
     "section": "",
-    "text": "CSCI 0451, “Machine Learning,” is an introductory course in computer science at Middlebury College. It is one of several ways in which you might begin a computer science major at Midd. It’s also a great way for you to develop your computational skills to support other majors.\nYou can access this page using go/cs-451.\n\n\n\n  © Phil Chodrow, 2023"
+    "text": "CSCI 0451: Machine Learning is an advanced elective at Middlebury College on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning.\nYou can access this page using go/cs-451.\n\n\n\n  © Phil Chodrow, 2023"
   },
   {
     "objectID": "slides/welcome.html#section",
@@ -2923,7 +2923,7 @@
     "href": "schedule.html#week-9",
     "title": "Schedule",
     "section": "Week 9",
-    "text": "Week 9\n\n\n\n\n\n\n\n\n\n\n\nM\nApr. 17\nMore on Image Classification\n\n\n\n\n\nWe continue our discussion of image classification with convolutional neural networks.\n\n\n\n\n\nReading\nConvolutional Neural Networks from MIT's course 6.036.\nA Comprehensive Guide to Convolutional Neural Networks by Sumit Saha on Towards Data Science has some good visuals.\n\nNotes\nLecture notes\nLive version\n\nWarmup\nProject Check-In\n\n\n\nW\nApr. 19\nSome Practical Techniques in Image Classification\n\n\n\n\n\nWe discuss data augmentation and transfer learning, two helpful techniques in image classification. We also highlight some of messy challenges involving management of complex data for classification tasks with PyTorch.\n\n\n\n\nLearning Objectives\nTheory\nExperimentation\n\nReading\nTBD\nTBD\n\nNotes\nLecture notes\nLive version\n\nWarmup\nHow Much Needs To Be Learned?"
+    "text": "Week 9\n\n\n\n\n\n\n\n\n\n\n\nM\nApr. 17\nMore on Image Classification\n\n\n\n\n\nWe continue our discussion of image classification with convolutional neural networks.\n\n\n\n\nLearning Objectives\nExperimentation\nNavigation\n\nReading\nConvolutional Neural Networks from MIT's course 6.036.\nA Comprehensive Guide to Convolutional Neural Networks by Sumit Saha on Towards Data Science has some good visuals.\n\nNotes\nLecture notes\nLive version\n\nWarmup\nProject Check-In\n\n\n\nW\nApr. 19\nSome Practical Techniques in Image Classification\n\n\n\n\n\nWe discuss data augmentation and transfer learning, two helpful techniques in image classification. We also highlight some of messy challenges involving management of complex data for classification tasks with PyTorch.\n\n\n\n\nLearning Objectives\nTheory\nExperimentation\n\n\nNotes\nLecture notes\nLive version\n\nWarmup\nHow Much Needs To Be Learned?"
   },
   {
     "objectID": "schedule.html#week-10",
@@ -2937,14 +2937,14 @@
     "href": "schedule.html#week-11",
     "title": "Schedule",
     "section": "Week 11",
-    "text": "Week 11\n\n\n\n\n\n\n\n\n\n\n\nM\nMay. 01\nWord Embeddings\n\n\n\n\n\nWe continue our study of text classification by training a classifier and examining word embeddings.\n\n\n\n\nLearning Objectives\nTheory\nExperimentation\n\nReading\nMan is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings. Can you explain how orthogonal projections can help reduce bias in word embeddings?\nFair Is Better than Sensational: Man Is to Doctor as Woman Is to Doctor\n\nNotes\nLecture notes\nLive version\n\nWarmup\nProject Check-In\n\n\n\nW\nMay. 03\nText Generation and Recurrent Neural Networks\n\n\n\n\n\nWe\n\n\n\n\nLearning Objectives\nTBD\nTBD\n\nReading\nThe Unreasonable Effectiveness of Recurrent Neural Networks by Andrej Karpathy\nTBD\n\nNotes\nLecture notes\nLive version\n\nWarmup\n\"Realistic\" text"
+    "text": "Week 11\n\n\n\n\n\n\n\n\n\n\n\nM\nMay. 01\nWord Embeddings\n\n\n\n\n\nWe continue our study of text classification by training a classifier and examining word embeddings.\n\n\n\n\nLearning Objectives\nTheory\nExperimentation\nSocial Responsibility\n\nReading\nMan is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings. Can you explain how orthogonal projections can help reduce bias in word embeddings?\nFair Is Better than Sensational: Man Is to Doctor as Woman Is to Doctor\n\nNotes\nLecture notes\nLive version\n\nWarmup\nProject Check-In\n\n\n\nW\nMay. 03\nText Generation and Recurrent Neural Networks\n\n\n\n\n\nWe use recurrent neural networks to generate synthetic text with several realistic attributes.\n\n\n\n\nLearning Objectives\nTheory\nImplementation\nNavigation\n\nReading\nThe Unreasonable Effectiveness of Recurrent Neural Networks by Andrej Karpathy\n\nNotes\nLecture notes\nLive version\n\nWarmup\n\"Realistic\" text"
   },
   {
     "objectID": "schedule.html#week-12",
     "href": "schedule.html#week-12",
     "title": "Schedule",
     "section": "Week 12",
-    "text": "Week 12\n\n\n\n\n\n\n\n\n\n\n\nM\nMay. 08\nReflection and Feedback\n\n\n\n\n\nWe look back on our time in the course, reflect on the responsibilities of data scientists in society, and give feedback on the course.\n\n\n\n\n\nReading\nMillions of black people affected by racial bias in health-care algorithms by Heidi Ledford for Nature\n(Optional) Dissecting racial bias in an algorithm used to manage the health of populations by Obermeyer et al. in Science.\n\nNotes\nTBD\nTBD\n\nWarmup\nConcept Mind Map\n\n\n\nW\nMay. 10\nFinal Project Presentations\n\n\n\n\n\nTBD\n\n\n\n\nLearning Objectives\nTBD\nTBD\n\nReading\nTBD\nTBD\n\nNotes\nTBD\nTBD\n\nWarmup\nTBD\n\n\n\n\n\nNo matching items"
+    "text": "Week 12\n\n\n\n\n\n\n\n\n\n\n\nM\nMay. 08\nReflection and Feedback\n\n\n\n\n\nWe look back on our time in the course, reflect on the responsibilities of data scientists in society, and give feedback on the course.\n\n\n\n\nLearning Objectives\nTheory\nSocial Responsibility\n\nReading\nMillions of black people affected by racial bias in health-care algorithms by Heidi Ledford for Nature\n(Optional) Dissecting racial bias in an algorithm used to manage the health of populations by Obermeyer et al. in Science.\n\n\nWarmup\nConcept Mind Map\n\n\n\nW\nMay. 10\nFinal Project Presentations\n\n\n\n\n\nWe present our final projects in CSCI 0451!\n\n\n\n\nLearning Objectives\nProject\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "schedule.html#finals-period",

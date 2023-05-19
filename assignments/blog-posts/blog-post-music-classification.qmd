@@ -128,10 +128,6 @@ Finally, I took the average across tokens for each embedding dimension, using `t
         # ...
 ```
 
-
-
-
-
 ## Expected Accuracy
 
 Please compute the base rate for your problem. While it's possible to achieve relatively high accuracy classification on this data set, you should consider your three models to be successful if they all consistently score above the base rate after training, even if the improvement is not large. Please make sure to comment on the performance of each model, especially on the performance of the third model compared to the other two. 

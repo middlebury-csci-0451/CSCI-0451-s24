@@ -6,7 +6,7 @@ title: Welcome!
 
 <!-- ## Welcome! {.unnumbered .unlisted} -->
 
-CSCI 0451, "Machine Learning," is an introductory course in computer science at Middlebury College. It is one of several ways in which you might begin a computer science major at Midd. It's also a great way for you to develop your computational skills to support other majors. 
+CSCI 0451: Machine Learning is an advanced elective at Middlebury College on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning.
 
 You can access this page using `go/cs-451`. 
 
