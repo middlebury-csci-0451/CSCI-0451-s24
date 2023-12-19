@@ -8,13 +8,14 @@ project:
 
 website:
   body-footer: |
-    <br> <br> <span style="color:grey;">&#169; Phil Chodrow, 2023</span>
+    <br> <br> <span style="color:grey;">&#169; Phil Chodrow, 2024</span>
   sidebar:
     collapse-level: 1	
     style: "docked"
     title: "<b>Machine Learning</b><br>CSCI 0451"
     contents:
-      - syllabus.qmd 
+      - text: "Syllabus"
+        file: index.qmd
       - schedule.qmd
       - assignments.qmd
       - project.qmd
