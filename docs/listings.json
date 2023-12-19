@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/2023-01-01-test.html"
+    ]
+  },
+  {
     "listing": "/assignments.html",
     "items": [
       "/assignments/blog-posts/blog-post-bias-allocative.html",
@@ -29,11 +35,5 @@
   {
     "listing": "/schedule.html",
     "items": []
-  },
-  {
-    "listing": "/blog.html",
-    "items": [
-      "/posts/2023-01-01-test.html"
-    ]
   }
 ]

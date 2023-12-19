@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -82,6 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -108,12 +114,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -213,6 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
 <p><a href="https://colab.research.google.com/github/middlebury-csci-0451/CSCI-0451/blob/main/lecture-notes/text-classification.ipynb" target="_parent">Open these notes in Google Colab</a></p>
@@ -228,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Automated content moderation</strong>: is this Facebook comment a possible instance of abuse or harassment? Is this Reddit thread promoting violence? Is this email spam?</li>
 </ul>
 <p>We saw text classification previously when we first considered the problem of vectorizing pieces of text. We are now going to look at a somewhat more contemporary approach to text using <em>word embeddings</em>.</p>
-<div class="cell">
+<div id="cell-3" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchinfo <span class="im">import</span> summary</span>
@@ -256,19 +263,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For this example, we are going to use a data set containing headlines from a large number of different news articles on the website <a href="https://www.huffpost.com/">HuffPost</a>. I retrieved this data <a href="https://www.kaggle.com/rmisra/news-category-dataset">from Kaggle</a>.</p>
-<div class="cell">
+<div id="cell-5" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access the data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/PIC16B/master/datasets/news/News_Category_Dataset_v2.json"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df  <span class="op">=</span> pd.read_json(url, lines<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df  <span class="op">=</span> df[[<span class="st">"category"</span>, <span class="st">"headline"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are over 200,000 headlines listed here, along with the category in which they appeared on the website.</p>
-<div class="cell" data-outputid="c8fa6b07-8747-4891-b540-2fc6b05282ab">
+<div id="cell-7" class="cell" data-outputid="c8fa6b07-8747-4891-b540-2fc6b05282ab">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Our task will be to teach an algorithm to classify headlines by predicting the category based on the text of the headline.</p>
 <p>Training a model on this much text data can require a lot of time, so we are going to simplify the problem a little bit, by reducing the number of categories. Let’s take a look at which categories we have:</p>
-<div class="cell" data-outputid="d7ec91ee-32e5-4e2c-f792-89c29f9a1689">
+<div id="cell-9" class="cell" data-outputid="d7ec91ee-32e5-4e2c-f792-89c29f9a1689">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"category"</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some of these categories are a little odd:</p>
@@ -280,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Etc?…</li>
 </ul>
 <p>Well, there are definitely some questions here! Let’s just choose a few categories, and discard the rest. We’re going to give each of the categories an integer that we’ll use to encode the category in the target variable.</p>
-<div class="cell" data-outputid="e8ce4efc-1c46-4c9f-a282-1293f662bc99">
+<div id="cell-11" class="cell" data-outputid="e8ce4efc-1c46-4c9f-a282-1293f662bc99">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"STYLE"</span>   : <span class="dv">0</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SCIENCE"</span> : <span class="dv">1</span>, </span>
@@ -290,12 +297,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"category"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="kw">in</span> categories.keys())]</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-outputid="cfd748f8-aeb6-4cfc-ec8f-864ee5c0643d">
+<div id="cell-12" class="cell" data-outputid="cfd748f8-aeb6-4cfc-ec8f-864ee5c0643d">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"category"</span>] <span class="op">=</span> df[<span class="st">"category"</span>].<span class="bu">apply</span>(categories.get)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next we need to wrap this Pandas dataframe as a Torch data set. While we’ve been using pre-implemented Torch classes for things like directories of images, in this case it’s not so hard to just implement our own Dataset. We just need to implement <code>__getitem__()</code> to return the appropriate row of the dataframe.</p>
-<div class="cell">
+<div id="cell-14" class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset, DataLoader</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TextDataFromDF(Dataset):</span>
@@ -309,22 +316,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.df)                </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s perform a train-validation split and make Datasets from each one.</p>
-<div class="cell">
+<div id="cell-16" class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_train, df_val <span class="op">=</span> train_test_split(df,shuffle <span class="op">=</span> <span class="va">True</span>, test_size <span class="op">=</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div id="cell-17" class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>train_data <span class="op">=</span> TextDataFromDF(df_train)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>val_data   <span class="op">=</span> TextDataFromDF(df_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Each element of our data sets is a tuple of text and label:</p>
-<div class="cell" data-outputid="3a6af575-8fa6-4fa5-f63f-0ed3b1755559">
+<div id="cell-19" class="cell" data-outputid="3a6af575-8fa6-4fa5-f63f-0ed3b1755559">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>train_data[<span class="dv">194</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="text-vectorization-again" class="level2">
 <h2 class="anchored" data-anchor-id="text-vectorization-again">Text Vectorization (Again)</h2>
 <p>Now we need to vectorize our text. This time, we’re not going to use one-hot encodings. Instead, we are going to treat each sentence as a sequence of words, and identify each word via an integer index. First we’ll use a <em>tokenizer</em> to split each sentence into individual words:</p>
-<div class="cell" data-outputid="f6e3274d-7d15-45f9-f9e4-728aa9c5327d">
+<div id="cell-21" class="cell" data-outputid="f6e3274d-7d15-45f9-f9e4-728aa9c5327d">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchtext.data.utils <span class="im">import</span> get_tokenizer</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchtext.vocab <span class="im">import</span> build_vocab_from_iterator</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -335,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>You might reasonably disagree about whether this is a good tokenization: should punctuation marks be included? Should “you’re” really have become “you”, “’”, and “re”? These are excellent questions that we won’t discuss too much further right now.</p>
 <p>We’re now ready to build a <em>vocabulary</em>. A vocabulary is a mapping from words to integers. The code below loops through the training data and uses it to build such a mapping.</p>
-<div class="cell">
+<div id="cell-23" class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> yield_tokens(data_iter):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> text, _ <span class="kw">in</span> data_iter:</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">yield</span> tokenizer(text)</span>
@@ -344,11 +351,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>vocab.set_default_index(vocab[<span class="st">"&lt;unk&gt;"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here are the first couple elements of the vocabulary:</p>
-<div class="cell" data-outputid="447390e1-83f2-4f13-96b7-bc99b3a6b610">
+<div id="cell-25" class="cell" data-outputid="447390e1-83f2-4f13-96b7-bc99b3a6b610">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>vocab.get_itos()[<span class="dv">0</span>:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This vocabulary can be applied on a list of tokens like this:</p>
-<div class="cell" data-outputid="7b2ace4d-34a3-457c-a3d5-d0ff4a6aa75c">
+<div id="cell-27" class="cell" data-outputid="7b2ace4d-34a3-457c-a3d5-d0ff4a6aa75c">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vocab(tokenized)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -361,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We pad the headlines with an unused integer index if necessary so that all headlines have the same length. This index corresponds to “blank” or “no words in this slot.”</li>
 <li>We return the batch of headlines as a consolidated tensor.</li>
 </ol>
-<div class="cell">
+<div id="cell-29" class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>max_len <span class="op">=</span> <span class="dv">30</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>num_tokens <span class="op">=</span> <span class="bu">len</span>(vocab.get_itos())</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> text_pipeline(x):</span>
@@ -374,10 +381,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>label_pipeline <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">int</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div id="cell-30" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>text_pipeline(<span class="st">"we can't believe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div id="cell-31" class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collate_batch(batch):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    label_list, text_list <span class="op">=</span> [], []</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (_text, _label) <span class="kw">in</span> batch:</span>
@@ -393,12 +400,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    text_list <span class="op">=</span> torch.stack(text_list)</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> label_list.to(device), text_list.to(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div id="cell-32" class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(train_data, batch_size<span class="op">=</span><span class="dv">8</span>, shuffle<span class="op">=</span><span class="va">True</span>, collate_fn<span class="op">=</span>collate_batch)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>val_loader <span class="op">=</span> DataLoader(val_data, batch_size<span class="op">=</span><span class="dv">8</span>, shuffle<span class="op">=</span><span class="va">True</span>, collate_fn<span class="op">=</span>collate_batch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at a batch of data now:</p>
-<div class="cell" data-outputid="98e6a698-98d2-45f9-aeba-7b91c12f9619">
+<div id="cell-34" class="cell" data-outputid="98e6a698-98d2-45f9-aeba-7b91c12f9619">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">next</span>(<span class="bu">iter</span>(train_loader))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first element is the list of labels. The second is the concatenated sequence of integers representing 8 headlines worth of text. The final one is the list of offsets that tells us where each of the 8 headlines begins.</p>
@@ -411,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Image credit: <a href="https://towardsdatascience.com/creating-word-embeddings-coding-the-word2vec-algorithm-in-python-using-deep-learning-b337d0ba17a8">Towards Data Science</a></em></p>
 <p>Word embeddings are often produced as intermediate stages in many machine learning algorithms. In our case, we’re going to add an embedding layer at the very base of our model. We’ll allow the user to flexibly specify the number of dimensions.</p>
 <p>We’ll typically expect pretty low-dimensional embeddings for this lecture, but state-of-the-art embeddings will typically have a much higher number of dimensions. For example, the <a href="http://projector.tensorflow.org/">Embedding Projector demo</a> supplied by TensorFlow uses a default dimension of 200.</p>
-<div class="cell">
+<div id="cell-36" class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> nn</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TextClassificationModel(nn.Module):</span>
@@ -428,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s learn and train a model!</p>
-<div class="cell">
+<div id="cell-40" class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(model.parameters(), lr<span class="op">=</span><span class="fl">.1</span>)</span>
@@ -482,7 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The weight matrix itself has 16 columns, which is too many for us to conveniently visualize. So, instead we are going to use our friend PCA to extract a 2-dimensional representation that we can plot.</p>
 <p>We’ll use the Plotly package to do the plotting. Plotly works best with dataframes:</p>
 <p>And, let’s plot! We’ve used Plotly for the interactivity: hover over a dot to see the word it corresponds to.</p>
-<div class="cell" data-outputid="4ea01cb9-bd75-4065-f79f-89d095fa4537">
+<div id="cell-54" class="cell" data-outputid="4ea01cb9-bd75-4065-f79f-89d095fa4537">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(embedding_df, </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                 x <span class="op">=</span> <span class="st">"x0"</span>, </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                 y <span class="op">=</span> <span class="st">"x1"</span>, </span>
@@ -502,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Modeler choice</strong>: we only used data corresponding to a certain subset of labels.</li>
 </ol>
 <p>With these considerations in mind, let’s see what kinds of words our model associates with female and male genders.</p>
-<div class="cell">
+<div id="cell-56" class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>feminine <span class="op">=</span> [<span class="st">"she"</span>, <span class="st">"her"</span>, <span class="st">"woman"</span>]</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>masculine <span class="op">=</span> [<span class="st">"he"</span>, <span class="st">"him"</span>, <span class="st">"man"</span>]</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -527,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>sub_df <span class="op">=</span> embedding_df[embedding_df[<span class="st">"highlight"</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-outputid="f92609a5-b848-4067-bc4b-2d815b5d037e">
+<div id="cell-57" class="cell" data-outputid="f92609a5-b848-4067-bc4b-2d815b5d037e">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(sub_df, </span>
@@ -664,10 +671,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -677,8 +683,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -691,6 +706,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -734,6 +824,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -759,6 +850,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -819,6 +937,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

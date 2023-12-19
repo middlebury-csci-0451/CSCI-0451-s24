@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -101,6 +101,11 @@ div.csl-indent {
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -110,7 +115,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -129,12 +135,12 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -223,6 +229,7 @@ div.csl-indent {
   </div>
   
 
+
 </header>
 
 <div class="hidden">
@@ -247,7 +254,7 @@ div.csl-indent {
 </div></div><section id="our-data" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="our-data">Our Data</h3>
 <p>The perceptron algorithm aims to find a rule for separating two distinct groups in some data. Here’s an example of some data on which we might aim to apply the perceptron:</p>
-<div class="cell page-columns page-full" data-execution_count="1">
+<div id="cell-fig-scatter" class="cell page-columns page-full" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -281,7 +288,7 @@ div.csl-indent {
 <div id="fig-scatter" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="perceptron_files/figure-html/fig-scatter-output-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1: 200 data points in the 2d plane, each of which has one of two labels.</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1: 200 data points in the 2d plane, each of which has one of two labels.</figcaption>
 </figure>
 </div>
 </div>
@@ -311,7 +318,7 @@ div.csl-indent {
 \tag{2}\]</span></span></p>
 <p>where we have defined the new feature vectors <span class="math inline">\(\tilde{\vx} = (\vx, 1)\)</span> and <span class="math inline">\(\tilde{\vw} = (\vw, -b)\)</span>.</p>
 <p>When <span class="math inline">\(k = 2\)</span>, a hyperplane is just a line. Here are two candidate hyperplanes that we could use to classify our data. Which one looks like it better separates the two classes?</p>
-<div class="cell page-columns page-full" data-execution_count="2">
+<div id="cell-fig-scatter-with-separators" class="cell page-columns page-full" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
@@ -330,7 +337,7 @@ div.csl-indent {
 <div id="fig-scatter-with-separators" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="perceptron_files/figure-html/fig-scatter-with-separators-output-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;2: Two candidate separating hyperplanes for our data. Which one would you choose? The two weight vectors are <span class="math inline">\(\tilde{\vw}^{(0)} = (0.5, -0.5, 0.1)\)</span> and <span class="math inline">\(\tilde{\vw}^{(1)} = (-0.5, -0.5, 0.9)\)</span>.</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;2: Two candidate separating hyperplanes for our data. Which one would you choose? The two weight vectors are <span class="math inline">\(\tilde{\vw}^{(0)} = (0.5, -0.5, 0.1)\)</span> and <span class="math inline">\(\tilde{\vw}^{(1)} = (-0.5, -0.5, 0.9)\)</span>.</figcaption>
 </figure>
 </div>
 </div>
@@ -339,11 +346,11 @@ div.csl-indent {
 <p><span id="eq-perceptron-predict"><span class="math display">\[
 \bracket{\tilde{\vw}^{(1)}, \tilde{\vx}_i} &gt; 0 \Leftrightarrow y_i = 1\;.
 \tag{3}\]</span></span></p>
-<p>That is, if someone gave you the weight vector <span class="math inline">\(\tilde{\vw}^{(1)}\)</span>, <strong><em>you wouldn’t need to see the data labels</em></strong>: you could exactly recover them using <a href="#eq-perceptron-predict">Equation&nbsp;3</a>.</p>
+<p>That is, if someone gave you the weight vector <span class="math inline">\(\tilde{\vw}^{(1)}\)</span>, <strong><em>you wouldn’t need to see the data labels</em></strong>: you could exactly recover them using <a href="#eq-perceptron-predict" class="quarto-xref">Equation&nbsp;3</a>.</p>
 <p>Let’s make this a little more precise. For fixed <span class="math inline">\(\tilde{\vw}\)</span>, let <span class="math inline">\(\hat{y}_i \triangleq \langle \tilde{\vw}, \tilde{\vx}_i \rangle\)</span>. The classification <em>accuracy</em> of the two-label perceptron with weight <span class="math inline">\(\tilde{\vw}\)</span>is</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">We’ve used a little math trick here: take a moment to convince yourself that <a href="#eq-perceptron-predict">Equation&nbsp;3</a> is equivalent to the statement that <span class="math inline">\(\hat{y}_i y_i &gt; 0\)</span>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">We’ve used a little math trick here: take a moment to convince yourself that <a href="#eq-perceptron-predict" class="quarto-xref">Equation&nbsp;3</a> is equivalent to the statement that <span class="math inline">\(\hat{y}_i y_i &gt; 0\)</span>.</span></div></div>
 <p><span class="math display">\[A(\tilde{\vw}) \triangleq \frac{1}{n} \sum_{i = 1}^n \one{\hat{y}_i y_i &gt; 0}\;.\]</span></p>
-<p>Higher accuracy means that the vector <span class="math inline">\(\tilde{\vw}\)</span> predicts more correct labels via <a href="#eq-perceptron-predict">Equation&nbsp;3</a>. The <em>loss</em> (also called the <em>empirical risk</em>) is</p>
+<p>Higher accuracy means that the vector <span class="math inline">\(\tilde{\vw}\)</span> predicts more correct labels via <a href="#eq-perceptron-predict" class="quarto-xref">Equation&nbsp;3</a>. The <em>loss</em> (also called the <em>empirical risk</em>) is</p>
 <p><span id="eq-loss"><span class="math display">\[
 R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 \tag{4}\]</span></span></p>
@@ -364,7 +371,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 </ol>
 <section id="local-improvement-on-data-point-i" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="local-improvement-on-data-point-i">Local Improvement on Data Point <span class="math inline">\(i\)</span></h4>
-<p>Let’s first check that the perceptron update in <a href="#eq-perceptron-update">Equation&nbsp;5</a> actually improves the prediction on data point <span class="math inline">\(i\)</span> if there is currently a mistake on that point (i.e.&nbsp;if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>). We can do this by computing the new <span class="math inline">\(\hat{y}_i^{(t+1)}\)</span>. Remember, what we want is for the sign of <span class="math inline">\(\hat{y}_i^{(t+1)}\)</span> to match <span class="math inline">\(y_i\)</span>.</p>
+<p>Let’s first check that the perceptron update in <a href="#eq-perceptron-update" class="quarto-xref">Equation&nbsp;5</a> actually improves the prediction on data point <span class="math inline">\(i\)</span> if there is currently a mistake on that point (i.e.&nbsp;if <span class="math inline">\(\hat{y}^{(t)}_i y_i &lt; 0\)</span>). We can do this by computing the new <span class="math inline">\(\hat{y}_i^{(t+1)}\)</span>. Remember, what we want is for the sign of <span class="math inline">\(\hat{y}_i^{(t+1)}\)</span> to match <span class="math inline">\(y_i\)</span>.</p>
 <p><span class="math display">\[
 \begin{align}
 \hat{y}_i^{(t+1)} &amp;= \bracket{\tilde{\vw}^{(t+1)}, \tilde{\vx}_i}  \tag{definition of $\hat{y}_i^{(t+1)}$}\\
@@ -379,7 +386,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 <section id="illustration" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="illustration">Illustration</h2>
 <p>Now let’s go ahead and run the perceptron algorithm on some data. First we should set up our feature matrix <span class="math inline">\(\mX\)</span> and target vector <span class="math inline">\(\vy\)</span>.</p>
-<div class="cell" data-execution_count="3">
+<div id="cell-6" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.append(np.column_stack((X1, X2)), np.column_stack((X3, X4)), axis <span class="op">=</span> <span class="dv">0</span>) <span class="co"># feature matrix</span></span>
@@ -387,7 +394,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 </details>
 </div>
 <p>Here are the first few rows of the feature matrix:</p>
-<div class="cell" data-execution_count="4">
+<div id="cell-8" class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">0</span>:<span class="dv">5</span>, :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -401,7 +408,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 </div>
 </div>
 <p>And here are the corresponding values of the target vector:</p>
-<div class="cell" data-execution_count="5">
+<div id="cell-10" class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -410,7 +417,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 <pre><code>array([-1, -1, -1, -1, -1])</code></pre>
 </div>
 </div>
-<div class="cell page-columns page-full" data-execution_count="6">
+<div id="cell-fig-demonstration" class="cell page-columns page-full" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123456</span>)</span>
@@ -433,7 +440,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 <div id="fig-demonstration" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="perceptron_files/figure-html/fig-demonstration-output-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;3: Several iterations of the perceptron algorithm. In each panel, the dashed line is the hyperplane corresponding to the previous weight vector <span class="math inline">\(\vw^{(t)}\)</span>, while the solid line is the hyperplane for the updated weight vector <span class="math inline">\(\vw^{t+1}\)</span>. The empty circle is the point <span class="math inline">\(i\)</span> used in the update; only iterations in which <span class="math inline">\(i\)</span> was a mistake are shown, with the exception of the final two iterations (by which the algorithm has converged). The loss is computed as in <a href="#eq-loss">Equation&nbsp;4</a>. (The perceptron update itself takes place using a function called <code>perceptron_update</code> whose implementation I have intentionally hidden – you’ll implement a version yourself in a blog post!)</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;3: Several iterations of the perceptron algorithm. In each panel, the dashed line is the hyperplane corresponding to the previous weight vector <span class="math inline">\(\vw^{(t)}\)</span>, while the solid line is the hyperplane for the updated weight vector <span class="math inline">\(\vw^{t+1}\)</span>. The empty circle is the point <span class="math inline">\(i\)</span> used in the update; only iterations in which <span class="math inline">\(i\)</span> was a mistake are shown, with the exception of the final two iterations (by which the algorithm has converged). The loss is computed as in <a href="#eq-loss" class="quarto-xref">Equation&nbsp;4</a>. (The perceptron update itself takes place using a function called <code>perceptron_update</code> whose implementation I have intentionally hidden – you’ll implement a version yourself in a blog post!)</figcaption>
 </figure>
 </div>
 </div>
@@ -489,7 +496,7 @@ R(\tilde{\vw}) \triangleq 1 - A(\tilde{\vw})\;.
 </div>
 </div>
 </div>
-<p>For a proof of <a href="#thm-perceptron-convergence">Theorem&nbsp;1</a>, see p.&nbsp;37-44 of <span class="citation" data-cites="hardt2021patterns">Hardt and Recht (<a href="#ref-hardt2021patterns" role="doc-biblioref">2021</a>)</span>.</p>
+<p>For a proof of <a href="#thm-perceptron-convergence" class="quarto-xref">Theorem&nbsp;1</a>, see p.&nbsp;37-44 of <span class="citation" data-cites="hardt2021patterns">Hardt and Recht (<a href="#ref-hardt2021patterns" role="doc-biblioref">2021</a>)</span>.</p>
 </section>
 <section id="close-out-activity" class="level2">
 <h2 class="anchored" data-anchor-id="close-out-activity">Close-out Activity</h2>
@@ -610,10 +617,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -623,8 +629,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -637,6 +652,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -680,6 +770,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -705,6 +796,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -765,6 +883,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

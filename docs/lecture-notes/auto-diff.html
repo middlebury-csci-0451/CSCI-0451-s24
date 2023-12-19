@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -82,6 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
@@ -113,12 +119,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -209,6 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
   </div>
   
+
 
 </header>
 
@@ -337,7 +344,7 @@ Backpropagation (Backprop)
 <li>A <code>_backward</code> method which will be used to compute the gradient of the node. What this method actually is will depend on <em>how the node is used in future computations</em>.</li>
 <li>A set of <code>_prev</code> (nodes that are “previous” to the current node in the sense of being upstream in the computational graph).</li>
 </ol>
-<div class="cell" data-execution_count="2">
+<div id="6d91bd72" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Value:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">""" stores a single scalar value v </span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">         and placeholder for derivative d output/ d v"""</span></span>
@@ -349,7 +356,7 @@ Backpropagation (Backprop)
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._prev <span class="op">=</span> <span class="bu">set</span>(_children)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The most important method of this class, which handles backwards navigation along the computational graph, is the <code>backward</code> method:</p>
-<div class="cell" data-execution_count="3">
+<div id="ee0b8234" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward(<span class="va">self</span>, visited <span class="op">=</span> <span class="va">None</span>): </span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> visited <span class="kw">is</span> <span class="va">None</span>:</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>        visited<span class="op">=</span> <span class="bu">set</span>([<span class="va">self</span>])</span>
@@ -365,21 +372,21 @@ Backpropagation (Backprop)
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="1" data-code-lines="2">This case corresponds the top-level node in the computational graph. In our setting this will usually be the value of the loss function.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">This case corresponds the top-level node in the computational graph. In our setting this will usually be the value of the loss function.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="2" data-code-lines="5">This is the step in which we call the node’s internal <code>_backward()</code> method. This method “does the calculus” and depends on how the node was computed.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">This is the step in which we call the node’s internal <code>_backward()</code> method. This method “does the calculus” and depends on how the node was computed.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-annotation="3" data-code-lines="6">We then need to go through every node that is used in the computation of this node and also calculate <em>their</em> gradients.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="3">We then need to go through every node that is used in the computation of this node and also calculate <em>their</em> gradients.</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>The <code>backward</code> method handles the recursive logic of automatic differentiation. However, it doesn’t do any of the actual <em>math</em>. We need to implement this math within each of the arithmetic operations that we are going to implement for the <code>Value</code> class. Here’s how we implement addition:</p>
-<div class="cell" data-execution_count="4">
+<div id="ad7766d3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__add__</span>(<span class="va">self</span>, other):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>    other <span class="op">=</span> other <span class="cf">if</span> <span class="bu">isinstance</span>(other, Value) <span class="cf">else</span> Value(other)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> Value(<span class="va">self</span>.data <span class="op">+</span> other.data, (<span class="va">self</span>, other))</span>
@@ -396,21 +403,21 @@ Backpropagation (Backprop)
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="1" data-code-lines="2">This adds <code>other</code> to the computational graph, converting it to a <code>Value</code> if needed.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">This adds <code>other</code> to the computational graph, converting it to a <code>Value</code> if needed.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="2" data-code-lines="3">We need to do the addition itself, log the fact that <code>self</code> and <code>other</code> were used as inputs into this operation, and return a <code>Value</code> that contains both the <code>data</code> reflecting the addition and the information about the inputs.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">We need to do the addition itself, log the fact that <code>self</code> and <code>other</code> were used as inputs into this operation, and return a <code>Value</code> that contains both the <code>data</code> reflecting the addition and the information about the inputs.</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-annotation="3" data-code-lines="5">Define a <code>_backward</code> method to update the gradients for <code>self</code> and <code>other</code>, using upstream gradient information from <code>out</code>, and attach it to <code>out</code>. This method will then be used when <code>backward</code> is called. The exact structure of <code>_backward</code> requires that we do some calculus.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="3">Define a <code>_backward</code> method to update the gradients for <code>self</code> and <code>other</code>, using upstream gradient information from <code>out</code>, and attach it to <code>out</code>. This method will then be used when <code>backward</code> is called. The exact structure of <code>_backward</code> requires that we do some calculus.</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>Let’s do another math operation. This operation is very similar, but with a slightly more complex <code>_backward</code> method that reflects the chain rule from calculus.</p>
-<div class="cell" data-execution_count="5">
+<div id="9f7fef73" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__mul__</span>(<span class="va">self</span>, other):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    other <span class="op">=</span> other <span class="cf">if</span> <span class="bu">isinstance</span>(other, Value) <span class="cf">else</span> Value(other)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> Value(<span class="va">self</span>.data <span class="op">*</span> other.data, (<span class="va">self</span>, other))</span>
@@ -425,7 +432,7 @@ Backpropagation (Backprop)
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Value.<span class="fu">__mul__</span> <span class="op">=</span> <span class="fu">__mul__</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Having defined addition and multiplication, we can also pretty quickly define subtraction:</p>
-<div class="cell" data-execution_count="6">
+<div id="4103dbaa" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__neg__</span>(<span class="va">self</span>): <span class="cf">return</span> <span class="va">self</span> <span class="op">*</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__sub__</span>(<span class="va">self</span>, other):  <span class="cf">return</span> <span class="va">self</span> <span class="op">+</span> (<span class="op">-</span>other)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -433,7 +440,7 @@ Backpropagation (Backprop)
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Value.<span class="fu">__sub__</span> <span class="op">=</span> <span class="fu">__sub__</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s see an example of this in action. We can define the function <span class="math inline">\(f(x) = (x + 2)^2 + x^3\)</span>. Let’s do this and compute <span class="math inline">\(f(3)\)</span>:</p>
-<div class="cell" data-execution_count="7">
+<div id="e397f269" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Value(<span class="dv">3</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x): <span class="cf">return</span> (x<span class="op">+</span><span class="dv">2</span>)<span class="op">*</span>(x<span class="op">+</span><span class="dv">2</span>) <span class="op">+</span> x<span class="op">*</span>x<span class="op">*</span>x</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> f(a)</span>
@@ -448,7 +455,7 @@ Backpropagation (Backprop)
 f'(x) = 2(x+2) + 3x^2\;,
 \]</span></p>
 <p>we are expecting that <span class="math inline">\(f'(3) = 2(3+2) + 3\cdot 3^2 = 37\)</span>. Let’s check:</p>
-<div class="cell" data-execution_count="8">
+<div id="f6436259" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y.backward()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"derivative = </span><span class="sc">{</span>a<span class="sc">.</span>grad<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -487,7 +494,7 @@ f'(x) = 2(x+2) + 3x^2\;,
 </div>
 </div>
 <p>In order to implement this with automatic differentiation, let’s first implement the predictor model <span class="math inline">\(f(x) = wx + b\)</span> as a class, using</p>
-<div class="cell" data-execution_count="9">
+<div id="c6175e3d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Linear:</span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.w,<span class="va">self</span>.b <span class="op">=</span> Value(np.random.rand()),Value(np.random.rand())</span>
@@ -501,25 +508,25 @@ f'(x) = 2(x+2) + 3x^2\;,
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-annotation="1" data-code-lines="3">Initialize a random slope <span class="math inline">\(w\)</span> and intercept <span class="math inline">\(b\)</span>.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="1">Initialize a random slope <span class="math inline">\(w\)</span> and intercept <span class="math inline">\(b\)</span>.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-annotation="2" data-code-lines="5">What should happen when the model accepts input.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="2">What should happen when the model accepts input.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-annotation="3" data-code-lines="7">This backend to <code>__call__</code> isn’t necessary; I just implemented it this way because PyTorch wants us to implement a method called <code>forward</code> for our models.</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="3">This backend to <code>__call__</code> isn’t necessary; I just implemented it this way because PyTorch wants us to implement a method called <code>forward</code> for our models.</span>
 </dd>
 <dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-annotation="4" data-code-lines="9">Zero out the gradients (need to do after each round of gradient descent).</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="4">Zero out the gradients (need to do after each round of gradient descent).</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>Now that we’ve implemented this model, we’re already to train it. First let’s create some random data:</p>
-<div class="cell" data-execution_count="10">
+<div id="6ab6a603" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -539,7 +546,7 @@ f'(x) = 2(x+2) + 3x^2\;,
 </div>
 </div>
 <p>And now let’s do stochastic gradient descent:</p>
-<div class="cell" data-execution_count="11">
+<div id="aa8e82d0" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.01</span></span>
 <span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">5</span></span>
 <span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -561,25 +568,25 @@ f'(x) = 2(x+2) + 3x^2\;,
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="1" data-code-lines="11">Zero out all previous gradient information in the model</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="11" data-code-annotation="1">Zero out all previous gradient information in the model</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="2" data-code-lines="12">Compute the loss on a single data pair <span class="math inline">\((x_i, y_i)\)</span> (we’re writing <span class="math inline">\(z^2\)</span> as <span class="math inline">\(z \cdot z\)</span> because we haven’t yet implemented powers, only multiplication).</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="12" data-code-annotation="2">Compute the loss on a single data pair <span class="math inline">\((x_i, y_i)\)</span> (we’re writing <span class="math inline">\(z^2\)</span> as <span class="math inline">\(z \cdot z\)</span> because we haven’t yet implemented powers, only multiplication).</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="3" data-code-lines="13">Compute the gradients of all the model parameters using automatic differentiation.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="13" data-code-annotation="3">Compute the gradients of all the model parameters using automatic differentiation.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-annotation="4" data-code-lines="14">Update the model parameters using gradient descent.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="14" data-code-annotation="4">Update the model parameters using gradient descent.</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>We’re now able to visualize our model parameters:</p>
-<div class="cell" data-execution_count="12">
+<div id="19e1b9c7" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, y, alpha <span class="op">=</span> <span class="fl">0.5</span>, label <span class="op">=</span> <span class="st">"data"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Predictor"</span>, ylabel <span class="op">=</span> <span class="st">"Target"</span>, )</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -687,10 +694,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -700,8 +706,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -714,6 +729,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -757,6 +847,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -782,6 +873,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -842,6 +960,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

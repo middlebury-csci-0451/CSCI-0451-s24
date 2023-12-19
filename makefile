@@ -26,3 +26,4 @@ shuffle-B:
 
 clean: 
 	find . -type f -name "* [0-9]*" -delete
+	find . -name "* [0-9]*" -type d -exec rm -r "{}" \;

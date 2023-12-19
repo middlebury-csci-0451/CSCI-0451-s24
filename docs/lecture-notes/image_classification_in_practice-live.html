@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -82,6 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -108,12 +114,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -204,12 +210,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
 <p><a href="https://colab.research.google.com/github/middlebury-csci-0451/CSCI-0451/blob/main/lecture-notes/image_classification_in_practice.ipynb">Open these notes in Google Colab.</a></p>
 <p><a href="https://colab.research.google.com/github/middlebury-csci-0451/CSCI-0451/blob/main/lecture-notes/image_classification_in_practice-live.ipynb">Open the live version of these notes in Google Colab.</a></p>
 <p>In this lecture, we’ll wrap up our discussion of deep image classification with consideration of some of the practicalities that go in to designing and training models. We’ll focus especially on some methods that can improve the performance of image classifiers without necessarily increasing the size of the training data set. These are <em>data augmentation</em> and <em>transfer learning</em>.</p>
-<div class="cell">
+<div id="cell-3" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for data retrieval</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> BytesIO</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.request <span class="im">import</span> urlopen</span>
@@ -242,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
 <p>We’ll start by downloading a data set containing images of cats and dogs. The result is a folder in our working directory called <code>cats_and_dogs_filtered</code>. This folder contains a <code>train</code> directory consisting of training images and a <code>validation</code> directory with validation images. Within the <code>train</code> directory are <code>cats</code> and <code>dogs</code> subdirectories containing images of each kind, and similarly for the <code>validation</code> directory.</p>
-<div class="cell">
+<div id="cell-5" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> <span class="st">'https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> urlopen(URL) <span class="im">as</span> zipped:</span>
@@ -254,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now that we’ve acquired the data, let’s create a Torch <code>Dataset</code> object. The nice developers at <code>Torch</code> have implemented an <code>ImageFolder</code> constructor that will create a <code>Dataset</code> for us. We only need to supply the directory of the training (and validation) data sets, as well as an optional <code>transform</code> that should be applied to each image prior to being fed into the model. Let’s start by just specifying that each image should have the <code>transforms.ToTensor()</code> function applied to it, which, as you might guess, will convert the image into a <code>Tensor</code>:</p>
 <p>Now we’re ready to visualize a few entries in our data:</p>
-<div class="cell" data-outputid="11058957-47a8-4962-e920-e6c3671eba01">
+<div id="cell-9" class="cell" data-outputid="11058957-47a8-4962-e920-e6c3671eba01">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -278,14 +285,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Although the classification task of “cat” vs.&nbsp;“dog” is simpler than last time, we can also see that the dat is somewhat messier. In particular, the images appear to come from a larger variety of different contexts. An important technical problem is that the images are of different <em>sizes</em>. In the supervized learning context this corresponds to a different number of features for each image, which is not workable for modeling. So, we need to resize our images to ensure that they all have the same number of features. This is handled by the <code>Resize</code> transform. The <code>Normalize</code> transform services to make the pixel values more comparable to each other (more formally, it scales the pixel values so that each image has mean pixel value 0 and variance 1).</p>
 <p>Let’s define both our training and validation data sets with this new set of transforms:</p>
-<div class="cell">
+<div id="cell-11" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>train_data <span class="op">=</span> ImageFolder(train_dir, transform <span class="op">=</span> transform)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>val_data <span class="op">=</span> ImageFolder(val_dir, transform <span class="op">=</span> transform)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If we now take a look, we can see that the resulting images are now all the same size, although some of them are a little blurry and others might be cropped in slightly strange ways.</p>
-<div class="cell" data-outputid="3b33f682-f7e1-46d4-f357-23fd5e34675a">
+<div id="cell-13" class="cell" data-outputid="3b33f682-f7e1-46d4-f357-23fd5e34675a">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>viz_data(train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -294,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now that we’ve prepared our data, we are ready to construct a model. First let’s wrap our data sets in data loaders to handle batching and randomization during training:</p>
 <p>For a first model, let’s use a manual convolutional neural network with three convolutional layers. This network is very similar to the one that we introduced last lecture.</p>
 <p>Let’s inspect our model:</p>
-<div class="cell" data-outputid="f886168f-0d09-4466-c4a5-5c2b897d9973">
+<div id="cell-19" class="cell" data-outputid="f886168f-0d09-4466-c4a5-5c2b897d9973">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>INPUT_SHAPE <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">64</span>, <span class="dv">64</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>summary(model, INPUT_SHAPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -308,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Compute gradients of the batch loss with respect to the model parameters.</li>
 <li>Take a step in the direction of the gradient, possibly after some modifications (e.g.&nbsp;in the Adam algorithm).</li>
 </ol>
-<div class="cell">
+<div id="cell-21" class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(model,  data_loader, optimizer, k_epochs <span class="op">=</span> <span class="dv">1</span>, print_every <span class="op">=</span> <span class="dv">2000</span>):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    begin <span class="op">=</span> time.time()</span>
@@ -353,11 +360,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now let’s try training our model:</p>
 <p>These are not <em>very</em> impressive training loss scores, as the loss we would get for a model that put equal weight on each possible label (essentially shrugging its shoulders) would be</p>
-<div class="cell" data-outputid="c7512b9d-abb0-4294-afed-1227826ce131">
+<div id="cell-25" class="cell" data-outputid="c7512b9d-abb0-4294-afed-1227826ce131">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.log(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, we can still test the model and see whether it might have learned anything that enables better-than-random predictions:</p>
-<div class="cell" data-outputid="fe7733a8-fc9f-438e-fe77-b0478a9cc2ed">
+<div id="cell-27" class="cell" data-outputid="fe7733a8-fc9f-438e-fe77-b0478a9cc2ed">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test(model, data_loader):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
@@ -394,26 +401,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>Sometimes, in this situation, we are simply out of luck: if there’s not enough data then you need to train a simpler model, or go get more data. In some settings—especially in the setting of images—there are some techniques we can try. The first one is data augmentation.</p>
 <p>Data augmentation techniques usually exploit certain so-called <em>invariances</em> in image data. Here’s an example of “rotation invariance.” Suppose I show you a picture of a cat:</p>
-<div class="cell" data-outputid="58df5267-5b59-4d93-ee5a-a133ea4149db">
+<div id="cell-30" class="cell" data-outputid="58df5267-5b59-4d93-ee5a-a133ea4149db">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> train_data[<span class="dv">14</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.moveaxis(X.numpy(), <span class="dv">0</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now suppose that I <em>rotate</em> the image a bit:</p>
-<div class="cell" data-outputid="a27b51e9-fb92-4de6-d5d9-2d6017134848">
+<div id="cell-32" class="cell" data-outputid="a27b51e9-fb92-4de6-d5d9-2d6017134848">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(np.moveaxis(rotated.numpy(), <span class="dv">0</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Well, that rotated image is <em>still an image of a cat</em>, just rotated a little bit. So, the correct label of the image is “rotation-invariant”: rotating the image doesn’t change the correct label. I could similarly flip the image upside-down, or crop it, or manipulate it in many other ways while still preserving it’s “cat”-ness. So, and this is a very special kind of circumstances, I can (sort of) <em>get more data for free</em> by rotating, flipping, and otherwise manipulating my images.</p>
 <p>This cluster of techniques is called <em>data augmentation</em>. Theoretically, data augmentation is not <em>just</em> a hack to get “more” data; it also helps models to generalize by ensuring that they are really learning features of “cats” and not just “cats that are standing the right way up.”</p>
 <p>A nice feature of Torch is that we can build these transforms right into our training data set. We don’t apply data augmentation to our validation data.</p>
-<div class="cell">
+<div id="cell-34" class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>train_data <span class="op">=</span> ImageFolder(train_dir, transform <span class="op">=</span> augmentation_transform)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(train_data, batch_size<span class="op">=</span>BATCH_SIZE, shuffle<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at some of our transformed data:</p>
-<div class="cell" data-outputid="b0a98983-a4fd-466f-8fc7-db3ba75438f6">
+<div id="cell-36" class="cell" data-outputid="b0a98983-a4fd-466f-8fc7-db3ba75438f6">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> (<span class="st">"cat"</span>, <span class="st">"dog"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> <span class="dv">3</span></span>
@@ -432,7 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        axarr[i, j].<span class="bu">set</span>(title <span class="op">=</span> classes[<span class="bu">int</span>(y)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are many other possible transformations, but we’ll stick with just those for now. Let’s go ahead and train!</p>
-<div class="cell" data-outputid="0bf15040-0066-4249-c6d9-2a0bb16a226c">
+<div id="cell-38" class="cell" data-outputid="0bf15040-0066-4249-c6d9-2a0bb16a226c">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ConvNet().to(device)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> optim.Adam(model.parameters(), lr<span class="op">=</span><span class="fl">0.001</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>train(model, train_loader, optimizer, k_epochs <span class="op">=</span> k_epochs, print_every <span class="op">=</span> <span class="dv">50</span>)</span>
@@ -453,7 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>In this model, the output layer is stored in the <code>fc</code> instance variable. So, let’s just overwrite it, making sure to include the correct number of input features;</p>
 <p>Now we (hopefully) have a model that maintains much of <code>ImageNet</code>’s ability to detect patterns in images, but which will work for our purposes of binary classification. Let’s go ahead and train it!</p>
-<div class="cell" data-outputid="e347182b-7991-470d-fe27-10e0bae43cf4">
+<div id="cell-47" class="cell" data-outputid="e347182b-7991-470d-fe27-10e0bae43cf4">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># train with the complete model</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.to(device)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> optim.Adam(model.parameters(), lr<span class="op">=</span><span class="fl">0.001</span>)</span>
@@ -466,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="fixing-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="fixing-parameters">Fixing Parameters</h2>
 <p>But wait! In the last experiment, we still needed to train all 11M parameters of our modified <code>ImageNet</code>. But maybe we don’t even need to train the parameters of the intermediate hidden layers. Let’s instead train our model by insisting that only the parameters of the final hidden layer are going to be updated, with all the other parameters staying the same.</p>
-<div class="cell">
+<div id="cell-49" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># instead train only the parameters of the final layer</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can be around 50% faster</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -486,11 +493,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># opposed to before.</span></span>
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> optim.Adam(model.fc.parameters(), lr<span class="op">=</span><span class="fl">0.001</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-outputid="01f3809a-843d-438f-f2f4-3d0d712b1dc8">
+<div id="cell-50" class="cell" data-outputid="01f3809a-843d-438f-f2f4-3d0d712b1dc8">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>summary(model, INPUT_SHAPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, although our model still has the same number of parameters, the number of <em>trainable</em> parameters is much smaller. This means that we can get away with much less computation when it comes time to perform gradient updates. In particular, when using automatic differentiation it typically requires about as much compute to form the gradient (the backward step) as it does to compute the loss (the forward step). So, if we skip most of the backward step, we can hope for our training to be roughly twice as fast. This is usually the case for very large models. Our model isn’t quite big enough to realize that large a speedup.</p>
-<div class="cell" data-outputid="59d9cc3b-9726-43a4-de1e-6d8aa34807aa">
+<div id="cell-52" class="cell" data-outputid="59d9cc3b-9726-43a4-de1e-6d8aa34807aa">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>train(model, train_loader, optimizer, k_epochs <span class="op">=</span> k_epochs, print_every <span class="op">=</span> <span class="dv">50</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>test(model, val_loader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -581,10 +588,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -594,8 +600,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -608,6 +623,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -651,6 +741,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -676,6 +767,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -736,6 +854,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

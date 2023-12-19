@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -82,6 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -110,12 +116,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -203,6 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
   </div>
   
+
 
 </header>
 
@@ -322,7 +329,7 @@ Example
 </div>
 </div>
 </div>
-<p><a href="#thm-local-minima">Theorem&nbsp;1</a> and <a href="#thm-descent-directions">Theorem&nbsp;2</a> are important because they give us the mechanics of how to solve the empirical risk minimization problem (<a href="#eq-empirical-risk-minimization">Equation&nbsp;1</a>). Here’s our first version:</p>
+<p><a href="#thm-local-minima" class="quarto-xref">Theorem&nbsp;1</a> and <a href="#thm-descent-directions" class="quarto-xref">Theorem&nbsp;2</a> are important because they give us the mechanics of how to solve the empirical risk minimization problem (<a href="#eq-empirical-risk-minimization" class="quarto-xref">Equation&nbsp;1</a>). Here’s our first version:</p>
 <div class="callout callout-style-simple callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -368,7 +375,7 @@ Algorithm: (Batch) Gradient Descent
 </section>
 <section id="gradient-descent-for-empirical-risk-minimization" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="gradient-descent-for-empirical-risk-minimization">Gradient Descent For Empirical Risk Minimization</h2>
-<p>Suppose that we have a per-observation loss function <span class="math inline">\(\ell\)</span> that is strictly convex and differentiable. Suppose that we are still dealing with a linear predictor of the form in <a href="#eq-linear-predictor">Equation&nbsp;2</a>. Then, we know that the empirical risk objective function <span class="math inline">\(L\)</span> is also strictly convex and differentiable. It follows from <a href="#thm-gradient-descent-convergence">Theorem&nbsp;3</a> that, if there is a minimizer <span class="math inline">\(\mathbf{w}^*\)</span> for the empirical risk, then we can find it using gradient descent. To do this, we need to be able to calculate the gradient of the loss function <span class="math inline">\(L\)</span>. Here’s how this looks. Keep in mind that we are differentiating with respect to <span class="math inline">\(\mathbf{w}\)</span>.</p>
+<p>Suppose that we have a per-observation loss function <span class="math inline">\(\ell\)</span> that is strictly convex and differentiable. Suppose that we are still dealing with a linear predictor of the form in <a href="#eq-linear-predictor" class="quarto-xref">Equation&nbsp;2</a>. Then, we know that the empirical risk objective function <span class="math inline">\(L\)</span> is also strictly convex and differentiable. It follows from <a href="#thm-gradient-descent-convergence" class="quarto-xref">Theorem&nbsp;3</a> that, if there is a minimizer <span class="math inline">\(\mathbf{w}^*\)</span> for the empirical risk, then we can find it using gradient descent. To do this, we need to be able to calculate the gradient of the loss function <span class="math inline">\(L\)</span>. Here’s how this looks. Keep in mind that we are differentiating with respect to <span class="math inline">\(\mathbf{w}\)</span>.</p>
 <p><span class="math display">\[
 \begin{align}
 \nabla L(\mathbf{w}) &amp;= \nabla \left(\frac{1}{n} \sum_{i = 1}^n \ell(f_{\mathbf{w}}(\mathbf{x}_i), y_i)\right) \\
@@ -398,7 +405,7 @@ Algorithm: (Batch) Gradient Descent
 \]</span></p>
 <p>So, we can do logistic regression by choosing a learning rate and iterating the update <span class="math inline">\(\mathbf{w}^{(t+1)} \gets \mathbf{w}^{(t)} - \alpha \nabla L(\mathbf{w}^{(t)})\)</span> until convergence.</p>
 <p>Let’s see this in action. Here’s a data set:</p>
-<div class="cell page-columns page-full" data-execution_count="2">
+<div id="b5584b09" class="cell page-columns page-full" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
@@ -416,13 +423,13 @@ Algorithm: (Batch) Gradient Descent
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="gradient-descent_files/figure-html/cell-2-output-1.png" class="figure-img" width="587" height="429"></p>
-<p></p><figcaption class="figure-caption margin-caption">Note that this data is <strong>not</strong> linearly separable. The perceptron algorithm wouldn’t even have converged for this data set, but logistic regression will do great.</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Note that this data is <strong>not</strong> linearly separable. The perceptron algorithm wouldn’t even have converged for this data set, but logistic regression will do great.</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>The code below is very similar to the code from last time, but I’m going to first transform the feature matrix <span class="math inline">\(\mathbf{X}\)</span> so that it contains a column of constant features. This is going to make our mathematical life a lot easier.</p>
-<div class="cell" data-execution_count="3">
+<div id="7a70e907" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>np.seterr(<span class="bu">all</span><span class="op">=</span><span class="st">'ignore'</span>) </span>
@@ -444,7 +451,7 @@ Algorithm: (Batch) Gradient Descent
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loss(y_hat, y).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I’ll start by picking a random parameter vector, visualizing the corresponding line, and computing the loss:</p>
-<div class="cell" data-execution_count="4">
+<div id="6a7acd92" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pick a random weight vector and calculate the loss</span></span>
@@ -465,7 +472,7 @@ Algorithm: (Batch) Gradient Descent
 </div>
 <p>It can be hard to put these kinds of numbers in context, but this is a pretty poor value of the loss. You could probably guess that considering how bad the classifier line looks.</p>
 <p>Now let’s go ahead and use gradient descent to compute a better value of the parameter vector <span class="math inline">\(\tilde{\mathbf{w}}\)</span>. I’ve shown you the main loop of the algorithm, but not the calculation of the gradient. It’ll be up to you to implement the gradient (as well as variations of gradient descent) in an upcoming blog post.</p>
-<div class="cell" data-execution_count="5">
+<div id="fb4df8e0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hidden.logistic <span class="im">import</span> gradient</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">.001</span> <span class="co"># learning rate</span></span>
@@ -488,7 +495,7 @@ Algorithm: (Batch) Gradient Descent
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        prev_loss <span class="op">=</span> new_loss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can visualize the resulting classifier and check the value of the loss that it achieves.</p>
-<div class="cell" data-execution_count="6">
+<div id="4dc84b98" class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> empirical_risk(X_, y, logistic_loss, w)</span>
@@ -515,7 +522,7 @@ Algorithm: (Batch) Gradient Descent
 <section id="activity" class="level2">
 <h2 class="anchored" data-anchor-id="activity">Activity</h2>
 <p>Consider the function <span class="math inline">\(f(w_0, w_1) = \sin(w_0w_1)\)</span>. You can define this function like this:</p>
-<div class="cell" data-execution_count="7">
+<div id="19513d97" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -617,10 +624,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -630,8 +636,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -644,6 +659,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -687,6 +777,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -712,6 +803,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -772,6 +890,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

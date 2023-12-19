@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -82,6 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
@@ -113,12 +119,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -213,6 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
 <div class="hidden">
@@ -240,13 +247,13 @@ L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rang
 <h1>The Titanic Data Set</h1>
 <p>The Titanic Data Set is something like the “Hello world” of machine learning. It collects information about almost 900 passengers aboard the Titanic during the fateful voyage when it crashed into an iceberg in 1912 and sank. The information includes their age; the fare they paid for their ticket (in British pounds); their sex; and the passenger class <code>Pclass</code>, with 1st class corresponding to VIP treatment and 3rd class corresponding to a much less luxurious experience. Crucially, the data set also records whether that passenger survived the sinking of the ship, with 1 indicating that the passenger survived and 0 indicating that the passenger tragically perished.</p>
 <p>It is often convenient to represent tables of data as <em>data frames</em>. Data frames are implemented in multiple ways in multiple languages; we’ll work with data frames through <code>pandas</code>.</p>
-<div class="cell" data-execution_count="2">
+<div id="0575e735" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The following function will retrieve data from the <code>url</code> in which I’ve hosted the data set. It returns both the complete data (<code>df</code>, for “data frame”) and split pieces of the data that contain only the features and the target, respectively.</p>
-<div class="cell" data-execution_count="3">
+<div id="a5263237" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_titanic_data(url):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> df[<span class="st">"Survived"</span>]</span>
@@ -254,13 +261,13 @@ L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rang
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df, X, y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The reason I wrote a function is that we are going to read <em>two</em> data sets: a training data set and a testing data set. As we saw last time, the loss or score on the training data is not always a reliable guide to the ability of the model to make predictions on unseen data. For this reason, we are going to hold back a testing data set that we won’t actually download until we’re ready to evaluate our model. For now, let’s download the data on which we’ll train:</p>
-<div class="cell" data-execution_count="4">
+<div id="eeb2e9b5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/middlebury-csci-0451/CSCI-0451/main/data/titanic/train.csv"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_train, X_train, y_train <span class="op">=</span> read_titanic_data(train_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at the complete data frame:</p>
-<div class="cell" data-execution_count="5">
+<div id="af746e9f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -355,7 +362,7 @@ L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rang
 <blockquote class="blockquote">
 <p>What percentage of passengers in the training set survived?</p>
 </blockquote>
-<div class="cell" data-execution_count="6">
+<div id="7f9e72d0" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y_train.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>0.3921015514809591</code></pre>
@@ -366,7 +373,7 @@ L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rang
 <p>How wealthy were the passengers on the Titanic?</p>
 </blockquote>
 <p>We can’t know for certain, but we can learn about how much was paid for each passenger class:</p>
-<div class="cell" data-execution_count="7">
+<div id="ecf18370" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_train.groupby(<span class="st">'Pclass'</span>)[[<span class="st">'Fare'</span>]].aggregate([np.mean, <span class="bu">len</span>]).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -421,7 +428,7 @@ L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rang
 <p>Did wealth disparities make a difference for who was most likely to survive?</p>
 </blockquote>
 <p>We can segment out survival rates by passenger class to learn more about this:</p>
-<div class="cell" data-execution_count="8">
+<div id="1c1a0b0a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_train.groupby([<span class="st">'Pclass'</span>])[[<span class="st">'Survived'</span>]].aggregate([np.mean,<span class="bu">len</span> ]).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
@@ -468,7 +475,7 @@ L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rang
 </div>
 <p>Indeed, the higher passenger classes had significantly higher survival rates.</p>
 <p>This difference is even starker if we also segment out the data by the sex of the passenger:</p>
-<div class="cell" data-execution_count="9">
+<div id="f8a5c36e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_train.groupby([<span class="st">'Pclass'</span>, <span class="st">'Sex'</span>])[[<span class="st">'Survived'</span>]].aggregate([np.mean,<span class="bu">len</span> ]).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
@@ -539,7 +546,7 @@ L(\mathbf{w}) = \sum_{i = 1}^n \ell(\langle \mathbf{w}, \phi(\mathbf{x}_i) \rang
 <section id="data-preparation" class="level2">
 <h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
 <p>So far, we’ve been working with 2d <code>numpy</code> arrays (matrices) of features and 1d <code>numpy</code> arrays (vectors) of target variables. We can treat <code>pandas</code> data frames <em>of numbers</em> like matrices, and we can treat <code>pandas</code> columns <em>of numbers</em> like vectors. For example, our <code>y_train</code> is already in a format that we can use:</p>
-<div class="cell" data-execution_count="10">
+<div id="c35df33f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y_train.head() <span class="co"># first few entries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>0    1
@@ -551,7 +558,7 @@ Name: Survived, dtype: int64</code></pre>
 </div>
 </div>
 <p>On the other hand, our data frame has one column that we can’t use: the <code>Sex</code> column contains strings representing categories, rather than numbers. ML algorithms only understand numbers, and so we need to encode the <code>Sex</code> of the passengers as a number. We use so-called “<em>one-hot encoding</em>” for this, in which each category is represented by a binary column, with a 1 indicating that the passenger fell into that category. The <code>Pandas</code> function <code>get_dummies()</code> is an extremely convenient way to achieve this:</p>
-<div class="cell" data-execution_count="11">
+<div id="55bf4e4d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> pd.get_dummies(X_train, columns <span class="op">=</span> [<span class="st">"Sex"</span>], drop_first <span class="op">=</span> <span class="st">"if_binary"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
@@ -627,7 +634,7 @@ Name: Survived, dtype: int64</code></pre>
 <section id="modeling" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="modeling">Modeling</h2>
 <p>Now we’re ready to do some modeling! You may know how to implement logistic regression (and maybe you’ve already done it!), but for today we’ll use the <code>scikit-learn</code> implementation. We can already go ahead and fit our model. In <code>sklearn</code>, the <code>score</code> of a classification model is just the accuracy rate.</p>
-<div class="cell" data-execution_count="13">
+<div id="52fdf87d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
@@ -639,7 +646,7 @@ Name: Survived, dtype: int64</code></pre>
 </div>
 <p>So, our model achieves about 80% accuracy on the training data, which is much better than the 60% we could have achieved by random guessing.</p>
 <p>Let’s take a look at the optimal parameter vector <span class="math inline">\(\mathbf{w}\)</span>. This is stored in <code>LR</code> in the <code>coef_</code> instance variable:</p>
-<div class="cell" data-execution_count="14">
+<div id="8ef2c984" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"column"</span> : X_train.columns, </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"coefficient"</span> : LR.coef_.ravel()</span>
@@ -705,18 +712,18 @@ Name: Survived, dtype: int64</code></pre>
 <li>Should we try regularizing our logistic regression?</li>
 </ul>
 <p>We can’t exhaustively explore all possibilities, but let’s try to address one of these. Should we try incorporating polynomial features, and if so, of what degree?</p>
-<div class="cell" data-execution_count="15">
+<div id="b9fdb409" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s write a simple function that will construct a model with polynomial features for us:</p>
-<div class="cell" data-execution_count="16">
+<div id="362904e0" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> poly_LR(deg):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> Pipeline([(<span class="st">"poly"</span>, PolynomialFeatures(degree <span class="op">=</span> deg)),</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                   (<span class="st">"LR"</span>, LogisticRegression(penalty <span class="op">=</span> <span class="st">"none"</span>, max_iter <span class="op">=</span> <span class="bu">int</span>(<span class="fl">1e3</span>)))])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can use it like this:</p>
-<div class="cell" data-execution_count="17">
+<div id="1e1091ec" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plr <span class="op">=</span> poly_LR(<span class="dv">3</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plr.fit(X_train, y_train)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plr.score(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -727,7 +734,7 @@ Name: Survived, dtype: int64</code></pre>
 <p>Is that better or worse than the simple logistic model without polynomial features? Unfortunately we don’t really know; the reason is again that accuracy on the training isn’t usually a reliable indicator of predictive performance. In order to make an assessment, we can instead simulate the process of fitting the model and evaluating on “test” data by witholding parts of our <em>training</em> data to use as testing. We split the data into chunks and withold each chunk, using the other chunks to train the data. This is called <em>cross-validation</em>, and it is illustrated in this figure:</p>
 <p><img src="https://scikit-learn.org/stable/_images/grid_search_cross_validation.png" class="img-fluid"></p>
 <p>We could do this with a janky for-loop, but the nice <code>scikit-learn</code> developers have implemented this for us. Here’s an example of cross-validation with 5 folds. This can take a little while, as there are actually 5 calls to <code>plr.fit()</code> happening under the hood.</p>
-<div class="cell" data-execution_count="18">
+<div id="63f43208" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> cross_val_score(plr, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>cv_scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -736,14 +743,14 @@ Name: Survived, dtype: int64</code></pre>
 </div>
 </div>
 <p>Each of these scores represents the model’s performance when used to predict one of the 5 folds of data after having been fit on the other 4. We often just average them to get an overall metric:</p>
-<div class="cell" data-execution_count="19">
+<div id="32a4d533" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cv_scores.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>0.7714514034561983</code></pre>
 </div>
 </div>
 <p>Now we can try using cross-validation to get a sense for what degree of polynomial feature we should use. Degree 0 is actually the baseline model, and degree 1 corresponds to simple logistic regression without a polynomial feature map.</p>
-<div class="cell" data-execution_count="20">
+<div id="fd67d7fa" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> deg <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  plr <span class="op">=</span> poly_LR(deg <span class="op">=</span> deg)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  cv_scores <span class="op">=</span> cross_val_score(plr, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>)</span>
@@ -757,7 +764,7 @@ Polynomial degree = 3, score = 0.771</code></pre>
 </div>
 </div>
 <p>It looks like it doesn’t make a <em>huge</em> difference, but degree-2 polynomial features might be our best bet according to cross-validation. Let’s try go ahead and fit a single copy of this model on the entire training data:</p>
-<div class="cell" data-execution_count="21">
+<div id="de2d8532" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plr <span class="op">=</span> poly_LR(deg <span class="op">=</span> <span class="dv">2</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>plr.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
@@ -767,14 +774,14 @@ Polynomial degree = 3, score = 0.771</code></pre>
 </div>
 </div>
 <p>Let’s finally see how we do on the test set. We need to download the test set and process it in the same way that we did the training set.</p>
-<div class="cell" data-execution_count="22">
+<div id="51d6a0ad" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>test_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/middlebury-csci-0451/CSCI-0451/main/data/titanic/test.csv"</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>df_test, X_test, y_test <span class="op">=</span> read_titanic_data(test_url)</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> pd.get_dummies(X_test, columns <span class="op">=</span> [<span class="st">"Sex"</span>], drop_first<span class="op">=</span><span class="st">"if_binary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we’re finally ready to compute the score. Drumroll please!</p>
-<div class="cell" data-execution_count="23">
+<div id="bd626d76" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plr.score(X_test, y_test).<span class="bu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>0.8483</code></pre>
@@ -784,7 +791,7 @@ Polynomial degree = 3, score = 0.771</code></pre>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>In case you’re wondering, our original logistic regression without polynomial features does <em>almost</em> as well on the test data:</p>
-<div class="cell" data-execution_count="24">
+<div id="50f783c7" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>LR.score(X_test, y_test).<span class="bu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>0.8427</code></pre>
@@ -794,7 +801,7 @@ Polynomial degree = 3, score = 0.771</code></pre>
 <section id="breaking-down-accuracy" class="level2">
 <h2 class="anchored" data-anchor-id="breaking-down-accuracy">Breaking Down Accuracy</h2>
 <p>When evaluating the performance of our algorithms, it’s not usually enough to just compute an overall score. The <em>confusion matrix</em> of a classifier on the test data is a convenient way to understand the <em>kind</em> of mistakes that your model most frequently makes. To construct a confusion matrix, we can use the <code>confusion_matrix</code> function from <code>sklearn.metrics</code>.</p>
-<div class="cell" data-execution_count="25">
+<div id="0ec8e356" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> plr.predict(X_test)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -820,7 +827,7 @@ Polynomial degree = 3, score = 0.771</code></pre>
 \text{FPR} = \frac{\text{\#FP}}{\text{\#FP} + \text{\#TN}}
 \]</span></p>
 <p>The true negative rate and false negative right are defined similarly. Normalizing the confusion matrix allows us to read off these rates:</p>
-<div class="cell" data-execution_count="26">
+<div id="f7ca6a66" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>confusion_matrix(y_test, y_pred, normalize <span class="op">=</span> <span class="st">"true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>array([[0.87719298, 0.12280702],
@@ -828,7 +835,7 @@ Polynomial degree = 3, score = 0.771</code></pre>
 </div>
 </div>
 <p>We observe that not only does our model make mistakes, it makes <em>different kinds</em> of mistakes. Not only that – it makes different kinds of mistakes on different groups! For example, let’s compare the model’s confusion matrices on test data for female and male passengers:</p>
-<div class="cell" data-execution_count="27">
+<div id="c748229b" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ix <span class="op">=</span> X_test[<span class="st">"Sex_male"</span>] <span class="op">==</span> <span class="dv">0</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Female passengers:"</span>)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print((y_test[ix] == y_pred[ix]).mean())</span></span>
@@ -878,7 +885,7 @@ Discussion
 <p>Please discuss the following questions:</p>
 <p>As we saw above, the model is more likely to incorrectly predict male passengers to perish, and more likely to incorrectly predict female passengers to survive. As a result, the insurance prices for men are significantly higher. <strong>Does your insurance scheme have an anti-male bias?</strong> Please consider both of the following points of view: - No, there is no bias because the model is simply doing its best to replicate the patterns found in the data. It’s not the model’s fault that men tended not to survive the crash! - Yes, there is bias because the model is creating higher prices for men on the basis of information that includes their sex.</p>
 <p>Suppose now that we train and evaluate a version of the model that doesn’t include passenger sex at all:</p>
-<div class="cell" data-execution_count="28">
+<div id="2fefa824" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># versions of the training and test data with sex column removed</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>X_train_ <span class="op">=</span> X_train.drop(<span class="st">"Sex_male"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>X_test_   <span class="op">=</span> X_test.drop(<span class="st">"Sex_male"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
@@ -1004,10 +1011,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1017,8 +1023,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1031,6 +1046,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1074,6 +1164,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1099,6 +1190,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1159,6 +1277,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

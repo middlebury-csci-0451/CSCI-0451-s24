@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -82,6 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
@@ -113,12 +119,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -208,6 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
   </div>
   
+
 
 </header>
 
@@ -341,7 +348,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <p><span id="eq-single-layer"><span class="math display">\[
 \hat{\mathbf{W}}, \hat{\mathbf{U}}_1 = \mathop{\mathrm{arg\,min}}_{\mathbf{W}\in \mathbb{R}^{q\times \ell}, \mathbf{U}_1 \in \mathbb{R}^{p\times q}} \; \mathcal{L}(\alpha_1(\mathbf{X}\mathbf{U}_1)\mathbf{W}, \mathbf{Y})\;.
 \tag{1}\]</span></span></p>
-<p><a href="#eq-single-layer">Equation&nbsp;1</a> is an example of a machine learning problem for a neural network with a single <strong><em>hidden layer</em></strong>. The hidden layer refers to the “layer” of computation <span class="math inline">\(\alpha_1(\mathbf{X}\mathbf{U}_1)\)</span>. This layer is “hidden” because it’s not the input of the model (that would be <span class="math inline">\(\mathbf{X}\)</span>) nor is it the output (that would be <span class="math inline">\(\alpha_1(\mathbf{X}\mathbf{U}_1)\mathbf{W}\)</span>). The computational graph is now more complicated: we need to substitute in the explicit computations for <span class="math inline">\(\phi\)</span>:</p>
+<p><a href="#eq-single-layer" class="quarto-xref">Equation&nbsp;1</a> is an example of a machine learning problem for a neural network with a single <strong><em>hidden layer</em></strong>. The hidden layer refers to the “layer” of computation <span class="math inline">\(\alpha_1(\mathbf{X}\mathbf{U}_1)\)</span>. This layer is “hidden” because it’s not the input of the model (that would be <span class="math inline">\(\mathbf{X}\)</span>) nor is it the output (that would be <span class="math inline">\(\alpha_1(\mathbf{X}\mathbf{U}_1)\mathbf{W}\)</span>). The computational graph is now more complicated: we need to substitute in the explicit computations for <span class="math inline">\(\phi\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -403,7 +410,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <section id="deep-penguin-classification" class="level1">
 <h1>Deep Penguin Classification</h1>
 <p>Let’s use our friends the penguins as a running example. When working with deep models we often need to construct more complex data structures in order to feed our models to the data. I’m hiding this complexity for today; we’ll discuss it in some more detail in a coming lecture.</p>
-<div class="cell" data-execution_count="2">
+<div id="e1830f45" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -455,7 +462,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> features, label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="3">
+<div id="3dcc69e0" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
@@ -467,7 +474,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 </details>
 </div>
 <p>Here are our data sets. <code>PenguinsDataset</code> is a custom class that I implemented above, while <code>DataLoader</code> is a utility from <code>torch</code> that automatically handles things like batching and randomization for gradient descent.</p>
-<div class="cell" data-execution_count="4">
+<div id="b623d7ff" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> PenguinsDataset()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>train_dataloader <span class="op">=</span> DataLoader(train, batch_size<span class="op">=</span><span class="dv">10</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -475,7 +482,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>val_dataloader <span class="op">=</span> DataLoader(val, batch_size<span class="op">=</span><span class="dv">10</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we’re ready to define our model. To see how we do things in torch, let’s start by implementing logistic regression. To start, we need to create a predictor model that does the prediction step of logistic regression. If you’ll recall, this is nothing more than matrix multiplication. The <code>nn.Linear</code> “layer” supplied by <code>torch</code> implements this:</p>
-<div class="cell" data-execution_count="5">
+<div id="c9a804cf" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> nn</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> penguinLogistic(nn.Module):</span>
@@ -489,7 +496,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.linear(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can optimize this model using the cross-entropy loss and the Adam optimizer. As you’ll recall, logistic regression is nothing more than matrix multiplication plus the cross-entropy loss, so this is a logistic regression model!</p>
-<div class="cell" data-execution_count="6">
+<div id="ce484b76" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> penguinLogistic()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> nn.CrossEntropyLoss()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -497,7 +504,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(model.parameters(), lr<span class="op">=</span>learning_rate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we need to actually perform the optimization. The <code>torch</code> package gives us a lot of control over exactly how this happens, and we’ll go over the details in a future lecture.</p>
-<div class="cell" data-execution_count="7">
+<div id="ce92a295" class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> training_loop(model, train_dataloader, val_dataloader, learning_rate, epochs):</span>
@@ -568,7 +575,7 @@ R = \mathcal{L}(\phi(\mathbf{X})\mathbf{W}, \mathbf{Y})\;,
 </details>
 </div>
 <p>Let’s go ahead and train!</p>
-<div class="cell" data-execution_count="8">
+<div id="50f14370" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tlh, tah, vlh, vah <span class="op">=</span> training_loop(model, train_dataloader, val_dataloader, <span class="fl">1e-4</span>, <span class="dv">500</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plot_histories(tlh, tah, vlh, vah)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -588,7 +595,7 @@ epoch 450: val_loss = 0.015965097419479313, val_accuracy = 0.9852941632270813</c
 </div>
 </div>
 <p>We can see that our model is doing much better than we would expect from random guessing on this problem, although it may not be competitive with many of the models that you implemented in your analysis of the penguins data set. Further training or tweaks to parameters like batch sizes and learning rates could potentially help improve performance here.</p>
-<p>Let’s try adding a hidden layer, as in <a href="#eq-single-layer">Equation&nbsp;1</a>. To do this, we need to add a nonlinearity <span class="math inline">\(\alpha\)</span> and more <code>Linear</code> layers. The important points are:</p>
+<p>Let’s try adding a hidden layer, as in <a href="#eq-single-layer" class="quarto-xref">Equation&nbsp;1</a>. To do this, we need to add a nonlinearity <span class="math inline">\(\alpha\)</span> and more <code>Linear</code> layers. The important points are:</p>
 <ol type="1">
 <li>The first dimension of the first linear layer needs to match the number of features of the input.</li>
 <li>The final dimension of the last linear layer needs to match the number of possible labels.</li>
@@ -596,7 +603,7 @@ epoch 450: val_loss = 0.015965097419479313, val_accuracy = 0.9852941632270813</c
 </ol>
 <p>These rules follow directly from the need to make all the matrix multiplications turn out right.</p>
 <p>So, let’s try a model with a single layer of 100 hidden units:</p>
-<div class="cell" data-execution_count="9">
+<div id="a2f0523e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> nn</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> penguinNN(nn.Module):</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
@@ -614,7 +621,7 @@ epoch 450: val_loss = 0.015965097419479313, val_accuracy = 0.9852941632270813</c
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> penguinNN().to(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can optimize it using the same approach as before:</p>
-<div class="cell" data-execution_count="10">
+<div id="817ef672" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(model.parameters(), lr<span class="op">=</span>learning_rate)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tlh, tah, vlh, vah <span class="op">=</span> training_loop(model, train_dataloader, val_dataloader, <span class="fl">1e-4</span>, <span class="dv">500</span>)</span>
@@ -721,10 +728,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -734,8 +740,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -748,6 +763,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -791,6 +881,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -816,6 +907,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -876,6 +994,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

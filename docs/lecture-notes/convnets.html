@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -82,6 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,7 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -110,12 +116,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -210,6 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
 <p><em>Major components of these lecture notes are based on the <a href="https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html">Training a Classifier tutorial</a> in the PyTorch docs. It is recommended to run the code in these notes on Google Colab with a GPU enabled.</em></p>
@@ -240,18 +247,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="the-cifar10-data">The CIFAR10 Data</h2>
 <p>For this lecture, we’ll use the popular <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR10 data set</a>. CIFAR10 was a common benchmark for simple image recognition tasks, although it’s since been superseded by larger and more complex data sets.</p>
 <p>To start, we’ll load our packages, access the CIFAR10 data set, and set the device type.</p>
-<div class="cell" data-execution_count="53">
+<div id="cell-4" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if you don't have torchviz, install it by uncommenting and running the following line</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install torchviz</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="54">
+<div id="cell-5" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torchvision</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torchvision.transforms <span class="im">as</span> transforms</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchviz <span class="im">import</span> make_dot, make_dot_from_trace</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchsummary <span class="im">import</span> summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-outputid="0bc28fe9-a84c-4391-9593-023d40ffec27" data-execution_count="55">
+<div id="cell-6" class="cell" data-outputid="0bc28fe9-a84c-4391-9593-023d40ffec27" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>transform <span class="op">=</span> transforms.Compose(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    [transforms.ToTensor(),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     transforms.Normalize((<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), (<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))])</span>
@@ -280,13 +287,13 @@ Files already downloaded and verified</code></pre>
 <section id="visualizing-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-the-data">Visualizing The Data</h3>
 <p>The CIFAR10 training data set contains 50,000 images with 32x32 pixels and 3 color channels. Each of these images is labeled with one of 10 labels:</p>
-<div class="cell" data-execution_count="56">
+<div id="cell-9" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> (<span class="st">'plane'</span>, <span class="st">'car'</span>, <span class="st">'bird'</span>, <span class="st">'cat'</span>,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">'deer'</span>, <span class="st">'dog'</span>, <span class="st">'frog'</span>, <span class="st">'horse'</span>, <span class="st">'ship'</span>, <span class="st">'truck'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The testing data set contains 10,000 more images with the same labels.</p>
 <p>Let’s begin by visualizing a few elements of the training data set:</p>
-<div class="cell" data-outputid="dec62f68-3181-4250-e027-2f456865251a" data-execution_count="57">
+<div id="cell-11" class="cell" data-outputid="dec62f68-3181-4250-e027-2f456865251a" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -317,11 +324,11 @@ Files already downloaded and verified</code></pre>
 <section id="first-model-logistic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="first-model-logistic-regression">First Model: Logistic Regression</h2>
 <p>We’re now ready to write some models to attempt do better than the base rate. Before we construct any models, we’ll set our <code>device</code> to be equal to the GPU if we have one available (e.g.&nbsp;if your computer has one or if you are working on Google Colab.</p>
-<div class="cell" data-execution_count="58">
+<div id="cell-14" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> torch.device(<span class="st">'cuda:0'</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">'cpu'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s construct a logistic regression model. All we need for this model is a <code>Linear</code> layer that accepts the number of floating point numbers used to store a single image and returns 10 numbers. A single image is a tensor of size <span class="math inline">\(3\times32\times 32\)</span>, which means that it has 3072 total numbers stored.</p>
-<div class="cell" data-execution_count="59">
+<div id="cell-16" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -348,7 +355,7 @@ Files already downloaded and verified</code></pre>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Logistic().to(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can get a nice summary of the structure of our model using the <code>summary</code> function from the <code>torchsummary</code> package:</p>
-<div class="cell" data-outputid="322eda04-facb-40ef-df78-f67facac5ba8" data-execution_count="60">
+<div id="cell-18" class="cell" data-outputid="322eda04-facb-40ef-df78-f67facac5ba8" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>INPUT_SHAPE <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">32</span>, <span class="dv">32</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>summary(model, INPUT_SHAPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -370,7 +377,7 @@ Estimated Total Size (MB): 0.13
 </div>
 </div>
 <p>As a side note, after computing the loss on a bit of data, it’s possible to actually visualize the computational graph. Fun!</p>
-<div class="cell" data-outputid="aac8c4f9-b8fc-4ce0-e9aa-6bdabe213260" data-execution_count="61">
+<div id="cell-20" class="cell" data-outputid="aac8c4f9-b8fc-4ce0-e9aa-6bdabe213260" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>loss_fn <span class="op">=</span> nn.CrossEntropyLoss() </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(trainloader))</span>
@@ -385,7 +392,7 @@ Estimated Total Size (MB): 0.13
 </div>
 </div>
 <p>Let’s go ahead and implement a training loop:</p>
-<div class="cell" data-outputid="23e282cc-1b89-49fa-b3e9-5d6e8b60c282" data-execution_count="62">
+<div id="cell-22" class="cell" data-outputid="23e282cc-1b89-49fa-b3e9-5d6e8b60c282" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.optim <span class="im">as</span> optim</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(model, k_epochs <span class="op">=</span> <span class="dv">1</span>, print_every <span class="op">=</span> <span class="dv">2000</span>):</span>
@@ -448,7 +455,7 @@ Finished Training</code></pre>
 </div>
 </div>
 <p>Let’s also define a testing function that will evaluate the accuracy of our model against the test set.</p>
-<div class="cell" data-outputid="2caeb9c2-c4f4-4fdf-c24e-c58bf6d06d27" data-execution_count="63">
+<div id="cell-24" class="cell" data-outputid="2caeb9c2-c4f4-4fdf-c24e-c58bf6d06d27" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test(model):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
@@ -484,7 +491,7 @@ Finished Training</code></pre>
 <p>Nothing at all wrong with this, but it’s not very Deep. If all we wanted to do was logistic regression, we could have stuck with <code>scikit-learn</code> or even our own implementations. Here’s an implementation of a linear-ReLU stack. This model has “complete” or “full” linkage because every unit in one layer is an input to every unit in the next layer.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Colored_neural_network.svg/500px-Colored_neural_network.svg.png" class="img-fluid"></p>
 <p><em>Example of a a fully-connected neural network: every unit in every layer is an input into the next layer.</em></p>
-<div class="cell" data-execution_count="64">
+<div id="cell-26" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -515,7 +522,7 @@ Finished Training</code></pre>
 <span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Complete().to(device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This time the number of model parameters is much larger:</p>
-<div class="cell" data-outputid="6aeb38c8-bbc5-453a-eacb-e5da3f8d98c8" data-execution_count="65">
+<div id="cell-28" class="cell" data-outputid="6aeb38c8-bbc5-453a-eacb-e5da3f8d98c8" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>summary(model, INPUT_SHAPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>----------------------------------------------------------------
@@ -537,7 +544,7 @@ Estimated Total Size (MB): 1.19
 </div>
 </div>
 <p>Let’s go ahead and train…</p>
-<div class="cell" data-outputid="d1b26fe6-d197-468e-e509-ea33293de0b3" data-execution_count="66">
+<div id="cell-30" class="cell" data-outputid="d1b26fe6-d197-468e-e509-ea33293de0b3" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>train(model, k_epochs<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[epoch: 1, batches:  2000], loss: 1.971
@@ -556,7 +563,7 @@ Finished Training</code></pre>
 </div>
 </div>
 <p>…and test!</p>
-<div class="cell" data-outputid="bf99d5ed-1e4e-40d5-cbc8-b8a1111e27f5" data-execution_count="67">
+<div id="cell-32" class="cell" data-outputid="bf99d5ed-1e4e-40d5-cbc8-b8a1111e27f5" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>test(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Test accuracy: 43 %</code></pre>
@@ -571,7 +578,7 @@ Finished Training</code></pre>
 <p><em>Image from <a href="https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html">Dive Into Deep Learning</a></em></p>
 <p>In this example, the value of 19 is computed as <span class="math inline">\(0\times 0 + 1\times 1 + 3\times 2 + 4\times 3 = 19\)</span>.</p>
 <p>Historically, kernel matrices were designed by hand for specific purposes and applied to images. For example, here’s a greyscale image alongside the result of convolving it with an <em>edge-detection kernel</em>. You can see that the resulting convolved image is darker (larger values in each pixel) in the places where different patches of color meet.</p>
-<div class="cell" data-outputid="b14a512a-26c4-4e8a-a576-0a890bad8a54" data-execution_count="68">
+<div id="cell-34" class="cell" data-outputid="b14a512a-26c4-4e8a-a576-0a890bad8a54" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
@@ -640,7 +647,7 @@ Finished Training</code></pre>
 <li>Adding up the products.</li>
 </ol>
 <p>Although the notation gets a little complicated, this is still just matrix multiplication!! So, we can represent convolutional layers within our framework just by carefully engineering these matrices. We won’t worry about the details here, but instead will go straight into using convolutional layers in a model:</p>
-<div class="cell" data-execution_count="100">
+<div id="cell-36" class="cell" data-execution_count="100">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -690,7 +697,7 @@ Finished Training</code></pre>
 <p><img src="https://computersciencewiki.org/images/8/8a/MaxpoolSample2.png" class="img-fluid"></p>
 <p><em>Image credit: Computer Science Wiki</em></p>
 <p>Although convolutional neural networks seem more complicated, one of their key points is using a small set of kernels in each layer actually reduces the number of parameters when compared to a fully connected model. For example, our model here has more layers, but has fewer parameters than our previous model with a single hidden layer:</p>
-<div class="cell" data-outputid="cca98fd2-dc66-4066-cd9d-02dfd0618d26" data-execution_count="101">
+<div id="cell-39" class="cell" data-outputid="cca98fd2-dc66-4066-cd9d-02dfd0618d26" data-execution_count="101">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>summary(model, INPUT_SHAPE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>----------------------------------------------------------------
@@ -718,7 +725,7 @@ Estimated Total Size (MB): 1.11
 </div>
 </div>
 <p>Furthermore, this model can obtain substantially better performance, because the parameters that it does have are designed for the spatial nature of the image classification task:</p>
-<div class="cell" data-outputid="5cf83602-4059-4d5e-9bc5-0a1b76795082" data-execution_count="102">
+<div id="cell-41" class="cell" data-outputid="5cf83602-4059-4d5e-9bc5-0a1b76795082" data-execution_count="102">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>train(model, k_epochs<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[epoch: 1, batches:  2000], loss: 1.976
@@ -736,14 +743,14 @@ Estimated Total Size (MB): 1.11
 Finished Training</code></pre>
 </div>
 </div>
-<div class="cell" data-outputid="f69ec88d-1c46-4c7e-8ad5-75e1213af41b" data-execution_count="103">
+<div id="cell-42" class="cell" data-outputid="f69ec88d-1c46-4c7e-8ad5-75e1213af41b" data-execution_count="103">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>test(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Test accuracy: 55 %</code></pre>
 </div>
 </div>
 <p>Let’s go ahead and take a look at some of the model predictions. We’ll show the image, the true label, and the model’s prediction.</p>
-<div class="cell" data-outputid="d49983f6-0185-4279-da9a-596bf2dacbc9" data-execution_count="104">
+<div id="cell-44" class="cell" data-outputid="d49983f6-0185-4279-da9a-596bf2dacbc9" data-execution_count="104">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(n_rows, batch_size, figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">7</span>))</span>
@@ -776,14 +783,14 @@ Finished Training</code></pre>
 <h2 class="anchored" data-anchor-id="inspecting-learned-features">Inspecting Learned Features</h2>
 <p>It’s possible to extract the outputs from intermediate layers of the model. Doing this can sometimes help us get some understanding of what features the model has learned from the data that help it to perform the classification task. It’s important not to overinterpret these.</p>
 <p>The function below helps extract these hidden layer outputs. I retrieved this function from <a href="https://discuss.pytorch.org/t/how-can-i-extract-intermediate-layer-output-from-loaded-cnn-model/77301/2">this forum post</a>.</p>
-<div class="cell" data-execution_count="105">
+<div id="cell-46" class="cell" data-execution_count="105">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>activation <span class="op">=</span> {}</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_activation(name):</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hook(model, <span class="bu">input</span>, output):</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        activation[name] <span class="op">=</span> output.detach()</span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-outputid="e709920c-9b98-4a9d-fc44-256d7471e438" data-execution_count="106">
+<div id="cell-47" class="cell" data-outputid="e709920c-9b98-4a9d-fc44-256d7471e438" data-execution_count="106">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model.conv1.register_forward_hook(get_activation(<span class="st">'conv1'</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>model.conv2.register_forward_hook(get_activation(<span class="st">'conv2'</span>))</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>model.conv3.register_forward_hook(get_activation(<span class="st">'conv3'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -792,7 +799,7 @@ Finished Training</code></pre>
 </div>
 </div>
 <p>Let’s pick an image and call our model on it to obtain an output.</p>
-<div class="cell" data-execution_count="116">
+<div id="cell-49" class="cell" data-execution_count="116">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> <span class="bu">next</span>(tl) </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> X.to(device), y.to(device)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -800,7 +807,7 @@ Finished Training</code></pre>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> model(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s visualize our image alongside activations from each of the two layers.</p>
-<div class="cell" data-outputid="4ea90d27-9fb8-41e9-a062-367f97e0dc50" data-execution_count="117">
+<div id="cell-51" class="cell" data-outputid="4ea90d27-9fb8-41e9-a062-367f97e0dc50" data-execution_count="117">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">8</span>, figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">0</span>, <span class="dv">0</span>].imshow((np.moveaxis(X[<span class="dv">0</span>].to(<span class="st">"cpu"</span>).numpy(), <span class="dv">0</span>, <span class="dv">2</span>) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span>)</span>
@@ -909,10 +916,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -922,8 +928,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -936,6 +951,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -979,6 +1069,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1004,6 +1095,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1064,6 +1182,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

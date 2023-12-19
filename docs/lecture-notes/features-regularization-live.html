@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.309">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,6 +81,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "panel-placement": "start",
   "type": "textbox",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,7 +95,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -109,12 +115,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -195,6 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
 <div class="hidden">
@@ -221,7 +228,7 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(f_{\mathbf{w}}(\mathbf{x}_i), y_
 f_{\mathbf{w}}(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle
 \tag{2}\]</span></span></p><div class="no-row-height column-margin column-container"><span class="">Originally we considered classifiers of the form <span class="math inline">\(f_{\mathbf{w}, b}(\mathbf{x}) = \langle \mathbf{w}, \mathbf{x} \rangle - b\)</span>, but we can ignore <span class="math inline">\(b\)</span> for today by using the assumption that the final column of <span class="math inline">\(\mathbf{x}\)</span> is a column of <span class="math inline">\(1\)</span>s, just like we did for the perceptron.</span></div></div>
 <p>In our <a href="../lecture-notes/gradient-descent.html">last lecture</a>, we studied how to compute the gradient of <span class="math inline">\(L(\mathbf{w})\)</span> in minimize the convex loss and find a good value <span class="math inline">\(\hat{\mathbf{w}}\)</span> for the parameter vector. In this lecture we’re going to assume that we can cheerfully solve the empirical risk minimization for convex linear models. This time, we’re going to see how we can use the framework of convex linear models to try to get around one of the main limitations we’ve seen in class so far: our models only work with linear decision boundaries. Most of the data we care about has <em>nonlinear</em> decision boundaries. Here’s a dramatic example. For this example, I’m using the implementation of logistic regression from <code>scikit-learn</code>. I’m also using the <code>plot_decision_regions</code> function from the <code>mlxtend</code> package, which is a handy plotting utility for visualizing the behavior of our models.</p>
-<div class="cell" data-execution_count="25">
+<div id="cell-4" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons, make_circles</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.plotting <span class="im">import</span> plot_decision_regions</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
@@ -304,7 +311,7 @@ r^2 = x_1^2 + x_2^2\;.
 r^2 = \langle (1, 1), (x_1^2, x_2^2) \rangle\;.
 \]</span></p>
 <p>Let’s see how this looks. We’ll again show the failed linear separator, and we’ll also show a successful separator in a transformed feature space:</p>
-<div class="cell" data-execution_count="29">
+<div id="cell-6" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plot_decision_regions(X, y, clf <span class="op">=</span> LR, ax <span class="op">=</span> axarr[<span class="dv">0</span>])</span>
@@ -334,7 +341,7 @@ r^2 = x_1^2 + x_2^2\;.
 \]</span></p>
 <p>The important point to keep track of is that the new feature matrix <span class="math inline">\(\mathbf{X}' = \Phi(\mathbf{X})\)</span> has more columns than <span class="math inline">\(\mathbf{X}\)</span>. In this case, for example, <span class="math inline">\(\mathbf{X}\)</span> had just 2 columns but <span class="math inline">\(\Phi(\mathbf{X})\)</span> has 6. This means that <span class="math inline">\(\hat{\mathbf{w}}\)</span> has 6 components, instead of 2!</p>
 <p>Let’s now run logistic regression with degree-2 polynomial features on this data set. The most convenient way to make this happen in the <code>scikit-learn</code> framework is with at <code>Pipeline</code>. The <code>Pipeline</code> first applies the feature map and then calls the model during both fitting and evaluation. We’ll wrap the pipeline in a simple function for easy reuse.</p>
-<div class="cell" data-execution_count="30">
+<div id="cell-8" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -347,7 +354,7 @@ r^2 = x_1^2 + x_2^2\;.
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    plot_decision_regions(X, y, clf <span class="op">=</span> plr)</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> plt.gca().set_title(<span class="ss">f"Accuracy = </span><span class="sc">{</span>plr<span class="sc">.</span>score(X, y)<span class="sc">}</span><span class="ss">"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="32">
+<div id="cell-9" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plr <span class="op">=</span> poly_LR(degree <span class="op">=</span> <span class="dv">2</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plr.fit(X, y)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>viz_plr(plr, X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -356,12 +363,12 @@ r^2 = x_1^2 + x_2^2\;.
 </div>
 </div>
 <p>Let’s check the coefficients of the model:</p>
-<div class="cell">
+<div id="cell-11" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that two coefficients are much larger than the others, and approximately equal. These are the coefficients for the features <span class="math inline">\(x_1^2\)</span> and <span class="math inline">\(x_2^2\)</span>. The fact that these are approximately equal means that our model is very close to using the square radius <span class="math inline">\(r^2 = x_1^2 + x_2^2\)</span> for this data, just like we’d expect. The benefit is that we didn’t have to hard-code that in; the model just detected on its own the right pattern to find.</p>
 <p>Part of the reason this might be beneficial is that for some data sets, we might not really know what specific features we should try. For example, here’s another one where a linear classifier doesn’t do so great (degree 1 corresponds to no transformation of the features).</p>
-<div class="cell" data-execution_count="39">
+<div id="cell-13" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_moons(<span class="dv">200</span>, shuffle <span class="op">=</span> <span class="va">True</span>, noise <span class="op">=</span> <span class="fl">0.2</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -372,7 +379,7 @@ r^2 = x_1^2 + x_2^2\;.
 <p><img src="features-regularization-live_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="40">
+<div id="cell-14" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plr.named_steps[<span class="st">"LR"</span>].coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>array([[-2.55579727e-05,  1.35298953e-01, -2.50514385e+00,
@@ -385,7 +392,7 @@ r^2 = x_1^2 + x_2^2\;.
 </div>
 </div>
 <p>It’s not as obvious that we should use the radius or any other specific feature for our feature map. Fortunately we don’t need to think too much about it – we can just increase the degree and let the model figure things out:</p>
-<div class="cell">
+<div id="cell-16" class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -395,7 +402,7 @@ r^2 = x_1^2 + x_2^2\;.
 <section id="generalization-feature-selection-regularization" class="level2">
 <h2 class="anchored" data-anchor-id="generalization-feature-selection-regularization">Generalization, Feature Selection, Regularization</h2>
 <p>So, why don’t we just use as many features as it takes to get perfect accuracy on the training data? Here’s an example where we get perfect accuracy on the training data:</p>
-<div class="cell" data-execution_count="41">
+<div id="cell-18" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plr <span class="op">=</span> poly_LR(degree <span class="op">=</span> <span class="dv">15</span>, penalty <span class="op">=</span> <span class="st">"none"</span>, max_iter <span class="op">=</span> <span class="fl">1e6</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plr.fit(X, y)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>viz_plr(plr, X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -405,7 +412,7 @@ r^2 = x_1^2 + x_2^2\;.
 </div>
 <p>I’ve had to change some parameters to the <code>LogisticRegression</code> in order to ensure that it fully ran the optimization procedure for this many polynomials.</p>
 <p>The problem here is that, although this classifier might achieve perfect <em>training</em> accuracy, it doesn’t really look like it’s captured “the right” pattern. This means that if we ask it to classify <em>similar</em> new data, it’s unlikely to do as well:</p>
-<div class="cell" data-execution_count="42">
+<div id="cell-20" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_moons(<span class="dv">200</span>, shuffle <span class="op">=</span> <span class="va">True</span>, noise <span class="op">=</span> <span class="fl">0.2</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>viz_plr(plr, X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -415,7 +422,7 @@ r^2 = x_1^2 + x_2^2\;.
 <p>Whoops! We have <em>overfit</em>: our model was so flexible that it was able to learn both some <em>real</em> patterns that we wanted it to learn and some <em>noise</em> that we didn’t. As a result, when it made a prediction on new data, the model’s predictions were imperfect, reflecting the noise it learned in the training process.</p>
 <p>In machine learning practice, we don’t actually <em>want</em> our models to get perfect scores on the training data – we want them to <strong><em>generalize</em></strong> to new instances of unseen data. Overfitting is one way in which a model can fail to generalize.</p>
 <p>Let’s do an experiment in which we see what happens to the model’s generalization ability when we increase the number of polynomial features:</p>
-<div class="cell" data-execution_count="43">
+<div id="cell-22" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>np.random.seed()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -450,10 +457,10 @@ r^2 = x_1^2 + x_2^2\;.
 </div>
 <p>We observe that there is an optimal number of features for which the model is most able to generalize: around 3 or so. More features than that is actually <em>harmful</em> to the model’s predictive performance.</p>
 <p>So, one way to promote generalization is to try to find “the right” or “the right number” of features and use them for prediction. This problem is often called <strong>feature selection</strong>.</p>
-<p>Another common approach to avoid overfitting is called <em>regularization</em>. In regularization, we actually modify the empirical risk objective function that is to be minimized. Instead of trying to minimize <a href="#eq-empirical-risk-minimization">Equation&nbsp;1</a>, we instead consider the modified objective function <span class="math display">\[
+<p>Another common approach to avoid overfitting is called <em>regularization</em>. In regularization, we actually modify the empirical risk objective function that is to be minimized. Instead of trying to minimize <a href="#eq-empirical-risk-minimization" class="quarto-xref">Equation&nbsp;1</a>, we instead consider the modified objective function <span class="math display">\[
 L'(\mathbf{w}) = L(\mathbf{w}) + \lambda R(\mathbf{w})\;,
 \]</span> where <span class="math inline">\(\lambda\)</span> is a <em>regularization strength</em> and <span class="math inline">\(R(\mathbf{w})\)</span> is a <em>regularization function</em> that aims to influence the entries of <span class="math inline">\(\mathbf{w}\)</span> in some way. Common choices of regularization function include the Euclidean norm <span class="math inline">\(R(\mathbf{w}) = \lVert \mathbf{w} \rVert_2^2\)</span> and the <span class="math inline">\(\ell_1\)</span> norm <span class="math inline">\(R(\mathbf{w}) = \sum_{j = 1}^p \lvert x_j \rvert\)</span>. To see regularization in action, let’s go back to our logistic regression model with a large number of polynomial features. We can see the presence of overfitting in the excessive “wiggliness” of the decision boundary.</p>
-<div class="cell" data-execution_count="47">
+<div id="cell-24" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_moons(<span class="dv">200</span>, shuffle <span class="op">=</span> <span class="va">True</span>, noise <span class="op">=</span> <span class="fl">0.3</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plr <span class="op">=</span> poly_LR(degree <span class="op">=</span> <span class="dv">15</span>, penalty <span class="op">=</span> <span class="st">"l1"</span>, solver <span class="op">=</span> <span class="st">"liblinear"</span>, max_iter <span class="op">=</span> <span class="fl">1e4</span>, C <span class="op">=</span> <span class="dv">10</span>)</span>
@@ -464,25 +471,25 @@ L'(\mathbf{w}) = L(\mathbf{w}) + \lambda R(\mathbf{w})\;,
 </div>
 </div>
 <p>Fortunately for us, we can actually use regularization directly from inside the <code>scikit-learn</code> implementation of <code>LogisticRegression</code>. We specify the penalty (the <span class="math inline">\(\ell_1\)</span> regularization), the strength of the penalty (in the <code>scikit-learn</code> implementation, you specify <span class="math inline">\(C = \frac{1}{\lambda}\)</span> so that larger <span class="math inline">\(C\)</span> means less regularization) and the optimization solver (not all solvers work with all penalties).</p>
-<div class="cell">
+<div id="cell-26" class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This looks more likely to generalize! We can also increase the regularization:</p>
-<div class="cell">
+<div id="cell-28" class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>or decrease it:</p>
-<div class="cell">
+<div id="cell-30" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Like last time, we can conduct a search (often called a grid-search) to find the best value of the regularization strength for a given problem. We’ll hold fixed the number of features, and instead vary the regularization strength:</p>
-<div class="cell">
+<div id="cell-32" class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>np.random.seed()</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">10.0</span><span class="op">**</span>np.arange(<span class="op">-</span><span class="dv">4</span>, <span class="dv">5</span>)</span>
@@ -598,10 +605,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -611,8 +617,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -625,6 +640,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -668,6 +758,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -693,6 +784,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -753,6 +871,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
