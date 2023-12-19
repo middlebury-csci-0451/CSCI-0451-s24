@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
+      &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451&lt;br&gt;Spring '24
       </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../"><b>Machine Learning</b><br>CSCI 0451</a> 
+      <a href="../../"><b>Machine Learning</b><br>CSCI 0451<br>Spring ’24</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
@@ -246,18 +246,18 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 \tag{1}\]</span></span></p>
 <p>where <span class="math inline">\(\mathbf{D} \in \mathbb{R}^{m \times n}\)</span> has nonzero entries (the <em>singular values</em> <span class="math inline">\(\sigma_i\)</span>) only along its diagonal, and where <span class="math inline">\(\mathbf{U} \in \mathbb{R}^{m \times m}\)</span> and <span class="math inline">\(\mathbf{V} \in \mathbb{R}^{n \times n}\)</span> are orthogonal matrices. The singular values <span class="math inline">\(\sigma_i\)</span> collectively give some measure of how “large” the matrix <span class="math inline">\(\mathbf{A}\)</span> is.</p>
 <p>Numpy makes it easy to compute the SVD of a matrix. Here’s a sample matrix we can use:</p>
-<div id="aaafa00d" class="cell" data-execution_count="2">
+<div id="27cc66de" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">12345</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0d64acef" class="cell" data-execution_count="3">
+<div id="6ee5158e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a_1 <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">3</span>, (<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a_2 <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">3</span>, (<span class="dv">3</span>, <span class="dv">7</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> a_1 <span class="op">@</span> a_2 <span class="op">+</span> <span class="fl">0.1</span><span class="op">*</span>np.random.randn(<span class="dv">5</span>, <span class="dv">7</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>array([[ 9.13529168, 10.08864293,  9.79983627,  7.96281575,  9.16690253,
          4.95614303,  6.94602586],
        [ 8.0476985 , 10.32489439,  9.89787725,  8.94229127,  8.01241213,
@@ -271,7 +271,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 </div>
 <p>It’s often useful to visualize a matrix as an image:</p>
-<div id="bff1e1d2" class="cell" data-execution_count="4">
+<div id="ec9453a5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(A, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -279,16 +279,16 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 </div>
 <p>Once we have the matrix, we can compute a singular value decomposition:</p>
-<div id="9dd38173" class="cell" data-execution_count="5">
+<div id="a561b1c6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, sigma, V <span class="op">=</span> np.linalg.svd(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now <code>sigma</code> is a numpy array (vector) containing the singular values of <span class="math inline">\(\mathbf{A}\)</span>. We can reconstruct <span class="math inline">\(\mathbf{A}\)</span> from <a href="#eq-svd" class="quarto-xref">Equation&nbsp;1</a> by constructing a diagonal matrix containing the elements of <code>sigma</code> and performing the matrix multiplication:</p>
-<div id="d6ab0d02" class="cell" data-execution_count="6">
+<div id="f2fc7374" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the D matrix in the SVD</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.zeros_like(A,dtype<span class="op">=</span><span class="bu">float</span>) <span class="co"># matrix of zeros of same shape as A</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>D[:<span class="bu">min</span>(A.shape),:<span class="bu">min</span>(A.shape)] <span class="op">=</span> np.diag(sigma)        <span class="co"># singular values on the main diagonal</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([[47.92787806,  0.        ,  0.        ,  0.        ,  0.        ,
          0.        ,  0.        ],
        [ 0.        ,  1.59525638,  0.        ,  0.        ,  0.        ,
@@ -302,9 +302,9 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 </div>
 <p>Having constructed <code>D</code>, we can reconstruct <code>A</code> from <code>U</code>, <code>D</code>, and <code>V</code> up to numerical precision:</p>
-<div id="aeb79d19" class="cell" data-execution_count="7">
+<div id="1b1146a7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>U <span class="op">@</span> D <span class="op">@</span> V <span class="co"># == A up to numerical precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>array([[ 9.13529168, 10.08864293,  9.79983627,  7.96281575,  9.16690253,
          4.95614303,  6.94602586],
        [ 8.0476985 , 10.32489439,  9.89787725,  8.94229127,  8.01241213,
@@ -325,18 +325,18 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 <li>The first <code>k</code> rows of <code>V</code>.</li>
 </ul>
 <p>For example, let’s try <code>k = 2</code>:</p>
-<div id="17a3cb70" class="cell" data-execution_count="8">
+<div id="9b0719ca" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>U_ <span class="op">=</span> U[:,:k]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>D_ <span class="op">=</span> D[:k, :k]</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>V_ <span class="op">=</span> V[:k, :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, <code>k</code> needs to be smaller than both <code>m</code> and <code>n</code> (the number of rows and columns in <code>A</code>). Once we’ve formed these smaller matrices, we can compute an approximation of <code>A</code>:</p>
-<div id="1bf4761c" class="cell" data-execution_count="9">
+<div id="7186f300" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A_ <span class="op">=</span> U_ <span class="op">@</span> D_ <span class="op">@</span> V_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look and see how we did:</p>
-<div id="8f832c7f" class="cell" data-execution_count="10">
+<div id="f7baf23e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare_images(A, A_):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">3</span>))</span>
@@ -355,7 +355,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 </div>
 <p>The reconstructed image is visually quite close to the original! In this toy example, even we can even do ok with <code>k = 1</code>:</p>
-<div id="d0e5e6ee" class="cell" data-execution_count="11">
+<div id="99b2f3dc" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>U_ <span class="op">=</span> U[:,:k]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>D_ <span class="op">=</span> D[:k, :k]</span>
@@ -369,7 +369,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 <section id="application-to-images" class="level2">
 <h2 class="anchored" data-anchor-id="application-to-images">Application to Images</h2>
 <p>The following function will read an image for you from a URL and save it as a numpy array.</p>
-<div id="973b7787" class="cell" data-execution_count="12">
+<div id="4f25bc84" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> PIL</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -378,13 +378,13 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 <p>I will choose an image of Maru. Maru is a Cat On The Internet who is famous for doing stuff like this:</p>
 <p><img src="https://media2.giphy.com/media/9NAXEP3RiJjm8/giphy.webp?cid=ecf05e47dbjp1upvg5ovlw54yn1j9zrhaa73vg4x5m4er4ow&amp;rid=giphy.webp&amp;ct=g" class="img-fluid"></p>
-<div id="f5ab5803" class="cell" data-execution_count="13">
+<div id="ca75f36c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://i.pinimg.com/originals/0e/d0/23/0ed023847cad0d652d6371c3e53d1482.png"</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> read_image(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>My image is an RGB color image (I suggest you find an RGB image as well). In the code below, I’ll convert it to greyscale.</p>
-<div id="cad0f9ee" class="cell" data-execution_count="14">
+<div id="f862c019" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">3</span>))</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_greyscale(im):</span>
@@ -399,7 +399,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].imshow(grey_img, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].axis(<span class="st">"off"</span>)</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>axarr[<span class="dv">1</span>].<span class="bu">set</span>(title <span class="op">=</span> <span class="st">"greyscale"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>[Text(0.5, 1.0, 'greyscale')]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -407,9 +407,9 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 </div>
 <p>My <code>grey_img</code> is now a simple (but large) matrix:</p>
-<div id="4e5bb07b" class="cell" data-execution_count="15">
+<div id="de699476" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>grey_img.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>(413, 640)</code></pre>
 </div>
 </div>
@@ -427,7 +427,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </ul></li>
 </ol>
 <p>Here’s an example of output from your experiment:</p>
-<div id="cfd2d42a" class="cell" data-execution_count="16">
+<div id="61ed2c7c" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> solutions.images <span class="im">import</span> svd_reconstruct, svd_experiment</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>svd_experiment(grey_img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -451,7 +451,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>In <a href="../../lecture-notes/clustering.html">lecture</a>, we discussed the Laplacian spectral clustering algorithm as a method for finding interesting clusters in point cloud data sets by operating on a graph. Spectral clustering doesn’t only work on point clouds, however; we can use it on any data that we can represent as a graph, like social networks.</p>
 <p>Here’s a famous social network:</p>
-<div id="cell-fig-karate-club" class="cell" data-execution_count="17">
+<div id="cell-fig-karate-club" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.karate_club_graph()</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>layout <span class="op">=</span> nx.layout.fruchterman_reingold_layout(G)</span>
@@ -467,11 +467,11 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 <p>This graph is often called the “Karate Club Graph.” Each node (blue dot) represents an individual member of a karate club. Edges between them are measurements of social ties by the researcher Zachary; informally, you can think of two connected nodes as having interacted in a friendly social setting.</p>
 <p>BUT: things didn’t stay friendly for long! The reason that this data set is so famous is that it provides a relatively pure case study of the process of <em>graph fission</em>. In this case, the karate club studied eventually broke into two separate clubs after a conflict between the instructor (“Mr.&nbsp;Hi”) and the club president (“Officer”). Node 0 is Mr.&nbsp;Hi himself, and Node 33 is the club president. This information is present as a node attribute in the data:</p>
-<div id="3d7e20ec" class="cell" data-execution_count="18">
+<div id="795e54b5" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>clubs <span class="op">=</span> nx.get_node_attributes(G, <span class="st">"club"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can draw the graph with this data like this, using the <code>node_color</code> attribute to control the node colors.</p>
-<div id="cell-fig-karate-club-fission" class="cell" data-execution_count="19">
+<div id="cell-fig-karate-club-fission" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nx.draw(G, layout,</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        with_labels<span class="op">=</span><span class="va">True</span>, </span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        node_color <span class="op">=</span> [<span class="st">"orange"</span> <span class="cf">if</span> clubs[i] <span class="op">==</span> <span class="st">"Officer"</span> <span class="cf">else</span> <span class="st">"steelblue"</span> <span class="cf">for</span> i <span class="kw">in</span> G.nodes()],</span>
@@ -488,7 +488,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </div>
 <p>The fundamental question of community detection is: can we <em>predict</em> divisions like this based <em>only</em> on the social ties? That is: could we have looked at <a href="#fig-karate-club" class="quarto-xref">Figure&nbsp;1</a> (NOT <a href="#fig-karate-club-fission" class="quarto-xref">Figure&nbsp;2</a>) and made a guess that the club might split on approximately these lines?</p>
 <p>A bit more abstractly, the community detection problem is to divide an observed graph into interpretable or important components, often called “communities” or “clusters.” There are lots of algorithms for this problem, but one of them is spectral clustering! We can extract an adjacency matrix for the graph like this:</p>
-<div id="f98391e9" class="cell" data-execution_count="20">
+<div id="1bb5bffb" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> nx.adjacency_matrix(G).toarray()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -522,7 +522,7 @@ Everybody knows that the <a href="https://twitter.com/hashtag/SVD?src=hash&amp;r
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

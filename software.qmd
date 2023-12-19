@@ -6,12 +6,9 @@ title: Software and Setup
 
 After following this set of instructions, you will be all ready to go for participation in CSCI 0451. 
 
-# Social: Slack and Hypothes.is
+# Slack
 
-First, you'll need to join Hypothes.is and Slack. 
-
-- **For Hypothes.is**, start by [making an account](https://web.hypothes.is/). Then, follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/12215/assignments/syllabus) to join the "CSCI 0451 (S23)" group. 
-- **For Slack**, just follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/12215/assignments/syllabus) to join the workspace. You may choose to download the Slack desktop client, but that's up to you. You can make your own choices about notifications, but please do whatever you need to do to ensure that you're able to check Slack on a regular basis. 
+First, you'll need to join Slack. Just follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/13859/assignments/syllabus) to join the workspace. You may choose to download the Slack desktop client, but that's up to you. You can make your own choices about notifications, but please do whatever you need to do to ensure that you're able to check Slack on a regular basis. 
 
 # Anaconda Python
 
@@ -35,7 +32,7 @@ The Environments tab, with the Create button on the bottom.
 
 An *environment* is a separate installation of Python that exists independently of any other versions of Python on your computer. Using environments allows us to have fine-grained control over which version of Python we use, which additional packages are installed, etc. 
 
-To create an environment in Anaconda, first open the Anaconda Navigator program. Then, navigate to the Environments tab. There, you'll find the current existing environments, including the default `base(root)` environment. Click the Create button to create a new environment. 
+To create an environment in Anaconda, first open the Anaconda Navigator program. Then, navigate to the Environments tab. There, you'll find the current existing environments, including the default `base (root)` environment. Click the Create button to create a new environment. 
 
 In the resulting dialog box: 
 
@@ -66,10 +63,20 @@ Install the following packages:
 - `pandas`
 - `scikit-learn`
 - `seaborn`
+- `pytorch`
+- `torchvision`
+- `torchtext`
+- `torchdata`
 
 I may ask you to install additional packages later on, or you may find it useful to install packages yourself in order to deal with problems or projects. You'll follow this same process to install them to the `ml-0451` environment. 
 
-## Launch JupyterLab
+## Test Installation
+
+We now need to test your installation. We are going to do this by checking that you are able to run code from these packages in a Jupyter notebook. You can use any software you like for editing Jupyter notebooks. Below, I supply instructions for working in JupyterLab, which is easiest and most reliable. I personally prefer [VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)'s notebook capabilities, but it can be a little bit more finicky to connect your kernel to your notebook. 
+
+To test your installation with JupyterLab...
+
+### Launch JupyterLab
 
 Now back on the Home tab, launch the JupyterLab app. You may need to install it first. Create a notebook using the `ml-0451` environment as a kernel. 
 
@@ -87,6 +94,7 @@ import sklearn as sk
 import numpy as np
 from matplotlib import pyplot as plt
 import pandas as pd
+import torch
 print("I did it!")
 ```
 
@@ -106,7 +114,7 @@ JupyterLab is probably the easiest way for you to get up and coding. The reason 
 - *Notebooks*, which allow us to combine code, text, and outputs, including data visualizations. 
 - *Text files*, like `.py` files, which are best for holding complex, reusable source code. 
 
-There are other editors that support these as well. My personal favorite is [Visual Studio Code](https://code.visualstudio.com/) (often called VSCode), and you're likely to see me using it in class. It's fine for you to use VSCode or any other editor, but please note that I'll only troubleshoot Anaconda + JupyterLab. That is, you can use VSCode, but you'll be "on your own" in terms of getting up and running. That said, the [documentation](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) on working with notebooks in VSCode is pretty good. 
+There are other editors that support these as well. My personal favorite is [Visual Studio Code](https://code.visualstudio.com/) (often called VSCode), and you're likely to see me using it in class. It's fine for you to use VSCode or any other editor, but please note that I'll only troubleshoot Anaconda + JupyterLab. That is, you can use VSCode, but you'll be "on your own" in terms of getting up and running. That said, the [documentation](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) on working with notebooks in VSCode is very good. 
 
 # GitHub and GitHub Pages
 

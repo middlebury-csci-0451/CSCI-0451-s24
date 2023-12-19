@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
+      &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451&lt;br&gt;Spring '24
       </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./"><b>Machine Learning</b><br>CSCI 0451</a> 
+      <a href="./"><b>Machine Learning</b><br>CSCI 0451<br>Spring ’24</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
@@ -174,13 +174,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#social-slack-and-hypothes.is" id="toc-social-slack-and-hypothes.is" class="nav-link active" data-scroll-target="#social-slack-and-hypothes.is">Social: Slack and Hypothes.is</a></li>
+  <li><a href="#slack" id="toc-slack" class="nav-link active" data-scroll-target="#slack">Slack</a></li>
   <li><a href="#anaconda-python" id="toc-anaconda-python" class="nav-link" data-scroll-target="#anaconda-python">Anaconda Python</a>
   <ul class="collapse">
   <li><a href="#install-anaconda" id="toc-install-anaconda" class="nav-link" data-scroll-target="#install-anaconda">1. Install Anaconda</a></li>
   <li><a href="#create-the-ml-0451-environment" id="toc-create-the-ml-0451-environment" class="nav-link" data-scroll-target="#create-the-ml-0451-environment">2. Create the <code>ml-0451</code> Environment</a></li>
   <li><a href="#install-packages" id="toc-install-packages" class="nav-link" data-scroll-target="#install-packages">Install Packages</a></li>
+  <li><a href="#test-installation" id="toc-test-installation" class="nav-link" data-scroll-target="#test-installation">Test Installation</a>
+  <ul class="collapse">
   <li><a href="#launch-jupyterlab" id="toc-launch-jupyterlab" class="nav-link" data-scroll-target="#launch-jupyterlab">Launch JupyterLab</a></li>
+  </ul></li>
   <li><a href="#alternative-vscode-and-others" id="toc-alternative-vscode-and-others" class="nav-link" data-scroll-target="#alternative-vscode-and-others">Alternative: VSCode and Others</a></li>
   </ul></li>
   <li><a href="#github-and-github-pages" id="toc-github-and-github-pages" class="nav-link" data-scroll-target="#github-and-github-pages">GitHub and GitHub Pages</a>
@@ -226,13 +229,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>After following this set of instructions, you will be all ready to go for participation in CSCI 0451.</p>
-<section id="social-slack-and-hypothes.is" class="level1">
-<h1>Social: Slack and Hypothes.is</h1>
-<p>First, you’ll need to join Hypothes.is and Slack.</p>
-<ul>
-<li><strong>For Hypothes.is</strong>, start by <a href="https://web.hypothes.is/">making an account</a>. Then, follow the link on the <a href="https://middlebury.instructure.com/courses/12215/assignments/syllabus">Canvas syllabus page</a> to join the “CSCI 0451 (S23)” group.</li>
-<li><strong>For Slack</strong>, just follow the link on the <a href="https://middlebury.instructure.com/courses/12215/assignments/syllabus">Canvas syllabus page</a> to join the workspace. You may choose to download the Slack desktop client, but that’s up to you. You can make your own choices about notifications, but please do whatever you need to do to ensure that you’re able to check Slack on a regular basis.</li>
-</ul>
+<section id="slack" class="level1">
+<h1>Slack</h1>
+<p>First, you’ll need to join Slack. Just follow the link on the <a href="https://middlebury.instructure.com/courses/13859/assignments/syllabus">Canvas syllabus page</a> to join the workspace. You may choose to download the Slack desktop client, but that’s up to you. You can make your own choices about notifications, but please do whatever you need to do to ensure that you’re able to check Slack on a regular basis.</p>
 </section>
 <section id="anaconda-python" class="level1 page-columns page-full">
 <h1>Anaconda Python</h1>
@@ -249,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="assets/img/screencaps/create-environment.png" class="img-fluid"></p>
 <p>The Environments tab, with the Create button on the bottom.</p>
 </div></div><p>An <em>environment</em> is a separate installation of Python that exists independently of any other versions of Python on your computer. Using environments allows us to have fine-grained control over which version of Python we use, which additional packages are installed, etc.</p>
-<p>To create an environment in Anaconda, first open the Anaconda Navigator program. Then, navigate to the Environments tab. There, you’ll find the current existing environments, including the default <code>base(root)</code> environment. Click the Create button to create a new environment.</p>
+<p>To create an environment in Anaconda, first open the Anaconda Navigator program. Then, navigate to the Environments tab. There, you’ll find the current existing environments, including the default <code>base (root)</code> environment. Click the Create button to create a new environment.</p>
 <p>In the resulting dialog box:</p>
 <ul>
 <li>Name your environmnent <code>ml-0451</code>.</li>
@@ -272,11 +271,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>pandas</code></li>
 <li><code>scikit-learn</code></li>
 <li><code>seaborn</code></li>
+<li><code>pytorch</code></li>
+<li><code>torchvision</code></li>
+<li><code>torchtext</code></li>
+<li><code>torchdata</code></li>
 </ul>
 <p>I may ask you to install additional packages later on, or you may find it useful to install packages yourself in order to deal with problems or projects. You’ll follow this same process to install them to the <code>ml-0451</code> environment.</p>
 </section>
-<section id="launch-jupyterlab" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="launch-jupyterlab">Launch JupyterLab</h2>
+<section id="test-installation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="test-installation">Test Installation</h2>
+<p>We now need to test your installation. We are going to do this by checking that you are able to run code from these packages in a Jupyter notebook. You can use any software you like for editing Jupyter notebooks. Below, I supply instructions for working in JupyterLab, which is easiest and most reliable. I personally prefer <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">VSCode</a>’s notebook capabilities, but it can be a little bit more finicky to connect your kernel to your notebook.</p>
+<p>To test your installation with JupyterLab…</p>
+<section id="launch-jupyterlab" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="launch-jupyterlab">Launch JupyterLab</h3>
 <p>Now back on the Home tab, launch the JupyterLab app. You may need to install it first. Create a notebook using the <code>ml-0451</code> environment as a kernel.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -286,12 +293,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"I did it!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"I did it!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Finally, run the cell (<code>cmd + enter</code> on Mac or <code>ctrl + enter</code> on Windows). If you get no errors, only the output of the <code>print</code> statement, then you did it!</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="assets/img/screencaps/did-it.png" class="img-fluid"> If you see this then you did it!</p>
 </div></div></section>
+</section>
 <section id="alternative-vscode-and-others" class="level2">
 <h2 class="anchored" data-anchor-id="alternative-vscode-and-others">Alternative: VSCode and Others</h2>
 <p>JupyterLab is probably the easiest way for you to get up and coding. The reason is that it supports two ways of working with Python:</p>
@@ -299,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>Notebooks</em>, which allow us to combine code, text, and outputs, including data visualizations.</li>
 <li><em>Text files</em>, like <code>.py</code> files, which are best for holding complex, reusable source code.</li>
 </ul>
-<p>There are other editors that support these as well. My personal favorite is <a href="https://code.visualstudio.com/">Visual Studio Code</a> (often called VSCode), and you’re likely to see me using it in class. It’s fine for you to use VSCode or any other editor, but please note that I’ll only troubleshoot Anaconda + JupyterLab. That is, you can use VSCode, but you’ll be “on your own” in terms of getting up and running. That said, the <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">documentation</a> on working with notebooks in VSCode is pretty good.</p>
+<p>There are other editors that support these as well. My personal favorite is <a href="https://code.visualstudio.com/">Visual Studio Code</a> (often called VSCode), and you’re likely to see me using it in class. It’s fine for you to use VSCode or any other editor, but please note that I’ll only troubleshoot Anaconda + JupyterLab. That is, you can use VSCode, but you’ll be “on your own” in terms of getting up and running. That said, the <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">documentation</a> on working with notebooks in VSCode is very good.</p>
 </section>
 </section>
 <section id="github-and-github-pages" class="level1">
@@ -366,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

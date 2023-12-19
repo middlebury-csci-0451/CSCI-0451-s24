@@ -12,7 +12,7 @@ website:
   sidebar:
     collapse-level: 1	
     style: "docked"
-    title: "<b>Machine Learning</b><br>CSCI 0451"
+    title: "<b>Machine Learning</b><br>CSCI 0451<br>Spring '24"
     contents:
       - text: "Syllabus"
         file: index.qmd

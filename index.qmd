@@ -165,7 +165,7 @@ See the [complete schedule](schedule.qmd) for more details! I am still working o
 - **Week 2**: Black-box classification in practice. Features, model evaluation.
 - **Week 3**: Vectorization. Flex. 
 - **Week 4**: Bias and fairness. Auditing models. 
-- **Week 5**: Introduction to theory: empirical risk minimization. Convex optimization. 
+- **Week 5**: Introduction to theory: empirical risk minimization. Convex optimization.  
 - **Spring Break!**
 - **Week 6**: Optimization: deterministic and stochastic. 
 - **Week 7**: Kernel methods. 
@@ -281,7 +281,7 @@ I'll usually describe the importance of revisions on your assignment using one o
 
 At the beginning of the semester, you'll write a process letter that will outline what you'd like to learn and achieve in the course. It's ok if you don't meet all your aspirations by the end of the course. That said, you are still accountable to yourself and to me, in the following way: 
 
-> For an "A", a student should spend at least* ***10 productive hours*** *of work outside of class. 
+> For an A, a student should spend at least **10 productive hours per week** of work outside of class. 
 
 How you spend those 10 hours is largely up to you and your goals. Some examples: 
 

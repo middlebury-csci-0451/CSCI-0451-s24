@@ -1,9 +1,7 @@
 [
   {
     "listing": "/blog.html",
-    "items": [
-      "/posts/2023-01-01-test.html"
-    ]
+    "items": []
   },
   {
     "listing": "/assignments.html",

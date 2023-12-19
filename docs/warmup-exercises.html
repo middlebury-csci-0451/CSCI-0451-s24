@@ -142,7 +142,7 @@ div.csl-indent {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451
+      &lt;b&gt;Machine Learning&lt;/b&gt;&lt;br&gt;CSCI 0451&lt;br&gt;Spring '24
       </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
@@ -158,7 +158,7 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./"><b>Machine Learning</b><br>CSCI 0451</a> 
+      <a href="./"><b>Machine Learning</b><br>CSCI 0451<br>Spring ’24</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -170,7 +170,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
@@ -306,7 +306,7 @@ div.csl-indent {
 <section id="part-1-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
 <p>Consider the 0-1 step function that I’ve plotted below:</p>
-<div id="b102a2a8" class="cell" data-execution_count="3">
+<div id="5973b2a0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -378,7 +378,7 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <section id="sec-gradient-descent-2" class="level2">
 <h2 class="anchored" data-anchor-id="sec-gradient-descent-2">Gradient Descent (Again)</h2>
 <p>Consider the function <span class="math inline">\(f(w_0, w_1) = \sin(w_0w_1)\)</span>. You can define this function like this:</p>
-<div id="d1d666a9" class="cell" data-execution_count="4">
+<div id="631867fb" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -555,7 +555,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <p>Implement kernel convolution. Your implementation should accept a 2d array <code>X</code> (think of <code>X</code> as representing a greyscale image) and a square convolutional kernel <code>K</code>. Your implementation should operate using pure <code>numpy</code>. You can use any zero-padding strategy, but you do need to explain what your strategy is when presenting.</p>
 <p>It’s ok to use a for-loop to loop over pixels.</p>
 <p>Here’s an example image you can use:</p>
-<div id="cc2106a9" class="cell" data-execution_count="5">
+<div id="ac361f54" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -583,7 +583,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 </div>
 </div>
 <p>After implementing your function, you should be able to use it like this, replacing the implementation of <code>scipy.signal</code> with your own implementation. The result should look something like this:</p>
-<div id="1b5cfdd5" class="cell" data-execution_count="6">
+<div id="7aca0e84" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
@@ -723,7 +723,7 @@ The false positive rate is ___. </code></pre>
 <section id="part-3-2" class="level4">
 <h4 class="anchored" data-anchor-id="part-3-2">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
-<div id="97431b72" class="cell" data-execution_count="7">
+<div id="0c476396" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
@@ -793,7 +793,7 @@ The false positive rate is ___. </code></pre>
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2023</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-narayanan2022limits" class="csl-entry" role="listitem">
 Narayanan, Arvind. 2022. <span>“The Limits of the Quantitative Approach to Discrimination.”</span> Speech.
 </div>
