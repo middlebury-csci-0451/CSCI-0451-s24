@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -278,7 +259,7 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="support-vector-machine">Support Vector Machine</h4>
 <p><em>Support vector machines</em> (SVMs) were among the state-of-the-art binary classifiers before the rise of deep neural networks. Support vector machines are convex linear classifiers like logistic regression, but have some special mathematical properties that enable them to make much faster predictions on new data by leveraging <em>sparsity</em>. A good SVM project would likely involve most or all of the following:</p>
 <ol type="1">
-<li>Implementing SVM using a version of stochastic gradient descent called PEGASOS (Fig. 2 in <span class="citation" data-cites="shalev2007pegasos">Shalev-Shwartz, Singer, and Srebro (<a href="#ref-shalev2007pegasos" role="doc-biblioref">2007</a>)</span>).</li>
+<li>Implementing SVM using a version of stochastic gradient descent called PEGASOS (Fig. 2 in <span class="citation" data-cites="shalev2007pegasos">(<a href="#ref-shalev2007pegasos" role="doc-biblioref"><strong>shalev2007pegasos?</strong></a>)</span>).</li>
 <li>Implementing <em>kernel</em> SVM, which enables nonlinear decision boundaries, using a quadratic solver.</li>
 <li>Testing your results on several real and synthetic data sets for:
 <ul>
@@ -315,22 +296,14 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="audits-and-algorithmic-bias">Audits and Algorithmic Bias</h2>
 <p>Many of you may have an interest in further exploring topics related to fairness and bias in machine learning algorithms. This is a great topic! Some possibilities include:</p>
 <ul>
-<li>Thoroughly reproducing the findings of papers that diagnose algorithmic bias with an available data set or algorithm, such as <span class="citation" data-cites="obermeyer2019dissecting">Obermeyer et al. (<a href="#ref-obermeyer2019dissecting" role="doc-biblioref">2019</a>)</span>.</li>
+<li>Thoroughly reproducing the findings of papers that diagnose algorithmic bias with an available data set or algorithm, such as <span class="citation" data-cites="obermeyer2019dissecting">(<a href="#ref-obermeyer2019dissecting" role="doc-biblioref"><strong>obermeyer2019dissecting?</strong></a>)</span>.</li>
 <li>Write a critical review essay on the topic of algorithmic bias in a specific area. This should be a <em>polished</em> essay with lots of references and some specific, quantitative examples.</li>
 </ul>
 
 
-
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-obermeyer2019dissecting" class="csl-entry" role="listitem">
-Obermeyer, Ziad, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. 2019. <span>“Dissecting Racial Bias in an Algorithm Used to Manage the Health of Populations.”</span> <em>Science</em> 366 (6464): 447–53.
-</div>
-<div id="ref-shalev2007pegasos" class="csl-entry" role="listitem">
-Shalev-Shwartz, Shai, Yoram Singer, and Nathan Srebro. 2007. <span>“Pegasos: Primal Estimated Sub-Gradient Solver for Svm.”</span> In <em>Proceedings of the 24th International Conference on Machine Learning</em>, 807–14.
-</div>
-</div></section></div></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

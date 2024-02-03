@@ -15,51 +15,85 @@
   module: Welcome
   publish: true
   warmup: <a href="software.qmd">Set up your software</a>.
-  assignments: No really, <br><a href="software.qmd">set up your software</a>.
-- date: 2024-02-15
-  header: Introduction to Classification
-  summary: |
-    We introduce the core idea of a classifier as a function that accepts predictors and returns a prediction for a target. We then begin to work through the basic data manipulation and classification via the <code>pandas</code> and <code>scikit-learn</code> packages for Python. 
-  objectives: 
-    - Theory
-    - Navigation
-  reading:
-    - <a href="http://ciml.info/dl/v0_99/ciml-v0_99-ch01.pdf">Daumé 1.1-1.5</a>
-  notes: 
-    - |
-      TBD
-  module: Classification
-  publish: true
-  warmup: TBD
-  assignments: TBD
+  assignments: <a href="assignments/math-pre-assessment/math-pre-assessment.qmd">Math pre-assessment</a>.
 - date: 2024-02-20
-  header: Model Evaluation
-  summary: |
-    We learn how to evaluate classification models according to various metrics. We also introduce cross-validation as a technique for selecting between models. 
+  header: Linear Models and Score-Based Classification
+  summary: 
   objectives: 
-    - Navigation
-  reading:
-    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.02-introducing-scikit-learn.html">Introducing Scikit-Learn</a>
-    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.03-hyperparameters-and-model-validation.html">Hyperparameters and Model Validation</a>
+  reading: 
   notes: 
-    - |
-      TBD 
+  module: Classification 
+  publish: true
+  warmup:
+  assignments:
+- date: 2024-02-15
+  header: The Classification Workflow
+  summary: 
+  objectives: 
+  reading:
+  notes: 
   module: Classification
   publish: true
   warmup: TBD
   assignments: TBD
 - date: 2024-02-22
-  header: Decision Boundaries and Features
-  summary: |
-    We learn more about how to visualize and evaluate the behavior of models. We also learn how to learn *nonlinear* decision boundaries by constructing nonlinear features.  
+  header: Statistical Decision Theory and Automated Decision-Making
+  summary: 
   objectives: 
-    - Navigation
   reading:
-    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.04-feature-engineering.html">Feature Engineering</a>
   notes: 
-    - |
-      TBD
   module: Classification
   publish: true
   warmup: TBD
-  assignments: TBD
+  assignments: |
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due 2/27 </b>
+- date: 2024-02-27
+  header: Legitimacy in Automated Decision-Making
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-02-29
+  header: Model Auditing
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-03-05
+  header: Statistical formulations of fairness in classification
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-03-07 
+  header: Incompatibility and normative foundations
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-03-12
+  header: Critical perspectives on quantifying discrimination
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 

@@ -2,11 +2,10 @@
 tbl-cap-location: margin
 title: Syllabus
 callout-icon: false
+bibliography: refs.bib
 ---
 
-This is an advanced elective on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning. 
-
-This course is by no means an exhaustive overview of machine learning. The course focuses almost exclusively on *supervised* models which perform *empirical risk minimization*. This focus allows us to study a wide variety of classical models while building up a skillset that will give us a smooth on-ramp into deep learning towards the end of the course. 
+This is an advanced elective on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning. The course focuses almost entirely on *predictive* models, and places special emphasis on questions of fairness in automated decision-making. 
 
 # Learning Objectives
 
@@ -26,7 +25,7 @@ A learning objective is a primary goal for your learning by the end of the cours
             <b>Implementation</b>
         </td>
         <td class="syllabus-description-table-entry">
-            You will implement classification, regression, and clustering algorithms in efficient, usable Python programs. 
+            You will implement classification and regression algorithms in efficient, usable Python programs. 
         </td>
     </tr>
     <tr>
@@ -50,7 +49,7 @@ A learning objective is a primary goal for your learning by the end of the cours
             <b>Social Responsibility</b>
         </td>
         <td class="syllabus-description-table-entry">
-            You will interrogate sources of bias and harm in machine learning models, especially with regard to gender, race, and class. 
+            You will interrogate sources of bias, harm, and disparity in machine learning models, especially with regard to gender, race, and class. 
         </td>
     </tr>
     <tr>
@@ -65,26 +64,18 @@ A learning objective is a primary goal for your learning by the end of the cours
 
 # Readings
 
-It is not necessary for you to purchase any books for this course. We will have regular readings from a few different texts, with the most frequent one being: 
+It is not necessary for you to purchase any books for this course. We will have frequent readings from the following two texts: 
 
-- [*A Course In Machine Learning*](http://ciml.info/) by Hal Daumé III. 
+- [A Course in Machine Learning](http://ciml.info/) by Hal Daumé III is an accessible introduction to many of the topics and serves as a useful source of supplementary readings.
+- [@barocasFairnessMachineLearning2023](https://fairmlbook.org/) is a text on questions of fairness in automated decision-making which we will use as a source for discussion in several weeks of the course. 
 
-The following resources cover similar topics to our core readings at a similar level. If something doesn't click for you in our core reading, you may want to check the treatment in one of these resources. 
+Some additional readings can provide useful additional background and may be referenced in some lecture notes or assignments.   
 
-- [*Learning From Data*](https://openeclass.panteion.gr/modules/document/file.php/PMS152/LEARNING/Abu-Mostafa%20Yaser%20S.%2C%20Malik%20Magdon-Ismail%2C%20Hsuan-Tien%20Lin%20%282012%29%20--%20Learning%20From%20Data_%20A%20short%20course.pdf) by Yaser Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin.
-- [*The Hundred Page Machine Learning Book*](http://ema.cri-info.cm/wp-content/uploads/2019/07/2019BurkovTheHundred-pageMachineLearning.pdf) by Andriy Burkov.
-
-I will also sometimes draw readings from the following sources: 
-
-- [*Patterns, Predictions, and Actions: A Story About Machine Learning*](https://arxiv.org/abs/2102.05242) by Mortiz Hardt and Benjamin Recht.
-- [*Probabilistic Machine Learning: An Introduction*](https://probml.github.io/pml-book/book1.html) by Kevin Patrick Murphy.
-- [*Fairness and Machine Learning*](https://fairmlbook.org/pdf/fairmlbook.pdf) by Solon Barocas, Moritz Hardt, and Arvind Narayanan.
-
-The following books are relatively advanced. I'll often suggest additional readings from these books for students who are interested in diving deeper, especially into theoretical considerations. 
-
-- [*Pattern Recognition and Machine Learning*](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) by Christopher Bishop. Recommended for students who have taken a course in probability. [In case you're wondering, I primarily learned out of Bishop and Hastie et al.]{.aside}
-- [*The Elements of Statistical Learning: Data Mining, Inference, and Prediction*](https://hastie.su.domains/Papers/ESLII.pdf) by Trevor Hastie, Rob Tibshirani, and Jerome Friedman. A more statistical perspective on many of the same problems that we will study. 
-- [*Mathematics for Machine Learning*](https://mml-book.github.io/book/mml-book.pdf) by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong
+- [@abu-mostafaLearningDataShort2012](https://amlbook.com/) give a helpful overview of the general problem of using models to gain insight frmo data. 
+- [@hardtPatternsPredictionsActions2022](https://mlstory.org/) is a major influence on the overall arc of the notes I have written for the course. 
+- [@bishopPatternRecognitionMachine2006](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) and [@murphyProbabilisticMachineLearning2022a](https://probml.github.io/pml-book/book1.html) are advanced texts on machine learning from a Bayesian perspective. These texts  are most suitable for readers who have already taken at least one course in probability theory. [@hastieElementsStatisticalLearning2017](https://hastie.su.domains/Papers/ESLII.pdf) is a similarly advanced text that focuses on frequentist interpretations. 
+- [@deisenrothMathematicsMachineLearning2020](https://mml-book.github.io/book/mml-book.pdf) and [@kroeseDataScienceMachine2020](https://people.smp.uq.edu.au/DirkKroese/DSML/DSML.pdf) are useful readings focusing on some of the mathematical fundamentals of machine learning theory. 
+- [@zhangDiveDeepLearning2023](https://d2l.ai/d2l-en.pdf) tells a helpful story of the fundamentals of deep learning.  
 
 # Logistics and Key Policies
 
@@ -161,20 +152,19 @@ The following books are relatively advanced. I'll often suggest additional readi
 
 See the [complete schedule](schedule.qmd) for more details! I am still working on populating this schedule, and will try to have it set up at least two weeks in advance at all times. 
 
-- **Week 1**: Welcome! Data science techniques in Python. 
-- **Week 2**: Black-box classification in practice. Features, model evaluation.
-- **Week 3**: Vectorization. Flex. 
-- **Week 4**: Bias and fairness. Auditing models. 
-- **Week 5**: Introduction to theory: empirical risk minimization. Convex optimization.  
+- **Week 1**: Welcome! Score-based classification. 
+- **Week 2**: Linear models in Python, feature maps. Automated decision-making. 
+- **Week 3**: Legitimacy of automated decision-making. Auditing models. 
+- **Week 4**: Statistical formulations of fairness in classification; normative underpinnings. Incompatibility. 
+- **Week 5**: Critical perspectives on fairness in automated decision systems. Flex. 
 - **Spring Break!**
-- **Week 6**: Optimization: deterministic and stochastic. 
-- **Week 7**: Kernel methods. 
-- **Week 8**: Deep learning. Image classification.  
-- **Week 9**: Text classification and word embedding. 
-- **Week 10**: Generative language models. 
-- **Week 11**: Generative models: promises and risks. 
+- **Week 6**: Introduction to theory: linear models, empirical risk minimization, regularization. Gradients.  
+- **Week 7**: Classical optimization: deterministic first- and second-order methods. 
+- **Week 8**: Modern optimization: automatic differentiation; stochastic gradient descent and friends. 
+- **Week 9**: Feature maps. Kernel classifiers.
+- **Week 10**: Deep learning. Image classification. 
+- **Week 11**: Text classification and word embedding. 
 - **Week 12**: Feedback, reflection, projects. 
-
 
 ## What Will Class Time Look Like? 
 
@@ -211,7 +201,7 @@ Because grading is broken! Traditional points-based grading is ineffective at bo
 
 > Agency, dialogue, self-actualization, and social justice are not possible in a hierarchical system that pits teachers against students and encourages competition by ranking students against one another. Grades (and institutional rankings) are currency for a capitalist system that reduces teaching and learning to a mere transaction. Grading is a massive co-ordinated effort to take humans out of the educational process.
 
-I'd prefer to just not give you grades at all. But, Middlebury says I have to, and so my aim is to instead put the process of grading under your control to the greatest extent that I reasonably can.  
+For a course like this, I'd prefer to just not give you grades at all. But, Middlebury says I have to, and so my aim is to instead put the process of grading under your control to the greatest extent that I reasonably can.  
 
 ## Assignments
 
@@ -268,27 +258,45 @@ While we don't have formal due dates, there is a benefit to keeping yourself on 
 
 ## Feedback
 
-I won't "grade" your individual assignments, but our course team and I will offer you feedback about what I thought was successful and where you can improve. My general expectation is that you will often (though not always) revise your work in response to feedback and resubmit it. **Revising in response to feedback is one of the single most effective ways for you to deepen your learning**. 
+### Blog Posts
 
-I'll usually describe the importance of revisions on your assignment using one of the following categories: 
+You will receive feedback and "grades" on your blog posts. Your feedback will describe what we in the course team thought was especially successful and where you have room to improve. Your "grade" will be one of the following: 
 
-- **No revisions suggested**: you've done great work and should focus on the next thing. 
-- **Revisions useful**: you have opportunities for improvement on this assignment, but focusing on the next topic or assignment may be a better use of your time---use your judgment.  
-- **Revisions encouraged**: the best use of your time is to respond to feedback and resubmit, rather than moving on to the next assignment. 
-- **Incomplete**: the assignment isn't sufficiently complete for it to be used as evidence of your learning.  
+- **E**: Excellent, *I do not suggest that you spend any more time on this assignment*. 
+- **M**: Meets expectations, *I think that you may be able to learn more by revising this assignment in response to feedback*. 
+- **R**: Revision suggested, *I believe that you need to spend more time with this assignment in order to learn what it has to teach you.*
+- **I**: Incomplete, *You have more work to do in order to learn what this assignment has to teach you.*
+
+There is no formula by which Es, Ms, Rs, and Is are factored into a final grade. Instead, it will be up to you to set goals around these and hold yourself accountable to them. [Historically, ambitious students in this course have reached Es or above on at least 4 blog posts and Ms on at least 2-3 more.]{.aside}
+
+It is relatively rare to earn an **E** on a first assignment submission. That's ok! It's an opportunity for you to revise and continue to learn. **Revising in response to feedback is one of the single most effective ways for you to deepen your learning.** 
+
+### Project
+
+Your project does not receive any formal grades. As one of your final blog posts, you will reflect on your contributions to your project and write about the extent to which you met your goals. 
+
+### Process Reflections
+
+After you submit process reflections, I will write back to you with my own thoughts on your goals and your progress against them. Process reflections are not otherwise graded, **you are required to complete them** in order to receive a grade for the course. 
 
 ## What Work Do You Need To Do?
 
-At the beginning of the semester, you'll write a process letter that will outline what you'd like to learn and achieve in the course. It's ok if you don't meet all your aspirations by the end of the course. That said, you are still accountable to yourself and to me, in the following way: 
+At the beginning of the semester, you'll write a process reflection that will outline what you'd like to learn and achieve in the course. It's ok if you don't meet all your aspirations by the end of the course, and there will be an opportunity to revise mid-way. That said, you are still accountable to yourself and to me, in the following way: 
 
-> For an A, a student should spend at least **10 productive hours per week** of work outside of class. 
+> For an A, a student should spend at least **10 productive hours of learning per  week** of work outside of class. 
 
 How you spend those 10 hours is largely up to you and your goals. Some examples: 
 
-- You complete almost all of the assignments that I offer you, to a high degree of quality. 
+- You complete many of the assignments that I offer you, to a high degree of quality. 
 - You complete fewer of the assignments that I offer you, but also propose several different assignments to demonstrate your learning in response to your interests. 
 - You complete fewer of the assignments that I offer you, but also organize a regular study group or review session. 
 - You complete fewer of the assignments that I offer you, but complete a final project that goes far beyond the standard project expectations.  
+- You complete fewer of the assignments that I offer you, but demonstrate considerable outside learning in relevant math, the theory of fairness in machine learning, or some other endeavor. 
+
+**Notes**: 
+
+- There are lots of opportunities to practice applied data science workflows via things like Kaggle competitions. This can be a worthwhile use of time, but it's not guaranteed to help you *learn* new ideas. With that in mind, these kinds of applied projects are not recommended as part of how you'll spend your time for this class. 
+- Data science projects that you do for other classes, consulting, internships, etc. are cool and I would love to hear about them! They don't count as effort towards this course unless you can describe how the content from this course is informing your projects and how you are spending *extra* effort on those projects as part of your experience of this course. 
 
 # Am I Ready for CSCI 0451? 
 
@@ -315,6 +323,8 @@ I am assuming that you remember most of MATH 0200 and CSCI 0200. It's ok if you 
 - Eigenvalues, eigenvectors, positive-definite matrices. 
 - Derivatives, critical points of functions. 
 
+I have prepared a mathematics [pre-assessment](assignments/math-pre-assessment/math-pre-assessment.qmd) for you to try. This assessment is ungraded and is primarily for **you** to reflect on your comfort with some of the skills we will need. It's ok if you are not confident on every problem (especially the problems related to multivariable differentiation). You'll just want to devote some of your learning effort during the course towards getting more comfortable.  
+
 ### Reviews/Diagnostics
 
 - [This resource](http://web.stanford.edu/class/cs246/handouts/CS246_LinAlg_review.pdf) from Stanford's CS246 contains most of the linear algebra that you'll need for the course. The only big topic that's missing is treatment of the existence of solutions of the linear system $\mathbf{A}\mathbf{x} = \mathbf{b}$ in terms of the rank of $\mathbf{A}$. You don't need to have memorized everything here, but most of it should look familiar. 
@@ -323,7 +333,7 @@ I am assuming that you remember most of MATH 0200 and CSCI 0200. It's ok if you 
 
 # Course Policies 
 
-### Laptops
+## Laptops
 
 Please bring a laptop, and make sure that it has at least 75 minutes of charge. 
 
@@ -336,15 +346,6 @@ If you ever find yourself temporarily in need of a laptop, the Computer Science 
 **On Long-Term Use**: College policy has changed recently to include the expectation that every student have a laptop available. The college provides laptops to those who need them where “need” is based on Student Financial Services calculations. If you anticipate needing a laptop for the whole term, we encourage you to inquire with Student Financial Services and the library first due to our smaller pool of equipment. However, our department commits to meeting the needs of every student, so do not be afraid to reach out if you believe you need one of our laptops for any length of time.
 
 :::
-
-
-
-<!-- [![An image of four of the Pokemon Squirtle welcoming a fifth Squirtle. The original four Squirtles are labeled "unfinished assignment #1" through #4. The fifth Squirtle is labeled "new assignment."](assets/img/memes/unfinished-assignments.jpg) *Image credit: [Dr. Spencer Bagley](https://twitter.com/sbagley/status/1437833176311762946?s=20&t=xPhXuSfOqxBvezv2HG2xyg)*]{.aside} -->
-
-<!-- In general, I'm not offended when your work comes in late, provided that it doesn't become a problem for our graders (who, like you, are students here!). However, please make sure that you plan your time and prevent your work from piling up. I don't really have any way to help you if you have too much to do at the end of the semester after requesting many due date adjustments.  -->
-
-
-
 
 ## Academic Integrity and Collaboration
 
@@ -360,13 +361,36 @@ I assume that both of us want you to learn some cool stuff. Cheating stops you f
 
 Trust me. Neither of us want this. 
 
-
-
-## Collaboration
+### Collaboration
 
 I love it! Please collaborate in ways that allow you and your collaboration partners to fully learn from and engage with the content. Sharing small snippets of code or math is often helpful to get someone unstuck, but sharing complete function implementations or mathematical arguments is usually counterproductive.  
 
 Here are some [general guidelines](collaboration.qmd) for how I think about collaboration. 
+
+### Large Language Models
+
+Large language models (LLMs) like ChatGPT aim to produce helpful, human-like text with a combination of two major mechanisms: 
+
+- LLMs use *next-token prediction* to predict the next entries in a sequence of text by using the previous entries. This enables them to mimic human-produced text. So, if you saw the sequence "*I love machine _____*", you might guess that the next word might be "*learning*" and that it's probably not "*pineapples*."
+- LLMs are trained using *reinforcement learning with human feedback (RLHF)* to produce sentences that are not just realistic but also *helpful*, *nonoffensive*, or *accurate*. They do this using a multistage training process that involves humans rating the quality of candidate texts. 
+
+ChatGPT and similar LLMs are shaping many conversations in education [at Middlebury](https://www.middleburycampus.com/article/2023/03/middlebury-meets-chatgpt) and [beyond](https://www.chronicle.com/article/im-a-student-you-have-no-idea-how-much-were-using-chatgpt).
+
+While LLMs may have many benefits, they are also the subject of [routine]((https://analyticsindiamag.com/did-google-bard-really-learn-bengali-on-its-own/)) [deception](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4441311) by powerful, motivated actors. They are powered by [massive quantities](https://www.theverge.com/features/23764584/ai-artificial-intelligence-data-notation-labor-scale-surge-remotasks-openai-chatbots) of [low-paying, traumatizing labor](https://www.wsj.com/articles/chatgpt-openai-content-abusive-sexually-explicit-harassment-kenya-workers-on-human-workers-cf191483). LLMs and automation more generally are [furthering labor instability](https://www.cbsnews.com/news/ai-job-losses-artificial-intelligence-challenger-report/), [contributing to reduced wages](https://www.forbes.com/sites/jackkelly/2021/06/18/artificial-intelligence-has-caused--50-to-70-decrease-in-wages-creating-income-inequality-and-threatening-millions-of-jobs/?sh=6bc1e5c41009), and are [concentrating the power](https://www.nytimes.com/2019/09/26/technology/ai-computer-expense.html) of a small number of large tech companies. 
+
+### In This Class
+
+- Work that you submit in this class must demonstrate **your** learning and understanding. Copy/paste from LLMs like ChatGPT does not do this, and is consequently a violation of academic integrity. 
+- In particular, English writing in blog posts and project writeups must always be your own words. Using ChatGPT to generate *ideas* is permissible, but using it to generate *text* for your blog is a violation of academic integrity.
+- Use of ChatGPT or GitHub Copilot to generate solution code for blog posts is likely to detract from your learning and is therefore strongly discouraged. 
+
+If you choose to use an LLM in any way in your blog posts or projects, you must: 
+
+- Cite your source. 
+- Describe the contribution of the source to your submitted writeup. 
+- Describe what steps you have taken to independently verify that your learning from the LLM is indeed correct. 
+- Remember that you are always personally responsible for the accuracy, quality, and integrity of your work. 
+
 
 # Course Environment
 

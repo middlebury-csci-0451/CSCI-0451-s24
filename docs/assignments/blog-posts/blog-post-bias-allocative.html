@@ -56,26 +56,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -263,7 +244,7 @@ $$
 </div>
 </div>
 </div>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class=""><code>folktables</code> was introduced by <span class="citation" data-cites="ding2021retiring">Ding et al. (<a href="#ref-ding2021retiring" role="doc-biblioref">2021</a>)</span>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class=""><code>folktables</code> was introduced by <span class="citation" data-cites="ding2021retiring">(<a href="#ref-ding2021retiring" role="doc-biblioref"><strong>ding2021retiring?</strong></a>)</span>.</span></div></div>
 <p>The <code>folktables</code> package allows you to download and neatly organize data from the American Community Survey’s Public Use Microdata Sample (PUMS). You can install it in your <code>ml-0451</code> environment by running the following two commands in your terminal:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate ml-0451</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install folktables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -739,7 +720,7 @@ $$
 </section>
 <section id="bias-measures" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="bias-measures">Bias Measures</h5>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">See <span class="citation" data-cites="chouldechova2017fair">Chouldechova (<a href="#ref-chouldechova2017fair" role="doc-biblioref">2017</a>)</span> for definitions of these terms. For calibration, you can think of the score as having only two values, 0 and 1.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">See <span class="citation" data-cites="chouldechova2017fair">(<a href="#ref-chouldechova2017fair" role="doc-biblioref"><strong>chouldechova2017fair?</strong></a>)</span> for definitions of these terms. For calibration, you can think of the score as having only two values, 0 and 1.</span></div></div>
 <ul>
 <li>Is your model approximately <em>calibrated</em>?</li>
 <li>Does your model satisfy approximate <em>error rate balance</em>?</li>
@@ -773,21 +754,13 @@ $$
 </section>
 <section id="feasible-fnr-and-fpr-rates" class="level3">
 <h3 class="anchored" data-anchor-id="feasible-fnr-and-fpr-rates">Feasible FNR and FPR Rates</h3>
-<p>As an optional component of your bias audit, you could reproduce Figure 5 in <span class="citation" data-cites="chouldechova2017fair">Chouldechova (<a href="#ref-chouldechova2017fair" role="doc-biblioref">2017</a>)</span> (<a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">link</a>). This figure uses Eq. (2.6), fixing the prevalence (proportion of true positive labels) <span class="math inline">\(p\)</span> for each group, as well as a desired PPV that should be the same across both groups. With these numbers fixed, eq. (2.6) then defines a line of feasible FNR and FPR rates, which you could plot. Don’t worry about reproducing the shaded regions unless you really want to.</p>
-
+<p>As an optional component of your bias audit, you could reproduce Figure 5 in <span class="citation" data-cites="chouldechova2017fair">(<a href="#ref-chouldechova2017fair" role="doc-biblioref"><strong>chouldechova2017fair?</strong></a>)</span> (<a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">link</a>). This figure uses Eq. (2.6), fixing the prevalence (proportion of true positive labels) <span class="math inline">\(p\)</span> for each group, as well as a desired PPV that should be the same across both groups. With these numbers fixed, eq. (2.6) then defines a line of feasible FNR and FPR rates, which you could plot. Don’t worry about reproducing the shaded regions unless you really want to.</p>
 
 
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-chouldechova2017fair" class="csl-entry" role="listitem">
-Chouldechova, Alexandra. 2017. <span>“Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments.”</span> <em>Big Data</em> 5 (2): 153–63.
-</div>
-<div id="ref-ding2021retiring" class="csl-entry" role="listitem">
-Ding, Frances, Moritz Hardt, John Miller, and Ludwig Schmidt. 2021. <span>“Retiring Adult: New Datasets for Fair Machine Learning.”</span> <em>Advances in Neural Information Processing Systems</em> 34.
-</div>
-</div></section></div></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

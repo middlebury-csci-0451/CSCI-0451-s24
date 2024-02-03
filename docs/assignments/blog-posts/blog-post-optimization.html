@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="gradient-descent" class="level3">
 <h3 class="anchored" data-anchor-id="gradient-descent">Gradient Descent</h3>
 <p>Your <code>LogisticRegression.fit</code> method should use gradient descent as described in lecture. Allow the user to specify the learning rate <span class="math inline">\(\alpha\)</span> and the maximum number of iterations, which for this blog post we’ll call <em>epochs</em>. So, using the <code>fit</code> method might look like this:</p>
-<div id="da3fff8b" class="cell" data-execution_count="1">
+<div id="da3fff8b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> solutions.logistic <span class="im">import</span> LogisticRegression <span class="co"># your source code</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="blog-post-optimization_files/figure-html/cell-2-output-1.png" width="587" height="429"></p>
 </div>
 </div>
-<div id="df26df94" class="cell" data-execution_count="2">
+<div id="df26df94" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the model</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
@@ -333,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="illustration" class="level3">
 <h3 class="anchored" data-anchor-id="illustration">Illustration</h3>
 <p>Here is an example plot showing the evolution of the loss function for the three algorithms:</p>
-<div id="c0cbd640" class="cell caption-undefined" data-execution_count="3">
+<div id="c0cbd640" class="cell caption-undefined" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>LR.fit_stochastic(X, y, </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  m_epochs <span class="op">=</span> <span class="dv">100</span>, </span>
@@ -398,14 +398,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="tips-and-hints">Tips and Hints</h2>
 <p>Most of the major math functions are shown in our <a href="../../lecture-notes/gradient-descent.html">lecture on gradient descent</a>. You’re welcome to use any of these functions as you wish; please just incorporate comments in your code and blog post to cite where they came from.</p>
 <p>If you compute the gradient using matrix-vector operations in <code>numpy</code> (recommended, no for-loops!), you may find it useful at some point to convert an <code>np.array()</code> of shape <code>(n,)</code> to an <code>np.array()</code> of shape <code>(n,1)</code> like this:</p>
-<div id="778ae80a" class="cell" data-execution_count="4">
+<div id="778ae80a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.random.rand(<span class="dv">5</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>array([0.99223301, 0.3061863 , 0.82998541, 0.84127377, 0.07136462])</code></pre>
 </div>
 </div>
-<div id="f58a7972" class="cell" data-execution_count="5">
+<div id="f58a7972" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>v[:,np.newaxis]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([[0.99223301],

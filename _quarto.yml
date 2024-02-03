@@ -5,6 +5,7 @@ project:
     - "lecture-scripts/*"
     - "assignments"
     - "lecture-notes/*.ipynb"
+  
 
 website:
   body-footer: |
@@ -20,7 +21,9 @@ website:
       - assignments.qmd
       - project.qmd
   favicon: assets/icons/favicon.png
- 
+
+bibliography: refs.bib
+
 format:
   html:
     theme: [cosmo, custom.scss]

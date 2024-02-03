@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -156,7 +175,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#why-collaborative-grading" id="toc-why-collaborative-grading" class="nav-link" data-scroll-target="#why-collaborative-grading">Why Collaborative Grading?</a></li>
   <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a></li>
   <li><a href="#best-by-dates" id="toc-best-by-dates" class="nav-link" data-scroll-target="#best-by-dates">Best-By Dates</a></li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">Feedback</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback">Feedback</a>
+  <ul class="collapse">
+  <li><a href="#blog-posts" id="toc-blog-posts" class="nav-link" data-scroll-target="#blog-posts">Blog Posts</a></li>
+  <li><a href="#project" id="toc-project" class="nav-link" data-scroll-target="#project">Project</a></li>
+  <li><a href="#process-reflections" id="toc-process-reflections" class="nav-link" data-scroll-target="#process-reflections">Process Reflections</a></li>
+  </ul></li>
   <li><a href="#what-work-do-you-need-to-do" id="toc-what-work-do-you-need-to-do" class="nav-link" data-scroll-target="#what-work-do-you-need-to-do">What Work Do You Need To Do?</a></li>
   </ul></li>
   <li><a href="#am-i-ready-for-csci-0451" id="toc-am-i-ready-for-csci-0451" class="nav-link" data-scroll-target="#am-i-ready-for-csci-0451">Am I Ready for CSCI 0451?</a>
@@ -174,8 +198,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#academic-integrity-and-collaboration" id="toc-academic-integrity-and-collaboration" class="nav-link" data-scroll-target="#academic-integrity-and-collaboration">Academic Integrity and Collaboration</a>
   <ul class="collapse">
   <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity">Academic Integrity</a></li>
-  </ul></li>
   <li><a href="#collaboration" id="toc-collaboration" class="nav-link" data-scroll-target="#collaboration">Collaboration</a></li>
+  <li><a href="#large-language-models" id="toc-large-language-models" class="nav-link" data-scroll-target="#large-language-models">Large Language Models</a></li>
+  <li><a href="#in-this-class" id="toc-in-this-class" class="nav-link" data-scroll-target="#in-this-class">In This Class</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#course-environment" id="toc-course-environment" class="nav-link" data-scroll-target="#course-environment">Course Environment</a></li>
   <li><a href="#beyond-this-course" id="toc-beyond-this-course" class="nav-link" data-scroll-target="#beyond-this-course">Beyond This Course</a>
@@ -207,8 +233,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This is an advanced elective on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning.</p>
-<p>This course is by no means an exhaustive overview of machine learning. The course focuses almost exclusively on <em>supervised</em> models which perform <em>empirical risk minimization</em>. This focus allows us to study a wide variety of classical models while building up a skillset that will give us a smooth on-ramp into deep learning towards the end of the course.</p>
+<p>This is an advanced elective on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning. The course focuses almost entirely on <em>predictive</em> models, and places special emphasis on questions of fairness in automated decision-making.</p>
 <section id="learning-objectives" class="level1">
 <h1>Learning Objectives</h1>
 <p>A learning objective is a primary goal for your learning by the end of the course. You’re successful in CSCI 0451 when you achieve excellence against these learning objectives. We have six learning objectives in CSCI 0451.</p>
@@ -226,7 +251,7 @@ You will describe the broad mathematical structure of modern machine learning al
 <b>Implementation</b>
 </td>
 <td class="syllabus-description-table-entry">
-You will implement classification, regression, and clustering algorithms in efficient, usable Python programs.
+You will implement classification and regression algorithms in efficient, usable Python programs.
 </td>
 </tr>
 <tr>
@@ -250,7 +275,7 @@ You will experiment with machine learning models, audit their performance, and c
 <b>Social Responsibility</b>
 </td>
 <td class="syllabus-description-table-entry">
-You will interrogate sources of bias and harm in machine learning models, especially with regard to gender, race, and class.
+You will interrogate sources of bias, harm, and disparity in machine learning models, especially with regard to gender, race, and class.
 </td>
 </tr>
 <tr>
@@ -263,30 +288,22 @@ You will complete a long-term project that involves significant implementation o
 </tr>
 </tbody></table>
 </section>
-<section id="readings" class="level1 page-columns page-full">
+<section id="readings" class="level1">
 <h1>Readings</h1>
-<p>It is not necessary for you to purchase any books for this course. We will have regular readings from a few different texts, with the most frequent one being:</p>
+<p>It is not necessary for you to purchase any books for this course. We will have frequent readings from the following two texts:</p>
 <ul>
-<li><a href="http://ciml.info/"><em>A Course In Machine Learning</em></a> by Hal Daumé III.</li>
+<li><a href="http://ciml.info/">A Course in Machine Learning</a> by Hal Daumé III is an accessible introduction to many of the topics and serves as a useful source of supplementary readings.</li>
+<li><a href="https://fairmlbook.org/"><span class="citation" data-cites="barocasFairnessMachineLearning2023">Barocas, Hardt, and Narayanan (<span>2023</span>)</span></a> is a text on questions of fairness in automated decision-making which we will use as a source for discussion in several weeks of the course.</li>
 </ul>
-<p>The following resources cover similar topics to our core readings at a similar level. If something doesn’t click for you in our core reading, you may want to check the treatment in one of these resources.</p>
+<p>Some additional readings can provide useful additional background and may be referenced in some lecture notes or assignments.</p>
 <ul>
-<li><a href="https://openeclass.panteion.gr/modules/document/file.php/PMS152/LEARNING/Abu-Mostafa%20Yaser%20S.%2C%20Malik%20Magdon-Ismail%2C%20Hsuan-Tien%20Lin%20%282012%29%20--%20Learning%20From%20Data_%20A%20short%20course.pdf"><em>Learning From Data</em></a> by Yaser Abu-Mostafa, Malik Magdon-Ismail, and Hsuan-Tien Lin.</li>
-<li><a href="http://ema.cri-info.cm/wp-content/uploads/2019/07/2019BurkovTheHundred-pageMachineLearning.pdf"><em>The Hundred Page Machine Learning Book</em></a> by Andriy Burkov.</li>
+<li><a href="https://amlbook.com/"><span class="citation" data-cites="abu-mostafaLearningDataShort2012">Abu-Mostafa, Magdon-Ismail, and Lin (<span>2012</span>)</span></a> give a helpful overview of the general problem of using models to gain insight frmo data.</li>
+<li><a href="https://mlstory.org/"><span class="citation" data-cites="hardtPatternsPredictionsActions2022">Hardt and Recht (<span>2022</span>)</span></a> is a major influence on the overall arc of the notes I have written for the course.</li>
+<li><a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"><span class="citation" data-cites="bishopPatternRecognitionMachine2006">Bishop (<span>2006</span>)</span></a> and <a href="https://probml.github.io/pml-book/book1.html"><span class="citation" data-cites="murphyProbabilisticMachineLearning2022a">Murphy (<span>2022</span>)</span></a> are advanced texts on machine learning from a Bayesian perspective. These texts are most suitable for readers who have already taken at least one course in probability theory. <a href="https://hastie.su.domains/Papers/ESLII.pdf"><span class="citation" data-cites="hastieElementsStatisticalLearning2017">Hastie, Tibshirani, and Friedman (<span>2017</span>)</span></a> is a similarly advanced text that focuses on frequentist interpretations.</li>
+<li><a href="https://mml-book.github.io/book/mml-book.pdf"><span class="citation" data-cites="deisenrothMathematicsMachineLearning2020">Deisenroth, Faisal, and Ong (<span>2020</span>)</span></a> and <a href="https://people.smp.uq.edu.au/DirkKroese/DSML/DSML.pdf"><span class="citation" data-cites="kroeseDataScienceMachine2020">Kroese et al. (<span>2020</span>)</span></a> are useful readings focusing on some of the mathematical fundamentals of machine learning theory.</li>
+<li><a href="https://d2l.ai/d2l-en.pdf"><span class="citation" data-cites="zhangDiveDeepLearning2023">Zhang, Lipton, and Li (<span>2023</span>)</span></a> tells a helpful story of the fundamentals of deep learning.</li>
 </ul>
-<p>I will also sometimes draw readings from the following sources:</p>
-<ul>
-<li><a href="https://arxiv.org/abs/2102.05242"><em>Patterns, Predictions, and Actions: A Story About Machine Learning</em></a> by Mortiz Hardt and Benjamin Recht.</li>
-<li><a href="https://probml.github.io/pml-book/book1.html"><em>Probabilistic Machine Learning: An Introduction</em></a> by Kevin Patrick Murphy.</li>
-<li><a href="https://fairmlbook.org/pdf/fairmlbook.pdf"><em>Fairness and Machine Learning</em></a> by Solon Barocas, Moritz Hardt, and Arvind Narayanan.</li>
-</ul>
-<p>The following books are relatively advanced. I’ll often suggest additional readings from these books for students who are interested in diving deeper, especially into theoretical considerations.</p>
-<ul>
-<li><a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"><em>Pattern Recognition and Machine Learning</em></a> by Christopher Bishop. Recommended for students who have taken a course in probability. </li>
-<li><a href="https://hastie.su.domains/Papers/ESLII.pdf"><em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em></a> by Trevor Hastie, Rob Tibshirani, and Jerome Friedman. A more statistical perspective on many of the same problems that we will study.</li>
-<li><a href="https://mml-book.github.io/book/mml-book.pdf"><em>Mathematics for Machine Learning</em></a> by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong</li>
-</ul>
-<div class="no-row-height column-margin column-container"><span class="">In case you’re wondering, I primarily learned out of Bishop and Hastie et al.</span></div></section>
+</section>
 <section id="logistics-and-key-policies" class="level1">
 <h1>Logistics and Key Policies</h1>
 <table>
@@ -360,20 +377,19 @@ I encourage you to call me Phil or Prof.&nbsp;Phil. “Professor Chodrow” is f
 <h1>Rough Schedule Of Topics</h1>
 <p>See the <a href="./schedule.html">complete schedule</a> for more details! I am still working on populating this schedule, and will try to have it set up at least two weeks in advance at all times.</p>
 <ul>
-<li><strong>Week 1</strong>: Welcome! Data science techniques in Python.</li>
-<li><strong>Week 2</strong>: Black-box classification in practice. Features, model evaluation.</li>
-<li><strong>Week 3</strong>: Vectorization. Flex.</li>
-<li><strong>Week 4</strong>: Bias and fairness. Auditing models.</li>
-<li><strong>Week 5</strong>: Introduction to theory: empirical risk minimization. Convex optimization.<br>
-</li>
+<li><strong>Week 1</strong>: Welcome! Score-based classification.</li>
+<li><strong>Week 2</strong>: Linear models in Python, feature maps. Automated decision-making.</li>
+<li><strong>Week 3</strong>: Legitimacy of automated decision-making. Auditing models.</li>
+<li><strong>Week 4</strong>: Statistical formulations of fairness in classification; normative underpinnings. Incompatibility.</li>
+<li><strong>Week 5</strong>: Critical perspectives on fairness in automated decision systems. Flex.</li>
 <li><strong>Spring Break!</strong></li>
-<li><strong>Week 6</strong>: Optimization: deterministic and stochastic.</li>
-<li><strong>Week 7</strong>: Kernel methods.</li>
-<li><strong>Week 8</strong>: Deep learning. Image classification.<br>
+<li><strong>Week 6</strong>: Introduction to theory: linear models, empirical risk minimization, regularization. Gradients.<br>
 </li>
-<li><strong>Week 9</strong>: Text classification and word embedding.</li>
-<li><strong>Week 10</strong>: Generative language models.</li>
-<li><strong>Week 11</strong>: Generative models: promises and risks.</li>
+<li><strong>Week 7</strong>: Classical optimization: deterministic first- and second-order methods.</li>
+<li><strong>Week 8</strong>: Modern optimization: automatic differentiation; stochastic gradient descent and friends.</li>
+<li><strong>Week 9</strong>: Feature maps. Kernel classifiers.</li>
+<li><strong>Week 10</strong>: Deep learning. Image classification.</li>
+<li><strong>Week 11</strong>: Text classification and word embedding.</li>
 <li><strong>Week 12</strong>: Feedback, reflection, projects.</li>
 </ul>
 <section id="what-will-class-time-look-like" class="level2">
@@ -413,7 +429,7 @@ I encourage you to call me Phil or Prof.&nbsp;Phil. “Professor Chodrow” is f
 <blockquote class="blockquote">
 <p>Agency, dialogue, self-actualization, and social justice are not possible in a hierarchical system that pits teachers against students and encourages competition by ranking students against one another. Grades (and institutional rankings) are currency for a capitalist system that reduces teaching and learning to a mere transaction. Grading is a massive co-ordinated effort to take humans out of the educational process.</p>
 </blockquote>
-<p>I’d prefer to just not give you grades at all. But, Middlebury says I have to, and so my aim is to instead put the process of grading under your control to the greatest extent that I reasonably can.</p>
+<p>For a course like this, I’d prefer to just not give you grades at all. But, Middlebury says I have to, and so my aim is to instead put the process of grading under your control to the greatest extent that I reasonably can.</p>
 </section>
 <section id="assignments" class="level2">
 <h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
@@ -461,30 +477,48 @@ You may have some topic or idea that especially interests you and which you want
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="assets/img/memes/unfinished-assignments.JPG" class="img-fluid" alt="An image of four of the Pokemon Squirtle welcoming a fifth Squirtle. The original four Squirtles are labeled “unfinished assignment #1” through #4. The fifth Squirtle is labeled “new assignment.”"> <em>Image credit: <a href="https://twitter.com/sbagley/status/1437833176311762946?s=20&amp;t=xPhXuSfOqxBvezv2HG2xyg">Dr.&nbsp;Spencer Bagley</a></em></p>
 </div></div></section>
-<section id="feedback" class="level2">
+<section id="feedback" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="feedback">Feedback</h2>
-<p>I won’t “grade” your individual assignments, but our course team and I will offer you feedback about what I thought was successful and where you can improve. My general expectation is that you will often (though not always) revise your work in response to feedback and resubmit it. <strong>Revising in response to feedback is one of the single most effective ways for you to deepen your learning</strong>.</p>
-<p>I’ll usually describe the importance of revisions on your assignment using one of the following categories:</p>
+<section id="blog-posts" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="blog-posts">Blog Posts</h3>
+<p>You will receive feedback and “grades” on your blog posts. Your feedback will describe what we in the course team thought was especially successful and where you have room to improve. Your “grade” will be one of the following:</p>
 <ul>
-<li><strong>No revisions suggested</strong>: you’ve done great work and should focus on the next thing.</li>
-<li><strong>Revisions useful</strong>: you have opportunities for improvement on this assignment, but focusing on the next topic or assignment may be a better use of your time—use your judgment.<br>
-</li>
-<li><strong>Revisions encouraged</strong>: the best use of your time is to respond to feedback and resubmit, rather than moving on to the next assignment.</li>
-<li><strong>Incomplete</strong>: the assignment isn’t sufficiently complete for it to be used as evidence of your learning.</li>
+<li><strong>E</strong>: Excellent, <em>I do not suggest that you spend any more time on this assignment</em>.</li>
+<li><strong>M</strong>: Meets expectations, <em>I think that you may be able to learn more by revising this assignment in response to feedback</em>.</li>
+<li><strong>R</strong>: Revision suggested, <em>I believe that you need to spend more time with this assignment in order to learn what it has to teach you.</em></li>
+<li><strong>I</strong>: Incomplete, <em>You have more work to do in order to learn what this assignment has to teach you.</em></li>
 </ul>
+<div class="page-columns page-full"><p>There is no formula by which Es, Ms, Rs, and Is are factored into a final grade. Instead, it will be up to you to set goals around these and hold yourself accountable to them. </p><div class="no-row-height column-margin column-container"><span class="">Historically, ambitious students in this course have reached Es or above on at least 4 blog posts and Ms on at least 2-3 more.</span></div></div>
+<p>It is relatively rare to earn an <strong>E</strong> on a first assignment submission. That’s ok! It’s an opportunity for you to revise and continue to learn. <strong>Revising in response to feedback is one of the single most effective ways for you to deepen your learning.</strong></p>
+</section>
+<section id="project" class="level3">
+<h3 class="anchored" data-anchor-id="project">Project</h3>
+<p>Your project does not receive any formal grades. As one of your final blog posts, you will reflect on your contributions to your project and write about the extent to which you met your goals.</p>
+</section>
+<section id="process-reflections" class="level3">
+<h3 class="anchored" data-anchor-id="process-reflections">Process Reflections</h3>
+<p>After you submit process reflections, I will write back to you with my own thoughts on your goals and your progress against them. Process reflections are not otherwise graded, <strong>you are required to complete them</strong> in order to receive a grade for the course.</p>
+</section>
 </section>
 <section id="what-work-do-you-need-to-do" class="level2">
 <h2 class="anchored" data-anchor-id="what-work-do-you-need-to-do">What Work Do You Need To Do?</h2>
-<p>At the beginning of the semester, you’ll write a process letter that will outline what you’d like to learn and achieve in the course. It’s ok if you don’t meet all your aspirations by the end of the course. That said, you are still accountable to yourself and to me, in the following way:</p>
+<p>At the beginning of the semester, you’ll write a process reflection that will outline what you’d like to learn and achieve in the course. It’s ok if you don’t meet all your aspirations by the end of the course, and there will be an opportunity to revise mid-way. That said, you are still accountable to yourself and to me, in the following way:</p>
 <blockquote class="blockquote">
-<p>For an A, a student should spend at least <strong>10 productive hours per week</strong> of work outside of class.</p>
+<p>For an A, a student should spend at least <strong>10 productive hours of learning per week</strong> of work outside of class.</p>
 </blockquote>
 <p>How you spend those 10 hours is largely up to you and your goals. Some examples:</p>
 <ul>
-<li>You complete almost all of the assignments that I offer you, to a high degree of quality.</li>
+<li>You complete many of the assignments that I offer you, to a high degree of quality.</li>
 <li>You complete fewer of the assignments that I offer you, but also propose several different assignments to demonstrate your learning in response to your interests.</li>
 <li>You complete fewer of the assignments that I offer you, but also organize a regular study group or review session.</li>
-<li>You complete fewer of the assignments that I offer you, but complete a final project that goes far beyond the standard project expectations.</li>
+<li>You complete fewer of the assignments that I offer you, but complete a final project that goes far beyond the standard project expectations.<br>
+</li>
+<li>You complete fewer of the assignments that I offer you, but demonstrate considerable outside learning in relevant math, the theory of fairness in machine learning, or some other endeavor.</li>
+</ul>
+<p><strong>Notes</strong>:</p>
+<ul>
+<li>There are lots of opportunities to practice applied data science workflows via things like Kaggle competitions. This can be a worthwhile use of time, but it’s not guaranteed to help you <em>learn</em> new ideas. With that in mind, these kinds of applied projects are not recommended as part of how you’ll spend your time for this class.</li>
+<li>Data science projects that you do for other classes, consulting, internships, etc. are cool and I would love to hear about them! They don’t count as effort towards this course unless you can describe how the content from this course is informing your projects and how you are spending <em>extra</em> effort on those projects as part of your experience of this course.</li>
 </ul>
 </section>
 </section>
@@ -515,6 +549,7 @@ You may have some topic or idea that especially interests you and which you want
 <li>Eigenvalues, eigenvectors, positive-definite matrices.</li>
 <li>Derivatives, critical points of functions.</li>
 </ul>
+<p>I have prepared a mathematics <a href="./assignments/math-pre-assessment/math-pre-assessment.html">pre-assessment</a> for you to try. This assessment is ungraded and is primarily for <strong>you</strong> to reflect on your comfort with some of the skills we will need. It’s ok if you are not confident on every problem (especially the problems related to multivariable differentiation). You’ll just want to devote some of your learning effort during the course towards getting more comfortable.</p>
 <section id="reviewsdiagnostics" class="level3">
 <h3 class="anchored" data-anchor-id="reviewsdiagnostics">Reviews/Diagnostics</h3>
 <ul>
@@ -526,8 +561,8 @@ You may have some topic or idea that especially interests you and which you want
 </section>
 <section id="course-policies" class="level1">
 <h1>Course Policies</h1>
-<section id="laptops" class="level3">
-<h3 class="anchored" data-anchor-id="laptops">Laptops</h3>
+<section id="laptops" class="level2">
+<h2 class="anchored" data-anchor-id="laptops">Laptops</h2>
 <p>Please bring a laptop, and make sure that it has at least 75 minutes of charge.</p>
 <div class="callout callout-style-simple callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -546,8 +581,6 @@ We Can Help You Borrow a Laptop
 </div>
 </div>
 </div>
-<!-- [![An image of four of the Pokemon Squirtle welcoming a fifth Squirtle. The original four Squirtles are labeled "unfinished assignment #1" through #4. The fifth Squirtle is labeled "new assignment."](assets/img/memes/unfinished-assignments.jpg) *Image credit: [Dr. Spencer Bagley](https://twitter.com/sbagley/status/1437833176311762946?s=20&t=xPhXuSfOqxBvezv2HG2xyg)*]{.aside} -->
-<!-- In general, I'm not offended when your work comes in late, provided that it doesn't become a problem for our graders (who, like you, are students here!). However, please make sure that you plan your time and prevent your work from piling up. I don't really have any way to help you if you have too much to do at the end of the semester after requesting many due date adjustments.  -->
 </section>
 <section id="academic-integrity-and-collaboration" class="level2">
 <h2 class="anchored" data-anchor-id="academic-integrity-and-collaboration">Academic Integrity and Collaboration</h2>
@@ -558,11 +591,36 @@ We Can Help You Borrow a Laptop
 <p>I assume that both of us want you to learn some cool stuff. Cheating stops you from doing that, and ultimately wastes both your time and mine. I won’t be vigorously hunting for academic integrity violations, but I may ask you to discuss code or theory with me in class or in our meetings. If I notice you struggling to explain code that you submitted for feedback, I may have questions.</p>
 <p>Trust me. Neither of us want this.</p>
 </section>
-</section>
-<section id="collaboration" class="level2">
-<h2 class="anchored" data-anchor-id="collaboration">Collaboration</h2>
+<section id="collaboration" class="level3">
+<h3 class="anchored" data-anchor-id="collaboration">Collaboration</h3>
 <p>I love it! Please collaborate in ways that allow you and your collaboration partners to fully learn from and engage with the content. Sharing small snippets of code or math is often helpful to get someone unstuck, but sharing complete function implementations or mathematical arguments is usually counterproductive.</p>
 <p>Here are some <a href="./collaboration.html">general guidelines</a> for how I think about collaboration.</p>
+</section>
+<section id="large-language-models" class="level3">
+<h3 class="anchored" data-anchor-id="large-language-models">Large Language Models</h3>
+<p>Large language models (LLMs) like ChatGPT aim to produce helpful, human-like text with a combination of two major mechanisms:</p>
+<ul>
+<li>LLMs use <em>next-token prediction</em> to predict the next entries in a sequence of text by using the previous entries. This enables them to mimic human-produced text. So, if you saw the sequence “<em>I love machine _____</em>”, you might guess that the next word might be “<em>learning</em>” and that it’s probably not “<em>pineapples</em>.”</li>
+<li>LLMs are trained using <em>reinforcement learning with human feedback (RLHF)</em> to produce sentences that are not just realistic but also <em>helpful</em>, <em>nonoffensive</em>, or <em>accurate</em>. They do this using a multistage training process that involves humans rating the quality of candidate texts.</li>
+</ul>
+<p>ChatGPT and similar LLMs are shaping many conversations in education <a href="https://www.middleburycampus.com/article/2023/03/middlebury-meets-chatgpt">at Middlebury</a> and <a href="https://www.chronicle.com/article/im-a-student-you-have-no-idea-how-much-were-using-chatgpt">beyond</a>.</p>
+<p>While LLMs may have many benefits, they are also the subject of <a href="(https://analyticsindiamag.com/did-google-bard-really-learn-bengali-on-its-own/)">routine</a> <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4441311">deception</a> by powerful, motivated actors. They are powered by <a href="https://www.theverge.com/features/23764584/ai-artificial-intelligence-data-notation-labor-scale-surge-remotasks-openai-chatbots">massive quantities</a> of <a href="https://www.wsj.com/articles/chatgpt-openai-content-abusive-sexually-explicit-harassment-kenya-workers-on-human-workers-cf191483">low-paying, traumatizing labor</a>. LLMs and automation more generally are <a href="https://www.cbsnews.com/news/ai-job-losses-artificial-intelligence-challenger-report/">furthering labor instability</a>, <a href="https://www.forbes.com/sites/jackkelly/2021/06/18/artificial-intelligence-has-caused--50-to-70-decrease-in-wages-creating-income-inequality-and-threatening-millions-of-jobs/?sh=6bc1e5c41009">contributing to reduced wages</a>, and are <a href="https://www.nytimes.com/2019/09/26/technology/ai-computer-expense.html">concentrating the power</a> of a small number of large tech companies.</p>
+</section>
+<section id="in-this-class" class="level3">
+<h3 class="anchored" data-anchor-id="in-this-class">In This Class</h3>
+<ul>
+<li>Work that you submit in this class must demonstrate <strong>your</strong> learning and understanding. Copy/paste from LLMs like ChatGPT does not do this, and is consequently a violation of academic integrity.</li>
+<li>In particular, English writing in blog posts and project writeups must always be your own words. Using ChatGPT to generate <em>ideas</em> is permissible, but using it to generate <em>text</em> for your blog is a violation of academic integrity.</li>
+<li>Use of ChatGPT or GitHub Copilot to generate solution code for blog posts is likely to detract from your learning and is therefore strongly discouraged.</li>
+</ul>
+<p>If you choose to use an LLM in any way in your blog posts or projects, you must:</p>
+<ul>
+<li>Cite your source.</li>
+<li>Describe the contribution of the source to your submitted writeup.</li>
+<li>Describe what steps you have taken to independently verify that your learning from the LLM is indeed correct.</li>
+<li>Remember that you are always personally responsible for the accuracy, quality, and integrity of your work.</li>
+</ul>
+</section>
 </section>
 </section>
 <section id="course-environment" class="level1">
@@ -583,10 +641,39 @@ We Can Help You Borrow a Laptop
 <p>Writing letters of recommendation for students is a fundamental part of my job and something that I am usually very happy to do. <a href="https://www.philchodrow.com/for-students.html#advice-and-recommendation-letters">Here’s how to ask me for a letter</a>.</p>
 
 
+
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-abu-mostafaLearningDataShort2012" class="csl-entry" role="listitem">
+Abu-Mostafa, Yaser S., Malik Magdon-Ismail, and Hsuan-Tien Lin. 2012. <em>Learning from Data: A Short Course</em>. <span>S.l.</span>
+</div>
+<div id="ref-barocasFairnessMachineLearning2023" class="csl-entry" role="listitem">
+Barocas, Solon, Moritz Hardt, and Arvind Narayanan. 2023. <em>Fairness and Machine Learning: Limitations and Opportunities</em>. <span>Cambridge, Massachusetts</span>: <span>The MIT Press</span>.
+</div>
+<div id="ref-bishopPatternRecognitionMachine2006" class="csl-entry" role="listitem">
+Bishop, Christopher M. 2006. <em>Pattern <span>Recognition</span> and <span>Machine Learning</span></em>. Information Science and Statistics. <span>New York</span>: <span>Springer</span>.
+</div>
+<div id="ref-deisenrothMathematicsMachineLearning2020" class="csl-entry" role="listitem">
+Deisenroth, Marc Peter, A. Aldo Faisal, and Cheng Soon Ong. 2020. <em>Mathematics for Machine Learning</em>. <span>Cambridge, UK New York, NY</span>: <span>Cambridge University Press</span>.
+</div>
+<div id="ref-hardtPatternsPredictionsActions2022" class="csl-entry" role="listitem">
+Hardt, Moritz, and Benjamin Recht. 2022. <em>Patterns, <span>Predictions</span>, and <span>Actions</span></em>. <span>Princeton University Press</span>.
+</div>
+<div id="ref-hastieElementsStatisticalLearning2017" class="csl-entry" role="listitem">
+Hastie, Trevor, Robert Tibshirani, and Jerome H. Friedman. 2017. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Second edition, corrected at 12th printing 2017. Springer Series in Statistics. <span>New York, NY</span>: <span>Springer</span>. <a href="https://doi.org/10.1007/b94608">https://doi.org/10.1007/b94608</a>.
+</div>
+<div id="ref-kroeseDataScienceMachine2020" class="csl-entry" role="listitem">
+Kroese, Dirk P., Zdravko I. Botev, Thomas Taimre, and Radislav Vaisman. 2020. <em>Data Science and Machine Learning: Mathematical and Statistical Methods</em>. Chapman &amp; <span>Hall</span>/<span>CRC</span> Machine Learning &amp; Pattern Recognition Series. <span>Boca Raton London New York</span>: <span>CRC Press, Taylor &amp; Francis Group</span>.
+</div>
+<div id="ref-murphyProbabilisticMachineLearning2022a" class="csl-entry" role="listitem">
+Murphy, Kevin P. 2022. <em>Probabilistic Machine Learning: An Introduction</em>. Adaptive Computation and Machine Learning Series. <span>Cambridge, Massachusetts</span>: <span>The MIT Press</span>.
+</div>
+<div id="ref-zhangDiveDeepLearning2023" class="csl-entry" role="listitem">
+Zhang, Aston, Zachary Lipton, and Mu Li. 2023. <em>Dive into Deep Learning</em>. <span>Cambridge, UK</span>: <span>Cambridge University Press</span>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
