@@ -1,5 +1,5 @@
 ---
-title: "CSCI 0451: Math Self-Assessment"
+title: "Math Self-Assessment"
 type: "Reflection"
 date: 2023-02-19
 description: |
@@ -212,7 +212,7 @@ Compute $\frac{\partial^2 f(\mathbf{w})}{\partial w_i \partial w_j}$ for the fun
 <br><br><br><br><br><br><br><br><br>
 
 
-## Part C
+## Part C: Computing Probabilities From Contingency Tables
 
 Suppose that a randomly-selected population of 1000 people is tested for COVID-19 using a rapid test (which is occasionally wrong), as well as a very thorough lab test which we'll imagine is always right. The results are summarized in the following table: 
 

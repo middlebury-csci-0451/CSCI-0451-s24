@@ -1,7 +1,7 @@
 ---
 title: "Replication Study: *Dissecting racial bias in an algorithm used to manage the health of populations*"
 type: "Blog Post"
-date: 2024-04-29
+date: 2024-03-08
 description: In this post, you will read a famous scholarly paper on racial bias in a healthcare recommender system; replicate its primary findings; and discuss your results
 objectives: 
   - Social Responsibility

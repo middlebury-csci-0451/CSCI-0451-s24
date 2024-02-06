@@ -1,5 +1,5 @@
 ---
-title: "Blog Post: Classifying Palmer Penguins"
+title: "Classifying Palmer Penguins"
 type: "Blog Post"
 date: 2024-02-22
 description: |

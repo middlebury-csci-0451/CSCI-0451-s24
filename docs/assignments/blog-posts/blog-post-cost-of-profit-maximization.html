@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-03-08">
-<meta name="description" content="In this post, you will read a famous scholarly paper on racial bias in a healthcare recommender system; replicate its primary findings; and discuss your results">
+<meta name="dcterms.date" content="2024-03-01">
+<meta name="description" content="In this blog post, you will further study optimal decision-making in the context of the the credit-risk prediction problem. Your aim is to (a)determine a score function and threshold that maximize profit for the bank under more realistic assumptions and (b) assess which populations of prospective borrowers are most impacted by your proposed policy.">
 
-<title>Replication Study: Dissecting racial bias in an algorithm used to manage the health of populations</title>
+<title>‘Optimal’ Decision-Making</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -56,26 +56,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -127,7 +108,7 @@ div.csl-indent {
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar docked slimcontent">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -197,30 +178,27 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation">Preparation</a></li>
-  <li><a href="#part-a-data-access" id="toc-part-a-data-access" class="nav-link" data-scroll-target="#part-a-data-access">Part A: Data Access</a></li>
-  <li><a href="#part-b-reproduce-fig.-1" id="toc-part-b-reproduce-fig.-1" class="nav-link" data-scroll-target="#part-b-reproduce-fig.-1">Part B: Reproduce Fig. 1</a></li>
-  <li><a href="#part-c-reproduce-fig.-3" id="toc-part-c-reproduce-fig.-3" class="nav-link" data-scroll-target="#part-c-reproduce-fig.-3">Part C: Reproduce Fig. 3</a></li>
-  <li><a href="#part-d-modeling-cost-disparity" id="toc-part-d-modeling-cost-disparity" class="nav-link" data-scroll-target="#part-d-modeling-cost-disparity">Part D: Modeling Cost Disparity</a>
-  <ul class="collapse">
-  <li><a href="#data-prep" id="toc-data-prep" class="nav-link" data-scroll-target="#data-prep">Data Prep</a></li>
-  <li><a href="#modeling" id="toc-modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a></li>
-  </ul></li>
-  <li><a href="#part-e-abstract-and-discussion" id="toc-part-e-abstract-and-discussion" class="nav-link" data-scroll-target="#part-e-abstract-and-discussion">Part E: Abstract and Discussion</a></li>
+  <li><a href="#part-a-grab-the-data" id="toc-part-a-grab-the-data" class="nav-link active" data-scroll-target="#part-a-grab-the-data">Part A: Grab the Data</a></li>
+  <li><a href="#part-b-explore-the-data" id="toc-part-b-explore-the-data" class="nav-link" data-scroll-target="#part-b-explore-the-data">Part B: Explore The Data</a></li>
+  <li><a href="#part-c-build-a-model" id="toc-part-c-build-a-model" class="nav-link" data-scroll-target="#part-c-build-a-model">Part C: Build a Model</a></li>
+  <li><a href="#part-d-find-a-threshold" id="toc-part-d-find-a-threshold" class="nav-link" data-scroll-target="#part-d-find-a-threshold">Part D: Find a Threshold</a></li>
+  <li><a href="#part-e-evaluate-your-model-from-the-banks-perspective" id="toc-part-e-evaluate-your-model-from-the-banks-perspective" class="nav-link" data-scroll-target="#part-e-evaluate-your-model-from-the-banks-perspective">Part E: Evaluate Your Model from the Bank’s Perspective</a></li>
+  <li><a href="#part-f-evaluate-your-model-from-the-borrowers-perspective" id="toc-part-f-evaluate-your-model-from-the-borrowers-perspective" class="nav-link" data-scroll-target="#part-f-evaluate-your-model-from-the-borrowers-perspective">Part F: Evaluate Your Model From the Borrower’s Perspective</a></li>
+  <li><a href="#part-g-write-and-reflect" id="toc-part-g-write-and-reflect" class="nav-link" data-scroll-target="#part-g-write-and-reflect">Part G: Write and Reflect</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Replication Study: <em>Dissecting racial bias in an algorithm used to manage the health of populations</em></h1>
+<h1 class="title">‘Optimal’ Decision-Making</h1>
 </div>
 
 <div>
   <div class="description">
-    In this post, you will read a famous scholarly paper on racial bias in a healthcare recommender system; replicate its primary findings; and discuss your results
+    In this blog post, you will further study optimal decision-making in the context of the the credit-risk prediction problem. Your aim is to (a)determine a score function and threshold that maximize profit for the bank under more realistic assumptions and (b) assess which populations of prospective borrowers are most impacted by your proposed policy.
   </div>
 </div>
 
@@ -231,7 +209,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 8, 2024</p>
+      <p class="date">March 1, 2024</p>
     </div>
   </div>
   
@@ -242,108 +220,97 @@ div.csl-indent {
 
 </header>
 
-<p>This blog post is a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10019630/"><em>replication study</em></a>. In this post, you will read a famous scholarly paper on racial bias in a healthcare recommender system; replicate its primary findings; and discuss your results.</p>
-<section id="preparation" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="preparation">Preparation</h2>
-<p>To prepare to complete this blog post, you need to do three things:</p>
-<p><strong>First</strong>, <a href="https://www.science.org/doi/full/10.1126/science.aax2342">read this journal article</a></p>
-<blockquote class="blockquote">
-<p>Obermeyer, Ziad, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. 2019. “Dissecting Racial Bias in an Algorithm Used to Manage the Health of Populations.” Science 366 (6464): 447–53.</p>
-</blockquote>
-<div class="page-columns page-full"><p><strong>Second</strong>, watch the concise high-level discussion of this paper in the video “<a href="https://www.youtube.com/watch?v=Ok5sKLXqynQ">Are We Automating Racism?</a>”. </p><div class="no-row-height column-margin column-container"><span class="">I recommend the entire video, but the discussion of this paper runs from approximately 14:45 to 17:51. The discussion features <a href="https://www.ruhabenjamin.com/">Dr.&nbsp;Ruha Benjamin</a>, a prominent critical scholar of technology and society. She is the author of the well-known book <em>Race After Technology</em>, as well as several others.</span></div></div>
-<p><strong>Third</strong>, reread the article in the context of Dr.&nbsp;Benjamin’s discussion.</p>
-<p>Now, proceed on to the next parts.</p>
-</section>
-<section id="part-a-data-access" class="level2">
-<h2 class="anchored" data-anchor-id="part-a-data-access">Part A: Data Access</h2>
-<p>In order to protect patient privacy, the authors did not share the “real” data used in their study. Instead, they created a randomized version of the data that preserves many of the same patterns and trends. You can use the code below to access the data.</p>
-<div id="4a08978e" class="cell" data-execution_count="2">
+<p>In <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">two</a> <a href="https://www.philchodrow.prof/ml-notes/chapters/04-decision-theory.html">sets</a> of lecture notes, we studied the theory of making (binary) decisions based on a linear score function. We illustrated the theory in the context of <em>credit-risk prediction</em>, in which we attempted to identify prospective borrowers who are most likely to default on loans. For the purposes of illustrating the theory, our analysis in those lecture notes was very simple. In particular, we used only two features, and did not make a major attempt to find an optimal vector of weights <span class="math inline">\(\mathbf{w}\)</span>.</p>
+<p>You have two aims in this blog post:</p>
+<ol type="1">
+<li>Find a score function and a threshold which optimize total expected profit for the bank, using <em>any</em> of the features contained in the data and <em>any</em> method, under slightly more realistic assumptions. We’ll think of your score function and threshold as defining an automated decision system for a hypothetical bank extending credit.</li>
+<li>Assess how your automated decision system impacts different segments of the population of prospective borrowers.</li>
+</ol>
+<section id="part-a-grab-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-grab-the-data">Part A: Grab the Data</h2>
+<p>Start by downloading the training data:</p>
+<div id="cb34545d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://gitlab.com/labsysmed/dissecting-bias/-/raw/master/data/data_new.csv?inline=false"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/credit-risk/train.csv"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Poke around the data a bit. You should consult the <a href="https://gitlab.com/labsysmed/dissecting-bias">code repository</a> provided by the authors, especially the <a href="https://gitlab.com/labsysmed/dissecting-bias/-/blob/master/data/data_dictionary.md">data dictionary</a>, in order to interpret the meaning of the rows and columns.</p>
-<p>A few of the columns are especially important:</p>
+<p>The columns in this data are:</p>
 <ul>
-<li><code>risk_score_t</code> is the algorithm’s risk score assigned to a given patient.</li>
-<li><code>cost_t</code> is the patient’s medical costs in the study period.</li>
-<li><code>race</code> is the patient’s self-reported race. The authors filtered the data to include only <code>white</code> and <code>black</code> patients.</li>
-<li><code>gagne_sum_t</code> is the total number of chronic illnesses presented by the patient during the study period.</li>
+<li><code>person_age</code>, the age of the prospective borrower.</li>
+<li><code>person_income</code>, the income of the prospective borrower at time of application.<br>
+</li>
+<li><code>person_home_ownership</code>, the home ownership status of the prospective borrower at time of application. Possible values are <code>MORTGAGE</code>, <code>OWN</code>, <code>RENT</code>, and <code>OTHER</code>.</li>
+<li><code>person_emp_length</code>, the length of most recent employment for the prospective borrower, in years.</li>
+<li><code>loan_intent</code>, the purpose of the loan request.</li>
+<li><code>loan_grade</code>, a composite measure of the likelihood of the borrower to repay the loan. <strong>You may not use this column in your score function in Part B</strong>.</li>
+<li><code>loan_amnt</code>, the amount of the loan.</li>
+<li><code>loan_int_rate</code>, the annual interest rate on the loan.</li>
+<li><code>loan_status</code>, whether or not the borrower defaulted on the loan. <strong>This is the target variable.</strong></li>
+<li><code>loan_percent_income</code>, the amount of the loan as a percentage of the prospective borrower’s personal income.</li>
+<li><code>cb_person_default_on_file</code>, whether the prospective borrower has previously defaulted on a loan in the records of a credit bureau.</li>
+<li><code>cb_person_cred_hist_length</code>, the length of credit history of the prospective borrower.</li>
 </ul>
 </section>
-<section id="part-b-reproduce-fig.-1" class="level2">
-<h2 class="anchored" data-anchor-id="part-b-reproduce-fig.-1">Part B: Reproduce Fig. 1</h2>
-<p>Please make a plot in which you reproduce Fig. 1A of <span class="citation" data-cites="obermeyerDissectingRacialBias2019b">Obermeyer et al. (<a href="#ref-obermeyerDissectingRacialBias2019b" role="doc-biblioref">2019</a>)</span>. Your figure is not required to be exactly the same, but it must visualize risk score percentiles against mean number of active chronic conditions within that percentile. For example, I thought I would try spliting out male and female patients. I also think the figure looks a bit nicer with axes inverted. So, my result looked like this:</p>
-<div id="0db02b64" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<p><img src="blog-post-dissecting-bias_files/figure-html/cell-3-output-1.png" width="743" height="329"></p>
-</div>
-</div>
-<p>Please make sure to appropriately label all axes, legends, and plot facets.</p>
-<p>Include a brief discussion of the meaning of this plot. Suppose that Patient A is Black, that Patient B is White, and that both Patient A and Patient B have exactly the same chronic illnesses. Are Patient A and Patient B equally likely to be referred to the high-risk care management program?</p>
-</section>
-<section id="part-c-reproduce-fig.-3" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="part-c-reproduce-fig.-3">Part C: Reproduce Fig. 3</h2>
-<p>The authors write that</p>
-<blockquote class="blockquote">
-<p>…there are many opportunities for a wedge to creep in between needing health care and receiving health care—and crucially, we find that wedge to be correlated with race…</p>
-</blockquote>
-<p>To support their argument, they produce Figure 3. This figure shows how total medical expenditures are correlated with the risk score and with the number of chronic health conditions. Please produce a version of Figure 3, including both panels. For the horizontal axis in the second panel, please use the number of chronic conditions. It is not necessary to draw threshold values in the same way as the authors. Here’s an example output.</p>
-<p><em>Note</em>: Although not explicitly labeled, I believe that the righthand panel of Fig. 3 in <span class="citation" data-cites="obermeyerDissectingRacialBias2019b">Obermeyer et al. (<a href="#ref-obermeyerDissectingRacialBias2019b" role="doc-biblioref">2019</a>)</span> has percentiles in the number of chronic conditions on the horizontal axis. I’m uncertain how they computed these, considering that in our sample data set the maximum number of chronic conditions is 17. This implies that either the original data set has patients with more chronic conditions or the authors did something to arbitrarily break ties. To avoid dealing with this, let’s just use the number of chronic conditions.</p>
-<div id="a91da72d" class="cell page-columns page-full" data-execution_count="4">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="blog-post-dissecting-bias_files/figure-html/cell-4-output-1.png" class="figure-img" width="657" height="349"></p>
-<figcaption class="figure-caption margin-caption">I found it helpful to use <code>plt.subplots</code> to create a figure with two panels, and then <code>sns.scatterplot</code> to populate each of the panels.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Comment on your findings. You may find it useful to note that the vast majority of patients in this data set have 5 or fewer chronic conditions, as you will confirm in Part D.</p>
-</section>
-<section id="part-d-modeling-cost-disparity" class="level2">
-<h2 class="anchored" data-anchor-id="part-d-modeling-cost-disparity">Part D: Modeling Cost Disparity</h2>
-<p>You’ll notice that there is a relatively stable pattern of disparity in the cost incurred by Black and white patients with 5 or fewer chronic conditions, but that this pattern begins to swing wildly in one direction or another as the number of active chronic conditions increases. This is likely a reflection of the smaller number of data points as the number of conditions increases, which exacerbates the wild variability of healthcare costs.</p>
-<p>Let’s see if we can quantify the disparity that we observe in patients that have 5 or fewer active chronic conditions.</p>
-<section id="data-prep" class="level3">
-<h3 class="anchored" data-anchor-id="data-prep">Data Prep</h3>
+<section id="part-b-explore-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-explore-the-data">Part B: Explore The Data</h2>
+<p>Create at least two visualizations and one summary table in which you explore patterns in the data. You might consider some questions like:</p>
 <ol type="1">
-<li>First, determine the percentage of the patients in the data with 5 or fewer chronic conditions. Does this percentage justify the choice to focus on these patients?</li>
-<li>Create a new column of the data set which is just the logarithm of the cost. This is called a <em>log-transform</em>. We’ll use this as our target variable. Log transforms are common when the target variable varies widely across several orders of magnitude. Because <span class="math inline">\(\log(0)\)</span> is undefined, you should subset the data so that patients who incurred $0 in medical costs are removed.</li>
-<li>Create a dummy (one-hot encoded) column for the qualitative race variable. Make sure to track what a <code>0</code> and a <code>1</code> mean in this column.</li>
-<li>Separate the data into predictor variables <code>X</code> and target variable <code>y</code> (the log-cost). For predictor variables, just use the dummy columns for race and the number of active chronic conditions.</li>
+<li>How does loan intent vary with the age, length of employment, or homeownership status of an individual?</li>
+<li>Which segments of prospective borrowers are offered low interest rates? Which segments are offered high interest rates?</li>
+<li>Which segments of prospective borrowers have access to large lines of credit?</li>
 </ol>
 </section>
-<section id="modeling" class="level3">
-<h3 class="anchored" data-anchor-id="modeling">Modeling</h3>
-<p>Your figure from the previous part suggests that the relationship between the number of chronic conditions and the cost might be nonlinear. For this reason, we are going to fit a regression model with polynomial features derived from the number of active chronic conditions. How many polynomial features should we use? A simple way to figure this out is cross-validation. Here’s a function that will construct data sets with polynomial features of various sizes:</p>
-<div id="b66ae145" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_polynomial_features(X, degree):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  X_ <span class="op">=</span> X.copy()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, degree):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    X_[<span class="ss">f"poly_</span><span class="sc">{</span>j<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> X_[<span class="st">"gagne_sum_t"</span>]<span class="op">**</span>j</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> X_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="part-c-build-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-build-a-model">Part C: Build a Model</h2>
+<p>Please use <em>any</em> technique to construct a score function and threshold for predicting whether a prospective borrower is likely to default on a given loan. You may use all the features in the data except <code>loan_grade</code> (and the target variable <code>loan_status</code>), and you may choose any subset of these. There are several valid ways to approach this modeling task:</p>
+<ol type="1">
+<li>Choose features and estimate entries of a weight vector <span class="math inline">\(\mathbf{w}\)</span> by hand (this is allowed but not recommended).</li>
+<li>(Recommended): Choose your features, estimate new ones if needed, and fit a score-based machine learning model to the data. My suggestion is <code>LogisticRegression</code>. Once you have fit a logistic regression model, the weight vector <span class="math inline">\(\mathbf{w}\)</span> is stored as the attribute <code>model.coef_</code>.</li>
+</ol>
+<p>I suggest that you try several combinations of features, possibly including some which you create, and test out which combinations work best with cross-validation.</p>
+</section>
+<section id="part-d-find-a-threshold" class="level2">
+<h2 class="anchored" data-anchor-id="part-d-find-a-threshold">Part D: Find a Threshold</h2>
+<p>Once you have a weight vector <span class="math inline">\(\mathbf{w}\)</span>, it is time to choose a threshold <span class="math inline">\(t\)</span>. To choose a threshold that maximizes profit for the bank, we need to make some assumptions about how the bank makes and loses money on loans. Let’s use the following (simplified) modeling assumptions:</p>
+<ol type="1">
+<li>If the loan is repaid in full, the profit for the bank is equal to <code>loan_amnt*(1 + loan_int_rate)**10 - loan_amnt</code>. This formula gives the total interest earned on a ten year loan. It is extremely simplistic and does not account for inflation, opportunity costs, etc.</li>
+<li>If the borrower defaults on the loan, the “profit” for the bank is equal to <code>loan_amnt*(1 + loan_int_rate)**5 - 1.5*loan_amnt</code>. This scenario corresponds to the bank earning 5 years of interest on the loan but losing half the principal. This formula is also extremely simplistic and does not take into consideration inflation, opportunity costs, amortization of loans, etc.</li>
+</ol>
+<p><strong>You may deviate from these assumptions if you have relevant prior knowledge to inform your approach!!</strong></p>
+<p>Based on your assumptions, determine the threshold <span class="math inline">\(t\)</span> which optimizes profit for the bank on the training set. Explain your approach, including labeled visualizations where appropriate, and include a final estimate of the bank’s expected profit per borrower on the training set.</p>
+</section>
+<section id="part-e-evaluate-your-model-from-the-banks-perspective" class="level2">
+<h2 class="anchored" data-anchor-id="part-e-evaluate-your-model-from-the-banks-perspective">Part E: Evaluate Your Model from the Bank’s Perspective</h2>
+<p>Only after you have finalized your weight vector <span class="math inline">\(\mathbf{w}\)</span> and threshold <span class="math inline">\(t\)</span>, evaluate your automated decision-process on the test set:</p>
+<div id="4d84a7e8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/credit-risk/test.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Use this function to loop through polynomial features of varying degrees. For each possible degree, construct a <code>LinearRegression</code> model and compute its score on the expanded data using cross-validation. From your results, determine a reasonable value of the polynomial degree that appears to led to the best predictions on this data set. There may be several reasonable choices.</p>
-<p>Once you have determined a degree that seems reasonable for this data set, construct a copy of the data with the correct number of polynomial features and fit one last linear regression model.</p>
-<p>You can access the coefficients of the linear regression model as <code>LR.coef_</code>. Determine which of these coefficients corresponds to Black race (the coefficients are in the same order as the variables in the data frame). Let <span class="math inline">\(w_{\mathrm{b}}\)</span> be the name of this coefficient. When working with log-transformed data, the number <span class="math inline">\(e^{w_\mathrm{b}}\)</span> is our estimate of the <em>healthcare costs incurred by Black patients as a percentage of the costs incurred by white patients</em>.</p>
-<p>What is your estimate of the disparity in cost? Does it roughly support the findings of <span class="citation" data-cites="obermeyerDissectingRacialBias2019b">Obermeyer et al. (<a href="#ref-obermeyerDissectingRacialBias2019b" role="doc-biblioref">2019</a>)</span>?</p>
+<p>What is the expected profit per borrower on the test set? Is it similar to your profit on the training set?</p>
 </section>
+<section id="part-f-evaluate-your-model-from-the-borrowers-perspective" class="level2">
+<h2 class="anchored" data-anchor-id="part-f-evaluate-your-model-from-the-borrowers-perspective">Part F: Evaluate Your Model From the Borrower’s Perspective</h2>
+<p>Now evaluate your model from the (aggregate) perspective of the prospective borrowers. Please quantitatively address the following questions, using the predictions of your model on the test data:</p>
+<ol type="1">
+<li>Is it more difficult for people in certain age groups to access credit under your proposed system?</li>
+<li>Is it more difficult for people to get loans in order to pay for medical expenses? How does this compare with the actual rate of default in that group? What about people seeking loans for business ventures or education?<br>
+</li>
+<li>How does a person’s income level impact the ease with which they can access credit under your decision system?</li>
+</ol>
 </section>
-<section id="part-e-abstract-and-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="part-e-abstract-and-discussion">Part E: Abstract and Discussion</h2>
-<p>Please add an introductory “abstract” section to your blog post describing the high-level aims of of your analysis and an overview of your findings. The abstract should be no more than one paragraph. Then, add a closing “discussion” section of your blog post in which you summarize your findings and describe what you learned from the process of completing this post.</p>
-
+<section id="part-g-write-and-reflect" class="level2">
+<h2 class="anchored" data-anchor-id="part-g-write-and-reflect">Part G: Write and Reflect</h2>
+<p>Write a brief introductory paragraph for your blog post describing the overall purpose, methodology, and findings of your study. Then, write a concluding discussion describing what you found and what you learned through from this blog post.</p>
+<p>Please include one paragraph discussing the following questions:</p>
+<blockquote class="blockquote">
+<p>Considering that people seeking loans for medical expense have high rates of default, is it <em>fair</em> that it is more difficult for them to obtain access to credit?</p>
+</blockquote>
+<p>You are free to define “fairness” in a way that makes sense to you, but <strong>please write down your definition</strong> as part of your discussion.</p>
 
 
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-obermeyerDissectingRacialBias2019b" class="csl-entry" role="listitem">
-Obermeyer, Ziad, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. 2019. <span>“Dissecting Racial Bias in an Algorithm Used to Manage the Health of Populations.”</span> <em>Science</em> 366 (6464): 447–53. <a href="https://doi.org/10.1126/science.aax2342">https://doi.org/10.1126/science.aax2342</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
