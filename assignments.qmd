@@ -1,4 +1,4 @@
---- 
+---  
 #   type: table
 #   sort: best-by
 #   fields: [title, type, best-by,]
@@ -12,12 +12,14 @@ toc: false
 title: Index of Assignments
 listing:
   - id: blog-posts
-    contents: assignments/blog-posts
+    contents: assignments/blog-posts  
     sort-ui: false
     filter-ui: false
     template: assignments.ejs
-  - id: process
-    contents: assignments/process
+  - id: process 
+    contents: 
+      - assignments/process
+      - assignments/math-pre-assessment
     sort-ui: false
     filter-ui: false
     template: assignments.ejs

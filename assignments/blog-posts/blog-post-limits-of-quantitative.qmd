@@ -1,7 +1,7 @@
 ---
 title: "Limits of the Quantitative Approach to Bias and Fairness"
 type: "Blog Post"
-date: 2023-03-29
+date: 2024-04-29
 description: |
     This blog post is actually an essay -- no math or coding is involved. In this blog post, you'll discuss the limits of the quantitative approach to bias and fairness in allocative decision-making.  
 objectives: 
@@ -13,15 +13,10 @@ publish: "true"
 bibliography: ../../refs.bib
 ---
 
-::: {.callout-note}
-
-This one of two possible blog posts for this week. This blog post is a research essay on the limitations of the quantitative approach to analyzing bias and discrimination. If you'd rather work with some data and perform a bias audit of a data set, see [the alternative assignment](blog-post-bias-allocative.qmd). 
-
-:::
 
 ### What You Should Do
 
-Quantitative methods for assessing discrimination and bias include things like: 
+Quantitative methods for assessing discrimination and bias include techniques like: 
 
 - Formal (mathematical) definitions of bias and fairness in terms. 
 - Audits of machine learning algorithms, including things like confusion matrices and false positive rates. 
@@ -31,12 +26,15 @@ In a recent speech, @narayanan2022limits [p. 25] asserts that
 
 > "currently quantitative methods are primarily used to justify the status quo. I would argue that they do more harm than good."
 
-In a carefully-structured essay of approximately 1,500 words, engage **at least 5 scholarly sources** (in addition to Narayanan's speech) to discuss this claim. Your essay should include: 
+In a carefully-structured essay of approximately 1,500-2,000 words, engage Narayanan's speech, @barocasFairnessMachineLearning2023, and **at least 5 additional scholarly sources** to discuss this claim. Your essay should include: 
 
 1. A careful explanation of Narayanan's position. 
 2. A careful explanation of the *uses* or *benefits* of quantitative methods, as described in one of your scholarly sources. 
+    - Please include at least one example of a beneficial study of an algorithm or decision-process using quantitative techniques. Include a careful discussion of which quantitative notion(s) of fairness or lack of discrimination was/were used in the example, in both the technical language of [Chapter 3](https://fairmlbook.org/classification.html) and the moral language of [Chapter 4](https://fairmlbook.org/relative.html) of  @barocasFairnessMachineLearning2023.  
+3. A careful explanation of one of the *limitations* or *drawbacks* of quantitative methods, described in Narayanan's speech or one of your scholarly sources. 
+    - Please include at least one example of a limited, misleading, or otherwise disappinting study of an algorithm or decision-process using quantitative techniques. Include a careful discussion of which quantitative notion(s) of fairness or lack of discrimination was/were used in the example, in both the technical language of [Chapter 3](https://fairmlbook.org/classification.html) and the moral language of [Chapter 4](https://fairmlbook.org/relative.html) of  @barocasFairnessMachineLearning2023.  
 3. Appropriate supporting points from your other scholarly sources. 
-4. An argument in which you stake out a position on Narayanan's point of view. Do you agree? Disagree? Agree with qualifications? Which ones? Why? 
+4. An argument in which you stake out a position on Narayanan's claim of view. Do you agree? Disagree? Agree with qualifications? Which ones? Why? 
 
 
 ### References in Quarto
@@ -44,21 +42,22 @@ In a carefully-structured essay of approximately 1,500 words, engage **at least 
 To manage references in Quarto, you need to create a `.bib` file (you can call it `refs.bib`). This file should live in the same directory as your blog post. Your `.bib` file is essentially a database of document information. Here's an example of a a `refs.bib` file: 
 
 ```bibtex
-@article{hardt2021patterns,
-  title  = {Patterns, predictions, and actions: A story about machine learning},
+@book{hardtPatternsPredictionsActions2022,
+  title = {Patterns, {{Predictions}}, and {{Actions}}},
   author = {Hardt, Moritz and Recht, Benjamin},
-  journal= {arXiv preprint arXiv:2102.05242},
-  year   = {2021}
+  year = {2022},
+  publisher = {{Princeton University Press}},
+  isbn = {978-0-691-23372-7},
+  langid = {english}
 }
 
-@article{kearns1994toward,
-  title     = {Toward Efficient Agnostic Learning},
-  author    = {Kearns, Michael J and Schapire, Robert E and Sellie, Linda M},
-  journal   = {Machine Learning},
-  volume    = {17},
-  pages     = {115--141},
-  year      = {1994},
-  publisher = {Citeseer}
+@book{barocasFairnessMachineLearning2023,
+  title = {Fairness and Machine Learning: Limitations and Opportunities},
+  shorttitle = {Fairness and Machine Learning},
+  author = {Barocas, Solon and Hardt, Moritz and Narayanan, Arvind},
+  year = {2023},
+  publisher = {{The MIT Press}},
+  address = {{Cambridge, Massachusetts}}
 }
 
 @misc{narayanan2022limits,
@@ -84,30 +83,13 @@ bibliography: refs.bib
 Once you've followed these steps, you're ready to cite! You can reference your documents using the \@ symbol and their bibliographic key, which is the first entry for each document in the `refs.bib` file. For example, typing 
 
 ```
-@hardt2021patterns
+@barocasFairnessMachineLearning2023
 ```
 
 results in the reference 
 
-@hardt2021patterns
+@barocasFairnessMachineLearning2023
 
 as well as an entry in the "References" section at the end of your blog post. 
 
 For more on how to handle citations in Quarto, check [the Quarto documentation](https://quarto.org/docs/authoring/footnotes-and-citations.html#citations). 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

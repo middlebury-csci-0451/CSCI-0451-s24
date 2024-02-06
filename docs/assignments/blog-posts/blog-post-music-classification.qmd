@@ -10,7 +10,7 @@ objectives:
 jupyter: conda-env-ml-0451-py
 number-sections: true
 number-depth: 2
-publish: "true"
+publish: "false"
 bibliography: ../../refs.bib
 ---
 

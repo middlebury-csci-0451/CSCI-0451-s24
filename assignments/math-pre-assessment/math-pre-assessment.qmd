@@ -1,10 +1,17 @@
 ---
 title: "CSCI 0451: Math Self-Assessment"
+type: "Reflection"
+date: 2023-02-19
+description: |
+    We check in on our comfort with mathematical techniques that we'll use later in the course. 
+objectives: 
+  - Math
+publish: "true"
 ---
 
 # Instructions
 
-This is an ungraded self-assessment. The purpose is for you to assess your comfort with some of the key mathematical ideas we will draw on in this course. By Week 2, please do the following: 
+This is an ungraded self-assessment. The purpose is for you to assess your comfort with some of the key mathematical ideas we will draw on in this course. Please do the following: 
 
 1. Print out this webpage or save it as a PDF. 
 2. Read each problem.
@@ -12,7 +19,7 @@ This is an ungraded self-assessment. The purpose is for you to assess your comfo
     - 😊: you are confident and can do this problem without needing to look anything up. 
     - 😑: you believe you could figure this problem out, but you would need to consult a text first.  
     - 😓: you feel stuck and aren't sure how to begin this problem. 
-4. **Recommended but optional**: on  separate paper, actually do as many of the problems as you can. 
+4. **Recommended but optional**: actually do the problems. 
 5. Submit your version of the assignment with little faces on Canvas. 
 
 
@@ -33,13 +40,18 @@ $$
 
 Make a sketch of this function. 
 
+<br><br><br><br><br><br><br><br><br>
+
+
 ### A.2 {#sec-A.2}
 
 Compute $\frac{d\sigma(w_0)}{dw}$.  [$\frac{d\sigma(w_0)}{dw}$ is the first derivative of $\sigma$ evaluated at the point $w_0$.]{.aside}
 
+<br><br><br><br><br><br><br><br><br>
+
 ### A.3
 
-Using your computation of $\frac{d\sigma(w_0)}{dw}$ from the previous part, check that the following formula holds: 
+Using your computation of $\frac{d\sigma(w_0)}{dw}$ from the previous part, check that the following formula holds. You should do so by computing both sides of the equation and verifying that they are equal. 
 
 $$
 \begin{aligned}
@@ -47,20 +59,27 @@ $$
 \end{aligned}
 $$
 
+<br><br><br><br><br><br><br><br><br>
+
 ### A.4
 
 Compute $\frac{d^2\sigma(w_0)}{dw^2}$. It is recommended to use your results from the previous two parts. [$\frac{d^2\sigma(w_0)}{dw^2}$ is the second derivative of $\sigma$ evaluated at the point $w_0$.]{.aside}
+
+<br><br><br><br><br><br><br><br><br>
 
 ### A.5
 
 The Taylor expansion can be used to approximate a function near a point. For example, we might find it useful to estimate $\sigma(w_0 + \delta)$, where $\delta$ is a small number. 
 
-Compute an estimate of $\sigma(w_0 + \delta)$ using the second-order Taylor expansion of $\sigma$. 
+Compute an estimate of $\sigma(w_0 + \delta)$ using the second-order Taylor expansion of $\sigma$, assuming that $\delta$ is sufficiently small.
+
+<br><br><br><br><br><br><br><br><br>
 
 ### A.6
 
 The *error* in this approximation has scaling $O(g(\delta))$ for some function $g$. Please say as much as you are able about the function $g$. 
 
+<br><br><br><br><br><br><br><br><br>
 
 ## Part B: Multivariable Differentiation
 
@@ -138,6 +157,9 @@ $$
 
 Compute $\nabla f(w_1,w_2,w_3)$. 
 
+<br><br><br><br><br><br><br><br><br>
+
+
 ### B.2
 
 [It might seem strange to use the variable $\mathbf{w}$ as the variable of differentiation while treating $\mathbf{x}$ as a constant. There will be a reason for it when we get to algorithms! ]{.aside}
@@ -147,6 +169,7 @@ Let $\mathbf{x}, \mathbf{w} \in \mathbb{R}^p$, and let $\langle \mathbf{w}, \mat
 
 Let $\nabla_\mathbf{w}f_{\mathbf{x}}(\mathbf{w})$ be the gradient *with respect to the variables in $\mathbf{w}$*, holding $\mathbf{x}$ constant. Write a careful calculation showing that  $\nabla_\mathbf{w}f_{\mathbf{x}}(\mathbf{w}) = \mathbf{x}$.
 
+<br><br><br><br><br><br><br><br><br>
 
 
 
@@ -156,9 +179,15 @@ Let $f_\mathbf{x}(\mathbf{w}) = \sigma(\langle \mathbf{w}, \mathbf{x}\rangle)$. 
 
 *Hint*: chain rule. 
 
+<br><br><br><br><br><br><br><br><br>
+
+
 ### B.4
 
 Let $\lVert \mathbf{w} \rVert_2 = \sqrt{\sum_{i = 1}^p w_i^2}$ be the Euclidean norm of $\mathbf{w}$. Let $f(\mathbf{w}) = \lVert \mathbf{w} \rVert_2$. Compute $\nabla_\mathbf{w} f(\mathbf{w})$. Express your answer in terms of the vector $\mathbf{x}$, but not any of the individual entries $x_i$. 
+
+<br><br><br><br><br><br><br><br><br>
+
 
 ### B.5
 
@@ -180,6 +209,9 @@ That is, to compute a mixed partial derivative, first compute $\frac{\partial f(
 
 Compute $\frac{\partial^2 f(\mathbf{w})}{\partial w_i \partial w_j}$ for the function $f_\mathbf{x}(\mathbf{w}) = \sigma(\langle \mathbf{x}, \mathbf{w}\rangle)$, assuming that $1 \leq i,j \leq p$. Please consider two cases: $i \neq j$ and $i = j$. 
 
+<br><br><br><br><br><br><br><br><br>
+
+
 ## Part C
 
 Suppose that a randomly-selected population of 1000 people is tested for COVID-19 using a rapid test (which is occasionally wrong), as well as a very thorough lab test which we'll imagine is always right. The results are summarized in the following table: 
@@ -195,24 +227,40 @@ We are going to use these results to estimate the reliability of the rapid test.
 
 The accuracy of the rapid test is the fraction of the time in which the rapid test "got the right answer." What is the accuracy of the rapid test according to these results?
 
+<br><br><br><br><br><br><br><br><br>
+
+
 ### C.2
 
 The *true positive* rate is the proportion of  all COVID+ people who received a Rapid+ result. What is the true positive rate of the rapid test? 
+
+<br><br><br><br><br><br><br><br><br>
+
 
 ### C.3 
 
 The *false positive* rate is the proportion of all COVID- people who received a Rapid+ result. What is the false positive rate of the rapid test? 
 
+<br><br><br><br><br><br><br><br><br>
+
+
 ### C.4
 
 The *true negative* rate is the proportion of all COVID- people who received a Rapid- result. The *false negative* rate is the proportion of all COVID+ people who received a Rapid- result. What are the true and false negative rates of the rapid test? 
+
+<br><br><br><br><br><br><br><br><br>
+
 
 ### C.5
 
 Suppose that you took the rapid test and received a positive result. What is your estimate of the probability that you are truly COVID+?
 
+<br><br><br><br><br><br><br><br><br>
+
+
 ### C.6 
 
 Suppose that you took this rapid test and received a negative result. What is your estimate of the probability that you are truly COVID+?
 
+<br><br><br><br><br><br><br><br><br>
 

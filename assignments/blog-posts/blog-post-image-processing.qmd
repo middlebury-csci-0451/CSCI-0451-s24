@@ -8,7 +8,7 @@ objectives:
   - Theory
   - Implementation
   - Experimentation
-publish: "true"
+publish: "false"
 ---
 
 ::: {.hidden}
