@@ -1,0 +1,153 @@
+---
+title: "Deep Music Genre Classification"
+type: "Blog Post"
+date: 2023-05-08
+description: |
+    In this blog post, you'll use PyTorch to perform classification on a data set of song attributes, comparing approaches that use only lyrics, approaches that use only quantitative audio features, and approaches that use both. 
+objectives: 
+  - Theory
+  - Experimentation
+jupyter: conda-env-ml-0451-py
+number-sections: true
+number-depth: 2
+publish: "false"
+bibliography: ../../refs.bib
+---
+
+::: {.callout-important}
+
+**Content warning**: this blog post involves the use of song lyric data, some of which may be obscene or offensive. 
+
+:::
+
+## Introduction
+
+The code below will allow you to download and load into memory a Pandas data frame containing information on 28,000 musical tracks produced between the years 1950 and 2019. 
+
+```{python}
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/PhilChodrow/PIC16B/master/datasets/tcc_ceds_music.csv"
+df = pd.read_csv(url)
+```
+
+I accessed the data on Kaggle [here](https://www.kaggle.com/datasets/saurabhshahane/music-dataset-1950-to-2019). The data was originally collected from Spotify by researchers who published in the following data publication:
+
+> Moura, Luan; Fontelles, Emanuel; Sampaio, Vinicius; França, Mardônio (2020), “Music Dataset: Lyrics and Metadata from 1950 to 2019”, Mendeley Data, V3, doi: 10.17632/3t9vbwxgr5.3
+
+Here's an excerpt of the data: 
+
+```{python}
+df.head()
+```
+
+In this blog post, your task is to use Torch to predict the *genre* of the track based on the track's lyrics and engineered features. The lyrics are contained in the `lyrics` column. Here is a list of the engineered features that you may additionally find useful. 
+
+```{python}
+engineered_features = ['dating', 'violence', 'world/life', 'night/time','shake the audience','family/gospel', 'romantic', 'communication','obscene', 'music', 'movement/places', 'light/visual perceptions','family/spiritual', 'like/girls', 'sadness', 'feelings', 'danceability','loudness', 'acousticness', 'instrumentalness', 'valence', 'energy']      
+```
+
+These features were engineered by teams at Spotify to describe attributes of the tracks. 
+
+## What You Should Do
+
+Create at least **three** neural networks with Torch and train them. 
+
+1. Your first network should use only the *lyrics* to perform the classification task. You are welcome to use any technique for this, and it's ok for your solution to closely resemble the methods from [our lecture on text classification](../../lecture-notes/text-classification.ipynb). 
+2. Your second network should use only the *engineered features* to perform the classification task. Don't overthink this one: a few fully-connected layers are fine. 
+3. Your third network should use *both* the lyrics and the engineered features to perform the classification task. 
+4. Finally, visualize the word embedding learned by your model and comment on any interesting results you notice. 
+
+## Code Specifications
+
+1. Please implement *exactly one data loader class* for your networks. This class should return batches of data containing both the text features and the engineered features. 
+2. Please implement *exactly one function* for your training loop. You can pass this function arguments that state whether the model being trained should use only the text features, only the engineered features, or both. 
+    - You can use simple array slicing to access only one set of features from a batch containing both features. 
+3. Please perform a train-validation split and compare each of your three models on validation data. Again, please implement only one function for your evaluation loop, which can use the same mechanism as the training loop to determine which part of the data should be passed to the model. 
+
+## Writing Specifications
+
+Please include: 
+
+1. An introductory paragraph describing the purpose of the post. 
+2. A closing paragraph summarizing your results and what you learned from the process. 
+3. Commentary throughout describing the design of your models, how you implemented utility functions, and how to interpret the visualizations and numerical results you produce. 
+
+## Hints
+
+### Architecture for Third Network
+
+For the third network, I recommend that you:
+
+1. Separate the input data into the text features and engineered features (this can be done in either the model or the data loader).
+2. In the `forward` method of your model, process the text features and the engineered features through separate pipelines. Then, use the [`torch.cat`](https://pytorch.org/docs/stable/generated/torch.cat.html) function to combine them, and finally pass the result through one or two fully-connected layers before the output. Here's a rough outline: 
+
+```python
+class CombinedNet(nn.Module):
+    
+    def __init__(self):
+        # ...
+    
+    def forward(self, x):
+        # separate x into x_1 (text features) and x_2 (engineered features)
+        
+        # text pipeline: try embedding! 
+        # x_1 = ...
+
+        # engineered features: fully-connected Linear layers are fine
+        # x_2 = ...
+
+        # ensure that both x_1 and x_2 are 2-d tensors, flattening if necessary
+        # then, combine them with: 
+        x = torch.cat(x_1, x_2, 1)
+        # pass x through a couple more fully-connected layers and return output
+
+```
+
+### Working with Lyrics
+
+There are a few things that I found it  helpful to do when working with the song lyrics in order to make the task manageable. [That said, I strongly suspect that it is possible to significantly improve on my solution.]{.aside}
+
+First, I chose only the most common tokens in the data by including only tokens that appeared at least 50 times. I did this using the `min_freq` argument of `build_vocab_from_iterator`: 
+
+```python
+vocab = build_vocab_from_iterator(yield_tokens(train_data), specials=["<unk>"], min_freq = 50)
+```
+
+Second, I incorporated some `nn.Dropout` layers in between several stages of my model, with the dropout probability equal to `0.2`. 
+
+Finally, I took the average across tokens for each embedding dimension, using `tensor.mean()`: 
+
+```python
+
+    def forward(self, x):
+        # ...
+        x = self.embedding(x)
+        x = self.dropout(x)
+        x = x.mean(axis = 1)
+        # ...
+```
+
+## Expected Accuracy
+
+Please compute the base rate for your problem. While it's possible to achieve relatively high accuracy classification on this data set, you should consider your three models to be successful if they all consistently score above the base rate after training, even if the improvement is not large. Please make sure to comment on the performance of each model, especially on the performance of the third model compared to the other two. 
+
+
+
+
+## If It's Not Working / Too Slow
+
+1. Come chat with me in OH! 
+2. Work in Colab and make sure that you are using the GPU. 
+3. It's ok to reduce the size of your data by restricting to a smaller number of genres, e.g. 3. 
+
+## Optional Extras
+
+*Optionally*, I encourage you to create some interesting visualizations that might highlight differences between genres in terms of some of the engineered features, perhaps over time. You're welcome to pose and address your own questions here. A few that I am wondering about are: 
+
+1. Has pop music gotten more danceable over time in this sample, according to Spotify's definition of `danceability`? 
+2. Does `blues` music tend to have more `sadness` than other genres? Does `pop` or `rock` have more `energy`? 
+3. Are `acousticness` and `instrumentalness` similar features? Can you find any patterns in when they disagree? 
+
+
+
