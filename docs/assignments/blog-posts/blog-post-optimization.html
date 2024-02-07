@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In <a href="../../lecture-notes/gradient-descent.html"></a>, we introduced the <em>gradient descent</em> algorithm for optimization and showed it in action for the logistic regression problem. In this blog post, you’ll:</p>
+<p>In <a href="../../lecture-notes/gradient-descent.qmd"></a>, we introduced the <em>gradient descent</em> algorithm for optimization and showed it in action for the logistic regression problem. In this blog post, you’ll:</p>
 <ol type="1">
 <li>Implement gradient descent for logistic regression in an object-oriented paradigm.</li>
 <li>Implement a key variant of gradient descent called <em>stochastic gradient descent</em>, including an optional momentum feature.</li>
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="tips-and-hints" class="level2">
 <h2 class="anchored" data-anchor-id="tips-and-hints">Tips and Hints</h2>
-<p>Most of the major math functions are shown in our <a href="../../lecture-notes/gradient-descent.html">lecture on gradient descent</a>. You’re welcome to use any of these functions as you wish; please just incorporate comments in your code and blog post to cite where they came from.</p>
+<p>Most of the major math functions are shown in our <a href="../../lecture-notes/gradient-descent.qmd">lecture on gradient descent</a>. You’re welcome to use any of these functions as you wish; please just incorporate comments in your code and blog post to cite where they came from.</p>
 <p>If you compute the gradient using matrix-vector operations in <code>numpy</code> (recommended, no for-loops!), you may find it useful at some point to convert an <code>np.array()</code> of shape <code>(n,)</code> to an <code>np.array()</code> of shape <code>(n,1)</code> like this:</p>
 <div id="778ae80a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.random.rand(<span class="dv">5</span>)</span>

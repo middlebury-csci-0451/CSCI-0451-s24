@@ -236,7 +236,7 @@ $$
 <h2 data-number="1" class="anchored" data-anchor-id="implement-linear-regression-two-ways"><span class="header-section-number">1</span> Implement Linear Regression Two Ways</h2>
 <p>To start this blog post, please implement least-squares linear regression in <em>two ways</em>.</p>
 <ol type="1">
-<li>First, use the analytical formula for the optimal weight vector <span class="math inline">\(\hat{\mathbf{w}}\)</span> from <a href="../../lecture-notes/regression.html">the lecture notes</a>. This formula requires matrix inversion and several matrix multiplications.</li>
+<li>First, use the analytical formula for the optimal weight vector <span class="math inline">\(\hat{\mathbf{w}}\)</span> from <a href="../../lecture-notes/regression.qmd">the lecture notes</a>. This formula requires matrix inversion and several matrix multiplications.</li>
 <li>Next, use the formula for the <em>gradient</em> of the loss function to implement gradient descent for linear regression. You can still pass in <code>max_iter</code> and <code>alpha</code> (the learning rate) as parameters to the <code>fit</code> method. </li>
 </ol>
 <div class="no-row-height column-margin column-container"><span class="">Implementing <em>stochastic</em> gradient descent would be nice thing to do but not required. Only if you want to go above and beyond!</span></div><p>In addition to the <code>fit</code> method, your implementation should include a <code>score</code> method (see below) and a <code>predict</code> method (just return <span class="math inline">\(\mathbf{X}\mathbf{w}\)</span>).</p>

@@ -549,7 +549,7 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <section id="sec-classification-rates-2" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates-2">Balancing Classification Rates</h2>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">You can do this first part just by copying and pasting lecture code. It doesn’t matter much how good your model is – just make sure you’re able to get predictions.</span></div></div>
-<p>Use the code from <a href="./lecture-notes/classification-in-practice.html">our recent lecture</a> to download the Titanic data set as a Pandas data frame and train a model on the training data. Then download the test data. Compute <code>y_pred</code>, the vector of predictions of your model on the test data.</p>
+<p>Use the code from <a href="./lecture-notes/classification-in-practice.qmd">our recent lecture</a> to download the Titanic data set as a Pandas data frame and train a model on the training data. Then download the test data. Compute <code>y_pred</code>, the vector of predictions of your model on the test data.</p>
 <p>Then, write a function that verifies eq. (2.6) in Alexandra Chouldechova’s paper “<a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">Fair Prediction with disparate impact</a>.” Here’s what your function should do:</p>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">The positive predictive value is <span class="math inline">\(\mathrm{PPV} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}\)</span>.</span></div></div>
 <ol type="1">
@@ -577,7 +577,7 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 </section>
 <section id="sec-vectorization" class="level2">
 <h2 class="anchored" data-anchor-id="sec-vectorization">Vectorization Brainstorm</h2>
-<p>In a <a href="./lecture-notes/vectorization.html">recent lecture</a>, we discussed methods of vectorizing text like the document-term matrix that use the <em>bag of words</em> assumption: the order of the words doesn’t matter!</p>
+<p>In a <a href="lecture-notes/vectorization.qmd">recent lecture</a>, we discussed methods of vectorizing text like the document-term matrix that use the <em>bag of words</em> assumption: the order of the words doesn’t matter!</p>
 <p>Take some time and propose an alternative approach to word-based text vectorization. Can you find a scheme that would give different vector representations to the following two sentences?</p>
 <blockquote class="blockquote">
 <p>“I love rabbits, not cats.” “I love cats, not rabbits.”</p>

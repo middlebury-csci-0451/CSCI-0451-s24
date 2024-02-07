@@ -361,7 +361,7 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <li>You should still use the logistic loss for <span class="math inline">\(\ell\)</span>.</li>
 <li>You will probably need to choose a random initial <span class="math inline">\(\mathbf{v}\)</span>. Don’t forget that <span class="math inline">\(\mathbf{v}\)</span> should have <em>length equal to the number of data points</em>, <em>not the number of features</em>.</li>
 </ul></li>
-<li>If you’ve already implemented gradient descent for logistic regression in <a href="../../assignments/blog-posts/blog-post-optimization.html">this blog post</a>, then it’s not too hard to adapt your method to kernel logistic regression. However, it’s also fine to use the function <code>scipy.optimize.minimize()</code> as demonstrated in <a href="../../lecture-notes/convex-linear-models.html">this lecture</a>.</li>
+<li>If you’ve already implemented gradient descent for logistic regression in <a href="../../assignments/blog-posts/blog-post-optimization.html">this blog post</a>, then it’s not too hard to adapt your method to kernel logistic regression. However, it’s also fine to use the function <code>scipy.optimize.minimize()</code> as demonstrated in <a href="../../lecture-notes/convex-linear-models.ipynb">this lecture</a>.</li>
 </ul></li>
 <li><code>predict(self, X)</code> should accept a new feature matrix and return binary labels <span class="math inline">\(\{0,1\}\)</span>. For each row of <span class="math inline">\(\mathbf{X}\)</span>, the prediction is obtained using the formula <span class="math inline">\(\mathbb{1}[\langle \hat{\mathbf{v}}, \boldsymbol{\kappa}(\mathbf{x}) \rangle]\)</span>. To do this:
 <ul>
