@@ -69,7 +69,7 @@ Compute $\frac{d^2\sigma(w_0)}{dw^2}$. It is recommended to use your results fro
 
 ### A.5
 
-The Taylor expansion can be used to approximate a function near a point. For example, we might find it useful to estimate $\sigma(w_0 + \delta)$, where $\delta$ is a small number. 
+Provided that the function in question has sufficiently many derivatives, the Taylor expansion can be used to approximate that function near a point. For example, we might find it useful to estimate $\sigma(w_0 + \delta)$, where $\delta$ is a small number. 
 
 Compute an estimate of $\sigma(w_0 + \delta)$ using the second-order Taylor expansion of $\sigma$, assuming that $\delta$ is sufficiently small.
 
