@@ -3,6 +3,7 @@ title: Warmup Exercises
 number-sections: true
 author: Phil
 bibliography: refs.bib
+fig-cap-location: margin
 ---
 
 
@@ -19,6 +20,121 @@ $$
 $$
 
 :::
+
+## Graphing Decision Boundaries {#sec-score-based-classification}
+
+### Part A
+
+Sketch the line in $\R^2$ described by the equation 
+$$ 
+\bracket{\vw, \vx}  =  b\;, 
+$$ {#eq-linear-boundary}
+
+where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $b = \frac{1}{2}$. Here, $\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i$ is the inner product (or dot product) between the vectors $\vw$ and $\vw$. 
+
+### Part B
+
+[You can create `numpy` arrays like this: `x = np.array([0.2, 4.3])`. The syntax `x@w` can also be used as a convenient shorthand for `np.dot(x, w)`.]{.aside}
+
+Write a quick Python function called `linear_classify(x, w, b)`. `w` and `x` should both be 1d `numpy` arrays of the same length, and `b` should be a scalar. The function `np.dot(x, w)` will compute the inner product of `x` and `w`. Argument `b` should be a scalar number. Your function should return `0` if if $\bracket{\vw, \vx}  <  b$ and `1` if $\bracket{\vw, \vx}  \geq  b$.
+
+Verify that your function works on a few simple examples. 
+
+### Part C
+
+[The function $\phi$ is an example of a *feature map*, which we will discuss soon.]{.aside}
+
+Let $\phi:\mathbb{R}^2\rightarrow \mathbb{R}^5$ be the function 
+
+$$
+\phi(\mathbf{x}) = \phi(x_1, x_2) = (x_1, x_2, x_1^2, x_2^2, x_1x_2)^T\;. 
+$$
+
+Make a sketch of the curve in $\R^2_+$ (the nonnegative quadrant) defined by the equation 
+
+$$
+\bracket{\vw, \phi(\vx)} = b\;, 
+$$
+
+where $w = (0, 0, 1, \frac{1}{4}, 0)^T$ and $b = 1$. 
+
+
+## Meet The Palmer Penguins! {#sec-penguins}
+
+![Image source: \@allisonhorst. The Palmer Penguins data was originally collected by @gormanEcologicalSexualDimorphism2014 and was nicely packaged and released for use in the data science community by @horstAllisonhorstPalmerpenguinsV02020.](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
+
+Our data set for class today is the Palmer Penguins. This data set contains physiological measurements and species labels for several populations of Adelie, Chinstrap, and Gentoo penguins. 
+
+Open a fresh Jupyter notebook using the `ml-0451` Anaconda Python kernel. In a code cell, paste and run the following code in order to acquire the data set. 
+
+```python
+import pandas as pd
+from matplotlib import pyplot as plt
+import seaborn as sns
+
+url = "https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/palmer-penguins/palmer-penguins.csv"
+df = pd.read_csv(url)
+```
+
+### Part A
+
+Use a `pandas` summary table (`df.groupby(...).aggregate(...)`) to answer the following question: how does the mean mass of penguins vary by species and sex? 
+
+::: {.column-margin}
+
+![Image source: \@allisonhorst.](https://allisonhorst.github.io/palmerpenguins/reference/figures/culmen_depth.png) 
+
+:::
+
+### Part B
+
+Make a [scatterplot](https://seaborn.pydata.org/generated/seaborn.scatterplot.html) of culmen length against culmen depth, with the color of each point corresponding to the penguin species. 
+
+## Choosing a Threshold {#sec-decision-theory}
+
+### Part A
+
+You wake up feeling a bit of a tickle in your throat. You take a COVID rapid test. Consider two scenarios: 
+
+(a) The test comes up positive and you quarantine for five days. As it turns out, your throat tickle disappears after 1 day, and a lab test reveals that you did **not** actually have COVID. 
+(b) The test comes up negative. You figure you must just have a common cold. You carry on your day as usual. After 5 days, you decide to get a lab test, which reveals that you have been COVID+ for the last 5 days. 
+
+[If it feels very difficult to come up with a single number to summarize the "cost" of each of these outcomes, that's normal! In practice, designers of automated decision systems may need to assign comparable "costs" to injury, life, access to education, etc.]{.aside}
+
+Using any assumptions that seem appropriate to you, assign a numerical **cost** to each of these scenarios. If it helps, you may assume that scenario (a) is 1 "unit of badness," and that scenario (b) is $k$ times as bad as scenario (a). What's your suggested value of $k$? 
+
+Please write down your reasoning and your suggested value in a short paragraph. 
+
+### Part B
+
+Let's now imagine that the rapid COVID test does not just give a yes/no answer, but actually a *score* describing the patient's likelihood of COVID on a scale from 0 to 1. What score is high enough to merit you staying home, according to your costs from Part A? To answer this question, run the following code to create a simulated vector of `cases` (0 is COVID negative, 1 is COVID positive) and `scores` between 0 and 1. 
+
+```python
+import numpy as np
+
+NUM_CASES  = 1000
+PREVALENCE = 0.1
+NOISE      = 2
+
+cases  = 1*(np.random.rand(NUM_CASES) < PREVALENCE)
+scores = np.exp(cases + NOISE*(np.random.rand(NUM_CASES))) / np.exp(NOISE+1)
+```
+
+Suppose that the recommendation on the rapid test is that a score above $t$ indicates a "positive" result and that you should quarantine. 
+
+1. Write a function which, given a candidate value of $t$, computes the total "cost" of using that threshold. The cost is equal to the number of times scenario (a) occurs in this data set (from Part A), multiplied by the cost of scenario (a), plus the number of times scenario (b) occurs in this data set, multiplied by the cost of scenario (b). 
+2. Using a `for`-loop or any other technique, conduct a search to find the value of $t$ that minimizes the total cost. 
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Perceptron {#sec-perceptron}

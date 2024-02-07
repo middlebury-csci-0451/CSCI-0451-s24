@@ -202,7 +202,23 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec-perceptron" id="toc-sec-perceptron" class="nav-link active" data-scroll-target="#sec-perceptron">Perceptron</a></li>
+  <li><a href="#sec-score-based-classification" id="toc-sec-score-based-classification" class="nav-link active" data-scroll-target="#sec-score-based-classification">Graphing Decision Boundaries</a>
+  <ul class="collapse">
+  <li><a href="#part-a" id="toc-part-a" class="nav-link" data-scroll-target="#part-a">Part A</a></li>
+  <li><a href="#part-b" id="toc-part-b" class="nav-link" data-scroll-target="#part-b">Part B</a></li>
+  <li><a href="#part-c" id="toc-part-c" class="nav-link" data-scroll-target="#part-c">Part C</a></li>
+  </ul></li>
+  <li><a href="#sec-penguins" id="toc-sec-penguins" class="nav-link" data-scroll-target="#sec-penguins">Meet The Palmer Penguins!</a>
+  <ul class="collapse">
+  <li><a href="#part-a-1" id="toc-part-a-1" class="nav-link" data-scroll-target="#part-a-1">Part A</a></li>
+  <li><a href="#part-b-1" id="toc-part-b-1" class="nav-link" data-scroll-target="#part-b-1">Part B</a></li>
+  </ul></li>
+  <li><a href="#sec-decision-theory" id="toc-sec-decision-theory" class="nav-link" data-scroll-target="#sec-decision-theory">Choosing a Threshold</a>
+  <ul class="collapse">
+  <li><a href="#part-a-2" id="toc-part-a-2" class="nav-link" data-scroll-target="#part-a-2">Part A</a></li>
+  <li><a href="#part-b-2" id="toc-part-b-2" class="nav-link" data-scroll-target="#part-b-2">Part B</a></li>
+  </ul></li>
+  <li><a href="#sec-perceptron" id="toc-sec-perceptron" class="nav-link" data-scroll-target="#sec-perceptron">Perceptron</a></li>
   <li><a href="#sec-convexity" id="toc-sec-convexity" class="nav-link" data-scroll-target="#sec-convexity">Convexity</a>
   <ul class="collapse">
   <li><a href="#part-2-second-derivative-test" id="toc-part-2-second-derivative-test" class="nav-link" data-scroll-target="#part-2-second-derivative-test">Part 2: Second Derivative Test</a></li>
@@ -277,13 +293,106 @@ div.csl-indent {
 \newcommand{\paren}[1]{\left( #1 \right)}
 \]</span></p>
 </div>
+<section id="sec-score-based-classification" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-score-based-classification">Graphing Decision Boundaries</h2>
+<section id="part-a" class="level3">
+<h3 class="anchored" data-anchor-id="part-a">Part A</h3>
+<p>Sketch the line in <span class="math inline">\(\R^2\)</span> described by the equation <span id="eq-linear-boundary"><span class="math display">\[
+\bracket{\vw, \vx}  =  b\;,
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(\vw = \paren{1, -\frac{1}{2}}^T \in \R^2\)</span> and <span class="math inline">\(b = \frac{1}{2}\)</span>. Here, <span class="math inline">\(\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i\)</span> is the inner product (or dot product) between the vectors <span class="math inline">\(\vw\)</span> and <span class="math inline">\(\vw\)</span>.</p>
+</section>
+<section id="part-b" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-b">Part B</h3>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">You can create <code>numpy</code> arrays like this: <code>x = np.array([0.2, 4.3])</code>. The syntax <code>x@w</code> can also be used as a convenient shorthand for <code>np.dot(x, w)</code>.</span></div></div>
+<p>Write a quick Python function called <code>linear_classify(x, w, b)</code>. <code>w</code> and <code>x</code> should both be 1d <code>numpy</code> arrays of the same length, and <code>b</code> should be a scalar. The function <code>np.dot(x, w)</code> will compute the inner product of <code>x</code> and <code>w</code>. Argument <code>b</code> should be a scalar number. Your function should return <code>0</code> if if <span class="math inline">\(\bracket{\vw, \vx} &lt; b\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx} \geq b\)</span>.</p>
+<p>Verify that your function works on a few simple examples.</p>
+</section>
+<section id="part-c" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-c">Part C</h3>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">The function <span class="math inline">\(\phi\)</span> is an example of a <em>feature map</em>, which we will discuss soon.</span></div></div>
+<p>Let <span class="math inline">\(\phi:\mathbb{R}^2\rightarrow \mathbb{R}^5\)</span> be the function</p>
+<p><span class="math display">\[
+\phi(\mathbf{x}) = \phi(x_1, x_2) = (x_1, x_2, x_1^2, x_2^2, x_1x_2)^T\;.
+\]</span></p>
+<p>Make a sketch of the curve in <span class="math inline">\(\R^2_+\)</span> (the nonnegative quadrant) defined by the equation</p>
+<p><span class="math display">\[
+\bracket{\vw, \phi(\vx)} = b\;,
+\]</span></p>
+<p>where <span class="math inline">\(w = (0, 0, 1, \frac{1}{4}, 0)^T\)</span> and <span class="math inline">\(b = 1\)</span>.</p>
+</section>
+</section>
+<section id="sec-penguins" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-penguins">Meet The Palmer Penguins!</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">Image source: @allisonhorst. The Palmer Penguins data was originally collected by <span class="citation" data-cites="gormanEcologicalSexualDimorphism2014">Gorman, Williams, and Fraser (<a href="#ref-gormanEcologicalSexualDimorphism2014" role="doc-biblioref">2014</a>)</span> and was nicely packaged and released for use in the data science community by <span class="citation" data-cites="horstAllisonhorstPalmerpenguinsV02020">Horst, Hill, and Gorman (<a href="#ref-horstAllisonhorstPalmerpenguinsV02020" role="doc-biblioref">2020</a>)</span>.</figcaption>
+</figure>
+</div>
+<p>Our data set for class today is the Palmer Penguins. This data set contains physiological measurements and species labels for several populations of Adelie, Chinstrap, and Gentoo penguins.</p>
+<p>Open a fresh Jupyter notebook using the <code>ml-0451</code> Anaconda Python kernel. In a code cell, paste and run the following code in order to acquire the data set.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/palmer-penguins/palmer-penguins.csv"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="part-a-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-a-1">Part A</h3>
+<p>Use a <code>pandas</code> summary table (<code>df.groupby(...).aggregate(...)</code>) to answer the following question: how does the mean mass of penguins vary by species and sex?</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://allisonhorst.github.io/palmerpenguins/reference/figures/culmen_depth.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Image source: @allisonhorst.</figcaption>
+</figure>
+</div>
+</div></div></section>
+<section id="part-b-1" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-1">Part B</h3>
+<p>Make a <a href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html">scatterplot</a> of culmen length against culmen depth, with the color of each point corresponding to the penguin species.</p>
+</section>
+</section>
+<section id="sec-decision-theory" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-decision-theory">Choosing a Threshold</h2>
+<section id="part-a-2" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-a-2">Part A</h3>
+<p>You wake up feeling a bit of a tickle in your throat. You take a COVID rapid test. Consider two scenarios:</p>
+<ol type="a">
+<li>The test comes up positive and you quarantine for five days. As it turns out, your throat tickle disappears after 1 day, and a lab test reveals that you did <strong>not</strong> actually have COVID.</li>
+<li>The test comes up negative. You figure you must just have a common cold. You carry on your day as usual. After 5 days, you decide to get a lab test, which reveals that you have been COVID+ for the last 5 days.</li>
+</ol>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If it feels very difficult to come up with a single number to summarize the “cost” of each of these outcomes, that’s normal! In practice, designers of automated decision systems may need to assign comparable “costs” to injury, life, access to education, etc.</span></div></div>
+<p>Using any assumptions that seem appropriate to you, assign a numerical <strong>cost</strong> to each of these scenarios. If it helps, you may assume that scenario (a) is 1 “unit of badness,” and that scenario (b) is <span class="math inline">\(k\)</span> times as bad as scenario (a). What’s your suggested value of <span class="math inline">\(k\)</span>?</p>
+<p>Please write down your reasoning and your suggested value in a short paragraph.</p>
+</section>
+<section id="part-b-2" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-2">Part B</h3>
+<p>Let’s now imagine that the rapid COVID test does not just give a yes/no answer, but actually a <em>score</em> describing the patient’s likelihood of COVID on a scale from 0 to 1. What score is high enough to merit you staying home, according to your costs from Part A? To answer this question, run the following code to create a simulated vector of <code>cases</code> (0 is COVID negative, 1 is COVID positive) and <code>scores</code> between 0 and 1.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>NUM_CASES  <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>PREVALENCE <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>NOISE      <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>cases  <span class="op">=</span> <span class="dv">1</span><span class="op">*</span>(np.random.rand(NUM_CASES) <span class="op">&lt;</span> PREVALENCE)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> np.exp(cases <span class="op">+</span> NOISE<span class="op">*</span>(np.random.rand(NUM_CASES))) <span class="op">/</span> np.exp(NOISE<span class="op">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Suppose that the recommendation on the rapid test is that a score above <span class="math inline">\(t\)</span> indicates a “positive” result and that you should quarantine.</p>
+<ol type="1">
+<li>Write a function which, given a candidate value of <span class="math inline">\(t\)</span>, computes the total “cost” of using that threshold. The cost is equal to the number of times scenario (a) occurs in this data set (from Part A), multiplied by the cost of scenario (a), plus the number of times scenario (b) occurs in this data set, multiplied by the cost of scenario (b).</li>
+<li>Using a <code>for</code>-loop or any other technique, conduct a search to find the value of <span class="math inline">\(t\)</span> that minimizes the total cost.</li>
+</ol>
+</section>
+</section>
 <section id="sec-perceptron" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-perceptron">Perceptron</h2>
 <section id="part-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-1">Part 1</h4>
 <p>Sketch the line in <span class="math inline">\(\R^2\)</span> described by the equation <span id="eq-perceptron-boundary"><span class="math display">\[
 \bracket{\vw, \vx}  =  b\;,
-\tag{1}\]</span></span></p>
+\tag{2}\]</span></span></p>
 <p>where <span class="math inline">\(\vw = \paren{1, -\frac{1}{2}}^T \in \R^2\)</span> and <span class="math inline">\(b = \frac{1}{2}\)</span>. Here, <span class="math inline">\(\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i\)</span> is the inner product (or dot product) between the vectors <span class="math inline">\(\vw\)</span> and <span class="math inline">\(\vw\)</span>.</p>
 </section>
 <section id="part-2" class="level4 page-columns page-full">
@@ -293,11 +402,11 @@ div.csl-indent {
 </section>
 <section id="part-3" class="level4">
 <h4 class="anchored" data-anchor-id="part-3">Part 3</h4>
-<p>Consider a line of the general form of <a href="#eq-perceptron-boundary" class="quarto-xref">Equation&nbsp;1</a>. Let’s allow <span class="math inline">\(\vx\)</span> and <span class="math inline">\(\vw\)</span> to both be <span class="math inline">\(n\)</span>-dimensional, so that this equation defines a hyperplane in <span class="math inline">\(\R^n\)</span>. Suppose that we wanted to represent <em>the same hyperplane</em> in <span class="math inline">\(\R^n\)</span> using an equation of the form</p>
+<p>Consider a line of the general form of <a href="#eq-perceptron-boundary" class="quarto-xref">Equation&nbsp;2</a>. Let’s allow <span class="math inline">\(\vx\)</span> and <span class="math inline">\(\vw\)</span> to both be <span class="math inline">\(n\)</span>-dimensional, so that this equation defines a hyperplane in <span class="math inline">\(\R^n\)</span>. Suppose that we wanted to represent <em>the same hyperplane</em> in <span class="math inline">\(\R^n\)</span> using an equation of the form</p>
 <p><span id="eq-perceptron-boundary-2"><span class="math display">\[
 \bracket{\tilde{\vw}, \tilde{\vx}} = 0\;.
-\tag{2}\]</span></span></p>
-<p>for some <span class="math inline">\(\tilde{\vw} \in \R^{n+1}\)</span>. Define <span class="math inline">\(\tilde{\vx} = (\vx, 1)\)</span>. How could you define <span class="math inline">\(\tilde{\vw}\)</span> to make <a href="#eq-perceptron-boundary-2" class="quarto-xref">Equation&nbsp;2</a> equivalent to <a href="#eq-perceptron-boundary" class="quarto-xref">Equation&nbsp;1</a>?</p>
+\tag{3}\]</span></span></p>
+<p>for some <span class="math inline">\(\tilde{\vw} \in \R^{n+1}\)</span>. Define <span class="math inline">\(\tilde{\vx} = (\vx, 1)\)</span>. How could you define <span class="math inline">\(\tilde{\vw}\)</span> to make <a href="#eq-perceptron-boundary-2" class="quarto-xref">Equation&nbsp;3</a> equivalent to <a href="#eq-perceptron-boundary" class="quarto-xref">Equation&nbsp;2</a>?</p>
 </section>
 </section>
 <section id="sec-convexity" class="level2 page-columns page-full">
@@ -307,20 +416,20 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
 <p>Consider the 0-1 step function that I’ve plotted below:</p>
 <div id="5973b2a0" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>) </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">101</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="kw">lambda</span> y_hat, y: <span class="dv">1</span> <span class="op">-</span> <span class="dv">1</span><span class="op">*</span>(y_hat<span class="op">*</span>y <span class="op">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="vs">r"$\hat</span><span class="sc">{y}</span><span class="vs">$"</span>, </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       ylabel <span class="op">=</span> <span class="vs">r"$\ell(\hat</span><span class="sc">{y}</span><span class="vs">, y)$"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ax.plot(y_hat, loss(y_hat, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>) </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">101</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="kw">lambda</span> y_hat, y: <span class="dv">1</span> <span class="op">-</span> <span class="dv">1</span><span class="op">*</span>(y_hat<span class="op">*</span>y <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="vs">r"$\hat</span><span class="sc">{y}</span><span class="vs">$"</span>, </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>       ylabel <span class="op">=</span> <span class="vs">r"$\ell(\hat</span><span class="sc">{y}</span><span class="vs">, y)$"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax.plot(y_hat, loss(y_hat, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="warmup-exercises_files/figure-html/cell-3-output-1.png" width="445" height="286"></p>
+<p><img src="warmup-exercises_files/figure-html/cell-3-output-1.png" class="" width="445" height="286"></p>
 </div>
 </div>
 <p>Show pictorially that this function is not convex. No proof needed – just the right drawing.</p>
@@ -379,9 +488,9 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <h2 class="anchored" data-anchor-id="sec-gradient-descent-2">Gradient Descent (Again)</h2>
 <p>Consider the function <span class="math inline">\(f(w_0, w_1) = \sin(w_0w_1)\)</span>. You can define this function like this:</p>
 <div id="631867fb" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Mathematically, the gradient of this function is</p>
 <p><span class="math display">\[\nabla f(w_0, w_1) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.\]</span></p>
@@ -532,7 +641,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 \frac{\partial L}{\partial w} &amp;= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))x + \lambda w \\
 \frac{\partial L}{\partial b} &amp;= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))\;.
 \end{aligned}
-\tag{3}\]</span></span></p>
+\tag{4}\]</span></span></p>
 <section id="what-you-should-do" class="level3">
 <h3 class="anchored" data-anchor-id="what-you-should-do">What You Should Do</h3>
 <p>Assume that each of the following operations cost one computational unit:</p>
@@ -543,7 +652,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 </ul>
 <p>Using this assumption:</p>
 <ol type="1">
-<li>Determine the number of computational units (i.e.&nbsp;computational cost) of computing the gradient of <span class="math inline">\(L\)</span> exactly as written in <a href="#eq-explicit-gradient" class="quarto-xref">Equation&nbsp;3</a>, under the assumption that you are not allowed to store the values of any intermediate computations.</li>
+<li>Determine the number of computational units (i.e.&nbsp;computational cost) of computing the gradient of <span class="math inline">\(L\)</span> exactly as written in <a href="#eq-explicit-gradient" class="quarto-xref">Equation&nbsp;4</a>, under the assumption that you are not allowed to store the values of any intermediate computations.</li>
 <li>Now determine the computational cost of computing the gradient of <span class="math inline">\(L\)</span> under the assumption that you are allowed to store intermediate computations. Please describe both the number of computations and the number of floating point numbers that must be stored.</li>
 <li>Finally, determine the computational cost in terms of both steps and storage to compute <span class="math inline">\(L\)</span> using the backpropagation algorithm (described for a very similar function in <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks">Hegde’s notes</a>).</li>
 </ol>
@@ -556,49 +665,49 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <p>It’s ok to use a for-loop to loop over pixels.</p>
 <p>Here’s an example image you can use:</p>
 <div id="ac361f54" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_image(url):</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(Image.<span class="bu">open</span>(urllib.request.urlopen(url)))</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://i.pinimg.com/originals/0e/d0/23/0ed023847cad0d652d6371c3e53d1482.png"</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> read_image(url)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_greyscale(im):</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> np.dot(im[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> to_greyscale(img)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_image(url):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(Image.<span class="bu">open</span>(urllib.request.urlopen(url)))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://i.pinimg.com/originals/0e/d0/23/0ed023847cad0d652d6371c3e53d1482.png"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> read_image(url)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_greyscale(im):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> np.dot(im[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> to_greyscale(img)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>(-0.5, 639.5, 412.5, -0.5)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="warmup-exercises_files/figure-html/cell-5-output-2.png" width="363" height="241"></p>
+<p><img src="warmup-exercises_files/figure-html/cell-5-output-2.png" class="" width="363" height="241"></p>
 </div>
 </div>
 <p>After implementing your function, you should be able to use it like this, replacing the implementation of <code>scipy.signal</code> with your own implementation. The result should look something like this:</p>
 <div id="7aca0e84" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>,  <span class="dv">8</span>, <span class="op">-</span><span class="dv">1</span>], </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>convd <span class="op">=</span> convolve2d(img, kernel)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(convd, cmap <span class="op">=</span> <span class="st">"Greys"</span>, vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">8</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>,  <span class="dv">8</span>, <span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>convd <span class="op">=</span> convolve2d(img, kernel)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(convd, cmap <span class="op">=</span> <span class="st">"Greys"</span>, vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">8</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>(-0.5, 641.5, 414.5, -0.5)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="warmup-exercises_files/figure-html/cell-6-output-2.png" width="362" height="241"></p>
+<p><img src="warmup-exercises_files/figure-html/cell-6-output-2.png" class="" width="362" height="241"></p>
 </div>
 </div>
 </section>
@@ -703,11 +812,11 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <h4 class="anchored" data-anchor-id="part-1-3">Part 1</h4>
 <div class="page-columns page-full"><p>COVID-19 rapid tests have approximately an 80% sensitivity rate, which means that, in an individual who truly has COVID-19, the probability of a rapid test giving a positive result is roughly 80%.  On the other hand, the probability of a rapid test giving a positive result for an individual who truly does <strong>not</strong> have COVID-19 is 5%. Suppose that approximately 4% of the population are currently infected with COVID-19. </p><div class="no-row-height column-margin column-container"><span class="">These numbers are mostly made-up.</span><span class="">Example 2.3.1 of <a href="https://github.com/probml/pml-book/releases/latest/download/book1.pdf">Murphy</a>, page 46, has a good review of the relevant probability and the definition of each of the rates below.</span></div></div>
 <p>Write a Python function called <code>rate_summary</code> that prints the following output, filling in the correct values for each of the specified rates:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -724,12 +833,12 @@ The false positive rate is ___. </code></pre>
 <h4 class="anchored" data-anchor-id="part-3-2">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
 <div id="0c476396" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
@@ -775,8 +884,8 @@ The false positive rate is ___. </code></pre>
 </div>
 </div>
 <p>You should be able to use your function like this:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -784,8 +893,8 @@ The false positive rate is ___. </code></pre>
 <section id="hints" class="level5">
 <h5 class="anchored" data-anchor-id="hints">Hints</h5>
 <p>An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 
@@ -794,6 +903,12 @@ The false positive rate is ___. </code></pre>
 </section>
 
 <p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-gormanEcologicalSexualDimorphism2014" class="csl-entry" role="listitem">
+Gorman, Kristen B., Tony D. Williams, and William R. Fraser. 2014. <span>“Ecological <span>Sexual Dimorphism</span> and <span>Environmental Variability</span> Within a <span>Community</span> of <span>Antarctic Penguins</span> (<span>Genus Pygoscelis</span>).”</span> Edited by André Chiaradia. <em>PLoS ONE</em> 9 (3): e90081. <a href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a>.
+</div>
+<div id="ref-horstAllisonhorstPalmerpenguinsV02020" class="csl-entry" role="listitem">
+Horst, Allison M, Alison Presmanes Hill, and Kristen B Gorman. 2020. <span>“Allisonhorst/Palmerpenguins: V0.1.0.”</span> Zenodo. <a href="https://doi.org/10.5281/ZENODO.3960218">https://doi.org/10.5281/ZENODO.3960218</a>.
+</div>
 <div id="ref-narayanan2022limits" class="csl-entry" role="listitem">
 Narayanan, Arvind. 2022. <span>“The Limits of the Quantitative Approach to Discrimination.”</span> Speech.
 </div>
