@@ -11,18 +11,17 @@ render:
 	$(CONDA_ACTIVATE) ml-0451
 	quarto render
 
+init_teams:
+	$(CONDA_ACTIVATE) ml-0451
+	python utils/teams.py init
+
 teams:
 	$(CONDA_ACTIVATE) ml-0451
-	python utils/teams.py assign
 	python utils/teams.py teams
 
-shuffle-A:
+shuffle: 
 	$(CONDA_ACTIVATE) ml-0451
-	python utils/teams.py shuffle A
-
-shuffle-B:
-	$(CONDA_ACTIVATE) ml-0451
-	python utils/teams.py shuffle B
+	python utils/teams.py shuffle
 
 clean: 
 	find . -type f -name "* [0-9]*" -delete

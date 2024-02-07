@@ -8,91 +8,100 @@ from rich.console import Console
 from rich.columns import Columns
 from rich.panel import Panel
 
-def format_student(name, i):
-    # https://rich.readthedocs.io/en/stable/markup.html
-    last_first = name.split(", ")
-    if i == 0:
-        return f":bulb:[b blue]{last_first[1]} {last_first[0]}[/]"
-    return f"  {last_first[1]} {last_first[0]}"
 
-def assign_ids():
-    A = "CSCI 0451A (Spring 2023)"
-    B = "CSCI 0451B (Spring 2023)"
+def read_roster(path = "utils/students.csv"):
+    return pd.read_csv(path)
 
-    roster = pd.read_csv("utils/roster.csv")
-    
-    roster["ix"] = roster.groupby("Section")["Section"].transform(lambda x: np.arange(len(x)))
-    
-    roster["Section"] = roster["Section"].apply(lambda x: "A_" if x == A else "B_")
-    
-    roster["id"] = roster["Section"] + roster["ix"].astype(str)
-    
-    roster = roster.sort_values(by = ["Section", "ix"])
-    
-    roster[["Student", "id"]].to_csv("utils/roster_id.csv", index = False)
+def candidate_teams(df, num_teams = 5):
+    df_ = df.copy()
+    team_size = len(df_) // num_teams + 1
+    group_nums = np.tile(np.arange(num_teams), team_size)[:len(df_)]
+    np.random.shuffle(group_nums)
+    df_["team"] = group_nums
 
-def form_teams(num_groups = 5):
-    roster = pd.read_csv("utils/roster_id.csv")
-    
-    roster_A = roster[roster["id"].str[0] == "A"].copy()
-    roster_B = roster[roster["id"].str[0] == "B"].copy()
-    
-    for r in [roster_A, roster_B]:
-        
-        group_nums = np.tile(np.arange(5), 5)[:len(r)]
-        
-        np.random.seed(123)
-        np.random.shuffle(group_nums)
-        r["group"] = group_nums
-        r = r.sort_values(by = "group")
-        r["presented"] = False
-        section = r["id"].str[0].iloc[0]
-        
-        for i in range(num_groups):
-            
-            p = f"utils/teams/{section}"
-            path = Path(p)
-            path.mkdir(parents = True, exist_ok = True)
-            
-            sub = r[r["group"] == i].to_csv(p + f"/{i}.csv", index = False)
+    return df_
 
-def shuffle(section = "A"):
+def check_teams(df): 
+    df_ = df.copy()
+    df_["is_f"] = df_["gender"] == "F"
+    grouped = df_.groupby("team")["is_f"].sum()
+    df_ = df_.drop("is_f", axis = 1)
+    return not (1 in grouped.values)
+    
+def assign_teams(df, num_teams = 5):
+    df_ = candidate_teams(df, num_teams = num_teams)
+    while not check_teams(df_):
+        df_ = candidate_teams(df, num_teams = num_teams)
+    return df_    
+
+def reset_presentation(df):
+    """
+    need to check for correct behavior on this
+    """
+    df_ = df.copy()
+    if "presented" not in df.columns: 
+        df_["presented"] = False
+    df_["all_presented"] = df_.groupby(["section", "team"])["presented"].transform(np.all)
+    with pd.option_context('mode.chained_assignment', None):
+        df_["presented"][df_["all_presented"]] = False
+    df_ = df_.drop("all_presented", axis = 1)
+    return df_
+    
+def shuffle(df):
+    df_ = df.copy()
+    df_ = reset_presentation(df_)
+    df_["r"] = np.random.rand(len(df_))
+    df_ = df_.sort_values(by = ["section", "team", "presented", "r"])
+    min_r = df_.groupby(["section", "team", "presented"])["r"].transform(min)
+    ix = np.isclose(df_["r"], min_r)
+    df_.loc[ix, "presented"] = True
+    df_ = df_.drop("r", axis = 1)
+    
+    display_teams(df)
+    
+    return df_
+
+def display_teams(df, section = "A"):
     console = Console()
     panels = []
-    path = f"utils/teams/{section}"
-    for team in os.listdir(path):
-        
-        df = pd.read_csv(f"{path}/{team}")
-        
-        if np.all(df["presented"]):
-            df["presented"] = False
-                        
-        df["r"] = np.random.rand(len(df))
-        df = df.sort_values(by = ["presented", "r"])
-        
-        # presented is the 3rd column
-        df.iloc[0, 3] = True
-        
-        df[["Student", "id", "group", "presented"]].to_csv(f"{path}/{team}", index = False)
-        
+    
+    df_section = df[df["section"] == section].copy()
+    
+    teams = np.unique(df.team)
+    
+    for team in teams: 
         panel_str = ""
-
-        for i in range(len(df)):
+        df_ = df[df["team"] == team]
+        for i in range(len(df_)):
             
-            if i == 0:    
-                print('\033[1m' + "\033[94m")
-                
-            name = df["Student"].iloc[i]
-            panel_str += format_student(name, i) + "\n"
+            # if i == 0:    
+            #     print('\033[1m' + "\033[94m")
+            
+            first = df_["first"].iloc[i]
+            last = df_["last"].iloc[i]    
+            panel_str += format_student(first, last, i) + "\n"
             
         panels.append(Panel(panel_str))
 
     console.print(Columns(panels))
     
-if __name__ == "__main__":       
-    if sys.argv[1] == "assign":
-        assign_ids()
+def format_student(first, last, i):
+    # https://rich.readthedocs.io/en/stable/markup.html
+    if i == 0:
+        return f":bulb:[b green]{first} {last}[/]"
+    return f"  {first} {last}"
+
+ 
+if __name__ == "__main__":
+    if sys.argv[1] == "init":
+        df = read_roster()
+        df = assign_teams(df, num_teams = 5)
+        df.to_csv("utils/teams.csv", index = False)
     elif sys.argv[1] == "teams":
-        form_teams(5)
-    else: 
-        shuffle(section = sys.argv[2])
+        df = pd.read_csv("utils/teams.csv")
+        df = assign_teams(df, num_teams = 5)
+        df.to_csv("utils/teams.csv", index = False)
+    elif sys.argv[1] == "shuffle":
+        df = pd.read_csv("utils/teams.csv")
+        df = shuffle(df)
+        df.to_csv("utils/teams.csv", index = False)
