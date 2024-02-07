@@ -1,0 +1,95 @@
+```{=html}
+
+<% items.sort(function(b,a){return new Date(b.date) - new Date(a.date)}) %>
+<% var currentWeek = 0 %>
+<% var displayWeek = 0 %>
+
+<% const weekdayNames = ["Su","M","T","W","Th","F","Sa"]; %>
+
+<% var currentModule = "NA" %>
+
+<% for (var i = 0; i < items.length; i++) { %>
+    <% var currentItem = items[i] %>
+    <% var itemDate = new Date(currentItem.date) %>
+    <% var weekday = itemDate.toLocaleString('en-US', { weekday: 'short' }) %> 
+    <% var longWeekday = itemDate.toLocaleString('en-US', { weekday: 'short' }) %> 
+    <% var displayMonth = itemDate.toLocaleString('en-US', { month: 'short' }) %>
+    <% var displayDay = itemDate.toLocaleString('en-US', { day: '2-digit' }) %>
+    <% if (longWeekday == "Tue") { %>
+        <% currentWeek = currentWeek + 1 %>
+        <% if (i > 0) { %>
+            </table>
+        <% } %>
+        <% if (currentItem.publish) { %>
+            <h2> Week <%= currentWeek %> </h2>
+            <table>
+        <% } %>
+    <% } %>
+    <% if (currentItem.publish) { %>
+        <tr>
+            <td rowspan="2" class="syllabus-date-pane">
+                    <span class="syllabus-day-of-week"><%= weekday %></span>
+                    <br>
+                    <span class="syllabus-date"><%= displayMonth %>. <%= displayDay %></span></td> 
+            <td colspan="4"> <%= currentItem.header %> </td>  
+        </tr>
+        <tr>
+            <td colspan="4" class="smaller"> 
+                <%= currentItem.summary %>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="smaller syllabus-item-objective">
+                <% if (currentItem.objectives) { %>
+                    <b>Learning Objectives</b><br>
+                    <% for (obj of currentItem.objectives) { %>
+                            <%= obj %> <br> 
+                    <% } %>  
+                <% } %>  
+            </td>
+            <td class="smaller syllabus-item-readings">
+                <% if (currentItem.reading) { %>
+                    <b>Reading</b><br>
+                    <% for (read of currentItem.reading) { %>
+                           <%= read %><br> 
+                    <% } %>  
+                <% } %>
+                <% if (currentItem.optional) { %>
+                    <% for (read of currentItem.optional) { %>
+                           <i><%= read %></i><br> 
+                    <% } %>  
+                <% } %>
+            </td>
+            <td class="smaller syllabus-item-readings">
+                <% if (currentItem.notes) { %>
+                    <b>Notes</b><br>
+                    <% for (read of currentItem.notes) { %>
+                            <%= read %> <br> 
+                    <% } %>  
+                <% } %>
+            </td>
+            <td class="smaller syllabus-item-assignment">
+                <% if (currentItem.warmup) { %>
+                    <b>Warmup</b><br>
+                    <%= currentItem.warmup %>
+                <% } %>     
+            </td>
+            <td class="smaller syllabus-item-assignment">
+                <% if (currentItem.assignments) { %>
+                    <b>Assignments</b><br>
+                    <%= currentItem.assignments %>
+                <% } %>     
+            </td>
+        </tr>
+    <% } %>
+    <% if (i == items.length-1)  { %>
+        </table>
+    <% } %>
+<% } %>
+
+
+```
+
+
+

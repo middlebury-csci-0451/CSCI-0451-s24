@@ -1,0 +1,190 @@
+---
+toc: true
+numbered: false
+title: Software and Setup
+---
+
+After following this set of instructions, you will be all ready to go for participation in CSCI 0451. 
+
+# Slack
+
+First, you'll need to join Slack. Just follow the link on the [Canvas syllabus page](https://middlebury.instructure.com/courses/13859/assignments/syllabus) to join the workspace. You may choose to download the Slack desktop client, but that's up to you. You can make your own choices about notifications, but please do whatever you need to do to ensure that you're able to check Slack on a regular basis. 
+
+# Anaconda Python
+
+An important part of PIC16B is navigating the Python package ecosystem. We will do so using the Anaconda distribution of Python. Getting set up with Anaconda is a somewhat detailed process, outlined below.
+
+**You should follow these instructions even if you already have Anaconda installed.** Uninstalling and reinstalling is recommended.
+
+## 1. Install Anaconda
+
+Install and configure Anaconda Python by following [these instructions](https://docs.anaconda.com/anaconda/install/). Choose the installer appropriate for your operating system. 
+
+## 2. Create the `ml-0451` Environment
+
+::: {.column-margin}
+
+![](assets/img/screencaps/create-environment.png)
+
+The Environments tab, with the Create button on the bottom. 
+
+:::
+
+An *environment* is a separate installation of Python that exists independently of any other versions of Python on your computer. Using environments allows us to have fine-grained control over which version of Python we use, which additional packages are installed, etc. 
+
+To create an environment in Anaconda, first open the Anaconda Navigator program. Then, navigate to the Environments tab. There, you'll find the current existing environments, including the default `base (root)` environment. Click the Create button to create a new environment. 
+
+In the resulting dialog box: 
+
+- Name your environmnent `ml-0451`. 
+- Ensure that the installed Python is some version of Python 3.9 (it's ok if your version number differs in the last two digits from the one shown in the example). 
+
+
+::: {.column-margin}
+
+![](assets/img/screencaps/environment-configure.png)
+Configuring the `ml-0451` environment. 
+
+:::
+
+## Install Packages
+
+You will need to install several packages to the `ml-0451` environment. Note that you need to do this **even if** you previously installed these packages to another version of Python on your laptop. 
+
+To add packages to the environment, first ensure that the environment is selected (it will be highlighted in green). Then, on the righthand menu, search for the package you want to install. You may need to change the box on the top left from "Installed" to "Not Installed" in order to view packages that you have not installed yet.  
+
+![](assets/img/screencaps/nb_conda.png)
+
+Install the following packages: 
+
+- `nb_conda`
+- `numpy`
+- `matplotlib`
+- `pandas`
+- `scikit-learn`
+- `seaborn`
+- `pytorch`
+- `torchvision`
+- `torchtext`
+- `torchdata`
+
+I may ask you to install additional packages later on, or you may find it useful to install packages yourself in order to deal with problems or projects. You'll follow this same process to install them to the `ml-0451` environment. 
+
+## Test Installation
+
+We now need to test your installation. We are going to do this by checking that you are able to run code from these packages in a Jupyter notebook. You can use any software you like for editing Jupyter notebooks. Below, I supply instructions for working in JupyterLab, which is easiest and most reliable. I personally prefer [VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)'s notebook capabilities, but it can be a little bit more finicky to connect your kernel to your notebook. 
+
+To test your installation with JupyterLab...
+
+### Launch JupyterLab
+
+Now back on the Home tab, launch the JupyterLab app. You may need to install it first. Create a notebook using the `ml-0451` environment as a kernel. 
+
+::: {.column-margin}
+
+![](assets/img/screencaps/jupyter-lab.png)
+Creating a notebook using the `ml-0451` environment as the kernel. 
+
+:::
+
+Next, type the following code into the grey code cell that appears in the notebook:
+
+```python
+import sklearn as sk
+import numpy as np
+from matplotlib import pyplot as plt
+import pandas as pd
+import torch
+print("I did it!")
+```
+
+Finally, run the cell (`cmd + enter` on Mac or `ctrl + enter` on Windows). If you get no errors, only the output of the `print` statement, then you did it! 
+
+::: {.column-margin}
+
+![](assets/img/screencaps/did-it.png)
+If you see this then you did it! 
+
+:::
+
+## Alternative: VSCode and Others
+
+JupyterLab is probably the easiest way for you to get up and coding. The reason is that it supports two ways of working with Python: 
+
+- *Notebooks*, which allow us to combine code, text, and outputs, including data visualizations. 
+- *Text files*, like `.py` files, which are best for holding complex, reusable source code. 
+
+There are other editors that support these as well. My personal favorite is [Visual Studio Code](https://code.visualstudio.com/) (often called VSCode), and you're likely to see me using it in class. It's fine for you to use VSCode or any other editor, but please note that I'll only troubleshoot Anaconda + JupyterLab. That is, you can use VSCode, but you'll be "on your own" in terms of getting up and running. That said, the [documentation](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) on working with notebooks in VSCode is very good. 
+
+# GitHub and GitHub Pages
+
+Create an account on [GitHub](https://github.com/) if you do not have one already. 
+
+## Optional: GitHub Desktop
+
+If you are comfortable working with git from the command line, you can continue to do this! If you are unfamiliar with git, I recommend that you download and install the [GitHub Desktop](https://desktop.github.com/) graphical client. You will need to connect it to your GitHub account. 
+
+# Your Blog via GitHub Pages
+
+Now let's set up your *blog*. Your blog is the primary way in which you will demonstrate your learning in CSCI 0451. 
+
+On GitHub, navigate to the [blog template repository](https://github.com/middlebury-csci-0451/middlebury-csci-0451.github.io). *Fork* the repository--this creates a copy of the repository under your own personal GitHub account. Then: 
+
+1. Go to Settings and rename the blog `github_username.github.io`, replacing `github_username` with your GitHub username. 
+2. Configure GitHub pages to deploy from the `main` branch and the `/docs` subdirectory, as pictured below. 
+
+![](assets/img/screencaps/gh-pages.png)
+
+After a few minutes, try navigating to `https://github_username.github.io`. You should find an exact copy of the [template website](https://middlebury-csci-0451.github.io/). We haven't modified it yet, but we will soon! 
+
+## Clone your blog
+
+Finally, clone your blog to your local computer in a place where you'll be able to find it in the future. You can do this using the big green "Clone" button on GitHub. You can clone either using GitHub Desktop or at the command line: both options are good! 
+
+### What if I already have a GitHub Pages site?
+
+Great! You can publish your blog as a project website rather than as a user site. Find out [more on the difference](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) and how to publish a project website. 
+
+# Install Quarto
+
+Here's how the blog works: 
+
+1. You modify special markdown files with extension `.qmd` and Jupyter notebooks with extension `.ipynb`. 
+2. You use [Quarto](https://quarto.org/) to transform these files into the HTML files that form your blog. 
+
+So, first, [install Quarto](https://quarto.org/docs/get-started/). 
+
+## Test Drive Quarto
+
+Change modify the About page of your blog by modifying the file `about.qmd`. You can do things like change text or change the profile picture (it doesn't have to be of yourself). Once you've made these changes, open a terminal in the location of your cloned blog and type the command 
+
+```bash
+quarto preview
+```
+
+After a few moments, a web browser window should pop up with a preview of your blog. If you navigate over to the About tab, you should see your changes. 
+
+## Finalize and Publish
+
+In the terminal, use `ctrl + c` to stop the preview process. Then type the command 
+
+```bash
+quarto render
+```
+
+This time you won't see a preview, but that's ok! Over in git or GitHub Desktop, check all the new and modified files that have been generated, add a short message, and commit them to the main branch. Then, *push* your commit. This sends your files back to GitHub.com, where it will be published. After a minute or two, navigate back over to the URL housing your website and check that your changes have been made. 
+
+# Nice Job!
+
+I know it might have been a long journey, but you now have all the software you need to thrive in CSCI 0451. There's also a lot of stuff here (Jupyter/VSCode, git+GitHub) that will help you in lots of other classes and projects. 
+
+# References
+
+- Quarto basics with [JupyterLab](https://quarto.org/docs/get-started/hello/jupyter.html), with [VSCode](https://quarto.org/docs/get-started/hello/vscode.html). 
+- The [Quarto docs](https://quarto.org/docs/reference/) are searchable!
+- Tutorials for [JupyterLab](https://www.tutorialspoint.com/jupyter/jupyterlab_interface.htm). 
+- [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/getting-started-with-github-desktop)
+
+
+
+
