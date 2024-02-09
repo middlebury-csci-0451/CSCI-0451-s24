@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -370,7 +435,7 @@ Prof.&nbsp;<span class="speaker-highlight">Phil Chodrow</span> <br>Department of
 <p lang="en" dir="ltr">
 Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious. <a href="https://t.co/T785FbGmUX">pic.twitter.com/T785FbGmUX</a>
 </p>
-— Deqing Fu (<span class="citation" data-cites="DeqingFu">(<a href="" role="doc-biblioref" onclick="return false;"><strong>DeqingFu?</strong></a>)</span>) <a href="https://twitter.com/DeqingFu/status/1599682153201401856?ref_src=twsrc%5Etfw">December 5, 2022</a>
+— Deqing Fu (@DeqingFu) <a href="https://twitter.com/DeqingFu/status/1599682153201401856?ref_src=twsrc%5Etfw">December 5, 2022</a>
 </blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
@@ -450,19 +515,23 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <section id="section-8" class="slide level2 split-50">
 <h2></h2>
 <div class="column bg1">
-<h5 id="ml-ethics-bias-and-fairness">ML, Ethics, Bias, and Fairness</h5>
-<p><em>Algorithmic bias</em> is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality.</p>
-<p>Most systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed.</p>
-<p><img data-src="https://ars.electronica.art/outofthebox/files/2019/08/GenderShades_gs04.jpg"></p>
+<h5 id="whats-in-this-course">What’s In This Course</h5>
+<p>Short answer: stuff that is harder to learn from the internet.</p>
+<p><span class="fragment"><img data-src="../assets/img/screencaps/mosh.png"></span></p>
+<div class="fragment">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
+<span id="cb1-2"><a href="#cb1-2"></a>LR.fit(predictors, target)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>LR.predict(new_predictors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><span class="fragment"><em>We are going to learn this workflow in a day, then do more interesting things</em>.</span></p>
 </div>
 <div class="column bg0">
 <div class="fragment">
 <!-- -->
-<h5 id="save-the-date">Save the Date</h5>
-<p><img data-src="https://api.time.com/wp-content/uploads/2022/01/timnit-gebru-ai-google-1-featured-socialcrop.jpg?quality=85"></p>
-<h6 id="monday-april-24th">Monday April 24th</h6>
-<p>Dr.&nbsp;<strong>Timnit Gebru</strong> will be virtually visiting our class for a Q&amp;A session and giving a talk at 7pm.</p>
-<p>Dr.&nbsp;Gebru is one of the world’s leading experts in intersectional bias in AI.</p>
+<h5 id="special-focus-disparity-fairness-and-impact">Special Focus: Disparity, Fairness, and Impact</h5>
+<p><em>Algorithmic bias</em> is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality.</p>
+<p>Most systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed.</p>
+<p><img data-src="https://ars.electronica.art/outofthebox/files/2019/08/GenderShades_gs04.jpg"></p>
 </div>
 </div>
 </section>
@@ -473,25 +542,27 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <h4 id="rough-tentative-plan-for-the-semester">Rough, <span class="alert">tentative</span> plan for the semester</h4>
 </div>
 <div class="column bg0">
-<h6 id="fundamentals-of-prediction-6-weeks">Fundamentals of prediction (~6 weeks)</h6>
+<h6 id="fundamentals-of-prediction-2-weeks">Fundamentals of Prediction (~2 weeks)</h6>
 <ul>
-<li>Core math concepts</li>
-<li>Optimization (“the algorithms”)</li>
-<li>How to help models generalize</li>
-<li>Formal definitions of bias and fairness</li>
+<li>Data science workflow.</li>
+<li>Score-based prediction, linear models, decision theory.</li>
 </ul>
-<h6 id="unsupervised-methods-1-week">Unsupervised methods (~1 week)</h6>
+<h6 id="fairness-in-machine-learning-2-3-weeks">Fairness in Machine Learning (~2-3 weeks)</h6>
 <ul>
-<li>Clustering</li>
-<li>Dimensionality reduction</li>
+<li>Legitimacy of automated decision-systems</li>
+<li>Formal definitions of bias and fairness.</li>
+<li>Limitations of formal methods.</li>
 </ul>
-<h6 id="deep-learning-4-weeks">Deep Learning (~4 weeks)</h6>
+<h6 id="algorithms-math-4-weeks">Algorithms (math) (~4 weeks)</h6>
 <ul>
-<li>Image classification</li>
-<li>Text generation</li>
-<li>Word embedding</li>
+<li>Empirical risk minimization, convexity, optimization.</li>
+<li>Controlling features: regularization and kernels.</li>
 </ul>
-<h6 id="project-presentations-1-week">Project Presentations (~1 week)</h6>
+<h6 id="deep-learning-2-weeks">Deep Learning (~2 weeks)</h6>
+<ul>
+<li>Image classification, text classification, word embedding.</li>
+<li><em>We are not doing generative language models – take 457</em>.</li>
+</ul>
 </div>
 </section>
 <section id="section-10" class="slide level2 split-33">
@@ -501,11 +572,12 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <h3 id="most-days">Most Days</h3>
 </div>
 <div class="column bg0">
+<p><br> <br></p>
 <h6 id="warmup-activity">Warmup Activity</h6>
 <ul>
 <li>Complete ahead of time.</li>
 <li>Reinforces content from readings and connects them to lecture.</li>
-<li>Present in groups of 4-5.</li>
+<li>Present in groups of 5-6.</li>
 <li>Random presenter presents to the group.</li>
 </ul>
 <h6 id="lecture">Lecture</h6>
@@ -513,11 +585,6 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <li>Math</li>
 <li>Live-coding + experiments</li>
 <li>Your questions and ideas!</li>
-</ul>
-<h6 id="close-out-activity">Close-Out Activity</h6>
-<ul>
-<li>In same groups as warmup.</li>
-<li>Practices content from lecture, discussion</li>
 </ul>
 </div>
 </section>
@@ -530,7 +597,7 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <div class="column bg0">
 <h6 id="blog-posts">Blog Posts</h6>
 <ul>
-<li>Aim for ~1 per week.</li>
+<li>Substantial projects! Usually require &gt;5 hours.</li>
 <li>Involves implementation, experiments, and discussion.</li>
 <li>Published on your blog.</li>
 </ul>
@@ -554,63 +621,53 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <p><br> <br></p>
 <h3 id="blog-posts-1">Blog Posts</h3>
 <ul>
-<li>Implement algorithms in source (<code>.py</code>) files.</li>
 <li>Perform experiments in Jupyter notebooks.</li>
 <li>Create figures, add expository prose, etc.</li>
+<li>(Sometimes) Implement algorithms in source (<code>.py</code>) files.</li>
 <li>Render your notebooks into a blog using the Quarto publishing engine.</li>
 <li>Host source code and rendered blog on GitHub.</li>
 </ul>
 </div>
 <div class="column bg0">
-<p><br></p>
-<div class="stretch">
-<p><img data-src="../assets/img/figs/blog.png"></p>
-</div>
+<iframe data-src="https://middlebury-csci-0451.github.io/CSCI-0451-s24/assignments/blog-posts/blog-post-penguins.html" width="900" height="600">
+</iframe>
 </div>
 </section>
-<section id="section-13" class="slide level2" data-background-image="../assets/img/figs/blog-stack.png" data-background-size="contain">
+<section id="section-13" class="slide level2" data-background-image="../assets/img/screencaps/vscode-quarto.png" data-background-size="contain">
 <h2></h2>
 </section>
-<section id="section-14" class="slide level2 split-33">
+<section id="section-14" class="slide level2 split-50">
 <h2></h2>
 <div class="column bg1">
-<p><br> <br> <br> <br> <br> <br> <br></p>
-<h4 id="feedback-on-blog-posts-via-hypothes.is">Feedback on blog posts via Hypothes.is</h4>
+<h3 id="blog-post-feedback">Blog Post Feedback</h3>
+<ul>
+<li><span class="alert"><strong>E</strong></span>: You have demonstrated excellent and thorough learning in this blog post. <span class="alert"><strong>You should definitely move on</strong></span>.</li>
+<li><span class="alert"><strong>M</strong></span>: You have demonstrated learning in this blog post, but may have missed some opportunities. <span class="alert"><strong>You could learn either by moving on or by revising this post</strong></span>.</li>
+<li><span class="alert"><strong>R</strong></span>: You have demonstrated some learning, but have missed some important ideas or techniques. <span class="alert"><strong>I recommend that you focus your learning on revising this assignment.</strong></span></li>
+</ul>
+<p><em>These “grades” are always accompanied by written feedback on where to revise if applicable</em>.</p>
 </div>
 <div class="column bg0">
-<div class="stretch">
-<p><br> <br> <br></p>
-<p><img data-src="../assets/img/figs/annotations.png"></p>
-</div>
+<iframe data-src="https://middlebury-csci-0451.github.io/CSCI-0451-s24/assignments/blog-posts/blog-post-penguins.html" width="900" height="600">
+</iframe>
 </div>
 </section>
 <section id="section-15" class="slide level2 split-33">
 <h2></h2>
 <div class="column bg1">
-<p><br> <br> <br> <br> <br> <br> <br></p>
-<h4 id="feedback-on-source-code">Feedback on source code</h4>
-</div>
-<div class="column bg0">
-<div class="stretch">
-<p><br> <br> <br></p>
-<p><img data-src="../assets/img/figs/annotations-github.png"></p>
-</div>
-</div>
-</section>
-<section id="section-16" class="slide level2 split-33">
-<h2></h2>
-<div class="column bg1">
-<p><br> <br> <br> <br> <br> <br> <br></p>
+<p><br> <br> <br> <br></p>
 <h4 id="readings-and-warmups">Readings and Warmups</h4>
-<p>Do them! <em>Some readings are optional.</em></p>
+<p>Do them!</p>
+<p>Readings should be completed ahead of time.</p>
+<p>Notes are for in-class.</p>
 <p><span class="fragment">Let’s practice a warmup activity</span></p>
 </div>
 <div class="column bg0">
-<iframe data-src="https://middlebury-csci-0451.github.io/CSCI-0451/schedule.html" width="900" height="600">
+<iframe data-src="https://middlebury-csci-0451.github.io/CSCI-0451-s24/schedule.html" width="900" height="600">
 </iframe>
 </div>
 </section>
-<section id="section-17" class="slide level2" data-background-image="../assets/img/figs/veggies.jpeg" data-background-size="contain" data-background-color="black">
+<section id="section-16" class="slide level2" data-background-image="../assets/img/figs/veggies.jpeg" data-background-size="contain" data-background-color="black">
 <h2></h2>
 <h3 id="your-affinity-vegetable">Your Affinity Vegetable</h3>
 <p><br> <br></p>
@@ -618,19 +675,19 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <h3 id="go-around-and-share-your-name-and">2. Go around and share your name and:</h3>
 <h5 id="if-you-were-a-vegetable-which-vegetable-would-you-be-and-why">If you were a vegetable, which vegetable would you be <span class="alert">and why</span>?</h5>
 </section>
-<section id="section-18" class="slide level2" data-background-image="../assets/img/figs/veggies.jpeg" data-background-size="contain" data-background-color="black">
+<section id="section-17" class="slide level2" data-background-image="../assets/img/figs/veggies.jpeg" data-background-size="contain" data-background-color="black">
 <h2></h2>
 <h3 id="your-affinity-vegetable-1">Your Affinity Vegetable</h3>
 <p><br> <br></p>
 <h3 id="team-leader-lead-your-team-in-finding-a-delicious-dish-that-incorporates-all-of-your-vegetables.">3. <span class="alert">Team leader</span>: lead your team in finding a <span class="alert2"><em>delicious dish</em></span> that incorporates all of your vegetables.</h3>
 <h5 id="be-ready-to-share">Be ready to share!</h5>
 </section>
-<section id="section-19" class="slide level2 bg2">
+<section id="section-18" class="slide level2 bg2">
 <h2></h2>
 <p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h3 id="collaborative-grading"><span class="alert">Collaborative</span> Grading</h3>
 </section>
-<section id="section-20" class="slide level2 split-33">
+<section id="section-19" class="slide level2 split-33">
 <h2></h2>
 <div class="column bg1">
 <p><br> <br> <br> <br> <br> <br> <br></p>
@@ -658,10 +715,10 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <li class="fragment">You <span class="alert"><strong>propose a letter grade</strong></span> that reflects your learning and achievement, and discuss it with me.</li>
 </ul>
 </div>
-<h6 id="individual-assignments-dont-get-scores-points-or-gradesjust-feedback."><span class="fragment">Individual assignments don’t get scores, points, or grades–just feedback.</span></h6>
+<h6 id="the-feedback-you-get-on-individual-assignments-is-data-for-your-proposal.-there-is-no-formula."><span class="fragment">The feedback you get on individual assignments is <em>data for your proposal</em>. There is no formula.</span></h6>
 </div>
 </section>
-<section id="section-21" class="slide level2 bg1 smaller">
+<section id="section-20" class="slide level2 bg1 smaller">
 <h2></h2>
 <h3 id="collaborative-grading-2">Collaborative Grading</h3>
 <p><br> <br></p>
@@ -702,7 +759,7 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 </tbody>
 </table>
 </section>
-<section id="section-22" class="slide level2 split-50">
+<section id="section-21" class="slide level2 split-50">
 <h2></h2>
 <div class="column bg1">
 <h4 id="what-a-grade-sounds-like">What a Grade Sounds Like…</h4>
@@ -721,18 +778,18 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 </ul>
 </div>
 </section>
-<section id="section-23" class="slide level2 bg3">
+<section id="section-22" class="slide level2 bg3">
 <h2></h2>
 <p><br> <br> <br> <br> <br></p>
 <h4 id="what-is-something-that-makes-you-feel-excited-or-empowered-about-collaborative-grading">What is something that makes you feel <span class="alert">excited</span> or <span class="alert">empowered</span> about collaborative grading?</h4>
 <h4 id="what-is-something-that-makes-you-feel-nervous-or-confused-about-collaborative-grading">What is something that makes you feel <span class="alert-4">nervous</span> or <span class="alert-4">confused</span> about collaborative grading?</h4>
 </section>
-<section id="section-24" class="slide level2 bg2">
+<section id="section-23" class="slide level2 bg2">
 <h2></h2>
 <p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h3 id="what-i-expect-from-you-now">What I <span class="alert">expect</span> from you now</h3>
 </section>
-<section id="section-25" class="slide level2 split-50">
+<section id="section-24" class="slide level2 split-50">
 <h2></h2>
 <div class="column bg1">
 <h4 id="cs-stuff">CS Stuff</h4>
@@ -746,13 +803,12 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <p>You remember most of MATH 0200 and CSCI 0200:</p>
 <ul>
 <li>Matrix multiplication and inner products</li>
-<li>Everything about <span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>.<br>
+<li><span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>.<br>
 </li>
-<li>Visualizing linear spaces.</li>
+<li>Visualizing linear and affine spaces.</li>
 <li>Eigenvalues, eigenvectors, positive-definite matrices.</li>
 <li>Derivatives, critical points of functions.</li>
-<li>Sample spaces, probability distribution functions.</li>
-<li>Random variables, mean and variance.</li>
+<li>Sample spaces, probability distribution functions, random variables.</li>
 <li>Conditional probability and expectations.</li>
 </ul>
 <p>You are ready to <span class="alert-2">look up</span> what you don’t remember.</p>
@@ -792,7 +848,7 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 
 ::: -->
 </section>
-<section id="section-26" class="slide level2 split-50">
+<section id="section-25" class="slide level2 split-50">
 <h2></h2>
 <div class="column bg0">
 <h3 id="nyt-1957">NYT, 1957</h3>
@@ -805,16 +861,16 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 <div class="fragment">
 <!-- -->
 <h4 id="what-we-are-actually-talking-about">What We Are Actually Talking About</h4>
-<div id="370cfb69" class="cell" data-fig-height="1" data-fig-width="10" data-execution_count="2">
+<div id="0cd0ea5f" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<p><img data-src="welcome_files/figure-revealjs/cell-2-output-1.png" width="569" height="337"></p>
+<p><img data-src="welcome_files/figure-revealjs/cell-2-output-1.png" width="503" height="275"></p>
 </div>
 </div>
 <p><span class="math display">\[\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} + \mathbb{1}(y_i \langle \mathbf{w}^{(t)}, \mathbf{x}_i \rangle &lt; 0)y_i \mathbf{x}_i\]</span></p>
 </div>
 </div>
 </section>
-<section id="section-27" class="slide level2 split-50">
+<section id="section-26" class="slide level2 split-50">
 <h2></h2>
 <div class="column bg0">
 <h3 id="nyt-2022">NYT, 2022</h3>
@@ -830,12 +886,12 @@ Ask chatGPT to condemn itself in the tone of Shakespeare and it looks hilarious.
 </div>
 </div>
 </section>
-<section id="section-28" class="slide level2 bg1">
+<section id="section-27" class="slide level2 bg1">
 <h2></h2>
 <p><br> <br> <br> <br> <br> <br> <br></p>
 <h5 id="most-of-all-i-expect-that-you-are-ready-to-make-thoughtful-decisions-to-guide-your-own-learning-in-this-course.">Most of all, I expect that you are ready to make thoughtful decisions to <span class="alert">guide your own learning</span> in this course.</h5>
 </section>
-<section id="section-29" class="slide level2 bg3">
+<section id="section-28" class="slide level2 bg3">
 <h2></h2>
 <p><br> <br> <br> <br> <br> <br> <br></p>
 <h5 id="based-on-what-you-know-about-the-course-so-far-what-are-some-ways-that-success-might-look-like-for-you">Based on what you know about the course so far, what are some ways that <span class="alert">success</span> might look like <span class="alert-4">for you</span>?</h5>
