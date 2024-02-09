@@ -10,11 +10,12 @@ project:
 website:
   body-footer: |
     <br> <br> <span style="color:grey;">&#169; Phil Chodrow, 2024</span>
-  sidebar:
+  navbar:
     collapse-level: 1	
     style: "docked"
-    title: "<b>Machine Learning</b><br>CSCI 0451<br>Spring '24"
-    contents:
+    title: |
+      <b>Machine Learning</b> | CSCI 0451 S24
+    left:
       - text: "Syllabus"
         file: index.qmd
       - schedule.qmd
@@ -33,6 +34,7 @@ format:
     reference-location: margin
     callout-icon: false;
     callout-appearance: simple
+    title-block-style: none
 
 jupyter: conda-env-ml-0451-py
 
