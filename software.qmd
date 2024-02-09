@@ -48,7 +48,7 @@ To add channels, run this:
 
 ```bash
 conda config --set channel_priority strict
-conda config --add channels pytorch conda-forge
+conda config --add channels conda-forge
 conda config --add channels pytorch
 ```
 
@@ -67,7 +67,7 @@ conda activate ml-0451
 Finally, you can install packages with `conda install`:
 
 ```bash
-conda install nb_conda numpy matplotlib pandas scikit-learn seaborn pytorch torchvision torchtext torchdata
+conda install jupyter nb_conda numpy matplotlib pandas scikit-learn seaborn pytorch torchvision torchtext torchdata
 ```
 
 You are now ready to skip to the next section to [Test Your Installation](#test-your-installation).
