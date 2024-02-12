@@ -603,7 +603,7 @@ You are ready to [look up]{.alert-2} what you don't remember.
 ::: -->
 
 
-## {.split-50 }
+## {.split-40 }
 
 ::: {.column .bg0}
 
