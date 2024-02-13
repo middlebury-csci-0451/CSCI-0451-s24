@@ -1222,147 +1222,147 @@
     "href": "slides/welcome.html#section-6",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "How is this course going to go?"
+    "text": "Big Messages\n \nThis class is about something that is already impacting your life, and is likely to do so more in the future.\nWe are going to grow in math, coding, technical writing, and critical awareness.\nThis class works by giving you opportunties to push yourself.\nThis class is fun and rewarding but not easy."
   },
   {
     "objectID": "slides/welcome.html#section-7",
     "href": "slides/welcome.html#section-7",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "CSCI 0451 is….\nCoding\n\nNumerical array programming\nObject-oriented interfaces\nExperiments and visualization\n\nMath\n\nLinear algebra\nOptimization (\\(\\implies\\) calculus)\nA bit of probability\n\nReading, writing, discussion\n\nTechnical methods\nBias, fairness, and impact of ML"
+    "text": "What are we going to learn in this class?"
   },
   {
     "objectID": "slides/welcome.html#section-8",
     "href": "slides/welcome.html#section-8",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What’s In This Course\nShort answer: stuff that is harder to learn from the internet.\n\n\nLR = LogisticRegression()\nLR.fit(predictors, target)\nLR.predict(new_predictors)\n\nWe are going to learn this workflow in a day, then do more interesting things.\n\n\n\n\nSpecial Focus: Disparity, Fairness, and Impact\nAlgorithmic bias is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality.\nMost systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed."
+    "text": "CSCI 0451 is….\nCoding\n\nNumerical array programming\nObject-oriented interfaces\nExperiments and visualization\n\nMath\n\nLinear algebra\nOptimization (\\(\\implies\\) calculus)\nA bit of probability\n\nReading, writing, discussion\n\nTechnical methods\nBias, fairness, and impact of ML"
   },
   {
     "objectID": "slides/welcome.html#section-9",
     "href": "slides/welcome.html#section-9",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Rough, tentative plan for the semester\n\n\nFundamentals of Prediction (~2 weeks)\n\nData science workflow.\nScore-based prediction, linear models, decision theory.\n\nFairness in Machine Learning (~2-3 weeks)\n\nLegitimacy of automated decision-systems\nFormal definitions of bias and fairness.\nLimitations of formal methods.\n\nAlgorithms (math) (~4 weeks)\n\nEmpirical risk minimization, convexity, optimization.\nControlling features: regularization and kernels.\n\nDeep Learning (~2 weeks)\n\nImage classification, text classification, word embedding.\nWe are not doing generative language models – take 457."
+    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About\n\n\n\n\n\n\\[\\mathbf{w}^{(t+1)} = \\mathbf{w}^{(t)} + \\mathbb{1}(y_i \\langle \\mathbf{w}^{(t)}, \\mathbf{x}_i \\rangle &lt; 0)y_i \\mathbf{x}_i\\]"
   },
   {
     "objectID": "slides/welcome.html#section-10",
     "href": "slides/welcome.html#section-10",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Most Days\n\n\n \nWarmup Activity\n\nComplete ahead of time.\nReinforces content from readings and connects them to lecture.\nPresent in groups of 5-6.\nRandom presenter presents to the group.\n\nLecture\n\nMath\nLive-coding + experiments\nYour questions and ideas!"
+    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
   },
   {
     "objectID": "slides/welcome.html#section-11",
     "href": "slides/welcome.html#section-11",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Activities and assignments\n\n\nBlog Posts\n\nSubstantial projects! Usually require &gt;5 hours.\nInvolves implementation, experiments, and discussion.\nPublished on your blog.\n\nDaily Warmup Activities\n\nRelatively quick when you’ve done the readings.\nOne (random) person each day will present to your team.\nConnects readings to lecture.\n\nProject\n\nIn groups of your choosing.\nWork on it throughout the semester, presentations in last week.\nWe’ll have activities etc. to help you pick a path."
+    "text": "My Approach\nI want you to learn stuff in this class that is hard to learn from the internet.\n\n\nLR = LogisticRegression()\nLR.fit(predictors, target)\nLR.predict(new_predictors)\n\nWe are going to learn this workflow in a day, then do more interesting things.\n\n\n\n\nSpecial Focus: Disparity, Fairness, and Impact\nAutomated decision systems have a history reproducing structural privilege and oppression, especially in relation to race, gender, class, and sexuality.\nWhat does it mean for an automated decision system to be fair? This is a hard question which we will discuss from multiple perspectives."
   },
   {
     "objectID": "slides/welcome.html#section-12",
     "href": "slides/welcome.html#section-12",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Blog Posts\n\nPerform experiments in Jupyter notebooks.\nCreate figures, add expository prose, etc.\n(Sometimes) Implement algorithms in source (.py) files.\nRender your notebooks into a blog using the Quarto publishing engine.\nHost source code and rendered blog on GitHub."
+    "text": "Rough, tentative plan for the semester\n\n\n\n\nFundamentals of Prediction (~2 weeks)\n\nData science workflow.\nScore-based prediction, linear models, decision theory.\n\n\n\n\nFairness in Machine Learning (~2-3 weeks)\n\nLegitimacy of automated decision-systems\nFormal definitions of bias and fairness.\nLimitations of formal methods.\n\n\n\n\nAlgorithms (math) (~4 weeks)\n\nEmpirical risk minimization, convexity, optimization.\nControlling features: regularization and kernels.\n\n\n\n\nDeep Learning (~2 weeks)\n\nImage classification, text classification, word embedding.\nWe are not doing generative language models – take 457."
+  },
+  {
+    "objectID": "slides/welcome.html#section-13",
+    "href": "slides/welcome.html#section-13",
+    "title": "Welcome to CSCI 0451!",
+    "section": "",
+    "text": "Ok…so what are we going to do?"
   },
   {
     "objectID": "slides/welcome.html#section-14",
     "href": "slides/welcome.html#section-14",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Blog Post Feedback\n\nE: You have demonstrated excellent and thorough learning in this blog post. You should definitely move on.\nM: You have demonstrated learning in this blog post, but may have missed some opportunities. You could learn either by moving on or by revising this post.\nR: You have demonstrated some learning, but have missed some important ideas or techniques. I recommend that you focus your learning on revising this assignment.\n\nThese “grades” are always accompanied by written feedback on where to revise if applicable."
+    "text": "Most Days\n\n\n \nWarmup Activity\n\nComplete ahead of time.\nReinforces content from readings and connects them to lecture.\nPresent in groups of 5-6.\nRandom presenter presents to the group.\n\nLecture\n\nMath\nLive-coding + experiments\nYour questions and ideas!"
   },
   {
     "objectID": "slides/welcome.html#section-15",
     "href": "slides/welcome.html#section-15",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Readings and Warmups\nDo them!\nReadings should be completed ahead of time.\nNotes are for in-class.\nLet’s practice a warmup activity"
+    "text": "Activities and assignments\n\n\n\n\nBlog Posts\n\nSubstantial projects! Usually require &gt;5 hours.\nInvolves implementation, experiments, and discussion.\nPublished on your blog.\n\n\n\n\nDaily Warmup Activities\n\nRelatively quick when you’ve done the readings.\nOne (random) person each day will present to your team.\nConnects readings to lecture.\n\n\n\n\nProject\n\nIn groups of your choosing.\nWork on it throughout the semester, presentations in last week.\nWe’ll have activities etc. to help you pick a path."
   },
   {
     "objectID": "slides/welcome.html#section-16",
     "href": "slides/welcome.html#section-16",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Your Affinity Vegetable\n \n1. Split into teams\n2. Go around and share your name and:\nIf you were a vegetable, which vegetable would you be and why?"
-  },
-  {
-    "objectID": "slides/welcome.html#section-17",
-    "href": "slides/welcome.html#section-17",
-    "title": "Welcome to CSCI 0451!",
-    "section": "",
-    "text": "Your Affinity Vegetable\n \n3. Team leader: lead your team in finding a delicious dish that incorporates all of your vegetables.\nBe ready to share!"
+    "text": "Blog Posts\n\nPerform experiments in Jupyter notebooks.\nCreate figures, add expository prose, etc.\n(Sometimes) Implement algorithms in source (.py) files.\nRender your notebooks into a blog using the Quarto publishing engine.\nHost source code and rendered blog on GitHub."
   },
   {
     "objectID": "slides/welcome.html#section-18",
     "href": "slides/welcome.html#section-18",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Collaborative Grading"
+    "text": "Blog Post Feedback\n\nE: You have demonstrated excellent and thorough learning in this blog post. You should definitely move on.\nM: You have demonstrated learning in this blog post, but may have missed some opportunities. You could learn either by moving on or by revising this post.\nR: You have demonstrated some learning, but have missed some important ideas or techniques. I recommend that you focus your learning on revising this assignment.\n\nThese “grades” are always accompanied by written feedback on where to revise if applicable."
   },
   {
     "objectID": "slides/welcome.html#section-19",
     "href": "slides/welcome.html#section-19",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Collaborative Grading\n\n\nInitialization:\n\n\nYou set goals for your learning and achievement (in week 2).\n\n\nMain Loop:\n\n\nYou attend class, participate in activities, and complete assignments.\n\nYou get feedback on your assignments from me and the TAs, and you revise.\nYou reflect on your learning and achievement at different points throughout the course.\n\n\nAt End Of Course:\n\n\nYou propose a letter grade that reflects your learning and achievement, and discuss it with me.\n\n\nThe feedback you get on individual assignments is data for your proposal. There is no formula."
+    "text": "Readings and Warmups\nDo them!\nReadings should be completed ahead of time.\nNotes are for in-class.\nLet’s practice a warmup activity"
   },
   {
     "objectID": "slides/welcome.html#section-20",
     "href": "slides/welcome.html#section-20",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Collaborative Grading\n \n\n\n\n\n\n\n\n\n\nOpportunity\nChallenge\n\n\n\n\nNo points, no averages\nYou can focus on feedback and set your own goals.\nYou need to motivate based on your interest in the class\n\n\nResubmit assignments\nOne of the best ways to learn\nNeed to read feedback and prioritize time for revisions\n\n\nCan skip assignments\nNo busy work – work on what’s valuable to you.\nStill need to work enough to learn and meet your goals\n\n\nNo hard due-dates\nDon’t ask for extensions, take the time you need\nNeed to keep yourself on pace to achieve your goals"
+    "text": "Your Affinity Vegetable\n \n1. Split into teams\n2. Go around and share your name and:\nIf you were a vegetable, which vegetable would you be and why?"
   },
   {
     "objectID": "slides/welcome.html#section-21",
     "href": "slides/welcome.html#section-21",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What a Grade Sounds Like…\nA: I am ready to take the theory, techniques, and ideas of this course into my endeavours outside this classroom: future classes, projects, hobbies, career.\nB: With help or review, I might be able to take some of what I learned outside this classroom.\nC: I showed up and did stuff, but I don’t really see any ways to take what I learned outside this classroom.\nD-F: I didn’t really show up or do much.\n\n\nWork Expected Work Expected\nI am very likely to accept your proposed grade in the course if you EITHER:\n\nComplete most assignments to a high standard (including revisions) OR\nWork for ~10 productive hours per week outside of class OR\nDo some of the assignments I give you and also some other things (that you propose) that are relevant to the course learning goals."
+    "text": "Your Affinity Vegetable\n \n3. Team leader: lead your team in finding a delicious dish that incorporates all of your vegetables.\nBe ready to share!"
   },
   {
     "objectID": "slides/welcome.html#section-22",
     "href": "slides/welcome.html#section-22",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What is something that makes you feel excited or empowered about collaborative grading?\nWhat is something that makes you feel nervous or confused about collaborative grading?"
+    "text": "Collaborative Grading"
   },
   {
     "objectID": "slides/welcome.html#section-23",
     "href": "slides/welcome.html#section-23",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "What I expect from you now"
+    "text": "Collaborative Grading\n\n\nInitialization:\n\n\nYou set goals for your learning and achievement (in week 2).\n\n\nMain Loop:\n\n\nYou attend class, participate in activities, and complete assignments.\n\nYou get feedback on your assignments from me and the TAs, and you revise.\n\n\nAt End Of Course:\n\n\nYou propose a letter grade that reflects your learning and achievement, and discuss it with me.\n\n\nThe feedback you get on individual assignments is data for your proposal. There is no formula."
   },
   {
     "objectID": "slides/welcome.html#section-24",
     "href": "slides/welcome.html#section-24",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "CS Stuff\nYou can write moderately-complex, object-oriented software.\nYou are comfortable reading software documentation and researching how to perform a task that you haven’t seen before.\nYou know what a terminal is and how to perform simple operations at the command line.\nYou have experience debugging your code and you are ready to do it a lot more.\n\n\nMath Stuff\nYou remember most of MATH 0200 and CSCI 0200:\n\nMatrix multiplication and inner products\n\\(\\mathbf{A}\\mathbf{x} = \\mathbf{b}\\).\n\nVisualizing linear and affine spaces.\nEigenvalues, eigenvectors, positive-definite matrices.\nDerivatives, critical points of functions.\nSample spaces, probability distribution functions, random variables.\nConditional probability and expectations.\n\nYou are ready to look up what you don’t remember."
+    "text": "Collaborative Grading\n \n\n\n\n\n\n\n\n\n\nOpportunity\nChallenge\n\n\n\n\nNo points, no averages\nYou can focus on feedback and set your own goals.\nYou need to motivate based on your interest in the class\n\n\nResubmit assignments\nOne of the best ways to learn\nNeed to read feedback and prioritize time for revisions\n\n\nCan skip assignments\nNo busy work – work on what’s valuable to you.\nStill need to work enough to learn and meet your goals\n\n\nNo hard due-dates\nDon’t ask for extensions, take the time you need\nNeed to keep yourself on pace to achieve your goals"
   },
   {
     "objectID": "slides/welcome.html#section-25",
     "href": "slides/welcome.html#section-25",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 1957\n \n\n\n\n\n\n\n\nWhat We Are Actually Talking About\n\n\n\n\n\n\\[\\mathbf{w}^{(t+1)} = \\mathbf{w}^{(t)} + \\mathbb{1}(y_i \\langle \\mathbf{w}^{(t)}, \\mathbf{x}_i \\rangle &lt; 0)y_i \\mathbf{x}_i\\]"
+    "text": "What a Grade Sounds Like…\nA: I am ready to take the theory, techniques, and ideas of this course into my endeavours outside this classroom: future classes, projects, hobbies, career.\nB: With help or review, I might be able to take some of what I learned outside this classroom.\nC: I showed up and did stuff, but I don’t really see any ways to take what I learned outside this classroom.\nD-F: I didn’t really show up or do much.\n\n\n\nI am very likely to accept your proposed grade in the course if you EITHER:\n\nComplete most assignments to a high standard (including revisions) OR\nWork for ~10 productive hours per week outside of class OR\nDo some of the assignments I give you and also some other things (that you propose) that are relevant to the course learning goals."
   },
   {
     "objectID": "slides/welcome.html#section-26",
     "href": "slides/welcome.html#section-26",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "NYT, 2022\n \n\n\n\n\nWhat We Are Actually Talking About\n\n\nxkcd"
+    "text": "What is something that makes you feel excited or empowered about collaborative grading?\nWhat is something that makes you feel nervous or confused about collaborative grading?"
   },
   {
     "objectID": "slides/welcome.html#section-27",
     "href": "slides/welcome.html#section-27",
     "title": "Welcome to CSCI 0451!",
     "section": "",
-    "text": "Most of all, I expect that you are ready to make thoughtful decisions to guide your own learning in this course."
+    "text": "The Wisdom Of Those Who Have Gone Before\nStay on top of the blog posts and do the daily warmups. also go to office hours if you are confused, Phil is helpful and there will likely be CS0451 peers there to talk through assignments with.\nReview after each class using lecture notes so that you have a solid understanding of the concepts taught in class.\nget to know quarto blogs and watch threeblueonebrown essence of linear algebra on Youtube to review some ideas\nBe realistic in your goal setting and focus on what you want to get out of the course.\nFocus on learning and growing instead of the grade. Be curious and think hard."
   },
   {
     "objectID": "slides/welcome.html#section-28",
@@ -1376,49 +1376,14 @@
     "href": "software.html",
     "title": "Software and Setup",
     "section": "",
-    "text": "After following this set of instructions, you will be all ready to go for participation in CSCI 0451.\n© Phil Chodrow, 2024"
-  },
-  {
-    "objectID": "software.html#install-anaconda",
-    "href": "software.html#install-anaconda",
-    "title": "Software and Setup",
-    "section": "1. Install Anaconda",
-    "text": "1. Install Anaconda\nInstall and configure Anaconda Python by following these instructions. Choose the installer appropriate for your operating system."
-  },
-  {
-    "objectID": "software.html#create-the-ml-0451-environment",
-    "href": "software.html#create-the-ml-0451-environment",
-    "title": "Software and Setup",
-    "section": "2. Create the ml-0451 Environment",
-    "text": "2. Create the ml-0451 Environment\n\n\n\nThe Environments tab, with the Create button on the bottom.\nAn environment is a separate installation of Python that exists independently of any other versions of Python on your computer. Using environments allows us to have fine-grained control over which version of Python we use, which additional packages are installed, etc.\nTo create an environment in Anaconda, first open the Anaconda Navigator program. Then, navigate to the Environments tab. There, you’ll find the current existing environments, including the default base (root) environment. Click the Create button to create a new environment.\nIn the resulting dialog box:\n\nName your environmnent ml-0451.\nEnsure that the installed Python is some version of Python 3.9 (it’s ok if your version number differs in the last two digits from the one shown in the example).\n\n\n\n Configuring the ml-0451 environment."
-  },
-  {
-    "objectID": "software.html#install-packages",
-    "href": "software.html#install-packages",
-    "title": "Software and Setup",
-    "section": "Install Packages",
-    "text": "Install Packages\nYou will need to install several packages to the ml-0451 environment. Note that you need to do this even if you previously installed these packages to another version of Python on your laptop.\nTo add packages to the environment, first ensure that the environment is selected (it will be highlighted in green). Then, on the righthand menu, search for the package you want to install. You may need to change the box on the top left from “Installed” to “Not Installed” in order to view packages that you have not installed yet.\n\nInstall the following packages:\n\nnb_conda\nnumpy\nmatplotlib\npandas\nscikit-learn\nseaborn\npytorch\ntorchvision\ntorchtext\ntorchdata\n\nI may ask you to install additional packages later on, or you may find it useful to install packages yourself in order to deal with problems or projects. You’ll follow this same process to install them to the ml-0451 environment."
-  },
-  {
-    "objectID": "software.html#test-your-installation",
-    "href": "software.html#test-your-installation",
-    "title": "Software and Setup",
-    "section": "Test Your Installation",
-    "text": "Test Your Installation\nOpen VSCode. Following these instructions, open a Jupyter Notebook in VSCode using the ml-0451 Anaconda environment as the notebook kernel.\n\n\n Creating a notebook using the ml-0451 environment as the kernel.\nNext, type the following code into the grey code cell that appears in the notebook:\nimport sklearn as sk\nimport numpy as np\nfrom matplotlib import pyplot as plt\nimport pandas as pd\nimport torch\nprint(\"I did it!\")\nFinally, run the cell. If you get no errors, only the output of the print statement, then you did it!\n\n\n I did it!"
-  },
-  {
-    "objectID": "software.html#optional-github-desktop",
-    "href": "software.html#optional-github-desktop",
-    "title": "Software and Setup",
-    "section": "Optional: GitHub Desktop",
-    "text": "Optional: GitHub Desktop\nIf you are comfortable working with git from the command line, you can continue to do this! If you are unfamiliar with git, I recommend that you download and install the GitHub Desktop graphical client. You will need to connect it to your GitHub account."
+    "text": "Bell Luo ’24 contributed to these notes.\nAfter following this set of instructions, you will be all ready to go for participation in CSCI 0451.\n© Phil Chodrow, 2024"
   },
   {
     "objectID": "software.html#clone-your-blog",
     "href": "software.html#clone-your-blog",
     "title": "Software and Setup",
     "section": "Clone your blog",
-    "text": "Clone your blog\nFinally, clone your blog to your local computer in a place where you’ll be able to find it in the future. You can do this using the big green “Clone” button on GitHub. You can clone either using GitHub Desktop or at the command line: both options are good!\n\nWhat if I already have a GitHub Pages site?\nGreat! You can publish your blog as a project website rather than as a user site. Find out more on the difference and how to publish a project website."
+    "text": "Clone your blog\nFinally, clone your blog repository to your local computer in a place where you’ll be able to find it in the future. You can do this using the big green “Clone” button on GitHub. You can clone either using VSCode, GitHub Desktop, or at the command line with git or gh: all options are good!"
   },
   {
     "objectID": "software.html#test-drive-quarto",
@@ -1432,7 +1397,7 @@
     "href": "software.html#finalize-and-publish",
     "title": "Software and Setup",
     "section": "Finalize and Publish",
-    "text": "Finalize and Publish\nIn the terminal, use ctrl + c to stop the preview process. Then type the command\nquarto render\nThis time you won’t see a preview, but that’s ok! Over in git or GitHub Desktop, check all the new and modified files that have been generated, add a short message, and commit them to the main branch. Then, push your commit. This sends your files back to GitHub.com, where it will be published. After a minute or two, navigate back over to the URL housing your website and check that your changes have been made."
+    "text": "Finalize and Publish\nIn the terminal, use Ctrl + C to stop the preview process. Then type the command\nquarto render\nThis time you won’t see a preview, but that’s ok! Quarto rendered our code into files under the docs/ folder. So now, all we have to do is publish that on GitHub.\nOver in git, or GitHub Desktop, or inside VSCode, you should be able to see all the new and modified files that have been generated.\n\n\n\n\n\n\nThe Internet Remembers\n\n\n\nYou are about to publish to the Internet.\nOnce you publish something, it is virtually impossible to un-publish.\nSo pause for a moment, think, and check that you are not accidentally uploading your password, or your embarrassing childhood photo.\n\n\nStage these files (git add), add a short commit message, and commit them to the main branch.\nThen, push your commit to GitHub.\nThis sends your files back to GitHub.com (the “remote”), where it will immediately be published online.\nAfter a minute or two, navigate back over to the URL housing your website and check that your changes have been made."
   },
   {
     "objectID": "software.html#optional-the-vscode-quarto-extension",

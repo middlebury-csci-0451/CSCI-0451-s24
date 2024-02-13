@@ -4,6 +4,9 @@ numbered: false
 title: Software and Setup
 ---
 
+*Bell Luo '24 contributed to these notes.* 
+
+
 After following this set of instructions, you will be all ready to go for participation in CSCI 0451. 
 
 ::: {.callout-tip}
@@ -22,11 +25,7 @@ since we will be less able to help with any errors that may occur.
 First, you'll need to join Slack.
 Just follow the link on the Canvas Syllabus page to join our workspace.
 
-You may use Slack in the browser, or you may choose to download the Slack desktop client,
-but that's up to you.
-
-You can make your own choices about notifications,
-but please do whatever you need to do to ensure that you're able to check Slack on a regular basis. 
+You may use Slack in the browser, in the desktop client, or on mobile. You can make your own choices about notifications, but please do whatever you need to do to ensure that you're able to check Slack on a regular basis. 
 
 # Anaconda Python
 
@@ -55,7 +54,7 @@ conda config --add channels pytorch
 Run the following to create an environment called `ml-0451`:
 
 ```bash
-conda create -n ml-0451
+conda create -n ml-0451 python=3.9
 ```
 
 Then, you need to actually get inside the environment:
@@ -70,7 +69,7 @@ Finally, you can install packages with `conda install`:
 conda install jupyter nb_conda numpy matplotlib pandas scikit-learn seaborn pytorch torchvision torchtext torchdata
 ```
 
-You are now ready to skip to the next section to [Test Your Installation](#test-your-installation).
+You are now ready to skip to the next section, [Test Your Installation](#test-your-installation).
 
 :::
 
@@ -125,7 +124,7 @@ Click the "Create" button to create a new environment.
 In the resulting dialog box: 
 
 - Name your environment `ml-0451`. 
-- Ensure that the installed Python is some version of Python 3.11 (so 3.11.1 is as valid as 3.11.8). 
+- Ensure that the installed Python is some version of Python 3.9.*. 
 
 
 ::: {.column-margin}

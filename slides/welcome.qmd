@@ -123,14 +123,32 @@ cache: false
 
 #### Can you list the times in which you interacted with a machine learning system [yesterday]{.alert}?
  
+## {.bg1}
+
+### Big Messages
+
+<br> <br> 
+
+[This class is about something that is already impacting your life, and is likely to do so more in the future.]{.fragment .fade-in-then-semi-out} 
+
+[We are going to grow in math, coding, technical writing, and critical awareness.]{.fragment .fade-in-then-semi-out} 
+
+[This class works by [giving you opportunties to push yourself]{.alert}.]{.fragment .fade-in-then-semi-out}
+
+[This class is [fun and rewarding]{.alert} but not [easy]{.alert-2}.]{.fragment .fade-in-then-semi-out}
+
+
 
 ## {.bg2}
 
 <br> <br> <br> <br> <br> <br> <br>  <br>  
 
-### How is [this course]{.alert} going to go?
+### What are we going to [learn]{.alert} in this class?
+
+
 
 ## {.split-50}
+
 
 ::: {.column .bg1}
 
@@ -169,13 +187,138 @@ cache: false
 :::
 
 
+## {.split-40 }
+
+::: {.column .bg0}
+
+### NYT, 1957
+
+<br> <br>
+
+::: {.stretch}
+![](../assets/img/figs/perceptron-nyt.jpeg)
+:::
+
+:::
+
+
+::: {.column .bg0}
+
+::: {.fragment}
+
+#### What We Are Actually Talking About
+
+```{python}
+#| echo: false
+#| cache: false
+
+
+import numpy as np
+from matplotlib import pyplot as plt
+np.random.seed(123)
+
+plt.rcParams["figure.figsize"] = (6, 3)
+plt.style.use('seaborn-v0_8-whitegrid')
+
+X1 = np.random.normal(0, 1, 100)
+X2 = np.random.normal(0, 1, 100)
+ 
+Y1 = np.random.normal(0, 1, 100)*.5+3
+Y2 = np.random.normal(0, 1, 100)*.5+3
+
+p = plt.scatter(X1, X2, color = "orange", alpha = 0.5)
+p = plt.scatter(Y1, Y2, color = "blue", alpha = 0.5)
+
+plt.plot([0.3, 4.3], [3.3, -0.7], color = "black")
+
+labs = plt.gca().set(xlabel = r"$x_1$", ylabel = r"$x_2$")
+
+``` 
+
+$$\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} + \mathbb{1}(y_i \langle \mathbf{w}^{(t)}, \mathbf{x}_i \rangle < 0)y_i \mathbf{x}_i$$
+
+:::
+:::
+
+
+
+
+## {.split-50}
+
+::: {.column .bg0}
+
+### NYT, 2022
+
+
+![](../assets/img/figs/language-model-nyt-face.png){width=200}
+![](../assets/img/figs/language-model-nyt.png){width=300}
+
+
+:::
+ 
+::: {.column .bg0}
+
+::: {.fragment}
+
+#### What We Are Actually Talking About
+
+![](https://imgs.xkcd.com/comics/machine_learning.png)
+
+<br> 
+
+[[xkcd](https://xkcd.com/1838/)]{.footnote}
+
+:::
+
+:::
+
+
+
+<!-- 
 ## {.split-50}
 
 ::: {.column .bg1}
 
-##### What's In This Course
+#### CS Stuff
 
-Short answer: stuff that is harder to learn from the internet. 
+You can write moderately-complex, [object-oriented software]{.alert}. 
+
+You are comfortable reading [software documentation]{.alert} and [researching]{.alert} how to perform a task that you haven't seen before. 
+
+You know what a [terminal]{.alert} is and how to perform simple operations at the command line. 
+
+You have experience [debugging]{.alert} your code and you are ready to do it a lot more. 
+
+:::
+
+::: {.column .bg0}
+
+#### Math Stuff
+
+You remember most of calculus, linear algebra, and math foundations: 
+
+- Matrix multiplication and inner products
+- $\mathbf{A}\mathbf{x} = \mathbf{b}$.  
+- Visualizing linear and affine spaces. 
+- Eigenvalues, eigenvectors, positive-definite matrices. 
+- Derivatives, critical points of functions. 
+- Sample spaces, probability distribution functions, random variables.
+- Conditional probability and expectations. 
+
+You are ready to [look up]{.alert-2} what you don't remember. 
+
+:::
+
+ -->
+
+
+## {.split-50}
+
+::: {.column .bg1}
+
+##### My Approach
+
+I want you to learn stuff in this class that is hard to learn from the internet. 
 
 
 
@@ -206,9 +349,10 @@ LR.predict(new_predictors)
 
 ##### Special Focus: Disparity, Fairness, and Impact
 
-*Algorithmic bias* is the tendency of automated systems to reproduce structural privilege and oppression, especially in relation to race, gender, and sexuality. 
+Automated decision systems have a history reproducing structural privilege and oppression, especially in relation to race, gender, class, and sexuality. 
 
-Most systems that impact people in any way have at least a risk of algorithmic bias. Active mitigation is usually needed. 
+What does it mean for an automated decision system to be *fair*? This is a hard question which we will discuss from multiple perspectives. 
+
 
 ![](https://ars.electronica.art/outofthebox/files/2019/08/GenderShades_gs04.jpg)
 
@@ -232,10 +376,16 @@ Most systems that impact people in any way have at least a risk of algorithmic b
 
 ::: {.column .bg0}
 
+::: {.fragment .fade-in-then-semi-out}
+
 ###### Fundamentals of Prediction (~2 weeks)  
 
 - Data science workflow. 
 - Score-based prediction, linear models, decision theory.
+
+:::
+
+::: {.fragment .fade-in-then-semi-out}
 
 ###### Fairness in Machine Learning (~2-3 weeks)
 
@@ -243,18 +393,32 @@ Most systems that impact people in any way have at least a risk of algorithmic b
 - Formal definitions of bias and fairness.
 - Limitations of formal methods. 
 
+:::
+
+::: {.fragment .fade-in-then-semi-out}
+
 ###### Algorithms (math) (~4 weeks)
 
 - Empirical risk minimization, convexity, optimization. 
 - Controlling features: regularization and kernels. 
 
+:::
+
+::: {.fragment .fade-in-then-semi-out}
 ###### Deep Learning (~2 weeks)
 
 - Image classification, text classification, word embedding.
 - *We are  not doing generative language models -- take 457*. 
 
 :::
+:::
 
+
+## {.bg2}
+
+<br> <br> <br> <br> <br> <br> <br> <br> 
+
+### Ok...so what are we going to [do]{.alert}?
 
 ## {.split-33}
 
@@ -298,23 +462,32 @@ Most systems that impact people in any way have at least a risk of algorithmic b
 
 ::: {.column .bg0}
 
+::: {.fragment .fade-in-then-semi-out}
+
 ###### Blog Posts
 
 - Substantial projects! Usually require >5 hours. 
 - Involves implementation, experiments, and discussion. 
 - Published on your blog. 
 
+:::
+
+::: {.fragment .fade-in-then-semi-out}
 ###### Daily Warmup Activities
 
 - Relatively quick **when you've done the readings**.
 - One (random) person each day will present to your team. 
 - Connects readings to lecture. 
 
+:::
+
+::: {.fragment .fade-in-then-semi-out}
 ###### Project
 
 - In groups of your choosing. 
 - Work on it throughout the semester, presentations in last week. 
 - We'll have activities etc. to help you pick a path. 
+:::
 
 :::
 
@@ -440,7 +613,7 @@ Notes are for in-class.
 
 ###### **Initialization:** 
 
-::: {.incremental}
+::: {.fragment .fade-in-then-semi-out}
 
 - You set goals for your learning and achievement (in week 2).
 
@@ -448,11 +621,10 @@ Notes are for in-class.
 
 ###### **Main Loop:**
 
-::: {.incremental}
+::: {.fragment .fade-in-then-semi-out}
 
 - You attend class, participate in activities, and complete assignments.  
 - You get feedback on your assignments from me and the TAs, and you **revise**.
-- You reflect on your learning and achievement at different points throughout the course. 
 
 :::
 
@@ -502,13 +674,15 @@ Notes are for in-class.
 :::
 
 ::: {.column .bg0}
-#### Work Expected [Work Expected]{.hide}
+<!-- #### Work Expected [Work Expected]{.hide} -->
 
 I am very likely to accept your proposed grade in the course if you EITHER: 
 
 - Complete **most assignments** to a high standard (including revisions) OR
 - Work for **~10 productive hours per week** outside of class OR
 - Do some of the assignments I give you and also **some other things** (that you propose) that are relevant to the course learning goals.
+
+![](../assets/img/screencaps/time-spent.png)
 
 :::
 
@@ -524,47 +698,23 @@ I am very likely to accept your proposed grade in the course if you EITHER:
 #### What is something that makes you feel [nervous]{.alert-4} or [confused]{.alert-4} about collaborative grading?  
 
 
+## {.bg1}
+
+### The Wisdom Of Those Who Have Gone Before
+
+*[Stay on top of the blog posts and do the daily warmups]{.alert}. also go to office hours if you are confused, Phil is helpful and there will likely be CS0451 peers there to talk through assignments with.*
+
+*[Review after each class]{.alert} using lecture notes so that you have a solid understanding of the concepts taught in class.*
+
+*get to know quarto blogs and [watch threeblueonebrown essence of linear algebra]{.alert} on Youtube to review some ideas*
+
+*Be realistic in your goal setting and [focus on what you want to get out of the course]{.alert}.*
+
+*[Focus on learning and growing]{.alert} instead of the grade. Be curious and think hard.*
 
 
-## {.bg2}
 
-<br> <br> <br> <br> <br> <br> <br>  <br>  
 
-### What I [expect]{.alert} from you now 
-
-## {.split-50}
-
-::: {.column .bg1}
-
-#### CS Stuff
-
-You can write moderately-complex, [object-oriented software]{.alert}. 
-
-You are comfortable reading [software documentation]{.alert} and [researching]{.alert} how to perform a task that you haven't seen before. 
-
-You know what a [terminal]{.alert} is and how to perform simple operations at the command line. 
-
-You have experience [debugging]{.alert} your code and you are ready to do it a lot more. 
-
-:::
-
-::: {.column .bg0}
-
-#### Math Stuff
-
-You remember most of MATH 0200 and CSCI 0200: 
-
-- Matrix multiplication and inner products
-- $\mathbf{A}\mathbf{x} = \mathbf{b}$.  
-- Visualizing linear and affine spaces. 
-- Eigenvalues, eigenvectors, positive-definite matrices. 
-- Derivatives, critical points of functions. 
-- Sample spaces, probability distribution functions, random variables.
-- Conditional probability and expectations. 
-
-You are ready to [look up]{.alert-2} what you don't remember. 
-
-:::
 
 
 <!-- 
@@ -601,99 +751,6 @@ You are ready to [look up]{.alert-2} what you don't remember.
 - Critical points of functions when $f'(x) = 0$. 
 
 ::: -->
-
-
-## {.split-40 }
-
-::: {.column .bg0}
-
-### NYT, 1957
-
-<br> <br>
-
-::: {.stretch}
-![](../assets/img/figs/perceptron-nyt.jpeg)
-:::
-
-:::
-
-
-::: {.column .bg0}
-
-::: {.fragment}
-
-#### What We Are Actually Talking About
-
-```{python}
-#| echo: false
-#| cache: false
-
-
-import numpy as np
-from matplotlib import pyplot as plt
-np.random.seed(123)
-
-plt.rcParams["figure.figsize"] = (6, 3)
-plt.style.use('seaborn-v0_8-whitegrid')
-
-X1 = np.random.normal(0, 1, 100)
-X2 = np.random.normal(0, 1, 100)
- 
-Y1 = np.random.normal(0, 1, 100)*.5+3
-Y2 = np.random.normal(0, 1, 100)*.5+3
-
-p = plt.scatter(X1, X2, color = "orange", alpha = 0.5)
-p = plt.scatter(Y1, Y2, color = "blue", alpha = 0.5)
-
-plt.plot([0.3, 4.3], [3.3, -0.7], color = "black")
-
-labs = plt.gca().set(xlabel = r"$x_1$", ylabel = r"$x_2$")
-
-``` 
-
-$$\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} + \mathbb{1}(y_i \langle \mathbf{w}^{(t)}, \mathbf{x}_i \rangle < 0)y_i \mathbf{x}_i$$
-
-:::
-:::
-
-
-
-
-## {.split-50}
-
-::: {.column .bg0}
-
-### NYT, 2022
-
-
-![](../assets/img/figs/language-model-nyt-face.png){width=200}
-![](../assets/img/figs/language-model-nyt.png){width=300}
-
-
-:::
-
-::: {.column .bg0}
-
-::: {.fragment}
-
-#### What We Are Actually Talking About
-
-![](https://imgs.xkcd.com/comics/machine_learning.png)
-
-<br> 
-
-[[xkcd](https://xkcd.com/1838/)]{.footnote}
-
-:::
-
-:::
-
-
-## {.bg1}
-
-<br> <br> <br> <br> <br> <br> <br>
-
-##### Most of all, I expect that you are ready to make thoughtful decisions to [guide your own learning]{.alert} in this course. 
 
 
 ## {.bg3}
