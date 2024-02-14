@@ -69,14 +69,22 @@
     <a href="assignments/blog-posts/blog-post-cost-of-profit-maximization.qmd">Blog Post: Whose Costs?</a>
 - date: 2024-02-27
   header: Legitimacy in Automated Decision-Making
-  summary: 
+  summary: We introduce the topics of fairness and disparity in automated decision systems using a famous case study. 
   objectives: 
+    - Social Responsibility
+    - Experimentation
   reading:
+    - |
+      BHN: <a href="https://fairmlbook.org/introduction.html">Introduction</a>
+    - <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica. 
   notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/10-compas.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/10-compas.ipynb">Live notes</a>
   module: Fairness and Disparity
   publish: true
-  warmup: TBD
-  assignments: 
+  warmup: <a href="warmup-exercises.qmd#sec-fairness">Experiencing (Un)Fairness</a>
+  assignments: |
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due today</b>
 - date: 2024-02-29
   header: Model Auditing
   summary: 

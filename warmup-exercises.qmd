@@ -128,9 +128,30 @@ Suppose that the recommendation on the rapid test is that a score above $t$ indi
 
 
 
+## Experiencing (Un)Fairness {#sec-fairness}
+
+*In completing this warmup, please keep in mind that you will be asked to share with your group and potentially with the class.*
 
 
+Take 30 minutes to write two paragraphs. 
 
+In your first paragraph, please respond to the following prompt: 
+
+::: {.column-margin}
+You can choose to discuss a decision that either unfairly harmed **or** unfairly benefited you.
+:::
+
+> When was a time in your life in which you felt that **you were the subject of an unfair decision**? What was it about that decision that made it feel **unfair**, rather than just bad, disappointing, or surprising?
+
+In your second paragraph, please respond to the following prompt: 
+
+> Consider Figure 4 in the [Introduction](https://fairmlbook.org/introduction.html) of *BHN*. In this figure, there are blue dots and green dots, where the colors correspond to hypothetical demographic attributes. We as the reader can choose what the colors mean. 
+> 
+>- Suggest one possible meaning for the blue and green dots in which you would say that the classifier depicted in the figure is unproblematic from the perspective of fairness. 
+>- Suggest one possible meaning for the blue and green dots in which you would say that the classifier depicted in the figure is concerning from the perspective of fairness. 
+>- What is the relevant difference between the two cases? 
+
+Please bring your paragraphs to class and be ready to share with your group. 
 
 
 

@@ -14,8 +14,9 @@ title: Schedule
 Reading sources: 
 
 - ***PSC***: Lecture notes I've written for this course, hosted [here](https://www.philchodrow.prof/ml-notes/).  
-- ***PDSH***: The Python Data Science Handbook by @vanderplasPythonDataScience2016. 
- 
+- ***PDSH***: *The Python Data Science Handbook* by @vanderplasPythonDataScience2016. 
+- ***BHN***: *Fairness and Machine Learning: Limitations and Opportunities* by @barocasFairnessMachineLearning2023. 
+  
  
 :::{#schedule}
 :::               
