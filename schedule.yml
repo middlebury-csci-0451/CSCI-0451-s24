@@ -68,7 +68,7 @@
   assignments: |
     <a href="assignments/blog-posts/blog-post-cost-of-profit-maximization.qmd">Blog Post: Whose Costs?</a>
 - date: 2024-02-27
-  header: Legitimacy in Automated Decision-Making
+  header: Auditing Fairness
   summary: We introduce the topics of fairness and disparity in automated decision systems using a famous case study. 
   objectives: 
     - Social Responsibility
@@ -86,7 +86,7 @@
   assignments: |
     <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due today</b>
 - date: 2024-02-29
-  header: Model Auditing
+  header: Legitimacy in Automated Decision-Making
   summary: 
   objectives: 
   reading:
