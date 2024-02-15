@@ -222,7 +222,7 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <section id="demo" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="demo"><span class="header-section-number">2</span> Demo</h2>
 <p>The following function will create both testing and validation data that you can use to test your implementation:</p>
-<div id="f5b94d7e" class="cell" data-execution_count="2">
+<div id="df78d86a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -242,7 +242,7 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X_train, y_train, X_val, y_val</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s an example of how to use the function to generate data. Unfortunately, it’s only possible to easily visualize this problem when <code>p_features = 1</code>.</p>
-<div id="aae49589" class="cell" data-execution_count="3">
+<div id="7cb46581" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n_train <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n_val <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> <span class="dv">1</span></span>
@@ -259,11 +259,11 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>labs <span class="op">=</span> axarr[<span class="dv">1</span>].<span class="bu">set</span>(title <span class="op">=</span> <span class="st">"Validation"</span>, xlabel <span class="op">=</span> <span class="st">"x"</span>)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-linear-regression_files/figure-html/cell-3-output-1.png" width="656" height="468"></p>
+<p><img src="blog-post-linear-regression_files/figure-html/cell-3-output-1.png" width="657" height="468"></p>
 </div>
 </div>
 <p>Once you’ve impmlemented your solution, you should be able to use it like this:</p>
-<div id="51c22adc" class="cell" data-execution_count="4">
+<div id="24663d99" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> solutions.linear_regression <span class="im">import</span> LinearRegression</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LinearRegression()</span>
@@ -272,136 +272,136 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Training score = </span><span class="sc">{</span>LR<span class="sc">.</span>score(X_train, y_train)<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Validation score = </span><span class="sc">{</span>LR<span class="sc">.</span>score(X_val, y_val)<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Training score = 0.4893
-Validation score = 0.5789</code></pre>
+<pre><code>Training score = 0.5687
+Validation score = 0.6727</code></pre>
 </div>
 </div>
 <p>The estimated weight vector <span class="math inline">\(\mathbf{w}\)</span> is</p>
-<div id="094809d0" class="cell" data-execution_count="5">
+<div id="c58ef7f4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>LR.w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>array([0.747003  , 0.44868746])</code></pre>
+<pre><code>array([0.95008323, 0.64337213])</code></pre>
 </div>
 </div>
 <p>I can get the same value for <span class="math inline">\(\mathbf{w}\)</span> using gradient descent (it would be even closer if we allowed more iterations).</p>
-<div id="d7a6f54a" class="cell" data-execution_count="6">
+<div id="22bfb5f0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>LR2 <span class="op">=</span> LinearRegression()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>LR2.fit(X_train, y_train, method <span class="op">=</span> <span class="st">"gradient"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span>, max_iter <span class="op">=</span> <span class="fl">1e2</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>LR2.w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(2,)
-64.12005734482265
-16.72385268708793
-4.3631921799615565
-1.1426455948613508
-0.3135262896429141
-0.12307532671139117
-0.09262185312609275
-0.08554499257478913
-0.08065936736885844
-0.07617593375585291
-0.07195060554955024
-0.06796028864979113
-0.06419131733758959
-0.060631370602570754
-0.05726885300041441
-0.05409281519506045
-0.05109291530209028
-0.04825938499702271
-0.04558299769197311
-0.043055038490743824
-0.040667275811166866
-0.038411934581301446
-0.03628167092207313
-0.034269548234066666
-0.03236901461041562
-0.03057388150240311
-0.028878303568201827
-0.027276759639161846
-0.0257640347417009
-0.024335203116227
-0.022985612177805377
-0.021710867366288494
-0.02050681783677326
-0.01936954294343242
-0.018295339473129262
-0.017280709586930117
-0.016322349430387476
-0.015417138375444592
-0.014562128859036174
-0.013754536785172243
-0.012991732459318788
-0.01227123202554262
-0.011590689378495927
-0.010947888524084806
-0.010340736363634083
-0.009767255878337615
-0.009225579691626032
-0.008713943988640232
-0.008230682772826806
-0.007774222441103351
-0.007343076659829512
-0.006935841525077175
-0.006551190991120884
-0.006187872552581976
-0.005844703166023483
-0.005520565397671855
-0.005214403784804498
-0.004925221398946194
-0.004652076599700883
-0.004394079968495958
-0.00415039141245514
-0.003920217428926677
-0.0037028085216152065
-0.0034974567600721024
-0.003303493474522938
-0.0031202870785407197
-0.002947241012454381
-0.002783791800850175
-0.002629407217703845
-0.0024835845534157113
-0.0023458489778325035
-0.0022157519941287374
-0.0020928699783533252
-0.0019768028000925666
-0.0018671725194881609
-0.0017636221566389146
-0.0016658145291493938
-0.001573431154213808
-0.0014861712115657464
-0.0014037505639860107
-0.00132590083197368
-0.0012523685199805606
-0.0011829141908711698
-0.001117311686329429
-0.0010553473904042917
-0.0009968195339431624
-0.0009415375375751116
-0.0008893213911575244
-0.0008400010676339144
-0.0007934159693307206
-0.0007494144051266652
-0.0007078530963663613
-0.0006685967104631158
-0.0006315174201248321
-0.0005964944871466762
-0.0005634138692925388
-0.0005321678489112023
-0.0005026546821923759
-0.00047477826789643667
-0.0004484478343631255</code></pre>
+87.86018758576171
+22.240124066884277
+5.847641034624846
+2.137081065113018
+1.551810586831155
+1.424562755737454
+1.338469135378949
+1.2597407785670018
+1.1857899028831203
+1.1161901105776455
+1.0506761410821055
+0.9890075119729055
+0.930958478757133
+0.8763165889878355
+0.8248818628018681
+0.776466058192767
+0.7308919818864844
+0.6879928408323571
+0.6476116317692625
+0.6096005666213725
+0.5738205316199496
+0.5401405781715815
+0.5084374436095878
+0.4785951000743536
+0.45050432987201317
+0.4240623257570076
+0.39917231467569564
+0.37574320359422947
+0.35368924611407093
+0.3329297286554041
+0.31338867505972634
+0.29499456853053074
+0.2776800898945504
+0.26138187122540535
+0.24604026392832215
+0.23159912043675493
+0.21800558872229026
+0.2052099188655142
+0.19316528098017202
+0.18182759382407818
+0.17115536346952318
+0.16110953144289084
+0.151653331777523
+0.14275215645684708
+0.13437342875507846
+0.12648648401230056
+0.11906245740705175
+0.11207417831637863
+0.10549607087605954
+0.0993040603774799
+0.09347548515849878
+0.08798901366572186
+0.08282456638486227
+0.07796324235319262
+0.07338724998546985
+0.06907984195976334
+0.0650252539253148
+0.06120864680778406
+0.05761605250080207
+0.05423432274528317
+0.05105108100905388
+0.04805467719090851
+0.04523414498339277
+0.042579161737991346
+0.0400800106860831
+0.037727545377281194
+0.03551315620504704
+0.03342873889704505
+0.031466664854995136
+0.02961975323526444
+0.027881244668303145
+0.02624477652057117
+0.024704359608368757
+0.023254356278531597
+0.021889459775572266
+0.02060467481995873
+0.019395299326198635
+0.018256907194112833
+0.017185332110050622
+0.016176652298911832
+0.015227176171177154
+0.014333428812318728
+0.013492139265237518
+0.012700228559135877
+0.011954798441022249
+0.011253120768680626
+0.01059262752600801
+0.009970901424696513
+0.009385667057310648
+0.00883478256964273
+0.008316231822015676
+0.007828117010505729
+0.007368651721317351
+0.006936154392845119
+0.006529042161422039
+0.006145825068374911
+0.005785100606992099
+0.005445548589584823
+0.005125926315908854
+0.004825064025029235</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>array([0.74693539, 0.44872299])</code></pre>
+<pre><code>array([0.94939606, 0.64372792])</code></pre>
 </div>
 </div>
 <p>I can also see how the score changed over time. Because we’re not using stochastic gradient descent, the score should increase monotonically in each iteration.</p>
-<div id="bc40622a" class="cell" data-execution_count="7">
+<div id="148e70dc" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.plot(LR2.score_history)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Iteration"</span>, ylabel <span class="op">=</span> <span class="st">"Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-linear-regression_files/figure-html/cell-7-output-1.png" width="597" height="431"></p>
+<p><img src="blog-post-linear-regression_files/figure-html/cell-7-output-1.png" width="597" height="429"></p>
 </div>
 </div>
 <p>Your implementation is likely correct when you are able to reproduce results that are similar to these (although small differences are no problem).</p>
@@ -424,12 +424,12 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 \]</span></p>
 <div class="page-columns page-full"><p>The effect of the regularizing term is to make the entries of the weight vector <span class="math inline">\(\mathbf{w}\)</span> small. In fact, LASSO has a nice property: it tends to force entries of the weight vector to be <em>exactly zero</em>.  This is very desirable in so-called <em>overparameterized</em> problems, when the number of features <span class="math inline">\(p\)</span> is larger than the number of data points <span class="math inline">\(n\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">The reason we exclude the final entry of <span class="math inline">\(\mathbf{w}\)</span> is that it is not desirable to penalize the weight corresponding to the constant feature in <span class="math inline">\(\mathbf{X}\)</span>.</span></div></div>
 <p>Implementing LASSO involves some more complicated mathematical optimization than we will discuss in this course, so instead we’ll use the implementation in <code>scikit-learn</code>. You can import it like this:</p>
-<div id="77db4c07" class="cell" data-execution_count="8">
+<div id="68a43cb1" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> Lasso(alpha <span class="op">=</span> <span class="fl">0.001</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, <code>alpha</code> controls the strength of the regularization (it’s not related to the learning rate in gradient descent). Let’s fit this model on some data and check the coefficients:</p>
-<div id="42494f7f" class="cell" data-execution_count="9">
+<div id="f77c13e0" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> n_train <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_val, y_val <span class="op">=</span> LR_data(n_train, n_val, p_features, noise)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>L.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -438,10 +438,10 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </div>
 </div>
 <p>The score on the validation set is high, which might be different from what you found with pure linear regression.</p>
-<div id="cd7351cb" class="cell" data-execution_count="10">
+<div id="b1497943" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>L.score(X_val, y_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>0.7007716561272292</code></pre>
+<pre><code>0.6917256126475264</code></pre>
 </div>
 </div>
 <section id="what-you-should-do" class="level3">
@@ -457,7 +457,7 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </blockquote>
 <p>This data set includes information about the season and time of year; the weather; and the count of bicycle users on each day for two years (year 0 is 2011, year 1 is 2012). This level of information gives us considerable ability to model phenomena in the data.</p>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">For more on what the entries in each column means, you can consult the data <a href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">dictionary here</a> (under “Attribute Information”).</span></div></div>
-<div id="46fcb815" class="cell" data-execution_count="11">
+<div id="d074d0ee" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>bikeshare <span class="op">=</span> pd.read_csv(<span class="st">"https://philchodrow.github.io/PIC16A/datasets/Bike-Sharing-Dataset/day.csv"</span>)</span>
@@ -592,7 +592,7 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </div>
 </div>
 <p>Our aim for this case study is to plot daily usage by <em>casual</em> users (as opposed to registered users). The total number of casual users each day is given by the <code>casual</code> column, Let’s plot this over time:</p>
-<div id="4b0ed907" class="cell" data-execution_count="12">
+<div id="3fc86b8f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import datetime</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">3</span>))</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax.plot(pd.to_datetime(bikeshare[<span class="st">'dteday'</span>]), bikeshare[<span class="st">'casual'</span>])</span>
@@ -603,7 +603,7 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </div>
 </div>
 <p>For this prediction task, it’s handy to work with a smaller subset of the columns, and to transform the <code>mnth</code> column into dummy variables.</p>
-<div id="0f259017" class="cell" data-execution_count="13">
+<div id="6c4751c9" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">"casual"</span>, </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mnth"</span>, </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weathersit"</span>, </span>
@@ -898,7 +898,7 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </div>
 </div>
 <p>Now we can do a train-test split.</p>
-<div id="f4b3a6c1" class="cell" data-execution_count="14">
+<div id="a150f3a3" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>train, test <span class="op">=</span> train_test_split(bikeshare, test_size <span class="op">=</span> <span class="fl">.2</span>, shuffle <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train.drop([<span class="st">"casual"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>

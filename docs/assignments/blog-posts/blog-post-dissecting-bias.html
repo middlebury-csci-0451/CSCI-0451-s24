@@ -214,7 +214,7 @@ div.csl-indent {
 <section id="part-a-data-access" class="level2">
 <h2 class="anchored" data-anchor-id="part-a-data-access">Part A: Data Access</h2>
 <p>In order to protect patient privacy, the authors did not share the “real” data used in their study. Instead, they created a randomized version of the data that preserves many of the same patterns and trends. You can use the code below to access the data.</p>
-<div id="f3664842" class="cell" data-execution_count="2">
+<div id="b734e5e9" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://gitlab.com/labsysmed/dissecting-bias/-/raw/master/data/data_new.csv?inline=false"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -231,7 +231,7 @@ div.csl-indent {
 <section id="part-b-reproduce-fig.-1" class="level2">
 <h2 class="anchored" data-anchor-id="part-b-reproduce-fig.-1">Part B: Reproduce Fig. 1</h2>
 <p>Please make a plot in which you reproduce Fig. 1A of <span class="citation" data-cites="obermeyerDissectingRacialBias2019b">Obermeyer et al. (<a href="#ref-obermeyerDissectingRacialBias2019b" role="doc-biblioref">2019</a>)</span>. Your figure is not required to be exactly the same, but it must visualize risk score percentiles against mean number of active chronic conditions within that percentile. For example, I thought I would try spliting out male and female patients. I also think the figure looks a bit nicer with axes inverted. So, my result looked like this:</p>
-<div id="c6e04100" class="cell" data-execution_count="3">
+<div id="7f2a0fac" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <p><img src="blog-post-dissecting-bias_files/figure-html/cell-3-output-1.png" width="743" height="329"></p>
 </div>
@@ -247,7 +247,7 @@ div.csl-indent {
 </blockquote>
 <p>To support their argument, they produce Figure 3. This figure shows how total medical expenditures are correlated with the risk score and with the number of chronic health conditions. Please produce a version of Figure 3, including both panels. For the horizontal axis in the second panel, please use the number of chronic conditions. It is not necessary to draw threshold values in the same way as the authors. Here’s an example output.</p>
 <p><em>Note</em>: Although not explicitly labeled, I believe that the righthand panel of Fig. 3 in <span class="citation" data-cites="obermeyerDissectingRacialBias2019b">Obermeyer et al. (<a href="#ref-obermeyerDissectingRacialBias2019b" role="doc-biblioref">2019</a>)</span> has percentiles in the number of chronic conditions on the horizontal axis. I’m uncertain how they computed these, considering that in our sample data set the maximum number of chronic conditions is 17. This implies that either the original data set has patients with more chronic conditions or the authors did something to arbitrarily break ties. To avoid dealing with this, let’s just use the number of chronic conditions.</p>
-<div id="a73703b2" class="cell page-columns page-full" data-execution_count="4">
+<div id="2075e4b4" class="cell page-columns page-full" data-execution_count="3">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -275,7 +275,7 @@ div.csl-indent {
 <section id="modeling" class="level3">
 <h3 class="anchored" data-anchor-id="modeling">Modeling</h3>
 <p>Your figure from the previous part suggests that the relationship between the number of chronic conditions and the cost might be nonlinear. For this reason, we are going to fit a regression model with polynomial features derived from the number of active chronic conditions. How many polynomial features should we use? A simple way to figure this out is cross-validation. Here’s a function that will construct data sets with polynomial features of various sizes:</p>
-<div id="f0932500" class="cell" data-execution_count="6">
+<div id="4dd35345" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_polynomial_features(X, degree):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  X_ <span class="op">=</span> X.copy()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, degree):</span>

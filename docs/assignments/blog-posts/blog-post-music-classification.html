@@ -195,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p>The code below will allow you to download and load into memory a Pandas data frame containing information on 28,000 musical tracks produced between the years 1950 and 2019.</p>
-<div id="6096d884" class="cell" data-execution_count="2">
+<div id="b366ce05" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/PIC16B/master/datasets/tcc_ceds_music.csv"</span></span>
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Moura, Luan; Fontelles, Emanuel; Sampaio, Vinicius; França, Mardônio (2020), “Music Dataset: Lyrics and Metadata from 1950 to 2019”, Mendeley Data, V3, doi: 10.17632/3t9vbwxgr5.3</p>
 </blockquote>
 <p>Here’s an excerpt of the data:</p>
-<div id="8104b9eb" class="cell" data-execution_count="3">
+<div id="e74376b5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>In this blog post, your task is to use Torch to predict the <em>genre</em> of the track based on the track’s lyrics and engineered features. The lyrics are contained in the <code>lyrics</code> column. Here is a list of the engineered features that you may additionally find useful.</p>
-<div id="b745236f" class="cell" data-execution_count="4">
+<div id="e45c9aa2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>engineered_features <span class="op">=</span> [<span class="st">'dating'</span>, <span class="st">'violence'</span>, <span class="st">'world/life'</span>, <span class="st">'night/time'</span>,<span class="st">'shake the audience'</span>,<span class="st">'family/gospel'</span>, <span class="st">'romantic'</span>, <span class="st">'communication'</span>,<span class="st">'obscene'</span>, <span class="st">'music'</span>, <span class="st">'movement/places'</span>, <span class="st">'light/visual perceptions'</span>,<span class="st">'family/spiritual'</span>, <span class="st">'like/girls'</span>, <span class="st">'sadness'</span>, <span class="st">'feelings'</span>, <span class="st">'danceability'</span>,<span class="st">'loudness'</span>, <span class="st">'acousticness'</span>, <span class="st">'instrumentalness'</span>, <span class="st">'valence'</span>, <span class="st">'energy'</span>]      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>These features were engineered by teams at Spotify to describe attributes of the tracks.</p>
