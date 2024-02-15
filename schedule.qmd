@@ -1,0 +1,26 @@
+---
+listing: 
+  id: schedule 
+  contents: schedule.yml
+  template: schedule.ejs
+toc: false
+title: Schedule  
+---       
+   
+- Readings in normal font should be completed and annotated ahead of lecture. 
+- *Readings in italic provide optional additional depth on the material.*   
+- **Assignments** are listed on the day when I suggest you begin working on them.           
+
+Reading sources: 
+
+- ***PSC***: Lecture notes I've written for this course, hosted [here](https://www.philchodrow.prof/ml-notes/).  
+- ***PDSH***: *The Python Data Science Handbook* by @vanderplasPythonDataScience2016. 
+- ***BHN***: *Fairness and Machine Learning: Limitations and Opportunities* by @barocasFairnessMachineLearning2023. 
+  
+ 
+:::{#schedule}
+:::               
+  
+## Finals Period           
+ 
+During the reading and final exam period, you'll meet with me 1-1 for about 15 minutes. The purpose of this meeting is to help us both reflect on your time in the course and agree on a final grade. 

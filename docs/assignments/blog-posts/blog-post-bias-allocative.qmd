@@ -1,0 +1,284 @@
+---
+title: "Auditing Allocative Bias"
+type: "Blog Post"
+date: 2023-03-29
+description: |
+    In this blog post, you'll create a machine learning model that predicts an individual characteristic like employment status or income on the basis of other demographic characteristics. You'll then perform a fairness audit in order to assess whether or not your algorithm displays bias with respect demographic characteristics like race or sex, and discuss your findings. 
+objectives: 
+  - Social Responsibility
+  - Navigation
+  - Experimentation
+jupyter: conda-env-ml-0451-py
+number-sections: true
+number-depth: 2
+publish: "false"
+bibliography: ../../refs.bib
+---
+
+::: {.hidden}
+$$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vd}{\mathbf{d}}
+\newcommand{\mX}{\mathbf{X}}
+\newcommand{\mR}{\mathbf{R}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vzero}{\mathbf{0}}
+\newcommand{\bracket}[1]{\langle #1 \rangle}
+\newcommand{\paren}[1]{\left( #1 \right)}
+\newcommand{\one}[1]{\mathbb{1}\left[ #1 \right]}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\mA}{\mathbf{A}}
+\newcommand{\vtheta}{\boldsymbol{\theta}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\prob}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\dd}[2]{\frac{\partial #1}{\partial #2}}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+$$
+
+:::
+
+::: {.callout-note}
+
+This one of two possible blog posts for this week. This blog post involves working with data and performing audits. If you'd rather write a research essay on the limitations of the quantitative approach to analyzing bias and discrimination, see [the alternative assignment](blog-post-limits-of-quantitative.qmd). 
+
+:::
+
+[`folktables` was introduced by @ding2021retiring.]{.aside}
+
+The `folktables` package allows you to download and neatly organize data from the American Community Survey's Public Use Microdata Sample (PUMS). You can install it in your `ml-0451` environment by running the following two commands in your terminal: 
+
+```bash
+conda activate ml-0451
+pip install folktables
+```
+
+You can learn more about the `folktables` package, including documentation and examples, on [the package's GitHub page](https://github.com/socialfoundations/folktables). 
+
+In this blog post, you'll fit a classifier using data from `folktables` and  perform a bias audit for the algorithm.  
+
+## Using `folktables`
+
+The first thing to do is to download some data! Here's an illustration of downloading a complete set of PUMS data for the state of Alabama. 
+
+```{python}
+from folktables import ACSDataSource, ACSEmployment, BasicProblem, adult_filter
+import numpy as np
+
+STATE = "AL"
+
+data_source = ACSDataSource(survey_year='2018', 
+                            horizon='1-Year', 
+                            survey='person')
+
+acs_data = data_source.get_data(states=[STATE], download=True)
+
+acs_data.head()
+```
+
+There are approximately 48,000 rows of PUMS data in this data frame. Each one corresponds to an individual citizen of the given `STATE` who filled out the 2018 edition of the PUMS survey. You'll notice that there are a *lot* of columns. In the modeling tasks we'll use here, we're only going to focus on a relatively small number of features. Here are all the *possible* features I suggest you use: 
+
+```{python}
+possible_features=['AGEP', 'SCHL', 'MAR', 'RELP', 'DIS', 'ESP', 'CIT', 'MIG', 'MIL', 'ANC', 'NATIVITY', 'DEAR', 'DEYE', 'DREM', 'SEX', 'RAC1P', 'ESR']
+acs_data[possible_features].head()
+```
+
+For documentation on what these features mean, you can consult the appendix of [the paper](https://arxiv.org/pdf/2108.04884.pdf) that introduced the package. 
+
+For a few examples: 
+
+- `ESR` is employment status (1 if employed, 0 if not)
+- `RAC1P` is race (`1` for White Alone, `2` for Black/African American alone, `3` and above for other self-identified racial groups)
+- `SEX` is binary sex (1 for male, 2 for female)
+- `DEAR`, `DEYE`, and `DREM` relate to certain disability statuses. 
+ 
+Let's consider the following task: we are going to 
+
+1. Train a machine learning algorithm to predict whether someone is currently employed, based on their other attributes *not* including race, and 
+2. Perform a bias audit of our algorithm to determine whether it displays racial bias. 
+
+First, let's subset the features we want to use: 
+
+```{python}
+features_to_use = [f for f in possible_features if f not in ["ESR", "RAC1P"]]
+```
+
+Now we can construct a `BasicProblem` that expresses our wish to use these features to predict employment status `ESR`, using the race `RAC1P` as the group label. I recommend you mostly don't touch the `target_transform`, `preprocess`, and `postprocess` columns. [You can find examples of constructing problems in the `folktables` [source code](https://github.com/socialfoundations/folktables/blob/main/folktables/acs.py) if you really want to carefully customize your problem.]{.aside}  
+
+```{python}
+EmploymentProblem = BasicProblem(
+    features=features_to_use,
+    target='ESR',
+    target_transform=lambda x: x == 1,
+    group='RAC1P',
+    preprocess=lambda x: x,
+    postprocess=lambda x: np.nan_to_num(x, -1),
+)
+
+features, label, group = EmploymentProblem.df_to_numpy(acs_data)
+```
+
+The result is now a feature matrix `features`, a label vector `label`, and a group label vector `group`, in convenient format with which we can work. 
+
+```{python}
+for obj in [features, label, group]:
+  print(obj.shape)
+```
+
+Before we touch the data any more, we should perform a train-test split: 
+
+```{python}
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test, group_train, group_test = train_test_split(
+    features, label, group, test_size=0.2, random_state=0)
+```
+
+Now we are ready to create a model and train it on the training data: 
+
+
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix
+
+model = make_pipeline(StandardScaler(), LogisticRegression())
+model.fit(X_train, y_train)
+```
+
+We can then extract predictions on the test set like this: 
+```{python}
+y_hat = model.predict(X_test)
+```
+
+The overall accuracy in predicting whether someone is employed is: 
+
+```{python}
+(y_hat == y_test).mean()
+```
+
+The accuracy for white individuals is
+
+```{python}
+(y_hat == y_test)[group_test == 1].mean()
+```
+
+The accuracy for Black individuals is 
+
+```{python}
+(y_hat == y_test)[group_test == 2].mean()
+```
+
+We can also calculate confusion matrices, false positive rates, false negative rates, positive predictive values, prevalences, and lots of other information using tools we've already seen. 
+
+## What You Should Do
+
+### Choose Your Problem
+
+Choose a prediction problem (target variable), a list of features, and a choice of `group` with respect to which to evaluate bias. I would suggest one of the following two possibilities: 
+
+1. (What we just illustrated): predict employment status on the basis of demographics *excluding race*, and audit for racial bias. 
+2. Predict whether income is over $50K on the basis of demographics *excluding* sex, and audit for gender bias. 
+
+[**Do not audit for racial bias in VT**, as we didn't have enough Black individuals fill out the PUMS survey. 😬]{.aside} 
+You can also pick the state from which you would like to pull your data. 
+
+Finally, you should choose a machine learning model. While you can use a model like logistic regression that you've previously implemented, my suggestion is to use one out of the box from `scikit-learn`. Some simple classifiers with good performance are: 
+
+- `sklearn.linear_model.LogisticRegression`
+- `sklearn.svm.SVC` (support vector machine)
+- `sklearn.tree.DecisionTreeClassifier` (decision tree)
+- `sklearn.ensemble.RandomForestClassifier` (random forest)
+
+### Basic Descriptives
+
+Use simple descriptive analysis to address the following questions. You'll likely find it easiest to address these problems when working with a data frame. Here's some code to turn your training data back into a data frame for easy analysis: 
+
+```{python}
+import pandas as pd
+df = pd.DataFrame(X_train, columns = features_to_use)
+df["group"] = group_train
+df["label"] = y_train
+```
+
+Using this data frame, answer the following questions: 
+
+1. How many individuals are in the data?
+2. Of these individuals, what proportion have target label equal to 1? In employment prediction, these would correspond to employed individuals. 
+3. Of these individuals, how many are in each of the `group`s? 
+4. In each group, what proportion of individuals have target label equal to 1? 
+5. Check for *intersectional* trends by studying the proportion of positive target labels broken out by your chosen group labels *and* an additional group labe. For example, if you chose race (`RAC1P`) as your group, then you could also choose sex (`SEX`) and compute the proportion of positive labels by both race and sex. This might be a good opportunity to use a visualization such as a bar chart, e.g. via the [seaborn package](https://seaborn.pydata.org/).  
+
+### Train Your Model
+
+Train your model on the training data. Please incorporate a tunable model complexity and use cross-validation in order to select a good choice for the model complexity. Some possibilities: 
+
+- Use polynomial features with `LogisticRegression`. 
+- Tune the regularization parameter `C` in `SVC`. 
+- Tune the `max_depth` of in `DecisionTreeClassifier` and in `RandomForestClassifier`. 
+
+### Audit Your Model
+
+Then, perform an audit in which you address the following questions (all on test data): 
+
+##### Overall Measures
+
+1. What is the overall accuracy of your model? 
+2. What is the positive predictive value (PPV) of your model?
+3. What are the overall false negative and false positive rates (FNR and FPR) for your model? 
+
+##### By-Group Measures
+
+1. What is the accuracy of your model on each subgroup? 
+2. What is the PPV of your model on each subgroup? 
+3. What are the FNR and FPR on each subgroup? 
+
+##### Bias Measures
+
+[See @chouldechova2017fair for definitions of these terms. For calibration, you can think of the score as having only two values, 0 and 1.]{.aside}
+
+- Is your model approximately *calibrated*? 
+- Does your model satisfy approximate *error rate balance*? 
+- Does your model satisfy *statistical parity*? 
+
+### Concluding Discussion
+
+In a few paragraphs, discuss the following questions: 
+
+1. What groups of people could stand to benefit from a system that is able to predict the label you predicted, such as income or employment status? For example, what kinds of companies might want to buy your model for commercial use?
+2. Based on your bias audit, what could be the *impact* of deploying your model for large-scale prediction in commercial or governmental settings? 
+3. Based on your bias audit, do you feel that your model displays problematic bias? What kind (calibration, error rate, etc)? 
+4. Beyond bias, are there *other* potential problems associated with deploying your model that make you uncomfortable? How would you propose addressing some of these problems? 
+
+## Optional Extras
+
+### Intersectional Bias?
+
+As an optional component of your bias audit, you could consider checking for *intersectional* bias in your model. For example, is the FNR significantly higher for Black women than it is for Black men or white women? 
+
+To address this question, you'll likely find it is easier to work with a data frame again. 
+
+```{python}
+import pandas as pd
+df = pd.DataFrame(X_test, columns = features_to_use)
+df["group"] = group_test
+df["label"] = y_test
+```
+
+### Feasible FNR and FPR Rates
+
+As an optional component of your bias audit, you could reproduce Figure 5 in @chouldechova2017fair ([link](https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf)). This figure uses Eq. (2.6), fixing the prevalence (proportion of true positive labels) $p$ for each group, as well as a desired PPV that should be the same across both groups. With these numbers fixed, eq. (2.6) then defines a line of feasible FNR and FPR rates, which you could plot. Don't worry about reproducing the shaded regions unless you really want to. 
+
+
+

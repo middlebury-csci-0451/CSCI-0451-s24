@@ -1,0 +1,62 @@
+```{=html}
+
+<% items.sort(function(b,a){return new Date(b.date) - new Date(a.date)}) %>
+<% var currentWeek = 0 %>
+<% var displayWeek = 0 %>
+
+<% const weekdayNames = ["Su","M","T","W","Th","F","Sa"]; %>
+
+<% var currentModule = "NA" %>
+
+<table style="display: block; max-width: 800px;">
+    <% for (var i = 0; i < items.length; i++) { %>
+        <% if (items[i].publish == "true") {%>
+            <% if (items[i].type != "extra") {%>
+                <tr>
+                    <td style="min-width:100px;max-width:200px;">
+                        <b>
+                            <%= items[i].type %>
+                        </b> 
+                    </td>
+                    <td style="min-width:400px">
+                        <a href="<%- items[i].path %>">
+                            <%= items[i].title %>
+                        </a>
+                    </td>
+                    <td style="text-align: right; max-width: 150;min-width: 150px;">
+                    Best By: &nbsp; 
+                    </td>
+                    <td style="max-width: 100px;min-width: 100px;padding-left:0em;">
+                        <%= items[i].date %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="smaller" colspan="4">
+                        <%= items[i].description %>
+                    </td>
+                </tr>
+                <% } %>
+            <tr>
+                <td class="smaller syllabus-item-objective" colspan="3">
+                    <% if (items[i].objectives) { %>
+                        <b>Learning Objectives: </b>
+                        <!-- <b>Learning Objectives</b><br> -->
+                        <% for (var j = 0; j < items[i].objectives.length; j++) { %>
+                            <%=items[i].objectives[j]%>
+                            <% if (j < items[i].objectives.length-1) { %> 
+                                | 
+                            <% } %>
+                        <% } %>  
+                    <% } %>  
+                <% } %>  
+            </td>
+        </tr>
+    <% } %>
+</table>
+
+
+
+```
+
+
+

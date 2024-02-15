@@ -1,0 +1,127 @@
+- date: 2024-02-13
+  header: Welcome!
+  summary: |
+    We introduce our topic and discuss how the course works. 
+  objectives: 
+    - Getting Oriented
+  reading: 
+    - <a href="index.qmd">Course syllabus</a>
+    - <a href="collaboration.qmd">Collaboration</a>
+    - <a href="https://www.jessestommel.com/why-i-dont-grade/">Why I Don't Grade</a> by Jesse Stommel
+  notes: 
+    - |
+      <a href="slides/welcome.qmd">Welcome slides</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/01-data-and-models.html">Data, Patterns, and Models</a>
+  module: Welcome
+  publish: true
+  warmup: <a href="software.qmd">Set up your software</a>.
+  assignments: <a href="assignments/math-pre-assessment/math-pre-assessment.qmd">Math pre-assessment</a>.
+- date: 2024-02-15
+  header: The Classification Workflow in Python
+  summary: We work through a simple, complete example of training and evaluating a classification model on a small data set. 
+  objectives: 
+    - Navigation
+    - Experimentation
+  reading: 
+    - |
+      PDSH: <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#3.-Data-Manipulation-with-Pandas">Data Manipulation with Pandas</a> (through "Aggregation and Grouping")
+  notes: 
+    - |
+      <a href="https://www.philchodrow.prof/ml-notes/chapters/02-black-box-classification.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/02-black-box-classification.ipynb">Live notes</a>
+  module: Classification 
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-penguins">Meet the Palmer Penguins!</a>
+  assignments: |
+    <a href="assignments/blog-posts/blog-post-penguins.qmd">Blog Post: Penguins</a>
+- date: 2024-02-20
+  header: Linear Score-Based Classification
+  summary: We study a fundamental method for binary classification in which data points are assigned scores. Scores above a certain threshold are assigned to one class; scores below are assigned to another. 
+  objectives: 
+    - Theory
+    - Experimentation
+  reading: 
+    - <a href="https://openlearninglibrary.mit.edu/assets/courseware/v1/9d904854b4ae0878cfdcedcdceabf937/asset-v1:MITx+6.036+1T2019+type@asset+block/notes_chapter_Linear_classifiers.pdf">Linear Classifiers</a> from MITx. 
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/03-score-based-classification.ipynb">Live notes</a>
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-score-based-classification">Graphing Decision Boundaries</a>
+  assignments: |
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due 2/27</b>
+- date: 2024-02-22
+  header: Statistical Decision Theory and Automated Decision-Making
+  summary: We discuss the theory of making automated decisions based on a score function. We go into detail on thresholding, error rates, and cost-based optimization.  
+  objectives: 
+    - Theory
+    - Experimentation
+  reading:
+    - |
+      PDSH: <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#2.-Introduction-to-NumPy">Introduction to Numpy</a> 
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/04-decision-theory.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/04-decision-theory.ipynb">Live notes</a>
+  module: Classification
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-decision-theory">Choosing a Threshold</a>
+  assignments: |
+    <a href="assignments/blog-posts/blog-post-cost-of-profit-maximization.qmd">Blog Post: Whose Costs?</a>
+- date: 2024-02-27
+  header: Auditing Fairness
+  summary: We introduce the topics of fairness and disparity in automated decision systems using a famous case study. 
+  objectives: 
+    - Social Responsibility
+    - Experimentation
+  reading:
+    - |
+      BHN: <a href="https://fairmlbook.org/introduction.html">Introduction</a>
+    - <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica. 
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/10-compas.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/10-compas.ipynb">Live notes</a>
+  module: Fairness and Disparity
+  publish: true
+  warmup: <a href="warmup-exercises.qmd#sec-fairness">Experiencing (Un)Fairness</a>
+  assignments: |
+    <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/goal-setting.ipynb">Reflective Goal-Setting</a> due today</b>
+- date: 2024-02-29
+  header: Legitimacy in Automated Decision-Making
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-03-05
+  header: Statistical formulations of fairness in classification
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-03-07 
+  header: Incompatibility and normative foundations
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-03-12
+  header: Critical perspectives on quantifying discrimination
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: Fairness and Disparity
+  publish: true
+  warmup: TBD
+  assignments: 
