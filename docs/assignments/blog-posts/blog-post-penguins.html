@@ -213,14 +213,14 @@ div.csl-indent {
 </figure>
 </div>
 <p>You can access the (training) data like this:</p>
-<div id="652363a1" class="cell" data-execution_count="1">
+<div id="652363a1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>train_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/palmer-penguins/train.csv"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(train_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s how the data looks:</p>
-<div id="29b4812f" class="cell" data-execution_count="2">
+<div id="29b4812f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -389,7 +389,7 @@ div.csl-indent {
 <section id="data-preparation" class="level3">
 <h3 class="anchored" data-anchor-id="data-preparation">Data Preparation</h3>
 <p>You will need to prepare the qualitative columns in the data. Categorical feature columns like <code>Sex</code> and <code>Island</code> should be converted into so-called “one-hot encoded” 0-1 columns using the <a href="https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html"><code>pd.get_dummies</code></a> function. The label column <code>Species</code> should be coded differently, using a <code>LabelEncoder</code>. The following function handles this work for you.</p>
-<div id="27b90391" class="cell" data-execution_count="3">
+<div id="27b90391" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>le <span class="op">=</span> LabelEncoder()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>le.fit(train[<span class="st">"Species"</span>])</span>
@@ -420,7 +420,7 @@ div.csl-indent {
 <p>This is where much of the work for this blog post lies. You need to choose 3 good features! One possibility is to use some of the tools described on <a href="https://scikit-learn.org/stable/modules/feature_selection.html">this page</a>. Another approach, which is ok to use on this data set, is exhaustive search of all the features contained in the data set. For this, the <code>combinations</code> function from the <code>itertools</code> package might be helpful.</p>
 <p><strong>USE CROSS-VALIDATION</strong>! This is your simplest way to guard against overfitting issues and get a good feeling for how your model might do on unseen data.</p>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you use the <code>Island</code> feature, you are allowed to use all of the columns that correspond to <code>Island</code>.</span></div></div>
-<div id="7b2e1837" class="cell" data-execution_count="4">
+<div id="7b2e1837" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># these are not actually all the columns: you'll </span></span>
@@ -448,7 +448,7 @@ div.csl-indent {
 <section id="model-choices" class="level3">
 <h3 class="anchored" data-anchor-id="model-choices">Model Choices</h3>
 <p>There are three species of penguin in the data. Most classifiers in <code>scikit-learn</code> will handle multi-way classification without issue. For example:</p>
-<div id="70dc296c" class="cell" data-execution_count="5">
+<div id="70dc296c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this counts as 3 features because the two Clutch Completion </span></span>
@@ -476,7 +476,7 @@ div.csl-indent {
 <section id="testing" class="level3">
 <h3 class="anchored" data-anchor-id="testing">Testing</h3>
 <p>To test your model, you should download the test data set and prepare it using the <code>prepare_data</code> function. You’ll need to make sure that you subset it using only the features you choose. Here’s code that does this:</p>
-<div id="adbaa28d" class="cell" data-execution_count="6">
+<div id="adbaa28d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>test_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/palmer-penguins/test.csv"</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(test_url)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -490,11 +490,11 @@ div.csl-indent {
 <section id="plotting-decision-regions" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-decision-regions">Plotting Decision Regions</h3>
 <p>Now we are going to plot a panel of decision regions for your classifier. You can use the <code>plot_regions</code> function defined below to plot your regions. <strong>This function assumes that your first two columns in <code>X_train</code> are quantitative and that the columns after that are one-hot qualitative columns.</strong></p>
-<div id="92a387c5" class="cell" data-execution_count="7">
+<div id="92a387c5" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e98abc4f" class="cell" data-execution_count="8">
+<div id="e98abc4f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> Patch</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_regions(model, X, y):</span>
@@ -548,7 +548,7 @@ div.csl-indent {
 <span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>      plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here it is in action, visualized on the training data with a logistic regression classifier. For your blog post, I recommend visualizing decision regions on both the training and test sets, with the classifier of your choice.</p>
-<div id="f221e66a" class="cell" data-execution_count="9">
+<div id="f221e66a" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plot_regions(LR, X_train[cols], y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="blog-post-penguins_files/figure-html/cell-10-output-1.png" width="649" height="276"></p>

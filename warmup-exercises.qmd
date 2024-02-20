@@ -30,7 +30,7 @@ $$
 \bracket{\vw, \vx}  =  b\;, 
 $$ {#eq-linear-boundary}
 
-where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $b = \frac{1}{2}$. Here, $\bracket{\vw, \vx} = \sum_{i = 1}^n w_i x_i$ is the inner product (or dot product) between the vectors $\vw$ and $\vw$. 
+where $\vw = \paren{1, -\frac{1}{2}}^T \in \R^2$ and $b = \frac{1}{2}$. Here, $\bracket{\vw, \vx} = \sum_{i = 1}^p w_i x_i$ is the inner product (or dot product) between the vectors $\vw,\vx \in \R^p$. 
 
 ### Part B
 
@@ -56,7 +56,7 @@ $$
 \bracket{\vw, \phi(\vx)} = b\;, 
 $$
 
-where $w = (0, 0, 1, \frac{1}{4}, 0)^T$ and $b = 1$. 
+where $\vw = (0, 0, 1, \frac{1}{4}, 0)^T$ and $b = 1$. 
 
 
 ## Meet The Palmer Penguins! {#sec-penguins}

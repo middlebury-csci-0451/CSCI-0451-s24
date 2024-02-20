@@ -186,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="part-a-grab-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="part-a-grab-the-data">Part A: Grab the Data</h2>
 <p>Start by downloading the training data:</p>
-<div id="0cd0d3c6" class="cell" data-execution_count="1">
+<div id="0cd0d3c6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/credit-risk/train.csv"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="part-e-evaluate-your-model-from-the-banks-perspective" class="level2">
 <h2 class="anchored" data-anchor-id="part-e-evaluate-your-model-from-the-banks-perspective">Part E: Evaluate Your Model from the Bank’s Perspective</h2>
 <p>Only after you have finalized your weight vector <span class="math inline">\(\mathbf{w}\)</span> and threshold <span class="math inline">\(t\)</span>, evaluate your automated decision-process on the test set:</p>
-<div id="4689437e" class="cell" data-execution_count="2">
+<div id="4689437e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/credit-risk/test.csv"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
