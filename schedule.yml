@@ -101,7 +101,8 @@
   publish: true
   warmup: <a href="warmup-exercises.qmd#sec-bhn-comprehension">Reading Check</a>
   assignments: |
-    <a href="assignments/blog-posts/blog-post-dissecting-bias.qmd">Blog Post: Bias Replication Study</a>
+    <a href="assignments/blog-posts/blog-post-dissecting-bias.qmd">Blog Post: Bias Replication Study</a> <br> and/or <br>
+    <a href="assignments/blog-posts/blog-post-WIDS.qmd">Blog Post: Women in Data Science Conference</a>
 - date: 2024-03-05
   header: Normative Theory of Fairness
   summary: 

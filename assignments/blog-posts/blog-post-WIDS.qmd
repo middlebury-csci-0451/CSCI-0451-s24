@@ -1,0 +1,52 @@
+---
+title: "The Women in Data Science (WiDS) Conference at Middlebury College"
+type: "Blog Post"
+date: 2024-03-14
+description: |
+    This blog post involves attending, reporting on, and reflecting on the Women in Data Science (WiDS) Conference at Middlebury College on March 4th, 2024. 
+objectives: 
+  - Social Responsibility
+jupyter: conda-env-ml-0451-py
+number-sections: false
+number-depth: 2
+publish: "true"
+bibliography: ../../refs.bib
+---
+ 
+*The [expectations for all blog posts](../../blog-post-expectations.qmd) apply!* 
+
+## Introduction
+
+The [Middlebury Women in Data Science (WiDS) Conference](https://www.middlebury.edu/events/event/women-data-science-conference-0) will take place on March 4th, 2024. This blog post is an opportunity for you to attend the conference, reflect on your learning, and contextualize the conference against the broad landscape of gender disparities in data science and STEM more generally. 
+
+## Part 1: Why Spotlight Women in Data Science? 
+
+Why is it important to have events that specifically shine a spotlight on the accomplishments of *women* in data science? To address this question, we'll read some sections of [*Solving the Equation: The Variables for Women's Success in Engineering and Computing*](https://www.aauw.org/app/uploads/2020/03/Solving-the-Equation-report-nsa.pdf) [@corbettSolvingEquationVariables2015]. Please read the following: 
+
+- Executive Summary (pages 2-5)
+- Why So Few? (pages 34-46)
+- Women in Engineering and Computing (pages 8-16)
+- What Can We Do? (pages 98-105) 
+
+Once you've completed your reading, write three paragraphs: 
+
+1. Why is it a problem that women are underrepresented in computing, math, and engineering? For whom is it a problem? 
+2. How is the representation and status of women in computing today different from the 1950s and 1960s? What are some of the forces that brought on this change? 
+3. Which of the barriers and unequal challenges described in the section "Why So Few?" can be eroded by evens that spotlight the achievement of women in STEM? 
+
+## Part 2: Attend WiDS
+
+Attend the conference and take notes, especially on Dr. Brown's keynote. 
+
+## Part 3: Report! 
+
+1. For each of the three lightning talks, please write a paragraph describing who spoke, what they spoke about, their main argument, and what you learned. 
+2. Please write two paragraphs in which you report on Dr. Brown's keynote presentation, including her topic, her primary argument, and what you learned. 
+
+
+
+## Part 4: Transitions, Abstract, and Reflection
+
+Please add transition sentences and paragraphs in your writing so that your blog post reads like a single cohesive essay on the status of women in computing and the role of conferences like WiDS in supporting change. 
+
+Then, add an introductory "abstract" section to your blog post describing the high-level structure of the post and your biggest takeaways. Please also add a reflection paragraph at the bottom describing what you learned from completing this blog post and what you hope to learn next. 
