@@ -1,0 +1,71 @@
+---
+title: Collaboration And Academic Honesty
+tbl-cap-location: margin
+---
+
+This is a page of general principles and guidelines that apply in courses I (Phil Chodrow) teach at Middlebury College. It is lightly adapted from the handout "[Collaborating on Mathematics](https://t.co/EPvBoANjB7)" by the Harvey Mudd Department of Mathematics, which I discovered in a [Tweet by Francis Su](https://twitter.com/mathyawp/status/1480299390610788353?s=20&t=xPhXuSfOqxBvezv2HG2xyg). 
+
+In any case in which the guidelines and principles on this page conflict with the policies of a specific course, **the policies of the specific course should be followed**. For example, if the course syllabus says that collaboration is not permitted on homeworks, then collaboration is not permitted on homeworks, regardless of anything written here. 
+
+## Why Collaborate?
+
+Most scientists and engineers don’t work on their own; they work with colleagues and students while doing and publishing research. Increasingly, open problems in science and engineering require multiple skill sets and areas of expertise. Because of this, the need to collaborate will only increase in the future. This is why several of CS@Midd's learning goals are explicitly focused on communication and collaboration. We want our students to have strong professional and communication skills, to be able to function well as part of a
+team, and to be able to work and communicate with diverse groups of people.
+
+## Collaborating on Homework and Other Individually-Assessed Assignments
+
+1. (**COLLABORATION IS A LIFE SKILL**) Understand that working with others and asking for assistance are not signs of weakness or deficiency; rather, they are essential life skills important for making progress in any discipline, including computer science. Our department wants you to develop these skills. If you're too shy to come to my office hours or to join a group of people working on their homework, ask a friend to come with you. 
+2. (**COLLABORATIONS BENEFIT FROM DIVERSITY**) Open yourself up to working with people whom you don't know (yet). You might find someone you work really well with and who doesn't think exactly like you do. A wide range of experiecnes and backgrounds is beneficial in problem solving, although it may be helpful to find folks who can work on assignments during the same time of day and at roughly the same pace. If you're having trouble finding people to work with, I can help! 
+3. (**COLLABORATIONS ARE INCLUSIVE**) Believe that everyone has something meaningful to contribute (you included), and that you have something to learn from each person. This can be a difficult state of mind to achieve, but critical for healthy, effective collaboration. Here are some practical consequences: 
+    - In any group setting, **listen** carefully for everyone's contributions. Don't dismiss or ignore what someone says, and don't move on until you've considered it carefully. If what is said doesn't make sense to you, that doesn't necessarily mean it's incorrect--the person might just have a way of approaching the problem that is different and not yet clear to you. Furthermore, even ideas that ultimately turn out to be incomplete or incorrect are often still useful building blocks towards a successful approach. 
+    - Find ways to verbally validate the ideas of others. For example: "One really neat feature of Zenith's approach to part (b) is that it also works with a small modification for part (c)."
+    - If someone in the group hasn't spoken for a while, ask for their ideas or opinions. Conversely, if you find yourself talking a lot, take a step back and allow someone else to contribute to the discussion. 
+4. (**COLLABORATIONS REQUIRE PREPARATION**) Don't seek help from others on a probem before you've had time to think about it yourself, try at least one approach, and formulate the obstacle as clearly as you can. But at the same time, if you find yourself frustrated with a problem and you’re not making progress, don’t wait too long before you look for help from your classmates, your tutors, or me. 
+5. (**COLLABORATIONS GENERATE DEEPER UNDERSTANDING**) Don't be satisfied with only producing the correct final result; use your collaboration to push each other to understand: 
+    - Why does this approach work?
+    - What alternative approaches would also have worked?
+    - What are some of the merits and drawbacks of these different approaches? 
+6. (**COLLABORATIONS ARE EMPOWERING**) Good collaborations empower people towards further growth. 
+    - When you're working on a problem with others and you find a path before everyone else, avoid ruining the experience of discovery for others. Conversely, if you haven't figured out something yet and want to enjoy the discovery for yourself, don't let someone else ruin your joy. 
+    - If someone asks you for help, don't just tell them the answer or start showing them a solution method. Listen carefully to their question. Ask for more information if they aren't being specific enough. If they say "I don't know where to start," ask them to tell you about their understanding of what the question is asking and which parts of it seem most puzzling. Ask guiding questions to help them discover ideas for themselves. In these situations, you have the opportunity to learn how to help others learn -- this is an invaluable life skill. 
+7. (**COLLABORATIONS ACKNOWLEDGE CONTRIBUTORS**) Whenever you've received help on a homework assignment from a classmate, a friend, a tutor, or me, acknowledge the support and briefly describe how it helped you in your assignment.
+    - The reason I ask you to acknowledge tutors and myself is actually different from the reason I ask you to acknowledge classmates and friends. For classmates and friends, it's about cultivating transparency and integrity. The primary reason I want you to acknowledge tutors and myself is that the exercise of explicitly remembering and reflecting on your learning journey is part of [metacognition](https://cft.vanderbilt.edu/guides-sub-pages/metacognition/), a valuable set of practices that will help you succeed in this class, in college, and in your long-term career. 
+
+## Collaborating on Group Projects
+
+1. (**COLLABORATIONS SET GOOD EXPECTATIONS**) Establish clear expectations and ways of communicating with each other to avoid misunderstandings. When, where, and how often will you meet? How can you reach each other in case of an emergency?
+2. (**COLLABORATION IS NOT DIVISION OF LABOR**) Collaboration is not the same as splitting up a problem into pieces and then slapping the completed pieces together. 
+    - Identify the parts of the problem that need to be completed together and the parts that can be completed individually.
+    - Work toward a final product that everyone is happy with and that represents the contributions of everyone on the group.
+    - Don’t just divide up the work based on who might have the most experience or skill with each part of the problem. Let those who want to develop their skills also have a chance to work on pieces that are unfamiliar to them
+3. (**COLLABORATIONS ARE EQUITABLE**) Aim for each person to contribute a fair and equitable amount of effort and/or time to the group's deliverables. 
+4. (**COLLABORATIONS RESOLVE CONFLICT QUICKLY**) Resolve any misunderstands between the team members quickly. Don't let those misunderstandings fester into distrust, resentment, or anger. Don't be afraid to ask your professor for help in resolving interpersonal conflict in your team. While this can feel uncomfortable, often these kinds of situations are important opportunities for everyone to learn more about how to coexist as collaborative, whole humans. 
+
+## Collaboration is a Skill
+
+You might imagine that you already know whether you need to collaborate and how to do it. And indeed, there's a lot you know already! But **collaboration is a skill**, and like other skills it rewards practice and growth. Effective collaboration involves perspective-taking, empathy, respect, and clear communication. We hope that you will find that the benefits of collaboration far outweigh its challenges. 
+
+## Collaboration and the Middlebury Honor Code
+
+The Middlebury [Honor Code](https://www.middlebury.edu/office/sites/www.middlebury.edu.office/files/2021-09/Honor%20Code%20Handbook%202021-22.pdf?fv=HtZz-C9e#:~:text=Honor%20Code%20Pledge:%20The%20Honor,research%20papers,%20and%20laboratory%20reports.)'s preamble states that: 
+
+> The students of Middlebury College believe that individual undergraduates must assume responsibility for their own integrity on all assigned academic work...The Middlebury student body, then, declares its commitment to an honor system that fosters moral growth and to a code that will not tolerate academic dishonesty in the College community. 
+
+In any assignment in which you receive a grade individually (homeworks, exams), the purpose of the grade is to measure your learning and achievement. When you turn in such an assignment, you implicitly represent that work as work that you are able to complete yourself under the stated conditions (which may include getting help or working with others). If you cannot complete some work under the stated collaboration conditions, it is dishonest to turn in that work. 
+
+
+When working individually, it is your responsibility to uphold the Code's standards of integrity and academic honesty. When working in a group, it is additionally your responsibility to ensure that your group as a whole upholds these standards. 
+
+If you have a question about whether some form of collaboration is permitted, just ask! 
+
+### What Happens if I Observe an Honor Violation?
+
+<!-- An important part of my teaching philosophy is: "***no cop shit.***" [From [this blog post](https://jeffreymoro.com/blog/2020-02-13-against-cop-shit/) by Jeffrey Moro]{.aside} -->
+
+We all fail to uphold our highest moral aspirations at times. If you show lack of integrity or academic honesty, that doesn't mean you're a bad person. It means that you're under pressure and chose the course of action that looked like the most workable one to you at the time. 
+
+That said, if you show lack of integrity or academic honesty, that's an indicator that you have an opportunity for some very important growth. 
+
+It is part of my job to help you achieve that growth. I take this part of my job very seriously. In order to help you on your journey, I will connect both of us with the Middlebury [Community Standards Office](https://www.middlebury.edu/office/community-standards). Office leadership will help us all find a path that helps you grow toward integrity and honesty. 
+
+This is an awkward and uncomfortable process for everyone involved. You don't want this. 
