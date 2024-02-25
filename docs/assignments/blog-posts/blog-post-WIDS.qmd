@@ -21,7 +21,7 @@ The [Middlebury Women in Data Science (WiDS) Conference](https://www.middlebury.
 
 ## Part 1: Why Spotlight Women in Data Science? 
 
-Why is it important to have events that specifically shine a spotlight on the accomplishments of *women* in data science? To address this question, we'll read some sections of [*Solving the Equation: The Variables for Women's Success in Engineering and Computing*](https://www.aauw.org/app/uploads/2020/03/Solving-the-Equation-report-nsa.pdf) [@corbettSolvingEquationVariables2015]. Please read the following: 
+Why is it important to have events that specifically shine a spotlight on the accomplishments of *women* in data science? To address this question, we'll read some sections of the report [*Solving the Equation: The Variables for Women's Success in Engineering and Computing*](https://www.aauw.org/app/uploads/2020/03/Solving-the-Equation-report-nsa.pdf) written by @corbettSolvingEquationVariables2015 for the [American Association of University Women](https://www.aauw.org/). Please read the following: 
 
 - Executive Summary (pages 2-5)
 - Why So Few? (pages 34-46)
