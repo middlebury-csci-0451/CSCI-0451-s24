@@ -205,6 +205,7 @@ div.csl-indent {
   <li><a href="#part-b-3" id="toc-part-b-3" class="nav-link" data-scroll-target="#part-b-3">Part B</a></li>
   <li><a href="#check" id="toc-check" class="nav-link" data-scroll-target="#check">Check</a></li>
   </ul></li>
+  <li><a href="#sec-views-on-compas" id="toc-sec-views-on-compas" class="nav-link" data-scroll-target="#sec-views-on-compas">COMPAS and Equality of Opportunity</a></li>
   <li><a href="#sec-convexity" id="toc-sec-convexity" class="nav-link" data-scroll-target="#sec-convexity">Convexity</a>
   <ul class="collapse">
   <li><a href="#part-2-second-derivative-test" id="toc-part-2-second-derivative-test" class="nav-link" data-scroll-target="#part-2-second-derivative-test">Part 2: Second Derivative Test</a></li>
@@ -472,7 +473,7 @@ div.csl-indent {
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> loss(<span class="va">self</span>, X, y):</span>
 <span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">        Compute the misclassification rate. In the perceptron algorith, the target vector y is assumed to have labels in {-1, 1}. A point i is classified correctly if its score s_i has the same sign as y_i. </span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">        Compute the misclassification rate. In the perceptron algorithm, the target vector y is assumed to have labels in {-1, 1}. A point i is classified correctly if its score s_i has the same sign as y_i. </span></span>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co">        ARGUMENTS: </span></span>
 <span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co">            X, torch.Tensor: the feature matrix. X.size() == (n, p), </span></span>
@@ -526,13 +527,24 @@ div.csl-indent {
 <p><em>There are several other methods in these classes that we will need to implement in order to have a functioning classification algorithm, but we won’t worry about those until later</em>.</p>
 </section>
 </section>
+<section id="sec-views-on-compas" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-views-on-compas">COMPAS and Equality of Opportunity</h2>
+<p><a href="https://www.philchodrow.prof/ml-notes/chapters/10-compas.html">Recently</a>, we replicated <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">ProPublica’s investigative reporting on the COMPAS algorithm</a> and <a href="https://www.philchodrow.prof/ml-notes/chapters/12-statistical-fairness.html">studied</a> several competing statistical definitions of fairness.</p>
+<p>Imagine that this article came out two weeks ago. <strong>What should we do about the situation reported by <span class="citation" data-cites="angwin2022machine">Angwin et al. (<a href="#ref-angwin2022machine" role="doc-biblioref">2022</a>)</span>?</strong> Please address this question from three distinct perspectives:</p>
+<ol type="1">
+<li>The perspective of someone who adheres to the <em>narrow view</em> of equality of opportunity.</li>
+<li>The perspective of someone who adheres to the <em>middle view</em> of equality of opportunity.</li>
+<li>The perspective of someone who adheres to the <em>broad view</em> of equality of opportunity.</li>
+</ol>
+<div class="page-columns page-full"><p> Write at least two sentences from each of these perspectives. Please ground your sentences in our quantitative findings and our recent readings on <a href="https://fairmlbook.org/classification.html">statistical</a> and <a href="https://fairmlbook.org/relative.html">normative</a> notions of fairness. If you think the answer isn’t cut-and-dried, please do your best analysis and make a note about what’s complicated and why.</p><div class="no-row-height column-margin column-container"><span class="">You may find it useful to remember from the readings that <em>calibration</em>, as discussed in BHN Ch. 4 is related to <em>sufficiency</em>, which is discussed in BHN Ch. 3 and also in <a href="https://www.philchodrow.prof/ml-notes/chapters/12-statistical-fairness.html">our notes on statistical conceptions of fairness</a>.</span></div></div>
+</section>
 <section id="sec-convexity" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-convexity">Convexity</h2>
 <p>As you learned in Daumé, informally, a convex function is a function that is “bowl-shaped.” Hardt and Recht give the formal definition, which has the benefit of applying to functions of many variables.</p>
 <section id="part-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-1">Part 1</h4>
 <p>Consider the 0-1 step function that I’ve plotted below:</p>
-<div id="cell-10" class="cell" data-execution_count="5">
+<div id="cell-11" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -604,7 +616,7 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <section id="sec-gradient-descent-2" class="level2">
 <h2 class="anchored" data-anchor-id="sec-gradient-descent-2">Gradient Descent (Again)</h2>
 <p>Consider the function <span class="math inline">\(f(w_0, w_1) = \sin(w_0w_1)\)</span>. You can define this function like this:</p>
-<div id="cell-12" class="cell" data-execution_count="6">
+<div id="cell-13" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -781,7 +793,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <p>Implement kernel convolution. Your implementation should accept a 2d array <code>X</code> (think of <code>X</code> as representing a greyscale image) and a square convolutional kernel <code>K</code>. Your implementation should operate using pure <code>numpy</code>. You can use any zero-padding strategy, but you do need to explain what your strategy is when presenting.</p>
 <p>It’s ok to use a for-loop to loop over pixels.</p>
 <p>Here’s an example image you can use:</p>
-<div id="cell-14" class="cell" data-execution_count="7">
+<div id="cell-15" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -809,7 +821,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 </div>
 </div>
 <p>After implementing your function, you should be able to use it like this, replacing the implementation of <code>scipy.signal</code> with your own implementation. The result should look something like this:</p>
-<div id="cell-16" class="cell" data-execution_count="8">
+<div id="cell-17" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
@@ -949,7 +961,7 @@ The false positive rate is ___. </code></pre>
 <section id="part-3-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-3-1">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
-<div id="cell-18" class="cell" data-execution_count="9">
+<div id="cell-19" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
@@ -1020,6 +1032,9 @@ The false positive rate is ___. </code></pre>
 </section>
 
 <p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-angwin2022machine" class="csl-entry" role="listitem">
+Angwin, Julia, Jeff Larson, Surya Mattu, and Lauren Kirchner. 2022. <span>“Machine Bias.”</span> In <em>Ethics of Data and Analytics</em>, 254–64. <span>Auerbach Publications</span>.
+</div>
 <div id="ref-barocasFairnessMachineLearning2023" class="csl-entry" role="listitem">
 Barocas, Solon, Moritz Hardt, and Arvind Narayanan. 2023. <em>Fairness and Machine Learning: Limitations and Opportunities</em>. <span>Cambridge, Massachusetts</span>: <span>The MIT Press</span>.
 </div>

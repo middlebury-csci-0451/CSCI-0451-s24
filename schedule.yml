@@ -76,7 +76,7 @@
   reading:
     - |
       BHN: <a href="https://fairmlbook.org/introduction.html">Introduction</a>
-    - <a href="https://via.hypothes.is/https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica. 
+    - <a href="www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica. 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/10-compas.html">Lecture notes</a>
     - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/10-compas.ipynb">Live notes</a>
@@ -111,10 +111,10 @@
   reading:
     - |
       BHN: <a href="https://fairmlbook.org/relative.html">Relative Notions of Fairness</a>
-  notes: 
+  notes: Discussion guide shared in Slack
   module: Fairness and Disparity
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.ipynb#sec-views-on-compas">COMPAS and Equality of Opportunity</a>
   assignments: 
 - date: 2024-03-07 
   header: |
@@ -167,6 +167,8 @@
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-perceptron">Linear Models, Perceptron, and Torch</a>
   assignments: 
+    - |
+      <a href="assignments/blog-posts/blog-post-limits-of-quantitative.qmd">Blog Post: Implementing Perceptron</a>
 - date: 2024-03-19
   header: Spring Break!
   summary: 
