@@ -7,7 +7,7 @@ preview:
 	$(CONDA_ACTIVATE) ml-0451
 	quarto preview 
 
-render:
+publish:
 	$(CONDA_ACTIVATE) ml-0451
 	quarto render
 

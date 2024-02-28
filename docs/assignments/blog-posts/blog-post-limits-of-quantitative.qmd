@@ -27,7 +27,14 @@ In a recent speech, @narayanan2022limits [p. 25] asserts that
 
 > "currently quantitative methods are primarily used to justify the status quo. I would argue that they do more harm than good."
 
-In a carefully-structured essay of approximately 1,500-2,000 words, engage Narayanan's speech, @barocasFairnessMachineLearning2023, and **at least 5 additional scholarly sources** to discuss this claim. Your essay should include: 
+In a carefully-structured essay of approximately 1,500-2,000 words, engage this claim in conversation with the following scholarly sources: 
+
+- Narayanan's speech.
+- *Fairness and Machine Learning*: @barocasFairnessMachineLearning2023. 
+- *Data Feminism*: @dignazioDataFeminism2023. 
+- 3 additional scholarly sources of your choosing. 
+
+Your essay should include: 
 
 1. A careful explanation of Narayanan's position. 
 2. A careful explanation of the *uses* or *benefits* of quantitative methods, as described in one of your scholarly sources. 
@@ -37,8 +44,9 @@ In a carefully-structured essay of approximately 1,500-2,000 words, engage Naray
 3. Appropriate supporting points from your other scholarly sources. 
 4. An argument in which you stake out a position on Narayanan's claim of view. Do you agree? Disagree? Agree with qualifications? Which ones? Why? 
 
-
 ### References in Quarto
+
+*Appropriately formatted citations are a fundamental aspect of scholarly writing. A fundamental aspect of **technical** scholarly writing is learning to manage references using automated tools such as Quarto. Managing references in Quarto is very easy once you have followed the setup below! Blog posts that do not use Quarto's citation system will receive at most Ms.* 
 
 To manage references in Quarto, you need to create a `.bib` file (you can call it `refs.bib`). This file should live in the same directory as your blog post. Your `.bib` file is essentially a database of document information. Here's an example of a a `refs.bib` file: 
 
@@ -91,6 +99,6 @@ results in the reference
 
 @barocasFairnessMachineLearning2023
 
-as well as an entry in the "References" section at the end of your blog post. 
+as well as an entry in the "References" section at the end of your blog post, as illustrated below. 
 
 For more on how to handle citations in Quarto, check [the Quarto documentation](https://quarto.org/docs/authoring/footnotes-and-citations.html#citations). 
