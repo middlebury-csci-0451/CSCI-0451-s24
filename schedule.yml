@@ -111,7 +111,8 @@
   reading:
     - |
       BHN: <a href="https://fairmlbook.org/relative.html">Relative Notions of Fairness</a>
-  notes: Discussion guide shared in Slack
+  notes:
+    - Discussion guide shared in Slack
   module: Fairness and Disparity
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-views-on-compas">COMPAS and Equality of Opportunity</a>
