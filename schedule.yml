@@ -120,7 +120,8 @@
 - date: 2024-03-07 
   header: |
     Critical Perspectives: Interrogate Your Task
-  summary: 
+  summary: |
+    We discuss several critical views that seek to move our attention beyond the fairness of algorithms and towards their role in sociotechnical systems. We center two questions: who benefits from a given data science task? What tasks could we approach instead if our aims were to uplift the oppressed? 
   objectives: 
     - Social Responsibility
   reading: 
@@ -131,9 +132,10 @@
     - |
       <a href="https://dl.acm.org/doi/pdf/10.1145/3351095.3372859">"Studying Up: Reorienting the study of algorithmic fairness around issues of power"</a> by Barabas et al. 
   notes: 
+    - Discussion guide shared in Slack
   module: Fairness and Disparity
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.ipynb#sec-studying-up">Power, Data, and Studying Up</a>
   assignments: 
     - |
       <a href="assignments/blog-posts/blog-post-limits-of-quantitative.qmd">Blog Post: Limitations of the Quantitative Approach</a>
