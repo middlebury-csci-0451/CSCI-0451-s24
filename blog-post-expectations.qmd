@@ -12,6 +12,7 @@ The following expectations apply to all submitted blog posts in CSCI 0451.
 Blog posts are ***computational essays***. 
 
 - Please write in thoughtfully composed English paragraphs. 
+    - Provided that your intended meaning is unambiguous, spelling and grammar will not be major feedback items and will not be the determining factor about whether revisions are encouraged or expected. 
 - You should **explain all code** displayed in your blog post, in such a way that your reader can understand what you are doing. 
     - A corollary is that you should break large code blocks up into smaller ones so that you can explain your approach. 
 - Please make sure that your writing also responds to all prompts in the body of the blog post assignment. 
@@ -36,7 +37,7 @@ Your code should be careful, concise, efficient Python.
 ## Text Formatting
 
 - Mathematical content should be typeset using Quarto's [included MathJax syntax](https://quarto.org/docs/authoring/markdown-basics.html#equations). "alpha x y" is not appropriately typeset; instead, typing `$\alpha \times y$` produces the mathematics $\alpha \times y$. 
-- All code should be in code blocks (Quarto will usually take care of this for you). Inline code can be rendered `like this.` 
+- All code should be in code blocks (Quarto will usually take care of this for you). Inline code can be rendered using backticks (\`code here\`), which results in text that looks `like this`. 
 
 ## Submission Instructions
 
@@ -45,4 +46,4 @@ Once your blog post is published on your blog:
 1. Print the webpage as a PDF. 
 2. Check the PDF to make sure that all your math, plots, etc. look good. 
 3. Submit the PDF to the assignment on Canvas. 
-4. **To submit a revision**, just include a link to your new blog post. 
+4. **To submit a revision**, just include a link to your new blog post as a comment on the Canvas submission. It is not necessary to create or submit a new PDF.  

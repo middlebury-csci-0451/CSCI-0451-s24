@@ -662,7 +662,7 @@
     "href": "blog-post-expectations.html#writing",
     "title": "Expectations for Blog Posts",
     "section": "Writing",
-    "text": "Writing\nBlog posts are computational essays.\n\nPlease write in thoughtfully composed English paragraphs.\nYou should explain all code displayed in your blog post, in such a way that your reader can understand what you are doing.\n\nA corollary is that you should break large code blocks up into smaller ones so that you can explain your approach.\n\nPlease make sure that your writing also responds to all prompts in the body of the blog post assignment.\n\nIn this course, writing is a fundamental part of the learning process. Blog posts that have fully correct technical solutions but which are missing major written components will generally receive feedback of an M (which means “I think you could learn more on this assignment”) rather than an E.\nTip: Quarto offers some neat functionality for marking up your code. Code comments can also be helpful, but do not replace text."
+    "text": "Writing\nBlog posts are computational essays.\n\nPlease write in thoughtfully composed English paragraphs.\n\nProvided that your intended meaning is unambiguous, spelling and grammar will not be major feedback items and will not be the determining factor about whether revisions are encouraged or expected.\n\nYou should explain all code displayed in your blog post, in such a way that your reader can understand what you are doing.\n\nA corollary is that you should break large code blocks up into smaller ones so that you can explain your approach.\n\nPlease make sure that your writing also responds to all prompts in the body of the blog post assignment.\n\nIn this course, writing is a fundamental part of the learning process. Blog posts that have fully correct technical solutions but which are missing major written components will generally receive feedback of an M (which means “I think you could learn more on this assignment”) rather than an E.\nTip: Quarto offers some neat functionality for marking up your code. Code comments can also be helpful, but do not replace text."
   },
   {
     "objectID": "blog-post-expectations.html#code",
@@ -683,14 +683,14 @@
     "href": "blog-post-expectations.html#text-formatting",
     "title": "Expectations for Blog Posts",
     "section": "Text Formatting",
-    "text": "Text Formatting\n\nMathematical content should be typeset using Quarto’s included MathJax syntax. “alpha x y” is not appropriately typeset; instead, typing $\\alpha \\times y$ produces the mathematics \\(\\alpha \\times y\\).\nAll code should be in code blocks (Quarto will usually take care of this for you). Inline code can be rendered like this."
+    "text": "Text Formatting\n\nMathematical content should be typeset using Quarto’s included MathJax syntax. “alpha x y” is not appropriately typeset; instead, typing $\\alpha \\times y$ produces the mathematics \\(\\alpha \\times y\\).\nAll code should be in code blocks (Quarto will usually take care of this for you). Inline code can be rendered using backticks (`code here`), which results in text that looks like this."
   },
   {
     "objectID": "blog-post-expectations.html#submission-instructions",
     "href": "blog-post-expectations.html#submission-instructions",
     "title": "Expectations for Blog Posts",
     "section": "Submission Instructions",
-    "text": "Submission Instructions\nOnce your blog post is published on your blog:\n\nPrint the webpage as a PDF.\nCheck the PDF to make sure that all your math, plots, etc. look good.\nSubmit the PDF to the assignment on Canvas.\nTo submit a revision, just include a link to your new blog post."
+    "text": "Submission Instructions\nOnce your blog post is published on your blog:\n\nPrint the webpage as a PDF.\nCheck the PDF to make sure that all your math, plots, etc. look good.\nSubmit the PDF to the assignment on Canvas.\nTo submit a revision, just include a link to your new blog post as a comment on the Canvas submission. It is not necessary to create or submit a new PDF."
   },
   {
     "objectID": "assignments.html",
