@@ -106,7 +106,10 @@ The authors write that
 
 To support their argument, they produce Figure 3. This figure shows how total medical expenditures are correlated with the risk score and with the number of chronic health conditions. Please produce a version of Figure 3, including both panels. For the horizontal axis in the second panel, please use the number of chronic conditions. It is not necessary to draw threshold values in the same way as the authors. Here's an example output.
 
-*Note*: Although not explicitly labeled, I believe that the righthand panel of Fig. 3 in @obermeyerDissectingRacialBias2019b has percentiles in the number of chronic conditions on the horizontal axis. I'm uncertain how they computed these, considering that in our sample data set the maximum number of chronic conditions is 17. This implies that either the original data set has patients with more chronic conditions or the authors did something to arbitrarily break ties. To avoid dealing with this, please simply use the number of chronic illnesses for your horizontal axis. Here's an example of my solution: 
+*Notes*: 
+
+- In my version of the first panel of Figure 3, I plot the *mean* expenditure within each risk score percentile. 
+- Although not explicitly labeled, I believe that the righthand panel of Fig. 3 in @obermeyerDissectingRacialBias2019b has percentiles in the number of chronic conditions on the horizontal axis. I'm uncertain how they computed these, considering that in our sample data set the maximum number of chronic conditions is 17. This implies that either the original data set has patients with more chronic conditions or the authors did something to arbitrarily break ties. To avoid dealing with this, please simply use the number of chronic illnesses for your horizontal axis. Here's an example of my solution: 
 
 ```{python}
 #| fig-cap: I found it helpful to use `plt.subplots` to create a figure with two panels, and then `sns.scatterplot` to populate each of the panels. 
@@ -149,7 +152,6 @@ sns.scatterplot(data = grouped,
 ax[1].semilogy()
 
 l = ax[1].set(xlabel = "Number of Chronic Illnesses", ylabel = "")
-
 ```
 
 Comment on your findings. You may find it useful to note that the vast majority of patients in this data set have 5 or fewer chronic conditions, as you will confirm in Part D. 
