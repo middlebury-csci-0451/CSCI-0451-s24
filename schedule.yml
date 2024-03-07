@@ -142,18 +142,19 @@
 - date: 2024-03-12
   header: |
     Critical Perspectives: Interrogate Your Data
-  summary: 
+  summary: We discuss the importance of understanding the <i>context</i> of data when planning and executing data science, and effectively communicating this context when sharing our findings.
   objectives: 
     - Social Responsibility
   reading:
     - |
       <a href="https://data-feminism.mitpress.mit.edu/pub/czq9dfs5/release/3">Data Feminism: The Numbers Don't Speak For Themselves</a> by Catherine D'Ignazio and Lauren Klein
     - |
-      <a href="https://dl.acm.org/doi/pdf/10.1145/3351095.3372826">Towards a critical race methodology in algorithmic fairness</a> by Hanna et al. 
+      <a href="https://dl.acm.org/doi/pdf/10.1145/3458723">Datasheets for Datasets</a> by Timnit Gebru et al. 
   notes: 
+    - Discussion guide shared in Slack
   module: Fairness and Disparity
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.ipynb#sec-data-sheets">Data Context and Data Sheets</a>
   assignments: 
 - date: 2024-03-14
   header: |
@@ -162,7 +163,7 @@
   objectives: 
     - Theory
   reading:
-    - No reading today, but please be ready to put some time into the warmup. It may be useful to review our lecture notes on <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">score-based classification</a> and <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">decision theory</a> when completing the warmup. 
+    - No reading today, but please be ready to put some extra time into the warmup. It may be useful to review our lecture notes on <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">score-based classification</a> and <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">decision theory</a> when completing the warmup. 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/20-perceptron.html">Lecture notes</a>
     - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/20-perceptron.ipynb">Live notes</a>

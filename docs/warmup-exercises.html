@@ -210,6 +210,11 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#scenarios" id="toc-scenarios" class="nav-link" data-scroll-target="#scenarios">Scenarios</a></li>
   </ul></li>
+  <li><a href="#sec-data-sheets" id="toc-sec-data-sheets" class="nav-link" data-scroll-target="#sec-data-sheets">Data Context and Data Sheets</a>
+  <ul class="collapse">
+  <li><a href="#part-a-4" id="toc-part-a-4" class="nav-link" data-scroll-target="#part-a-4">Part A</a></li>
+  <li><a href="#part-b-4" id="toc-part-b-4" class="nav-link" data-scroll-target="#part-b-4">Part B</a></li>
+  </ul></li>
   <li><a href="#sec-convexity" id="toc-sec-convexity" class="nav-link" data-scroll-target="#sec-convexity">Convexity</a>
   <ul class="collapse">
   <li><a href="#part-2-second-derivative-test" id="toc-part-2-second-derivative-test" class="nav-link" data-scroll-target="#part-2-second-derivative-test">Part 2: Second Derivative Test</a></li>
@@ -565,13 +570,69 @@ div.csl-indent {
 </ol>
 </section>
 </section>
+<section id="sec-data-sheets" class="level2">
+<h2 class="anchored" data-anchor-id="sec-data-sheets">Data Context and Data Sheets</h2>
+<p><em>This warmup is based on Ch. 6 of <span class="citation" data-cites="dignazioDataFeminism2023">D’Ignazio and Klein (<a href="#ref-dignazioDataFeminism2023" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="gebruDatasheetsDatasets2021">Gebru et al. (<a href="#ref-gebruDatasheetsDatasets2021" role="doc-biblioref">2021</a>)</span></em>.</p>
+<p>Let’s go back to our running example of the COMPAS data set. As you may remember, the data that feeds into a COMPAS risk score is collected by a screener using <a href="https://www.documentcloud.org/documents/2702103-Sample-Risk-Assessment-COMPAS-CORE">forms like this one</a>. Such risk assessments are administered to people who have been arrested and charged with criminal activity.</p>
+<section id="part-a-4" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-4">Part A</h3>
+<p>Using <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">the writeup from ProPublica</a> and any additional sources you are able to find, please respond to the following questions from <span class="citation" data-cites="gebruDatasheetsDatasets2021">Gebru et al. (<a href="#ref-gebruDatasheetsDatasets2021" role="doc-biblioref">2021</a>)</span> in order to construct a (very partial) datasheet for the COMPAS data set.</p>
+<p>You may be able to answer many of these questions off the top of your head. For others, the answers might be a little blurry. For example, who created the COMPAS data set? Northpointe? The criminal penal system? ProPublica? In other cases, you might not know the answer – it’s fine to mark that and move on. Short responses are fine.</p>
+<section id="motivation" class="level4">
+<h4 class="anchored" data-anchor-id="motivation">Motivation</h4>
+<ol type="1">
+<li>For what purpose was the dataset created?</li>
+<li>Who created the dataset (for example, which team, research group) and on behalf of which entity (for example, company, institution, organization)?</li>
+</ol>
+</section>
+<section id="composition" class="level4">
+<h4 class="anchored" data-anchor-id="composition">Composition</h4>
+<ol type="1">
+<li>What do the instances (rows) that comprise the dataset represent?</li>
+<li>Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set?
+<ul>
+<li><em>Note</em>: this is another one that might take some thought.</li>
+</ul></li>
+<li>Does the dataset identify any subpopulations (for example, by age, gender)?</li>
+<li>Is it possible to identify individuals (that is, one or more natural persons), either directly or indirectly (that is, in combination with other data) from the dataset?</li>
+<li>Does the dataset contain data that might be considered sensitive in any way (for example, data that reveals race or ethnic origins, sexual orientations, religious beliefs, political opinions or union memberships, or locations; financial or health data; biometric or genetic data; forms of government identification, such as social security numbers; criminal history)?</li>
+</ol>
+</section>
+<section id="collection-process" class="level4">
+<h4 class="anchored" data-anchor-id="collection-process">Collection Process</h4>
+<ol type="1">
+<li>How was the data associated with each instance acquired?</li>
+<li>Who was involved in the data collection process?</li>
+<li>Did the individuals in question consent to the collection and use of their data?</li>
+<li>If consent was obtained, were the consenting individuals provided with a mechanism to revoke their consent in the future or for certain uses?</li>
+</ol>
+</section>
+<section id="uses" class="level4">
+<h4 class="anchored" data-anchor-id="uses">Uses</h4>
+<ol type="1">
+<li>Has the data set been used for any tasks already?</li>
+<li>What (other) tasks could the data set be used for?</li>
+<li>Is there anything about the composition of the dataset or the way it was collected and preprocessed/ cleaned/labeled that might impact future uses? <em>For example, is there anything that a dataset consumer might need to know to avoid uses that could result in unfair treatment of individuals or groups (for example, stereotyping, quality of service issues) or other risks or harms (for example, legal risks, financial harms)? If so, please provide a description. Is there anything a dataset consumer could do to mitigate these risks or harms?</em></li>
+<li>Are there tasks for which the dataset should not be used?</li>
+</ol>
+</section>
+</section>
+<section id="part-b-4" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-4">Part B</h3>
+<p><span class="citation" data-cites="dignazioDataFeminism2023">D’Ignazio and Klein (<a href="#ref-dignazioDataFeminism2023" role="doc-biblioref">2023</a>)</span> emphasize the importance of the <em>context</em> of the data when deciding what data science to do and how to interpret it. Consider the following hypothetical, out-of-context statement:</p>
+<blockquote class="blockquote">
+<p>The COMPAS data set describes the the social background, thought patterns, criminal histories, and reoffenses for all criminal perpetrators in Broward County during the time period.</p>
+</blockquote>
+<p>In roughly one paragraph, analyze this statement against what you know about the <em>context</em> of the data, including your datasheet and our previous discussions. What context is missing from this statement? Which aspects of this statement are incorrect? Why does it matter?</p>
+</section>
+</section>
 <section id="sec-convexity" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-convexity">Convexity</h2>
 <p>As you learned in Daumé, informally, a convex function is a function that is “bowl-shaped.” Hardt and Recht give the formal definition, which has the benefit of applying to functions of many variables.</p>
 <section id="part-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-1">Part 1</h4>
 <p>Consider the 0-1 step function that I’ve plotted below:</p>
-<div id="cell-12" class="cell" data-execution_count="5">
+<div id="cell-13" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -643,7 +704,7 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <section id="sec-gradient-descent-2" class="level2">
 <h2 class="anchored" data-anchor-id="sec-gradient-descent-2">Gradient Descent (Again)</h2>
 <p>Consider the function <span class="math inline">\(f(w_0, w_1) = \sin(w_0w_1)\)</span>. You can define this function like this:</p>
-<div id="cell-14" class="cell" data-execution_count="6">
+<div id="cell-15" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -820,7 +881,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <p>Implement kernel convolution. Your implementation should accept a 2d array <code>X</code> (think of <code>X</code> as representing a greyscale image) and a square convolutional kernel <code>K</code>. Your implementation should operate using pure <code>numpy</code>. You can use any zero-padding strategy, but you do need to explain what your strategy is when presenting.</p>
 <p>It’s ok to use a for-loop to loop over pixels.</p>
 <p>Here’s an example image you can use:</p>
-<div id="cell-16" class="cell" data-execution_count="7">
+<div id="cell-17" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -848,7 +909,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 </div>
 </div>
 <p>After implementing your function, you should be able to use it like this, replacing the implementation of <code>scipy.signal</code> with your own implementation. The result should look something like this:</p>
-<div id="cell-18" class="cell" data-execution_count="8">
+<div id="cell-19" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
@@ -988,7 +1049,7 @@ The false positive rate is ___. </code></pre>
 <section id="part-3-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-3-1">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
-<div id="cell-20" class="cell" data-execution_count="9">
+<div id="cell-21" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
@@ -1064,6 +1125,12 @@ Barabas, Chelsea, Colin Doyle, Jb Rubinovitz, and Karthik Dinakar. 2020. <span>�
 </div>
 <div id="ref-barocasFairnessMachineLearning2023" class="csl-entry" role="listitem">
 Barocas, Solon, Moritz Hardt, and Arvind Narayanan. 2023. <em>Fairness and Machine Learning: Limitations and Opportunities</em>. Cambridge, Massachusetts: The MIT Press.
+</div>
+<div id="ref-dignazioDataFeminism2023" class="csl-entry" role="listitem">
+D’Ignazio, Catherine, and Lauren F. Klein. 2023. <em>Data Feminism</em>. First MIT Press paperback edition. Cambridge, Massachusetts: The Mit Press.
+</div>
+<div id="ref-gebruDatasheetsDatasets2021" class="csl-entry" role="listitem">
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé Iii, and Kate Crawford. 2021. <span>“Datasheets for Datasets.”</span> <em>Communications of the ACM</em> 64 (12): 86–92. <a href="https://doi.org/10.1145/3458723">https://doi.org/10.1145/3458723</a>.
 </div>
 <div id="ref-gormanEcologicalSexualDimorphism2014" class="csl-entry" role="listitem">
 Gorman, Kristen B., Tony D. Williams, and William R. Fraser. 2014. <span>“Ecological <span>Sexual Dimorphism</span> and <span>Environmental Variability</span> Within a <span>Community</span> of <span>Antarctic Penguins</span> (<span>Genus Pygoscelis</span>).”</span> Edited by André Chiaradia. <em>PLoS ONE</em> 9 (3): e90081. <a href="https://doi.org/10.1371/journal.pone.0090081">https://doi.org/10.1371/journal.pone.0090081</a>.
