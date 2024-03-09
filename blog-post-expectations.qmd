@@ -41,9 +41,6 @@ Your code should be careful, concise, efficient Python.
 
 ## Submission Instructions
 
-Once your blog post is published on your blog: 
+Simply submit a URL to your online blog post in Canvas! 
 
-1. Print the webpage as a PDF. 
-2. Check the PDF to make sure that all your math, plots, etc. look good. 
-3. Submit the PDF to the assignment on Canvas. 
-4. **To submit a revision**, just include a link to your new blog post as a comment on the Canvas submission. It is not necessary to create or submit a new PDF.  
+**To submit a revision**, just include another link to your blog post as a comment on the Canvas submission. (Unfortunately your revised posts don't show up as revised in Canvas). The reason for submitting a comment rather than a new submission is so that it is easy for us all to see the feedback that you were previously given and are revising in response to. 
