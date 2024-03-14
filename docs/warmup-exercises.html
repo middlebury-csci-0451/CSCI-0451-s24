@@ -215,11 +215,10 @@ div.csl-indent {
   <li><a href="#part-a-4" id="toc-part-a-4" class="nav-link" data-scroll-target="#part-a-4">Part A</a></li>
   <li><a href="#part-b-4" id="toc-part-b-4" class="nav-link" data-scroll-target="#part-b-4">Part B</a></li>
   </ul></li>
-  <li><a href="#sec-convexity" id="toc-sec-convexity" class="nav-link" data-scroll-target="#sec-convexity">Convexity</a>
+  <li><a href="#sec-convexity" id="toc-sec-convexity" class="nav-link" data-scroll-target="#sec-convexity">Practice with Convex Functions</a>
   <ul class="collapse">
-  <li><a href="#part-2-second-derivative-test" id="toc-part-2-second-derivative-test" class="nav-link" data-scroll-target="#part-2-second-derivative-test">Part 2: Second Derivative Test</a></li>
-  <li><a href="#part-3-plotting-practice" id="toc-part-3-plotting-practice" class="nav-link" data-scroll-target="#part-3-plotting-practice">Part 3: Plotting Practice</a></li>
-  <li><a href="#part-4-convexity-in-many-variables" id="toc-part-4-convexity-in-many-variables" class="nav-link" data-scroll-target="#part-4-convexity-in-many-variables">Part 4: Convexity in Many Variables</a></li>
+  <li><a href="#part-a-5" id="toc-part-a-5" class="nav-link" data-scroll-target="#part-a-5">Part A</a></li>
+  <li><a href="#part-b-5" id="toc-part-b-5" class="nav-link" data-scroll-target="#part-b-5">Part B</a></li>
   </ul></li>
   <li><a href="#sec-gradient-descent" id="toc-sec-gradient-descent" class="nav-link" data-scroll-target="#sec-gradient-descent">Gradient Descent</a></li>
   <li><a href="#sec-gradient-descent-2" id="toc-sec-gradient-descent-2" class="nav-link" data-scroll-target="#sec-gradient-descent-2">Gradient Descent (Again)</a></li>
@@ -631,52 +630,52 @@ div.csl-indent {
 </section>
 </section>
 <section id="sec-convexity" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="sec-convexity">Convexity</h2>
-<p>As you learned in Daumé, informally, a convex function is a function that is “bowl-shaped.” Hardt and Recht give the formal definition, which has the benefit of applying to functions of many variables.</p>
-<section id="part-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-1">Part 1</h4>
-<p>Consider the 0-1 step function that I’ve plotted below:</p>
-<div id="cell-13" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>) </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">101</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>loss <span class="op">=</span> <span class="kw">lambda</span> y_hat, y: <span class="dv">1</span> <span class="op">-</span> <span class="dv">1</span><span class="op">*</span>(y_hat<span class="op">*</span>y <span class="op">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="vs">r"$\hat</span><span class="sc">{y}</span><span class="vs">$"</span>, </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       ylabel <span class="op">=</span> <span class="vs">r"$\ell(\hat</span><span class="sc">{y}</span><span class="vs">, y)$"</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ax.plot(y_hat, loss(y_hat, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="warmup-exercises_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<p>Show pictorially that this function is not convex. No proof needed – just the right drawing.</p>
+<h2 class="anchored" data-anchor-id="sec-convexity">Practice with Convex Functions</h2>
+<section id="part-a-5" class="level3">
+<h3 class="anchored" data-anchor-id="part-a-5">Part A</h3>
+<p>Please write a careful mathematical proof of the following statement. You may cite without proving any of the statements <a href="https://sboyles.github.io/teaching/ce377k/convexity.pdf">from the reading</a> up to page 7. As suggested in the reading, Prop 2. (the second derivative test) is likely to be especially useful.</p>
+<p><strong>Claim</strong>: Let <span class="math inline">\(f:\mathbb{R}\rightarrow\mathbb{R}\)</span> be any differentiable and convex function. Then, the function <span class="math inline">\(g(x) = f(ax + b)\)</span> is also convex, where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are any constants.</p>
 </section>
-<section id="part-2-second-derivative-test" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="part-2-second-derivative-test">Part 2: Second Derivative Test</h3>
-<p>Another way to tell whether a function is convex is to check its second derivative. If a function <span class="math inline">\(f:S\rightarrow \R\)</span> has a convex domain <span class="math inline">\(S\subseteq \R\)</span>, if <span class="math inline">\(f\)</span> is everywhere twice-differentiable, and if <span class="math inline">\(\frac{d^2f(z_0)}{dz^2} &gt; 0\)</span> for all <span class="math inline">\(z_0 \in S\)</span>, then <span class="math inline">\(f\)</span> is convex.</p>
-<div class="page-columns page-full"><p>Use the second derivative test to check that the following two functions are convex: </p><div class="no-row-height column-margin column-container"><span class="">The base of the logarithm doesn’t really matter, but for this course it is always most convenient to assume logs base <span class="math inline">\(e\)</span>, which you might also have seen written <span class="math inline">\(\ln\)</span>.</span></div></div>
+<section id="part-b-5" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-b-5">Part B</h3>
+<p>The logistic sigmoid <span class="math inline">\(\sigma\)</span> is the function <span class="math inline">\(\sigma: \mathbb{R} \rightarrow \mathbb{R}\)</span> given by the formula <span class="math display">\[
+\begin{aligned}
+    \sigma(z) = \frac{1}{1 + e^{-z}}\;.
+\end{aligned}
+\]</span></p>
+<section id="b.1" class="level4">
+<h4 class="anchored" data-anchor-id="b.1">B.1</h4>
+<p>Use <code>matplotlib</code> with either <code>numpy</code> or <code>torch</code> to make a graph of this function on the interval <span class="math inline">\(z \in [-1, 1]\)</span>.</p>
+</section>
+<section id="b.2" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="b.2">B.2</h4>
+<div class="page-columns page-full"><p>Compute <span class="math inline">\(\frac{d\sigma(s_0)}{ds}\)</span>. </p><div class="no-row-height column-margin column-container"><span class=""><span class="math inline">\(\frac{d\sigma(s_0)}{ds}\)</span> is the first derivative of <span class="math inline">\(\sigma\)</span> evaluated at the point <span class="math inline">\(s_0\)</span>. You may need to recall things like the chain and quotient rules.</span></div></div>
+</section>
+<section id="b.3" class="level4">
+<h4 class="anchored" data-anchor-id="b.3">B.3</h4>
+<p>Using your computation of <span class="math inline">\(\frac{d\sigma(s_0)}{ds}\)</span> from the previous part, check that the following formula holds. You should do so by computing both sides of the equation and verifying that they are equal.</p>
 <p><span class="math display">\[
 \begin{aligned}
-f(z) &amp;= - \log z \\
-g(z) &amp;= - \log(1-z)\;.
+    \frac{d\sigma(s_0)}{ds} = \sigma(s_0)\left(1 - \sigma(s_0)\right)\;.
 \end{aligned}
 \]</span></p>
 </section>
-<section id="part-3-plotting-practice" class="level3">
-<h3 class="anchored" data-anchor-id="part-3-plotting-practice">Part 3: Plotting Practice</h3>
-<p>In a Jupyter notebook, write a simple program to plot each of the functions <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> from Part 2. Some of the Part 1 code is likely to help you.</p>
+<section id="b.4" class="level4">
+<h4 class="anchored" data-anchor-id="b.4">B.4</h4>
+<p>Using any methods from the reading, write a careful proof that the following two functions are convex:</p>
+<ol type="1">
+<li><span class="math inline">\(f(s) = - \log \sigma(s)\)</span></li>
+<li><span class="math inline">\(g(s) = - \log (1 - \sigma(s))\)</span></li>
+</ol>
 </section>
-<section id="part-4-convexity-in-many-variables" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="part-4-convexity-in-many-variables">Part 4: Convexity in Many Variables</h3>
-<p>Recall the Hardt and Recht definition of convexity: a function <span class="math inline">\(f:\R^p \rightarrow \R\)</span> is convex if, for any <span class="math inline">\(\lambda \in [0,1]\)</span> and any points <span class="math inline">\(\vz_1, \vz_2 \in \R^p\)</span>,</p>
+<section id="b.5" class="level4">
+<h4 class="anchored" data-anchor-id="b.5">B.5</h4>
+<p>Let <span class="math inline">\(y \in \{0,1\}\)</span>. Explain why the function</p>
 <p><span class="math display">\[
-f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\;.
+\ell(s, y) = - y \log \sigma(s) - (1  - y) \log(1-\sigma(s))
 \]</span></p>
-<div class="page-columns page-full"><p>Using this definition, write a short mathematical proof that the function <span class="math inline">\(f(\vz) = \norm{\vz} = \sqrt{\bracket{\vz, \vz}}\)</span> is convex. You will want to use the <em>triangle inequality</em>, which says that <span class="math inline">\(\norm{\vz_1 + \vz_2} \leq \norm{\vz_1} + \norm{\vz_2}\)</span>. </p><div class="no-row-height column-margin column-container"><span class="">This proof requires just a few lines if you carefully use your definitions!</span></div></div>
+<p>is convex as a function of <span class="math inline">\(s\)</span>.</p>
+</section>
 </section>
 </section>
 <section id="sec-gradient-descent" class="level2">
@@ -708,10 +707,10 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <section id="sec-gradient-descent-2" class="level2">
 <h2 class="anchored" data-anchor-id="sec-gradient-descent-2">Gradient Descent (Again)</h2>
 <p>Consider the function <span class="math inline">\(f(w_0, w_1) = \sin(w_0w_1)\)</span>. You can define this function like this:</p>
-<div id="cell-15" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-13" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(w):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(w[<span class="dv">0</span>]<span class="op">*</span>w[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Mathematically, the gradient of this function is</p>
 <p><span class="math display">\[\nabla f(w_0, w_1) = (w_1\cos w_0w_1, w_0 \cos w_0w_1)^T.\]</span></p>
@@ -748,8 +747,8 @@ f(\lambda \vz_1 + (1-\lambda)\vz_2) \leq \lambda f(\vz_1) + (1-\lambda)f(\vz_2)\
 <li>If my coin comes up heads, you give me <span class="math inline">\(-\log \hat{p}\)</span> dollars.</li>
 <li>If my coin comes up tails, you give me <span class="math inline">\(-\log (1-\hat{p})\)</span> dollars.</li>
 </ul>
-<section id="part-1-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
+<section id="part-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-1">Part 1</h4>
 <p>Compute the <em>expected</em> amount of money you will give me when we play this game in terms of <span class="math inline">\(p\)</span> and <span class="math inline">\(\hat{p}\)</span>. Call this quantity <span class="math inline">\(R(\hat{p}, p)\)</span>. This is the <em>risk</em> of the guess <span class="math inline">\(\hat{p}\)</span>.</p>
 </section>
 <section id="part-2" class="level4 page-columns page-full">
@@ -885,50 +884,50 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <p>Implement kernel convolution. Your implementation should accept a 2d array <code>X</code> (think of <code>X</code> as representing a greyscale image) and a square convolutional kernel <code>K</code>. Your implementation should operate using pure <code>numpy</code>. You can use any zero-padding strategy, but you do need to explain what your strategy is when presenting.</p>
 <p>It’s ok to use a for-loop to loop over pixels.</p>
 <p>Here’s an example image you can use:</p>
-<div id="cell-17" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_image(url):</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(Image.<span class="bu">open</span>(urllib.request.urlopen(url)))</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://i.pinimg.com/originals/0e/d0/23/0ed023847cad0d652d6371c3e53d1482.png"</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> read_image(url)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_greyscale(im):</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> np.dot(im[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> to_greyscale(img)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-15" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_image(url):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(Image.<span class="bu">open</span>(urllib.request.urlopen(url)))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://i.pinimg.com/originals/0e/d0/23/0ed023847cad0d652d6371c3e53d1482.png"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> read_image(url)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_greyscale(im):</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> np.dot(im[...,:<span class="dv">3</span>], [<span class="fl">0.2989</span>, <span class="fl">0.5870</span>, <span class="fl">0.1140</span>])</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> to_greyscale(img)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>(-0.5, 639.5, 412.5, -0.5)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="warmup-exercises_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
+<p><img src="warmup-exercises_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 <p>After implementing your function, you should be able to use it like this, replacing the implementation of <code>scipy.signal</code> with your own implementation. The result should look something like this:</p>
-<div id="cell-19" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>,  <span class="dv">8</span>, <span class="op">-</span><span class="dv">1</span>], </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>convd <span class="op">=</span> convolve2d(img, kernel)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(convd, cmap <span class="op">=</span> <span class="st">"Greys"</span>, vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">8</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-17" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>,  <span class="dv">8</span>, <span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>convd <span class="op">=</span> convolve2d(img, kernel)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(convd, cmap <span class="op">=</span> <span class="st">"Greys"</span>, vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">8</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>(-0.5, 641.5, 414.5, -0.5)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="warmup-exercises_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+<p><img src="warmup-exercises_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
@@ -1029,15 +1028,15 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 </section>
 <section id="sec-classification-rates" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>
-<section id="part-1-2" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="part-1-2">Part 1</h4>
+<section id="part-1-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
 <div class="page-columns page-full"><p>COVID-19 rapid tests have approximately an 80% sensitivity rate, which means that, in an individual who truly has COVID-19, the probability of a rapid test giving a positive result is roughly 80%.  On the other hand, the probability of a rapid test giving a positive result for an individual who truly does <strong>not</strong> have COVID-19 is 5%. Suppose that approximately 4% of the population are currently infected with COVID-19. </p><div class="no-row-height column-margin column-container"><span class="">These numbers are mostly made-up.</span><span class="">Example 2.3.1 of <a href="https://github.com/probml/pml-book/releases/latest/download/book1.pdf">Murphy</a>, page 46, has a good review of the relevant probability and the definition of each of the rates below.</span></div></div>
 <p>Write a Python function called <code>rate_summary</code> that prints the following output, filling in the correct values for each of the specified rates:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -1053,13 +1052,13 @@ The false positive rate is ___. </code></pre>
 <section id="part-3-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-3-1">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
-<div id="cell-21" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-19" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
@@ -1105,8 +1104,8 @@ The false positive rate is ___. </code></pre>
 </div>
 </div>
 <p>You should be able to use your function like this:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -1114,8 +1113,8 @@ The false positive rate is ___. </code></pre>
 <section id="hints" class="level5">
 <h5 class="anchored" data-anchor-id="hints">Hints</h5>
 <p>An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 

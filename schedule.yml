@@ -179,7 +179,7 @@
   objectives: 
   reading:
   notes: 
-  module: Fairness and Disparity
+  module: 
   publish: true
   warmup: TBD
   assignments: 
@@ -189,7 +189,31 @@
   objectives: 
   reading:
   notes: 
-  module: Theory
+  module: 
+  publish: true
+  warmup: TBD
+  assignments: 
+- date: 2024-03-26
+  header: Convex Empirical Risk Minimization
+  summary: We introduce the framework of convex empirical risk minimization, which offers a principled approach to overcoming the many limitations of the perceptron algorithm. 
+  objectives: 
+    - Theory
+  reading: 
+    - <a href="https://sboyles.github.io/teaching/ce377k/convexity.pdf">Convexity Examples</a> by Stephen D. Boyles, pages 1 - 7 (ok to stop when we start talking about gradients and Hessians). 
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/22-convex-erm.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/22-convex-erm.ipynb">Live notes</a>
+  module: 
+  publish: true
+  warmup: <a href="warmup-exercises.ipynb#sec-convexity">Practice with Convex Functions</a>
+  assignments: 
+- date: 2024-03-28
+  header: Gradient Descent and Friends
+  summary: 
+  objectives: 
+  reading:
+  notes: 
+  module: 
   publish: true
   warmup: TBD
   assignments: 
