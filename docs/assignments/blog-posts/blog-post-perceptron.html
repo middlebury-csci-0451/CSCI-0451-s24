@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Finally, it is time to implement <code>Perceptron.grad()</code>. This is where the math comes in – turning the math of the perceptron algorithm into code. In this part, you may assume that the argument <code>X</code> of <code>Perceptron.grad()</code> is a single row of the feature matrix.</p>
 <p>Inside <code>Perceptron.grad()</code>, you should do two things:</p>
 <ol type="1">
-<li>Compute the score <span class="math inline">\(s_i = \langle \mathbf{x}, \mathbf{y}\rangle\)</span>.</li>
+<li>Compute the score <span class="math inline">\(s_i = \langle \mathbf{w}, \mathbf{x}_i\rangle\)</span>.</li>
 <li>Return the vector <span class="math inline">\(\mathbb{1}\left[s_i y_{i} &lt; 0 \right] y_{i} \mathbf{x}_{i}\)</span>.</li>
 </ol>
 </section>
