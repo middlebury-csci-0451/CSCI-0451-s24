@@ -172,7 +172,7 @@
   warmup: <a href="warmup-exercises.ipynb#sec-perceptron">Linear Models, Perceptron, and Torch</a>
   assignments: 
     - |
-      <a href="assignments/blog-posts/blog-post-perceptron.qmd">Blog Post: Implementing Perceptron</a>
+      <a href="assignments/blog-posts/blog-post-perceptron.ipynb">Blog Post: Implementing Perceptron</a>
 - date: 2024-03-19
   header: Spring Break!
   summary: 
