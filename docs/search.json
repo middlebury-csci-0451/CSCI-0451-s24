@@ -606,7 +606,7 @@
     "href": "assignments/blog-posts/blog-post-perceptron.html",
     "title": "Implementing the Perceptron Algorithm",
     "section": "",
-    "text": "\\[\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\vx}{\\mathbf{x}}\n\\newcommand{\\vy}{\\mathbf{y}}\n\\newcommand{\\mX}{\\mathbf{X}}\n\\newcommand{\\vw}{\\mathbf{w}}\n\\newcommand{\\bracket}[1]{\\langle #1 \\rangle}\n\\newcommand{\\paren}[1]{\\left( #1 \\right)}\n\\]\n© Phil Chodrow, 2024"
+    "text": "\\[\n\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\vx}{\\mathbf{x}}\n\\newcommand{\\vy}{\\mathbf{y}}\n\\newcommand{\\mX}{\\mathbf{X}}\n\\newcommand{\\vw}{\\mathbf{w}}\n\\newcommand{\\bracket}[1]{\\langle #1 \\rangle}\n\\newcommand{\\paren}[1]{\\left( #1 \\right)}\n\\]\nThe expectations for all blog posts apply!\n© Phil Chodrow, 2024"
   },
   {
     "objectID": "assignments/blog-posts/blog-post-perceptron.html#getting-started",
@@ -641,7 +641,7 @@
     "href": "assignments/blog-posts/blog-post-perceptron.html#minibatch-perceptron-experiments",
     "title": "Implementing the Perceptron Algorithm",
     "section": "Minibatch Perceptron Experiments",
-    "text": "Minibatch Perceptron Experiments\nPlease perform experiments and create visualizations to demonstrate the following:\n\nWhen k = 1, minibatch perceptron performs similarly to regular perceptron.\nWhen k = 10, minibatch perceptron can still find a separating line in 2d.\nWhen k = n (that is, the batch size is the size of the entire data set), minibatch perceptron can converge even when the data is not linearly separable."
+    "text": "Minibatch Perceptron Experiments\nPlease perform experiments and create visualizations to demonstrate the following:\n\nWhen k = 1, minibatch perceptron performs similarly to regular perceptron.\nWhen k = 10, minibatch perceptron can still find a separating line in 2d.\nWhen k = n (that is, the batch size is the size of the entire data set), minibatch perceptron can converge even when the data is not linearly separable, provided that the learning rate \\(\\alpha\\) is small enough."
   },
   {
     "objectID": "assignments/blog-posts/blog-post-erm.html",

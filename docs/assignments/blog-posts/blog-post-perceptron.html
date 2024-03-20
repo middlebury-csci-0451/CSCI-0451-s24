@@ -199,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \newcommand{\paren}[1]{\left( #1 \right)}
 \]</span></p>
 </div>
+<p><em>The <a href="../../blog-post-expectations.html">expectations for all blog posts</a> apply!</em></p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>In this blog post, you will complete an implementation of the perceptron algorithm and test it in several experiments.</p>
@@ -277,9 +278,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Perform the update</li>
 </ol>
 <p><span id="eq-batch-perceptron"><span class="math display">\[
-\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} + \frac{1}{k}\sum_{\ell = 1}^k \mathbb{1}\left[\langle \mathbf{w}, \mathbf{x}_{i_k} \rangle y_{i_k} &lt; 0 \right] y_{i_k} \mathbf{x}_{i_k}
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} + \frac{\alpha}{k}\sum_{\ell = 1}^k \mathbb{1}\left[\langle \mathbf{w}, \mathbf{x}_{i_k} \rangle y_{i_k} &lt; 0 \right] y_{i_k} \mathbf{x}_{i_k}
 \tag{1}\]</span></span></p>
-<p><a href="#eq-batch-perceptron" class="quarto-xref">Equation&nbsp;1</a> corresponds to computing <span class="math inline">\(k\)</span> perceptron increments simultaneously and averaging them before modifying <span class="math inline">\(\mathbf{w}\)</span>.</p>
+<p><a href="#eq-batch-perceptron" class="quarto-xref">Equation&nbsp;1</a> corresponds to computing <span class="math inline">\(k\)</span> perceptron increments simultaneously and averaging them before modifying <span class="math inline">\(\mathbf{w}\)</span>. The <em>hyperparameter</em> <span class="math inline">\(\alpha\)</span> is a <em>learning rate</em> that determines how quickly the weight vector <span class="math inline">\(\mathbf{w}\)</span> changes in each iteration. The learning rate can be tuned in order to achieve good results.</p>
 <p>To implement mini-batch updating, modify your <code>perceptron.grad()</code> method so that it accepts a submatrix of the feature matrix <span class="math inline">\(\mathbf{X}\)</span>. You should assume that this submatrix has size <span class="math inline">\(k \times p\)</span>. It is possible to perform this implementation in two lines and with no for-loops if you are careful. You’ll then need to modify your main training loop so that a random submatrix of the feature matrix is passed to <code>PerceptronOptimizer.step()</code>.</p>
 <p><strong>Hint</strong>: You can get a random submatrix of the feature matrix <code>X</code> and target vector <code>y</code> like this:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">5</span></span>
@@ -292,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>When <code>k = 1</code>, minibatch perceptron performs similarly to regular perceptron.</li>
 <li>When <code>k = 10</code>, minibatch perceptron can still find a separating line in 2d.</li>
-<li>When <code>k = n</code> (that is, the batch size is the size of the entire data set), minibatch perceptron can converge <em>even when the data is not linearly separable</em>.</li>
+<li>When <code>k = n</code> (that is, the batch size is the size of the entire data set), minibatch perceptron can converge <em>even when the data is not linearly separable</em>, provided that the learning rate <span class="math inline">\(\alpha\)</span> is small enough.</li>
 </ol>
 </section>
 </section>
