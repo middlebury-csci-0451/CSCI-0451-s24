@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.339">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -82,12 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -96,17 +97,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -115,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
@@ -184,6 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p class="date">2023-03-15</p>
 </header>
 
+
 <div class="hidden">
 $$
 <p>$$</p>
@@ -195,7 +225,7 @@ $$
 <li>First, use the analytical formula for the optimal weight vector <span class="math inline">\(\hat{\mathbf{w}}\)</span> from <a href="../../lecture-notes/regression.qmd">the lecture notes</a>. This formula requires matrix inversion and several matrix multiplications.</li>
 <li>Next, use the formula for the <em>gradient</em> of the loss function to implement gradient descent for linear regression. You can still pass in <code>max_iter</code> and <code>alpha</code> (the learning rate) as parameters to the <code>fit</code> method. </li>
 </ol>
-<div class="no-row-height column-margin column-container"><span class="">Implementing <em>stochastic</em> gradient descent would be nice thing to do but not required. Only if you want to go above and beyond!</span></div><p>In addition to the <code>fit</code> method, your implementation should include a <code>score</code> method (see below) and a <code>predict</code> method (just return <span class="math inline">\(\mathbf{X}\mathbf{w}\)</span>).</p>
+<div class="no-row-height column-margin column-container"><span class="margin-aside">Implementing <em>stochastic</em> gradient descent would be nice thing to do but not required. Only if you want to go above and beyond!</span></div><p>In addition to the <code>fit</code> method, your implementation should include a <code>score</code> method (see below) and a <code>predict</code> method (just return <span class="math inline">\(\mathbf{X}\mathbf{w}\)</span>).</p>
 <p>It’s fine for you to either define separate methods like <code>fit_analytic</code> and <code>fit_gradient</code> for these methods. It’s also fine to define a single <code>fit</code> method with a <code>method</code> argument to determine which algorithm is used.</p>
 <p>As usual, place your implementation in a source file where you will be able to implement it.</p>
 <section id="the-score" class="level3">
@@ -222,7 +252,7 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <section id="demo" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="demo"><span class="header-section-number">2</span> Demo</h2>
 <p>The following function will create both testing and validation data that you can use to test your implementation:</p>
-<div id="f5b94d7e" class="cell" data-execution_count="2">
+<div id="eaf2a12a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -242,7 +272,7 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X_train, y_train, X_val, y_val</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here’s an example of how to use the function to generate data. Unfortunately, it’s only possible to easily visualize this problem when <code>p_features = 1</code>.</p>
-<div id="aae49589" class="cell" data-execution_count="3">
+<div id="7b45591e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n_train <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n_val <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> <span class="dv">1</span></span>
@@ -259,11 +289,15 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>labs <span class="op">=</span> axarr[<span class="dv">1</span>].<span class="bu">set</span>(title <span class="op">=</span> <span class="st">"Validation"</span>, xlabel <span class="op">=</span> <span class="st">"x"</span>)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-linear-regression_files/figure-html/cell-3-output-1.png" width="656" height="468"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-linear-regression_files/figure-html/cell-3-output-1.png" width="657" height="468" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Once you’ve impmlemented your solution, you should be able to use it like this:</p>
-<div id="51c22adc" class="cell" data-execution_count="4">
+<div id="dbb0a4d2" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> solutions.linear_regression <span class="im">import</span> LinearRegression</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LinearRegression()</span>
@@ -272,136 +306,140 @@ c = 1 - \frac{\sum_{i = 1}^n (\hat{y}_i - y_i)^2}{\sum_{i = 1}^n (\bar{y} - y_i)
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Training score = </span><span class="sc">{</span>LR<span class="sc">.</span>score(X_train, y_train)<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Validation score = </span><span class="sc">{</span>LR<span class="sc">.</span>score(X_val, y_val)<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Training score = 0.4893
-Validation score = 0.5789</code></pre>
+<pre><code>Training score = 0.183
+Validation score = 0.1574</code></pre>
 </div>
 </div>
 <p>The estimated weight vector <span class="math inline">\(\mathbf{w}\)</span> is</p>
-<div id="094809d0" class="cell" data-execution_count="5">
+<div id="510f0044" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>LR.w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>array([0.747003  , 0.44868746])</code></pre>
+<pre><code>array([0.31679445, 1.08950597])</code></pre>
 </div>
 </div>
 <p>I can get the same value for <span class="math inline">\(\mathbf{w}\)</span> using gradient descent (it would be even closer if we allowed more iterations).</p>
-<div id="d7a6f54a" class="cell" data-execution_count="6">
+<div id="6eea1e4a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>LR2 <span class="op">=</span> LinearRegression()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>LR2.fit(X_train, y_train, method <span class="op">=</span> <span class="st">"gradient"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span>, max_iter <span class="op">=</span> <span class="fl">1e2</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>LR2.w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(2,)
-64.12005734482265
-16.72385268708793
-4.3631921799615565
-1.1426455948613508
-0.3135262896429141
-0.12307532671139117
-0.09262185312609275
-0.08554499257478913
-0.08065936736885844
-0.07617593375585291
-0.07195060554955024
-0.06796028864979113
-0.06419131733758959
-0.060631370602570754
-0.05726885300041441
-0.05409281519506045
-0.05109291530209028
-0.04825938499702271
-0.04558299769197311
-0.043055038490743824
-0.040667275811166866
-0.038411934581301446
-0.03628167092207313
-0.034269548234066666
-0.03236901461041562
-0.03057388150240311
-0.028878303568201827
-0.027276759639161846
-0.0257640347417009
-0.024335203116227
-0.022985612177805377
-0.021710867366288494
-0.02050681783677326
-0.01936954294343242
-0.018295339473129262
-0.017280709586930117
-0.016322349430387476
-0.015417138375444592
-0.014562128859036174
-0.013754536785172243
-0.012991732459318788
-0.01227123202554262
-0.011590689378495927
-0.010947888524084806
-0.010340736363634083
-0.009767255878337615
-0.009225579691626032
-0.008713943988640232
-0.008230682772826806
-0.007774222441103351
-0.007343076659829512
-0.006935841525077175
-0.006551190991120884
-0.006187872552581976
-0.005844703166023483
-0.005520565397671855
-0.005214403784804498
-0.004925221398946194
-0.004652076599700883
-0.004394079968495958
-0.00415039141245514
-0.003920217428926677
-0.0037028085216152065
-0.0034974567600721024
-0.003303493474522938
-0.0031202870785407197
-0.002947241012454381
-0.002783791800850175
-0.002629407217703845
-0.0024835845534157113
-0.0023458489778325035
-0.0022157519941287374
-0.0020928699783533252
-0.0019768028000925666
-0.0018671725194881609
-0.0017636221566389146
-0.0016658145291493938
-0.001573431154213808
-0.0014861712115657464
-0.0014037505639860107
-0.00132590083197368
-0.0012523685199805606
-0.0011829141908711698
-0.001117311686329429
-0.0010553473904042917
-0.0009968195339431624
-0.0009415375375751116
-0.0008893213911575244
-0.0008400010676339144
-0.0007934159693307206
-0.0007494144051266652
-0.0007078530963663613
-0.0006685967104631158
-0.0006315174201248321
-0.0005964944871466762
-0.0005634138692925388
-0.0005321678489112023
-0.0005026546821923759
-0.00047477826789643667
-0.0004484478343631255</code></pre>
+11.328469647280597
+5.236717682699775
+4.329889482032084
+4.012454684147247
+3.7532710960961264
+3.5131876870105243
+3.2886182249064757
+3.078414055199832
+2.8816465505910274
+2.697456168844806
+2.5250389538925284
+2.363642380127672
+2.2125620250558753
+2.0711384919646654
+1.9387545317693446
+1.8148323489901614
+1.6988310799383664
+1.590244432093386
+1.4885984743673286
+1.3934495686123411
+1.3043824333430065
+1.2210083312222988
+1.142963372400955
+1.069906926304447
+1.0015201349362628
+0.9375045212085436
+0.8775806862259342
+0.8214870898371666
+0.7689789091317749
+0.719826969900038
+0.6738167463923196
+0.6307474250121007
+0.5904310278566007
+0.5526915922789675
+0.5173644028918645
+0.4842952726600383
+0.45333986994442044
+0.42436308856040666
+0.39723845810120845
+0.37184759195230777
+0.3480796705879372
+0.32583095789455535
+0.3050043484101287
+0.2855089435031292
+0.26725965464158385
+0.25017683202051866
+0.23418591692696017
+0.21921711632524907
+0.2052050982422807
+0.19208870662338354
+0.17981069441402237
+0.16831747370264602
+0.15755888183383046
+0.1474879624713472
+0.13806076065513045
+0.12923613095797595
+0.12097555790459999
+0.11324298786914323
+0.10600467171760167
+0.09922901750827567
+0.09288645260737073
+0.0869492946180047
+0.08139163055914499
+0.0761892037673134
+0.07131930802737269
+0.06676068847021657
+0.062493448805007
+0.05849896448096553
+0.05475980139972026
+0.051259639823399365
+0.04798320314649763
+0.04491619122043182
+0.04204521793992856
+0.03935775281881115
+0.036842066300137755
+0.03448717856206151
+0.032282811595914215
+0.03021934434739268
+0.02828777072508872
+0.026479660292977047
+0.024787121475399344
+0.02320276711402693
+0.021719682226188593
+0.02033139382422293
+0.019031842663739848
+0.017815356797920807
+0.016676626821934472
+0.015610682699918022
+0.014612872072974804
+0.013678839953758766
+0.012804509718958525
+0.011986065316754802
+0.011219934611367261
+0.010502773792455393
+0.009831452780809252
+0.009203041567052343
+0.008614797423449762
+0.008064152933172926
+0.0075487047847031235
+0.007066203282447441</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>array([0.74693539, 0.44872299])</code></pre>
+<pre><code>array([0.31771408, 1.08903144])</code></pre>
 </div>
 </div>
 <p>I can also see how the score changed over time. Because we’re not using stochastic gradient descent, the score should increase monotonically in each iteration.</p>
-<div id="bc40622a" class="cell" data-execution_count="7">
+<div id="9517426a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.plot(LR2.score_history)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Iteration"</span>, ylabel <span class="op">=</span> <span class="st">"Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-linear-regression_files/figure-html/cell-7-output-1.png" width="597" height="431"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-linear-regression_files/figure-html/cell-7-output-1.png" width="600" height="429" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Your implementation is likely correct when you are able to reproduce results that are similar to these (although small differences are no problem).</p>
@@ -409,7 +447,7 @@ Validation score = 0.5789</code></pre>
 <section id="experiments" class="level2 page-columns page-full" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="experiments"><span class="header-section-number">3</span> Experiments</h2>
 <p>Once you’ve demonstrated the behavior above, perform an experiment in which you allow <code>p_features</code>, the number of features used, to increase, while holding <code>n_train</code>, the number of training points, constant. Try increasing <code>p_features</code> all the way to <code>n_train - 1</code>. What happens to the <em>training score</em>? What happens to the <em>validation</em> score? I’d suggest showing these results on a nice plot in which the horizontal axis is the number of features, the vertical axis is the score, and the training/validation scores are shown in different colors.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Optional: Relate your findings when <code>p_features = n_train-1</code> to the existence of a solution of the equation <span class="math inline">\(\mathbf{X}\mathbf{w}= \mathbf{y}\)</span>. What do you know about the rank of <span class="math inline">\(\mathbf{X}\)</span>? Remember that the number of columns in <span class="math inline">\(\mathbf{X}\)</span> is actually <code>p_features + 1</code>, since it’s still necessary to pad with a column of 1s.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Optional: Relate your findings when <code>p_features = n_train-1</code> to the existence of a solution of the equation <span class="math inline">\(\mathbf{X}\mathbf{w}= \mathbf{y}\)</span>. What do you know about the rank of <span class="math inline">\(\mathbf{X}\)</span>? Remember that the number of columns in <span class="math inline">\(\mathbf{X}\)</span> is actually <code>p_features + 1</code>, since it’s still necessary to pad with a column of 1s.</span></div></div>
 <p>When discussing your findings, make sure to connect them to the idea of overfitting.</p>
 </section>
 <section id="lasso-regularization" class="level2 page-columns page-full" data-number="4">
@@ -422,14 +460,14 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 <p><span class="math display">\[
 \lVert \mathbf{w}' \rVert_1 = \sum_{j = 1}^{p-1} \lvert w_j \rvert\;.
 \]</span></p>
-<div class="page-columns page-full"><p>The effect of the regularizing term is to make the entries of the weight vector <span class="math inline">\(\mathbf{w}\)</span> small. In fact, LASSO has a nice property: it tends to force entries of the weight vector to be <em>exactly zero</em>.  This is very desirable in so-called <em>overparameterized</em> problems, when the number of features <span class="math inline">\(p\)</span> is larger than the number of data points <span class="math inline">\(n\)</span>.</p><div class="no-row-height column-margin column-container"><span class="">The reason we exclude the final entry of <span class="math inline">\(\mathbf{w}\)</span> is that it is not desirable to penalize the weight corresponding to the constant feature in <span class="math inline">\(\mathbf{X}\)</span>.</span></div></div>
+<div class="page-columns page-full"><p>The effect of the regularizing term is to make the entries of the weight vector <span class="math inline">\(\mathbf{w}\)</span> small. In fact, LASSO has a nice property: it tends to force entries of the weight vector to be <em>exactly zero</em>.  This is very desirable in so-called <em>overparameterized</em> problems, when the number of features <span class="math inline">\(p\)</span> is larger than the number of data points <span class="math inline">\(n\)</span>.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">The reason we exclude the final entry of <span class="math inline">\(\mathbf{w}\)</span> is that it is not desirable to penalize the weight corresponding to the constant feature in <span class="math inline">\(\mathbf{X}\)</span>.</span></div></div>
 <p>Implementing LASSO involves some more complicated mathematical optimization than we will discuss in this course, so instead we’ll use the implementation in <code>scikit-learn</code>. You can import it like this:</p>
-<div id="77db4c07" class="cell" data-execution_count="8">
+<div id="a188e530" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> Lasso(alpha <span class="op">=</span> <span class="fl">0.001</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, <code>alpha</code> controls the strength of the regularization (it’s not related to the learning rate in gradient descent). Let’s fit this model on some data and check the coefficients:</p>
-<div id="42494f7f" class="cell" data-execution_count="9">
+<div id="8c865d1f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> n_train <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_val, y_val <span class="op">=</span> LR_data(n_train, n_val, p_features, noise)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>L.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -438,10 +476,10 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </div>
 </div>
 <p>The score on the validation set is high, which might be different from what you found with pure linear regression.</p>
-<div id="cd7351cb" class="cell" data-execution_count="10">
+<div id="a85a57aa" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>L.score(X_val, y_val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>0.7007716561272292</code></pre>
+<pre><code>0.6410338391919257</code></pre>
 </div>
 </div>
 <section id="what-you-should-do" class="level3">
@@ -456,14 +494,15 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 <p>Fanaee-T, Hadi, and Gama, Joao, “Event labeling combining ensemble detectors and background knowledge”, Progress in Artificial Intelligence (2013): pp.&nbsp;1-15, Springer Berlin Heidelberg, doi:10.1007/s13748-013-0040-3.</p>
 </blockquote>
 <p>This data set includes information about the season and time of year; the weather; and the count of bicycle users on each day for two years (year 0 is 2011, year 1 is 2012). This level of information gives us considerable ability to model phenomena in the data.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">For more on what the entries in each column means, you can consult the data <a href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">dictionary here</a> (under “Attribute Information”).</span></div></div>
-<div id="46fcb815" class="cell" data-execution_count="11">
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">For more on what the entries in each column means, you can consult the data <a href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">dictionary here</a> (under “Attribute Information”).</span></div></div>
+<div id="b5093269" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>bikeshare <span class="op">=</span> pd.read_csv(<span class="st">"https://philchodrow.github.io/PIC16A/datasets/Bike-Sharing-Dataset/day.csv"</span>)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>bikeshare.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
+<div>
 <div>
 
 
@@ -591,19 +630,24 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </div>
 </div>
 </div>
+</div>
 <p>Our aim for this case study is to plot daily usage by <em>casual</em> users (as opposed to registered users). The total number of casual users each day is given by the <code>casual</code> column, Let’s plot this over time:</p>
-<div id="4b0ed907" class="cell" data-execution_count="12">
+<div id="ea47d7a6" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import datetime</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize <span class="op">=</span> (<span class="dv">7</span>, <span class="dv">3</span>))</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax.plot(pd.to_datetime(bikeshare[<span class="st">'dteday'</span>]), bikeshare[<span class="st">'casual'</span>])</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Day"</span>, ylabel <span class="op">=</span> <span class="st">"# of casual users"</span>)</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-linear-regression_files/figure-html/cell-12-output-1.png" width="659" height="276"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-linear-regression_files/figure-html/cell-12-output-1.png" width="659" height="276" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>For this prediction task, it’s handy to work with a smaller subset of the columns, and to transform the <code>mnth</code> column into dummy variables.</p>
-<div id="0f259017" class="cell" data-execution_count="13">
+<div id="a617c13e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">"casual"</span>, </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mnth"</span>, </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weathersit"</span>, </span>
@@ -619,6 +663,7 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>bikeshare <span class="op">=</span> pd.get_dummies(bikeshare, columns <span class="op">=</span> [<span class="st">'mnth'</span>], drop_first <span class="op">=</span> <span class="st">"if_binary"</span>)</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>bikeshare</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
+<div>
 <div>
 
 
@@ -897,8 +942,9 @@ L(\mathbf{w}) = \lVert \mathbf{X}\mathbf{w}- \mathbf{y} \rVert_2^2 + \alpha \lVe
 </div>
 </div>
 </div>
+</div>
 <p>Now we can do a train-test split.</p>
-<div id="f4b3a6c1" class="cell" data-execution_count="14">
+<div id="740fd167" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>train, test <span class="op">=</span> train_test_split(bikeshare, test_size <span class="op">=</span> <span class="fl">.2</span>, shuffle <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train.drop([<span class="st">"casual"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
@@ -997,6 +1043,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1031,7 +1095,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1046,15 +1114,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -1063,7 +1144,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1105,6 +1194,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1180,7 +1292,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.339">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -65,12 +66,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -79,6 +81,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -88,6 +91,33 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -95,7 +125,7 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
@@ -200,6 +230,7 @@ div.csl-indent {
 <h1 class="title display-7">Syllabus</h1>
 
 </header>
+
 
 <p>This is an advanced elective on the topic of algorithms that learn patterns from data. Artificial intelligence, predictive analytics, computational science, pattern recognition, signal processing, and data science are all disciplines that draw heavily on techniques from machine learning. The course focuses almost entirely on <em>predictive</em> models, and places special emphasis on questions of fairness in automated decision-making.</p>
 <section id="learning-objectives" class="level1">
@@ -378,13 +409,13 @@ I encourage you to call me Phil or Prof.&nbsp;Phil. “Professor Chodrow” is f
 <h1>Demonstrating Your Learning</h1>
 <section id="collaborative-grading" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="collaborative-grading">Collaborative Grading</h2>
-<div class="page-columns page-full"><p>This course is <em>collaboratively graded</em>.  In a nutshell, this means:</p><div class="no-row-height column-margin column-container"><span class="">You may have also heard the term <em>ungrading</em> to refer to a similar approach.</span></div></div>
+<div class="page-columns page-full"><p>This course is <em>collaboratively graded</em>.  In a nutshell, this means:</p><div class="no-row-height column-margin column-container"><span class="margin-aside">You may have also heard the term <em>ungrading</em> to refer to a similar approach.</span></div></div>
 <ul>
 <li>There are no points or scores attached to any assignment. When you turn in assignments, you’ll get feedback on how to revise/resubmit, improve or otherwise proceed in the course, but you won’t get “graded.”</li>
 <li>There also aren’t any firm due dates, although I will give you suggestions on how to maintain a good pace. </li>
 <li>Periodically throughout the semester, you will complete reflection activities to help you take stock of your learning and achievement in the course. In your final activity at the end of the semester, you’ll make a proposal for your letter grade in the course, and support it with evidence of your learning. You and I will then meet to discuss how the course went for you, using your reflection activity and proposal as a starting point. In this conversation, you and I will agree on your final letter grade for the course, which I will then submit to the registrar.</li>
 </ul>
-<div class="no-row-height column-margin column-container"><span class="">All work you wish to be considered toward your achievement in the course needs to be submitted by the end of Finals Week.</span></div><p>Reflection activities:</p>
+<div class="no-row-height column-margin column-container"><span class="margin-aside">All work you wish to be considered toward your achievement in the course needs to be submitted by the end of Finals Week.</span></div><p>Reflection activities:</p>
 <ul>
 <li><a href="./assignments/process/goal-setting.html">Reflective goal-setting</a>.</li>
 <li><a href="./assignments/process/mid-course.html">Mid-course reflection</a>.</li>
@@ -456,7 +487,7 @@ You may have some topic or idea that especially interests you and which you want
 <li><strong>R</strong>: Revision suggested, <em>I believe that you need to spend more time with this assignment in order to learn what it has to teach you.</em></li>
 <li><strong>N</strong>: Not Complete, <em>You have more work to do in order to learn what this assignment has to teach you.</em></li>
 </ul>
-<div class="page-columns page-full"><p>There is no formula by which Es, Ms, Rs, and Ns are factored into a final grade. Instead, it will be up to you to set goals around these and hold yourself accountable to them. </p><div class="no-row-height column-margin column-container"><span class="">Historically, ambitious students in this course have reached Es or above on at least 4 blog posts and Ms on at least 2-3 more.</span></div></div>
+<div class="page-columns page-full"><p>There is no formula by which Es, Ms, Rs, and Ns are factored into a final grade. Instead, it will be up to you to set goals around these and hold yourself accountable to them. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">Historically, ambitious students in this course have reached Es or above on at least 4 blog posts and Ms on at least 2-3 more.</span></div></div>
 <p>It is relatively rare to earn an <strong>E</strong> on a first assignment submission. That’s ok! It’s an opportunity for you to revise and continue to learn. <strong>Revising in response to feedback is one of the single most effective ways for you to deepen your learning.</strong></p>
 </section>
 <section id="project" class="level3">
@@ -613,7 +644,7 @@ We Can Help You Borrow a Laptop
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-abu-mostafaLearningDataShort2012" class="csl-entry" role="listitem">
 Abu-Mostafa, Yaser S., Malik Magdon-Ismail, and Hsuan-Tien Lin. 2012. <em>Learning from Data: A Short Course</em>. S.l.
 </div>
@@ -721,6 +752,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -755,7 +804,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -770,15 +823,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -787,7 +853,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -829,6 +903,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -904,7 +1001,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

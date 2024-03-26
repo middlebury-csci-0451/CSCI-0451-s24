@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.339">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -82,12 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -96,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -105,6 +107,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
@@ -112,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
@@ -185,6 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p class="date">2023-03-08</p>
 </header>
 
+
 <div class="hidden">
 $$
 <p>$$</p>
@@ -216,7 +246,7 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i
 \]</span> is the empirical risk and <span class="math display">\[
 \ell(\hat{y}, y) = -y \log \sigma(\hat{y}) - (1-y)\log (1-\sigma(\hat{y}))\;,
 \]</span> is the logistic loss. Logistic regression is an outstanding algorithm for linear classification, but it can only handle <em>linear decision boundaries</em>. Here’s an example of a data set that has a clear <em>nonlinear</em> pattern that we’d like to learn:</p>
-<div id="870a1eb5" class="cell" data-execution_count="2">
+<div id="e5963301" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons, make_circles</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -227,12 +257,16 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-kernel-logistic_files/figure-html/cell-2-output-1.png" width="602" height="429"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-kernel-logistic_files/figure-html/cell-2-output-1.png" width="600" height="429" class="figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Follow the instructions <a href="http://rasbt.github.io/mlxtend/installation/">here</a> to install the <code>mlxtend</code> package.</span></div></div>
+</div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Follow the instructions <a href="http://rasbt.github.io/mlxtend/installation/">here</a> to install the <code>mlxtend</code> package.</span></div></div>
 <p>A linear separator wouldn’t do great on this data set. To see the best we can do, let’s use pre-implemented versions of logistic regression and a visualization tool:</p>
-<div id="7b84da91" class="cell" data-execution_count="3">
+<div id="7d5a9790" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.plotting <span class="im">import</span> plot_decision_regions</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -246,11 +280,15 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                      xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, </span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                      ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-kernel-logistic_files/figure-html/cell-3-output-1.png" width="600" height="449"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-kernel-logistic_files/figure-html/cell-3-output-1.png" width="587" height="449" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Our classifier does better than random chance, but it looks like we could do significantly better if we were able to learn the “curvy shape” of the data. Here’s an example using <em>kernel logistic regression</em>, which you will implement in this assignment.</p>
-<div id="59c66e2e" class="cell" data-execution_count="4">
+<div id="f65e3e74" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> solutions.kernel_logistic <span class="im">import</span> KernelLogisticRegression</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics.pairwise <span class="im">import</span> rbf_kernel</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -261,7 +299,11 @@ L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{w}, \mathbf{x}_i
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                      xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, </span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                      ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-kernel-logistic_files/figure-html/cell-4-output-1.png" width="600" height="449"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-kernel-logistic_files/figure-html/cell-4-output-1.png" width="587" height="449" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="kernel-logistic-regression" class="level2" data-number="1.1">
@@ -292,7 +334,7 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <section id="implement-kernel-logistic-regression" class="level2 page-columns page-full" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="implement-kernel-logistic-regression"><span class="header-section-number">2.1</span> Implement Kernel Logistic Regression</h2>
 <p>Implement a Python class called <code>KernelLogisticRegression</code>. You’ll be able to use it like the example in the previous section. Your class should implement the following methods:</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you’re not sure how to use <code>**kwargs</code> in Python functions and methods, you might want to check <a href="https://realpython.com/python-kwargs-and-args/#using-the-python-kwargs-variable-in-function-definitions">this resource</a>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">If you’re not sure how to use <code>**kwargs</code> in Python functions and methods, you might want to check <a href="https://realpython.com/python-kwargs-and-args/#using-the-python-kwargs-variable-in-function-definitions">this resource</a>.</span></div></div>
 <ul>
 <li><code>__init__(self, kernel, **kernel_kwargs)</code> should accept a <code>kernel</code> function and a set of named keyword arguments called <code>kernel_kwargs</code>. All the <code>__init__()</code> method should do is to save these items as instance variables called
 <ul>
@@ -350,7 +392,7 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <section id="choosing-gamma" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="choosing-gamma">Choosing <code>gamma</code></h3>
 <p>When we choose a very large value of <code>gamma</code>, we can achieve a very wiggly decision boundary with very good accuracy on the training data. For example:</p>
-<div id="c480f52e" class="cell" data-execution_count="5">
+<div id="76935b57" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>KLR <span class="op">=</span> KernelLogisticRegression(rbf_kernel, gamma <span class="op">=</span> <span class="dv">10000</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>KLR.fit(X, y)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(KLR.score(X, y))</span>
@@ -362,11 +404,15 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <pre><code>1.0</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-kernel-logistic_files/figure-html/cell-5-output-2.png" width="600" height="449"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-kernel-logistic_files/figure-html/cell-5-output-2.png" width="587" height="449" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Here, our classifier draws a little orange blob around each orange data point: points very nearby are classified as orange while other points are classified as blue. This is sufficient to achieve 100% accuracy on the training data. But this doesn’t <em>generalize</em>: generate some new data and we’ll see much worse performance:</p>
-<div id="e19336c0" class="cell" data-execution_count="6">
+<div id="6f37a509" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># new data with the same rough pattern</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_moons(<span class="dv">200</span>, shuffle <span class="op">=</span> <span class="va">True</span>, noise <span class="op">=</span> <span class="fl">0.2</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plot_decision_regions(X, y, clf <span class="op">=</span> KLR)</span>
@@ -374,11 +420,15 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                      xlabel <span class="op">=</span> <span class="st">"Feature 1"</span>, </span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                      ylabel <span class="op">=</span> <span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-kernel-logistic_files/figure-html/cell-6-output-1.png" width="600" height="449"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-kernel-logistic_files/figure-html/cell-6-output-1.png" width="600" height="449" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Whoops! Not so good. We say that the <em>validation</em> or <em>testing</em> accuracy of the classifier is quite low. Cases in which the validation accuracy is low even though the training accuracy is high are classic instances of overfitting.</p>
-<div class="page-columns page-full"><p> Design an experiment in which you fit your model for several different values of <code>gamma</code>. Show accuracy on both training data (the data on which the model was <code>fit</code>) and testing data (data generated from the same settings but which the model has never seen before). Please show your findings in the form of an attractive visualization with clear labels and a clear message.</p><div class="no-row-height column-margin column-container"><span class="">My suggestion is to choose <code>gamma in 10**np.arange(-5, 6)</code></span></div></div>
+<div class="page-columns page-full"><p> Design an experiment in which you fit your model for several different values of <code>gamma</code>. Show accuracy on both training data (the data on which the model was <code>fit</code>) and testing data (data generated from the same settings but which the model has never seen before). Please show your findings in the form of an attractive visualization with clear labels and a clear message.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">My suggestion is to choose <code>gamma in 10**np.arange(-5, 6)</code></span></div></div>
 </section>
 <section id="vary-the-noise" class="level3">
 <h3 class="anchored" data-anchor-id="vary-the-noise">Vary the Noise</h3>
@@ -387,12 +437,16 @@ L_k(\mathbf{v}) = \frac{1}{n} \sum_{i = 1}^n \ell(\langle \mathbf{v}, \boldsymbo
 <section id="try-other-problem-geometries" class="level3">
 <h3 class="anchored" data-anchor-id="try-other-problem-geometries">Try Other Problem Geometries</h3>
 <p>Use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles"><code>make_circles</code></a> function to generate some concentric circles instead of crescents. Show a few examples with varying amounts of noise. Can you find some values of <code>gamma</code> that look like they lead to good learning performance for this data set? Here’s an example of a fairly successful classifier: both the points and the accuracy are computed on unseen test data.</p>
-<div id="72c1b3b1" class="cell" data-execution_count="7">
+<div id="933c82f2" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
-<pre><code>0.99</code></pre>
+<pre><code>0.995</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-kernel-logistic_files/figure-html/cell-7-output-2.png" width="603" height="449"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-kernel-logistic_files/figure-html/cell-7-output-2.png" width="601" height="449" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -492,6 +546,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -526,7 +598,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -541,15 +617,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -558,7 +647,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -600,6 +697,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -675,7 +795,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

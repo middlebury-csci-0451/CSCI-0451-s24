@@ -1,4 +1,4 @@
----  
+---   
 #   type: table
 #   sort: best-by
 #   fields: [title, type, best-by,]

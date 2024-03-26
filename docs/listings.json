@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/blog.html",
+    "listing": "/schedule.html",
     "items": []
   },
   {
@@ -13,11 +13,12 @@
       "/assignments/blog-posts/blog-post-music-classification.html",
       "/assignments/blog-posts/blog-post-erm.html",
       "/assignments/blog-posts/blog-post-linear-regression.html",
+      "/assignments/blog-posts/blog-post-optimization.html",
       "/assignments/blog-posts/blog-post-perceptron.html",
       "/assignments/blog-posts/blog-post-kernel-logistic.html",
       "/assignments/blog-posts/blog-post-guest-speaker.html",
       "/assignments/blog-posts/blog-post-limits-of-quantitative.html",
-      "/assignments/blog-posts/blog-post-optimization.html",
+      "/assignments/blog-posts/blog-post-newton.html",
       "/assignments/blog-posts/blog-post-adam.html",
       "/assignments/blog-posts/blog-post-dissecting-bias.html",
       "/assignments/blog-posts/blog-post-WIDS.html",
@@ -33,9 +34,5 @@
       "/assignments/project/project-presentation.html",
       "/assignments/project/proposal.html"
     ]
-  },
-  {
-    "listing": "/schedule.html",
-    "items": []
   }
 ]

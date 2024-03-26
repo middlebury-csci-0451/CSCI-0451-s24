@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.339">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-03-01">
-<meta name="description" content="In this blog post, you’ll implement several first-order methods: optimization algorithms based on the gradients of functions. You’ll implement simple gradient descent, a momentum method, and stochastic gradient descent, comparing their performance for training logistic regression.">
+<meta name="dcterms.date" content="2024-04-04">
+<meta name="description" content="In this blog post, you’ll implement a generalized form of gradient descent for logistic regression.">
 
-<title>Optimization for Logistic Regression</title>
+<title>Implementing Logistic Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -82,12 +102,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -96,6 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -105,6 +127,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
@@ -112,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
@@ -158,28 +207,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#implement-logistic-regression" id="toc-implement-logistic-regression" class="nav-link" data-scroll-target="#implement-logistic-regression">1. Implement Logistic Regression</a>
+  <li><a href="#part-a-implement-logistic-regression" id="toc-part-a-implement-logistic-regression" class="nav-link" data-scroll-target="#part-a-implement-logistic-regression">Part A: Implement Logistic Regression</a>
   <ul class="collapse">
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">Gradient Descent</a></li>
-  <li><a href="#stochastic-gradient-descent" id="toc-stochastic-gradient-descent" class="nav-link" data-scroll-target="#stochastic-gradient-descent">Stochastic Gradient Descent</a></li>
-  <li><a href="#momentum-optional" id="toc-momentum-optional" class="nav-link" data-scroll-target="#momentum-optional">Momentum (Optional)</a></li>
-  <li><a href="#illustration" id="toc-illustration" class="nav-link" data-scroll-target="#illustration">Illustration</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#implement-linearmodel-and-logisticregression" id="toc-implement-linearmodel-and-logisticregression" class="nav-link" data-scroll-target="#implement-linearmodel-and-logisticregression">Implement <code>LinearModel</code> and <code>LogisticRegression()</code></a></li>
+  <li><a href="#implement-gradientdescentoptimizer" id="toc-implement-gradientdescentoptimizer" class="nav-link" data-scroll-target="#implement-gradientdescentoptimizer">Implement <code>GradientDescentOptimizer</code></a></li>
   </ul></li>
-  <li><a href="#perform-experiments" id="toc-perform-experiments" class="nav-link" data-scroll-target="#perform-experiments">2. Perform Experiments</a></li>
-  <li><a href="#document-and-write" id="toc-document-and-write" class="nav-link" data-scroll-target="#document-and-write">3. Document and Write</a></li>
-  <li><a href="#submit" id="toc-submit" class="nav-link" data-scroll-target="#submit">4. Submit</a></li>
-  <li><a href="#tips-and-hints" id="toc-tips-and-hints" class="nav-link" data-scroll-target="#tips-and-hints">Tips and Hints</a></li>
+  <li><a href="#part-b-experiments" id="toc-part-b-experiments" class="nav-link" data-scroll-target="#part-b-experiments">Part B: Experiments</a>
+  <ul class="collapse">
+  <li><a href="#experimental-data" id="toc-experimental-data" class="nav-link" data-scroll-target="#experimental-data">Experimental Data</a></li>
+  <li><a href="#how-to-train-your-model" id="toc-how-to-train-your-model" class="nav-link" data-scroll-target="#how-to-train-your-model">How to Train Your Model</a></li>
+  <li><a href="#experiments" id="toc-experiments" class="nav-link" data-scroll-target="#experiments">Experiments</a></li>
+  </ul></li>
+  <li><a href="#part-c-writing" id="toc-part-c-writing" class="nav-link" data-scroll-target="#part-c-writing">Part C: Writing</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Optimization for Logistic Regression</h1>
+<h1 class="title display-7">Implementing Logistic Regression</h1>
 
-<p class="date">2023-03-01</p>
+<p class="date">2024-04-04</p>
 </header>
+
 
 <div class="hidden">
 <p><span class="math display">\[
@@ -193,195 +245,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \newcommand{\paren}[1]{\left( #1 \right)}
 \]</span></p>
 </div>
+<p><em>The <a href="../../blog-post-expectations.html">expectations for all blog posts</a> apply!</em></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In <a href="../../lecture-notes/gradient-descent.qmd"></a>, we introduced the <em>gradient descent</em> algorithm for optimization and showed it in action for the logistic regression problem. In this blog post, you’ll:</p>
+<p><a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html">Recently</a>, we introduced the gradient descent algorithm for solving the empirical risk minimization problem. We also calculated the gradient of the loss function for logistic regression.</p>
+<p>In this blog post you will:</p>
 <ol type="1">
 <li>Implement gradient descent for logistic regression in an object-oriented paradigm.</li>
-<li>Implement a key variant of gradient descent called <em>stochastic gradient descent</em>, including an optional momentum feature.</li>
-<li>Perform several simple experiments on synthetic data to see which of these algorithms converges most quickly to a satisfactory logistic regression model.</li>
+<li>Implement a key variant of gradient descent with <em>momentum</em> in order to achieve faster convergence.</li>
+<li>Perform experiments to test your implementations.</li>
 </ol>
 </section>
-<section id="implement-logistic-regression" class="level2">
-<h2 class="anchored" data-anchor-id="implement-logistic-regression">1. Implement Logistic Regression</h2>
-<p>In your source file, implement a <code>LogisticRegression()</code> class. Your class should have similar user-facing functions as the <code>Perceptron()</code> class from the <a href="blog-post-perceptron.qmd">previous blog post</a>. These are:</p>
+<section id="part-a-implement-logistic-regression" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="part-a-implement-logistic-regression">Part A: Implement Logistic Regression</h2>
+<section id="getting-started" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started">Getting Started</h3>
+<ol type="1">
+<li>Please create a new blog post. In addition to the usual <code>.ipynb</code> file, please also create a script called <code>logistic.py</code> <em>in the same directory</em>. This is the file in which you will implement logistic regression.</li>
+<li>Then, in your <code>.ipynb</code> notebook file, place the following in a Python code block underneath your metadata block:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> logistic <span class="im">import</span> LogisticRegression, GradientDescentOptimizer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you complete the optional implementation of Newton’s Method, you’ll also need to import <code>NewtonOptimizer</code>.</p>
+</section>
+<section id="implement-linearmodel-and-logisticregression" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="implement-linearmodel-and-logisticregression">Implement <code>LinearModel</code> and <code>LogisticRegression()</code></h3>
+<p>If you haven’t already, implement the methods of the <code>LinearModel</code> class as described in <a href="../../warmup-exercises.html#sec-perceptron">this warmup</a>. Then, define a new class called <code>LogisticRegression</code> which inherits from <code>LinearModel</code>. This class should have two methods:</p>
 <ul>
-<li><code>LogisticRegression.fit(X, y)</code> is the primary method. This method has no return value. If <code>LR</code> is a <code>LogisticRegression</code> object, then after <code>LR.fit(X, y)</code> is called, <code>LR</code> should have an instance variable of <em>weights</em> called <code>w</code>. This <code>w</code> is the vector of weights, including the bias term <span class="math inline">\(b\)</span>. <code>LR</code> should have an instance variable called <code>LR.loss_history</code> which is a list of the evolution of the <code>loss</code> over the training period (see <code>LogisticRegression.loss(X, y)</code> below). Finally, <code>LR</code> should have an instance variable called <code>LR.score_history</code> which is a list of the evolution of the <code>score</code> over the training period (see <code>LogisticRegression.score(X, y)</code> below).</li>
-<li><code>LogisticRegression.predict(X)</code> should return a vector <span class="math inline">\(\hat{\vy} \in \{0,1\}^n\)</span> of predicted labels. These are the model’s predictions for the labels on the data.</li>
-<li><code>LogisticRegression.score(X, y)</code> should return the <em>accuracy</em> of the predictions as a number between 0 and 1, with 1 corresponding to perfect classification.</li>
-<li><code>LogisticRegression.loss(X, y)</code> should return the overall loss (empirical risk) of the current weights on <code>X</code> and <code>y</code>.</li>
+<li><code>LogisticRegression.loss(X, y)</code> should compute the empirical risk <span class="math inline">\(L(\mathbf{w})\)</span> using the logistic loss function  <span class="math display">\[
+\begin{aligned}
+  L(\mathbf{w}) = \frac{1}{n} \sum_{i = 1}^n \left[-y_i \log \sigma(s_i) - (1-y_i)\log (1-\sigma(s_i))\right]
+\end{aligned}
+\]</span> The weight vector <span class="math inline">\(\mathbf{w}\)</span> used for this calculation should be stored as an instance variable of the class.</li>
+<li><code>LogisticRegression.grad(X, y)</code> should compute the <em>gradient</em> of the empirical risk <span class="math inline">\(L(\mathbf{w})\)</span>. You can use <a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html#eq-logistic-gradient">the formula</a> for the gradient supplied in the lecture notes on gradient descent.</li>
 </ul>
-<section id="gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent">Gradient Descent</h3>
-<p>Your <code>LogisticRegression.fit</code> method should use gradient descent as described in lecture. Allow the user to specify the learning rate <span class="math inline">\(\alpha\)</span> and the maximum number of iterations, which for this blog post we’ll call <em>epochs</em>. So, using the <code>fit</code> method might look like this:</p>
-<div id="da3fff8b" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> solutions.logistic <span class="im">import</span> LogisticRegression <span class="co"># your source code</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>np.seterr(<span class="bu">all</span><span class="op">=</span><span class="st">'ignore'</span>) </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make the data</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>p_features <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_blobs(n_samples <span class="op">=</span> <span class="dv">200</span>, n_features <span class="op">=</span> p_features <span class="op">-</span> <span class="dv">1</span>, centers <span class="op">=</span> [(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">1</span>)])</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="blog-post-optimization_files/figure-html/cell-2-output-1.png" width="587" height="429"></p>
-</div>
-</div>
-<div id="df26df94" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the model</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>LR.fit(X, y, alpha <span class="op">=</span> <span class="fl">0.1</span>, max_epochs <span class="op">=</span> <span class="dv">1000</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the fitted value of w</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>LR.w </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c <span class="op">=</span> y)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>xlab <span class="op">=</span> plt.xlabel(<span class="st">"Feature 1"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ylab <span class="op">=</span> plt.ylabel(<span class="st">"Feature 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="blog-post-optimization_files/figure-html/cell-3-output-1.png" width="587" height="429"></p>
-</div>
-</div>
+<div class="no-row-height column-margin column-container"><span class="margin-aside">As usual, <span class="math inline">\(s_i = \langle \mathbf{w}, \mathbf{x}_i \rangle\)</span> and <span class="math inline">\(\sigma(s) = \frac{1}{1 + e^{-s}}\)</span>.</span></div><p>For an <strong>M</strong>, you can implement <code>LogisticRegression.grad</code> using a <code>for</code>-loop. For an <strong>E</strong>, your solution should involve no explicit loops. While working on a solution that avoids loops, you might find it useful to at some point convert a tensor <code>v</code> with shape <code>(n,)</code> into a tensor <code>v_</code> with shape <code>(n,1)</code>. The code <code>v_ = v[:, None]</code> will perform this conversion for you.</p>
 </section>
-<section id="stochastic-gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-gradient-descent">Stochastic Gradient Descent</h3>
-<p>Now implement an alternative version of the <code>fit</code> method called <code>fit_stochastic</code>. In this method, you will implement <em>stochastic gradient descent</em>. In stochastic gradient descent, we don’t compute the complete gradient</p>
-<p><span class="math display">\[
-\nabla L(\vw) = \frac{1}{n}\sum_{i = 1}^n \nabla \ell(f_{\vw}(\vx_i), y_i)\;.
-\]</span></p>
-<p>Instead, we compute a <em>stochastic gradient</em> by picking a random subset <span class="math inline">\(S \subseteq [n] = \{1, \ldots, n\}\)</span> and computing</p>
-<p><span class="math display">\[
-\nabla_S L(\vw) = \frac{1}{\abs{S}}\sum_{i \in S} \nabla \ell(f_{\vw}(\vx_i), y_i)\;.
-\]</span></p>
-<p>The size of <span class="math inline">\(S\)</span> is called the <em>batch size</em>. Typically, we cycle through all the points <span class="math inline">\(1\)</span> through <span class="math inline">\(n\)</span> in the following way:</p>
+<section id="implement-gradientdescentoptimizer" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="implement-gradientdescentoptimizer">Implement <code>GradientDescentOptimizer</code></h3>
+<div class="page-columns page-full"><p>Next, implement a <code>GradientDescentOptimizer</code> class. For this project, we are going to implement <em>gradient descent with momentum</em>, also known as Spicy Gradient Descent. Let <span class="math inline">\(\mathbf{w}_k\)</span> be the estimate of the weight vector at algorithmic step <span class="math inline">\(k\)</span>. Gradient descent with momentum performs the update  <span id="eq-gradient-momentum"><span class="math display">\[
+\begin{aligned}
+    \mathbf{w}_{k+1} \gets \mathbf{w}_k - \alpha \nabla L(\mathbf{w}_k) + \beta(\mathbf{w}_k - \mathbf{w}_{k-1})
+\end{aligned}
+\tag{1}\]</span></span></p><div class="no-row-height column-margin column-container"><span class="margin-aside">This description of gradient descent with momentum is based on <span class="citation" data-cites="hardtPatternsPredictionsActions2022">Hardt and Recht (<a href="#ref-hardtPatternsPredictionsActions2022" role="doc-biblioref">2022</a>)</span>.</span></div></div>
+<p>Here, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are <em>two</em> learning rate parameters. When <span class="math inline">\(\beta = 0\)</span> we have “regular” gradient descent. In practice, a choice of <span class="math inline">\(\beta \approx 0.9\)</span> or so is common. Implementing the momentum term isn’t too complex – you’ll just need to create a new instance variable to hold the <em>previous</em> value of <span class="math inline">\(\mathbf{w}\)</span> as well as the current one.</p>
+</section>
+</section>
+<section id="part-b-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-experiments">Part B: Experiments</h2>
+<section id="experimental-data" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-data">Experimental Data</h3>
+<p>Here is some code to generate data for a classification problem. You can control the number of points by adjusting <code>n_points</code>, the number of features by adjusting <code>p_dims</code>, and the difficulty of the classification problem by adjusting the <code>noise</code> (higher noise is a harder problem).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classification_data(n_points <span class="op">=</span> <span class="dv">300</span>, noise <span class="op">=</span> <span class="fl">0.2</span>, p_dims <span class="op">=</span> <span class="dv">2</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> torch.arange(n_points) <span class="op">&gt;=</span> <span class="bu">int</span>(n_points<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="fl">1.0</span><span class="op">*</span>y</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> y[:, <span class="va">None</span>] <span class="op">+</span> torch.normal(<span class="fl">0.0</span>, noise, size <span class="op">=</span> (n_points,p_dims))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> torch.cat((X, torch.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>))), <span class="dv">1</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, y</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> classification_data(noise <span class="op">=</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="how-to-train-your-model" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-train-your-model">How to Train Your Model</h3>
+<p>Once you’ve correctly implemented logistic regression and gradient descent, you can do a gradient descent loop like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression() </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>opt <span class="op">=</span> GradientDescentOptimizer(LR)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add other stuff to e.g. keep track of the loss over time. </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    opt.step(X, y, alpha <span class="op">=</span> <span class="fl">0.1</span>, beta <span class="op">=</span> <span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="experiments" class="level3">
+<h3 class="anchored" data-anchor-id="experiments">Experiments</h3>
+<p>Please perform experiments, with careful written explanations, that demonstrate the following statements:</p>
 <ol type="1">
-<li>Shuffle the points randomly.</li>
-<li>Pick the first <span class="math inline">\(k\)</span> random points, compute the stochastic gradient, and then perform an update.</li>
-<li>Pick the next <span class="math inline">\(k\)</span> random points and repeat..</li>
-<li>When we have gone through all <span class="math inline">\(n\)</span> points, reshuffle them all randomly and proceed again.</li>
+<li><strong>Vanilla gradient descent</strong>: When <span class="math inline">\(p_dim = 2\)</span>, when <span class="math inline">\(\alpha\)</span> is sufficiently small and <span class="math inline">\(\beta = 0\)</span>, gradient descent for logistic regression converges to a weight vector <span class="math inline">\(\mathbf{w}\)</span> that looks visually correct (plot the decision boundary with the data). Furthermore, the loss decreases monotonically (plot the loss over iterations).
+<ul>
+<li>This is a good experiment to use to assess whether your implementation in Part A has bugs.</li>
+</ul></li>
+<li><strong>Benefits of momentum</strong>: On the same data, gradient descent with momentum (e.g.&nbsp;<span class="math inline">\(\beta = 0.9\)</span>) <em>can</em> converge to the correct weight vector in fewer iterations than vanilla gradient descent (with <span class="math inline">\(\beta = 0\)</span>). Plot the loss over iterations for each method. You may need to experiment with the data and choice of <span class="math inline">\(\alpha\)</span> in order to observe speedups due to momentum.</li>
+<li><strong>Overfitting</strong>: Generate some data where <code>p_dim &gt; n_points</code>. For example, <code>p_dim = 100</code> and <code>n_points = 50</code>. Do this <strong>twice</strong> with the exact same parameters. Call the first dataset <code>X_train, y_train</code> and the second dataset <code>X_test, y_test</code>. Then, do an experiment in which you fit a logistic regression model to the data <code>X_train, y_train</code> and obtain 100% accuracy on this training data. What is the accuracy on the test data?</li>
 </ol>
-<p>This process can be accomplished efficiently using the <code>np.array_split()</code> function, which will create batches for you. Here is some code to get you started; it will split the data into batches of size <code>batch_size</code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> np.arange(m_epochs):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> np.arange(n)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    np.random.shuffle(order)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> batch <span class="kw">in</span> np.array_split(order, n <span class="op">//</span> batch_size <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        x_batch <span class="op">=</span> X[batch,:]</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        y_batch <span class="op">=</span> y[batch]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> gradient(w, x_batch, y_batch) </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># perform the gradient step</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For stochastic gradient descent, only update <code>self.loss_history</code> <em>at the end of each epoch</em>. This allows us to compare to regular gradient descent, since in both algorithms at the end of an epoch we have used every single point once.</p>
-</section>
-<section id="momentum-optional" class="level3">
-<h3 class="anchored" data-anchor-id="momentum-optional">Momentum (Optional)</h3>
-<p>The momentum method is described on p.&nbsp;85 of <a href="https://via.hypothes.is/https://arxiv.org/pdf/2102.05242.pdf">Hardt and Recht</a>. Implement the momentum method for stochastic gradient descent. My advice is to do so as an optional parameter for <code>fit_stochastic</code>. In my implementation, if the user sets <code>momentum = True</code> then I set the parameter <span class="math inline">\(\beta\)</span> from Hardt and Recht to value <code>0.8</code>. Otherwise it is set to 0, and we have regular gradient descent.</p>
-</section>
-<section id="illustration" class="level3">
-<h3 class="anchored" data-anchor-id="illustration">Illustration</h3>
-<p>Here is an example plot showing the evolution of the loss function for the three algorithms:</p>
-<div id="c0cbd640" class="cell caption-undefined" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>LR.fit_stochastic(X, y, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  m_epochs <span class="op">=</span> <span class="dv">100</span>, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                  momentum <span class="op">=</span> <span class="va">True</span>, </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                  batch_size <span class="op">=</span> <span class="dv">10</span>, </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                  alpha <span class="op">=</span> <span class="fl">.05</span>) </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>num_steps <span class="op">=</span> <span class="bu">len</span>(LR.loss_history)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, LR.loss_history, label <span class="op">=</span> <span class="st">"stochastic gradient (momentum)"</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>LR.fit_stochastic(X, y, </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                  m_epochs <span class="op">=</span> <span class="dv">100</span>, </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                  momentum <span class="op">=</span> <span class="va">False</span>, </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                  batch_size <span class="op">=</span> <span class="dv">10</span>, </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                  alpha <span class="op">=</span> <span class="fl">.1</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>num_steps <span class="op">=</span> <span class="bu">len</span>(LR.loss_history)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, LR.loss_history, label <span class="op">=</span> <span class="st">"stochastic gradient"</span>)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>LR.fit(X, y, alpha <span class="op">=</span> <span class="fl">.05</span>, max_epochs <span class="op">=</span> <span class="dv">100</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>num_steps <span class="op">=</span> <span class="bu">len</span>(LR.loss_history)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>plt.plot(np.arange(num_steps) <span class="op">+</span> <span class="dv">1</span>, LR.loss_history, label <span class="op">=</span> <span class="st">"gradient"</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>plt.loglog()</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> plt.legend() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="blog-post-optimization_files/figure-html/cell-4-output-1.png" width="603" height="412" class="figure-img"></p>
-<figcaption class="figure-caption">Evolution of the training loss for three optimization algorithms.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>For these settings, stochastic gradient descent with and without momentum tends to get to a “pretty good” result faster than standard gradient descent, but these random algorithms can “bounce around” near the good solution. Standard gradient descent might need more epochs to find a good solution, but quickly “settles down” once it finds it.</p>
 </section>
 </section>
-<section id="perform-experiments" class="level2">
-<h2 class="anchored" data-anchor-id="perform-experiments">2. Perform Experiments</h2>
-<p>After you have tested and implemented your class, please perform experiments in which you show examples of the following phenomena:</p>
+<section id="part-c-writing" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-writing">Part C: Writing</h2>
+<p>Please:</p>
 <ol type="1">
-<li>A case in which gradient descent does not converge to a minimizer because the learning rate <span class="math inline">\(\alpha\)</span> is too large.</li>
-<li>A case in which the choice of batch size influences how quickly the algorithm converges.</li>
-<li>If you implemented momentum, a case in which the use of momentum significantly speeds up convergence.</li>
+<li>Please include informative comments throughout your source code <strong>and a thorough docstring</strong> for each method in <code>LogisticRegression</code> and <code>GradientDescentOptimizer</code>.</li>
+<li>Please add <strong>careful expository writing</strong> throughout your blog post. You should describe each experiment and what it is intended to illustrate. You should also ensure that all your plots are legible and have appropriate axis labels and legends.</li>
+<li>At the beginning of your blog post, please place <strong>a link to your source code</strong> <code>logistic.py</code> on GitHub. After this link, please write <strong>an abstract paragraph</strong> describing the topic of your post and giving a brief overview of the experiments you performed.</li>
+<li>At the conclusion of your blog post, please write <strong>a discussion paragraph</strong> reminding the reader of what you did and what you learned while doing it.</li>
 </ol>
-<p>In at least one of these experiments, generate some synthetic data (it’s fine to use <code>make_blobs</code>) for data of at least 10 feature dimensions.</p>
-</section>
-<section id="document-and-write" class="level2">
-<h2 class="anchored" data-anchor-id="document-and-write">3. Document and Write</h2>
-<p>Please include informative comments throughout your source code, <strong>and a thorough docstring</strong> for each of your <code>fit</code> and <code>fit_stochastic</code> methods.</p>
-<p>In your blog post, please describe both your approach to implementing your algorithm and the findings of your experiments.</p>
-</section>
-<section id="submit" class="level2">
-<h2 class="anchored" data-anchor-id="submit">4. Submit</h2>
-<p>Submit your blog post, making sure to include a link to the online version of your source code at the top of your post.</p>
-</section>
-<section id="tips-and-hints" class="level2">
-<h2 class="anchored" data-anchor-id="tips-and-hints">Tips and Hints</h2>
-<p>Most of the major math functions are shown in our <a href="../../lecture-notes/gradient-descent.qmd">lecture on gradient descent</a>. You’re welcome to use any of these functions as you wish; please just incorporate comments in your code and blog post to cite where they came from.</p>
-<p>If you compute the gradient using matrix-vector operations in <code>numpy</code> (recommended, no for-loops!), you may find it useful at some point to convert an <code>np.array()</code> of shape <code>(n,)</code> to an <code>np.array()</code> of shape <code>(n,1)</code> like this:</p>
-<div id="778ae80a" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.random.rand(<span class="dv">5</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>array([0.99223301, 0.3061863 , 0.82998541, 0.84127377, 0.07136462])</code></pre>
-</div>
-</div>
-<div id="f58a7972" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>v[:,np.newaxis]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>array([[0.99223301],
-       [0.3061863 ],
-       [0.82998541],
-       [0.84127377],
-       [0.07136462]])</code></pre>
-</div>
-</div>
-<p>You will find it convenient again to ensure that <code>X</code> contains a column of <code>1</code>s prior to any major computations. I defined this function:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pad(X):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.append(X, np.ones((X.shape[<span class="dv">0</span>], <span class="dv">1</span>)), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and called it at a few strategic places in my implementation.</p>
-<p>My complete implementation, including all the math functions, momentum, etc. but excluding comments, was about 100 lines of code.</p>
-<p>You’re welcome to find creative ways to visualize your findings. You might also find it interesting to visualize the score (not just the loss). However, this is optional.</p>
+
 
 
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hardtPatternsPredictionsActions2022" class="csl-entry" role="listitem">
+Hardt, Moritz, and Benjamin Recht. 2022. <em>Patterns, <span>Predictions</span>, and <span>Actions</span></em>. Princeton University Press.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -461,6 +429,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -495,7 +481,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -510,15 +500,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -527,7 +530,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -569,6 +580,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -644,7 +678,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

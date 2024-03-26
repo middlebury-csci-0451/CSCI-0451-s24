@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.339">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -101,12 +102,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -115,6 +117,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -124,6 +127,33 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
@@ -131,7 +161,7 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
@@ -198,6 +228,7 @@ div.csl-indent {
 <p class="date">2024-03-08</p>
 </header>
 
+
 <p><em>The <a href="../../blog-post-expectations.html">expectations for all blog posts</a> apply!</em></p>
 <p>This blog post is a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10019630/"><em>replication study</em></a>. In this post, you will read a famous scholarly paper on racial bias in a healthcare recommender system; replicate its primary findings; and discuss your results.</p>
 <section id="preparation" class="level2 page-columns page-full">
@@ -207,14 +238,14 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>Obermeyer, Ziad, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. 2019. “Dissecting Racial Bias in an Algorithm Used to Manage the Health of Populations.” Science 366 (6464): 447–53.</p>
 </blockquote>
-<div class="page-columns page-full"><p><strong>Second</strong>, watch the concise high-level discussion of this paper in the video “<a href="https://www.youtube.com/watch?v=Ok5sKLXqynQ">Are We Automating Racism?</a>”. </p><div class="no-row-height column-margin column-container"><span class="">I recommend the entire video, but the discussion of this paper runs from approximately 14:45 to 17:51. The discussion features <a href="https://www.ruhabenjamin.com/">Dr.&nbsp;Ruha Benjamin</a>, a prominent critical scholar of technology and society. She is the author of the well-known book <em>Race After Technology</em>, as well as several others.</span></div></div>
+<div class="page-columns page-full"><p><strong>Second</strong>, watch the concise high-level discussion of this paper in the video “<a href="https://www.youtube.com/watch?v=Ok5sKLXqynQ">Are We Automating Racism?</a>”. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">I recommend the entire video, but the discussion of this paper runs from approximately 14:45 to 17:51. The discussion features <a href="https://www.ruhabenjamin.com/">Dr.&nbsp;Ruha Benjamin</a>, a prominent critical scholar of technology and society. She is the author of the well-known book <em>Race After Technology</em>, as well as several others.</span></div></div>
 <p><strong>Third</strong>, reread the article in the context of Dr.&nbsp;Benjamin’s discussion.</p>
 <p>Now, proceed on to the next parts.</p>
 </section>
 <section id="part-a-data-access" class="level2">
 <h2 class="anchored" data-anchor-id="part-a-data-access">Part A: Data Access</h2>
 <p>In order to protect patient privacy, the authors did not share the “real” data used in their study. Instead, they created a randomized version of the data that preserves many of the same patterns and trends. You can use the code below to access the data.</p>
-<div id="99d19b4f" class="cell" data-execution_count="2">
+<div id="8fe3f571" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://gitlab.com/labsysmed/dissecting-bias/-/raw/master/data/data_new.csv?inline=false"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -231,9 +262,13 @@ div.csl-indent {
 <section id="part-b-reproduce-fig.-1" class="level2">
 <h2 class="anchored" data-anchor-id="part-b-reproduce-fig.-1">Part B: Reproduce Fig. 1</h2>
 <p>Please make a plot in which you reproduce Fig. 1A of <span class="citation" data-cites="obermeyerDissectingRacialBias2019b">Obermeyer et al. (<a href="#ref-obermeyerDissectingRacialBias2019b" role="doc-biblioref">2019</a>)</span>. Your figure is not required to be exactly the same, but it must visualize risk score percentiles against mean number of active chronic conditions within that percentile. For example, I thought I would try spliting out male and female patients. I also think the figure looks a bit nicer with axes inverted. So, my result looked like this:</p>
-<div id="bc2a7cc7" class="cell" data-execution_count="3">
+<div id="101b8ed4" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<p><img src="blog-post-dissecting-bias_files/figure-html/cell-3-output-1.png" width="743" height="329"></p>
+<div>
+<figure class="figure">
+<p><img src="blog-post-dissecting-bias_files/figure-html/cell-3-output-1.png" width="743" height="329" class="figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Please make sure to appropriately label all axes, legends, and plot facets.</p>
@@ -251,12 +286,12 @@ div.csl-indent {
 <li>In my version of the first panel of Figure 3, I plot the <em>mean</em> expenditure within each risk score percentile.</li>
 <li>Although not explicitly labeled, I believe that the righthand panel of Fig. 3 in <span class="citation" data-cites="obermeyerDissectingRacialBias2019b">Obermeyer et al. (<a href="#ref-obermeyerDissectingRacialBias2019b" role="doc-biblioref">2019</a>)</span> has percentiles in the number of chronic conditions on the horizontal axis. I’m uncertain how they computed these, considering that in our sample data set the maximum number of chronic conditions is 17. This implies that either the original data set has patients with more chronic conditions or the authors did something to arbitrarily break ties. To avoid dealing with this, please simply use the number of chronic illnesses for your horizontal axis. Here’s an example of my solution:</li>
 </ul>
-<div id="3b4e86d7" class="cell page-columns page-full" data-execution_count="4">
+<div id="0301f769" class="cell page-columns page-full" data-execution_count="4">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="blog-post-dissecting-bias_files/figure-html/cell-4-output-1.png" class="figure-img" width="657" height="349"></p>
-<figcaption class="figure-caption margin-caption">I found it helpful to use <code>plt.subplots</code> to create a figure with two panels, and then <code>sns.scatterplot</code> to populate each of the panels.</figcaption>
+<figcaption class="margin-caption">I found it helpful to use <code>plt.subplots</code> to create a figure with two panels, and then <code>sns.scatterplot</code> to populate each of the panels.</figcaption>
 </figure>
 </div>
 </div>
@@ -278,7 +313,7 @@ div.csl-indent {
 </section>
 <section id="modeling" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="modeling">Modeling</h3>
-<div class="page-columns page-full"><p>Your figure from the previous part suggests that the relationship between the number of chronic conditions and the cost might be nonlinear. For this reason, we are going to fit a <em>linear regression model</em> with polynomial features in the number of active chronic conditions in order to to account for the nonlinearity. Here’s a mathematical description of our model: </p><div class="no-row-height column-margin column-container"><span class="">This is a relatively “casual” approach to modeling and should be viewed as exploratory rather than statistically confirmatory.</span></div></div>
+<div class="page-columns page-full"><p>Your figure from the previous part suggests that the relationship between the number of chronic conditions and the cost might be nonlinear. For this reason, we are going to fit a <em>linear regression model</em> with polynomial features in the number of active chronic conditions in order to to account for the nonlinearity. Here’s a mathematical description of our model: </p><div class="no-row-height column-margin column-container"><span class="margin-aside">This is a relatively “casual” approach to modeling and should be viewed as exploratory rather than statistically confirmatory.</span></div></div>
 <p><span class="math display">\[
 \begin{aligned}
   \log \mathrm{cost} \approx w_b \times (\text{patient is Black}) + \mathrm{intercept} + \sum_{i = 1}^k w_k\times (\text{gagne sum})^k\;.
@@ -286,7 +321,7 @@ div.csl-indent {
 \]</span></p>
 <p>Our primary statistical interest is in the value of the coefficient <span class="math inline">\(w_b\)</span>. In the context of a log-transformed linear model, <span class="math inline">\(w_b\)</span> has the following interpretation: the number <span class="math inline">\(e^{w_b}\)</span> is an estimate of the <em>percentage</em> of cost incurred by a Black patient in comparison to an equally sick white patient.</p>
 <p>To estimate <span class="math inline">\(w_b\)</span>, we can use a linear regression model, which is supplied by <code>scikit-learn</code>. How many polynomial features should we use? A simple way to figure this out is cross-validation. Here’s a function that will construct data sets with polynomial features of various sizes:</p>
-<div id="d72318ae" class="cell" data-execution_count="6">
+<div id="43292893" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_polynomial_features(X, degree):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  X_ <span class="op">=</span> X.copy()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, degree):</span>
@@ -309,7 +344,7 @@ div.csl-indent {
 
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-barocasFairnessMachineLearning2023" class="csl-entry" role="listitem">
 Barocas, Solon, Moritz Hardt, and Arvind Narayanan. 2023. <em>Fairness and Machine Learning: Limitations and Opportunities</em>. Cambridge, Massachusetts: The MIT Press.
 </div>
@@ -396,6 +431,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -430,7 +483,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -445,15 +502,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -462,7 +532,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -504,6 +582,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -579,7 +680,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

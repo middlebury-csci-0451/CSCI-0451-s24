@@ -1,0 +1,83 @@
+---
+title: "Newton's Method for Logistic Regression"
+type: "Blog Post"
+date: 2024-04-11
+description: |
+    In this blog post, you'll implement Newton's method for even faster logistic regression. 
+objectives: 
+  - Theory
+  - Implementation
+  - Experimentation
+publish: "true"
+---
+
+
+*The [expectations for all blog posts](../../blog-post-expectations.qmd) apply!* 
+
+## Introduction
+
+*This is an advanced blog post that requires you to have previously completed our [blog post](blog-post-optimization.qmd) on implementing logistic regression. If you haven't implemented logistic regression yet, go do that first.*
+
+### Part A: Implement `NewtonOptimizer`
+
+Newton's Method is a *second-order* optimization technique. This means that it requires information about the second derivatives of the loss function $L$ as well as the first derivatives. Here's how Newton's method works: 
+
+1. We compute the usual gradient $\nabla L(\mathbf{w})$. Recall that the gradient is the vector of first derivatives of $L$. 
+2. We also compute the *Hessian matrix*, which is the matrix of second derivatives of $L$. For logistic regression, the Hessian is the matrix $\mathbf{H}(\mathbf{w}) \in \mathbb{R}^{p \times p}$ with entries 
+$$
+\begin{aligned}
+    h_{ij}(\mathbf{w}) = \sum_{k = 1}^n x_{ki}x_{kj}\sigma(s_k)(1-\sigma(s_k))\;. 
+\end{aligned}
+$$
+The ideal way to compute this matrix is to use the formula $\mathbf{H}(\mathbf{w}) = \mathbf{X}^T\mathbf{D}(\mathbf{w})\mathbf{X}$, where $\mathbf{D}$ is the diagonal matrix with entries $d_{kk}(\mathbf{w}) = \sigma(s_k)(1-\sigma(s_k))$.
+3. Once we know how to calculate the gradient and the Hessian, we repeat the update 
+$$
+\begin{aligned}
+    w \gets w - \alpha \mathbf{H}(\mathbf{w})^{-1} \nabla L (\mathbf{w})\;.
+\end{aligned}
+$$
+until convergence. Here, $\alpha > 0$ is a learning rate and $\mathbf{H}(\mathbf{w})^{-1}$ is the matrix inverse of the Hessian matrix. 
+
+Please implement a `NewtonOptimizer` class that can use Newton's method to estimate $\mathbf{w}$ for a `LogisticRegression` model as implemented in [our logistic regression blog post](blog-post-optimization.qmd). To do so, you'll also need to extend your `LogisticRegression` implementation with a new method `hessian` that computes $\mathbf{H}(\mathbf{w})$. 
+
+To check your implementation, make sure that, on the same data set, for sufficiently small $\alpha$, Newton's method converges to the same result that you would get using standard gradient descent. 
+
+### Part B: Perform Experiments
+
+Perform experiments and include visualizations to show that: 
+
+1. When $\alpha$ is chosen appropriately, Newton's method converges to the correct choice of $\mathbf{w}$. 
+2. Under at least some circumstances, Newton's method can converge *much* faster than standard gradient descent, in the sense of decreasing the empirical risk. 
+3. If $\alpha$ is too large, Newton's method fails to converge. 
+
+### Part C: Operation Counting
+
+In high-dimensional optimization, the number of features $p$ can be very large. This can be a problem for Newton's method, because the operation of inverting a $p\times p$ matrix requires $O(p^\gamma)$ operations for some $2 \leq \gamma <3$ [Surprisingly, the exact value of $\gamma$ is not known. [Recent estimates](https://en.wikipedia.org/wiki/Computational_complexity_of_matrix_multiplication) have proven that $\gamma < 2.372$, while many researchers believe that the true value of $\gamma$ is $\gamma = 2$.]{.aside}
+Multiplying the gradient by the Hessian also requires $O(p^2)$ operations. 
+
+Assume that it costs $c$ computational units to compute the loss $L$, $2c$ units to compute the gradient $\nabla L$, and $pc$ units to compute the Hessian [These assumptions are simplistic but based on standard theory.]{.aside} Suppose further that it costs $k_1p^\gamma$ units to invert a $p\times p$ matrix and $k_2p^{2}$ units to perform the matrix-vector multiplication required by Newton's method. 
+
+Finally, suppose that Newton's method converges to an adequate solution in $t_\mathrm{nm}$ steps, while gradient descent converges to an adequate solution in $t_\mathrm{gd}$ steps. 
+
+Under these assumptions, write expressions describing the total computational costs of Newton's method as compared to gradient descent. How much smaller must $t_\mathrm{nm}$ be than $t_\mathrm{gd}$ in order to ensure that Newton's method will require fewer computational units to complete? When $p$ becomes very large, is using Newton's method ever going to pay off? 
+
+### Part D: Writing and Finishing Touches
+
+1. Add a link to your source code `NewtonOptimizer` on GitHub at the very top of your blog post. 
+2. Add expository writing throughout your post, with special focus on carefully describing the purpose of your experiments and what the results mean. Please also make sure that all plots are appropriately labeled with axis labels and legends. 
+3. Add an "abstract" paragraph in which you describe the overall topic and aims of your blog post. 
+4. Add a concluding paragraph in which you reflect on what you achieved and what you learned. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

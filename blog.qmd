@@ -1,7 +1,0 @@
----
-title: "Blog"
-listing:
-  contents: posts
-  # (additional metadata excluded for brevity)
-  categories: true
----

@@ -208,12 +208,18 @@
   warmup: <a href="warmup-exercises.ipynb#sec-convexity">Practice with Convex Functions</a>
   assignments: 
 - date: 2024-03-28
-  header: Gradient Descent and Friends
-  summary: 
+  header: Gradient Descent
+  summary: We study a method for finding the minima of convex functions using techniques from calculus and linear algebra. 
   objectives: 
+    - Theory
   reading:
+    - No reading today, but please budget some extra time for the warmup. 
   notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/23-gradient-descent.ipynb">Live notes</a>
   module: 
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.ipynb#sec-gradient-descent">A First Look at Gradient Descent</a>
   assignments: 
+    - |
+      <a href="assignments/blog-posts/blog-post-optimization.ipynb">Blog Post: Implementing Logistic Regression</a>
