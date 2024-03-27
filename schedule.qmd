@@ -1,4 +1,4 @@
----
+--- 
 listing: 
   id: schedule 
   contents: schedule.yml
@@ -17,7 +17,7 @@ Reading sources:
 - ***PDSH***: *The Python Data Science Handbook* by @vanderplasPythonDataScience2016. 
 - ***BHN***: *Fairness and Machine Learning: Limitations and Opportunities* by @barocasFairnessMachineLearning2023. 
    
-  
+    
 :::{#schedule}
 :::                
   

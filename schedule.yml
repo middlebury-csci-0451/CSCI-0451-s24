@@ -207,6 +207,8 @@
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-convexity">Practice with Convex Functions</a>
   assignments: 
+    - |
+      <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/mid-course.ipynb">Mid-semester reflection</a> due 04/02</b>
 - date: 2024-03-28
   header: Gradient Descent
   summary: We study a method for finding the minima of convex functions using techniques from calculus and linear algebra. 
@@ -223,3 +225,36 @@
   assignments: 
     - |
       <a href="assignments/blog-posts/blog-post-optimization.ipynb">Blog Post: Implementing Logistic Regression</a>
+- date: 2024-04-02
+  header: Feature Maps and Regularization
+  summary: We re-introduce feature maps as a method for learning nonlinear decision boundaries, and add regularization to the empirical risk minimization problem in order to control the complexity of our learned models. 
+  objectives: 
+    - Theory
+    - Experimentation
+  reading:
+    - No reading today -- please think hard about your project pitches! 
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html">TBD</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/23-gradient-descent.ipynb">TBD</a>
+  module: 
+  publish: true
+  warmup: <a href="warmup-exercises.ipynb#sec-project-pitch">Project Pitches</a>
+  assignments: 
+    - |
+      <a href="assignments/process/mid-course.ipynb">Mid-semester reflection</a> due today
+- date: 2024-04-04
+  header: Linear Regression
+  summary: We introduce linear regression through the framework of convex empirical risk minimization. 
+  objectives: 
+    - Theory
+  reading:
+    - TBD
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html">TBD</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/23-gradient-descent.ipynb">TBD</a>
+  module:  
+  publish: true
+  warmup: TBD
+  assignments: 
+    - |
+      TBD

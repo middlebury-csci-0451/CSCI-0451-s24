@@ -116,7 +116,7 @@ We will have a checkpoint for the project in Week 9 or 10, and then final presen
 
 ## General Expectations
 
-Your proposal is acceptably complete if if: 
+Your proposal is acceptably complete if: 
 
 1. The proposal is hosted on GitHub as the top-level README.md file in a repository hosted by one of the group members. 
 2. Each team member has made at least two commits to this file, which in total demonstrate substantial commitments to the writing of the proposal. 
