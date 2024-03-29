@@ -234,8 +234,8 @@
   reading:
     - No reading today -- please think hard about your project pitches! 
   notes: 
-    - <a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html">TBD</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/23-gradient-descent.ipynb">TBD</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/30-features-regularization.html">Lecture notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/30-features-regularization.ipynb">Live notes</a>
   module: 
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-project-pitch">Project Pitches</a>
