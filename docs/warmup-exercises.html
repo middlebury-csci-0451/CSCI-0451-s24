@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.330">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -78,7 +77,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -101,13 +100,12 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -116,7 +114,6 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -126,38 +123,11 @@ div.csl-indent {
 <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -166,7 +136,7 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
@@ -295,7 +265,6 @@ window.Quarto = {
 
 </header>
 
-
 <div class="hidden">
 <p><span class="math display">\[
 \newcommand{\R}{\mathbb{R}}
@@ -319,13 +288,13 @@ window.Quarto = {
 </section>
 <section id="part-b" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="part-b">Part B</h3>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">You can create <code>numpy</code> arrays like this: <code>x = np.array([0.2, 4.3])</code>. The syntax <code>x@w</code> can also be used as a convenient shorthand for <code>np.dot(x, w)</code>.</span></div></div>
-<p>Write a quick Python function called <code>linear_classify(x, w, b)</code>. <code>w</code> and <code>x</code> should both be 1d <code>numpy</code> arrays of the same length, and <code>b</code> should be a scalar. The function <code>np.dot(x, w)</code> will compute the inner product of <code>x</code> and <code>w</code>. Argument <code>b</code> should be a scalar number. Your function should return <code>0</code> if if <span class="math inline">\(\bracket{\vw, \vx}  &lt;  b\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx}  \geq  b\)</span>.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">You can create <code>numpy</code> arrays like this: <code>x = np.array([0.2, 4.3])</code>. The syntax <code>x@w</code> can also be used as a convenient shorthand for <code>np.dot(x, w)</code>.</span></div></div>
+<p>Write a quick Python function called <code>linear_classify(x, w, b)</code>. <code>w</code> and <code>x</code> should both be 1d <code>numpy</code> arrays of the same length, and <code>b</code> should be a scalar. The function <code>np.dot(x, w)</code> will compute the inner product of <code>x</code> and <code>w</code>. Argument <code>b</code> should be a scalar number. Your function should return <code>0</code> if if <span class="math inline">\(\bracket{\vw, \vx} &lt; b\)</span> and <code>1</code> if <span class="math inline">\(\bracket{\vw, \vx} \geq b\)</span>.</p>
 <p>Verify that your function works on a few simple examples.</p>
 </section>
 <section id="part-c" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="part-c">Part C</h3>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">The function <span class="math inline">\(\phi\)</span> is an example of a <em>feature map</em>, which we will discuss soon.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">The function <span class="math inline">\(\phi\)</span> is an example of a <em>feature map</em>, which we will discuss soon.</span></div></div>
 <p>Let <span class="math inline">\(\phi:\mathbb{R}^2\rightarrow \mathbb{R}^5\)</span> be the function</p>
 <p><span class="math display">\[
 \phi(\mathbf{x}) = \phi(x_1, x_2) = (x_1, x_2, x_1^2, x_2^2, x_1x_2)^T\;.
@@ -342,7 +311,7 @@ window.Quarto = {
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Image source: @allisonhorst. The Palmer Penguins data was originally collected by <span class="citation" data-cites="gormanEcologicalSexualDimorphism2014">Gorman, Williams, and Fraser (<a href="#ref-gormanEcologicalSexualDimorphism2014" role="doc-biblioref">2014</a>)</span> and was nicely packaged and released for use in the data science community by <span class="citation" data-cites="horstAllisonhorstPalmerpenguinsV02020">Horst, Hill, and Gorman (<a href="#ref-horstAllisonhorstPalmerpenguinsV02020" role="doc-biblioref">2020</a>)</span>.</figcaption>
+<figcaption class="figure-caption margin-caption">Image source: @allisonhorst. The Palmer Penguins data was originally collected by <span class="citation" data-cites="gormanEcologicalSexualDimorphism2014">Gorman, Williams, and Fraser (<a href="#ref-gormanEcologicalSexualDimorphism2014" role="doc-biblioref">2014</a>)</span> and was nicely packaged and released for use in the data science community by <span class="citation" data-cites="horstAllisonhorstPalmerpenguinsV02020">Horst, Hill, and Gorman (<a href="#ref-horstAllisonhorstPalmerpenguinsV02020" role="doc-biblioref">2020</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>Our data set for class today is the Palmer Penguins. This data set contains physiological measurements and species labels for several populations of Adelie, Chinstrap, and Gentoo penguins.</p>
@@ -361,7 +330,7 @@ window.Quarto = {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://allisonhorst.github.io/palmerpenguins/reference/figures/culmen_depth.png" class="img-fluid figure-img"></p>
-<figcaption>Image source: @allisonhorst.</figcaption>
+<figcaption class="figure-caption">Image source: @allisonhorst.</figcaption>
 </figure>
 </div>
 </div></div></section>
@@ -379,7 +348,7 @@ window.Quarto = {
 <li>The test comes up positive and you quarantine for five days. As it turns out, your throat tickle disappears after 1 day, and a lab test reveals that you did <strong>not</strong> actually have COVID.</li>
 <li>The test comes up negative. You figure you must just have a common cold. You carry on your day as usual. After 5 days, you decide to get a lab test, which reveals that you have been COVID+ for the last 5 days.</li>
 </ol>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">If it feels very difficult to come up with a single number to summarize the “cost” of each of these outcomes, that’s normal! In practice, designers of automated decision systems may need to assign comparable “costs” to injury, life, access to education, etc.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If it feels very difficult to come up with a single number to summarize the “cost” of each of these outcomes, that’s normal! In practice, designers of automated decision systems may need to assign comparable “costs” to injury, life, access to education, etc.</span></div></div>
 <p>Using any assumptions that seem appropriate to you, assign a numerical <strong>cost</strong> to each of these scenarios. If it helps, you may assume that scenario (a) is 1 “unit of badness,” and that scenario (b) is <span class="math inline">\(k\)</span> times as bad as scenario (a). What’s your suggested value of <span class="math inline">\(k\)</span>?</p>
 <p>Please write down your reasoning and your suggested value in a short paragraph.</p>
 </section>
@@ -460,11 +429,7 @@ window.Quarto = {
 <p>Here’s how it looks:</p>
 <div id="cell-4" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="warmup-exercises_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
+<p><img src="warmup-exercises_files/figure-html/cell-3-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>To define a classifier for this data, we are going to define three Python classes.</p>
@@ -590,7 +555,7 @@ window.Quarto = {
 <li>The perspective of someone who adheres to the <em>middle view</em> of equality of opportunity.</li>
 <li>The perspective of someone who adheres to the <em>broad view</em> of equality of opportunity.</li>
 </ol>
-<div class="page-columns page-full"><p> Write at least three sentences from each of these perspectives. Your response should, at minimum, address the following two questions:</p><div class="no-row-height column-margin column-container"><span class="margin-aside">You may find it useful to remember from the readings that <em>calibration</em>, as discussed in BHN Ch. 4 is related to <em>sufficiency</em>, which is discussed in BHN Ch. 3 and also in <a href="https://www.philchodrow.prof/ml-notes/chapters/12-statistical-fairness.html">our notes on statistical conceptions of fairness</a>.</span></div></div>
+<div class="page-columns page-full"><p> Write at least three sentences from each of these perspectives. Your response should, at minimum, address the following two questions:</p><div class="no-row-height column-margin column-container"><span class="">You may find it useful to remember from the readings that <em>calibration</em>, as discussed in BHN Ch. 4 is related to <em>sufficiency</em>, which is discussed in BHN Ch. 3 and also in <a href="https://www.philchodrow.prof/ml-notes/chapters/12-statistical-fairness.html">our notes on statistical conceptions of fairness</a>.</span></div></div>
 <ul>
 <li>Is the [narrow/middle/broad] view of equality of opportunity in fact violated, according to our previous data analysis?</li>
 <li>If so, what change is obligated?</li>
@@ -691,7 +656,7 @@ window.Quarto = {
 </section>
 <section id="b.2" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="b.2">B.2</h4>
-<div class="page-columns page-full"><p>Compute <span class="math inline">\(\frac{d\sigma(s_0)}{ds}\)</span>. </p><div class="no-row-height column-margin column-container"><span class="margin-aside"><span class="math inline">\(\frac{d\sigma(s_0)}{ds}\)</span> is the first derivative of <span class="math inline">\(\sigma\)</span> evaluated at the point <span class="math inline">\(s_0\)</span>. You may need to recall things like the chain and quotient rules.</span></div></div>
+<div class="page-columns page-full"><p>Compute <span class="math inline">\(\frac{d\sigma(s_0)}{ds}\)</span>. </p><div class="no-row-height column-margin column-container"><span class=""><span class="math inline">\(\frac{d\sigma(s_0)}{ds}\)</span> is the first derivative of <span class="math inline">\(\sigma\)</span> evaluated at the point <span class="math inline">\(s_0\)</span>. You may need to recall things like the chain and quotient rules.</span></div></div>
 </section>
 <section id="b.3" class="level4">
 <h4 class="anchored" data-anchor-id="b.3">B.3</h4>
@@ -720,9 +685,9 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="sec-gradient-descent" class="level2">
+<section id="sec-gradient-descent" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-gradient-descent">A First Look at Gradient Descent</h2>
-<p>Let <span class="math inline">\(\mathbb{R}^+\)</span> be the set of strictly positive real numbers. Let <span class="math inline">\(a \in \mathbb{R}^+\)</span>. Consider the function <span class="math inline">\(g_a:\mathbb{R}^+ \rightarrow \mathbb{R}\)</span> with formula</p>
+<div class="page-columns page-full"><p>Let <span class="math inline">\(\mathbb{R}^+\)</span> be the set of strictly positive real numbers. Let <span class="math inline">\(a \in \mathbb{R}^+\)</span>. Consider the function <span class="math inline">\(g_a:\mathbb{R}^+ \rightarrow \mathbb{R}\)</span> with formula </p><div class="no-row-height column-margin column-container"><span class="">Here and elsewhere in this class, <span class="math inline">\(\log\)</span> always refers to the <em>natural</em> log (base <span class="math inline">\(e\)</span>), which you may have also seen written <span class="math inline">\(\ln\)</span>.</span></div></div>
 <p><span class="math display">\[
 g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 \]</span></p>
@@ -740,7 +705,7 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 <p><strong>Inputs</strong>: <span class="math inline">\(a \in \mathbb{R}^+\)</span>, tolerance <span class="math inline">\(\epsilon &gt; 0\)</span>, learning rate <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\mathrm{maxsteps} = 100\)</span>.</p>
 <ol type="1">
 <li>Start with an initial guess <span class="math inline">\(x = a\)</span>.</li>
-<li>Set <span class="math inline">\(x' \gets 0\)</span> and <span class="math inline">\(j \gets 0\)</span>.</li>
+<li>Set <span class="math inline">\(x' \gets 2a\)</span> and <span class="math inline">\(j \gets 0\)</span>.</li>
 <li>While <span class="math inline">\(|x' - x| &gt; \epsilon\)</span>:
 <ul>
 <li>if <span class="math inline">\(j &gt; \mathrm{maxsteps}\)</span>
@@ -808,7 +773,7 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 </section>
 <section id="sec-overfitting" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-overfitting">Overfitting and the Scientific Method</h2>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/The_Scientific_Method.svg/520px-The_Scientific_Method.svg.png" class="img-fluid"> Image from <a href="https://en.wikipedia.org/wiki/Scientific_method">Wikipedia</a>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/The_Scientific_Method.svg/520px-The_Scientific_Method.svg.png" class="img-fluid"> Image from <a href="https://en.wikipedia.org/wiki/Scientific_method">Wikipedia</a>.</span></div></div>
 <p>In <a href="https://en.wikipedia.org/wiki/Scientific_method">the scientific method</a>, it is often emphasized that we need to formulate a hypothesis <em>before</em> performing an experiment. It’s fine for the hypothesis to be based on <em>previous</em> experiments. However, the scientific method never allows us to perform an experiment, formulate a hypothesis, and then say that the experiment supported the (new) hypothesis.</p>
 <p>We can think of scientific theories as systems of thought that help us make predictions about new phenomena. With this in mind, <strong><em>please write a short paragraph explaining the importance of hypothesis-first science using the language of machine learning.</em></strong> In your explanation, please use the following vocabulary:</p>
 <ul>
@@ -823,7 +788,7 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 <h2 class="anchored" data-anchor-id="sec-erm">The Coin-Flipping Game</h2>
 <p>Let’s play a game! Here is the setup:</p>
 <p>I have a coin with probability of heads equal to <span class="math inline">\(p \in [0,1]\)</span>. I am going to ask you to pick a number <span class="math inline">\(\hat{p} \in [0,1]\)</span>. Then, I flip my coin.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">This game is more fun for me than it is for you.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">This game is more fun for me than it is for you.</span></div></div>
 <ul>
 <li>If my coin comes up heads, you give me <span class="math inline">\(-\log \hat{p}\)</span> dollars.</li>
 <li>If my coin comes up tails, you give me <span class="math inline">\(-\log (1-\hat{p})\)</span> dollars.</li>
@@ -834,7 +799,7 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 </section>
 <section id="part-2" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="part-2">Part 2</h4>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Take the derivative and set it equal to 0! Don’t forget to check that you’ve found a minimum of <span class="math inline">\(R(\hat{p}, p)\)</span> rather than a maximum or an inflection point.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Take the derivative and set it equal to 0! Don’t forget to check that you’ve found a minimum of <span class="math inline">\(R(\hat{p}, p)\)</span> rather than a maximum or an inflection point.</span></div></div>
 <p>Suppose I tell you the value of <span class="math inline">\(p\)</span>. Write a mathematical proof to show that your best choice of <span class="math inline">\(\hat{p}\)</span> (the one that loses you the least money) is <span class="math inline">\(\hat{p} = p\)</span>.</p>
 </section>
 <section id="part-3" class="level4">
@@ -849,10 +814,10 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 </section>
 <section id="sec-classification-rates-2" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-classification-rates-2">Balancing Classification Rates</h2>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">You can do this first part just by copying and pasting lecture code. It doesn’t matter much how good your model is – just make sure you’re able to get predictions.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">You can do this first part just by copying and pasting lecture code. It doesn’t matter much how good your model is – just make sure you’re able to get predictions.</span></div></div>
 <p>Use the code from <a href="./lecture-notes/classification-in-practice.qmd">our recent lecture</a> to download the Titanic data set as a Pandas data frame and train a model on the training data. Then download the test data. Compute <code>y_pred</code>, the vector of predictions of your model on the test data.</p>
 <p>Then, write a function that verifies eq. (2.6) in Alexandra Chouldechova’s paper “<a href="https://via.hypothes.is/https://arxiv.org/pdf/1703.00056.pdf">Fair Prediction with disparate impact</a>.” Here’s what your function should do:</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">The positive predictive value is <span class="math inline">\(\mathrm{PPV} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}\)</span>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">The positive predictive value is <span class="math inline">\(\mathrm{PPV} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}\)</span>.</span></div></div>
 <ol type="1">
 <li>Given vectors <code>y_pred</code> of predictions and <code>y_test</code> of actual labels, compute the False Negative Rate (FNR), False Positive Rate (FPR), prevalence <span class="math inline">\(p\)</span>, and positive predictive value (PPV).</li>
 <li>Return as a tuple the lefthand side and righthand side of eq. (2.6) in Chouldechova.</li>
@@ -919,7 +884,7 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 <pre><code>conda activate ml-0451
 pip3 install torch torchvision torchaudio</code></pre>
 </div></div><p><strong>Then</strong>, in a blank Jupyter notebook, copy, paste, and run each of the code blocks in the <a href="https://pytorch.org/tutorials/beginner/basics/tensor_tutorial.html">first section</a> of the PyTorch tutorial.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">You may need to do a little bit of exploring around the tutorials in order to come up with answers to these questions.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">You may need to do a little bit of exploring around the tutorials in order to come up with answers to these questions.</span></div></div>
 <p><strong>Finally</strong>, write down a single-sentence answer to each of the following questions:</p>
 <ol type="1">
 <li>In what ways is a PyTorch tensor <em>similar</em> to a Numpy array?</li>
@@ -929,13 +894,13 @@ pip3 install torch torchvision torchaudio</code></pre>
 </section>
 <section id="sec-backprop" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-backprop">Efficient Differentiation</h2>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">This exercise is based on <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks">a section of Chinmay Hegde’s notes</a> on stochastic gradient descent and neural networks:</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">This exercise is based on <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks">a section of Chinmay Hegde’s notes</a> on stochastic gradient descent and neural networks:</span></div></div>
 <p>Consider the following function: <span class="math display">\[
 L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2\;,
 \]</span></p>
 <p>where <span class="math inline">\(\sigma(a) = \frac{1}{1 + e^{-a}}\)</span>.</p>
 <p>This is the loss function that would be obtained when using a single feature <span class="math inline">\(x\)</span> to predict <span class="math inline">\(y\)</span>, using the function <span class="math inline">\(\sigma(wx + b)\)</span> the predictor and measuring the quality of this predictor using the square-error loss function. Our aim is to compute the gradient of <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span>, with a “ridge” regularization term <span class="math inline">\(\frac{1}{2}\lambda w^2\)</span> that encourages the weight <span class="math inline">\(w\)</span> to be small.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">I’ve used the property of the sigmoid that <span class="math inline">\(\sigma'(a) = \sigma(a)(1-\sigma(a))\)</span>.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">I’ve used the property of the sigmoid that <span class="math inline">\(\sigma'(a) = \sigma(a)(1-\sigma(a))\)</span>.</span></div></div>
 <p>The gradient of <span class="math inline">\(L\)</span> is <span class="math inline">\(\nabla L (w, b) = \left(\frac{\partial L}{\partial w}, \frac{\partial L}{\partial b}\right)\)</span>, where</p>
 <p><span id="eq-explicit-gradient"><span class="math display">\[
 \begin{aligned}
@@ -985,32 +950,30 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap <span class="op">=</span> <span class="st">"Greys"</span>)</span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="warmup-exercises_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>(-0.5, 639.5, 412.5, -0.5)</code></pre>
 </div>
+<div class="cell-output cell-output-display">
+<p><img src="warmup-exercises_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 <p>After implementing your function, you should be able to use it like this, replacing the implementation of <code>scipy.signal</code> with your own implementation. The result should look something like this:</p>
 <div id="cell-17" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>,  <span class="dv">8</span>, <span class="op">-</span><span class="dv">1</span>], </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>convd <span class="op">=</span> convolve2d(img, kernel)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(convd, cmap <span class="op">=</span> <span class="st">"Greys"</span>, vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">8</span>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="warmup-exercises_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> convolve2d</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>,  <span class="dv">8</span>, <span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                   [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>convd <span class="op">=</span> convolve2d(img, kernel)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(convd, cmap <span class="op">=</span> <span class="st">"Greys"</span>, vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">8</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.gca().axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>(-0.5, 641.5, 414.5, -0.5)</code></pre>
 </div>
+<div class="cell-output cell-output-display">
+<p><img src="warmup-exercises_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
@@ -1091,10 +1054,9 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
     B--&gt;C(Third concept)
     A--&gt;C
     A &amp; B &amp; C --&gt;D(Fourth concept)</code></pre>
-<div class="cell" data-layout-align="default">
+<div class="cell">
 <div class="cell-output-display">
 <div>
-<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TB
     A(First concept) --&gt; B(Second concept)
@@ -1104,7 +1066,6 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
     A &amp; B &amp; C --&gt;D(Fourth concept)
 </pre>
 </div>
-<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -1115,13 +1076,13 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 <h2 class="anchored" data-anchor-id="sec-classification-rates">Classification Rates</h2>
 <section id="part-1-1" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="part-1-1">Part 1</h4>
-<div class="page-columns page-full"><p>COVID-19 rapid tests have approximately an 80% sensitivity rate, which means that, in an individual who truly has COVID-19, the probability of a rapid test giving a positive result is roughly 80%.  On the other hand, the probability of a rapid test giving a positive result for an individual who truly does <strong>not</strong> have COVID-19 is 5%. Suppose that approximately 4% of the population are currently infected with COVID-19. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">These numbers are mostly made-up.</span><span class="margin-aside">Example 2.3.1 of <a href="https://github.com/probml/pml-book/releases/latest/download/book1.pdf">Murphy</a>, page 46, has a good review of the relevant probability and the definition of each of the rates below.</span></div></div>
+<div class="page-columns page-full"><p>COVID-19 rapid tests have approximately an 80% sensitivity rate, which means that, in an individual who truly has COVID-19, the probability of a rapid test giving a positive result is roughly 80%.  On the other hand, the probability of a rapid test giving a positive result for an individual who truly does <strong>not</strong> have COVID-19 is 5%. Suppose that approximately 4% of the population are currently infected with COVID-19. </p><div class="no-row-height column-margin column-container"><span class="">These numbers are mostly made-up.</span><span class="">Example 2.3.1 of <a href="https://github.com/probml/pml-book/releases/latest/download/book1.pdf">Murphy</a>, page 46, has a good review of the relevant probability and the definition of each of the rates below.</span></div></div>
 <p>Write a Python function called <code>rate_summary</code> that prints the following output, filling in the correct values for each of the specified rates:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="fl">0.8</span>           <span class="co"># test sensitivity</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.02</span>          <span class="co"># probability of positive test if no COVID</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>prevalence <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># fraction of population infected</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>rate_summary(s, f, current_infection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -1133,19 +1094,18 @@ The false positive rate is ___. </code></pre>
 <li>Suppose that scientists found an alternative rapid test which had a 75% sensitivity rate with a 0% chance of a positive test on someone who is truly not infected. Would you suggest replacing the old rapid tests with these alternative tests? Why? </li>
 <li>What if the alternative test had an 85% sensitivity rate and a 10% chance of a positive test on someone who is truly not infected?</li>
 </ol>
-<div class="no-row-height column-margin column-container"><span class="margin-aside">You don’t necessarily need to use your function from the previous part in this part.</span></div></section>
+<div class="no-row-height column-margin column-container"><span class="">You don’t necessarily need to use your function from the previous part in this part.</span></div></section>
 <section id="part-3-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-3-1">Part 3</h4>
 <p>It’s all well and good to do the math, but what about when we actually have data? Write a function called <code>rate_summary_2</code> that accepts two columns of a <code>pandas.DataFrame</code> (or equivalently two one-dimensional <code>numpy.arrays</code> of equal length). Call these <code>y</code> and <code>y_pred</code>. Assume that both <code>y</code> and <code>y_pred</code> are binary arrays (i.e.&nbsp;arrays of 0s and 1s). <code>y</code> represents the true outcome, whereas <code>y_pred</code> represents the prediction from an algorithm or test. Here’s an example of the kind of data we are thinking about:</p>
 <div id="cell-19" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://github.com/middlebury-csci-0451/CSCI-0451/raw/main/data/toy-classification-data.csv"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df.head() <span class="co"># just for visualizing the first few rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<div>
 <div>
 
 
@@ -1189,10 +1149,9 @@ The false positive rate is ___. </code></pre>
 </div>
 </div>
 </div>
-</div>
 <p>You should be able to use your function like this:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># y is the true label, y_pred is the prediction</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rate_summary_2(df[<span class="st">"y"</span>], df[<span class="st">"y_pred"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>The true positive rate is ___.
 The false positive rate is ___.
 The true negative rate is ___. 
@@ -1200,8 +1159,8 @@ The false positive rate is ___. </code></pre>
 <section id="hints" class="level5">
 <h5 class="anchored" data-anchor-id="hints">Hints</h5>
 <p>An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 
@@ -1209,7 +1168,7 @@ The false positive rate is ___. </code></pre>
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-barabasStudyingReorientingStudy2020" class="csl-entry" role="listitem">
 Barabas, Chelsea, Colin Doyle, Jb Rubinovitz, and Karthik Dinakar. 2020. <span>“Studying up: Reorienting the Study of Algorithmic Fairness Around Issues of Power.”</span> In <em>Proceedings of the 2020 <span>Conference</span> on <span>Fairness</span>, <span>Accountability</span>, and <span>Transparency</span></em>, 167–76. Barcelona Spain: ACM. <a href="https://doi.org/10.1145/3351095.3372859">https://doi.org/10.1145/3351095.3372859</a>.
 </div>
@@ -1311,24 +1270,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1363,11 +1304,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1382,28 +1319,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
+    if (id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
         }
         return container.innerHTML
       } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
         return note.innerHTML;
       }
     } else {
@@ -1412,15 +1336,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1462,29 +1378,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
       }
     }, function(instance) {
     });
@@ -1560,6 +1453,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
+        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
