@@ -248,13 +248,13 @@
   objectives: 
     - Theory
   reading:
-    - TBD
+    - No additional reading, but you may need to open up your linear algebra textbook in order to complete the warmup. 
   notes: 
-    - <a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html">TBD</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/23-gradient-descent.ipynb">TBD</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/40-linear-regression.html">Linear Regression</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/40-linear-regression.ipynb">Live notes</a>
   module:  
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.ipynb#sec-linear-systems-review">Eigenvalues and Linear Systems</a>
   assignments: 
     - |
       TBD

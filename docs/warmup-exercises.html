@@ -258,6 +258,11 @@ window.Quarto = {
   <li><a href="#part-d" id="toc-part-d" class="nav-link" data-scroll-target="#part-d">Part D</a></li>
   </ul></li>
   <li><a href="#sec-project-pitch" id="toc-sec-project-pitch" class="nav-link" data-scroll-target="#sec-project-pitch">Project Pitches</a></li>
+  <li><a href="#sec-linear-systems-review" id="toc-sec-linear-systems-review" class="nav-link" data-scroll-target="#sec-linear-systems-review">Eigenvalues and Linear Systems</a>
+  <ul class="collapse">
+  <li><a href="#part-a-7" id="toc-part-a-7" class="nav-link" data-scroll-target="#part-a-7">Part A</a></li>
+  <li><a href="#part-b-7" id="toc-part-b-7" class="nav-link" data-scroll-target="#part-b-7">Part B</a></li>
+  </ul></li>
   <li><a href="#sec-gradient-descent-2" id="toc-sec-gradient-descent-2" class="nav-link" data-scroll-target="#sec-gradient-descent-2">Gradient Descent (Again)</a></li>
   <li><a href="#sec-overfitting" id="toc-sec-overfitting" class="nav-link" data-scroll-target="#sec-overfitting">Overfitting and the Scientific Method</a></li>
   <li><a href="#sec-erm" id="toc-sec-erm" class="nav-link" data-scroll-target="#sec-erm">The Coin-Flipping Game</a></li>
@@ -785,6 +790,39 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 <li>Close your pitch by letting us know: <strong>why are you excited about this topic?</strong> Pitches are due as your warmup assignment on Tuesday 4/2.</li>
 </ol>
 </section>
+<section id="sec-linear-systems-review" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-linear-systems-review">Eigenvalues and Linear Systems</h2>
+<p>Consider the system of linear equations expressed in matrix-vector notation as</p>
+<p><span id="eq-linear-system"><span class="math display">\[
+\mathbf{A}\mathbf{x} = \mathbf{b}
+\tag{2}\]</span></span></p>
+<p>for some <em>square</em> matrix <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{p \times p}\)</span> and vector <span class="math inline">\(\mathbf{b} \in \mathbb{R}^p\)</span>.</p>
+<section id="part-a-7" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="part-a-7">Part A</h3>
+<p>Suppose you are told that <a href="#eq-linear-system" class="quarto-xref">Equation&nbsp;2</a> has a <em>unique</em> solution in <span class="math inline">\(\mathbf{x}\)</span> for every possible choice of <span class="math inline">\(\mathbf{b}\in \mathbb{R}^p\)</span>.</p>
+<div class="page-columns page-full"><p>Is <span class="math inline">\(\mathbf{A}\)</span> invertible? How do you know? <em>Find a statement of a theorem from linear algebra</em> that supports your claim. </p><div class="no-row-height column-margin column-container"><span class="margin-aside">It’s ok to look for the theorem online.</span></div></div>
+</section>
+<section id="part-b-7" class="level3">
+<h3 class="anchored" data-anchor-id="part-b-7">Part B</h3>
+<p>Let <span class="math inline">\(\alpha_1,\ldots, \alpha_p\)</span> be the eigenvalues of <span class="math inline">\(\mathbf{A}\)</span>. Suppose that <span class="math inline">\(\alpha_j \geq 0\)</span> for all <span class="math inline">\(j\)</span>, but that you don’t know anything else about <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<section id="b.1-1" class="level4">
+<h4 class="anchored" data-anchor-id="b.1-1">B.1</h4>
+<p>Can you be sure that <span class="math inline">\(\mathbf{A}\)</span> invertible? Explain how you know (find a theorem and cite it), or construct a counterexample.</p>
+</section>
+<section id="b.2-1" class="level4">
+<h4 class="anchored" data-anchor-id="b.2-1">B.2</h4>
+<p>Let <span class="math inline">\(\lambda &gt; 0\)</span>. Let <span class="math inline">\(\tilde{\mathbf{A}} = \mathbf{A} + \lambda \mathbf{I}\)</span>. What are the eigenvalues of <span class="math inline">\(\tilde{\mathbf{A}}\)</span>?</p>
+</section>
+<section id="b.3-1" class="level4">
+<h4 class="anchored" data-anchor-id="b.3-1">B.3</h4>
+<p>Is <span class="math inline">\(\tilde{\mathbf{A}}\)</span> invertible? Explain how you know (find a theorem and cite it), or give a counterexample.</p>
+</section>
+<section id="b.4-1" class="level4">
+<h4 class="anchored" data-anchor-id="b.4-1">B.4</h4>
+<p>Does the linear system <span class="math inline">\(\tilde{\mathbf{A}}\mathbf{x} = \mathbf{b}\)</span> have zero, one, or infinitely many solutions? Does the value of <span class="math inline">\(\mathbf{b}\)</span> matter? Explain how you know (find a theorem and cite it).</p>
+</section>
+</section>
+</section>
 <section id="sec-gradient-descent-2" class="level2">
 <h2 class="anchored" data-anchor-id="sec-gradient-descent-2">Gradient Descent (Again)</h2>
 <p>Consider the function <span class="math inline">\(f(w_0, w_1) = \sin(w_0w_1)\)</span>. You can define this function like this:</p>
@@ -942,7 +980,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 \frac{\partial L}{\partial w} &amp;= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))x + \lambda w \\
 \frac{\partial L}{\partial b} &amp;= (\sigma(wx + b) - y)\sigma(wx+b)(1 - \sigma(wx+b))\;.
 \end{aligned}
-\tag{2}\]</span></span></p>
+\tag{3}\]</span></span></p>
 <section id="what-you-should-do" class="level3">
 <h3 class="anchored" data-anchor-id="what-you-should-do">What You Should Do</h3>
 <p>Assume that each of the following operations cost one computational unit:</p>
@@ -953,7 +991,7 @@ L(w, b) = \frac{1}{2} \left(y - \sigma(wx + b)\right)^2 + \frac{1}{2}\lambda w^2
 </ul>
 <p>Using this assumption:</p>
 <ol type="1">
-<li>Determine the number of computational units (i.e.&nbsp;computational cost) of computing the gradient of <span class="math inline">\(L\)</span> exactly as written in <a href="#eq-explicit-gradient" class="quarto-xref">Equation&nbsp;2</a>, under the assumption that you are not allowed to store the values of any intermediate computations.</li>
+<li>Determine the number of computational units (i.e.&nbsp;computational cost) of computing the gradient of <span class="math inline">\(L\)</span> exactly as written in <a href="#eq-explicit-gradient" class="quarto-xref">Equation&nbsp;3</a>, under the assumption that you are not allowed to store the values of any intermediate computations.</li>
 <li>Now determine the computational cost of computing the gradient of <span class="math inline">\(L\)</span> under the assumption that you are allowed to store intermediate computations. Please describe both the number of computations and the number of floating point numbers that must be stored.</li>
 <li>Finally, determine the computational cost in terms of both steps and storage to compute <span class="math inline">\(L\)</span> using the backpropagation algorithm (described for a very similar function in <a href="https://chinmayhegde.github.io/dl-notes/notes/lecture02/#sgd-and-neural-networks">Hegde’s notes</a>).</li>
 </ol>
