@@ -242,6 +242,8 @@
   assignments: 
     - |
       <a href="assignments/process/mid-course.ipynb">Mid-semester reflection</a> due today
+    - |
+      <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/project/proposal.html">Project proposal</a> due 4/9
 - date: 2024-04-04
   header: Linear Regression
   summary: We introduce linear regression through the framework of convex empirical risk minimization. 
@@ -256,5 +258,4 @@
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-linear-systems-review">Eigenvalues and Linear Systems</a>
   assignments: 
-    - |
-      TBD
+    
