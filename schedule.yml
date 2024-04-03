@@ -258,4 +258,18 @@
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-linear-systems-review">Eigenvalues and Linear Systems</a>
   assignments: 
+- date: 2024-04-09
+  header: Kernel Methods
+  summary: We introduce kernel methods as an alternative approach to the problem of fitting nonlinear models to data. 
+  objectives: 
+    - Theory
+  reading:
+    - <a href="https://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn04-notes-nup.pdf">Classification and K-Nearest Neighbours</a> by Hiroshi Shimodaira for a course at the University of Edinburgh
+  notes: 
+    - TBD
+    - TBD
+  module:  
+  publish: true
+  warmup: <a href="warmup-exercises.ipynb#sec-kernels">Introducing Kernels</a>
+  assignments: 
     
