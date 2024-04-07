@@ -272,4 +272,19 @@
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-kernels">Introducing Kernels</a>
   assignments: 
+- date: 2024-04-11
+  header: Vectorization and Feature Engineering
+  summary: We illustrate the interplay of vectorization and feature engineering on image data. 
+  objectives: 
+    - Experimentation
+    - Implementation
+  reading:
+    - <a href="https://setosa.io/ev/image-kernels/">Image Kernels Explained Visually</a> by Victor Powell
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/51-vectorization.html">Vectorization and Feature Engineering</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/51-vectorization.ipynb">Live notes</a>
+  module:  
+  publish: true
+  warmup: <a href="warmup-exercises.ipynb#sec-convolutional-kernel">Introducing Kernels</a>
+  assignments: 
     
