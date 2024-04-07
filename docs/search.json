@@ -60,7 +60,7 @@
     "href": "schedule.html#week-9",
     "title": "Schedule",
     "section": "Week 9",
-    "text": "Week 9\n\n\n\n\n\n\n\n\n\n\n\nTue\nApr. 09\nKernel Methods\n\n\n\nWe introduce kernel methods as an alternative approach to the problem of fitting nonlinear models to data.\n\n\n\n\nLearning Objectives\nTheory\n\nReading\nClassification and K-Nearest Neighbours by Hiroshi Shimodaira for a course at the University of Edinburgh\n\nNotes\nTBD\nTBD\n\nWarmup\nIntroducing Kernels\n\n\n\nThu\nApr. 11\nVectorization and Feature Engineering\n\n\n\nWe illustrate the interplay of vectorization and feature engineering on image data.\n\n\n\n\nLearning Objectives\nExperimentation\nImplementation\n\nReading\nImage Kernels Explained Visually by Victor Powell\n\nNotes\nVectorization and Feature Engineering\nLive notes\n\nWarmup\nIntroducing Kernels"
+    "text": "Week 9\n\n\n\n\n\n\n\n\n\n\n\nTue\nApr. 09\nVectorization and Feature Engineering\n\n\n\nWe illustrate the interplay of vectorization and feature engineering on image data.\n\n\n\n\nLearning Objectives\nExperimentation\nImplementation\n\nReading\nImage Kernels Explained Visually by Victor Powell\n\nNotes\nVectorization and Feature Engineering\nLive notes\n\nWarmup\nKernel Convolution\n\n\n\nThu\nApr. 11\nKernel Methods\n\n\n\nWe introduce kernel methods as an alternative approach to the problem of fitting nonlinear models to data.\n\n\n\n\nLearning Objectives\nTheory\n\nReading\nClassification and K-Nearest Neighbours by Hiroshi Shimodaira for a course at the University of Edinburgh\n\nNotes\nKernel Methods\nLive notes\n\nWarmup\nIntroducing Kernel Regression"
   },
   {
     "objectID": "schedule.html#finals-period",
