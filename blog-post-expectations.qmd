@@ -43,4 +43,4 @@ Your code should be careful, concise, efficient Python.
 
 Simply submit a URL to your online blog post in Canvas! 
 
-**To submit a revision**, just include another link to your blog post as a comment on the Canvas submission. (Unfortunately your revised posts don't show up as revised in Canvas). The reason for submitting a comment rather than a new submission is so that it is easy for us all to see the feedback that you were previously given and are revising in response to. 
+**To submit a revision**, just make another submission to the same assignment on Canvas. 
