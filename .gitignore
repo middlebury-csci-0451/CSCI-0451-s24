@@ -27,8 +27,11 @@ assignments/blog-posts/data/2018/1-Year/psam_p01.csv
 docs/assignments/blog-posts/data/2018/1-Year/psam_p01.csv
 grades
 FashionMNIST
+_drafts
+warmup-exercises_files
+!docs/warmup-exercises_files
 
-*_files
+
 
 utils/students.csv
 utils/teams.csv
