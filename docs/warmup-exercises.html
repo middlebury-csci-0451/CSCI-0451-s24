@@ -860,7 +860,7 @@ g_a(x) = \frac{1}{2}x^2 - a \log x\;.
 <p>To learn in this data set, we are going to try a very different kind of classifier than we’ve used before. This is a <em>kernel classifier</em>.</p>
 <p>For the purposes of this warmup, our kernel classifier computes a score for a data point with feature <span class="math inline">\(x\)</span> according to the formula</p>
 <p><span id="eq-kernel"><span class="math display">\[
-s = \sum_{i = 1}^n ye^{-\gamma (x - x_i )^2}\;,
+s = \sum_{i = 1}^n y_ie^{-\gamma (x - x_i )^2}\;,
 \tag{3}\]</span></span></p>
 <p>where <span class="math inline">\(\gamma\)</span> is some tunable positive constant. Roughly, the intuition of this score function is that you get a higher score by being “close” (having low distance) to lots of points where <span class="math inline">\(y = 1\)</span>.</p>
 <p>Your warmup problem is to implement this score function. The code block below produces a range of possible values of <span class="math inline">\(x\)</span>:</p>

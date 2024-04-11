@@ -224,7 +224,7 @@
   warmup: <a href="warmup-exercises.ipynb#sec-gradient-descent">A First Look at Gradient Descent</a>
   assignments: 
     - |
-      <a href="assignments/blog-posts/blog-post-optimization.ipynb">Blog Post: Implementing Logistic Regression</a>
+      <a href="assignments/blog-posts/blog-post-optimization.html">Blog Post: Implementing Logistic Regression</a>
 - date: 2024-04-02
   header: Feature Maps and Regularization
   summary: We re-introduce feature maps as a method for learning nonlinear decision boundaries, and add regularization to the empirical risk minimization problem in order to control the complexity of our learned models. 
@@ -287,4 +287,5 @@
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-convolutional-kernel">Kernel Convolution</a>
   assignments: 
-    
+    - |
+      <a href="assignments/blog-posts/blog-post-sparse-kernel-logistic-regression.html">Blog Post: Sparse Kernel Machines</a>
