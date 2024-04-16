@@ -28,7 +28,7 @@
   notes: 
     - |
       <a href="https://www.philchodrow.prof/ml-notes/chapters/02-black-box-classification.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/02-black-box-classification.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/02-black-box-classification.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/02-black-box-classification.ipynb">Google Colab</a>)
   module: Classification 
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-penguins">Meet the Palmer Penguins!</a>
@@ -44,7 +44,7 @@
     - <a href="https://openlearninglibrary.mit.edu/assets/courseware/v1/9d904854b4ae0878cfdcedcdceabf937/asset-v1:MITx+6.036+1T2019+type@asset+block/notes_chapter_Linear_classifiers.pdf">Linear Classifiers</a> from MITx. 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/03-score-based-classification.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/03-score-based-classification.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/03-score-based-classification.ipynb">Google Colab</a>)
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-score-based-classification">Graphing Decision Boundaries</a>
@@ -61,7 +61,7 @@
       PDSH: <a href="https://jakevdp.github.io/PythonDataScienceHandbook/#2.-Introduction-to-NumPy">Introduction to Numpy</a> 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/04-decision-theory.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/04-decision-theory.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/04-decision-theory.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/04-decision-theory.ipynb">Google Colab</a>)
   module: Classification
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-decision-theory">Choosing a Threshold</a>
@@ -79,7 +79,7 @@
     - <a href="www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a> by Julia Angwin et al. for ProPublica. 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/10-compas.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/10-compas.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/10-compas.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/10-compas.ipynb">Google Colab</a>)
   module: Fairness and Disparity
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-fairness">Experiencing (Un)Fairness</a>
@@ -96,7 +96,7 @@
       BHN: <a href="https://fairmlbook.org/classification.html">Classification</a> (ok to skip "Relationships between criteria" and below)
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/12-statistical-fairness.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/12-statistical-fairness.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/12-statistical-fairness.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/12-statistical-fairness.ipynb">Google Colab</a>)
   module: Fairness and Disparity
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-bhn-comprehension">Reading Check</a>
@@ -166,7 +166,7 @@
     - No reading today, but please be ready to put some extra time into the warmup. It may be useful to review our lecture notes on <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">score-based classification</a> and <a href="https://www.philchodrow.prof/ml-notes/chapters/03-score-based-classification.html">decision theory</a> when completing the warmup. 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/20-perceptron.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/20-perceptron.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/20-perceptron.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/20-perceptron.ipynb">Google Colab</a>)
   module: Theory
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-perceptron">Linear Models, Perceptron, and Torch</a>
@@ -202,7 +202,7 @@
     - <a href="https://sboyles.github.io/teaching/ce377k/convexity.pdf">Convexity Examples</a> by Stephen D. Boyles, pages 1 - 7 (ok to stop when we start talking about gradients and Hessians). 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/22-convex-erm.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/22-convex-erm.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/22-convex-erm.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/22-convex-erm.ipynb">Google Colab</a>)
   module: 
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-convexity">Practice with Convex Functions</a>
@@ -218,7 +218,7 @@
     - No reading today, but please budget some extra time for the warmup. 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/23-gradient-descent.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/23-gradient-descent.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/23-gradient-descent.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/23-gradient-descent.ipynb">Google Colab</a>)
   module: 
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-gradient-descent">A First Look at Gradient Descent</a>
@@ -235,7 +235,7 @@
     - No reading today -- please think hard about your project pitches! 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/30-features-regularization.html">Lecture notes</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/30-features-regularization.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/30-features-regularization.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/30-features-regularization.ipynb">Google Colab</a>)
   module: 
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-project-pitch">Project Pitches</a>
@@ -253,7 +253,7 @@
     - No additional reading, but you may need to open up your linear algebra textbook in order to complete the warmup. 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/40-linear-regression.html">Linear Regression</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/40-linear-regression.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/40-linear-regression.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/40-linear-regression.ipynb">Google Colab</a>)
   module:  
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-linear-systems-review">Eigenvalues and Linear Systems</a>
@@ -267,7 +267,7 @@
     - <a href="https://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn04-notes-nup.pdf">Classification and K-Nearest Neighbours</a> by Hiroshi Shimodaira for a course at the University of Edinburgh
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/50-kernel-methods.html">Kernel Methods</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/50-kernel-methods.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/50-kernel-methods.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/50-kernel-methods.ipynb">Google Colab</a>)
   module:  
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-kernels">Introducing Kernel Regression</a>
@@ -282,7 +282,8 @@
     - <a href="https://setosa.io/ev/image-kernels/">Image Kernels Explained Visually</a> by Victor Powell
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/51-vectorization.html">Vectorization and Feature Engineering</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/51-vectorization.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/51-vectorization.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/61-modern-optimization.ipynb">Google Colab</a>)
+    
   module:  
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-convolutional-kernel">Kernel Convolution</a>
@@ -299,7 +300,7 @@
     - 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/60-intro-deep.html">The Problem of Features and Deep Learning</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/60-intro-deep.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/60-intro-deep.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/60-intro-deep.ipynb">Google Colab</a>) 
   module:  
   publish: true
   warmup: <a href="warmup-exercises.ipynb#sec-project-check-in">Project Check In</a>
@@ -315,10 +316,28 @@
     - 
   notes: 
     - <a href="https://www.philchodrow.prof/ml-notes/chapters/61-modern-optimization.html">The Problem of Features and Deep Learning</a>
-    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/61-modern-optimization.ipynb">Live notes</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/61-modern-optimization.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/61-modern-optimization.ipynb">Google Colab</a>)
   module:  
   publish: true
-  warmup: <a href="warmup-exercises.ipynb#sec-sgd">Introducing Stochastic Gradient Descent</a>
+  warmup: <a href="warmup-exercises.ipynb#sec-SGD">Introducing Stochastic Gradient Descent</a>
   assignments: 
     - |
       <a href="assignments/blog-posts/blog-post-adam.html">Blog Post: The Adam Algorithm for Optimization</a>
+- date: 2024-04-23
+  header: Deep Image Classification
+  summary: |
+    We return to the image classification problem, using deep learning and large-scale optimization to optimize convolutional kernels as part of the training process. 
+  objectives: 
+    - Theory
+    - Implementation
+  reading:
+    - |
+      <a href="https://openlearninglibrary.mit.edu/assets/courseware/v1/41c7c4a6141b76b324055d56387570c0/asset-v1:MITx+6.036+1T2019+type@asset+block/notes_chapter_Convolutional_Neural_Networks.pdf">Convolutional Neural Networks</a> from MIT's course 6.036: Introduction to Machine Learning 
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/70-image-classification.html">The Problem of Features and Deep Learning</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/70-image-classification.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/70-image-classification.ipynb">Google Colab</a>)
+  module:  
+  publish: true
+  warmup: <a href="warmup-exercises.ipynb#sec-project-check-in">Project Check In</a>
+  assignments: 
+
