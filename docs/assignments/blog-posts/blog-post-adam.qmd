@@ -1,7 +1,7 @@
 ---
-title: "Optimization with Adam"
+title: "The Adam Algorithm for Optimization"
 type: "Blog Post"
-date: 2023-04-19
+date: 2023-04-25
 description: |
     In this blog post, you'll implement the Adam optimizer and perform some simple experiments. 
 objectives: 
@@ -10,7 +10,7 @@ objectives:
 jupyter: conda-env-ml-0451-py
 number-sections: true
 number-depth: 2
-publish: "false"
+publish: "true"
 bibliography: ../../refs.bib
 ---
 
@@ -23,7 +23,7 @@ This is a relatively theoretical blog post on which I am intentionally giving yo
 
 The Adam optimization algorithm is a mainstay of modern deep learning. You can think of Adam as *fancy gradient descent*. It still uses gradient information, but processes that information in a more complex way that often produces state-of-the-art performance in modern large-scale tasks. 
 
-Adam was introduced by @kingma2014adam, in a paper which has been cited over 140,000 times. 
+Adam was introduced by @kingma2015adam, in a paper which has been cited over 175,000 times. 
 
 ## What You Should Do
 
@@ -33,9 +33,9 @@ Start by reading [the paper that introduced Adam](https://arxiv.org/pdf/1412.698
 
 ### Implement Adam for Logistic Regression
 
-Expand your [implementation of logistic regression](blog-post-optimization.qmd) to include a version of the `fit` method that uses the Adam algorithm (Algorithm 1). If you implemented `gradient` as a separate function, you can just use that function within your implementation of Adam. 
+Implement an `AdamOptimizer` class similar to the optimizers that you have used for several other models in this course. Your optimizer should work for any linear model which has a `.grad()` method which will return the gradient of the loss function with respect to the parameters. For concreteness, you can use the implementation of the logistic regression that you used in an earlier blog post; your `AdamOptimizer` will serve as a replacement for the `GradientDescentOptimizer`. 
 
-The authors of the paper frame their algorithm as minimizing a *stochastic* (random) *objective* function $f$. This is a fancy mathematical way to talk about *stochastic batch gradient descent*. When they talk about evaluating/differentiating the "stochastic function" $f$, you can instead think of "evaluating/differentiating $f$ on a subset of the data," just like we did in gradient descent for logistic regression. So, you can think of $g_t$ in their algorithm as the gradient evaluated on a batch of the data. You can still follow the standard structure of stochastic gradient descent in which you loop through the entire data set in one epoch, reshuffle the batches, and do it again. 
+The authors of the paper frame their algorithm as minimizing a *stochastic* (random) *objective* function $f$. This is a fancy mathematical way to talk about *stochastic batch gradient descent*. When they talk about evaluating/differentiating the "stochastic function" $f$, you can instead think of "evaluating/differentiating $f$ on a subset of the data." So, you can think of $g_t$ in their algorithm as the gradient evaluated on a batch of the data. You can still follow the standard structure of stochastic gradient descent in which you loop through the entire data set in one epoch, reshuffle the batches, and do it again. 
 
 Your implementation should allow the user to pass five arguments: 
 
@@ -46,7 +46,7 @@ Your implementation should allow the user to pass five arguments:
 
 ### Perform a Basic Experiment
 
-Redo some of the simple experiments from [implementation of logistic regression](blog-post-optimization.qmd). Compare Adam optimization to standard stochastic gradient descent with a few different parameter choices. Please measure **both** the number of epochs and the actual amount of time required to achieve convergence. 
+Redo some of the simple experiments from your [implementation of logistic regression](blog-post-optimization.qmd). Compare Adam optimization to standard stochastic gradient descent with a few different parameter choices. Please measure **both** the number of epochs and the actual amount of time required to achieve convergence. 
 
 ### Perform a Digits Experiment
 
@@ -74,8 +74,3 @@ In your written blog post, please:
     - In the authors' assessment, what aspects of the Adam algorithm help it to converge so efficiently? (You don't need to go deep into the math but you should be able to identify a qualitative features from their paper). 
     - Did you observe highly efficient performance in your experiments when compared to other methods? If not, can you offer a hypothesis about why? 
     - How did the experience of implementing this algorithm compare to the experience of implementing standard stochastic gradient descent? 
-
-Finally, don't forget to label your axes!! 
-
-
-

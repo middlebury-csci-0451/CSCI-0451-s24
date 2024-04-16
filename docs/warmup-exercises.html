@@ -289,6 +289,7 @@ window.Quarto = {
   <li><a href="#flowcharts-in-quarto" id="toc-flowcharts-in-quarto" class="nav-link" data-scroll-target="#flowcharts-in-quarto">Flowcharts in Quarto</a></li>
   </ul></li>
   <li><a href="#sec-classification-rates" id="toc-sec-classification-rates" class="nav-link" data-scroll-target="#sec-classification-rates">Classification Rates</a></li>
+  <li><a href="#sec-SGD" id="toc-sec-SGD" class="nav-link" data-scroll-target="#sec-SGD">Introducing Stochastic Gradient Descent</a></li>
   </ul>
 </nav>
     </div>
@@ -1308,11 +1309,64 @@ The false positive rate is ___. </code></pre>
 <p>An excellent solution for this part will not use any for-loops. Computing each of the four rates can be performed in a single compact line of code. To begin thinking of how you might do this, you may want to experiment with code like the following:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]] <span class="op">==</span> df[[<span class="st">"y_pred"</span>]]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"y"</span>]].<span class="bu">sum</span>(), df[[<span class="st">"y"</span>]].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-
-
 </section>
 </section>
+</section>
+<section id="sec-SGD" class="level2">
+<h2 class="anchored" data-anchor-id="sec-SGD">Introducing Stochastic Gradient Descent</h2>
+<p>Consider the problem of least-squares linear regression with 1-d data:</p>
+<div id="cell-32" class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">'seaborn-v0_8-whitegrid'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> regression_data(n <span class="op">=</span> <span class="dv">100</span>, w <span class="op">=</span> torch.Tensor([<span class="op">-</span><span class="fl">0.7</span>, <span class="fl">0.5</span>]), x_max <span class="op">=</span> <span class="dv">1</span>):</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> torch.rand(n)<span class="op">*</span>x_max</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x<span class="op">*</span>w[<span class="dv">1</span>] <span class="op">+</span> w[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.05</span><span class="op">*</span>torch.randn(n)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> regression_data()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y, facecolors <span class="op">=</span> <span class="st">"none"</span>, edgecolors <span class="op">=</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>labs <span class="op">=</span> plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="vs">r"$x$"</span>, ylabel <span class="op">=</span> <span class="vs">r"$y$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="warmup-exercises_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The empirical risk for this problem has the form</p>
+<p><span class="math display">\[
+\begin{aligned}
+    R(\mathbf{w}) = \frac{1}{n}\sum_{i=1}^n (y_i - w_1x_i - w_0)^2\;.
+\end{aligned}
+\]</span></p>
+<p>Please implement the following algorithm:</p>
+<ol type="1">
+<li>Start with initial random guesses for <span class="math inline">\(w_0\)</span> and <span class="math inline">\(w_1\)</span>, as well as an initial learning rate <span class="math inline">\(\alpha\)</span>.</li>
+<li>For each <em>epoch</em> <span class="math inline">\(t = 1,\ldots,t_\mathrm{max}\)</span>:
+<ul>
+<li>Permute the data indices in a random order.</li>
+<li>Then, for each data index <span class="math inline">\(i\)</span> (in the permuted order), perform the following two updates:
+<ul>
+<li><span class="math inline">\(w_0 \gets w_0 - \frac{2\alpha}{t}w_0 (y_i - w_1x_i - w_0)\)</span></li>
+<li><span class="math inline">\(w_1 \gets w_1 - \frac{2\alpha}{t}w_1 (y_i - w_1x_i - w_0)x_i\)</span>.</li>
+</ul></li>
+</ul></li>
+</ol>
+<p>Note that the update increments are proportional to the derivatives of the <span class="math inline">\(i\)</span>th term of <span class="math inline">\(R(\mathbf{w})\)</span> with respect to <span class="math inline">\(w_0\)</span> and <span class="math inline">\(w_1\)</span>.</p>
+<p>Please demonstrate your algorithm by showing the behavior of the empirical risk over time, using two plots:</p>
+<ol type="1">
+<li>First, please show how the empirical risk evolves during a single epoch.</li>
+<li>Then, show how the empirical risk evolves over 100 epochs. For readability, only plot the empirical risk at the end of each of these epochs.</li>
+</ol>
+<p>You can use the function provided above to generate data for your experiments.</p>
+
+
+
 </section>
 
 <p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">

@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-04-19">
+<meta name="dcterms.date" content="2023-04-25">
 <meta name="description" content="In this blog post, you’ll implement the Adam optimizer and perform some simple experiments.">
 
-<title>Optimization with Adam</title>
+<title>The Adam Algorithm for Optimization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -168,9 +188,9 @@ window.Quarto = {
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Optimization with Adam</h1>
+<h1 class="title display-7">The Adam Algorithm for Optimization</h1>
 
-<p class="date">2023-04-19</p>
+<p class="date">2023-04-25</p>
 </header>
 
 
@@ -185,7 +205,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The Adam optimization algorithm is a mainstay of modern deep learning. You can think of Adam as <em>fancy gradient descent</em>. It still uses gradient information, but processes that information in a more complex way that often produces state-of-the-art performance in modern large-scale tasks.</p>
-<p>Adam was introduced by <span class="citation" data-cites="kingma2014adam">(<a href="#ref-kingma2014adam" role="doc-biblioref"><strong>kingma2014adam?</strong></a>)</span>, in a paper which has been cited over 140,000 times.</p>
+<p>Adam was introduced by <span class="citation" data-cites="kingma2015adam">Kingma and Ba (<a href="#ref-kingma2015adam" role="doc-biblioref">2015</a>)</span>, in a paper which has been cited over 175,000 times.</p>
 <section id="what-you-should-do" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="what-you-should-do"><span class="header-section-number">1</span> What You Should Do</h2>
 <section id="read-the-adam-paper" class="level3">
@@ -194,8 +214,8 @@ window.Quarto = {
 </section>
 <section id="implement-adam-for-logistic-regression" class="level3">
 <h3 class="anchored" data-anchor-id="implement-adam-for-logistic-regression">Implement Adam for Logistic Regression</h3>
-<p>Expand your <a href="../../assignments/blog-posts/blog-post-optimization.html">implementation of logistic regression</a> to include a version of the <code>fit</code> method that uses the Adam algorithm (Algorithm 1). If you implemented <code>gradient</code> as a separate function, you can just use that function within your implementation of Adam.</p>
-<p>The authors of the paper frame their algorithm as minimizing a <em>stochastic</em> (random) <em>objective</em> function <span class="math inline">\(f\)</span>. This is a fancy mathematical way to talk about <em>stochastic batch gradient descent</em>. When they talk about evaluating/differentiating the “stochastic function” <span class="math inline">\(f\)</span>, you can instead think of “evaluating/differentiating <span class="math inline">\(f\)</span> on a subset of the data,” just like we did in gradient descent for logistic regression. So, you can think of <span class="math inline">\(g_t\)</span> in their algorithm as the gradient evaluated on a batch of the data. You can still follow the standard structure of stochastic gradient descent in which you loop through the entire data set in one epoch, reshuffle the batches, and do it again.</p>
+<p>Implement an <code>AdamOptimizer</code> class similar to the optimizers that you have used for several other models in this course. Your optimizer should work for any linear model which has a <code>.grad()</code> method which will return the gradient of the loss function with respect to the parameters. For concreteness, you can use the implementation of the logistic regression that you used in an earlier blog post; your <code>AdamOptimizer</code> will serve as a replacement for the <code>GradientDescentOptimizer</code>.</p>
+<p>The authors of the paper frame their algorithm as minimizing a <em>stochastic</em> (random) <em>objective</em> function <span class="math inline">\(f\)</span>. This is a fancy mathematical way to talk about <em>stochastic batch gradient descent</em>. When they talk about evaluating/differentiating the “stochastic function” <span class="math inline">\(f\)</span>, you can instead think of “evaluating/differentiating <span class="math inline">\(f\)</span> on a subset of the data.” So, you can think of <span class="math inline">\(g_t\)</span> in their algorithm as the gradient evaluated on a batch of the data. You can still follow the standard structure of stochastic gradient descent in which you loop through the entire data set in one epoch, reshuffle the batches, and do it again.</p>
 <p>Your implementation should allow the user to pass five arguments:</p>
 <ol type="1">
 <li><code>batch_size</code>, the batch size for computing gradients. This works in the same way as it did in our initial implementation of stochastic gradient descent, and you can use much of the same code.</li>
@@ -206,7 +226,7 @@ window.Quarto = {
 </section>
 <section id="perform-a-basic-experiment" class="level3">
 <h3 class="anchored" data-anchor-id="perform-a-basic-experiment">Perform a Basic Experiment</h3>
-<p>Redo some of the simple experiments from <a href="../../assignments/blog-posts/blog-post-optimization.html">implementation of logistic regression</a>. Compare Adam optimization to standard stochastic gradient descent with a few different parameter choices. Please measure <strong>both</strong> the number of epochs and the actual amount of time required to achieve convergence.</p>
+<p>Redo some of the simple experiments from your <a href="../../assignments/blog-posts/blog-post-optimization.html">implementation of logistic regression</a>. Compare Adam optimization to standard stochastic gradient descent with a few different parameter choices. Please measure <strong>both</strong> the number of epochs and the actual amount of time required to achieve convergence.</p>
 </section>
 <section id="perform-a-digits-experiment" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="perform-a-digits-experiment">Perform a Digits Experiment</h3>
@@ -236,13 +256,17 @@ window.Quarto = {
 <li>How did the experience of implementing this algorithm compare to the experience of implementing standard stochastic gradient descent?</li>
 </ul></li>
 </ol>
-<p>Finally, don’t forget to label your axes!!</p>
+
 
 
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-kingma2015adam" class="csl-entry" role="listitem">
+Kingma, Diederik P, and Jimmy Lei Ba. 2015. <span>“Adam: <span>A</span> Method for Stochastic Gradient Descent.”</span> In <em><span>ICLR</span>: International Conference on Learning Representations</em>, 1–15. ICLR US.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

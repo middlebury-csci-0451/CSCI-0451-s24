@@ -153,6 +153,8 @@ Install the following packages:
 - `pandas`
 - `scikit-learn`
 - `seaborn`
+- `mlxtend`
+- `nltk`
 - `pytorch`
 - `torchvision`
 - `torchtext`
