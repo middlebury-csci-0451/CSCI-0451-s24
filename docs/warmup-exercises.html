@@ -1352,8 +1352,8 @@ The false positive rate is ___. </code></pre>
 <li>Permute the data indices in a random order.</li>
 <li>Then, for each data index <span class="math inline">\(i\)</span> (in the permuted order), perform the following two updates:
 <ul>
-<li><span class="math inline">\(w_0 \gets w_0 - \frac{2\alpha}{t}w_0 (y_i - w_1x_i - w_0)\)</span></li>
-<li><span class="math inline">\(w_1 \gets w_1 - \frac{2\alpha}{t}w_1 (y_i - w_1x_i - w_0)x_i\)</span>.</li>
+<li><span class="math inline">\(w_0 \gets w_0 - \frac{2\alpha}{t} (w_1x_i - w_0 - y_i)\)</span></li>
+<li><span class="math inline">\(w_1 \gets w_1 - \frac{2\alpha}{t} (w_1x_i - w_0 - y_i)x_i\)</span>.</li>
 </ul></li>
 </ul></li>
 </ol>

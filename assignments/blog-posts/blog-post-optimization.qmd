@@ -119,7 +119,7 @@ for _ in range(100):
 
 Please perform experiments, with careful written explanations, that demonstrate the following statements: 
 
-1. **Vanilla gradient descent**: When $p_dim = 2$, when $\alpha$ is sufficiently small and $\beta = 0$, gradient descent for logistic regression converges to a weight vector $\mathbf{w}$ that looks visually correct (plot the decision boundary with the data). Furthermore, the loss decreases monotonically (plot the loss over iterations). 
+1. **Vanilla gradient descent**: When the number of features $p_{\mathrm{dim}} = 2$, when $\alpha$ is sufficiently small and $\beta = 0$, gradient descent for logistic regression converges to a weight vector $\mathbf{w}$ that looks visually correct (plot the decision boundary with the data). Furthermore, the loss decreases monotonically (plot the loss over iterations). 
     - This is a good experiment to use to assess whether your implementation in Part A has bugs. 
 2. **Benefits of momentum**: On the same data, gradient descent with momentum (e.g. $\beta = 0.9$) *can* converge to the correct weight vector in fewer iterations than vanilla gradient descent (with $\beta = 0$). Plot the loss over iterations for each method. You may need to experiment with the data and choice of $\alpha$ in order to observe speedups due to momentum. 
 3. **Overfitting**: Generate some data where `p_dim > n_points`. For example, `p_dim = 100` and `n_points = 50`. Do this **twice** with the exact same parameters. Call the first dataset  `X_train, y_train` and the second dataset `X_test, y_test`. Then, do an experiment in which you fit a logistic regression model to the data `X_train, y_train` and obtain 100% accuracy on this training data. What is the accuracy on the test data?  
