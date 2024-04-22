@@ -1,7 +1,7 @@
 ---
 title: "The Adam Algorithm for Optimization"
 type: "Blog Post"
-date: 2023-04-25
+date: 2024-04-25
 description: |
     In this blog post, you'll implement the Adam optimizer and perform some simple experiments. 
 objectives: 
