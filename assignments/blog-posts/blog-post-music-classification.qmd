@@ -1,7 +1,7 @@
 ---
 title: "Deep Music Genre Classification"
 type: "Blog Post"
-date: 2023-05-08
+date: 2024-05-08
 description: |
     In this blog post, you'll use PyTorch to perform classification on a data set of song attributes, comparing approaches that use only lyrics, approaches that use only quantitative audio features, and approaches that use both. 
 objectives: 
@@ -10,7 +10,7 @@ objectives:
 jupyter: conda-env-ml-0451-py
 number-sections: true
 number-depth: 2
-publish: "false"
+publish: "true"
 bibliography: ../../refs.bib
 ---
 

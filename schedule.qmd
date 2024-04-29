@@ -12,7 +12,7 @@ title: Schedule
 - **Assignments** are listed on the day when I suggest you begin working on them.           
     
 Reading sources:  
-   
+    
 - ***PSC***: Lecture notes I've written for this course, hosted [here](https://www.philchodrow.prof/ml-notes/).  
 - ***PDSH***: *The Python Data Science Handbook* by @vanderplasPythonDataScience2016. 
 - ***BHN***: *Fairness and Machine Learning: Limitations and Opportunities* by @barocasFairnessMachineLearning2023. 
