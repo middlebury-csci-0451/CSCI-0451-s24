@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-05-14">
+<meta name="dcterms.date" content="2024-05-15">
 <meta name="description" content="Your project blog post is a written description of what you achieved in your project and a reflection on what you learned.">
 
 <title>Project Blog Post</title>
@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -181,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header">
 <h1 class="title display-7">Project Blog Post</h1>
 
-<p class="date">2023-05-14</p>
+<p class="date">2024-05-15</p>
 </header>
 
 
@@ -215,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="your-data" class="level3">
 <h3 class="anchored" data-anchor-id="your-data">Your Data</h3>
 <p>Include some discussion of where it came from, who collected it (include a citation), how it was collected, and what each row represents (a person, an environmental event, a body of text, etc) Please also include a discussion of potential <em>limitations</em> in the data: who or what is represented, and who or what <em>isn’t</em>?</p>
-<p>In structuring your description of the data, I encourage you to address many of the questions outlined in <span class="citation" data-cites="gebru2021datasheets">(<a href="#ref-gebru2021datasheets" role="doc-biblioref"><strong>gebru2021datasheets?</strong></a>)</span>, although it is not necessary for you to write a complete data sheet for your data set.</p>
+<p>In structuring your description of the data, I encourage you to address many of the questions outlined in <span class="citation" data-cites="gebruDatasheetsDatasets2021">Gebru et al. (<a href="#ref-gebruDatasheetsDatasets2021" role="doc-biblioref">2021</a>)</span>, although it is not necessary for you to write a complete data sheet for your data set.</p>
 </section>
 <section id="your-approach" class="level3">
 <h3 class="anchored" data-anchor-id="your-approach">Your Approach</h3>
@@ -247,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="group-contributions-statement" class="level2 page-columns page-full" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="group-contributions-statement"><span class="header-section-number">7</span> Group Contributions Statement</h2>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">When writing your group contributions statement, please keep in mind that everyone’s contributions are visible in the commit history of your GitHub repository.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">When writing your group contributions statement, please keep in mind that everyone’s contributions are visible in the commit history of your GitHub repository. I do check these commit histories in case I suspect highly imbalanced divisions of labor.</span></div></div>
 <p>In your group contributions statement, please include a short paragraph for each group member describing how they contributed to the project:</p>
 <ul>
 <li>Who worked on which parts of the source code?</li>
@@ -268,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sec-references-in-quarto" class="level3">
 <h3 class="anchored" data-anchor-id="sec-references-in-quarto">Appendix: References in Quarto</h3>
 <p>To manage references in Quarto, you need to create a <code>.bib</code> file (you can call it <code>refs.bib</code>). This file should live in the same directory as your blog post. Your <code>.bib</code> file is essentially a database of document information. Here’s an example of a a <code>refs.bib</code> file:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">hardt2021patterns</span>,</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">@article</span>{<span class="ot">@hardtPatternsPredictionsActions2022</span>,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>  = {Patterns, predictions, and actions: A story about machine learning},</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span> = {Hardt, Moritz and Recht, Benjamin},</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">journal</span>= {arXiv preprint arXiv:2102.05242},</span>
@@ -300,17 +320,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Once you’ve assembled your references, add the following line to your document metadata (the stuff in the top cell of your Jupyter notebook)</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> refs.bib</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Once you’ve followed these steps, you’re ready to cite! You can reference your documents using the @ symbol and their bibliographic key, which is the first entry for each document in the <code>refs.bib</code> file. For example, typing</p>
-<pre><code>@hardt2021patterns</code></pre>
+<pre><code>@hardtPatternsPredictionsActions2022</code></pre>
 <p>results in the reference</p>
-<p><span class="citation" data-cites="hardt2021patterns">(<a href="#ref-hardt2021patterns" role="doc-biblioref"><strong>hardt2021patterns?</strong></a>)</span></p>
+<p><span class="citation" data-cites="hardtPatternsPredictionsActions2022">Hardt and Recht (<a href="#ref-hardtPatternsPredictionsActions2022" role="doc-biblioref">2022</a>)</span></p>
 <p>as well as an entry in the “References” section at the end of your blog post.</p>
 <p>For more on how to handle citations in Quarto, check <a href="https://quarto.org/docs/authoring/footnotes-and-citations.html#citations">the Quarto documentation</a>.</p>
 
 
+
 </section>
 </section>
 
-<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p></main> <!-- /main -->
+<p><br> <br> <span style="color:grey;">© Phil Chodrow, 2024</span></p><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-gebruDatasheetsDatasets2021" class="csl-entry" role="listitem">
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé Iii, and Kate Crawford. 2021. <span>“Datasheets for Datasets.”</span> <em>Communications of the ACM</em> 64 (12): 86–92. <a href="https://doi.org/10.1145/3458723">https://doi.org/10.1145/3458723</a>.
+</div>
+<div id="ref-hardtPatternsPredictionsActions2022" class="csl-entry" role="listitem">
+Hardt, Moritz, and Benjamin Recht. 2022. <em>Patterns, <span>Predictions</span>, and <span>Actions</span></em>. Princeton University Press.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -1,7 +1,7 @@
 ---
 title: "Project Blog Post"
 type: "Project"
-date: 2023-05-14
+date: 2024-05-15
 description: |
     Your project blog post is a written description of what you achieved in your project and a reflection on what you learned. 
 objectives: 
@@ -48,7 +48,7 @@ Your Materials and Methods section should describe:
 
 Include some discussion of where it came from, who collected it (include a citation), how it was collected, and what each row represents (a person, an environmental event, a body of text, etc) Please also include a discussion of potential *limitations* in the data: who or what is represented, and who or what *isn't*? 
 
-In structuring your description of the data, I encourage you to address many of the questions outlined in @gebru2021datasheets, although it is not necessary for you to write a complete data sheet for your data set. 
+In structuring your description of the data, I encourage you to address many of the questions outlined in @gebruDatasheetsDatasets2021, although it is not necessary for you to write a complete data sheet for your data set. 
 
 ### Your Approach
 
@@ -78,7 +78,7 @@ Your conclusion is the right time to assess:
 
 ## Group Contributions Statement
 
-[When writing your group contributions statement, please keep in mind that everyone's contributions are visible in the commit history of your GitHub repository.]{.aside}
+[When writing your group contributions statement, please keep in mind that everyone's contributions are visible in the commit history of your GitHub repository. I do check these commit histories in case I suspect highly imbalanced divisions of labor.]{.aside}
 
 In your group contributions statement, please include a short paragraph for each group member describing how they contributed to the project: 
 
@@ -102,7 +102,7 @@ At the very end of your blog post, in a few paragraphs, respond to the following
 To manage references in Quarto, you need to create a `.bib` file (you can call it `refs.bib`). This file should live in the same directory as your blog post. Your `.bib` file is essentially a database of document information. Here's an example of a a `refs.bib` file: 
 
 ```bibtex
-@article{hardt2021patterns,
+@article{@hardtPatternsPredictionsActions2022,
   title  = {Patterns, predictions, and actions: A story about machine learning},
   author = {Hardt, Moritz and Recht, Benjamin},
   journal= {arXiv preprint arXiv:2102.05242},
@@ -142,12 +142,12 @@ bibliography: refs.bib
 Once you've followed these steps, you're ready to cite! You can reference your documents using the \@ symbol and their bibliographic key, which is the first entry for each document in the `refs.bib` file. For example, typing 
 
 ```
-@hardt2021patterns
+@hardtPatternsPredictionsActions2022
 ```
 
 results in the reference 
 
-@hardt2021patterns
+@hardtPatternsPredictionsActions2022
 
 as well as an entry in the "References" section at the end of your blog post. 
 
