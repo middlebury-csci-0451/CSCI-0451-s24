@@ -15,6 +15,6 @@ bibliography: ../../refs.bib
 Your project presentation will be a brief presentation followed by a very short Q&A session. What's in your presentation is largely up to you. Here are your main constraints: 
 
 1. You have **no more than 4 minutes**. I will give you a "one minute left" signal at the 3-minute mark, and give you a hard cutoff after 4 minutes have passed. We'll then have 1 minute in which folks can ask a few questions. 
-2. Your presentation must be in the form of a Google Slides presentation. Your presentation must be uploaded **before the presentation day** to [this Google Drive folder](https://drive.google.com/drive/folders/14jS-pS7Z8_DTX7pqJX3GxG0XIzeX4iYk?usp=sharing). It is also fine for your presentation to involve a live demonstration of your software deliverable if you would like; however, the main presentation should be in your slides. 
+2. Your presentation must be in the form of a Google Slides presentation. Your presentation must be uploaded **before the presentation day** to the supplied Google Drive folder.  It is also fine for your presentation to involve a live demonstration of your software deliverable if you would like; however, the main presentation should be in your slides. 
 
 Beyond this, your presentation is up to you. Please feel welcome to be creative and ambitious in showcasing your work! 

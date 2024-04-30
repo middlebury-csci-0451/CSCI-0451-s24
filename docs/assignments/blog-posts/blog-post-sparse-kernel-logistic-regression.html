@@ -223,7 +223,7 @@ window.Quarto = {
 <p>The loss function for sparse kernel logistic regression on data set <span class="math inline">\(\mathbf{X} \in \mathbb{R}^{m\times p}\)</span> is</p>
 <p><span class="math display">\[
 \begin{aligned}
-    L(\mathbf{a}) = \frac{1}{m} \sum_{j = 1}^m \left[y_j\log \sigma(s_j) + (1-y_j)\log (1-\sigma(s_j)) \right] + \lambda \lVert \mathbf{a} \rVert_1\;.
+    L(\mathbf{a}) = -\frac{1}{m} \sum_{j = 1}^m \left[y_j\log \sigma(s_j) + (1-y_j)\log (1-\sigma(s_j)) \right] + \lambda \lVert \mathbf{a} \rVert_1\;.
 \end{aligned}
 \]</span></p>
 <p>Here, <span class="math inline">\(\lambda\)</span> is a regularization strength and <span class="math inline">\(\lVert \mathbf{a} \rVert_1\)</span> is the <span class="math inline">\(\ell_1\)</span> norm of <span class="math inline">\(\mathbf{a}\)</span> which we discussed <a href="https://www.philchodrow.prof/ml-notes/chapters/30-features-regularization.html">in our lecture on regularization</a>. This specific choice of norm is what will make our model sparse. For a fixed choice of <span class="math inline">\(\alpha\)</span> and the kernel <span class="math inline">\(k\)</span>, we can minimize the loss function with respect to <span class="math inline">\(\mathbf{a}\)</span> using gradient descent.</p>

@@ -311,7 +311,6 @@
     We briefly introduce two concepts in optimization that have enabled large-scale deep learning: stochastic first-order optimization techniques and automatic differentiation.
   objectives: 
     - Theory
-    - Implementation
   reading:
     - 
   notes: 
@@ -328,7 +327,6 @@
   summary: |
     We return to the image classification problem, using deep learning and large-scale optimization to optimize convolutional kernels as part of the training process. 
   objectives: 
-    - Theory
     - Implementation
   reading:
     - |
@@ -345,7 +343,6 @@
   summary: |
     We continue working on an extended practical case study of deep learning for image classification.
   objectives: 
-    - Theory
     - Implementation
   reading:
     - |
@@ -360,14 +357,16 @@
 - date: 2024-04-30
   header: Text Classification
   summary: |
-    We continue working on an extended practical case study of deep learning for image classification.
+    We briefly study the use of word embeddings for text classification. 
   objectives: 
     - Theory
     - Implementation
+    - Experimentation
+    - Social Responsibility
   reading:
     - <a href="https://arxiv.org/pdf/1301.3781">Efficient Estimation of Word Representations in Vector Space</a> by Mikolov et al. (sections 1, 4, 5)
   notes: 
-    - <a href="https://www.philchodrow.prof/ml-notes/chapters/72-text-classification.html">Deep Image Classification</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/72-text-classification.html">Text Classification and Word Embedding</a>
     - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/72-text-classification.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/72-text-classification.ipynb">Google Colab</a>)
   module:  
   publish: true
@@ -375,3 +374,21 @@
   assignments: 
     - |
       <a href="assignments/blog-posts/blog-post-music-classification.html">Blog Post: Deep Music Genre Classification</a>
+- date: 2024-05-02
+  header: Unsupervised Learning and Autoencoders
+  summary: |
+    We introduce unsupervised learning through the framework of autoencoders. 
+  objectives: 
+    - Theory
+    - Implementation
+  reading:
+    - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html">K-Means Clustering</a> from PDSH.  
+  notes: 
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/80-unsupervised-autoencoders.html">Text Classification and Word Embedding</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/80-unsupervised-autoencoders.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/80-unsupervised-autoencoders.ipynb">Google Colab</a>)
+  module:  
+  publish: true
+  warmup: <a href="warmup-exercises.ipynb#sec-compression">Compression factor of K-means</a>
+  assignments: 
+    - |
+      <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/end-of-course.ipynb">End-Of-Course Reflection</a> due 5/15</b>
