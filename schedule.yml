@@ -384,7 +384,7 @@
   reading:
     - <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html">K-Means Clustering</a> from PDSH.  
   notes: 
-    - <a href="https://www.philchodrow.prof/ml-notes/chapters/80-unsupervised-autoencoders.html">Text Classification and Word Embedding</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/80-unsupervised-autoencoders.html">Unsupervised Learning and Autoencoders</a>
     - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/80-unsupervised-autoencoders.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/80-unsupervised-autoencoders.ipynb">Google Colab</a>)
   module:  
   publish: true
@@ -392,3 +392,19 @@
   assignments: 
     - |
       <b>ACTUAL REAL DUE DATE</b>: <a href="assignments/process/end-of-course.ipynb">End-Of-Course Reflection</a> due 5/15</b>
+- date: 2024-05-07
+  header: Neural Autoencoders
+  summary: |
+    We use neural autoencoders to learn low-dimensional structure in more complex data sets. 
+  objectives: 
+    - Theory
+    - Implementation
+  reading:
+    - TBD
+  notes: 
+    - TBD
+    - TBD
+  module:  
+  publish: true
+  warmup: TBD
+  assignments: 

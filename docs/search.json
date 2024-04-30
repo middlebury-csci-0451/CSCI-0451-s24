@@ -81,7 +81,14 @@
     "href": "schedule.html#week-12",
     "title": "Schedule",
     "section": "Week 12",
-    "text": "Week 12\n\n\n\n\n\n\n\n\n\n\n\nTue\nApr. 30\nText Classification\n\n\n\nWe briefly study the use of word embeddings for text classification.\n\n\n\n\nLearning Objectives\nTheory\nImplementation\nExperimentation\nSocial Responsibility\n\nReading\nEfficient Estimation of Word Representations in Vector Space by Mikolov et al. (sections 1, 4, 5)\n\nNotes\nText Classification and Word Embedding\nLive notes (Google Colab)\n\nWarmup\nProject Check In\nAssignments\nBlog Post: Deep Music Genre Classification\n\n\nThu\nMay. 02\nUnsupervised Learning and Autoencoders\n\n\n\nWe introduce unsupervised learning through the framework of autoencoders.\n\n\n\n\nLearning Objectives\nTheory\nImplementation\n\nReading\nK-Means Clustering from PDSH.\n\nNotes\nText Classification and Word Embedding\nLive notes (Google Colab)\n\nWarmup\nCompression factor of K-means\nAssignments\nACTUAL REAL DUE DATE: End-Of-Course Reflection due 5/15"
+    "text": "Week 12\n\n\n\n\n\n\n\n\n\n\n\nTue\nApr. 30\nText Classification\n\n\n\nWe briefly study the use of word embeddings for text classification.\n\n\n\n\nLearning Objectives\nTheory\nImplementation\nExperimentation\nSocial Responsibility\n\nReading\nEfficient Estimation of Word Representations in Vector Space by Mikolov et al. (sections 1, 4, 5)\n\nNotes\nText Classification and Word Embedding\nLive notes (Google Colab)\n\nWarmup\nProject Check In\nAssignments\nBlog Post: Deep Music Genre Classification\n\n\nThu\nMay. 02\nUnsupervised Learning and Autoencoders\n\n\n\nWe introduce unsupervised learning through the framework of autoencoders.\n\n\n\n\nLearning Objectives\nTheory\nImplementation\n\nReading\nK-Means Clustering from PDSH.\n\nNotes\nUnsupervised Learning and Autoencoders\nLive notes (Google Colab)\n\nWarmup\nCompression factor of K-means\nAssignments\nACTUAL REAL DUE DATE: End-Of-Course Reflection due 5/15"
+  },
+  {
+    "objectID": "schedule.html#week-13",
+    "href": "schedule.html#week-13",
+    "title": "Schedule",
+    "section": "Week 13",
+    "text": "Week 13\n\n\n\n\n\n\n\n\n\n\n\nTue\nMay. 07\nNeural Autoencoders\n\n\n\nWe use neural autoencoders to learn low-dimensional structure in more complex data sets.\n\n\n\n\nLearning Objectives\nTheory\nImplementation\n\nReading\nTBD\n\nNotes\nTBD\nTBD\n\nWarmup\nTBD"
   },
   {
     "objectID": "schedule.html#finals-period",
