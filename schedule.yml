@@ -400,11 +400,21 @@
     - Theory
     - Implementation
   reading:
-    - TBD
   notes: 
-    - TBD
-    - TBD
+    - <a href="https://www.philchodrow.prof/ml-notes/chapters/81-neural-autoencoders.html">Neural Autoencoders</a>
+    - <a href="https://www.philchodrow.prof/ml-notes/live-notebooks/81-neural-autoencoders.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/81-neural-autoencoders.ipynb">Google Colab</a>)
   module:  
   publish: true
-  warmup: TBD
+  warmup: <a href="warmup-exercises.ipynb#sec-image-embedding">Image Embedding By Hand</a>
+  assignments: 
+- date: 2024-05-09
+  header: Project Presentations
+  summary: |
+    Your project presentation is a group presentation of no more than 4 minutes long, in which you'll present your accomplishments in your project to the class. 
+  objectives: 
+  reading:
+  notes: 
+  module:  
+  publish: true
+  warmup: 
   assignments: 

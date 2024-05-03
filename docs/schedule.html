@@ -100,7 +100,8 @@ div.csl-indent {
 
     const options = {
       valueNames: ['listing-date','listing-header','listing-summary','listing-objectives','listing-reading','listing-notes','listing-module','listing-publish','listing-warmup','listing-assignments',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
-      
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-date","listing-header","listing-summary","listing-objectives","listing-reading","listing-notes","listing-module","listing-publish","listing-warmup","listing-assignments"],
     };
 
@@ -1081,15 +1082,31 @@ Implementation<br>
 Theory<br>
 Implementation<br>
 </td>
-<td class="smaller syllabus-item-readings"><strong>Reading</strong><br>
-TBD<br>
-</td>
+<td class="smaller syllabus-item-readings"></td>
 <td class="smaller syllabus-item-readings"><strong>Notes</strong><br>
-TBD<br>
-TBD<br>
+<a href="https://www.philchodrow.prof/ml-notes/chapters/81-neural-autoencoders.html">Neural Autoencoders</a><br>
+<a href="https://www.philchodrow.prof/ml-notes/live-notebooks/81-neural-autoencoders.ipynb">Live notes</a> (<a href="http://colab.research.google.com/github/philchodrow/ml-notes/blob/main/docs/live-notebooks/81-neural-autoencoders.ipynb">Google Colab</a>)<br>
 </td>
 <td class="smaller syllabus-item-assignment"><strong>Warmup</strong><br>
-TBD</td>
+<a href="./warmup-exercises.html#sec-image-embedding">Image Embedding By Hand</a></td>
+<td class="smaller syllabus-item-assignment"></td>
+</tr>
+<tr class="even">
+<td rowspan="2" class="syllabus-date-pane"><span class="syllabus-day-of-week">Thu</span><br>
+<span class="syllabus-date">May. 09</span></td>
+<td colspan="4">Project Presentations</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td colspan="4" class="smaller">Your project presentation is a group presentation of no more than 4 minutes long, in which you'll present your accomplishments in your project to the class.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td class="smaller syllabus-item-objective"></td>
+<td class="smaller syllabus-item-readings"></td>
+<td class="smaller syllabus-item-readings"></td>
+<td class="smaller syllabus-item-assignment"></td>
 <td class="smaller syllabus-item-assignment"></td>
 </tr>
 </tbody>
@@ -1102,10 +1119,14 @@ TBD</td>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="schedule-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div>
-<section id="finals-period" class="level2">
-<h2 class="anchored" data-anchor-id="finals-period">Finals Period</h2>
-<p>During the reading and final exam period, you’ll meet with me 1-1 for about 15 minutes. The purpose of this meeting is to help us both reflect on your time in the course and agree on a final grade.</p>
+<section id="wrapping-up" class="level2">
+<h2 class="anchored" data-anchor-id="wrapping-up">Wrapping Up</h2>
+<p>The final day to submit all course assignments, including blog posts, project assignments, and final reflections, is <strong>May 15th at 11:59pm</strong>.</p>
+<p>During the final exam period, you’ll meet with me 1-1 for about 15 minutes. The purpose of this meeting is to help us both reflect on your time in the course and agree on a final grade.</p>
 
 
 

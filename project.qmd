@@ -17,7 +17,7 @@ There are five deliverables associated with your project:
 2. A mid-project update due in Week 9 or 10. This will be a short, informal presentation in which you will share what you've done with the class. 
 3. **The project software**, (aka the GitHub repository itself) due at the end of finals week. 
 4. **A project report** in the form of an extended blog post in which you explain what you did, relate it to existing work, and show your experiments or other findings. The report is due at the end of finals week. 
-5. **A project presentation** during Week 12. The presentation will be 7-8 minutes and executed as a group. It should involve a visual aid, usually slides. 
+5. **A project presentation** during Week 12. The presentation will be 4 minutes long and executed as a group. It should involve a visual aid, usually slides. 
 
 I'll share more detailed information on each of these deliverables later in the course. 
 
