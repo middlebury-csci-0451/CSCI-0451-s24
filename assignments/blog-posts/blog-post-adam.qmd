@@ -29,7 +29,7 @@ Adam was introduced by @kingma2015adam, in a paper which has been cited over 175
 
 ### Read the Adam Paper
 
-Start by reading [the paper that introduced Adam](https://arxiv.org/pdf/1412.6980.pdf%5D). You can focus on sections 1, 2, 3, and 6.1, skipping the others. It's ok for your first reading to be relatively quick; you'll want to go back through the sections multiple times as you do your implementation and experiments. 
+Start by reading [the paper that introduced Adam](https://arxiv.org/abs/1412.6980). You can focus on sections 1, 2, 3, and 6.1, skipping the others. It's ok for your first reading to be relatively quick; you'll want to go back through the sections multiple times as you do your implementation and experiments. 
 
 ### Implement Adam for Logistic Regression
 
